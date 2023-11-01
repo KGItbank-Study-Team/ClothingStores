@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : 가짜 영역으로 URL에 폴더대신 사용하여 보안에 유리하며 최소3단계이상으로하는게 좋다 -->
+<mapper namespace="com.slimbear.mapper.Member"> 
+
+	<resultMap type="member" id="memberMap">
+		<id column="uid" property="uid" />
+		<result column="id" property="id" />
+		<result column="password" property="password" />
+		<result column="regDate" property="regDate" />
+	</resultMap>
+	
+	
+	<select id="SELECT_MEM_BY_UID" resultMap="memberMap" parameterType="member">
+		SELECT * FROM member WHERE uid=#{uid}
+	</select>
+	<select id="SELECT_MEM_LIST" resultMap="memberMap">
+		SELECT * FROM member
+	</select>
+	
+</mapper>
