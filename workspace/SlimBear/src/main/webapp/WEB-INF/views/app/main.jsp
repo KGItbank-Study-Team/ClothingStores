@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/main_page.css" />
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="js/main_page.js"></script>
+    <script defer src="../../../resources/js/mainPage.js"></script>
     <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
     <title>SLIIMBEAR</title>
 </head>
