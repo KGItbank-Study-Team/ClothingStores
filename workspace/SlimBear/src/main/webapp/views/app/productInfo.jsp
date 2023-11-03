@@ -20,7 +20,7 @@ request.setAttribute("color5", "블랙");
 </head>
 <body>
 	<%@ include file="header/header2.jsp"%>
-	<div id=container>
+	<div id="container">
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
@@ -29,7 +29,7 @@ request.setAttribute("color5", "블랙");
 			</div>
 			<div class="right">
 				<div class="explanation">
-					<h2>${productInfo}</h2>
+					<h2 style="padding-bottom: 15px;">${productInfo}</h2>
 					<div class="subExplanation">${subExplanation}</div>
 				</div>
 				<div>
@@ -58,24 +58,33 @@ request.setAttribute("color5", "블랙");
 					</table>
 				</div>
 				<div>
-					<table>
+					<table style="margin-top: 40px;">
 						<tbody>
 							<tr>
 								<th scope="row" class="solid3">
 									<span style="font-size: 12px; color: #555555;">COLOR</span>
 								</th>
 								<td>
-									<ul>
-										<li class="color"><a href="#none"><span>${color1}</span></a></li>
-										<li class="color"><a href="#none"><span>${color2}</span></a></li>
-										<li class="color"><a href="#none"><span>${color3}</span></a></li>
-										<li class="color"><a href="#none"><span>${color4}</span></a></li>
-										<li class="color"><a href="#none"><span>${color5}</span></a></li>
+									<ul class="ColorOptionPosition">
+										<li class="color"><a href="#none"><span class="colorOption">${color1}</span></a></li>
+										<li class="color"><a href="#none"><span class="colorOption">${color2}</span></a></li>
+										<li class="color"><a href="#none"><span class="colorOption">${color3}</span></a></li>
+										<li class="color"><a href="#none"><span class="colorOption">${color4}</span></a></li>
+										<li class="color"><a href="#none"><span class="colorOption">${color5}</span></a></li>
 									</ul>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="btns">
+					<div clss="btn1">
+						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;">
+							<span class="btnSpan">BUY IT NOW</span>
+						</a>
+						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO CART</span></a>
+						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO WISH</span></a>
+					</div>
 				</div>
 			</div>
 		</div>
