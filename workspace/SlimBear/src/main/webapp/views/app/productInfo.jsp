@@ -79,8 +79,8 @@ request.setAttribute("color5", "블랙");
 				</div>
 				<div class="btns">
 					<div clss="btn1">
-						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;">
-							<span class="btnSpan">BUY IT NOW</span>
+						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;background:rgb(101,83,69);">
+							<span class="btnSpan" style="color:white !important;">BUY IT NOW</span>
 						</a>
 						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO CART</span></a>
 						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO WISH</span></a>

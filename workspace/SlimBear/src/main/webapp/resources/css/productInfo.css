@@ -110,6 +110,7 @@ th:last-child {
 	width: 165px;
 	height: 50px;
 	position: relative;
+	font-weight: normal !important;
 
 }
 .btnSpan {
