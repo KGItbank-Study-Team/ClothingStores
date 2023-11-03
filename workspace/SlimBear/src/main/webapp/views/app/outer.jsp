@@ -3,8 +3,8 @@
 
 <!DOCTYPE html>
 <%
-String productImage = "/images/outerEx01.gif";
-String porductImage = "/images/outerEx01.gif";
+String productImage = "/resources/images/outerEx01.gif";
+String porductImage = "/resources/images/outerEx01.gif";
 String productName = "상품명들어올곳";
 String productDescription1 = "상품 간단 설명";
 String productDescription2 = "상품 상세 설명";
@@ -39,7 +39,7 @@ int discountPercentage = 99;
 		<script src="/resources/js/swiper.js"></script>
 		<header>
 			<div id="oneTop" class="swiper-container"></div>
-		<jsp:include page="../../header/header.jsp"></jsp:include>
+		<jsp:include page="header/header.jsp"></jsp:include>
 		</header>
 		<div id="contents">
 			<div id="prdBest"
@@ -383,7 +383,7 @@ int discountPercentage = 99;
 					<a href="?page=2"> <img src="/images/icon_next2.png" />
 					</a>
 				</div>
-				<jsp:include page="../../footer/footer.jsp" flush="true" />
+				<jsp:include page="footer/footer.jsp" flush="true" />
 			</main>
 		</div>
 

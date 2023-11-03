@@ -3,8 +3,8 @@
 
 <!DOCTYPE html>
 <%
-String productImage = "../images/outerEx01.gif";
-String porductImage = "../images/outerEx01.gif";
+String productImage = "/resources/images/outerEx01.gif";
+String porductImage = "/resources/images/outerEx01.gif";
 String productName = "상품명들어올곳";
 String productDescription1 = "상품 간단 설명";
 String productDescription2 = "상품 상세 설명";
@@ -18,9 +18,9 @@ int discountPercentage = 99;
 	window.CAFE24 = window.CAFE24 || {};
 </script>
 <link rel="stylesheet" type="text/css"
-	href="../../../../../resources/css/optimizer.css" />
+	href="/resources/css/optimizer.css" />
 <link rel="stylesheet" type="text/css"
-	href="../../../../../resources/css/optimizeruser.css" />
+	href="/resources/css/optimizeruser.css" />
 <style type="text/css"></style>
 <title>UNDERWEAR - 슬림베어</title>
 
@@ -35,11 +35,11 @@ int discountPercentage = 99;
 			rel="stylesheet" />
 		<link rel="stylesheet"
 			href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
-		<link rel="stylesheet" href="../../../../../resources/css/swiper.css" />
-		<script src="../../../../../resources/js/swiper.js"></script>
+		<link rel="stylesheet" href="/resources/css/swiper.css" />
+		<script src="/resources/js/swiper.js"></script>
 		<header>
 			<div id="oneTop" class="swiper-container"></div>
-		<jsp:include page="../../header/header.jsp"></jsp:include>
+		<jsp:include page="header/header.jsp"></jsp:include>
 		</header>
 		<div id="contents">
 			<div id="prdBest"
@@ -117,10 +117,10 @@ int discountPercentage = 99;
 									<!-- .spec -->
 									<div class="icon">
 										<div class="promotion">
-											<img src="../../../../../images/custom_4016861243871563.png" alt="" />
-											<img src="../../../../../images/custom_3916861243874417.png" alt="" />
+											<img src="/resources/images/custom_4016861243871563.png" alt="" />
+											<img src="/resources/images/custom_3916861243874417.png" alt="" />
 											<img
-												src="../../../../../images/benefit_shop1_83114664803d66b20824.38964181.png"
+												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
 												alt="" />
 										</div>
 									</div>
@@ -324,7 +324,7 @@ int discountPercentage = 99;
 									<div class="icon">
 										<div class="promotion">
 											<img
-												src="../../../../../images/benefit_shop1_83114664803d66b20824.38964181.png"
+												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
 												alt="" />
 										</div>
 									</div>
@@ -366,7 +366,7 @@ int discountPercentage = 99;
 					<a href="?page=2"> <img src="/_images/icon_next2.png" />
 					</a>
 				</div>
-				<jsp:include page="../../footer/footer.jsp" flush="true" />
+				<jsp:include page="footer/footer.jsp" flush="true" />
 			</main>
 		</div>
 
@@ -382,11 +382,11 @@ int discountPercentage = 99;
 
 	<!-- CMC3 script -->
 	<!-- External Script End -->
-	<script type="text/javascript" src="../resources/js/ko.js"
+	<script type="text/javascript" src="/resources/js/ko.js"
 		charset="utf-8"></script>
 
-	<script src="../../../../../resources/js/optimizer.js"></script>
-	<script src="../../../../../resources/js/optimizeruser.js"></script>
+	<script src="/resources/js/optimizer.js"></script>
+	<script src="/resources/js/optimizeruser.js"></script>
 
 </body>
 </html>
