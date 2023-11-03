@@ -1,0 +1,53 @@
+body {
+	background-color: #faf9ef;
+}
+#container  {
+	padding: 90px;
+	margin: 107.5px;
+	padding-top: 100px;
+}
+.productInfo {
+	display: flex;
+	max-width: 1750px;
+	width: fit-content;
+}
+.left {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 120px;
+}
+.right {
+	/* vertical-align: top; */
+	width: 540px;
+}
+img {
+	width: 460px;
+	height: 611.8px;
+}
+.productImg {
+	position: relative;
+	left: 40px;
+}
+.subExplanation {
+	font-size: 12px;
+	color:#555555;
+	padding-bottom: 30px;
+}
+table {
+	border-collapse: collapse; /* th와 td 사이에 border가 이어지게 함 */
+}
+table th {
+	width: 100px;
+	text-align: left;
+	border-bottom: 1px solid #555555;
+	border-spacing: 0;
+	padding: 6px 0;
+}
+th:last-child {
+    border-bottom: none; /* 마지막 <th>의 선을 숨김 */
+}
+table td {
+	width: 480px;
+	border-bottom: 1px solid #555555;
+}
