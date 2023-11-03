@@ -15,12 +15,14 @@
 	<!-- 제작한 VO마다 Mybatis에서 사용할 별칭 설정 -->
 	<typeAliases>
 		<typeAlias alias="member" type="com.kgitbank.slimbear.dto.MemberDTO" />
+		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->
 	<!-- @Mapper 어노테이션을 사용하여 java코드로 Mapper구현하면 아래와 mapper파일을 생성할 때 마다 추가하지 않아도 된다. -->
 	<mappers>
-		<mapper resource="mappings/member-mapping.xml" />
+		<mapper resource="mappings/member-mapping.xml"/>
+		<mapper resource="mappings/product-mapping.xml"/>
 	</mappers>
 	
 </configuration>

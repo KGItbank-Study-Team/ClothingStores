@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+	
 	<context:component-scan
 		base-package="com.kgitbank.slimbear" />
 
@@ -16,4 +16,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- root에 넣고 싶은데 여기아니면 문제가 생깁니다. -->
+	<mvc:annotation-driven/>
 </beans>

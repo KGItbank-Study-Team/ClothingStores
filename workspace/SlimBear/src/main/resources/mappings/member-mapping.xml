@@ -6,19 +6,11 @@
 
 <!-- namespace : 가짜 영역으로 URL에 폴더대신 사용하여 보안에 유리하며 최소3단계이상으로하는게 좋다 -->
 <mapper namespace="com.slimbear.mapper.Member"> 
-
-	<resultMap type="member" id="memberMap">
-		<id column="uid" property="uid" />
-		<result column="id" property="id" />
-		<result column="password" property="password" />
-		<result column="regDate" property="regDate" />
-	</resultMap>
 	
-	
-	<select id="SELECT_MEM_BY_UID" resultMap="memberMap" parameterType="member">
+	<select id="SELECT_MEM_BY_UID" resultType="member" parameterType="member">
 		SELECT * FROM member WHERE uid=#{uid}
 	</select>
-	<select id="SELECT_MEM_LIST" resultMap="memberMap">
+	<select id="SELECT_MEM_LIST" resultType="member">
 		SELECT * FROM member
 	</select>
 	

@@ -8,13 +8,5 @@ import com.kgitbank.slimbear.service.MemberServiceImpl;
 
 @Controller
 public class MemberController {
-	
-	@Autowired
-	private MemberServiceImpl memberService;
 
-	@RequestMapping("login")
-	public String login(){
-		memberService.login(null, null);
-		return "home";
-	}
 }
