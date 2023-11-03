@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../resources/css/baguni.css" rel="stylesheet" />
+<link href="/resources/css/baguni.css" rel="stylesheet" />
 <script src="../../resources/js/baguni.js"></script>
 <title>장 바 구 니</title>
 </head>
@@ -52,14 +52,15 @@
 						<div class="btn" onclick="toggleHiddenContent();">주문 추가/변경▽</div>
         <div id="hiddenContent03" class="delivery hiddenContent" >
 		    <div class="option hidden"></div>
-		    <table class="change hidden" >
+		    <table class="change hidden">
 		       <tbody class="cchange">
 		            <tr class="nammme">
+		            
 		                <td colspan="3" >${productName}</td>
 		            </tr>
 		            <tr class="">
 		                <td class="pcolor" >
-		                    <p>COLOR</p>
+		                    <p class="colooo">COLOR</p>
 		                </td>
 		                <td colspan="2" class="colorrr">
 		                    <select class="colorr">
@@ -70,7 +71,7 @@
 		                </td>
 		            </tr>
 		            <tr class="">
-		                <td class="" style="width: 27%;">
+		                <td class="" >
 		                    <p>SIZE</p>
 		                </td>
 		                <td colspan="2"class="colorrr">
@@ -82,12 +83,18 @@
 		                </td>
 		            </tr>
 		            <tr><td colspan="3">
-		            <button type="submit" class="chchange">변경하기</button>
+		           <div class="cart__mainbtns">
+			<button class="cart__bigorderbtn left"
+				onclick="window.location.href='https://www.slowand.com/'">쇼핑
+				계속하기</button>
+			<button class="cart__bigorderbtn right">주문하기</button>
+
+		</div>
 						</td></tr>
 		        </tbody>
 		        <div>
-		        <input type="submit" class="chaange" id="chaange">
-		        </div>
+		     <!-- <input type="submit" class="chaange" id="chaange">
+		        -->    </div>
 		    </table>
 		</div>
 						<!-- <button type="submit" class="cart__list__optionbtn">주문 추가/변경</button>
