@@ -17,13 +17,13 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/09decccad8.js"	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../resources/css/review_page.css">
+<link rel="stylesheet" href="/resources/css/review_page.css">
 <script defer src="../resources/js/review_page.js"></script>
 </head>
 
 <body>
 	<header>
-		<%@ include file="header.jsp"%>
+		<%@ include file="header/header.jsp"%>
 	</header>
 	<div id="wrapper">
 		<main id="product">
