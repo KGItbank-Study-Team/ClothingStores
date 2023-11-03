@@ -106,7 +106,7 @@
 			</section>
 		</main>
 		<div id="footer">
-			<%@ include file="footer.jsp" %>
+			<%@ include file="footer/footer.jsp" %>
 		</div>
 		<!-- <button type="button" id="top">상단이동</button> -->
 	</div>
