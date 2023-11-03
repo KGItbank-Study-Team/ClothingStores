@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="header/header.jsp" %>
+    <%@ include file="../../header/header.jsp" %>
+    <% 
+    request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");	
+     %>
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="baguni.css" rel="stylesheet" />
-<script>
-	function openPopup() {
-	  // 팝업 창 열기
-	  window.open('test2-1.html', '팝업창이름', 'width=300,height=200');}
-	</script>
+<link href="../../resources/css/baguni.css" rel="stylesheet" />
+<script src="../../resources/js/baguni.js"></script>
 <title>장 바 구 니</title>
 </head>
 <body>
@@ -50,10 +49,52 @@
 					</td>
 					<td class="cart__list__option">
 						<p>유해커의 검정후드티 / 1개</p>
-						<button class="cart__list__optionbtn"><a href="javascript:void(0);" onclick="openPopup()">주문 추가/변경</a></button>
-					</td>
+						<div class="btn" onclick="toggleHiddenContent();">주문 추가/변경▽</div>
+        <div id="hiddenContent03" class="delivery hiddenContent" >
+		    <div class="option hidden"></div>
+		    <table class="change hidden" >
+		       <tbody class="cchange">
+		            <tr class="nammme">
+		                <td colspan="3" >${productName}</td>
+		            </tr>
+		            <tr class="">
+		                <td class="pcolor" >
+		                    <p>COLOR</p>
+		                </td>
+		                <td colspan="2" class="colorrr">
+		                    <select class="colorr">
+		                        <option value="">red</option>
+	                        <option value="">blue</option>
+		                        <option value="">pink</option>
+		                    </select>
+		                </td>
+		            </tr>
+		            <tr class="">
+		                <td class="" style="width: 27%;">
+		                    <p>SIZE</p>
+		                </td>
+		                <td colspan="2"class="colorrr">
+		                    <select class="colorr" >
+		                        <option value="">XL</option>
+		                        <option value="">2XL</option>
+		                        <option value="">3XL</option>
+		                    </select>
+		                </td>
+		            </tr>
+		            <tr><td colspan="3">
+		            <button type="submit" class="chchange">변경하기</button>
+						</td></tr>
+		        </tbody>
+		        <div>
+		        <input type="submit" class="chaange" id="chaange">
+		        </div>
+		    </table>
+		</div>
+						<!-- <button type="submit" class="cart__list__optionbtn">주문 추가/변경</button>
+				 -->	
+				 </td>
 					<td>
-						<p>₩100</p>
+						<p>₩1000</p>
 					</td>
 					<td><span class="price">116,620원</span><br>
 						<button class="cart__list__orderbtn">주문하기</button></td>
@@ -71,15 +112,17 @@
 						<p>상품 주문 수량: 1개</p>
 						<button class="cart__list__optionbtn"><a href="javascript:void(0);" onclick="openPopup()">주문 추가/변경</a></button>
 					</td>
-					<td>
+					<td style="width:5%;">
 						<p>적립금: ₩100</p>
 					</td>
 					<td style="width: 15%;"><span class="price">88,900원</span><br>
 						<button class="cart__list__orderbtn">주문하기</button></td>
-					<td><select id="shipping">
+					<td>
+					<select id="shipping">
 							<option>일반 배송 (₩3000)</option>
 							<option>빠른 배송 (₩5000)</option>
-					</select></td>
+					</select>
+					</td>
 					<!-- <td style="width: 15%;">무료</td> -->
 				</tr>
 			</tbody>
@@ -148,5 +191,5 @@
 		</div>
 	</section>
 </body>
-    <%@ include file="footer/footer.jsp" %>
+    <%@ include file="../../footer/footer.jsp" %>
 </html>
