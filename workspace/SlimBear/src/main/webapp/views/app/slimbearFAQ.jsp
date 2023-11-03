@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header/header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css"
-	href="resources/css/slimNotice2.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
@@ -438,7 +437,7 @@
 		}
 		</style>
 	</div>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="footer/footer.jsp" />
 </div>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header.jsp" />
+<jsp:include page="header/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="resources/css/slimNotice2.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>SLIMBEAR</title>
@@ -1240,7 +1240,7 @@
 			</form>
 		</div>
 	</div>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
 </body>
