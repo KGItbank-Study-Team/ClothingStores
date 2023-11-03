@@ -1,0 +1,518 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');
+}
+
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+img {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body,
+code {
+  /* font: 13px 'Outfit','Noto Sans KR',Dotum,AppleGothic,sans-serif; */
+  font-size: 13px;
+  color: rgb(0, 0, 0);
+  background: #ffffff;
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+
+body {
+  min-width: 100%;
+}
+#oneTop {
+  position: relative;
+  background: #655345;
+  text-align: center;
+  padding: 0px 60px;
+  font-size: small;
+}
+.slide-sentence {
+  /* margin-top: 10px; */
+  line-height: 1cm;
+}
+#oneTop * {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 38px;
+  padding: 0 60px;
+  overflow: hidden;
+  height: 38px;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.35s;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+header {
+  box-shadow: 1px 1px 1px 1px rgb(153, 144, 144);
+
+}
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.logo>a>img {
+  padding-top: 15px;
+  width: 180px;
+}
+.menu-list {
+  position: relative;
+  top: 7px;
+  padding-left: 20px;
+}
+.menu-list > li {
+  font: 13px 'Outfit','Noto Sans KR',Dotum,AppleGothic,sans-serif;
+}
+.mainMenu {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 4%;
+  min-width: 900px;
+}
+.menu-item {
+  float: left;
+  position: relative;
+  cursor: pointer;
+  padding: 8px 15px;
+  text-align: center;
+  font-weight: bold;
+}
+.dropdown-content {
+  position: absolute;
+  min-width: 150px;
+  display: none;
+}
+.dropdown-content a {
+  display: flex;
+  width: auto;
+}
+.dropdown-content > li {
+  padding-top: 10px;
+}
+.dropdown {
+  position: relative;
+}
+.menu-item:hover {
+  color: #3f3f3f;
+}
+.menu-item:hover .dropdown-content {
+  display: block;
+}
+.banner-container {
+  width: 100%;
+  position: relative;
+  opacity: 1;
+  overflow-x: hidden;
+  z-index: 0;
+
+}
+.banner-container img {
+  /* overflow: hidden; */
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.menu-list {
+  z-index: 1;
+}
+.image-slider {
+  overflow: hidden;
+}
+
+.image-slider, img {
+  height: auto;
+}
+
+.slider {
+  display: none;
+}
+.userArea > ul {
+  display: flex;
+  align-content: center;
+  position: absolute;
+  right: 80px;
+  top: 30%;
+}
+.userArea>ul>li {
+  position: relative;
+  vertical-align: middle;
+  padding-left: 15px;
+}
+.userArea img {
+  width: 15px;
+  height: auto;
+  vertical-align: middle;
+  opacity: 1;
+}
+.fuck {
+  position: relative;
+  top: 20%;
+  right: 12px;
+}
+
+/*======================================================  */
+/* 검색 영역 */
+/*======================================================  */
+input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  width: 80px;
+  position: relative;
+  top: 9px;
+}
+i {
+  position: relative;
+  top: 9px;
+}
+#one-text {
+  position: relative;
+  padding-top: 50px;
+  color: #000;
+}
+main,
+code {
+  color: #3f3f3f;
+  text-align: center;
+}
+
+#one-best {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  text-align: center;
+  /* position: absolute; */
+}
+
+.image-list>img {
+  width: 370px;
+  height: 492px;
+}
+.menu-item2 {
+  float: right;
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+}
+/* ================== NOW BEST! ================== */
+.product-container {
+  display: inline-block;
+  max-width: 1200px;
+  justify-content: center;
+  width: 95%;
+}
+.slider-wrapper {
+  position: relative;
+}
+.slider-wrapper .slide-button {
+  position: absolute;
+  top: 50%;
+  outline: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  z-index: 5;
+  color: #fff;
+  display: flex;
+  cursor: pointer;
+  font-size: 2.2rem;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.slider-wrapper .slide-button:hover {
+  background: #404040;
+}
+
+.slider-wrapper .slide-button#prev-slide {
+  left: -25px;
+  display: none;
+}
+.slider-wrapper .slide-button#next-slide {
+  right: -25px;
+}
+.slider-wrapper .image-list {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 18px;
+  font-size: 0;
+  list-style: none;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.slider-wrapper .image-list::-webkit-scrollbar {
+  display: none;
+}
+.slider-wrapper .image-list .image-item {
+  width: 325px;
+  height: 400px;
+  object-fit: cover;
+}
+.product-container .slider-scrollbar {
+  height: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.slider-scrollbar .scrollbar-track {
+  background: #ccc;
+  width: 100%;
+  height: 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  position: relative;
+}
+.slider-scrollbar:hover .scrollbar-track {
+  height: 4px;
+}
+.slider-scrollbar .scrollbar-thumb {
+  position: absolute;
+  background: #000;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  cursor: grab;
+  border-radius: inherit;
+}
+.slider-scrollbar .scrollbar-thumb:active {
+  cursor: grabbing;
+  height: 8px;
+  top: -2px;
+}
+.slider-scrollbar .scrollbar-thumb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  bottom: -10px;
+}
+
+/* Styles for mobile and tablets */
+@media only screen and (max-width: 1023px) {
+  .slider-wrapper .slide-button {
+    display: none !important;
+  }
+
+  .slider-wrapper .image-list {
+    gap: 10px;
+    margin-bottom: 15px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .slider-wrapper .image-list .image-item {
+    width: 280px;
+    height: 380px;
+  }
+
+  .slider-scrollbar .scrollbar-thumb {
+    width: 20%;
+  }
+}
+/* 배너 이미지 CSS */
+.slide {
+  /* layout */
+  display: flex;
+  flex-wrap: nowrap;
+  /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+  overflow: hidden;
+
+  /* position */
+  /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+  position: relative;
+
+  /* size */
+  width: 100%;
+
+  /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+  user-select: none;
+}
+.slide_item {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+  position: relative;
+  left: 0px;
+
+  /* size */
+  width: 100%;
+  height: auto;
+  /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+  flex-shrink: 0;
+
+  /* transition */
+  transition: left 0.15s;
+}
+.slide_wrap > .slide_item> img {
+
+}
+.slide_button {
+  /* layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* position */
+  position: absolute;
+  /* 버튼이 중앙에 위치하게 하기위해 계산 */
+  top: calc(50% - 16px);
+
+  /* size */
+  width: 32px;
+  height: 32px;
+
+  /* style */
+  border-radius: 100%;
+  background-color: #cccc;
+  cursor: pointer;
+}
+
+.slide_prev_button {
+  left: 10px;
+}
+.slide_next_button {
+  right: 10px;
+}
+/* 페이지네이션 스타일 */
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.slide_pagination {
+  /* layout */
+  display: flex;
+  gap: 5px;
+
+  /* position */
+  position: absolute;
+  bottom: 0;
+  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slide_pagination > li {
+  /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+  color:gray;
+  cursor: pointer;
+  font-size: 25px;
+}
+.slide_pagination > li.active {
+  /* 현재 슬라이드 색상은 투명도 없이 */
+  color: white;
+  opacity: 0.7;
+}
+.slide_item_duplicate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  height: 300px;
+  flex-shrink: 0;
+  transition: left 0.15s;
+}
+footer {
+  padding: 80px 0px 15px 60px;
+  font-size: 10px;
+  color: #000;
+  overflow: hiddlen;
+  white-space: nowrap;
+}
+h2 {
+  font-size: medium !important;
+  padding-bottom: 20px;
+}
+#bottom_info > div {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 120px;
+}
+#service_logo > img {
+  width: 50px;
+  height: auto;
+  margin-right: 15px;
+}
