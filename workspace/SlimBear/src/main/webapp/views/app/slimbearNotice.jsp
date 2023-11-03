@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- VO, DAO import -->
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
-<jsp:include page="header.jsp" />
+<jsp:include page="header/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="resources/css/slimNotice2.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>SLIMBEAR</title>
@@ -17,7 +17,7 @@
 <body>
 <div id="wrap">
 	<div id="container">
-	<div id="contents">
+		<div id="contents">
 			<div
 				class="xans-element- xans-board xans-board-listpackage-1002 xans-board-listpackage xans-board-1002">
 				<!-- 현재 위치 -->
@@ -582,7 +582,7 @@
 			<!-- // 관리자 전용 메뉴 -->
 		</div>
 	</div>
-		<jsp:include page="footer.jsp" />
+	<jsp:include page="footer/footer.jsp" />
 </div>
 </body>
 </html>
