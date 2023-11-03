@@ -21,7 +21,8 @@ textarea {
     outline: none;
 }
 body {
-	width: 100%
+	width: 100%;
+	background: #D7D2C3;
 }
 #wrapper {
     width: 100%;

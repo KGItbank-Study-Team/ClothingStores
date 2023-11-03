@@ -99,9 +99,9 @@
                     이용하실 수 있습니다.
                 </div>
                 <div id="service_logo">
-                    <img src="../images/escrow_02.png" alt="asd" />
-                    <img src="../images/escrow_03.png" alt="sd" />
-                    <img src="../images/escrow_04.png" alt=""/>
+                    <img src="/resources/images/escrow_02.png" alt="asd" />
+                    <img src="/resources/images/escrow_03.png" alt="sd" />
+                    <img src="/resources/images/escrow_04.png" alt=""/>
                 </div>
             </div>
         </div>

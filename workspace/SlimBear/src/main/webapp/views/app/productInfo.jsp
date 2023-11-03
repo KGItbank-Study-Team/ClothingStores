@@ -15,16 +15,16 @@ request.setAttribute("color5", "블랙");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/productInfo.css">
+	href="/resources/css/productInfo.css">
 <title>상품상세정보</title>
 </head>
 <body>
-	<%-- <%@ include file="header.jsp"%> --%>
+	<%@ include file="header/header2.jsp"%>
 	<div id=container>
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
-					<img alt="상품01" src="../resources/images/Best_product08.webp">
+					<img alt="상품01" src="/resources/images/Best_product08.webp">
 				</div>
 			</div>
 			<div class="right">
@@ -35,30 +35,47 @@ request.setAttribute("color5", "블랙");
 				<div>
 					<table>
 						<tbody>
-							<!--  <tr class="info-name">
-								<td colspan="2"></td>
-							</tr>-->
 							<tr>
-								<th scope="row"><span
-									style="font-size: 12px; color: #555555;">CUSTOM</span>
+								<th scope="row" class="solid2">
+									<span style="font-size: 12px; color: #555555;">CUSTOM</span>
 								</th>
-								<td><span style="font-size: 12px; color: #555555;">
+								<td class="solid"><span style="font-size: 12px; color: #555555;">
 										<span><del>239,000원</del></span>
-								</span></td>
+									</span>
+								</td>
 							</tr>
 							<tr>
-								<th scope="row"><span
-									style="font-size: 12px; color: #555555;">PRICE</span>
+								<th scope="row" class="solid2">
+								 <span style="font-size: 12px; color: #555555;">PRICE</span>
 								</th>
-								<td><span style="font-size: 12px; color: #555555;">
+								<td class="solid">
+									<span style="font-size: 12px; color: #555555;">
 										<strong>198,000원</strong>
-								</span></td>
+									</span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div>
-					
+					<table>
+						<tbody>
+							<tr>
+								<th scope="row" class="solid3">
+									<span style="font-size: 12px; color: #555555;">COLOR</span>
+								</th>
+								<td>
+									<ul>
+										<li class="color"><a href="#none"><span>${color1}</span></a></li>
+										<li class="color"><a href="#none"><span>${color2}</span></a></li>
+										<li class="color"><a href="#none"><span>${color3}</span></a></li>
+										<li class="color"><a href="#none"><span>${color4}</span></a></li>
+										<li class="color"><a href="#none"><span>${color5}</span></a></li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

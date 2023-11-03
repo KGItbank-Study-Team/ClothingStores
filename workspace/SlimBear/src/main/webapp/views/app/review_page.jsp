@@ -18,12 +18,12 @@
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/09decccad8.js"	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/css/review_page.css">
-<script defer src="../resources/js/review_page.js"></script>
+<script defer src="/resources/js/review_page.js"></script>
 </head>
 
 <body>
 	<header>
-		<%@ include file="header/header.jsp"%>
+		<%@ include file="header/header2.jsp"%>
 	</header>
 	<div id="wrapper">
 		<main id="product">
@@ -46,22 +46,21 @@
 				<table>
 					<tr>
 						<td><a href="#" class="thumb"> <img class="review_images"
-								src="../resources/review_images/Best_product09.webp" alt="상품이미지"
+								src="/resources/images/Best_product09.webp" alt="상품이미지"
 								style=""></a></td>
 						<td><a href="#" class="desc"><b>${product_id}</b></a><br />
 							<div class="review_text">${content}</div></td>
 						<td>
 							<ul class="free-delivery">
-								<li><img src="../resources/review_images/free_delivery02.png" alt="무료배송"></li>
+								<li><img src="/resources/images/free_delivery02.png" alt="무료배송"></li>
 								<li>무료배송</li>
 							</ul>
 						</td>
 						<td>
 							<div class="btns"> <!-- 찜하기 하트 버튼 -->
-								<button onclick="Toggle1()" id="btnh1" class="btn">
+								<button onclick="Toggle1(this)" class="btn">
 									<i class="fa-sharp fa-solid fa-heart"></i>
 								</button>
-								<!-- <span class="heart-text">찜하기</span> -->
 							</div> 
 							<div class="review-cart"> <!-- 장바구니 추가 버튼 -->
 								<a href="장바구니로 슝~"> 

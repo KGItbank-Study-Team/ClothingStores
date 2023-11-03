@@ -1,11 +1,10 @@
-// 찜하기 버튼
-var btnvar1 = document.getElementById('btnh1');
-function Toggle1() {
-    if(btnvar1.style.color == "red") {
-        btnvar1.style.color = "black"
-    }
-    else {
-        btnvar1.style.color = "red"
+// 찜하기 버튼	
+
+function Toggle1(button) {
+    var heartIcon = button.querySelector('i.fa-heart');
+    if (heartIcon.style.color == "brown") {
+        heartIcon.style.color = "black";
+    } else {
+        heartIcon.style.color = "brown";
     }
 }
-
