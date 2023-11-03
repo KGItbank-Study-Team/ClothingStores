@@ -38,10 +38,10 @@
 					src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
 					<a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a>
-					<a href="/myHTML/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
-					<a href="/myHTML/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
-					<a href="/myHTML/slimbearNotice.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/myHTML/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
+					<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
+					<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
+					<a href="/views/app/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				<script>
 					$(function() {
@@ -196,18 +196,18 @@
 								<td><i class="xi-check"></i></td>
 								<td class="displaynone"></td>
 								<td class="subject left txtBreak">
-									<span class="displaynone">
-									<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);">
-									<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" 
-										alt="내용 보기" /></a>
-									</span> 
-									<strong> 
-										<a href="/article/상품문의/6/1684189/"
-											style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a>
-										<img src="images/icon_201611292036259700.gif" alt="HIT"
-											class="ec-common-rwd-image" />
-										<span class="txtEm"></span>
-									</strong>
+								<span class="displaynone">
+								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);">
+								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" 
+									alt="내용 보기" /></a>
+								</span> 
+								<strong> 
+									<a href="/article/상품문의/6/1684189/"
+										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a>
+									<img src="/resources/images/icon_hit.gif" alt="HIT"
+										class="ec-common-rwd-image" />
+									<span class="txtEm"></span>
+								</strong>
 								</td>
 								<td>슬림베어_CR</td>
 								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td>
@@ -231,7 +231,7 @@
 								<strong>
 								<a href="/article/상품문의/6/1052853/"
 									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a>
-								<img src="images/icon_201611292036259700.gif" alt="HIT"
+								<img src="/resources/images/icon_hit.gif" alt="HIT"
 									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td>
 									
 								<td>슬림베어_CR</td>
@@ -255,7 +255,7 @@
 								<strong>
 								<a href="/article/상품문의/6/807434/"
 									style="color: #555555;">[공지] 지그재그 제트결제 운영 정책 공지사항(02/23개정)</a>
-								<img src="images/icon_201611292036259700.gif" alt="HIT"
+								<img src="/resources/images/icon_hit.gif" alt="HIT"
 									class="ec-common-rwd-image" /><span class="txtEm"></span>
 								</strong></td>
 								<td>슬림베어</td>
@@ -280,13 +280,12 @@
 								 <strong>
 									 <a href="/article/상품문의/6/113923/"
 										style="color: #555555;">[공지] 배송 전[취소/변경/추가/주소지변경]문의는 "배송전 변경/취소" 게시판에 남겨주세요.</a>
-									<img src="images/icon_201611292036259700.gif" alt="HIT"
+									<img src="/resources/images/icon_hit.gif" alt="HIT"
 										class="ec-common-rwd-image" /><span class="txtEm"></span>
 								</strong>
 								</td>
 								<td>슬림베어</td>
-								<td class=""><span class="txtNum">2017-09-29
-										12:40:50</span></td>
+								<td class=""><span class="txtNum">2017-09-29 12:40:50</span></td>
 								<td class="displaynone"><span class="txtNum">44876</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -305,20 +304,19 @@
 								class="xans-record-">
 								<td>485848</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728308','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728308/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />서****</td>
-								<td class=""><span class="txtNum">2023-11-02
-										09:08:29</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728308','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> 
+									<a href="/article/상품문의/6/1728308/" style="color: #555555;">상품 문의합니다 ♡</a> 
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
+									<span class="txtEm"></span>
+								</td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />서****</td>
+								<td class=""><span class="txtNum">2023-11-02 09:08:29</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -329,20 +327,19 @@
 								class="xans-record-">
 								<td>485847</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728305','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728305/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />김****</td>
-								<td class=""><span class="txtNum">2023-11-02
-										09:00:16</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728305','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> 
+									<a href="/article/상품문의/6/1728305/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
+									<span class="txtEm"></span>
+								</td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />김****</td>
+								<td class=""><span class="txtNum">2023-11-02 09:00:16</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -353,20 +350,18 @@
 								class="xans-record-">
 								<td>485846</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728292','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728292/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260626.jpg" />김****</td>
-								<td class=""><span class="txtNum">2023-11-02
-										04:21:56</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728292','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span>
+									<a href="/article/상품문의/6/1728292/" style="color: #555555;">상품 문의합니다 ♡</a> 
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
+									<span class="txtEm"></span></td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260626.jpg" />김****</td>
+								<td class=""><span class="txtNum">2023-11-02 04:21:56</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -377,20 +372,17 @@
 								class="xans-record-">
 								<td>485845</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728286','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728286/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728286','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span>
+									<a href="/article/상품문의/6/1728286/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span></td>
 								<td><img
 									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />이****</td>
-								<td class=""><span class="txtNum">2023-11-02
-										00:49:11</span></td>
+								<td class=""><span class="txtNum">2023-11-02 00:49:11</span></td>
 								<td class="displaynone"><span class="txtNum">1</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -401,44 +393,37 @@
 								class="xans-record-">
 								<td>485844</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728280','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728280/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />김****</td>
-								<td class=""><span class="txtNum">2023-11-01
-										23:49:31</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone">
+										<a href="#none" onclick="BOARD.viewTarget('1728280','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> 
+									<a href="/article/상품문의/6/1728280/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
+									<span class="txtEm"></span>
+								</td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />김****</td>
+								<td class=""><span class="txtNum">2023-11-01 23:49:31</span></td>
 								<td class="displaynone"><span class="txtNum">1</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><img
-									src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
+								<td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" /></td>
 							</tr>
 							<tr style="background-color: #FFFFFF; color: #555555;"
 								class="xans-record-">
 								<td>485843</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728275','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728275/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260592.jpg" />박****</td>
-								<td class=""><span class="txtNum">2023-11-01
-										22:47:59</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728275','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> <a href="/article/상품문의/6/1728275/" style="color: #555555;">상품 문의합니다 ♡</a> 
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span></td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260592.jpg" />박****</td>
+								<td class=""><span class="txtNum">2023-11-01 22:47:59</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -449,20 +434,17 @@
 								class="xans-record-">
 								<td>485842</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728271','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728271/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />이****</td>
-								<td class=""><span class="txtNum">2023-11-01
-										21:20:35</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728271','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> <a href="/article/상품문의/6/1728271/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span>
+								</td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />이****</td>
+								<td class=""><span class="txtNum">2023-11-01 21:20:35</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -473,20 +455,17 @@
 								class="xans-record-">
 								<td>485841</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728266','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728266/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone"> 
+										<a href="#none" onclick="BOARD.viewTarget('1728266','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> <a href="/article/상품문의/6/1728266/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span>
+								</td>
 								<td><img
 									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />최****</td>
-								<td class=""><span class="txtNum">2023-11-01
-										20:00:02</span></td>
+								<td class=""><span class="txtNum">2023-11-01 20:00:02</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -497,20 +476,17 @@
 								class="xans-record-">
 								<td>485840</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728265','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728265/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
-								<td><img
-									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260592.jpg" />박****</td>
-								<td class=""><span class="txtNum">2023-11-01
-										20:00:01</span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone">
+										<a href="#none" onclick="BOARD.viewTarget('1728265','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> <a href="/article/상품문의/6/1728265/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span>
+								</td>
+								<td>
+									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260592.jpg" />박****</td>
+								<td class=""><span class="txtNum">2023-11-01 20:00:01</span></td>
 								<td class="displaynone"><span class="txtNum">1</span></td>
 								<td class="displaynone"><span class="txtNum">0</span></td>
 								<td class="displaynone"><img
@@ -521,16 +497,14 @@
 								class="xans-record-">
 								<td>485839</td>
 								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><span
-									class="displaynone"> <a href="#none"
-										onclick="BOARD.viewTarget('1728263','6',this);"><img
-											src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" /></a>
-								</span> <a href="/article/상품문의/6/1728263/" style="color: #555555;">상품
-										문의합니다 ♡</a> <img src="images/icon_201611292036328500.png"
-									alt="비밀글" class="ec-common-rwd-image" /><img
-									src="images/icon_201611292036284200.gif" alt="NEW"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></td>
+								<td class="subject left txtBreak">
+									<span class="displaynone">
+										<a href="#none" onclick="BOARD.viewTarget('1728263','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
+									</span> <a href="/article/상품문의/6/1728263/" style="color: #555555;">상품 문의합니다 ♡</a>
+									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
+									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" /><span class="txtEm"></span>
+								</td>
 								<td><img
 									src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260743.jpg" />고****</td>
 								<td class=""><span class="txtNum">2023-11-01
@@ -557,7 +531,7 @@
 
 			<div
 				class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
-				<a href="?board_no=6&page=1"><img src="images/icon_prev2.png" /></a>
+				<a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
 				<ol>
 					<li class="xans-record-"><a href="?board_no=6&page=1"
 						class="this">1</a></li>
@@ -580,7 +554,7 @@
 					<li class="xans-record-"><a href="?board_no=6&page=10"
 						class="other">10</a></li>
 				</ol>
-				<a href="?board_no=6&page=2"><img src="images/icon_next2.png" /></a>
+				<a href="?board_no=6&page=2"><img src="/resources/images/icon_next2.png" /></a>
 			</div>
 
 			<form id="boardSearchForm" name="" action="/board/qa/6" method="get"

@@ -37,10 +37,10 @@
 				src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 			<div class="boardnavi">
 				<a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a>
-				<a href="/myHTML/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
-				<a href="/myHTML/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
-				<a href="/myHTML/slimbearNotice.jsp" class="navi04"><span>사용후기</span></a> 
-				<a href="/myHTML/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
+				<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
+				<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
+				<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
+				<a href="/views/app/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
 			</div>
 			<script>
 				$(function() {
