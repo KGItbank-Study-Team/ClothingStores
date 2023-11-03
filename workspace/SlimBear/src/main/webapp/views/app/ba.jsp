@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="../../header/header.jsp" %>
+    <%@ include file="header/header.jsp" %>
     <% 
     request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");	
      %>
@@ -191,5 +191,5 @@
 		</div>
 	</section>
 </body>
-    <%@ include file="../../footer/footer.jsp" %>
+    <%@ include file="footer/footer.jsp" %>
 </html>
