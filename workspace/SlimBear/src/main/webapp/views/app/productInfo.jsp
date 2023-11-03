@@ -19,7 +19,7 @@ request.setAttribute("color5", "블랙");
 <title>상품상세정보</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%-- <%@ include file="header.jsp"%> --%>
 	<div id=container>
 		<div class="productInfo">
 			<div class="left">

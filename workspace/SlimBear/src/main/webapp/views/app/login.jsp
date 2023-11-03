@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="/resources/css/login.css">
 <script src="https://kit.fontawesome.com/51db22a717.js"
 	crossorigin="anonymous"></script>
 <script src="login.js"></script>
