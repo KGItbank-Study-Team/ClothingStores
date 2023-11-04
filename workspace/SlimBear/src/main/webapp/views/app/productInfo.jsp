@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-request.setAttribute("productInfo", "#SLIMEBEAR.캐시미어 핸드메이드 더플코트 - 3 color");
+request.setAttribute("productInfo", "#SLIMEBEAR.WARM PLUS LIGHT V NECK JACKET 블랙");
 request.setAttribute("subExplanation", "made by slimebear, 성숙한 감성의 더플코트 :)<br/>핸드메이드 봉제로 더 고급스럽게,<br/>"
 		+ "퀄리티 있는 부자재로 더 완성도 높게 :)<br/>하나하나 매력있는 세 컬러로 만나보세요!");
 request.setAttribute("color1", "화이트");
@@ -9,13 +9,26 @@ request.setAttribute("color2", "크림");
 request.setAttribute("color3", "브라운");
 request.setAttribute("color4", "챠콜");
 request.setAttribute("color5", "블랙");
+request.setAttribute("productInfo1", "없음");
+request.setAttribute("productInfo2", "보통");
+request.setAttribute("productInfo3", "있음");
+request.setAttribute("productInfo4", "없음");
+request.setAttribute("productInfo5", "오버핏");
+request.setAttribute("customMemo1", "⦁ 여유로운 오버핏 사이즈<br/>⦁ 전면 양쪽 포켓 디테일	<br/>⦁ 전면 양쪽 포켓 디테일<br/>⦁ 베이직한 스냅 디자인<br/>" +	
+						"⦁ 충전재 덕다운 80:20<br/>⦁ 나일론 원단<br/>");
+request.setAttribute("size1", "2XL");
+request.setAttribute("size2", "3XL");
+request.setAttribute("size3", "4XL");
+request.setAttribute("size4", "5XL");
+request.setAttribute("", "");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/productInfo.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
 </head>
 <body>
@@ -66,28 +79,167 @@ request.setAttribute("color5", "블랙");
 								</th>
 								<td>
 									<ul class="ColorOptionPosition">
-										<li class="color"><a href="#none"><span class="colorOption">${color1}</span></a></li>
-										<li class="color"><a href="#none"><span class="colorOption">${color2}</span></a></li>
-										<li class="color"><a href="#none"><span class="colorOption">${color3}</span></a></li>
-										<li class="color"><a href="#none"><span class="colorOption">${color4}</span></a></li>
-										<li class="color"><a href="#none"><span class="colorOption">${color5}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color1}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color2}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color3}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color4}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color5}</span></a></li>
 									</ul>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<div>
+					<table style="margin-top: 40px;">
+						<tbody>
+							<tr>
+								<th scope="row" class="solid3">
+									<span style="font-size: 12px; color: #555555;">SIZE</span>
+								</th>
+								<td>
+									<ul class="ColorOptionPosition">
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size1}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size2}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size3}</span></a></li>
+										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size4}</span></a></li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>				
+				</div>
 				<div class="btns">
 					<div clss="btn1">
 						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;background:rgb(101,83,69);">
 							<span class="btnSpan" style="color:white !important;">BUY IT NOW</span>
 						</a>
-						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO CART</span></a>
-						<a href="#none" class="btnOption"><span class="btnSpan">ADD TO WISH</span></a>
+						<a href="#none" class="btnOption" style="background:#eae5dd;"><span class="btnSpan">ADD TO CART</span></a>
+						<a href="#none" class="btnOption" style="background:#eae5dd;"><span class="btnSpan">ADD TO WISH</span></a>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+				<!-- 사이즈 가이드 -->
+			    <div class="guideBox"><br/><hr/>
+					<div class=shoppingInfo>
+						<p class="name">배송정보</p>
+						<ul class="ulClass">
+							<li>
+								<p>배송방법</p>
+								<strong>국내배송</strong>
+							</li>
+							<li>
+								<p>배송예정일</p>
+								<p><strong>3일 이내 출고</strong></p>
+							</li>
+							<li>
+								<p>택배사</p>
+								<p><strong>한진택배</strong></p>
+							</li>
+						</ul>
+					</div>
+					<hr/>
+					<div class="productGuide">
+						<p class="name1">제품 가이드</p>
+						<ul class="ulClass">
+							<li>
+								<p>신축성</p>
+								<p><strong>${productInfo1}</strong></p>
+							</li>
+							<li>
+								<p>두께감</p>
+								<p><strong>${productInfo2}</strong></p>
+							</li>
+							<li>
+								<p>안감</p>
+								<p><strong>${productInfo3}</strong></p>
+							</li>
+							<li>
+								<p>비침</p>
+								<p><strong>${productInfo4}</strong></p>
+							</li>
+							<li style="margin-right:0 !important;">
+								<p>사이즈</p>
+								<p><strong>${productInfo5}</strong></p>
+							</li>																						
+						</ul>
+					</div><!-- productGuide -->
+					<hr/>
+					<div class="customMemo">
+						<p class="name">제품 설명</p>
+						<p>${customMemo1}</p>
+					</div>
+					<hr/>
+					<div>
+						<p style="margin-bottom: 5px;">사이즈 정보</p>
+						 <table border="1" class="tableSize" style="width:540px; height: 200px;">
+					        <tr>
+					            <td class="tdColor">cm</td>
+					            <td class="tdColor">어깨</td>
+					            <td class="tdColor">가슴둘레</td>
+					            <td class="tdColor">소매</td>
+					            <td class="tdColor">암홀둘레</td>
+					            <td class="tdColor">총길이</td>
+					        </tr>
+					        <tr>
+					            <td class="tdColor">2XL</td>
+					            <td>행 2, 열 2</td>
+					            <td>행 2, 열 3</td>
+					            <td>행 2, 열 4</td>
+					            <td>행 2, 열 5</td>
+					            <td>행 2, 열 6</td>
+					        </tr>
+					        <tr>
+					            <td class="tdColor">3XL</td>
+					            <td>행 3, 열 2</td>
+					            <td>행 3, 열 3</td>
+					            <td>행 3, 열 4</td>
+					            <td>행 3, 열 5</td>
+					            <td>행 3, 열 6</td>
+					        </tr>
+					        <tr>
+					            <td class="tdColor">4XL</td>
+					            <td>행 4, 열 2</td>
+					            <td>행 4, 열 3</td>
+					            <td>행 4, 열 4</td>
+					            <td>행 4, 열 5</td>
+					            <td>행 4, 열 6</td>
+					        </tr>
+					        <tr>
+					            <td class="tdColor">5XL</td>
+					            <td>행 5, 열 2</td>
+					            <td>행 5, 열 3</td>
+					            <td>행 5, 열 4</td>
+					            <td>행 5, 열 5</td>
+					            <td>행 5, 열 6</td>
+					        </tr>
+					    </table>
+					</div>
+			    </div>
+			</div> <!-- right -->
+		</div> <!-- productInfo  -->
+	</div> <!-- container -->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

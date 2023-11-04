@@ -5,6 +5,7 @@ body {
 	padding: 90px;
 	margin: 107.5px;
 	padding-top: 100px;
+	height: auto;
 }
 .productInfo {
 	display: flex;
@@ -20,8 +21,7 @@ body {
 	padding-right: 120px;
 }
 .right {
-	/* vertical-align: top; */
-	width: 540px;
+	width: 550px;
 }
 img {
 	width: 460px;
@@ -41,7 +41,7 @@ table {
 	border-collapse: collapse; 
 }
 .solid {
-	width: 480px;
+	width: 430px;
 	border-bottom: 1px solid #555555;
 }
 .solid2 {
@@ -84,6 +84,7 @@ th:last-child {
 	box-sizing: border-box;
 	list-style: none;
 	text-decoration: none;
+	z-index: 0;
 }
 .colorOption {
 	display: inline-block;
@@ -92,7 +93,15 @@ th:last-child {
 	font-weight: 300;
 	font-size: 12px;
 	min-width: 30px;
-	color: #808080
+	z-index: 1;
+}
+/* .colorOption:active {
+	background-color: black;
+} */
+/* 버튼 클릭 시 적용할 css */
+.clicked-color {
+	background-color: white;
+	z-index: 0;
 }
 .btns {
 	position: relative;
@@ -117,5 +126,65 @@ th:last-child {
 	display: inline-block;
 	position: relative;
 	box-sizing: border-box;
+}
+/* 사이즈 가이드 */
+hr {
 	
 }
+.guideBox {
+	margin-top: 70px;
+}
+.ulClass li {
+    display: inline-block;
+    margin-right: 50px; /* 각 요소 사이의 간격을 조절할 수 있습니다. */
+    font-weight: nomal !important;
+}
+.name {
+	width: 80px;
+	padding-right: 60px;
+}
+.name1 {
+	width: 100px;
+	padding-right: 40px;
+}
+.shoppingInfo   {
+	display: flex;
+	font-weight: nomal !important;
+	margin-top: 10px;
+}
+.productGuide {
+	display: flex;
+}
+.customMemo {
+	display: flex;
+}
+.tableSize td {
+	text-align: center;
+	border: 1px solid #555555;
+
+}
+.tdColor {
+
+	background: #eae5dd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
