@@ -2,8 +2,22 @@
     pageEncoding="UTF-8"%>
     <%@ include file="header/header.jsp" %>
     <% 
-    request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");	
+    request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");
+    request.setAttribute("price1", "120000"); // 가격을 문자열로 설정
+    request.setAttribute("price2", "1120000"); // 다른 가격도 문자열로 설정
+    request.setAttribute("productDescription", "507호 공식 해커");
+    request.setAttribute("productDescription2", "입는 순간 해커가 되는 검정후드티");
+    request.setAttribute("discountPrice", "132622");
+    request.setAttribute("","");
+    request.setAttribute("","");
+    request.setAttribute("","");
+    request.setAttribute("","");
+    request.setAttribute("","");
+    request.setAttribute("","");
+    request.setAttribute("","");
+   
      %>
+  
 <!DOCTYPE html>
 
 <html>
@@ -11,6 +25,7 @@
 <meta charset="UTF-8">
 <link href="/resources/css/baguni.css" rel="stylesheet" />
 <script src="../../resources/js/baguni.js"></script>
+
 <title>장 바 구 니</title>
 </head>
 <body>
@@ -32,12 +47,14 @@
 					<td><input type="checkbox"></td>
 					<td colspan="2">상품정보</td>
 					<td>옵션</td>
+					<td>수량</td>
 					<td>적립금</td>
 					<td>상품금액</td>
 					<td>배송비</td>
 
 				</tr>
 			</thead>
+			<%for(int i=0; i<10; i++){ %>
 			<tbody>
 				<tr class="cart__list__detail">
 					<td><input type="checkbox"></td>
@@ -93,46 +110,41 @@
 						</td></tr>
 		        </tbody>
 		        <div>
-		     <!-- <input type="submit" class="chaange" id="chaange">
-		        -->    </div>
+		    
+		       </div>
 		    </table>
 		</div>
-						<!-- <button type="submit" class="cart__list__optionbtn">주문 추가/변경</button>
-				 -->	
+					
 				 </td>
-					<td>
-						<p>₩1000</p>
-					</td>
-					<td><span class="price">116,620원</span><br>
-						<button class="cart__list__orderbtn">주문하기</button></td>
+				 <td>
+				 <span class="ec-base-qty">
+				
+				 
+				 <input id="quantity_id_1_<%= i %>" name="quantity_name_1_<%= i %>" size="1" value="1" type="text" oninput="updatePrice(<%= i %>);">
+				
+				 <span class="ec-base-qty">
+    <a href="javascript:;" class="up" onclick="addQuantity('quantity_id_1_<%= i %>', 1);">
+        <img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가" />
+    </a>
+ 
+    <a href="javascript:;" class="down" onclick="outQuantity('quantity_id_1_<%= i %>', 1);">
+        <img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소" />
+    </a>
+   
+</span>
+
+				 
+				 </span>
+							 </td>
+					<td><p>₩1000</p></td>
+					<td><span class="price" id="price_<%= i %>">${discountPrice}</span>
+</td>
 					<td>무료</td>
 				</tr>
-				<tr class="cart__list__detail">
-					<td style="width: 2%;"><input type="checkbox"></td>
-					<td style="width: 13%;"><img src="images/burger01.jpg"
-						alt="magic mouse"></td>
-					<td style="width: 27%;"><a href="#">식스 가이즈</a><span
-						class="cart__list__smartstore"> 스마트스토어</span>
-						<p>사람이 되기 위한 필수 영양소 마늘 버거</p> <span class=" price">88,900원</span>
-					</td>
-					<td class="cart__list__option" style="width: 27%;">
-						<p>상품 주문 수량: 1개</p>
-						<button class="cart__list__optionbtn"><a href="javascript:void(0);" onclick="openPopup()">주문 추가/변경</a></button>
-					</td>
-					<td style="width:5%;">
-						<p>적립금: ₩100</p>
-					</td>
-					<td style="width: 15%;"><span class="price">88,900원</span><br>
-						<button class="cart__list__orderbtn">주문하기</button></td>
-					<td>
-					<select id="shipping">
-							<option>일반 배송 (₩3000)</option>
-							<option>빠른 배송 (₩5000)</option>
-					</select>
-					</td>
-					<!-- <td style="width: 15%;">무료</td> -->
-				</tr>
-			</tbody>
+				<%
+				}
+				%>
+				
 			<tfoot>
 				<tr>
 					<td colspan="3"><input type="checkbox">
@@ -142,7 +154,7 @@
 					<td></td>
 					<td></td>
 				</tr>
-			</tfoot>
+			</tfoot> 
 
 			</form>
 		</table>

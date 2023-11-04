@@ -14,7 +14,40 @@
         max-height: 1000px; /* 원하는 크기로 조절하세요 */
         display: block;
     }
- 
+.ec-base-qty {
+    display: flex;
+    align-items: center;
+    
+}
+
+.ec-base-qty input[type="text"] {
+    width: 30px; /* 원하는 너비로 조절하세요 */
+    height: 30px; /* 원하는 높이로 조절하세요 */
+    text-align: center;
+    font-size: 16px; /* 원하는 글꼴 크기로 조절하세요 */
+    border: 1px solid #ccc; /* 테두리 스타일 및 색상 설정 */
+    border-radius: 4px; /* 둥근 테두리를 만들려면 조절하세요 */
+        writing-mode: horizontal-tb !important;
+    padding-block: 1px;
+    padding-inline: 2px;
+    margin-left: 20px;
+    
+}
+
+.ec-base-qty a {
+    display: block;
+    width: 20px; /* 화살표 아이콘 너비 조절 */
+    height: 30px; /* 화살표 아이콘 높이 조절 */
+    margin-top: 5px; /* 화살표 아이콘과 숫자 간격 조절 */
+    
+}
+
+/* 화살표 아이콘에 사용할 이미지의 스타일 */
+.ec-base-qty a img {
+    width: 100%; /* 이미지를 부모 요소 크기에 맞게 조절 */
+     height: 40px;
+     
+}
 body {
 	background-color: #FFFDF5;
   margin: 0;
@@ -155,7 +188,8 @@ pcolor{
 .cart__list__detail :nth-child(4),
 .cart__list__detail :nth-child(5),
 .cart__list__detail :nth-child(6),
-.cart__list__detail :nth-child(7) {
+.cart__list__detail :nth-child(7),
+.cart__list__detail :nth-child(8) {
   border-left: 2px solid whitesmoke;
 }
 
@@ -163,7 +197,8 @@ pcolor{
 .cart__list__detail :nth-child(4),
 .cart__list__detail :nth-child(5),
 .cart__list__detail :nth-child(6),
-.cart__list__detail :nth-child(7) {
+.cart__list__detail :nth-child(7),
+.cart__list__detail :nth-child(8) {
   text-align: center;
 }
 
