@@ -1,26 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
 <%
-request.setAttribute("productInfo", "#SLIMEBEAR.WARM PLUS LIGHT V NECK JACKET 블랙");
-request.setAttribute("subExplanation", "made by slimebear, 성숙한 감성의 더플코트 :)<br/>핸드메이드 봉제로 더 고급스럽게,<br/>"
-		+ "퀄리티 있는 부자재로 더 완성도 높게 :)<br/>하나하나 매력있는 세 컬러로 만나보세요!");
-request.setAttribute("color1", "화이트");
-request.setAttribute("color2", "크림");
-request.setAttribute("color3", "브라운");
-request.setAttribute("color4", "챠콜");
-request.setAttribute("color5", "블랙");
-request.setAttribute("productInfo1", "없음");
-request.setAttribute("productInfo2", "보통");
-request.setAttribute("productInfo3", "있음");
-request.setAttribute("productInfo4", "없음");
-request.setAttribute("productInfo5", "오버핏");
-request.setAttribute("customMemo1", "⦁ 여유로운 오버핏 사이즈<br/>⦁ 전면 양쪽 포켓 디테일	<br/>⦁ 전면 양쪽 포켓 디테일<br/>⦁ 베이직한 스냅 디자인<br/>" +	
-						"⦁ 충전재 덕다운 80:20<br/>⦁ 나일론 원단<br/>");
-request.setAttribute("size1", "2XL");
-request.setAttribute("size2", "3XL");
-request.setAttribute("size3", "4XL");
-request.setAttribute("size4", "5XL");
-request.setAttribute("", "");
+	request.setAttribute("productInfo", "#SLIMEBEAR.WARM PLUS LIGHT V NECK JACKET 블랙");
+	request.setAttribute("subExplanation", "made by slimebear, 성숙한 감성의 더플코트 :)<br/>핸드메이드 봉제로 더 고급스럽게,<br/>"
+			+ "퀄리티 있는 부자재로 더 완성도 높게 :)<br/>하나하나 매력있는 세 컬러로 만나보세요!");
+	request.setAttribute("color1", "화이트");
+	request.setAttribute("color2", "크림");
+	request.setAttribute("color3", "브라운");
+	request.setAttribute("color4", "챠콜");
+	request.setAttribute("color5", "블랙");
+	request.setAttribute("productInfo1", "없음");
+	request.setAttribute("productInfo2", "보통");
+	request.setAttribute("productInfo3", "있음");
+	request.setAttribute("productInfo4", "없음");
+	request.setAttribute("productInfo5", "오버핏");
+	request.setAttribute("customMemo1", "⦁ 여유로운 오버핏 사이즈<br/>⦁ 전면 양쪽 포켓 디테일	<br/>⦁ 전면 양쪽 포켓 디테일<br/>⦁ 베이직한 스냅 디자인<br/>" +	
+							"⦁ 충전재 덕다운 80:20<br/>⦁ 나일론 원단<br/>");
+	request.setAttribute("size1", "2XL");
+	request.setAttribute("size2", "3XL");
+	request.setAttribute("size3", "4XL");
+	request.setAttribute("size4", "5XL");
+	ArrayList<String> size1 = new ArrayList<>(5);
+	size1.add("49");
+	size1.add("49");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -182,41 +185,45 @@ request.setAttribute("", "");
 					        </tr>
 					        <tr>
 					            <td class="tdColor">2XL</td>
-					            <td>행 2, 열 2</td>
-					            <td>행 2, 열 3</td>
-					            <td>행 2, 열 4</td>
-					            <td>행 2, 열 5</td>
-					            <td>행 2, 열 6</td>
+					            <td>49</td>
+					            <td>124</td>
+					            <td>67</td>
+					            <td>52</td>
+					            <td>72</td>
 					        </tr>
 					        <tr>
 					            <td class="tdColor">3XL</td>
-					            <td>행 3, 열 2</td>
-					            <td>행 3, 열 3</td>
-					            <td>행 3, 열 4</td>
-					            <td>행 3, 열 5</td>
-					            <td>행 3, 열 6</td>
+					            <td>51</td>
+					            <td>128</td>
+					            <td>68</td>
+					            <td>56</td>
+					            <td>73</td>
 					        </tr>
 					        <tr>
 					            <td class="tdColor">4XL</td>
-					            <td>행 4, 열 2</td>
-					            <td>행 4, 열 3</td>
-					            <td>행 4, 열 4</td>
-					            <td>행 4, 열 5</td>
-					            <td>행 4, 열 6</td>
+					            <td>53</td>
+					            <td>134</td>
+					            <td>71</td>
+					            <td>60</td>
+					            <td>74</td>
 					        </tr>
 					        <tr>
 					            <td class="tdColor">5XL</td>
-					            <td>행 5, 열 2</td>
-					            <td>행 5, 열 3</td>
-					            <td>행 5, 열 4</td>
-					            <td>행 5, 열 5</td>
-					            <td>행 5, 열 6</td>
+					            <td>55</td>
+					            <td>138</td>
+					            <td>72</td>
+					            <td>62</td>
+					            <td>75</td>
 					        </tr>
 					    </table>
 					</div>
 			    </div>
 			</div> <!-- right -->
 		</div> <!-- productInfo  -->
+		<hr class="hrPosition"/>
+		<div>
+			<%@ include file="footer/footer2.jsp" %>
+		</div>
 	</div> <!-- container -->
 </body>
 </html>

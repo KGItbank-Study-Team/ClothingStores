@@ -2,6 +2,7 @@ body {
 	background-color: #faf9ef;
 }
 #container  {
+	text-align: center;
 	padding: 90px;
 	margin: 107.5px;
 	padding-top: 100px;
@@ -13,6 +14,7 @@ body {
 	position: relative;
 	left: 25%;
 	width: fit-content;
+	margin-bottom: 80px;
 }
 .left {
 	position: relative;
@@ -128,9 +130,6 @@ th:last-child {
 	box-sizing: border-box;
 }
 /* 사이즈 가이드 */
-hr {
-	
-}
 .guideBox {
 	margin-top: 70px;
 }
@@ -159,13 +158,18 @@ hr {
 	display: flex;
 }
 .tableSize td {
+	width: 126px;
 	text-align: center;
 	border: 1px solid #555555;
 
 }
 .tdColor {
-
 	background: #eae5dd;
+}
+.hrPosition {
+	margin: 0 auto;
+	width: 1620px; 
+	text-align: center
 }
 
 

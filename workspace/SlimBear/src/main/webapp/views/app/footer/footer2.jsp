@@ -1,36 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/css/footer.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>footer</title>
-  <!--   <style type="text/css">
-    footer {
-    padding: 0px;
-    font-size: 10px;
-    color: #000;
-    overflow: hiddlen;
-    white-space: nowrap;
-    width:100%
-  }
-  h2 {
-    font-size: medium !important;
-    padding-bottom: 20px;
-  }
-  #bottom_info > div {
-    display: inline-block;
-    vertical-align: top;
-    margin: 30px;
-  }
-  #service_logo > img {
-    width: 50px;
-    height: auto;
-    margin-right: 15px;
-  }
-    </style> -->
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/footer.css">
+<title>Insert title here</title>
 </head>
 <body>
     <footer>

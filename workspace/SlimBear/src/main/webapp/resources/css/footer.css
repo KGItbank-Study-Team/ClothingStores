@@ -1,0 +1,30 @@
+footer {
+	color: rgb(85, 85, 85) !important;
+    font-size: 10px;
+    color: #000;
+    /* overflow: hidden; */
+    text-align: center;
+}
+h2 {
+  font-size: medium !important;
+  padding-bottom: 20px;
+}
+#bottom_info {
+	width: 1800px;
+	display: inline-block;
+	position: relative;
+	white-space: nowrap;
+	padding-top: 15px;
+	left: 100px;
+	
+}
+#bottom_info > div {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 120px;
+}
+#service_logo > img {
+  width: 50px;
+  height: auto;
+  margin-right: 15px;
+}
