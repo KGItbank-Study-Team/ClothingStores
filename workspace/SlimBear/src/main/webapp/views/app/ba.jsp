@@ -8,14 +8,19 @@
     request.setAttribute("productDescription", "507호 공식 해커");
     request.setAttribute("productDescription2", "입는 순간 해커가 되는 검정후드티");
     request.setAttribute("discountPrice", "132622");
-    request.setAttribute("","");
-    request.setAttribute("","");
-    request.setAttribute("","");
-    request.setAttribute("","");
-    request.setAttribute("","");
-    request.setAttribute("","");
-    request.setAttribute("","");
-   
+    request.setAttribute("baedal","무료");
+    request.setAttribute("red","red");
+    request.setAttribute("blue","blue");
+    request.setAttribute("gray","gray");
+    request.setAttribute("chongprice","1200000");
+    request.setAttribute("chongbaedal","무료");
+    request.setAttribute("maybeprice","1320000");
+   request.setAttribute("freemoney", "100");
+   request.setAttribute("L", "L");
+   request.setAttribute("XL", "XL");
+   request.setAttribute("XXL", "XXL");
+   request.setAttribute("XXXL", "XXXL");
+   request.setAttribute("XXXXL", "XXXXL");
      %>
   
 <!DOCTYPE html>
@@ -58,16 +63,17 @@
 			<tbody>
 				<tr class="cart__list__detail">
 					<td><input type="checkbox"></td>
-					<td><img src="../images/유해커.jpg" alt="magic keyboard"></td>
-					<td><a href="#">507호 공식 해커</a><span
+					<td><img src="/resources/images/유해커.jpg" alt="magic keyboard"></td>
+					<td><a href="#">${productDescription}</a><span
 						class="cart__list__smartstore"> 스마트스토어</span>
-						<p>입는 순간 해커가 되는 검정후드티</p> <sapn class="price">116,622원</sapn><span
-						style="text-decoration: line-through; color: lightgray;">119,000</span>
+						<p>${productDescription2 }</p> <sapn class="price">${discountPrice}</sapn><span
+						style="text-decoration: line-through; color: lightgray;">${price1}</span>
 					</td>
 					<td class="cart__list__option">
-						<p>유해커의 검정후드티 / 1개</p>
-						<div class="btn" onclick="toggleHiddenContent();">주문 추가/변경▽</div>
-        <div id="hiddenContent03" class="delivery hiddenContent" >
+						<p>${productDescription2 }</p>
+						<% for(int i = 0; i < 10; i++) { %>
+						<div class="btn" onclick="toggleHiddenContent(<%= i %>);">주문 추가/변경▽</div>
+        <div id="hiddenContent<%= i %>" class="delivery hiddenContent" >
 		    <div class="option hidden"></div>
 		    <table class="change hidden">
 		       <tbody class="cchange">
@@ -81,9 +87,9 @@
 		                </td>
 		                <td colspan="2" class="colorrr">
 		                    <select class="colorr">
-		                        <option value="">red</option>
-	                        <option value="">blue</option>
-		                        <option value="">pink</option>
+		                        <option value="">${red}</option>
+	                        <option value="">${blue}</option>
+		                        <option value="">${gray}</option>
 		                    </select>
 		                </td>
 		            </tr>
@@ -93,12 +99,18 @@
 		                </td>
 		                <td colspan="2"class="colorrr">
 		                    <select class="colorr" >
-		                        <option value="">XL</option>
-		                        <option value="">2XL</option>
-		                        <option value="">3XL</option>
+		                        <option value="">${L }</option>
+		                        <option value="">${XL }</option>
+		                        <option value="">${XXL }</option>
+		                        <option value="">${XXXL }</option>
+		                        <option value="">${XXXXL }</option>
 		                    </select>
 		                </td>
 		            </tr>
+		        <%
+				}
+				%>
+				
 		            <tr><td colspan="3">
 		           <div class="cart__mainbtns">
 			<button class="cart__bigorderbtn left"
@@ -130,16 +142,16 @@
     <a href="javascript:;" class="down" onclick="outQuantity('quantity_id_1_<%= i %>', 1);">
         <img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소" />
     </a>
-   
+   <!-- help 상진 -->
 </span>
 
 				 
 				 </span>
 							 </td>
-					<td><p>₩1000</p></td>
+					<td><p>${freemoney}</p></td>
 					<td><span class="price" id="price_<%= i %>">${discountPrice}</span>
 </td>
-					<td>무료</td>
+					<td>${baedal }</td>
 				</tr>
 				<%
 				}
@@ -170,10 +182,10 @@
 			</thead>
 			<tr>
 				<td></td>
-				<td colspan="2">00,000원</td>
+				<td colspan="2">${chongprice }</td>
 				<td></td>
-				<td>+ 2,500원</td>
-				<td>= 30,300원</td>
+				<td>${chongbaedal}</td>
+				<td>${maybeprice }</td>
 			</tr>
 			
 		</table>
