@@ -95,7 +95,7 @@
                         <ul>
                             <li>
                                 <div class="search">
-                                    <input type="text" value="search" style="color: rgb(0, 0, 0);">
+                                    <input type="text" value="search" style="color: rgb(0, 0, 0);" class="inputArea">
                                     <i class="fas fa-search"></i>
                                 </div>
                             </li>
