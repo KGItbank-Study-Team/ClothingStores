@@ -1,7 +1,7 @@
 
 function toggleHiddenContent() {
 
-    var hiddenContent = document.getElementById('hiddenContent03');
+    var hiddenContent = document.getElementById('hiddenContent02');
     var btn = document.querySelector('.btn');
 
     if (hiddenContent.style.display === 'none' || !hiddenContent.style.display) {
@@ -12,6 +12,8 @@ function toggleHiddenContent() {
         btn.textContent = '주문 추가/변경▽';
     }
 }
+
+
 function addQuantity(id, step) {
     var inputField = document.getElementById(id);
     if (inputField) {
