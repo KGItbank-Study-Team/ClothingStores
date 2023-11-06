@@ -4,7 +4,8 @@ footer {
     color: #000;
     overflow: hiddlen;
     white-space: nowrap;
-    width: 100%
+    width: 100%;
+    margin: 150px auto 0;
 }
 
 h2 {
