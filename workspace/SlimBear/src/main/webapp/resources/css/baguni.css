@@ -5,7 +5,6 @@
         max-height: 0;
          background-color: #f0f0f0;
          position: absolute;
-    z-index: 1;
     }
 .cchange{
 	background-color: #D7D2C3;
@@ -35,21 +34,7 @@
 	top: auto;
 	padding-left: 14px;	
 }
-.inputbox {
-	position: relative;
-	width: 20px;
-	height:	20px;
-	line-height: 22px;
-	word-wrap: break-word;
-	word-break: break-all;
-	vertical-align: middle;
-	border: 1px solid #d9d4cd;
-	border-right: 0;
-	border-radius: 3px 0 0 3px;
-	padding: 0 6px 0 3px;
-	background: #faf9ef;
-	border: 1px solid rgb(217, 212, 205);
-}
+
 /* .ec-base-qty {
     display: flex;
     align-items: center;
@@ -94,13 +79,15 @@ a {
   color: black;
 }
 
-img {
+.yout img {
   display: block;
-  width: 80%;
-  height: 80px;
+  width: 80% !important;
+  height: 80px !important;
   margin: auto;
 }
-
+.btn {
+	cursor: pointer;
+}
 .cart {
   width: 80%;
   margin: auto;
@@ -276,4 +263,40 @@ pcolor{
   background-color: #766346;
   color: white;
   border: none;
+}
+.inputBox {
+	position: relative;
+	width: 20px;
+	height:	20px;
+	line-height: 22px;
+	word-wrap: break-word;
+	word-break: break-all;
+	vertical-align: middle;
+	border: 1px solid #d9d4cd;
+	border-right: 0;
+	border-radius: 3px 0 0 3px;
+	padding: 0 6px 0 3px;
+	background: #faf9ef;
+	border: 1px solid rgb(217, 212, 205);
+}
+.quantity {
+	width: 65px;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+}
+.countUp {
+	width:21px;
+	height:11px;
+	position: absolute;
+	top: 1px;
+	right: -4px;
+}
+.countDown {
+	width:21px;
+	height:11px;
+	position: absolute;
+	bottom: 0;
+	top: auto;	
+	right: -4px;
 }

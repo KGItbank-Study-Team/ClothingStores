@@ -1,8 +1,6 @@
-
-function toggleHiddenContent() {
-
-    var hiddenContent = document.getElementById('hiddenContent02');
-    var btn = document.querySelector('.btn');
+function toggleHiddenContent(button) {
+    var hiddenContent = button.nextElementSibling; // 다음 형제 요소인 .hiddenContent02를 선택
+    var btn = button;
 
     if (hiddenContent.style.display === 'none' || !hiddenContent.style.display) {
         hiddenContent.style.display = 'block';
@@ -12,7 +10,6 @@ function toggleHiddenContent() {
         btn.textContent = '주문 추가/변경▽';
     }
 }
-
 
 function addQuantity(id, step) {
     var inputField = document.getElementById(id);
@@ -46,3 +43,23 @@ function updatePrice(id) {
         discountPriceElement.textContent = "₩" + newPrice;
     }
 }   
+
+// 선택 상품 수량 증감 감소 
+// DOM 요소 가져오기
+const inputBox = document.querySelector(".inputBox");
+const countUpButton = document.querySelector(".countUp");
+const countDownButton = document.querySelector(".countDown");
+
+// 증가 버튼 클릭 시
+countUpButton.addEventListener("click", function () {
+    const currentValue = parseInt(inputBox.value, 10); // 현재 값 가져오기
+    inputBox.value = currentValue + 1; // 값 증가
+});
+
+// 감소 버튼 클릭 시
+countDownButton.addEventListener("click", function () {
+    const currentValue = parseInt(inputBox.value, 10); // 현재 값 가져오기
+    if (currentValue > 1) {
+        inputBox.value = currentValue - 1; // 값 감소 (최소값은 1로 설정)
+    }
+});

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="header/header2.jsp"%>
+
 <%
 request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");
 request.setAttribute("price1", "120000"); // 가격을 문자열로 설정
@@ -29,12 +29,12 @@ request.setAttribute("XXXXL", "XXXXL");
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../resources/css/baguni.css" rel="stylesheet" />
-<script src="../../resources/js/baguni.js"></script>
+<link href="/resources/css/baguni.css" rel="stylesheet" />
+<script defer src="/resources/js/baguni.js"></script>
 <title>장 바 구 니</title>
 </head>
 <body>
-
+<%@ include file="header/header2.jsp"%>
 	<section class="cart">
 		<div class="cart__information">
 			<ul>
@@ -52,6 +52,7 @@ request.setAttribute("XXXXL", "XXXXL");
 						<td><input type="checkbox"></td>
 						<td colspan="2">상품정보</td>
 						<td>옵션</td>
+						<td>수량</td>
 						<td>적립금</td>
 						<td>상품금액</td>
 						<td>배송비</td>
@@ -65,15 +66,19 @@ request.setAttribute("XXXXL", "XXXXL");
 					<tr class="cart__list__detail">
 						<td><input type="checkbox"></td>
 						<td class="yout"><img src="/resources/images/유해커.jpg" alt="magic keyboard"></td>
-						<td><a href="#">${productDescription}</a><span
-							class="cart__list__smartstore"> 스마트스토어</span>
-							<p>${productDescription2 }</p> <sapn class="price">${discountPrice}</sapn><span
-							style="text-decoration: line-through; color: lightgray;">${price1}</span>
+						<td>
+							<a href="#">${productDescription}</a>
+							<span class="cart__list__smartstore"> 스마트스토어</span>
+							<p>${productDescription2 }</p> 
+							<span class="price">${discountPrice}</span>
+							<span style="text-decoration: line-through; color: lightgray;">${price1}</span>
 						</td>
 						<td class="cart__list__option">
 							<p>유해커의 검정후드티 / 1개</p>
-							<div class="btn" onclick="toggleHiddenContent();">주문 추가/변경▽</div>
-							<div id="hiddenContent02" class="hiddenContent04">
+							<div class="btn" onclick="toggleHiddenContent(this);">주문 추가/변경▽</div>	
+							<!-- 옵션 변경 -->
+							<!-- <div id="hiddenContent02" class="hiddenContent04"> -->
+							<div class="hiddenContent02 hiddenContent04">
 								<div class="option hidden"></div>
 								<table class="change hidden">
 									<tbody class="cchange">
@@ -84,11 +89,13 @@ request.setAttribute("XXXXL", "XXXXL");
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
 											</td>
-											<td colspan="2" class="colorrr"><select class="colorr">
-													<option value="${red}">빨강</option>
-													<option value="${blue}">파랑</option>
-													<option value="${gray}">회색</option>
-											</select></td>
+											<td colspan="2" class="colorrr">
+												<select class="colorr">
+														<option value="${red}">빨강</option>
+														<option value="${blue}">파랑</option>
+														<option value="${gray}">회색</option>
+												</select>
+											</td>
 										</tr>
 										<tr class="">
 											<td>
@@ -107,21 +114,27 @@ request.setAttribute("XXXXL", "XXXXL");
 							</div> 
 						</td>
 						<td>
-						<span class="ec-base-qty"> 
-						<input id="quantity_id_1_<%=i%>" name="quantity_name_1_<%=i%>" 
-								value="1" type="text" oninput="updatePrice(<%=i%>);"
-								class="inputbox"> 
-								<a href="javascript:;" class="up"
-									onclick="addQuantity('quantity_id_1_<%=i%>', 1);">
-									 <img src="/resources/images/btn_count_up.gif"
-										alt="수량증가" />
+					 	<!--<span class="ec-base-qty"> 
+							<input id="quantity_id_1_<%=i%>" name="quantity_name_1_<%=i%>" 
+									value="1" type="text" oninput="updatePrice(<%=i%>);"
+									class="inputbox"> 
+								<a href="javascript:;" class="up" onclick="addQuantity('quantity_id_1_<%=i%>', 1);">
+									 <img src="/resources/images/btn_count_up.gif" alt="수량증가" />
 								</a> <a href="javascript:;" class="down"
 									onclick="outQuantity('quantity_id_1_<%=i%>', 1);"> 
-									<img src="/resources/images/btn_count_down.gif"
-										alt="수량감소" />
-								</a> <!-- help 상진 -->
+									<img src="/resources/images/btn_count_down.gif"	alt="수량감소" />
+								</a>
+							</span>-->
+							<span class="quantity">
+									<input type="text" value="1" class="inputBox">
+									<a href="#none" class="">
+										<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
+									</a>
+									<a href="#none">
+										<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
+									</a>
 							</span>
-	</td>
+						</td>
 						<td><p>${freemoney}</p></td>
 						<td><span class="price" id="price_<%=i%>">${discountPrice}</span>
 						</td>
