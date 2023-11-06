@@ -1,29 +1,22 @@
 
 
+
 DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
-	`uid`	bigint unsigned 	NOT NULL,
-	`id`	varchar(11)	NOT NULL,
-	`password`	varchar(100)	NOT NULL,
-	`email`	varchar(30)	NOT NULL,
+	`uid`	bigint unsigned NOT NULL,
+	`id`	varchar(11)	NOT NULL unique,
+	`password`	varchar(100) NOT NULL unique,
+	`email`	varchar(30)	NOT NULL unique,
 	`name`	varchar(30)	NOT NULL,
 	`address`	VARCHAR(30)	NOT NULL,
 	`sex`	char(1) 	NOT NULL check(sex IN('F','M')) COMMENT 'Female, Male',
 	`reg_date`	datetime	NOT NULL
 );
-DROP TABLE IF EXISTS `member`;
-
-CREATE TABLE `member` (
-	`uid`	bigint unsigned 	NOT NULL,
-	`id`	varchar(11)	NOT NULL,
-	`password`	varchar(100)	NOT NULL,
-	`email`	varchar(30)	NOT NULL,
-	`name`	varchar(30)	NOT NULL,
-	`address`	VARCHAR(30)	NOT NULL,
-	`sex`	char(1)	NOT NULL	COMMENT 'Female, Male',
-	`reg_date`	datetime	NOT NULL
+ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY(
+	`uid`
 );
+ALTER TABLE member modify column uid bigint unsigned auto_increment;
 
 DROP TABLE IF EXISTS `productOrder`;
 
@@ -98,10 +91,6 @@ CREATE TABLE `orderDetail` (
 	`order_uid`	bigint unsigned 	NOT NULL,
 	`prod_code`	varchar(30)	NOT NULL,
 	`cnt`	tinyint unsigned	NOT NULL
-);
-
-ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
-	`uid`
 );
 
 ALTER TABLE `productOrder` ADD CONSTRAINT `PK_PRODUCTORDER` PRIMARY KEY (

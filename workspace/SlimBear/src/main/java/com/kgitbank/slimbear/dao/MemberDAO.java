@@ -8,15 +8,17 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 
 @Repository
 public class MemberDAO extends MybatisDAO{
-	
-	public MemberDTO fintMemberById(int uid) {
-		MemberDTO mem = new MemberDTO();
-		mem.setUid(uid);
-		return (MemberDTO)template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_UID", mem);
+
+	public MemberDTO getMemberById(String id){
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_ID", id);
 	}
 
 	public List<MemberDTO> getMemberList() {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_MEM_LIST");
 	}
 
+	public int addMember(MemberDTO member) {
+		return template.insert("com.slimbear.mapper.Member.INSERT_MEM", member);
+	}
+	
 }

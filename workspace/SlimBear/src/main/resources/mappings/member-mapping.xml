@@ -10,8 +10,18 @@
 	<select id="SELECT_MEM_BY_UID" resultType="member" parameterType="member">
 		SELECT * FROM member WHERE uid=#{uid}
 	</select>
+	
+	<select id="SELECT_MEM_BY_ID" resultType="member" parameterType="member">
+		SELECT * FROM member WHERE id=#{id}
+	</select>
+	
 	<select id="SELECT_MEM_LIST" resultType="member">
 		SELECT * FROM member
 	</select>
 	
+	<insert id="INSERT_MEM"> 
+		INSERT INTO member
+		(id, password, email, name, address, sex, reg_date)
+		VALUES(#{id},#{password},#{email},#{name},#{address},#{sex},#{reg_date})
+	</insert>
 </mapper>

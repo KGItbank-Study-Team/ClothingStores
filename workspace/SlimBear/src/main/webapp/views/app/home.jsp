@@ -7,12 +7,14 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Hello world!   
 </h1>
 
-<P id="result">  The time on the </P>
+<P id="result"> ${member} </P>
    <div class="slide_item"><img src="/resources/images/testImage.jpg" alt=""></div>
-<script type="text/javascript" >
+
+   
+<!-- <script type="text/javascript" >
 var form = {
         id:"안녕하세요",
         password: "asdf"
@@ -28,7 +30,7 @@ $.ajax({
         alert("simpleWithObject err");
     }
 });
-</script>
+</script> -->
 
 </body>
 </html>
