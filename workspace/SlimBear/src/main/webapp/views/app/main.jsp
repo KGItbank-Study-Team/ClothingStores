@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/main_page.css" />
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script defer src="js/main_page.js"></script>
+    <script defer src="/resources/js/main_page.js"></script>
     <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
     <title>SLIIMBEAR</title>
 </head>
@@ -26,12 +26,12 @@
         <div class="menu-container">
             <div class="banner-container">
                 <div class="slide slide_wrap">
-                    <div class="slide_item"><img src="images/Banner-images01.webp" alt=""></div>
-                    <div class="slide_item"><img src="images/Banner-images02.webp" alt=""></div>
-                    <div class="slide_item"><img src="images/Banner-images03.webp" alt=""></div>
-                    <div class="slide_item"><img src="images/Banner-images04.webp" alt=""></div>
-                    <div class="slide_item"><img src="images/Banner-images05.webp" alt=""></div>
-                    <div class="slide_item"><img src="images/Banner-images06.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images01.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images02.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images03.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images04.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images05.webp" alt=""></div>
+                    <div class="slide_item"><img src="/resources/images/Banner-images06.webp" alt=""></div>
                     <div class="slide_prev_button slide_button">◀</div>
                     <div class="slide_next_button slide_button">▶</div>
                     <ul class="slide_pagination"></ul>
@@ -41,7 +41,7 @@
             <div id="users-container"> <!-- "menu clearfix" -->
                 <ul class="mainMenu">
                     <div class="logo">
-                        <a href=""><img src="images/SlimBear-Logo01.png " alt=""></a>
+                        <a href=""><img src="/resources/images/SlimBear-Logo01.png " alt=""></a>
                     </div>
                     <div class="menu-list">
                         <li class="menu-item"><a href="">BEST🔥</a>
@@ -116,14 +116,14 @@
                                 </div>
                             </li>
                             <li class="menu-item">
-                                <a href="#"><img src="images/icon_user.png" alt="user"></a>
+                                <a href="#"><img src="/resources/images/icon_user.png" alt="user"></a>
                                 <ul class="dropdown-content">
                                     <li><a href="">로그인</a></li>
                                     <li><a href="">회원가입</a></li>
                                     <li><a href="">주문조회</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><img class="fuck" src="images/icon_cart.png" alt="cart"></a></li>
+                            <li><a href="#"><img class="fuck" src="/resources/images/icon_cart.png" alt="cart"></a></li>
                         </ul>
                     </div>
                 </ul>
@@ -147,16 +147,16 @@
                     &lsaquo;
                 </button>
                 <ul class="image-list">
-                    <img class="image-item" src="images/Best_product01.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product02.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product03.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product04.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product05.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product06.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product07.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product08.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product09.webp" alt="img-1" />
-                    <img class="image-item" src="images/Best_product10.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product01.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product02.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product03.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product04.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product05.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product06.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product07.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product08.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product09.webp" alt="img-1" />
+                    <img class="image-item" src="/resources/images/Best_product10.webp" alt="img-1" />
                 </ul>
                 <button id="next-slide" class="slide-button material-symbols-rounded">
                     &rsaquo;
@@ -235,9 +235,9 @@
                         이용하실 수 있습니다.
                     </div>
                     <div id="service_logo">
-                        <img src="images/escrow_02.png" alt="" />
-                        <img src="images/escrow_03.png" alt="" />
-                        <img src="images/escrow_04.png" alt="" />
+                        <img src="/resources/images/escrow_02.png" alt="" />
+                        <img src="/resources/images/escrow_03.png" alt="" />
+                        <img src="/resources/images/escrow_04.png" alt="" />
                     </div>
                 </div>
             </div>

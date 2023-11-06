@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setAttribute("productInfo", "#SLIMEBEAR.WARM PLUS LIGHT V NECK JACKET 블랙");
 	request.setAttribute("subExplanation", "made by slimebear, 성숙한 감성의 더플코트 :)<br/>핸드메이드 봉제로 더 고급스럽게,<br/>"
 			+ "퀄리티 있는 부자재로 더 완성도 높게 :)<br/>하나하나 매력있는 세 컬러로 만나보세요!");
-	request.setAttribute("color1", "화이트");
-	request.setAttribute("color2", "크림");
-	request.setAttribute("color3", "브라운");
-	request.setAttribute("color4", "챠콜");
-	request.setAttribute("color5", "블랙");
+	ArrayList<String> colors = new ArrayList<String>();
+		colors.add("화이트");
+		colors.add("크림");
+		colors.add("브라운");
+		colors.add("챠콜");
+		colors.add("블랙");
+	ArrayList<String> sizes = new ArrayList<String>();
+		sizes.add("2XL");
+		sizes.add("3XL");
+		sizes.add("4XL");
+		sizes.add("5XL");
+		
 	request.setAttribute("productInfo1", "없음");
 	request.setAttribute("productInfo2", "보통");
 	request.setAttribute("productInfo3", "있음");
@@ -28,7 +36,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="/resources/js/productInfo.js"></script>
+<script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
 </head>
 <body>
@@ -64,7 +72,7 @@
 								</th>
 								<td class="solid">
 									<span style="font-size: 12px; color: #555555;">
-										<strong>198,000원</strong>
+										<strong>${price1}</strong>
 									</span>
 								</td>
 							</tr>
@@ -80,11 +88,10 @@
 								</th>
 								<td>
 									<ul class="colorOptionPosition">
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color1}</span></a></li>
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color2}</span></a></li>
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color3}</span></a></li>
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color4}</span></a></li>
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color5}</span></a></li>
+										<c:set var="color" value="<%=colors%>"/>
+										<c:forEach var="colorList" items="${color}">
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${colorList}</span></a></li>
+										</c:forEach>
 									</ul>
 								</td>
 							</tr>
@@ -99,11 +106,11 @@
 									<span style="font-size: 12px; color: #555555;">SIZE</span>
 								</th>
 								<td>
-									<ul class="sizeOptionPosition">
-										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size1}</span></a></li>
-										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size2}</span></a></li>
-										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size3}</span></a></li>
-										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size4}</span></a></li>
+									<ul class="sizeOptionPosition"> 
+									<c:set var="size" value="<%=sizes%>"/>
+									<c:forEach var="sizeList" items="${size}">
+										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${sizeList}</span></a></li>
+									</c:forEach>
 									</ul>
 								</td>
 							</tr>
@@ -120,8 +127,8 @@
 						</colgroup>
 						<tbody class="displayNone">
 							<tr>
-								<td style="font-size: 12px; color: #555555; font-weight:bold;">${color1}</td>
-								<td style="font-size: 12px; color: #555555; font-weight:bold;">${size1}</td>
+								<td style="font-size: 12px; color: #555555; font-weight:bold;">${colorList}</td>
+								<td style="font-size: 12px; color: #555555; font-weight:bold;">${sizeList}</td>
 								<td>
 									<span class="quantity"">
 										<input type="text" value="1" class="inputBox">
@@ -132,7 +139,7 @@
 											<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
 										</a>
 									</span>
-									<a href="#none">
+									<a href="#none" class="deleteItem">
 										<img alt="삭제" src="/resources/images/icon_delete.png"style="width:9px;height:9px;">
 									</a>
 								</td>
