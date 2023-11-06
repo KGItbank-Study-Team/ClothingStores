@@ -24,7 +24,7 @@ function change_btn2(sizeOptionPosition) {
 	console.log(sizeOptionPosition.currentTarget);
 	showOptions();
 }
-
+ 
 // 선택 상품 수량 증감 감소 
 // DOM 요소 가져오기
 const inputBox = document.querySelector(".inputBox");

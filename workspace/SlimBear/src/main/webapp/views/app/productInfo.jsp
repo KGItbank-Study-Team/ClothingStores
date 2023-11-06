@@ -36,7 +36,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
+<script type="text/javascript" defer src="/resources/js/productInfo2.js"></script>
 <title>상품상세정보</title>
 </head>
 <body>
