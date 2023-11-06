@@ -2,12 +2,17 @@ package com.kgitbank.slimbear.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
 
 @Repository
-public class MemberDAO extends MybatisDAO{
+public class MemberDAO{
+	
+	@Autowired
+	protected SqlSessionTemplate template;
 
 	public MemberDTO getMemberById(String id){
 		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_ID", id);

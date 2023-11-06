@@ -1,5 +1,5 @@
 package com.kgitbank.slimbear.dto;
 
-public class BoardDTD {
+public class InquiryDTO {
 
 }

@@ -13,13 +13,10 @@ import com.kgitbank.slimbear.service.ProductServiceImpl;
 
 @Controller
 public class PageController {
-	
-	@Autowired
-	ProductServiceImpl productService;
 
 	@RequestMapping("main")
 	public String mainePage(HttpSession session) {
-		return "home";
+		return "main";
 	}
 
 	@RequestMapping("login")
