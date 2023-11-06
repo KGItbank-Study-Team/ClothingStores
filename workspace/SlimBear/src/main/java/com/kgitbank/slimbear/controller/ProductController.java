@@ -14,7 +14,7 @@ public class ProductController {
 	@RequestMapping("list")
 	@ResponseBody
 	public MemberDTO getProductList(MemberDTO dto) {
-		dto.setEmail("¾È¤¤³ç");
+		dto.setEmail("gd");
 		System.out.println(dto.toString());
 		return dto;
 	}

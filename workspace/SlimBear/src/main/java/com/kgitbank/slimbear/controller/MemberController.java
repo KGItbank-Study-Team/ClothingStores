@@ -53,21 +53,21 @@ public class MemberController {
 	@RequestMapping("join")
 	public String join(MemberDTO member, HttpSession session, Model model) {
 
-		// ÀÓ½Ãµ¥ÀÌÅÍ =============================
+		// ì„ì‹œë°ì´í„° =============================
 		member.setSex('F');
-		member.setAddress("¼­¿ï½ÃµµºÀ±¸¾îÂ¼°íÀúÂ¼°í");
-		member.setName("¾È»óÁø");
+		member.setAddress("ì„œìš¸ì‹œë„ë´‰êµ¬ì–´ì©Œê³ ì €ì©Œê³ ");
+		member.setName("ì•ˆìƒì§„");
 		member.setEmail("milgos@naver.com");
 		member.setReg_date(new Date(System.currentTimeMillis()));
 		// ========================================
 		
 		if(memberService.join(member)) {
-			System.out.println("°¡ÀÔ ¼º°ø");
+			System.out.println("ê°€ì… ì„±ê³µ");
 		}else {
-			System.out.println("°¡ÀÔ ½ÇÆĞ");
+			System.out.println("ê°€ì… ì‹¤íŒ¨");
 		}
 		
-		// ·Î±×ÀÎÇÑ ¼¼¼ÇÁ¤º¸°¡ ¾øÀ¸¸é
+		// ë¡œê·¸ì¸í•œ ì„¸ì…˜ì •ë³´ê°€ ì—†ìœ¼ë©´
 		return "redirect:/app/login";
 	}
 	

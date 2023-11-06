@@ -1,0 +1,5 @@
+INSERT INTO `SLIMBEAR`.`product` (`uid`, `ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`) VALUES ('1', '1', '바지바지바지바바★', '바지라고함비낟', '10000', '몰루', 'Best_product01.webp');
+INSERT INTO `SLIMBEAR`.`product` (`uid`, `ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`) VALUES ('2', '2', '바지바지바지바바★', '바지라고함비낟', '10000', '몰루', 'Best_product01.webp');
+INSERT INTO `SLIMBEAR`.`product` (`uid`, `ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`) VALUES ('3', '3', '바지바지바지바바★', '바지라고함비낟', '10000', '몰루', 'Best_product01.webp');
+INSERT INTO `SLIMBEAR`.`product` (`uid`, `ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`) VALUES ('4', '4', '바지바지바지바바★', '바지라고함비낟', '10000', '몰루', 'Best_product01.webp');
+INSERT INTO `SLIMBEAR`.`product` (`uid`, `ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`) VALUES ('5', '5', '바지바지바지바바★', '바지라고함비낟', '10000', '몰루', 'Best_product01.webp');

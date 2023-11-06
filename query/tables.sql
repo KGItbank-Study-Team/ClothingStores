@@ -1,18 +1,3 @@
-
-CREATE TABLE `member` (
-	`uid`	bigint unsigned NOT NULL,
-	`id`	varchar(11)	NOT NULL unique,
-	`password`	varchar(100) NOT NULL unique,
-	`email`	varchar(30)	NOT NULL unique,
-	`name`	varchar(30)	NOT NULL,
-	`address`	VARCHAR(30)	NOT NULL,
-	`sex`	char(1) 	NOT NULL check(sex IN('F','M')) COMMENT 'Female, Male',
-	`reg_date`	datetime	NOT NULL
-);
-ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY(
-	`uid`
-);
-
 DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
@@ -154,7 +139,8 @@ CREATE TABLE `product` (
 	`name`	varchar(30)	NOT NULL,
 	`desc`	varchar(100)	NOT NULL,
 	`price`	int unsigned	NOT NULL,
-	`maker`	varchar(100)	NOT NULL
+	`maker`	varchar(100)	NOT NULL,
+	`main_image`	varchar(100)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `orderDetail`;
@@ -222,11 +208,4 @@ ALTER TABLE `category` ADD CONSTRAINT `PK_CATEGORY` PRIMARY KEY (
 ALTER TABLE `product` ADD CONSTRAINT `PK_PRODUCT` PRIMARY KEY (
 	`uid`
 );
-
-
-
-
-
-
-
 
