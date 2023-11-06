@@ -11,7 +11,10 @@
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+			/WEB-INF/spring/root-context.xml
+			/WEB-INF/spring/security-context.xml
+		</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -20,7 +23,7 @@
 		</listener-class>
 	</listener>
 
-	<!-- Processes application requests -->
+	<!-- App Servlet -->
 	<servlet>
 		<servlet-name>app</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet
@@ -36,6 +39,7 @@
 		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
+    <!-- ADMIN Servlet -->
 	<servlet>
 		<servlet-name>admin</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet
@@ -51,9 +55,8 @@
 		<url-pattern>/admin/*</url-pattern>
 	</servlet-mapping>
 
-   <!-- UTF-8 인코딩 -->
-   <!-- 한글깨짐현상 생길 시 사용해볼것 -->
-<!-- 	<filter>
+	<!-- UTF-8 인코딩 -->
+	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
 			org.springframework.web.filter.CharacterEncodingFilter
@@ -70,6 +73,6 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
-	
+	</filter-mapping>
+
 </web-app>
