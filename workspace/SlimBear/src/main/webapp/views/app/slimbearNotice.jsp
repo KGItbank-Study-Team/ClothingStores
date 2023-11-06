@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- VO, DAO import -->
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
-<jsp:include page="header/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +14,12 @@
 </script>
 </head>
 <body>
+		<%@ include file="header/header2.jsp"%>
 <div id="wrap">
 	<div id="container">
+	<header>
+		<%-- <jsp:include page="header/header.jsp" /> --%>
+	</header>
 		<div id="contents">
 			<div
 				class="xans-element- xans-board xans-board-listpackage-1002 xans-board-listpackage xans-board-1002">
@@ -77,7 +80,6 @@
 				</script>
 				<div class="boardnavi">
 					<!-- <a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a> -->
-					<a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a>
 					<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
 					<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
 					<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
@@ -578,10 +580,10 @@
 					</div>
 				</form>
 			</div>
-			<jsp:include page="footer/footer.jsp" />
 			<!-- 관리자 전용 메뉴 -->
 			<!-- // 관리자 전용 메뉴 -->
 		</div>
+			<jsp:include page="footer/footer.jsp" />
 	</div>
 </div>
 </body>

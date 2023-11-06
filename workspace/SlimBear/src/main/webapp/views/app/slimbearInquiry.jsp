@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header/header.jsp" />
+<jsp:include page="header/header2.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,6 @@
 				<script
 					src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
-					<a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a>
 					<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
 					<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
 					<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 

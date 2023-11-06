@@ -84,7 +84,7 @@ body {
   min-width: 900px;
 }
 
-#oneTop {
+#oneTop1 {
   position: relative;
   background: #655345;
   text-align: center;
@@ -95,7 +95,7 @@ body {
   /* margin-top: 10px; */
   line-height: 1cm;
 }
-#oneTop * {
+#oneTop1 * {
   position: relative;
   color: rgba(255, 255, 255, 0.8);
   line-height: 38px;
@@ -223,7 +223,6 @@ header {
   top: 20%;
   right: 12px;
 }
-
 /*======================================================  */
 /* 검색 영역 */
 /*======================================================  */

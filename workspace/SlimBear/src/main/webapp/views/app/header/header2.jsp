@@ -13,7 +13,7 @@
 </head>
 <body>
 	 <div id="top_sentence">
-        <div id="oneTop">
+        <div id="oneTop1">
             <ul class="text-slide">
                 <li class="slide-sentence"><a href="#none">♥핸드메이드 코트 10% SALE♥ ~2023.10.31 23:59PM</a></li><br />
                 <li class="slide-sentence"><a href="#none">쌀쌀해진 날씨, 슬로우앤드와 함께 준비하기</a></li><br />
@@ -21,7 +21,7 @@
             </ul>
         </div>
     </div>
-    <header>
+    <div>
             <div id="users-container"> <!-- "menu clearfix" -->
                 <ul class="mainMenu">
                     <div class="logo">
@@ -113,6 +113,6 @@
                 </ul>
             </div><!-- 메인메뉴 끝-->
         </div>
-    </header>
+    </div>
 </body>
 </html>

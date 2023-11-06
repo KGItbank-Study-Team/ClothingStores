@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header/header.jsp" />
+<jsp:include page="header/header2.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,8 @@
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>SLIMBEAR</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<!-- <script src="/resources/js/boardWrite.js"></script> -->
-<script src="/resources/js/boardEmpty.js"></script>
 </head>
-<body>
+<body id="main">
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
@@ -95,7 +93,8 @@
 							불량/오배송 사유 :&lt;br /&gt;
 							검수번호(숫자나 알파벳) :&lt;br /&gt;
 							(상품 바코드 옆 검수자 숫자 한자리/두자리를 기재합니다.)"
-						type="hidden" /> <input id="fix_content_2" name="fix_content_2"
+						type="hidden" />
+					<input id="fix_content_2" name="fix_content_2"
 						value="이곳은 상품문의를 위한 게시판입니다!&lt;br /&gt;
 							게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
 							&lt;br /&gt;
@@ -103,7 +102,8 @@
 							불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 							&lt;br /&gt;
 							--------------------------------------------------------------"
-						type="hidden" /> <input id="fix_add_content"
+						type="hidden" /> 
+					<input id="fix_add_content"
 						name="fix_add_content" value="" type="hidden" />
 					<div
 						class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
@@ -199,7 +199,8 @@
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
 
-										<!-- Run Froala Script --> <script>
+										<!-- Run Froala Script --> 
+										<script>
 											var EC_FROALA_ID = null;
 											// isSimplexEditorFill 체크시에 필요함
 											var EC_FROALA_INSTANCE = null;
@@ -228,6 +229,7 @@
 														"language" : "ko_KR",
 														"paragraphFormatSelection" : true,
 														"fontFamilySelection" : true,
+														// 글꼴 크기
 														"fontSize" : [ "8",
 																"9", "10",
 																"12", "14",
@@ -265,6 +267,7 @@
 														"filesManagerMaxSize" : 5242880,
 														"toolbarButtons" : {
 															"moreText" : {
+																// 게시글 버튼
 																"buttons" : [
 																		"paragraphFormat",
 																		"fontFamily",
@@ -408,6 +411,8 @@
 														"htmlAllowedStyleProps" : [ ".*" ],
 														"htmlAllowedTags" : [ ".*" ],
 														"htmlAllowedAttrs" : [ ".*" ],
+														
+														// 글꼴
 														"fontFamily" : {
 															"Dotum,sans-serif" : "Dotum",
 															"Gulim,sans-serif" : "Gulim",
@@ -1183,18 +1188,19 @@
 								<tr class="">
 									<th scope="row">PASSWORD</th>
 									<td><input id="password" name="password" fw-filter=""
-										fw-label="비밀번호" fw-msg="" value="" type="password" /> <span
-										class="displaynone">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합,
-											10자~16자)</span></td>
+										fw-label="비밀번호" fw-msg="" value="" type="password" />
+										<span class="displaynone">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
+									</td>
 								</tr>
 								<tr class="">
 									<th scope="row">SECRET</th>
 									<td><input id="secure0" name="secure" fw-filter="isFill"
 										fw-label="비밀글설정" fw-msg="" value="F" type="radio"
-										checked="checked" /><label for="secure0">공개글</label> <input
-										id="secure1" name="secure" fw-filter="isFill"
-										fw-label="비밀글설정" fw-msg="" value="T" type="radio" /><label
-										for="secure1">비밀글</label></td>
+										checked="checked" />
+										<label for="secure0">공개글</label>
+										<input id="secure1" name="secure" fw-filter="isFill"
+										fw-label="비밀글설정" fw-msg="" value="T" type="radio" />
+										<label for="secure1">비밀글</label></td>
 								</tr>
 								<tr class="captcha displaynone">
 									<th scope="row">보안문자</th>
@@ -1242,6 +1248,17 @@
 			</form>
 		</div>
 	</div>
+	<!-- <form method="post" name="find_frm" action="#" onsubmit="return check()">
+<div id="table_search">
+<select class="select_box" name="find" size="1">
+<option value="writer">이름</option>
+<option value="subject">제목</option>
+<option value="content">내용</option>
+</select>
+<input type="text" class="input_box" name="find_box" />
+<input type="submit" value="search" class="btn" />
+</div>
+</form> -->
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
