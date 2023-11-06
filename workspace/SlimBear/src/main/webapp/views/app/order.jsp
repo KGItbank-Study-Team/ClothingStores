@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ include file="header/header.jsp" %>
+  <%
+		request.setAttribute("client", "222");
+		request.setAttribute("email", "");
+		request.setAttribute("phonenum", "");
+		request.setAttribute("choicephone", "");
+		request.setAttribute("wunum", "");
+		request.setAttribute("basicaddr", "");
+		request.setAttribute("jasaeaddr", "");
+		request.setAttribute("injungnum", "");
+		request.setAttribute("name", "");
+		request.setAttribute("newbasicaddr", "");
+		request.setAttribute("newjasaeaddr", "");
+		request.setAttribute("newphonenum", "");
+		request.setAttribute("nowpoint", "7200");
+		request.setAttribute("usepoint", "5000");
+		request.setAttribute("", "");
+		request.setAttribute("", "");
+		request.setAttribute("", "");
+  %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,7 +33,7 @@
 </head>
 
 <body>
-    
+    <form onsubmit="return validateForm();" method="POST" action="">
     <div class="member">
         <!-- 1. 로고 -->
         <img class="logo" src="../images/SlimBear-Logo01.png">
@@ -23,17 +42,17 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>주문자*</b>
-            <span class="placehold-text"><input class="iddd" type="text"></span>
+            <span class="placehold-text"><input class="iddd" type="text" value="${client }"></span>
         </div>
         <div class="field">
             <b>이메일*</b>
-            <input class="userpw" type="password">
+            <input class="email" type="password" value="${email }">
         </div>
         <div class="field birth">
             <b>휴대전화</b>
             <div>
                 
-                <input type="number" placeholder="010">                
+                <input type="number" placeholder="010" value="${phonenum }">                
                 <input type="number" placeholder="1234">                
                 
                 <input type="number" placeholder="5678">
@@ -43,7 +62,7 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>비상 연락망<small>(선택)</small></b>
-            <input type="email" placeholder="선택입력">
+            <input type="number" placeholder="선택입력" value="${choicephone }">
         </div>
         
         <div class="field tel-number">
@@ -53,9 +72,10 @@
             </select> -->
             <div>
                 <input type="tel" placeholder="01188">
-                <input type="button" value="주소 찾기">
+                <input type="button" value="주소 찾기" >
             </div>
-            <input type="number" placeholder="상세 주소">
+            <input type="text" placeholder="기본 주소"value="${basicaddr }">
+            <input type="text" placeholder="상세 주소"value="${jasaeaddr }">
         </div>
         </div>
         
@@ -76,7 +96,7 @@
    
     <div class="field">
         <b>받는사람*</b>
-        <span class="placehold-textt"><input type="text"></span>
+        <span class="placehold-textt"><input type="text" value="${name }"></span>
     </div>
     <div class="field tel-number">
         <b>주소</b>
@@ -85,15 +105,16 @@
         </select> -->
         <div>
             <input type="tel" placeholder="01188">
-            <input type="button" value="주소 찾기">
+            <input type="button" value="주소 찾기" >
         </div>
-        <input type="number" placeholder="상세 주소">
+        <input type="text" placeholder="기본 주소" value="${newbasicaddr }">
+        <input type="text" placeholder="상세 주소" value="${newjasaeaddr }">
     </div>
     <!--휴대전화-->
     <div class="field birth">
         <b>휴대전화</b>
         <div>
-             <input type="text" placeholder="010">
+             <input type="text" placeholder="010" value="${newphone }">
             <input type="text" placeholder="1234">                
             
             <input type="text" placeholder="5678">
@@ -107,7 +128,7 @@
             <option value="">대한민국 +82</option>
         </select>
          <div>
-            <input type="tel" placeholder="전화번호 입력">
+            <input type="tel" placeholder="전화번호 입력" value="${phone }">
             <input type="button" value="인증번호 받기">
         </div>
         <input type="number" placeholder="인증번호를 입력하세요">
@@ -119,10 +140,10 @@
     <h3>할인정보</h3>
     <div>
         <p>
-            현재 포인트 : <span>7200</span>점
+            현재 포인트 : <span>${nowpoint }</span>점
         </p>
 
-        <label> <input class="pointt" type="text" name="point" placeholder="00,000점"> <input
+        <label> <input class="pointt" type="text" name="point" placeholder="00,000점" value="${usepoint}"> <input
             type="button" value="적용">
         </label> <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
     </div>
@@ -167,6 +188,7 @@
 </article>
 <input type="submit" value="주문하기">
 </div>
+</form>
 </body>
-  <%@ include file="footer/footer.jsp" %>
+  <%@ include file="footer/footer2.jsp" %>
 </html>
