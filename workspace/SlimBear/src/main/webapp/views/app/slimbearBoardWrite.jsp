@@ -9,7 +9,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>SLIMBEAR</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/resources/js/boardWrite.js"></script>
+<!-- <script src="/resources/js/boardWrite.js"></script> -->
 <script src="/resources/js/boardEmpty.js"></script>
 </head>
 <body>
@@ -199,8 +199,7 @@
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
 
-										<!-- Run Froala Script --> 
-										<script>
+										<!-- Run Froala Script --> <script>
 											var EC_FROALA_ID = null;
 											// isSimplexEditorFill 체크시에 필요함
 											var EC_FROALA_INSTANCE = null;
@@ -1087,7 +1086,7 @@
 											// 폭없는 공백에서 폭과 줄바꿈 없는 공백으로 치환 (폭없는 공백은 플로알라버그로인해 지원하지않음)
 											function getReplaceZeroWidthSpace(
 													sContent) {
-// 												return sContent.replace(
+												return sContent.replace(
 														/\u200B/g,
 														"&#65279;");
 											}
@@ -1226,6 +1225,7 @@
 					  return true; // 유효성 검사 통과 시 폼을 제출
 					}
 					</script>
+					
 					<div class="ec-base-button ">
 						<span class="gLeft">
 							<span class="displaynone">
@@ -1234,28 +1234,14 @@
 						<a href="/board/상품문의/6/" class="btnNormalFix sizeS">LIST</a>
 						</span>
 						<span class="gRight">
-						<a href="#" class="btnSubmitFix sizeS" onsubmit="checkk()">OK</a> 
-						
-						<input type="submit" value="ok" class="btnSubmitFix sizeS" />ok
+							<a href="#none" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
 							<a href="/board/상품문의/6/" class="btnBasicFix sizeS">CANCEL</a>
 						</span>
 					</div>
-					</form>
 				</div>
-			
+			</form>
 		</div>
 	</div>
-	<form method="post" name="find_frm" action="#" onsubmit="return check()">
-<div id="table_search">
-<select class="select_box" name="find" size="1">
-<option value="writer">이름</option>
-<option value="subject">제목</option>
-<option value="content">내용</option>
-</select>
-<input type="text" class="input_box" name="find_box" />
-<input type="submit" value="search" class="btn" />
-</div>
-</form>
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
