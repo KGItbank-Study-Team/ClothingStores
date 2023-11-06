@@ -20,10 +20,7 @@
 	request.setAttribute("size2", "3XL");
 	request.setAttribute("size3", "4XL");
 	request.setAttribute("size4", "5XL");
-	ArrayList<String> size1 = new ArrayList<>(5);
-	size1.add("49");
-	size1.add("49");
-	
+	request.setAttribute("price1", "198,000원");
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +39,7 @@
 				<div class="productImg">
 					<img alt="상품01" src="/resources/images/Best_product08.webp">
 				</div>
+				<div></div>
 			</div>
 			<div class="right">
 				<div class="explanation">
@@ -81,36 +79,69 @@
 									<span style="font-size: 12px; color: #555555;">COLOR</span>
 								</th>
 								<td>
-									<ul class="ColorOptionPosition">
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color1}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color2}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color3}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color4}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${color5}</span></a></li>
+									<ul class="colorOptionPosition">
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color1}</span></a></li>
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color2}</span></a></li>
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color3}</span></a></li>
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color4}</span></a></li>
+										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${color5}</span></a></li>
 									</ul>
 								</td>
 							</tr>
 						</tbody>
-					</table>
+					</table>	
 				</div>
 				<div>
 					<table style="margin-top: 40px;">
 						<tbody>
-							<tr>
+							<tr>	
 								<th scope="row" class="solid3">
 									<span style="font-size: 12px; color: #555555;">SIZE</span>
 								</th>
 								<td>
-									<ul class="ColorOptionPosition">
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size1}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size2}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size3}</span></a></li>
-										<li class="color"><a href="#none" class="color-button"><span class="colorOption">${size4}</span></a></li>
+									<ul class="sizeOptionPosition">
+										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size1}</span></a></li>
+										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size2}</span></a></li>
+										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size3}</span></a></li>
+										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${size4}</span></a></li>
 									</ul>
 								</td>
 							</tr>
 						</tbody>
 					</table>				
+				</div>
+				<div style="margin-top: 30px;">
+					<table>
+						<colgroup>
+							<col>
+							<col>
+							<col>
+							<col>
+						</colgroup>
+						<tbody class="displayNone">
+							<tr>
+								<td style="font-size: 12px; color: #555555; font-weight:bold;">${color1}</td>
+								<td style="font-size: 12px; color: #555555; font-weight:bold;">${size1}</td>
+								<td>
+									<span class="quantity"">
+										<input type="text" value="1" class="inputBox">
+										<a href="#none" class="">
+											<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
+										</a>
+										<a href="#none">
+											<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
+										</a>
+									</span>
+									<a href="#none">
+										<img alt="삭제" src="/resources/images/icon_delete.png"style="width:9px;height:9px;">
+									</a>
+								</td>
+								<td>
+									<div class="tdCell">${price1}</div> 
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="btns">
 					<div clss="btn1">

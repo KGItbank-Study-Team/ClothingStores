@@ -43,4 +43,4 @@ function updatePrice(id) {
         var newPrice = quantity * productPrice;
         discountPriceElement.textContent = "₩" + newPrice;
     }
-}
+}   

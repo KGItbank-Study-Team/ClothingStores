@@ -2,7 +2,7 @@ body {
 	background-color: #faf9ef;
 }
 #container  {
-	text-align: center;
+	/* text-align: center; */
 	padding: 90px;
 	margin: 107.5px;
 	padding-top: 100px;
@@ -40,6 +40,7 @@ img {
 	
 }
 table {
+	border-spacing: 0;
 	border-collapse: collapse; 
 }
 .solid {
@@ -72,7 +73,10 @@ th:last-child {
 	border-spacing: 0;
 	padding: 6px 0;
 }
-.ColorOptionPosition {
+.colorOptionPosition {
+	
+}
+.sizeOptionPosition {
 	
 }
 .color {
@@ -88,6 +92,12 @@ th:last-child {
 	text-decoration: none;
 	z-index: 0;
 }
+.color.active {
+	background: #eae5dd; 
+}
+.color.active2 {
+	background: #eae5dd;
+}
 .colorOption {
 	display: inline-block;
 	padding: 4px 10px;
@@ -97,9 +107,62 @@ th:last-child {
 	min-width: 30px;
 	z-index: 1;
 }
-/* .colorOption:active {
-	background-color: black;
-} */
+col {
+	width: 110px;
+}
+.inputBox {
+	position: relative;
+	width: 20px;
+	height:	19px;
+	line-height: 22px;
+	word-wrap: break-word;
+	word-break: break-all;
+	vertical-align: middle;
+	border: 1px solid #d9d4cd;
+	border-right: 0;
+	border-radius: 3px 0 0 3px;
+	padding: 0 4px 0 3px;
+	background: #faf9ef;
+	border: 1px solid rgb(217, 212, 205);
+}
+input:focus {
+  outline: none; /* 포커스 시 외곽선 제거 */
+  border-color: initial; /* 포커스 시 기본 테두리 색상 유지 */
+}
+.quantity {
+	width: 65px;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+}
+.tdCell {
+	width: 130px !important;
+	padding-left: 50px;
+	font-size: 14px; 
+	color: #black; 
+	font-weight: bold;
+	text-align: right;
+}
+.countUp {
+	width:21px;
+	height:11px;
+	position: absolute;
+	top: 2.5px;
+}
+.countDown {
+	width:21px;
+	height:11px;
+	position: absolute;
+	bottom: 0;
+	top: auto;	
+}
+tbody img {
+	border: 0;
+	vertical-align: middle;
+}
+
+
+
 /* 버튼 클릭 시 적용할 css */
 .clicked-color {
 	background-color: white;
@@ -122,7 +185,6 @@ th:last-child {
 	height: 50px;
 	position: relative;
 	font-weight: normal !important;
-
 }
 .btnSpan {
 	display: inline-block;
@@ -159,8 +221,8 @@ th:last-child {
 }
 .tableSize td {
 	width: 126px;
-	text-align: center;
 	border: 1px solid #555555;
+	text-align: center;
 
 }
 .tdColor {
@@ -169,7 +231,7 @@ th:last-child {
 .hrPosition {
 	margin: 0 auto;
 	width: 1620px; 
-	text-align: center
+	text-align: center;
 }
 
 
