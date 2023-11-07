@@ -1,14 +1,3 @@
-/*function toggleHiddenContent() {
-    var hiddenContent = document.getElementById('hiddenContent03');
-    if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
-        hiddenContent.style.display = 'block'; // 숨겨진 콘텐츠를 표시
-        document.querySelector('.btn').textContent = '주문자 정보 ▲';
-    } else {
-        hiddenContent.style.display = 'none'; // 숨겨진 콘텐츠를 숨김
-        document.querySelector('.btn').textContent = 'ssss'
-        }
-}
-*/
 function toggleHiddenContent() {
     var hiddenContent = document.getElementById('hiddenContent03');
     var btn = document.querySelector('.btn');
@@ -22,36 +11,45 @@ function toggleHiddenContent() {
     }
 }
 function validateForm() {
-    var client = document.querySelector('.iddd').value;
-    var email = document.querySelector('.userpw').value;
-    var phonenum1 = document.querySelector('.field.birth input:nth-child(1)').value;
-    var phonenum2 = document.querySelector('.field.birth input:nth-child(2)').value;
-    var phonenum3 = document.querySelector('.field.birth input:nth-child(3)').value;
-    // 다른 필드도 유사하게 추가합니다.
-	 if (client === "" || email === "" || phonenum1 === "" || phonenum2 === "" || phonenum3 === "") {
-        alert("필수 입력 필드를 모두 작성해주세요.");
-        return false;
-    }
-    if (phonenum1 === "" || phonenum2 === "" || phonenum3 === "") {
-        alert("휴대 전화를 모두 작성해주세요.");
-        return false;
-    }
-    if (newJasaeAddr === "") {
-        alert("상세 주소를 입력해주세요.");
-        return false;
-    }
-    if (name === "") {
-        alert("보내는 분 성함을 입력해주세요.");
-        return false;
-    }
-    if (email === "") {
-        alert("이메일를 입력해주세요.");
-        return false;
-    }
-    if (newbasicaddr === "") {
-        alert("기본 주소를 입력해주세요.");
-        return false;
-    }
+    const nameField = document.querySelector('.placehold-textt input[name="name"]');
+    const newBasicAddrField = document.querySelector('.field.tel-number input[name="newbasicaddr"]');
+    const newJasaeAddrField = document.querySelector('.field.tel-number input[name="newjasaeaddr"]');
     
-    return true;
+    let errorMessages = [];
+
+    if (nameField.value.trim() === "") {
+    errorMessages.push('받는 사람을 입력하세요.');
 }
+
+    if (newBasicAddrField.value.trim() === "") {
+    errorMessages.push('새로운 기본 주소를 입력하세요.');
+}
+    if (newJasaeAddrField.value.trim() === "") {
+    errorMessages.push('새로운 상세 주소를 입력하세요.');
+}
+
+    if (errorMessages.length > 0) {
+        alert(errorMessages.join('\n'));
+        return false; // 폼 제출을 막음
+    }
+
+    return true; // 폼 제출을 허용
+}	
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var orderbutton = document.getElementById('orderbutton');
+
+    var orderButtonHandler = function() {
+        // 주문하기 버튼을 클릭할 때, onbeforeunload 이벤트를 제거
+        window.onbeforeunload = null;
+
+        // 폼 서버로 제출
+        var form = document.querySelector('form');
+        form.submit();
+    };
+
+    orderbutton.addEventListener('click', orderButtonHandler);
+});
+
+

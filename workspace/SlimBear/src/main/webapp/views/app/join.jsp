@@ -1,47 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
-    <%@ include file="header/header.jsp" %>
+   <%
+   request.setAttribute("name", "");
+   request.setAttribute("pw", "");
+   request.setAttribute("pwck", "****");
+   request.setAttribute("id", "");
+   request.setAttribute("btday", "");
+   request.setAttribute("email", "");
+   request.setAttribute("telphone", "");
+   request.setAttribute("manck", "");
+   request.setAttribute("", "");
+    %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>슬림 베어 회원가입</title>
-     <link rel="stylesheet" href="join.css">
-    <link rel="icon" href="./images/images2/favicon.png">
+     <link href="/resources/css/join.css" rel="stylesheet" />
+     <script defer src="/resources/js/join.js"></script>
     
+     <%@ include file="header/header2.jsp" %>
 </head>
 
 <body>
     
     <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="../../images/SlimBear-Logo01.png">
-		<form action="JoinProc" method="get">
+        <img class="logo" src="/resources/images/SlimBear-Logo01.png">
+		<form action="ordercheck.jsp" method="get">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input class="idd" type="text"></span>
+            <span class="placehold-text"><input class="idd" type="text" value="${id }"></span>
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password">
+            <input class="userpw" type="password"value="${pw }">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password">
+            <input class="userpw-confirm" type="password"value="${pwck }">
         </div>
         <div class="field">
             <b>이름</b>
-            <input class="namee" type="text">
+            <input class="namee" type="text"value="name">
         </div>
 
         <!-- 3. 필드(생년월일) -->
-        <div class="field birth">
+        <div class="field birth" >
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(4자)">                
+                <input type="number" placeholder="년(4자)" value="${btday }">                
                 <input type="number" placeholder="월">                
                 <select>
                     <option value="">월</option>
@@ -75,7 +85,7 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일<small>(선택)</small></b>
-            <input type="email" placeholder="선택입력">
+            <input type="email" placeholder="선택입력" value="${email }">
         </div>
         
         <div class="field tel-number">
@@ -84,10 +94,10 @@
                 <option value="">대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력">
+                <input type="tel" placeholder="전화번호 입력"value="${telphone }">
                 <input type="button" value="인증번호 받기">
             </div>
-            <input type="number" placeholder="인증번호를 입력하세요">
+            <input type="number" placeholder="인증번호를 입력하세요" value="${manck }">
         </div>
         
         <!-- 6. 가입하기 버튼 -->

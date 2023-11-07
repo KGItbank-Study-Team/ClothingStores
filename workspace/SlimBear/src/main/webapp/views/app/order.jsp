@@ -1,25 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  <%@ include file="header/header.jsp" %>
-  <%
-		request.setAttribute("client", "222");
-		request.setAttribute("email", "");
-		request.setAttribute("phonenum", "");
-		request.setAttribute("choicephone", "");
-		request.setAttribute("wunum", "");
-		request.setAttribute("basicaddr", "");
-		request.setAttribute("jasaeaddr", "");
-		request.setAttribute("injungnum", "");
-		request.setAttribute("name", "");
-		request.setAttribute("newbasicaddr", "");
-		request.setAttribute("newjasaeaddr", "");
-		request.setAttribute("newphonenum", "");
-		request.setAttribute("nowpoint", "7200");
-		request.setAttribute("usepoint", "5000");
-		request.setAttribute("", "");
-		request.setAttribute("", "");
-		request.setAttribute("", "");
-  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    request.setAttribute("client", "222");
+    request.setAttribute("email", "");
+    request.setAttribute("phonenum", "");
+    request.setAttribute("choicephone", "");
+    request.setAttribute("wunum", "");
+    request.setAttribute("basicaddr", "");
+    request.setAttribute("jasaeaddr", "");
+    request.setAttribute("injungnum", "");
+    request.setAttribute("name", "");
+    request.setAttribute("newbasicaddr", "");
+    request.setAttribute("newjasaeaddr", "");
+    request.setAttribute("newphonenum", "");
+    request.setAttribute("nowpoint", "7200");
+    request.setAttribute("usepoint", "5000");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,16 +24,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 페이지</title>
-    <link rel="icon" href="./images/images2/favicon.png">
-    <link rel="stylesheet" href="../../resources/css/orderr.css">
-    <script src="../../resources/js/order.js"></script>
+    <%@ include file="header/header2.jsp" %>
+    
+    <link rel="stylesheet" href="/resources/css/orderr.css">
+    <script src="/resources/js/order.js"></script>
 </head>
 
 <body>
-    <form onsubmit="return validateForm();" method="POST" action="">
+<form onsubmit="return validateForm();" method="post" action="">
+    
     <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="../images/SlimBear-Logo01.png">
+        <img class="logo" src="/resources/images/SlimBear-Logo01.png">
         <div class="btn" onclick="toggleHiddenContent();">주문자 정보 ▽</div>
         <div id="hiddenContent03" class="delivery" style="display: none;">
         <!-- 2. 필드 -->
@@ -44,7 +43,7 @@
             <b>주문자*</b>
             <span class="placehold-text"><input class="iddd" type="text" value="${client }"></span>
         </div>
-        <div class="field">
+        <div class ="field">
             <b>이메일*</b>
             <input class="email" type="password" value="${email }">
         </div>
@@ -74,8 +73,8 @@
                 <input type="tel" placeholder="01188">
                 <input type="button" value="주소 찾기" >
             </div>
-            <input type="text" placeholder="기본 주소"value="${basicaddr }">
-            <input type="text" placeholder="상세 주소"value="${jasaeaddr }">
+            <input type="text" placeholder="기본 주소" value="${basicaddr }">
+            <input type="text" placeholder="상세 주소" value="${jasaeaddr }">
         </div>
         </div>
         
@@ -94,7 +93,7 @@
         </div>
      
    
-    <div class="field">
+    <div class "field">
         <b>받는사람*</b>
         <span class="placehold-textt"><input type="text" value="${name }"></span>
     </div>
@@ -108,7 +107,7 @@
             <input type="button" value="주소 찾기" >
         </div>
         <input type="text" placeholder="기본 주소" value="${newbasicaddr }">
-        <input type="text" placeholder="상세 주소" value="${newjasaeaddr }">
+        <input type="text" placeholder "상세 주소" value="${newjasaeaddr }">
     </div>
     <!--휴대전화-->
     <div class="field birth">
@@ -186,9 +185,12 @@
                 업무자료>인허가업무안내>전자금융업등록현황에서 확인하실수 있습니다. </span></li>
     </ul>
 </article>
-<input type="submit" value="주문하기">
+<input type="submit" value="주문하기" id="orderbutton" class="orderbuttom">
+
 </div>
 </form>
+
+
 </body>
-  <%@ include file="footer/footer2.jsp" %>
+<%@ include file="footer/footer2.jsp" %>
 </html>
