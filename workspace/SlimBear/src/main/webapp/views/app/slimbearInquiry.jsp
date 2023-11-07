@@ -2,14 +2,14 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
-	request.setAttribute("title", "NOTICE");
+	request.setAttribute("title", "INQUIRY");
 	ArrayList<String> boards = new ArrayList<String>();
 	boards.add("필독");
 	boards.add("하우스앤드");
 	boards.add("하우스앤드2");
 	boards.add("하우스앤드3");
 	boards.add("하우스앤드4");
-	boards.add("하우스앤드5하우스앤드5하우스앤드5하우스앤드5하우스앤드5");	
+	boards.add("하우스앤드5하우스앤드5하우스앤드5");	
 	
 	request.setAttribute("boards", boards);
 %>
@@ -157,14 +157,13 @@
 						;
 					});
 				</script>
-				<!-- 
-				<div class="one_tab">
+				<!-- <div class="one_tab">
 					<ul module="Layout_BoardInfo">
 						<li><a href=""></a></li>
 						<li><a href=""></a></li>
 					</ul>	
-				</div>
-				 -->
+				</div> -->
+				
 				<div class="boardSort">
 					<span
 						class="xans-element- xans-board xans-board-replysort-4 xans-board-replysort xans-board-4 "></span>
@@ -177,7 +176,7 @@
 							<col style="width: 80px;" />
 							<col style="width: 130px;" class="displaynone" />
 							<col style="width: auto;" />
-							<col style="<%-- width: 120px; --%>" />
+							<col style="width: 120px;" />
 							<col style="width: 100px;" class="" />
 							<col style="width: 80px;" class="displaynone" />
 							<col style="width: 55px;" class="displaynone" />
@@ -186,7 +185,7 @@
 						<thead
 							class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
 							<tr style="">
-								<th scope="col" colspan="2">NO</th>
+								<th scope="col">NO</th>
 								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
@@ -199,76 +198,84 @@
 						
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 						
-							<c:forEach var="board" items="${boards}">
-								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-									<td><i class="xi-check"></i><td>
-									<td class="displaynone"></td>
-									<td class="subject left txtBreak">
-										<strong>
-											<a href="/article/상품문의/1/${board}/" style="color: #555555;">${board}</a>
-											<span class="txtEm"></span>
-										</strong>
-									</td>
-									<td>${board}</td>
-									<td class=""><span class="txtNum">${board}</span></td>
-									<td class="displaynone"><span class="txtNum">${board}</span></td>
-									<td class="displaynone"><span class="txtNum">${board}</span></td>
-									<td class="displaynone">
-										<img src="//img.echosting.cafe24.com/skin/base/board/ico_point${board}.gif"
-						                     alt="${board}점" />
-							</c:forEach>
+							<c:forEach items="${boards}" var="board">
+						      <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
+						        <td><i class="xi-check"></i></td>
+						        <td class="displaynone"></td>
+						        <td class="subject left txtBreak">
+						          <span class="displaynone">
+						            <a href="#none" onclick="BOARD.viewTarget('${board}','6',this);">
+						              <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" />
+						            </a>
+						          </span>
+						          <strong>
+						            <a href="/article/상품문의/6/${board}/" style="color: #555555;">${board}</a>
+						            <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image" />
+						            <span class="txtEm"></span>
+						          </strong>
+						        </td>
+						        <td>${board}</td>
+						        <td class=""><span class="txtNum">${board}</span></td>
+						        <td class="displaynone"><span class="txtNum">${board}</span></td>
+						        <td class="displaynone"><span class="txtNum">${board}</span></td>
+						        <td class="displaynone">
+						          <img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
+						        </td>
+						      </tr>
+						    </c:forEach>
 							
-<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
-<!-- 								class="xans-record-"> -->
-<!-- 								<td><i class="xi-check"></i></td> -->
-<!-- 								<td class="displaynone"></td> -->
-<!-- 								<td class="subject left txtBreak"> -->
-<!-- 								<span class="displaynone"> -->
-<!-- 								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"  -->
-<!-- 									alt="내용 보기" /></a> -->
-<!-- 								</span>  -->
-<!-- 								<strong>  -->
-<!-- 									<a href="/article/상품문의/6/1684189/" -->
-<!-- 										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a> -->
-<!-- 									<img src="/resources/images/icon_hit.gif" alt="HIT" -->
-<!-- 										class="ec-common-rwd-image" /> -->
-<!-- 									<span class="txtEm"></span> -->
-<!-- 								</strong> -->
-<!-- 								</td> -->
-<!-- 								<td>슬림베어_CR</td> -->
-<!-- 								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">11372</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
-<!-- 								<td class="displaynone"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
-<!-- 									alt="0점" /></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
-<!-- 								class="xans-record-"> -->
-<!-- 								<td><i class="xi-check"></i></td> -->
-<!-- 								<td class="displaynone"></td> -->
-<!-- 								<td class="subject left txtBreak"> -->
-<!-- 								<span class="displaynone">  -->
-<!-- 									<a href="#none" onclick="BOARD.viewTarget('1052853','6',this);"> -->
-<!-- 										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" -->
-<!-- 											alt="내용 보기" /> -->
-<!-- 									</a> -->
-<!-- 								</span>  -->
-<!-- 								<strong> -->
-<!-- 								<a href="/article/상품문의/6/1052853/" -->
-<!-- 									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a> -->
-<!-- 								<img src="/resources/images/icon_hit.gif" alt="HIT" -->
-<!-- 									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td> -->
+							
+							<tr style="background-color: #FFFFFF; color: #555555;"
+								class="xans-record-">
+								<td><i class="xi-check"></i></td>
+								<td class="displaynone"></td>
+								<td class="subject left txtBreak">
+								<span class="displaynone">
+								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);">
+								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" 
+									alt="내용 보기" /></a>
+								</span> 
+								<strong> 
+									<a href="/article/상품문의/6/1684189/"
+										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a>
+									<img src="/resources/images/icon_hit.gif" alt="HIT"
+										class="ec-common-rwd-image" />
+									<span class="txtEm"></span>
+								</strong>
+								</td>
+								<td>슬림베어_CR</td>
+								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td>
+								<td class="displaynone"><span class="txtNum">11372</span></td>
+								<td class="displaynone"><span class="txtNum">0</span></td>
+								<td class="displaynone">
+								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
+									alt="0점" /></td>
+							</tr>
+							<tr style="background-color: #FFFFFF; color: #555555;"
+								class="xans-record-">
+								<td><i class="xi-check"></i></td>
+								<td class="displaynone"></td>
+								<td class="subject left txtBreak">
+								<span class="displaynone"> 
+									<a href="#none" onclick="BOARD.viewTarget('1052853','6',this);">
+										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
+											alt="내용 보기" />
+									</a>
+								</span> 
+								<strong>
+								<a href="/article/상품문의/6/1052853/"
+									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a>
+								<img src="/resources/images/icon_hit.gif" alt="HIT"
+									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td>
 									
-<!-- 								<td>슬림베어_CR</td> -->
-<!-- 								<td class=""><span class="txtNum">2020-09-01 14:03:53</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">11715</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
-<!-- 								<td class="displaynone"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
-<!-- 									alt="0점" /></td> -->
-<!-- 							</tr> -->
+								<td>슬림베어_CR</td>
+								<td class=""><span class="txtNum">2020-09-01 14:03:53</span></td>
+								<td class="displaynone"><span class="txtNum">11715</span></td>
+								<td class="displaynone"><span class="txtNum">0</span></td>
+								<td class="displaynone">
+								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
+									alt="0점" /></td>
+							</tr>
 <!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
 <!-- 								class="xans-record-"> -->
 <!-- 								<td><i class="xi-check"></i></td> -->
