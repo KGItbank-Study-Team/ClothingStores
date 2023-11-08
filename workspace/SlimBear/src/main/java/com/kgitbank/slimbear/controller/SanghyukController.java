@@ -23,7 +23,7 @@ public class SanghyukController {
 		List<ReviewDTO> list = sanghService.getReview();
 		
 		// 임시데이타
-		for(int i=0; i<3;++i) {
+		for(int i=0; i<3; ++i) {
 			ReviewDTO item = new ReviewDTO();
 			item.setContent("리뷰 : " + i );
 			list.add(item);

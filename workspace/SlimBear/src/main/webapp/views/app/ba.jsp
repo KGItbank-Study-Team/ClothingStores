@@ -1,29 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-request.setAttribute("productName", "입는 순간 해커가 되는 검정후드티");
-request.setAttribute("price1", "120000"); // 가격을 문자열로 설정
-request.setAttribute("price2", "1120000"); // 다른 가격도 문자열로 설정
-request.setAttribute("productDescription", "507호 공식 해커");
-request.setAttribute("productDescription2", "입는 순간 해커가 되는 검정후드티");
-request.setAttribute("discountPrice", "132622");
-request.setAttribute("baedal", "무료");
-request.setAttribute("baedal2500", "2500");
-request.setAttribute("red", "red");
-request.setAttribute("blue", "blue");
-request.setAttribute("gray", "gray");
-request.setAttribute("chongprice", "1200000");
-request.setAttribute("chongbaedal", "무료");
-
-request.setAttribute("maybeprice", "1320000");
-request.setAttribute("freemoney", "100");
-request.setAttribute("L", "L");
-request.setAttribute("XL", "XL");
-request.setAttribute("XXL", "XXL");
-request.setAttribute("XXXL", "XXXL");
-request.setAttribute("XXXXL", "XXXXL");
-%>
 <!DOCTYPE html>
 
 <html>
@@ -59,19 +37,17 @@ request.setAttribute("XXXXL", "XXXXL");
 
 					</tr>
 				</thead>
-				<%
-				for (int i = 0; i < 10; i++) {
-				%>
+				<c:forEach var="cart" items="${cartList}">
 				<tbody>
 					<tr class="cart__list__detail">
 						<td><input type="checkbox"></td>
 						<td class="yout"><img src="/resources/images/유해커.jpg" alt="magic keyboard"></td>
 						<td>
-							<a href="#">${productDescription}</a>
+							<a href="#">${"cart.desc"}</a>
 							<span class="cart__list__smartstore"> 스마트스토어</span>
-							<p>${productDescription2 }</p> 
-							<span class="price">${discountPrice}</span>
-							<span style="text-decoration: line-through; color: lightgray;">${price1}</span>
+							<p>${"cart.desc2" }</p> 
+							<span class="price">${"cart.price"}</span>
+							<span style="text-decoration: line-through; color: lightgray;">${"price1"}</span>
 						</td>
 						<td class="cart__list__option">
 							<p>유해커의 검정후드티 / 1개</p>
@@ -114,17 +90,7 @@ request.setAttribute("XXXXL", "XXXXL");
 							</div> 
 						</td>
 						<td>
-					 	<!--<span class="ec-base-qty"> 
-							<input id="quantity_id_1_<%=i%>" name="quantity_name_1_<%=i%>" 
-									value="1" type="text" oninput="updatePrice(<%=i%>);"
-									class="inputbox"> 
-								<a href="javascript:;" class="up" onclick="addQuantity('quantity_id_1_<%=i%>', 1);">
-									 <img src="/resources/images/btn_count_up.gif" alt="수량증가" />
-								</a> <a href="javascript:;" class="down"
-									onclick="outQuantity('quantity_id_1_<%=i%>', 1);"> 
-									<img src="/resources/images/btn_count_down.gif"	alt="수량감소" />
-								</a>
-							</span>-->
+					 	
 							<span class="quantity">
 									<input type="text" value="1" class="inputBox">
 									<a href="#none" class="">
@@ -136,15 +102,13 @@ request.setAttribute("XXXXL", "XXXXL");
 							</span>
 						</td>
 						<td><p>${freemoney}</p></td>
-						<td><span class="price" id="price_<%=i%>">${discountPrice}</span>
+						<td><span class="price" id="price_">${discountPrice}</span>
 						</td>
 						<td>${baedal }</td>
 					</tr>
-					<%
-					}
-					%>
 					
 				</tbody>
+				</c:forEach>
 				<tfoot>
 					<tr>
 						<td colspan="3"><input type="checkbox">
