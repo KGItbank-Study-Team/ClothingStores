@@ -34,6 +34,10 @@
 
 </head>
 <body>
+<<<<<<< HEAD:workspace/SlimBear/src/main/webapp/views/app/slimbearNotice.jsp
+<%@ include file="header/header.jsp"%>
+=======
+>>>>>>> 67fc6075a4eb4a164d3cd6c303f2e2d466eeee6f:workspace/SlimBear/src/main/webapp/views/app/notice.jsp
 <div id="wrap">
 	<div id="container">
 		<div id="contents">

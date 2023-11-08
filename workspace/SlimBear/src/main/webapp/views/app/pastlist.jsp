@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="header/header2.jsp" %>
+<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -205,7 +205,7 @@ request.setAttribute("finalmoney","12000");
         </div>
     </div>
 
-<%@ include file="footer/footer2.jsp" %>
+<%@ include file="footer/footer.jsp" %>
 
 </body>
 

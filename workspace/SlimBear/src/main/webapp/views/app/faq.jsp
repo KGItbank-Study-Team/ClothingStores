@@ -351,9 +351,13 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD:workspace/SlimBear/src/main/webapp/views/app/slimbearFAQ.jsp
+	<%@ include file="footer/footer.jsp"%>
+=======
 	
 	<%@ include file="footer/footer.jsp"%>
 	
+>>>>>>> 67fc6075a4eb4a164d3cd6c303f2e2d466eeee6f:workspace/SlimBear/src/main/webapp/views/app/faq.jsp
 </div>
 </body>
 </html>

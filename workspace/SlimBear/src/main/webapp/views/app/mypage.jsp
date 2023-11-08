@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header2.jsp" %>
+<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -205,5 +205,5 @@ request.setAttribute("turn", "7");
         </div>
     </div>
 </body>
-<%@ include file="footer/footer2.jsp" %>
+<%@ include file="footer/footer.jsp" %>
 </html>

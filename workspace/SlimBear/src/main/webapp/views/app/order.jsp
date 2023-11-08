@@ -24,7 +24,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 페이지</title>
-    <%@ include file="header/header2.jsp" %>
+    <%@ include file="header/header.jsp" %>
     
     <link rel="stylesheet" href="/resources/css/orderr.css">
     <script src="/resources/js/order.js"></script>
@@ -192,5 +192,5 @@
 
 
 </body>
-<%@ include file="footer/footer2.jsp" %>
+<%@ include file="footer/footer.jsp" %>
 </html>

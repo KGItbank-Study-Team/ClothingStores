@@ -34,7 +34,7 @@ request.setAttribute("XXXXL", "XXXXL");
 <title>장 바 구 니</title>
 </head>
 <body>
-<%@ include file="header/header2.jsp"%>
+<%@ include file="header/header.jsp"%>
 	<section class="cart">
 		<div class="cart__information">
 			<ul>

@@ -22,7 +22,7 @@ int discountPercentage = 99;
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizeruser.css" />
 <style type="text/css"></style>
-<title>OUTER - 슬림베어</title>
+<title>TOP - 슬림베어</title>
 
 </head>
 <body id="main">
@@ -35,7 +35,7 @@ int discountPercentage = 99;
 			rel="stylesheet" />
 		<link rel="stylesheet"
 			href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
-		<link rel="stylesheet" href="../../../../../resources/css/swiper.css" />
+		<link rel="stylesheet" href="/resources/css/swiper.css" />
 		<script src="/resources/js/swiper.js"></script>
 		<header>
 			<div id="oneTop" class="swiper-container"></div>
@@ -117,10 +117,10 @@ int discountPercentage = 99;
 									<!-- .spec -->
 									<div class="icon">
 										<div class="promotion">
-											<img src="/images/custom_4016861243871563.png" alt="" />
-											<img src="/images/custom_3916861243874417.png" alt="" />
+											<img src="/resources/images/custom_4016861243871563.png" alt="" />
+											<img src="/resources/images/custom_3916861243874417.png" alt="" />
 											<img
-												src="/images/benefit_shop1_83114664803d66b20824.38964181.png"
+												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
 												alt="" />
 										</div>
 									</div>
@@ -153,7 +153,7 @@ int discountPercentage = 99;
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory titleArea ">
-						<h2>OUTER</h2>
+						<h2>TOP</h2>
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory title ">
@@ -181,31 +181,31 @@ int discountPercentage = 99;
 							<ul class="menuCategory">
 								<li style="display:;"
 									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 코트 <span
+									<a href="#"> 후드티 <span
 										class="count displaynone">()</span>
 								</a>
 								</li>
 								<li style="display:;"
 									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 자켓 <span
+									<a href="#"> 셔츠 <span
 										class="count displaynone">()</span>
 								</a>
 								</li>
 								<li style="display:;"
 									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 가디건 <span
+									<a href="#"> 티셔츠 <span
 										class="count displaynone">()</span>
 								</a>
 								</li>
 								<li style="display:;"
 									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 패딩 <span
+									<a href="#"> 맨투맨 <span
 										class="count displaynone">()</span>
 								</a>
 								</li>
 								<li style="display:;"
 									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 가죽자켓 <span
+									<a href="#"> 니트 <span
 										class="count displaynone">()</span>
 								</a>
 								</li>
@@ -341,7 +341,7 @@ int discountPercentage = 99;
 									<div class="icon">
 										<div class="promotion">
 											<img
-												src="/images/benefit_shop1_83114664803d66b20824.38964181.png"
+												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
 												alt="" />
 										</div>
 									</div>
@@ -368,7 +368,7 @@ int discountPercentage = 99;
 
 				<div
 					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
-					<a href="#none"> <img src="/images/icon_prev2.png" />
+					<a href="#none"> <img src="/_images/icon_prev2.png" />
 					</a>
 					<ol>
 						<li class="xans-record-"><a href="?page=1" class="this">1</a>
@@ -380,7 +380,7 @@ int discountPercentage = 99;
 						<li class="xans-record-"><a href="?page=4" class="other">4</a>
 						</li>
 					</ol>
-					<a href="?page=2"> <img src="/images/icon_next2.png" />
+					<a href="?page=2"> <img src="/_images/icon_next2.png" />
 					</a>
 				</div>
 				<jsp:include page="footer/footer.jsp" flush="true" />
