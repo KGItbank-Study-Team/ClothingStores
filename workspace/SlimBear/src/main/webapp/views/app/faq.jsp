@@ -11,20 +11,22 @@
 	
 	request.setAttribute("boards", boards);
 %>
-<jsp:include page="header/header2.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
+<title>FAQ</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
-<title>SLIIMBEAR</title>
+<script defer src="/resources/js/faq.js"></script>
 </head>
+
 <body>
 <div id="wrap">
 	<div id="container">
@@ -41,47 +43,20 @@
 
 			<div
 				class="xans-element- xans-board xans-board-title-3 xans-board-title xans-board-3 titleArea ">
-				<h2>FAQ</h2>
+				<h2>${title}</h2>
 				<p class="desc">자주 묻는 질문 안내드립니다♡</p>
 			</div>
 
 			<script
 				src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 			<div class="boardnavi">
-				<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
-				<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
-				<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
-				<a href="/views/app/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
+				<a href="/views/app/notice.jsp" class="navi01"><span>공지사항</span></a> 
+				<a href="/views/app/inquiry.jsp" class="navi02"><span>문의게시판</span></a>
+				<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
+				<a href="/views/app/faq.jsp" class="navi05"><span>자주묻는질문</span></a>
 			</div>
 			<script>
-				$(function() {
-					var hrefCate = location.href;
-
-					if (hrefCate.indexOf('/1/') != -1) {
-						$('.navi01').addClass("on");
-					}
-					;
-
-					if (hrefCate.indexOf('company.html') != -1) {
-						$('.navi00').addClass("on");
-					}
-					;
-
-					if (hrefCate.indexOf('/2/') != -1) {
-						$('.navi03').addClass("on");
-					}
-					;
-
-					if (hrefCate.indexOf('/4/') != -1) {
-						$('.navi04').addClass("on");
-					}
-					;
-
-					if (hrefCate.indexOf('/board/index.html') != -1) {
-						$('.navi05').addClass("on");
-					}
-					;
-				});
+				
 			</script>
 
 			<div
@@ -102,32 +77,56 @@
 							class="faq06"><span>쇼룸관련</span></a>
 					</div>
 				</div>
+				
 				<table border="1" summary="">
 					<caption>이용안내 목록</caption>
 					<tbody class="xans-element- xans-board xans-board-list-3 xans-board-list xans-board-3 center">
 					
-							<c:forEach items="${boards}" var="board">
-								<tr class="xans-record-">
-									<td class="subject" data-cate="${board}">
-										<a href="#none" onclick="BOARD.viewTarget('1711257', '3', this);">
-											<b>Q</b>
-											<span class>${board}</span>
-											${board}
-											<z class="fold"></z>
-										</a>
-									</td>
-								</tr>
-								<tr id="content_view" class>
-									<td colspan="1" class>
-										<div class="fr-view fr-view-article">
-											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p>
-											<p><span style="font-family: Verdana,Geneva,sans-serif;"><strong>${board}&nbsp;</strong></span></p>
-											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p>
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
-
+					<c:forEach items="${boards}" var="board">
+			            <tr class="xans-record-">
+			                <td class="subject" data-cate="${board}">
+			                    <a href="javascript:void(0);" class="toggle-button">
+			                        <b class="toggle-icon">Q</b>
+			                        <span>${board}</span>
+			                        ${board}
+			                        <z class="fold"></z>
+			                    </a>
+			                </td>
+			            </tr>
+			            <tr id="content-view" style="display: none;" class>
+			                <td colspan="1" class>
+			                    <div class="fr-view fr-view-article">
+			                        <p class="p-indented"><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p>
+			                        <p class="p-indented"><span style="font-family: Verdana,Geneva,sans-serif;"><strong>${board}&nbsp;</strong></span></p>
+			                        <p class="p-indented"><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p>
+			                    </div>
+			                </td>
+			            </tr>
+			        </c:forEach>
+					
+<%-- 							<c:forEach items="${boards}" var="board"> --%>
+<!-- 								<tr class="xans-record-"> -->
+<%-- 									<td class="subject" data-cate="${board}"> --%>
+<!-- 										<a href="#none" onclick="BOARD.viewTarget('1711257', '3', this);"> -->
+<!-- 											<b>Q</b> -->
+<%-- 											<span class>${board}</span> --%>
+<%-- 											${board} --%>
+<!-- 											<z class="fold"></z> -->
+<!-- 										</a> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<!-- 								<tr id="content_view" class> -->
+<!-- 									<td colspan="1" class> -->
+<!-- 										<div class="fr-view fr-view-article"> -->
+<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p> --%>
+<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;"><strong>${board}&nbsp;</strong></span></p> --%>
+<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p> --%>
+<!-- 										</div> -->
+<!-- 									</td> -->
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+							
+							
 <!-- 						<tr class="xans-record-"> -->
 <!-- 							<td class="subject" data-cate="쇼룸관련"> -->
 <!-- 							<a ref="#none" onclick="BOARD.viewTarget('1711257','3',this);"><b>Q</b> -->
@@ -351,107 +350,10 @@
 				</table>
 			</div>
 		</div>
-		
-		<style type="text/css">
-		/* 자주묻는질문 네비 */
-		.boardnavitxt { /* display: none; */
-			width: 480px;
-			margin: 0 auto;
-			border-top: 1px solid #d9d4cd;
-			border-bottom: 1px solid #d9d4cd;
-			padding: 10px;
-			margin-bottom: 50px;
-			text-align: center;
-		}
-		.boardnavitxt a {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 0 10px;
-		}
-		.boardnavitxt a span {
-			display: block;
-		}
-		.boardnavitxt a.on span {
-			font-weight: 600;
-		}
-		
-		/* 게시판 메인 > 이용안내 */
-		.board.xans-board-listpackage-3 {
-			position: relative;
-			margin: 0 auto 100px;
-		}
-		.board.xans-board-listpackage-3 .titleArea {
-			margin: 80px auto 20px;
-		}
-		.board.xans-board-listpackage-3 .boardSort {
-			margin: 0 0 10px;
-		}
-		.board.xans-board-listpackage-3 table {
-			width: 100%;
-		}
-		.board.xans-board-listpackage-3 td {
-			position: relative;
-			width: 65px;
-			padding: 0 10px;
-			border: none;
-			border-bottom: 1px solid #d9d4cd;
-			font-size: 12px;
-			text-align: left;
-			line-height: 50px;
-			background: transparent !important;
-			white-space: normal !important;
-		}
-		.board.xans-board-listpackage-3 td:first-child {
-			border-top: 1px solid #d9d4cd;
-		}
-		.board.xans-board-listpackage-3 td.subject a {
-			position: relative;
-			display: block;
-			cursor: pointer;
-			color: #353535;
-		}
-		.board.xans-board-listpackage-3 td.subject a span {
-			display: inline-block;
-			font-weight: bold;
-			width: 100px;
-		}
-		.board.xans-board-listpackage-3 td.subject a b {
-			display: inline-block;
-			width: 30px;
-			margin-right: 30px;
-			color: #b3b3b3;
-			font-weight: bold;
-			font-size: 12px;
-			text-align: center;
-		}
-		.board.xans-board-listpackage-3 #content_view {
-			transition: all 0.5s ease-out;
-		}
-		.board.xans-board-listpackage-3 #content_view td {
-			padding: 20px 20px 20px 43px;
-			line-height: 18px;
-			background: #fbfafa;
-			color: #353535;
-		}
-		.board.xans-board-listpackage-3 td.subject .fold:before {
-			content: ">";
-			position: absolute;
-			right: 0;
-			font-size: 15px;
-			color: #aaa;
-			font-style: normal;
-			font-family: 돋움, dotun, 'Nanum Gothic', arial, sans-serif;
-			-webkit-transform: rotate(90deg);
-			-moz-transform: rotate(90deg);
-			transform: rotate(90deg);
-		}
-		.fr-view strong, .fr-view b {
-			display: initial
-		}
-		</style>
-		
 	</div>
-	<%@ include file="footer/footer2.jsp"%>
+	
+	<%@ include file="footer/footer.jsp"%>
+	
 </div>
 </body>
 </html>
