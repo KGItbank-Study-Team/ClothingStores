@@ -35,8 +35,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" defer src="/resources/js/productInfo2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
 </head>
 <body>
@@ -87,10 +87,14 @@
 									<span style="font-size: 12px; color: #555555;">COLOR</span>
 								</th>
 								<td>
-									<ul class="colorOptionPosition">
+									<ul class="colorOptionPosition"> <!-- 색상 옵션 -->
 										<c:set var="color" value="<%=colors%>"/>
 										<c:forEach var="colorList" items="${color}">
-										<li class="color" onclick="change_btn(event)"><a href="#none" class="colorButton"><span class="colorOption">${colorList}</span></a></li>
+										<li class="colorBtn" onclick="<!-- change_btn(event) -->">
+											<a href="#none">
+												<span class="colorOption">${colorList}</span>
+											</a>
+										</li>
 										</c:forEach>
 									</ul>
 								</td>
@@ -106,10 +110,14 @@
 									<span style="font-size: 12px; color: #555555;">SIZE</span>
 								</th>
 								<td>
-									<ul class="sizeOptionPosition"> 
+									<ul class="sizeOptionPosition"> <!-- 사이즈 옵션 -->
 									<c:set var="size" value="<%=sizes%>"/>
 									<c:forEach var="sizeList" items="${size}">
-										<li class="color" onclick="change_btn2(event)"><a href="#none" class="color-button"><span class="colorOption">${sizeList}</span></a></li>
+										<li class="sizeBtn" onclick="<!-- change_btn2(event) -->">
+											<a href="#none">
+												<span class="sizeOption">${sizeList}</span>
+											</a>
+										</li>
 									</c:forEach>
 									</ul>
 								</td>
@@ -117,41 +125,44 @@
 						</tbody>
 					</table>				
 				</div>
-				<div style="margin-top: 30px;">
-					<table>
-						<colgroup>
-							<col>
-							<col>
-							<col>
-							<col>
-						</colgroup>
-						<tbody class="displayNone">
-							<tr>
-								<td style="font-size: 12px; color: #555555; font-weight:bold;">${colorList}</td>
-								<td style="font-size: 12px; color: #555555; font-weight:bold;">${sizeList}</td>
-								<td>
-									<span class="quantity"">
-										<input type="text" value="1" class="inputBox">
-										<a href="#none" class="">
-											<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
+				<!-- 옵션 선택 시 화면에 출력 -->
+				<form action="/app/order/product" method="post">
+					<div class="tablePosition">
+						<table>
+							<colgroup>
+								<col>
+								<col>
+								<col>
+								<col>
+							</colgroup>
+							<tbody class="displayNone">
+								<tr>
+									<td class="tdOption"></td>
+									<td class="tdOption">${sizeList}</td>
+									<td>
+										<span class="quantity">
+											<input type="text" value="1" class="inputBox">
+											<a href="#none" class="">
+												<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
+											</a>
+											<a href="#none">
+												<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
+											</a>
+										</span>
+										<a href="#none" class="deleteBtn">
+											<img alt="삭제" src="/resources/images/icon_delete.png"style="width:9px;height:9px;">
 										</a>
-										<a href="#none">
-											<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
-										</a>
-									</span>
-									<a href="#none" class="deleteItem">
-										<img alt="삭제" src="/resources/images/icon_delete.png"style="width:9px;height:9px;">
-									</a>
-								</td>
-								<td>
-									<div class="tdCell">${price1}</div> 
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+									</td>
+									<td>
+										<div class="tdCell">${price1}</div> 
+									</td>
+								</tr>
+							</tbody>	
+						</table>
+					</div>
+				</form>
 				<div class="btns">
-					<div clss="btn1">
+					<div class="btn1">
 						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;background:rgb(101,83,69);">
 							<span class="btnSpan" style="color:white !important;">BUY IT NOW</span>
 						</a>

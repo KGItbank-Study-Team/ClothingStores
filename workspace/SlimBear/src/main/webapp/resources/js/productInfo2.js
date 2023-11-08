@@ -1,79 +1,192 @@
-// 색상 옵션 버튼 클릭시 버튼 색상 변경 #1
-function change_btn(colorOptionPosition) {
-	var btns = document.querySelectorAll(".color");	
-	btns.forEach(function(btn, i) {
-		if(colorOptionPosition.currentTarget == btn) {
-			btn.classList.add("active");
-		} else {
-			btn.classList.remove("active");
-		}
-	});
-	console.log(colorOptionPosition.currentTarget);
-}
+/*
+$(function(){
+    var selectedColor = null;
+    var selectedSize = null;
+	
+    $(".colorBtn").on("click", function(){
+        if ($(this).hasClass("active")) {	
+            // 이미 선택한 상태라면 해제
+            selectedColor = null;
+            $(this).removeClass("active");
+        } else {
+            // 새로 선택한 옵션 처리
+            $(".colorBtn").removeClass("active");
+            $(this).addClass("active");
+            selectedColor = $(this).find(".colorOption").text();
+            updateSelection();
+        }
+    });
 
-// 사이즈 옵션 클릭시 버튼 클릭시 버튼 색상 변경 #2
-function change_btn2(sizeOptionPosition) {
-	var btns2 = document.querySelectorAll(".color");	
-	btns2.forEach(function(btn2, i) {
-		if(sizeOptionPosition.currentTarget == btn2) {
-			btn2.classList.add("active2");
-		} else {
-			btn2.classList.remove("active2");
-		}
-	});
-	console.log(sizeOptionPosition.currentTarget);
-	showOptions();
-}
- 
-// 선택 상품 수량 증감 감소 
-// DOM 요소 가져오기
-const inputBox = document.querySelector(".inputBox");
-const countUpButton = document.querySelector(".countUp");
-const countDownButton = document.querySelector(".countDown");
+    $(".sizeBtn").on("click", function(){
+        if ($(this).hasClass("active2")) {
+            // 이미 선택한 상태라면 해제
+            selectedSize = null;
+            $(this).removeClass("active2");
+        } else {
+            // 새로 선택한 옵션 처리
+            $(".sizeBtn").removeClass("active2");
+            $(this).addClass("active2");
+            selectedSize = $(this).find(".sizeOption").text();
+            updateSelection();
+        }
+    });
 
-// 증가 버튼 클릭 시
-countUpButton.addEventListener("click", function () {
-    const currentValue = parseInt(inputBox.value, 10); // 현재 값 가져오기
-    inputBox.value = currentValue + 1; // 값 증가
-});
+    var $devareBtn = $(".devareBtn");
+    
+    	$devareBtn.on("click", function(event) {
+        var row = $(event.target).closest("tr");
+        
+        if (row) {
+            row.remove();
+            updateSelection(); // 행을 삭제한 후 옵션 선택을 업데이트
+            selectedColor = null; // 옵션 선택 초기화
+            selectedSize = null; // 옵션 선택 초기화
+        }
+    });
 
-// 감소 버튼 클릭 시
-countDownButton.addEventListener("click", function () {
-    const currentValue = parseInt(inputBox.value, 10); // 현재 값 가져오기
-    if (currentValue > 1) {
-        inputBox.value = currentValue - 1; // 값 감소 (최소값은 1로 설정)
+ function updateSelection(){
+ 	//기존의 선택된 옵션 행 모두 삭제
+ 	$(".displayNone").empty();
+        if (selectedColor && selectedSize) {
+            // 행을 생성하고 선택한 옵션 값을 설정
+            var newRow = $("<tr></tr>");
+            newRow.append($("<td></td>").text(selectedColor));
+            newRow.append($("<td></td>").text(selectedSize));
+            newRow.append($("<td></td>").html('<span class="quantity"><input type="text" value="1" class="inputBox"><a href="#none" class=""><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a><a href="#none"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a></span><a href="#none" class="devareBtn"><img alt="삭제" src="/resources/images/icon_devare.png" style="width:9px;height:9px;"></a>'));
+            
+            $(".displayNone").append(newRow);
+            $(".displayNone").removeClass("displayNone");
+
+        }
     }
 });
+*/
 
-// 삭제 버튼 클릭 시
-document.addEventListener("DOMContentLoaded", function() {
-    // 모든 삭제 버튼을 선택
-    const deleteButtons = document.querySelectorAll(".deleteItem");
+/*
+$(function(){
+    var selectedColor = null;
+    var selectedSize = null;
 
-    // 각 삭제 버튼에 대한 클릭 이벤트 핸들러 설정
-    deleteButtons.forEach(function(button) {
-        button.addEventListener("click", function(event) {
-            // 클릭된 삭제 버튼의 부모 행(tr 요소)을 찾음
-            const row = event.target.closest("tr");
-
-            // 해당 행을 삭제
-            if (row) {
-                // 해당 행의 색상 옵션과 사이즈 옵션 선택을 초기화
-                const colorOption = row.querySelector(".color");
-                const sizeOption = row.querySelector(".size");
-                colorOption.classList.remove("active");
-                sizeOption.classList.remove("active2");
-
-                // 해당 행을 삭제
-                row.remove();
-            }
-        });
+    $(".colorBtn").on("click", function(){
+        // 선택한 상품 데이터 초기화
+        selectedColor = null;
+        selectedSize = null;
+        
+        // 새로운 옵션 선택 또는 해제
+        $(this).toggleClass("active");
+        selectedColor = $(this).find(".colorOption").text();
+        
+        // 기존에 선택한 행 모두 삭제
+        $(".displayNone").empty();
+   
+        // 새로운 행 생성 및 선택한 옵션 추가
+        updateSelection();
     });
-});
 
-// 제품의 모든 옵션 선택 시 선택한 제품의 옵션과 가격을 화면에 띄워줌
-function showOptions() {
-    // 색상 및 사이즈 옵션을 선택하면 displayNone 클래스를 제거하여 해당 영역을 표시
-    const displayNone = document.querySelector(".displayNone");
-    displayNone.classList.remove("displayNone");
-}
+    $(".sizeBtn").on("click", function(){
+        // 선택한 상품 데이터 초기화
+        selectedColor = null;
+        selectedSize = null;
+        
+        // 새로운 옵션 선택 또는 해제
+        $(this).toggleClass("active2");
+        selectedSize = $(this).find(".sizeOption").text();
+        
+        // 기존에 선택한 행 모두 삭제
+        $(".displayNone").empty();
+        
+  
+        // 새로운 행 생성 및 선택한 옵션 추가
+        updateSelection();
+    });
+
+    var $devareBtn = $(".devareBtn");
+    
+    $devareBtn.on("click", function(event) {
+        var row = $(event.target).closest("tr");
+        
+        if (row) {
+            row.remove();
+            // 옵션 선택 초기화
+            selectedColor = null;
+            selectedSize = null;
+        }
+    });
+
+    function updateSelection(){
+        if (selectedColor && selectedSize) {
+            // 행을 생성하고 선택한 옵션 값을 설정
+            var newRow = $("<tr></tr>");
+            newRow.append($("<td></td>").text(selectedColor));
+            newRow.append($("<td></td>").text(selectedSize));
+            newRow.append($("<td></td>").html('<span class="quantity"><input type="text" value="1" class="inputBox"><a href="#none" class=""><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a><a href="#none"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a></span><a href="#none" class="devareBtn"><img alt="삭제" src="/resources/images/icon_devare.png" style="width:9px;height:9px;"></a>'));
+            $(".displayNone").append(newRow);
+
+        }
+    }
+});
+*/
+
+var selectProduct=[];
+
+
+
+$(function(){
+    var selectedColor = null;
+    var selectedSize = null;
+	
+    $(".colorBtn").on("click", function(){
+        if ($(this).hasClass("active")) {
+            // 이미 선택한 상태라면 해제
+            selectedColor = null;
+            $(this).removeClass("active");
+        } else {
+            // 새로 선택한 옵션 처리
+            $(".colorBtn").removeClass("active");
+            $(this).addClass("active");
+            updateSelection($(this).find(".colorOption").text(), selectedSize);
+        }
+    });
+
+    $(".sizeBtn").on("click", function(){
+        if ($(this).hasClass("active2")) {
+            // 이미 선택한 상태라면 해제
+            selectedSize = null;
+            $(this).removeClass("active2");
+        } else {
+            // 새로 선택한 옵션 처리
+            $(".sizeBtn").removeClass("active2");
+            $(this).addClass("active2");
+            updateSelection(selectedColor, $(this).find(".sizeOption").text());
+        }
+    });
+
+    var $devareBtn = $(".devareBtn");
+    
+    	$devareBtn.on("click", function(event) {
+        var row = $(event.target).closest("tr");
+        
+        if (row) {
+            row.remove();
+         
+            selectedColor = null; // 옵션 선택 초기화
+            selectedSize = null; // 옵션 선택 초기화
+        }
+    }); 
+
+    function updateSelection(color, size){
+    
+    	beforeColor = selectedColor;
+    	beforesize = selectedSize;
+    	selectedColor = color;
+	    selectedSize = size;
+	    
+    	if(selectedColor != null && selectedSize != null){
+			if(beforeColor != color || beforesize!=size)    	
+    	 	$(".displayNone td:nth-child(1)").text(selectedColor);
+            $(".displayNone td:nth-child(2)").text(selectedSize);
+            $(".displayNone").css("display", "table-row-group");
+          
+    	}
+    }
+});

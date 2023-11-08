@@ -67,19 +67,19 @@ th:last-child {
 	padding-right: 20px;
 }
 
-.color2 {
+/* .color2 {
 	width: 100px;
 	text-align: left;
 	border-spacing: 0;
 	padding: 6px 0;
-}
+} */
 .colorOptionPosition {
 	
 }
 .sizeOptionPosition {
 	
 }
-.color {
+.sizeBtn, .colorBtn {
 	position:relative;
 	overflow: hidden;
 	display: inline-block;
@@ -92,13 +92,13 @@ th:last-child {
 	text-decoration: none;
 	z-index: 0;
 }
-.color.active {
+.colorBtn.active {
 	background: #eae5dd; 
 }
-.color.active2 {
+.sizeBtn.active2 {
 	background: #eae5dd;
 }
-.colorOption {
+.colorOption, .sizeOption {
 	display: inline-block;
 	padding: 4px 10px;
 	box-sizing: border-box;
@@ -132,11 +132,19 @@ input:focus {
 .displayNone {
 	display: none;
 }
+.tablePosition {
+	margin-top: 30px;
+}
 .quantity {
 	width: 65px;
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
+}
+.tdOption {
+	font-size: 12px; 
+	color: #555555; 
+	font-weight:bold;
 }
 .tdCell {
 	width: 130px !important;
