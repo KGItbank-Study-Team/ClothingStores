@@ -23,7 +23,7 @@
 
 <body>
 	<header>
-		<%@ include file="header/header2.jsp"%>
+		<%@ include file="header/header.jsp"%>
 	</header>
 	<div id="wrapper">
 		<main id="product">
@@ -79,11 +79,6 @@
 									<span class="star">&#9733;</span> <span class="star">&#9733;</span>
 									<span class="star">&#9733;</span> <span class="star">&#9733;</span>
 									<span class="star">&#9733;</span>
-									<!--<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span>  -->
 								</div>
 								<div class=review-id>${review_id}</div>
 								<div class=review-date>${regDate}</div>
