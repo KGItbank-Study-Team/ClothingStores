@@ -40,7 +40,7 @@
 <title>상품상세정보</title>
 </head>
 <body>
-	<%@ include file="header/header2.jsp"%>
+	<%@ include file="header/header.jsp"%>
 	<div id="container">
 		<div class="productInfo">
 			<div class="left">
@@ -271,7 +271,7 @@
 		</div> <!-- productInfo  -->
 		<hr class="hrPosition"/>
 		<div>
-			<%@ include file="footer/footer2.jsp" %>
+			<%@ include file="footer/footer.jsp" %>
 		</div>
 	</div> <!-- container -->
 </body>
