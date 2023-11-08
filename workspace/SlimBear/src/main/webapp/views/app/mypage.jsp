@@ -15,7 +15,7 @@ request.setAttribute("yearmoney", "0");
 request.setAttribute("reserve", "1000");  
 request.setAttribute("totalreserve", "3000");  
 request.setAttribute("usereserve", "2000");  
-request.setAttribute("balance", "50000");  
+request.setAttribute("deposit", "50000");  
 request.setAttribute("totalorderm", "0원");  
 request.setAttribute("totalordern", "0");  
 request.setAttribute("coupon", "1");  
@@ -133,7 +133,7 @@ request.setAttribute("turn", "7");
                         </li>
                         <li class="">
                             <strong class="title">예치금</strong>
-                            <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_deposit">${balance}원</span></strong>
+                            <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_deposit">${deposit}원</span></strong>
                             <a href="http://localhost:9090/views/app/deposits.jsp" class="btnNormal">조회</a>
                         </li>
                         <li>

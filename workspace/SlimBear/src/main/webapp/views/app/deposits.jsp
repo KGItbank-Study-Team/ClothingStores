@@ -9,12 +9,16 @@
 <!DOCTYPE html>
 
 <%
-HashMap<String, String> a = new HashMap<String, String>();
-a.put("2023-11-05", "1000");
+request.setAttribute("accruedeposit", "70000");
+request.setAttribute("usedeposit", "20000");
+request.setAttribute("deposit", "50000");
+request.setAttribute("refunddeposit", "0");
 
-session.setAttribute("map", a);
-
-request.setAttribute("orderdate", "2023-11-05");
+/* 확인용 임시데이터 */
+request.setAttribute("orderdate", "2023-11-11");
+request.setAttribute("minusdeposit", "20000");
+request.setAttribute("relatedorder", "관련주무운");
+request.setAttribute("substance", "내요옹");
 %>
 
 <html lang="ko">
@@ -72,19 +76,19 @@ request.setAttribute("orderdate", "2023-11-05");
                         <ul>
                             <li class="">
                                 <strong class="title">누적 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_all_deposit">0원 숫자써</span>&nbsp;</span>
+                                        id="xans_myshop_summary_all_deposit">${accruedeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용된 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_used_deposit">0원 숫자써</span>&nbsp;</span>
+                                        id="xans_myshop_summary_used_deposit">${usedeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용가능 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_deposit">0원 숫자써</span>&nbsp;</span>
+                                        id="xans_myshop_summary_deposit">${deposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">현금환불요청 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_refund_wait_deposit">0원 숫자써</span>&nbsp;</span>
+                                        id="xans_myshop_summary_refund_wait_deposit">${refunddeposit}</span>&nbsp;</span>
                             </li>
                         </ul>
                     </div>
@@ -108,15 +112,21 @@ request.setAttribute("orderdate", "2023-11-05");
                                 </thead>
                                 <tbody class="center">
                                 
-                              	    <c:forEach var="i" items="${map}">
+                              	    <%-- <c:forEach var="item" items="${depositList}">
                                     <tr class="">
-                                        <td>${i.key}</td>
-                                        <td>${i.value}</td>
-                                        <td>주문</td>
-                                        <td>내용</td>
+                                        <td>${item.orderdate}</td>
+                                        <td>${item.minusdeposit}</td>
+                                        <td>${item.relatedorder}</td>
+                                        <td>${item.substance}</td>
                                     </tr>
-                                    </c:forEach>
+                                    </c:forEach> --%>
 
+									<tr>
+										<td>${orderdate}</td>
+                                        <td>${minusdeposit}</td>
+                                        <td>${relatedorder}</td>
+                                        <td>${substance}</td>
+                                    </tr>
                                     
                                 </tbody>
                             </table>
