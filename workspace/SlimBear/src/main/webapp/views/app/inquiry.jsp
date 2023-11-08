@@ -3,15 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
 	request.setAttribute("title", "INQUIRY");
+	request.setAttribute("title1", "상품문의");
+	request.setAttribute("title2", "배송문의");	
+	
+	request.setAttribute("Num", "1");
+	request.setAttribute("name", "양동우");
+	request.setAttribute("regDate", "9999-99-99");
+	
 	ArrayList<String> boards = new ArrayList<String>();
 	boards.add("필독");
 	boards.add("하우스앤드");
 	boards.add("하우스앤드2");
-	boards.add("하우스앤드3");
-	boards.add("하우스앤드4");
-	boards.add("하우스앤드5하우스앤드5하우스앤드5");	
-	
 	request.setAttribute("boards", boards);
+	
+// 	ArrayList<String> names = new ArrayList<String>();
+// 	boards.add("슬림베어_CR");
+// 	boards.add("양동우");
+// 	boards.add("양동생");
+// 	request.setAttribute("names", names);
 %>
 <jsp:include page="header/header.jsp" />
 
@@ -19,11 +28,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
-<title>SLIMBEAR</title>
+<title>INQUIRY</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script defer src="/resources/js/inquiry.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -43,7 +53,7 @@
 					</div>
 					<div class="titleArea">
 						<h2>
-							<font color="333333">상품문의</font>
+							<font color="333333">${title1}</font>
 						</h2>
 						<p></p>
 					</div>
@@ -52,41 +62,12 @@
 				<script
 					src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
-					<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
-					<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
-					<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/views/app/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/views/app/notice.jsp" class="navi01"><span>공지사항</span></a> 
+					<a href="/views/app/inquiry.jsp" class="navi02"><span>문의게시판</span></a>
+					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
+					<a href="/views/app/faq.jsp" class="navi05"><span>자주묻는질문</span></a>
 				</div>
-				<script>
-					$(function() {
-						var hrefCate = location.href;
-
-						if (hrefCate.indexOf('/1/') != -1) {
-							$('.navi01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('company.html') != -1) {
-							$('.navi00').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/2/') != -1) {
-							$('.navi03').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/4/') != -1) {
-							$('.navi04').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/board/index.html') != -1) {
-							$('.navi05').addClass("on");
-						}
-						;
-					});
-				</script>
+				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="subnavi" style="display: block;">
 					<a href="/board/qa/6/" class="qna01"><span>상품문의</span></a> <a
@@ -97,66 +78,7 @@
 					<!-- <a href="/board/배송-후-교환반품/5/" class="qna04"><span>배송 후 교환/반품</span></a> -->
 					<!-- <a href="/board/입금결제-확인/14/" class="qna05"><span>입금/결제 확인</span></a> -->
 				</div>
-				<script>
-					$(function() {
-						var hrefCate = location.href;
-
-						if (hrefCate.indexOf('/board/index.html') != -1) {
-							$('.subnavi').css('display', 'block');
-						}
-						;
-
-						if (hrefCate.indexOf('/6/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('board_no=6') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/3001/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna02').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/101/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna03').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/5/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna04').addClass("on");
-						}
-						;
-
-						/*
-						if(hrefCate.indexOf('/14/')!=-1){
-						    $('.subnavi').css('display','block');
-						    $('.navi02').addClass("on");
-						    $('.qna05').addClass("on");
-						};
-						 */
-
-						if (hrefCate.indexOf('/13/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna06').addClass("on");
-						}
-						;
-					});
-				</script>
+				
 				<!-- <div class="one_tab">
 					<ul module="Layout_BoardInfo">
 						<li><a href=""></a></li>
@@ -214,8 +136,8 @@
 						            <span class="txtEm"></span>
 						          </strong>
 						        </td>
-						        <td>${board}</td>
-						        <td class=""><span class="txtNum">${board}</span></td>
+						        <td>${name}</td>
+						        <td class=""><span class="txtNum">${regDate}</span></td>
 						        <td class="displaynone"><span class="txtNum">${board}</span></td>
 						        <td class="displaynone"><span class="txtNum">${board}</span></td>
 						        <td class="displaynone">
@@ -225,57 +147,57 @@
 						    </c:forEach>
 							
 							
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td><i class="xi-check"></i></td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak">
-								<span class="displaynone">
-								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);">
-								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" 
-									alt="내용 보기" /></a>
-								</span> 
-								<strong> 
-									<a href="/article/상품문의/6/1684189/"
-										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a>
-									<img src="/resources/images/icon_hit.gif" alt="HIT"
-										class="ec-common-rwd-image" />
-									<span class="txtEm"></span>
-								</strong>
-								</td>
-								<td>슬림베어_CR</td>
-								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td>
-								<td class="displaynone"><span class="txtNum">11372</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone">
-								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td><i class="xi-check"></i></td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak">
-								<span class="displaynone"> 
-									<a href="#none" onclick="BOARD.viewTarget('1052853','6',this);">
-										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"
-											alt="내용 보기" />
-									</a>
-								</span> 
-								<strong>
-								<a href="/article/상품문의/6/1052853/"
-									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a>
-								<img src="/resources/images/icon_hit.gif" alt="HIT"
-									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td>
+<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
+<!-- 								class="xans-record-"> -->
+<!-- 								<td><i class="xi-check"></i></td> -->
+<!-- 								<td class="displaynone"></td> -->
+<!-- 								<td class="subject left txtBreak"> -->
+<!-- 								<span class="displaynone"> -->
+<!-- 								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);"> -->
+<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"  -->
+<!-- 									alt="내용 보기" /></a> -->
+<!-- 								</span>  -->
+<!-- 								<strong>  -->
+<!-- 									<a href="/article/상품문의/6/1684189/" -->
+<!-- 										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a> -->
+<!-- 									<img src="/resources/images/icon_hit.gif" alt="HIT" -->
+<!-- 										class="ec-common-rwd-image" /> -->
+<!-- 									<span class="txtEm"></span> -->
+<!-- 								</strong> -->
+<!-- 								</td> -->
+<!-- 								<td>슬림베어_CR</td> -->
+<!-- 								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td> -->
+<!-- 								<td class="displaynone"><span class="txtNum">11372</span></td> -->
+<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
+<!-- 								<td class="displaynone"> -->
+<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
+<!-- 									alt="0점" /></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
+<!-- 								class="xans-record-"> -->
+<!-- 								<td><i class="xi-check"></i></td> -->
+<!-- 								<td class="displaynone"></td> -->
+<!-- 								<td class="subject left txtBreak"> -->
+<!-- 								<span class="displaynone">  -->
+<!-- 									<a href="#none" onclick="BOARD.viewTarget('1052853','6',this);"> -->
+<!-- 										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" -->
+<!-- 											alt="내용 보기" /> -->
+<!-- 									</a> -->
+<!-- 								</span>  -->
+<!-- 								<strong> -->
+<!-- 								<a href="/article/상품문의/6/1052853/" -->
+<!-- 									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a> -->
+<!-- 								<img src="/resources/images/icon_hit.gif" alt="HIT" -->
+<!-- 									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td> -->
 									
-								<td>슬림베어_CR</td>
-								<td class=""><span class="txtNum">2020-09-01 14:03:53</span></td>
-								<td class="displaynone"><span class="txtNum">11715</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone">
-								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
+<!-- 								<td>슬림베어_CR</td> -->
+<!-- 								<td class=""><span class="txtNum">2020-09-01 14:03:53</span></td> -->
+<!-- 								<td class="displaynone"><span class="txtNum">11715</span></td> -->
+<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
+<!-- 								<td class="displaynone"> -->
+<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
+<!-- 									alt="0점" /></td> -->
+<!-- 							</tr> -->
 <!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
 <!-- 								class="xans-record-"> -->
 <!-- 								<td><i class="xi-check"></i></td> -->
@@ -333,7 +255,7 @@
 <!-- 			                $product_name_cut = 30 -->
 <!-- 			                $login_page_url = /member/login.html -->
 <!-- 			                $deny_access_url = /index.html -->
-<!-- 			            	--> -->
+<!-- 			            	-->
 <!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
 <!-- 								class="xans-record-"> -->
 <!-- 								<td>485848</td> -->
@@ -551,11 +473,9 @@
 <!-- 							</tr> -->
 						</tbody>
 					</table>
-					<p
-						class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
+					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
 				</div>
-				<div
-					class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
+				<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
 					<span class="gRight"> <a
 						href="/board/product/write.html?board_no=6"
 						class="btnSubmitFix sizeS ">WRITE</a>
@@ -567,48 +487,47 @@
 				class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
 				<a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
 				<ol>
-					<li class="xans-record-"><a href="?board_no=6&page=1"
-						class="this">1</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=2"
-						class="other">2</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=3"
-						class="other">3</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=4"
-						class="other">4</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=5"
-						class="other">5</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=6"
-						class="other">6</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=7"
-						class="other">7</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=8"
-						class="other">8</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=9"
-						class="other">9</a></li>
-					<li class="xans-record-"><a href="?board_no=6&page=10"
-						class="other">10</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=1" class="this">1</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=2" class="other">2</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=3" class="other">3</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=4" class="other">4</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=5" class="other">5</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=6" class="other">6</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=7" class="other">7</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=8" class="other">8</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=9" class="other">9</a></li>
+					<li class="xans-record-">
+						<a href="?board_no=6&page=10" class="other">10</a></li>
 				</ol>
 				<a href="?board_no=6&page=2"><img src="/resources/images/icon_next2.png" /></a>
 			</div>
 
 			<form id="boardSearchForm" name="" action="/board/qa/6" method="get"
 				target="_top" enctype="multipart/form-data">
-				<input id="board_no" name="board_no" value="6" type="hidden" /> <input
-					id="page" name="page" value="1" type="hidden" /> <input
-					id="board_sort" name="board_sort" value="" type="hidden" />
-				<div
-					class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 ">
+				<input id="board_no" name="board_no" value="6" type="hidden" />
+				<input id="page" name="page" value="1" type="hidden" />
+				<input id="board_sort" name="board_sort" value="" type="hidden" />
+				<div class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 ">
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p class="category displaynone"></p>
-						<p>
-							<select id="search_date" name="search_date" fw-filter=""
+						<p><select id="search_date" name="search_date" fw-filter=""
 								fw-label="" fw-msg="">
 								<option value="week">일주일</option>
 								<option value="month">한달</option>
 								<option value="month3">세달</option>
 								<option value="all">전체</option>
-							</select> <select id="search_key" name="search_key" fw-filter=""
+							</select> 
+							<select id="search_key" name="search_key" fw-filter=""
 								fw-label="" fw-msg="">
 								<option value="subject">제목</option>
 								<option value="content">내용</option>
@@ -616,7 +535,8 @@
 								<option value="member_id">아이디</option>
 								<option value="nick_name">별명</option>
 								<option value="product">상품정보</option>
-							</select> <input id="searchs" name="searchs" fw-filter="" fw-label=""
+							</select>
+							<input id="searchs" name="searchs" fw-filter="" fw-label=""
 								fw-msg="" class="searchs" placeholder="" value=""
 								type="text" /> <a href="#none" class="btnEmFix"
 								onclick="BOARD.form_submit('boardSearchForm');">FIND</a>

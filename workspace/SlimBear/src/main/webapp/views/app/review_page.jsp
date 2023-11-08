@@ -79,11 +79,6 @@
 									<span class="star">&#9733;</span> <span class="star">&#9733;</span>
 									<span class="star">&#9733;</span> <span class="star">&#9733;</span>
 									<span class="star">&#9733;</span>
-									<!--<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span> 
-									<span class="star">★</span>  -->
 								</div>
 								<div class=review-id>${review_id}</div>
 								<div class=review-date>${regDate}</div>

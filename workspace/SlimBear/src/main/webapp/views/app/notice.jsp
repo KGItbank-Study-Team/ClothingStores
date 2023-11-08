@@ -14,27 +14,30 @@
 		boards.add("필독");
 		boards.add("하우스앤드");
 		boards.add("하우스앤드2");
-		boards.add("하우스앤드3");
-		boards.add("하우스앤드4");
-		boards.add("하우스앤드5");	
+		boards.add("하우스앤드3");	
 		
 		request.setAttribute("boards", boards);
 %>
+<%@ include file="header/header.jsp"%>
 <!-- VO, DAO import -->
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/resources/css/slimNotice2.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
-<title>SLIMBEAR</title>
+<title>NOTICE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script defer src="/resources/js/notice.js"></script>
 
 </head>
 <body>
+<<<<<<< HEAD:workspace/SlimBear/src/main/webapp/views/app/slimbearNotice.jsp
 <%@ include file="header/header.jsp"%>
+=======
+>>>>>>> 67fc6075a4eb4a164d3cd6c303f2e2d466eeee6f:workspace/SlimBear/src/main/webapp/views/app/notice.jsp
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
@@ -63,97 +66,14 @@
 					<span class="xans-element- xans-board xans-board-replysort-1002 xans-board-replysort xans-board-1002"></span>
 				</div>
 				
-				<script>
-					$(function() {
-						var hrefCate = location.href;
-
-						if (hrefCate.indexOf('/1/') != -1) {
-							$('.navi01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('company.html') != -1) {
-							$('.navi00').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/2/') != -1) {
-							$('.navi03').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/4/') != -1) {
-							$('.navi04').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/board/index.html') != -1) {
-							$('.navi05').addClass("on");
-						}
-						;
-					});
-				</script>
-				
 				<div class="boardnavi">
 					<!-- <a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a> -->
-					<a href="/views/app/slimbearNotice.jsp" class="navi01"><span>공지사항</span></a> 
-					<a href="/views/app/slimbearInquiry.jsp" class="navi02"><span>문의게시판</span></a>
-					<a href="/views/app/review_page_for.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/views/app/slimbearFAQ.jsp" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/views/app/notice.jsp" class="navi01"><span>공지사항</span></a> 
+					<a href="/views/app/inquiry.jsp" class="navi02"><span>문의게시판</span></a>
+					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
+					<a href="/views/app/faq.jsp" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				
-				<script>
-					$(function() {
-						var hrefCate = location.href;
-
-						if (hrefCate.indexOf('/board/index.html') != -1) {
-							$('.subnavi').css('display', 'block');
-						}
-						;
-
-						if (hrefCate.indexOf('/6/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('board_no=6') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna01').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/3001/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna02').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/101/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna03').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/5/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna04').addClass("on");
-						}
-						;
-
-						if (hrefCate.indexOf('/13/') != -1) {
-							$('.subnavi').css('display', 'block');
-							$('.navi02').addClass("on");
-							$('.qna06').addClass("on");
-						}
-						;
-					});
-				</script>
 				
 				<!-- 나머지 코드들... -->
 				<div class="ec-base-table typeList gBorder">
@@ -624,7 +544,7 @@
 			<!-- 관리자 전용 메뉴 -->
 			<!-- // 관리자 전용 메뉴 -->
 		</div>
-			<jsp:include page="footer/footer.jsp" />
+		<jsp:include page="footer/footer.jsp" />
 	</div>
 </div>
 </body>
