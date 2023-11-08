@@ -1,4 +1,4 @@
-package com.kgitbank.slimbear.command;
+package com.kgitbank.slimbear.vo.command;
 
 
 import java.util.ArrayList;

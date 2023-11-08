@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `productReview`;
 CREATE TABLE `productReview` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`mem_id`	varchar(11)	NOT NULL,
-	`Field`	varchar(30)	NOT NULL,
+	`prod_uid`	varchar(30)	NOT NULL,
 	`title`	varchar(100)	NOT NULL,
 	`content`	varchar(100)	NOT NULL,
 	`score`	tinyint	NOT NULL,

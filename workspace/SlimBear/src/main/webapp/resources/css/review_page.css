@@ -144,6 +144,9 @@ main>section {
 .review_text {
     font-size: 12px;
 }
+.review_uid {
+	display: none;
+}
 
 #product>.list>table tr>td:nth-child(1) {
     width: 10%;
@@ -246,6 +249,10 @@ main>section {
 }
 .rating {
 	display: flex;
+	color: brown;
+	position: relative;
+	left: 50%;
+	
 }
 /* 장바구니 추가 버튼 */
 .cart-text {
@@ -821,7 +828,7 @@ btns:hover .heart-text {
 }
 .review-id, .review-date {
 	color: brown;
-	text-align: end;
+	/* text-align: end; */
 }
 /* 좋아요, 장바구니, 찜하기 버튼 */
 .review_logo {

@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%
-   request.setAttribute("name", "");
+   request.setAttribute("name", "");	
    request.setAttribute("pw", "");
-   request.setAttribute("pwck", "****");
+   request.setAttribute("pwck", "");
    request.setAttribute("id", "");
    request.setAttribute("btday", "");
    request.setAttribute("email", "");
    request.setAttribute("telphone", "");
-   request.setAttribute("manck", "");
+   request.setAttribute("phoneck", "");
+   request.setAttribute("postcode", "");
+   request.setAttribute("detailaddress", "");
+   request.setAttribute("address", "");
    request.setAttribute("", "");
     %>
 <html lang="ko">
@@ -19,7 +22,8 @@
     <title>슬림 베어 회원가입</title>
      <link href="/resources/css/join.css" rel="stylesheet" />
      <script defer src="/resources/js/join.js"></script>
-    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
      <%@ include file="header/header.jsp" %>
 </head>
 
@@ -29,30 +33,34 @@
         <!-- 1. 로고 -->
         <img class="logo" src="/resources/images/SlimBear-Logo01.png">
 		<form action="ordercheck.jsp" method="get">
+		<input type="hidden" name="birth">
+		<input id="realdata_address" type="hidden" name="address">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input class="idd" type="text" value="${id }"></span>
+            <span class="placehold-text"><input class="idd" type="text" name="id" required></span>
+        <span id="id_check" style="color: red;"></span>
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password"value="${pw }">
+            <input class="userpw" type="password"value="${pw }" name="pw">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password"value="${pwck }">
+            <input class="userpw-confirm" type="password"value="${pwck }" name="pwck">
+        	<span id="password-match-message" style="color: red;"></span>
         </div>
         <div class="field">
             <b>이름</b>
-            <input class="namee" type="text"value="name">
+            <input class="namee" type="text"value="${name }" name="name">
         </div>
 
         <!-- 3. 필드(생년월일) -->
         <div class="field birth" >
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(4자)" value="${btday }">                
-                <input type="number" placeholder="월">                
+                <input type="number" placeholder="년(4자)" value="${btday }" name="btday">                
+                <!-- <input type="number" placeholder="월">    -->             
                 <select>
                     <option value="">월</option>
                     <option value="">1월</option>
@@ -69,23 +77,13 @@
                     <option value="">12월</option>
                 </select>
                 <input type="number" placeholder="일">
+                
             </div>
         </div>
 
-        <!-- 4. 필드(성별) 
-        <div class="field gender">
-            <b>성별</b>
-            <div>
-                <label><input type="radio" name="gender">남자</label>
-                <label><input type="radio" name="gender">여자</label>
-                <label><input type="radio" name="gender" checked>선택안함</label>
-            </div>
-        </div>
--->
-        <!-- 5. 이메일_전화번호 -->
-        <div class="field">
+      <div class="field">
             <b>본인 확인 이메일<small>(선택)</small></b>
-            <input type="email" placeholder="선택입력" value="${email }">
+            <input type="email" placeholder="선택입력" value="${email }" name="email">
         </div>
         
         <div class="field tel-number">
@@ -94,12 +92,21 @@
                 <option value="">대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력"value="${telphone }">
+                <input type="tel" placeholder="전화번호 입력"value="${telphone }" name="telphone">
                 <input type="button" value="인증번호 받기">
             </div>
-            <input type="number" placeholder="인증번호를 입력하세요" value="${manck }">
+            <input type="number" placeholder="인증번호를 입력하세요" value="${phoneck  }" name="phoneck">
         </div>
+       <div class="field tel-number">
+        <b>주소</b>
+        <div>
+            <input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode">
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
+        </div>
+        <input type="text" placeholder="기본 주소" id="sample6_address" name="pubilcaddress">
+        <input type="text" placeholder ="상세 주소" id="sample6_detailAddress" name="detailaddress">
         
+    </div>
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="가입하기">
 </form>

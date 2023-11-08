@@ -73,7 +73,11 @@ color:#fff
 /* .field.birth div > * {  gap 사용한거랑 같은 효과를 줌 
     flex:1;
 } */
-
+.field.address div {
+    display: flex;
+    gap:10px;
+  
+}
 .field.tel-number div {
     display: flex;
     gap:10px;
@@ -124,14 +128,14 @@ color:#fff
 }
 
 .userpw{
-    background:url(./images/images2/icon-01.png) no-repeat center right 15px;
+   /*  background:url(./images/images2/icon-01.png) no-repeat center right 15px; */
     background-size: 20px;
     background-color: #fff;
 }
 
 .userpw-confirm{
-    background:url(./images/images2/icon-02.png) no-repeat center right 15px;
-    background-size: 20px;
+   /*  background:url(./images/images2/icon-02.png) no-repeat center right 15px;
+    */ background-size: 20px;
     background-color: #fff;
 }
 
