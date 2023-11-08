@@ -2,13 +2,18 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<%
+request.setAttribute("username", "페이커");  
+request.setAttribute("banknumber", "94320200118927");  
+%>
+
 <html lang="ko">
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../resources/css/modify.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/modify.css">
+    <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
     <title>환불계좌변경</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body id="popup">
@@ -32,7 +37,7 @@
                                 <th scope="row">예금주</th>
                                 <td>
                                     <input id="acc_depositor" name="acc_depositor" fw-filter="" fw-label="" fw-msg=""
-                                        class="inputTypeText" placeholder="" value="이름들어가는곳" type="text">
+                                        class="inputTypeText" placeholder="" value="${username}" type="text">
                                     <p class="txtInfo gBlank10">예금주명은 주문자명과 동일해야 합니다.</p>
                                 </td>
                             </tr>
@@ -113,7 +118,7 @@
                                 <th scope="row">계좌번호</th>
                                 <td>
                                     <input id="acc_no" name="acc_no" fw-filter="" fw-label="" fw-msg=""
-                                        class="inputTypeText" placeholder="" value="계좌번호들어가는곳" type="text">
+                                        class="inputTypeText" placeholder="" value="${banknumber}" type="text">
                                     <p class="txtInfo gBlank10">'-' 없이 숫자만 입력해 주세요.</p>
                                 </td>
                             </tr>
@@ -121,7 +126,7 @@
                                 <th scope="row">비밀번호 확인</th>
                                 <td>
                                     <input id="check_password" name="check_password" fw-filter="" fw-label="" fw-msg=""
-                                        value="비밀번호들어가는곳" type="password">
+                                        value="" type="password">
                                     <p class="txtInfo gBlank10">등록된 비밀번호를 확인합니다.</p>
                                 </td>
                             </tr>

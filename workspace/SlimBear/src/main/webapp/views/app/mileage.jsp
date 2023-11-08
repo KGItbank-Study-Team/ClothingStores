@@ -13,7 +13,7 @@ request.setAttribute("reserve", "1000");
 request.setAttribute("usereserve", "2000"); 
 request.setAttribute("unreserve", "0"); 
 
-/* 임시데이터 확인 */
+/* 확인용 임시데이터 */
 request.setAttribute("orderdate", "2023-11-05"); 
 request.setAttribute("addreserve", "1000"); 
 request.setAttribute("relatedorder", ""); 
