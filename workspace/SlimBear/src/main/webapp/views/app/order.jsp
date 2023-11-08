@@ -25,9 +25,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 페이지</title>
     <%@ include file="header/header.jsp" %>
-    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="/resources/css/orderr.css">
     <script src="/resources/js/order.js"></script>
+    
 </head>
 
 <body>
@@ -93,21 +94,19 @@
         </div>
      
    
-    <div class "field">
+    <div class= "field">
         <b>받는사람*</b>
         <span class="placehold-textt"><input type="text" value="${name }"></span>
     </div>
     <div class="field tel-number">
         <b>주소</b>
-        <!--<select>
-            <option value="">대한민국 +82</option>
-        </select> -->
         <div>
-            <input type="tel" placeholder="01188">
-            <input type="button" value="주소 찾기" >
+            <input type="text" id="sample6_postcode" placeholder="우편번호">
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
         </div>
-        <input type="text" placeholder="기본 주소" value="${newbasicaddr }">
-        <input type="text" placeholder "상세 주소" value="${newjasaeaddr }">
+        <input type="text" placeholder="기본 주소" id="sample6_address">
+        <input type="text" placeholder ="상세 주소" id="sample6_detailAddress">
+        <input type="text" id="sample6_extraAddress" placeholder="참고항목">
     </div>
     <!--휴대전화-->
     <div class="field birth">
@@ -170,8 +169,7 @@
             </label>
         </p>
     </div>
-    
-    
+
 </article>
 
 
