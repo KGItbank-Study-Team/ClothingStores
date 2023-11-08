@@ -90,11 +90,20 @@
 				}
 				%>
 				<div class="paging">
-					<span class="prev"> <a href="#"> < 이전</a>
-					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a>
-						<a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
+					<span class="prev"> 
+						<a href="#"> < 이전</a>
+					</span> 
+					<span class="num">
+						 <a href="#" class="on">1</a> 
+						 <a href="#">2</a>
+						<a href="#">3</a> 
+						<a href="#">4</a> 
+						<a href="#">5</a> 
+						<a href="#">6</a>
 						<a href="#">7</a>
-					</span> <span class="next"> <a href="#">다음 ></a>
+					</span>
+					 <span class="next">
+					  <a href="#">다음 ></a>
 					</span>
 				</div>
 			</section>
