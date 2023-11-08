@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-	request.setAttribute("product_id", "[1+1] 파운드 베이직 후드티");
-	request.setAttribute("content",  "이곳은 리뷰 영역입니다.");
-	request.setAttribute("review_id", "hyuk45**");
-	request.setAttribute("regDate", "2023-11-01");
-	request.setAttribute("review_uid", "happy24");
-	request.setAttribute("review_grade", "4.8");
-%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -46,7 +38,7 @@
 					<li><a href="#">최근등록순</a></li>
 				</ul>
 				<table>
-				<c:forEach var="review" items="${reviewList}">
+					<c:forEach var="review" items="${reviewList}">
 						<tr>
 							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"	style=""></a></td>
 							<td><a href="#" class="desc"><b>${review.product_id}</b></a><br />
