@@ -974,3 +974,14 @@ function removeFroalaNewLine(
 						'\n');
 	}
 }
+
+function validateForm() {
+  var content = document.getElementsByName("content")[0].value;
+  if (content.trim() === "") {
+    var errorMessage = "내용을 입력하여 주십시오.";
+    document.getElementById("error-message").innerText = errorMessage;
+    return false; // 폼 제출을 막음
+  }
+  return true; // 유효성 검사 통과 시 폼을 제출
+}
+

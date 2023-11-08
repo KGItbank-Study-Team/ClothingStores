@@ -103,29 +103,6 @@
 			                </td>
 			            </tr>
 			        </c:forEach>
-					
-<%-- 							<c:forEach items="${boards}" var="board"> --%>
-<!-- 								<tr class="xans-record-"> -->
-<%-- 									<td class="subject" data-cate="${board}"> --%>
-<!-- 										<a href="#none" onclick="BOARD.viewTarget('1711257', '3', this);"> -->
-<!-- 											<b>Q</b> -->
-<%-- 											<span class>${board}</span> --%>
-<%-- 											${board} --%>
-<!-- 											<z class="fold"></z> -->
-<!-- 										</a> -->
-<!-- 									</td> -->
-<!-- 								</tr> -->
-<!-- 								<tr id="content_view" class> -->
-<!-- 									<td colspan="1" class> -->
-<!-- 										<div class="fr-view fr-view-article"> -->
-<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p> --%>
-<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;"><strong>${board}&nbsp;</strong></span></p> --%>
-<%-- 											<p><span style="font-family: Verdana,Geneva,sans-serif;">${board}&nbsp;</span></p> --%>
-<!-- 										</div> -->
-<!-- 									</td> -->
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
-							
 							
 <!-- 						<tr class="xans-record-"> -->
 <!-- 							<td class="subject" data-cate="쇼룸관련"> -->
@@ -354,8 +331,6 @@
 <<<<<<< HEAD:workspace/SlimBear/src/main/webapp/views/app/slimbearFAQ.jsp
 	<%@ include file="footer/footer.jsp"%>
 =======
-	
-	<%@ include file="footer/footer.jsp"%>
 	
 >>>>>>> 67fc6075a4eb4a164d3cd6c303f2e2d466eeee6f:workspace/SlimBear/src/main/webapp/views/app/faq.jsp
 </div>

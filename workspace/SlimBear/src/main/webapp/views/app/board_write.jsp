@@ -34,14 +34,7 @@
 						<p></p>
 					</div>
 				</div>
-				<!-- 
-				<div class="one_tab">
-					<ul module="Layout_BoardInfo">
-						<li><a href=""></a></li>
-						<li><a href=""></a></li>
-					</ul>	
-				</div>
-				 -->
+				
 				<form id="boardWriteForm" name="" action="/exec/front/Board/write/6"
 					method="post" target="_self" enctype="multipart/form-data">
 					<input id="board_no" name="board_no" value="6" type="hidden" /> 
@@ -106,15 +99,8 @@
 						type="hidden" /> 
 					<input id="fix_add_content"
 						name="fix_add_content" value="" type="hidden" />
-					<div
-						class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
-						<!--
-				           $write_success_url = /board/product/list.html
-				           $product_select_url = /product/search_board_list.html
-				           $order_select_url = /order/search_board_list.html
-				           $login_page_url = /member/login.html
-				           $deny_access_url = /index.html
-				       -->
+					<div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
+						
 					<div class="ec-base-box typeProduct displaynone ">
 						<p class="thumbnail">
 							<a href="">
@@ -200,8 +186,6 @@
 											src="//img.echosting.cafe24.com/editors/froala/3.2.2/js/froala_editor.pkgd.min.js?vs=2310251253"></script>
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
-
-										<!-- Run Froala Script --> 
 										
 									</td>
 								</tr>
@@ -269,18 +253,6 @@
 						</table>
 					</div>
 					
-					<script>
-					function validateForm() {
-					  var content = document.getElementsByName("content")[0].value;
-					  if (content.trim() === "") {
-					    var errorMessage = "내용을 입력하여 주십시오.";
-					    document.getElementById("error-message").innerText = errorMessage;
-					    return false; // 폼 제출을 막음
-					  }
-					  return true; // 유효성 검사 통과 시 폼을 제출
-					}
-					</script>
-					
 					<div class="ec-base-button ">
 						<span class="gLeft">
 							<span class="displaynone">
@@ -297,17 +269,6 @@
 			</form>
 		</div>
 	</div>
-	<!-- <form method="post" name="find_frm" action="#" onsubmit="return check()">
-<div id="table_search">
-<select class="select_box" name="find" size="1">
-<option value="writer">이름</option>
-<option value="subject">제목</option>
-<option value="content">내용</option>
-</select>
-<input type="text" class="input_box" name="find_box" />
-<input type="submit" value="search" class="btn" />
-</div>
-</form> -->
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>

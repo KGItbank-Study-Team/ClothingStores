@@ -121,8 +121,6 @@
 <!--                                                     style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;"> -->
 <!--                                                     <br> -->
 <!--                                                 </p> -->
-                                                
-                                                
 <!--                                                 <p -->
 <!--                                                     style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;"> -->
 <!--                                                     <img src="/web/upload/NNEditor/20231013/20231013_100225_402.jpg" -->
@@ -307,76 +305,68 @@
                             <a href="/board/free/reply.html" class="btnSubmitFix sizeS displaynone">REPLY</a>
                         </span>
                     </div>
-                        
-                    </div>
-                </form>
-            </div>
-            
-            <div class="xans-element- xans-board xans-board-commentpackage-1002 xans-board-commentpackage xans-board-1002">
-                <form id="commentForm" name="" action="/exec/front/Board/CommentUpdate/1" method="post" target="_self"
-                    enctype="multipart/form-data" style="display:none">
-                    <input id="board_no" name="board_no" value="1" type="hidden" />
-                    <!-- Add more input fields here if needed -->
-                    <input id="no" name="no" value="1724624" type="hidden" />
-	                <input id="comment_no" name="comment_no" value="" type="hidden" />
-	                <input id="member_id" name="member_id" value="" type="hidden" />
-                    
-                    <div
-                        class="xans-element- xans-board xans-board-commentform-1002 xans-board-commentform xans-board-1002">
-                        <!-- Your comment form goes here -->
-                        <fieldset>
-	                        <legend>댓글 수정</legend>
-	                        <p>비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill"
-	                                fw-label="댓글비밀번호" fw-msg="" value="" type="password" />
-	                                <span class="secret displaynone"><label>비밀댓글</label></span></p>
-	                        <div class="view">
-	                            <textarea id="comment_modify" name="comment_modify" fw-filter="isFill" fw-label="댓글내용"
-	                                fw-msg=""></textarea> <span class="submit">
-	                                <a href="#none" class="btnEm sizeL"
-	                                    onclick="BOARD_COMMENT.comment_update_ok('commentForm');">EDIT</a>
-	                                <a href="#none" class="btnNormal sizeL"
-	                                    onclick="BOARD_COMMENT.comment_cancel_ok('commentForm');">CANCEL</a>
-	                            </span>
-	                        </div>
-	                        <p class="displaynone"> / byte</p>
-                    	</fieldset>
-                    </div>
-                </form>
-                <form id="commentSecretForm" name="" action="/exec/front/Board/CommentSecret/1" method="post" target="_self"
-                    enctype="multipart/form-data" style="display:none">
-                    <input id="board_no" name="board_no" value="1" type="hidden" />
-                    <!-- Add more input fields here if needed -->
-                    <input id="comment_no" name="comment_no" value="" type="hidden" />
-                	<input id="pass_check" name="pass_check" value="F" type="hidden" />
-                    
-                    <div
-                        class="xans-element- xans-board xans-board-commentformsecret-1002 xans-board-commentformsecret xans-board-1002">
-                        <!-- Your secret comment form goes here -->
-                        <p>비밀번호 : <input id="secure_password" name="secure_password" fw-filter="isFill" fw-label="댓글비밀번호"
-                            fw-msg="" value="" type="password" /> <a href="#none" class="btnNormal"
-                            onclick="BOARD_COMMENT.show_secret_comment('commentSecretForm');">OK</a>
-                        <a href="#none" class="btnNormal"
-                            onclick="BOARD_COMMENT.hide_secret_comment_form('commentSecretForm');">CANCEL</a>
-                    	</p>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="xans-element- xans-board xans-board-movement-1002 xans-board-movement xans-board-1002">
-                <ul>
-                    <li class="prev displaynone">
-                        <strong>이전글</strong><a href="/article/notice/1/$3/"></a>
-                    </li>
-                    <li class="next">
-                        <strong>다음글</strong><a href="/article/notice/1/1711077/">[하우스앤드] 11월의 쇼룸리스트</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- 관리자 전용 메뉴 -->
-            <!-- // 관리자 전용 메뉴 -->
-        </div>
-        <jsp:include page="footer/footer.jsp" />
-    </div>
+               	</div>
+              </form>
+           </div>
+           
+           <div class="xans-element- xans-board xans-board-commentpackage-1002 xans-board-commentpackage xans-board-1002">
+               <form id="commentForm" name="" action="/exec/front/Board/CommentUpdate/1" method="post" target="_self"
+                   enctype="multipart/form-data" style="display:none">
+	               <input id="board_no" name="board_no" value="1" type="hidden" />
+	               <input id="no" name="no" value="1724624" type="hidden" />
+	               <input id="comment_no" name="comment_no" value="" type="hidden" />
+	               <input id="member_id" name="member_id" value="" type="hidden" />
+                   
+                   <div class="xans-element- xans-board xans-board-commentform-1002 xans-board-commentform xans-board-1002">
+                       <fieldset>
+                        <legend>댓글 수정</legend>
+                        <p>비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill"
+                                fw-label="댓글비밀번호" fw-msg="" value="" type="password" />
+                                <span class="secret displaynone"><label>비밀댓글</label></span></p>
+                        <div class="view">
+                            <textarea id="comment_modify" name="comment_modify" fw-filter="isFill" fw-label="댓글내용"
+                                fw-msg=""></textarea> <span class="submit">
+                                <a href="#none" class="btnEm sizeL"
+                                    onclick="BOARD_COMMENT.comment_update_ok('commentForm');">EDIT</a>
+                                <a href="#none" class="btnNormal sizeL"
+                                    onclick="BOARD_COMMENT.comment_cancel_ok('commentForm');">CANCEL</a>
+                            </span>
+                        </div>
+                        <p class="displaynone"> / byte</p>
+                   	</fieldset>
+                   </div>
+               </form>
+               <form id="commentSecretForm" name="" action="/exec/front/Board/CommentSecret/1" method="post" target="_self"
+                   enctype="multipart/form-data" style="display:none">
+                   <input id="board_no" name="board_no" value="1" type="hidden" />
+                   <!-- Add more input fields here if needed -->
+                   <input id="comment_no" name="comment_no" value="" type="hidden" />
+               	<input id="pass_check" name="pass_check" value="F" type="hidden" />
+                   
+                   <div class="xans-element- xans-board xans-board-commentformsecret-1002 xans-board-commentformsecret xans-board-1002">
+                       <p>비밀번호 : <input id="secure_password" name="secure_password" fw-filter="isFill" fw-label="댓글비밀번호"
+                           fw-msg="" value="" type="password" /> <a href="#none" class="btnNormal"
+                           onclick="BOARD_COMMENT.show_secret_comment('commentSecretForm');">OK</a>
+                       <a href="#none" class="btnNormal"
+                           onclick="BOARD_COMMENT.hide_secret_comment_form('commentSecretForm');">CANCEL</a>
+                   		</p>
+                   </div>
+               </form>
+           </div>
+           
+           <div class="xans-element- xans-board xans-board-movement-1002 xans-board-movement xans-board-1002">
+               <ul>
+                   <li class="prev displaynone">
+                       <strong>이전글</strong><a href="/article/notice/1/$3/"></a>
+                   </li>
+                   <li class="next">
+                       <strong>다음글</strong><a href="/article/notice/1/1711077/">[하우스앤드] 11월의 쇼룸리스트</a>
+                   </li>
+               </ul>
+           </div>
+       </div>
+       <jsp:include page="footer/footer.jsp" />
+   </div>
 </div>
 </body>
 </html>
