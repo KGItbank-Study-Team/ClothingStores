@@ -1,16 +1,12 @@
 package com.kgitbank.slimbear.controller;
 
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
@@ -52,14 +48,6 @@ public class MemberController {
 	
 	@RequestMapping("join")
 	public String join(MemberDTO member, HttpSession session, Model model) {
-
-		// 임시데이터 =============================
-		member.setSex('F');
-		member.setAddress("서울시도봉구어쩌고저쩌고");
-		member.setName("안상진");
-		member.setEmail("milgos@naver.com");
-		member.setReg_date(new Date(System.currentTimeMillis()));
-		// ========================================
 		
 		if(memberService.join(member)) {
 			System.out.println("가입 성공");
@@ -70,4 +58,8 @@ public class MemberController {
 		}
 	}
 
+	@RequestMapping("myPage")
+	public String myPage() {
+		return "mypage";
+	}
 }
