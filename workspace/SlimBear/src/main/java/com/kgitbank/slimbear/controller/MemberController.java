@@ -27,7 +27,7 @@ public class MemberController {
 
 	@RequestMapping("login")
 	public String login(MemberDTO member,  HttpServletRequest request,  HttpSession session, Model model) {
-		
+			
 		ELoginResult result =  memberService.login(member.getId(), member.getPassword());
 
 		switch(result) {
@@ -63,12 +63,11 @@ public class MemberController {
 		
 		if(memberService.join(member)) {
 			System.out.println("가입 성공");
+			return "redirect:/";
 		}else {
 			System.out.println("가입 실패");
+			return "redirect:/app/join";
 		}
-		
-		// 로그인한 세션정보가 없으면
-		return "redirect:/app/login";
 	}
-	
+
 }

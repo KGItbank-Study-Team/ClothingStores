@@ -23,7 +23,7 @@ public class MemberServiceImpl {
 	public ELoginResult login(String id, String password) {
 
 		MemberDTO member = getMemberById(id);
-		
+
 		if (member == null) {
 			return ELoginResult.NOT_FOUNT_ID;
 		} else if (!member.getPassword().equals(password)) {
@@ -34,8 +34,6 @@ public class MemberServiceImpl {
 	}
 
 	public boolean join(MemberDTO member) {
-		
-		member.setPassword(member.getPassword());
 		
 		if (memDAO.addMember(member) > 0)
 			return true;

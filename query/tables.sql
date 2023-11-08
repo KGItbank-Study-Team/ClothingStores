@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
-	`uid`	bigint unsigned 	NOT NULL,
-	`id`	varchar(11)	NOT NULL,
+	`uid`	bigint unsigned	NOT NULL ,
+	`id`	varchar(11)	NOT NULL unique,
 	`password`	varchar(100)	NOT NULL,
-	`email`	varchar(30)	NOT NULL,
+	`email`	varchar(30)	NOT NULL unique,
 	`name`	varchar(30)	NOT NULL,
 	`address`	VARCHAR(30)	NOT NULL,
 	`sex`	char(1)	NOT NULL	COMMENT 'Female, Male',

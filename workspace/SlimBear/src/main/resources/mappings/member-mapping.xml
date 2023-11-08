@@ -11,7 +11,7 @@
 		SELECT * FROM member WHERE uid=#{uid}
 	</select>
 	
-	<select id="SELECT_MEM_BY_ID" resultType="member" parameterType="member">
+	<select id="SELECT_MEM_BY_ID" resultType="member"  parameterType="member">
 		SELECT * FROM member WHERE id=#{id}
 	</select>
 	

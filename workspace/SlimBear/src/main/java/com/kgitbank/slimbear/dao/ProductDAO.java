@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kgitbank.slimbear.dto.ReviewDTO;
+import com.kgitbank.slimbear.dto.ProductDTO;
 
 @Repository
 public class ProductDAO{
@@ -14,8 +14,8 @@ public class ProductDAO{
 	@Autowired
 	protected SqlSessionTemplate template;
 	
-	public List<ReviewDTO> getProductList() {
-		return template.selectList("com.slimbear.mapper.Member.SELECT_PROD_LIST");
+	public List<ProductDTO> getProductList() {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_LIST");
 	}
 
 }

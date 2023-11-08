@@ -13,14 +13,25 @@ import com.kgitbank.slimbear.service.ProductServiceImpl;
 
 @Controller
 public class PageController {
+	
+	@Autowired
+	private ProductServiceImpl productService;
 
 	@RequestMapping("main")
-	public String mainePage(HttpSession session) {
+	public String mainePage(HttpSession session, Model model) {
+
+		 model.addAttribute("hotProductList", productService.getHotProductList());
+		
 		return "main";
 	}
 
 	@RequestMapping("login")
-	public String login(HttpServletRequest request) {
+	public String loginPage(HttpServletRequest request) {
 		return "login";
+	}
+	
+	@RequestMapping("join")
+	public String joinPage(HttpServletRequest request) {
+		return "join";
 	}
 }

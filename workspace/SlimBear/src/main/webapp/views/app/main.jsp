@@ -133,9 +133,9 @@
 							<li class="menu-item"><a href="#"><img
 									src="/resources/images/icon_user.png" alt="user"></a>
 								<ul class="dropdown-content">
-									<li><a href="">로그인</a></li>
-									<li><a href="">회원가입</a></li>
-									<li><a href="">주문조회</a></li>
+									<li><a href="/app/login">로그인</a></li>
+									<li><a href="/app/join">회원가입</a></li>
+									<li><a href="#">주문조회</a></li>
 								</ul></li>
 							<li><a href="#"><img class="fuck"
 									src="/resources/images/icon_cart.png" alt="cart"></a></li>
@@ -165,8 +165,9 @@
 				<button id="prev-slide"
 					class="slide-button material-symbols-rounded">&lsaquo;</button>
 				<ul class="image-list">
-					<img class="image-item" src="/resources/images/Best_product01.webp"
-						alt="img-1" />
+					<c:forEach var="item" items="${hotProductList}">
+						<img class="image-item" src="/resources/images/${item.main_image}" alt="img-1" />
+					</c:forEach>
 				</ul>
 				<button id="next-slide"
 					class="slide-button material-symbols-rounded">&rsaquo;</button>

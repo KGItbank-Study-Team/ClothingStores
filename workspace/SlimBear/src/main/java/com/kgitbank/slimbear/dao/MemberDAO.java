@@ -15,7 +15,9 @@ public class MemberDAO{
 	protected SqlSessionTemplate template;
 
 	public MemberDTO getMemberById(String id) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_ID", id);
+		MemberDTO info = new MemberDTO();
+		info.setId(id);
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_ID", info);
 	}
 
 	public List<MemberDTO> getMemberList() {
