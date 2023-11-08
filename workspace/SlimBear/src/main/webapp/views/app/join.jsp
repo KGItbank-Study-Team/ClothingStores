@@ -20,7 +20,7 @@
      <link href="/resources/css/join.css" rel="stylesheet" />
      <script defer src="/resources/js/join.js"></script>
     
-     <%@ include file="header/header2.jsp" %>
+     <%@ include file="header/header.jsp" %>
 </head>
 
 <body>

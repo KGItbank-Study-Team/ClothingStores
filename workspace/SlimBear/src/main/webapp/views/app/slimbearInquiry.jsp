@@ -13,7 +13,7 @@
 	
 	request.setAttribute("boards", boards);
 %>
-<jsp:include page="header/header2.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <!DOCTYPE html>
 <html>

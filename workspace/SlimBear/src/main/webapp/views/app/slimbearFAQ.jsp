@@ -11,7 +11,7 @@
 	
 	request.setAttribute("boards", boards);
 %>
-<jsp:include page="header/header2.jsp" />
+<jsp:include page="header/header.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -451,7 +451,7 @@
 		</style>
 		
 	</div>
-	<%@ include file="footer/footer2.jsp"%>
+	<%@ include file="footer/footer.jsp"%>
 </div>
 </body>
 </html>

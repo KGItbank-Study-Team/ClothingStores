@@ -23,7 +23,7 @@
 
 <body>
 	<header>
-		<%@ include file="header/header2.jsp"%>
+		<%@ include file="header/header.jsp"%>
 	</header>
 	<div id="wrapper">
 		<main id="product">

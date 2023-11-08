@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="header/header2.jsp" %>
+    <%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -318,6 +318,6 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
     </div>
 
 </body>
-<%@ include file="footer/footer2.jsp" %>
+<%@ include file="footer/footer.jsp" %>
 
 </html>

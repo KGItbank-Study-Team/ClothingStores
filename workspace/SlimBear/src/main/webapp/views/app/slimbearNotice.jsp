@@ -34,7 +34,7 @@
 
 </head>
 <body>
-<%@ include file="header/header2.jsp"%>
+<%@ include file="header/header.jsp"%>
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
