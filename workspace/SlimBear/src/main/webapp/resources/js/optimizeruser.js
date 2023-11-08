@@ -1,3 +1,26 @@
+
+	function toggleFields(method) {
+		var emailFields = document.getElementById("email_view");
+		var mobileFields = document.getElementById("mobile_view");
+		var ssnFields = document.getElementById("ssn_view");
+
+		if (method === "1") { // 이메일 선택
+			emailFields.style.display = "block";
+			mobileFields.style.display = "none";
+			ssnFields.style.display = "none";
+		} else if (method === "2") { // 휴대폰 번호 선택
+			emailFields.style.display = "none";
+			mobileFields.style.display = "block";
+			ssnFields.style.display = "none";
+		} else if (method === "3") { // 주민등록번호 선택
+			emailFields.style.display = "none";
+			mobileFields.style.display = "none";
+			ssnFields.style.display = "block";
+		}
+	}
+
+
+
 var mySwiper1 = new Swiper ('#slide.swiper-container', {
 	loop:false,
 	speed:400,	
