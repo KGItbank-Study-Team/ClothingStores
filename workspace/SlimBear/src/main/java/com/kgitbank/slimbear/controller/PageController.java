@@ -9,10 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.service.PageConfigService;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
 
 @Controller
 public class PageController {
+
+	@Autowired
+	private PageConfigService pageConfigService;
 	
 	@Autowired
 	private ProductServiceImpl productService;
@@ -20,7 +24,8 @@ public class PageController {
 	@RequestMapping("main")
 	public String mainePage(HttpSession session, Model model) {
 
-		 model.addAttribute("hotProductList", productService.getHotProductList());
+		model.addAttribute("productBannerTop", pageConfigService.getProductBannerTop());
+		model.addAttribute("hotProductList", productService.getHotProductList());
 		
 		return "main";
 	}

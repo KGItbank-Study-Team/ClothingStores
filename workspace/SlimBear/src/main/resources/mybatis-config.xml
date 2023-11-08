@@ -14,8 +14,12 @@
 	
 	<!-- 제작한 VO마다 Mybatis에서 사용할 별칭 설정 -->
 	<typeAliases>
+	
 		<typeAlias alias="member" type="com.kgitbank.slimbear.dto.MemberDTO" />
 		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
+		
+		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.page.dto.ProductBannerTopDTO" />
+		
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->
@@ -23,6 +27,8 @@
 	<mappers>
 		<mapper resource="mappings/member-mapping.xml"/>
 		<mapper resource="mappings/product-mapping.xml"/>
+		
+		<mapper resource="mappings/page-mapping.xml"/>
 	</mappers>
 	
 </configuration>

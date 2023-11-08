@@ -209,3 +209,13 @@ ALTER TABLE `product` ADD CONSTRAINT `PK_PRODUCT` PRIMARY KEY (
 	`uid`
 );
 
+CREATE TABLE `ProductBannerTop` (
+	`uid`	bigint unsigned 	NOT NULL,
+	`image`	varchar(100)	NOT NULL,
+	`prod_uid`	bigint unsigned 	NOT NULL
+);
+
+ALTER TABLE `ProductBannerTop` ADD CONSTRAINT `PK_PRODUCTBANNERTOP` PRIMARY KEY (
+	`uid`
+);
+

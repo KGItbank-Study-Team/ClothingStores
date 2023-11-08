@@ -2,13 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/main_page.css" />
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/main_page.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js"
@@ -34,25 +33,13 @@
 	<header>
 		<div class="menu-container">
 			<div class="banner-container">
-				<div class="slide slide_wrap">
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images01.webp" alt="">
-					</div>
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images02.webp" alt="">
-					</div>
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images03.webp" alt="">
-					</div>
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images04.webp" alt="">
-					</div>
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images05.webp" alt="">
-					</div>
-					<div class="slide_item">
-						<img src="/resources/images/Banner-images06.webp" alt="">
-					</div>
+				<!-- 상단 제품 스크롤배너 -->
+				<div class="slide slide_wrap">				
+					<c:forEach var="item" items="${productBannerTop}">
+						<div class="slide_item">
+							<a href="/app/product?p=${item.prod_uid}"><img src="/resources/images/${item.image}" alt=""></a>
+						</div>
+					</c:forEach>
 					<div class="slide_prev_button slide_button">◀</div>
 					<div class="slide_next_button slide_button">▶</div>
 					<ul class="slide_pagination"></ul>
@@ -166,7 +153,8 @@
 					class="slide-button material-symbols-rounded">&lsaquo;</button>
 				<ul class="image-list">
 					<c:forEach var="item" items="${hotProductList}">
-						<img class="image-item" src="/resources/images/${item.main_image}" alt="img-1" />
+						<img class="image-item" src="/resources/images/${item.main_image}"
+							alt="img-1" />
 					</c:forEach>
 				</ul>
 				<button id="next-slide"
@@ -224,8 +212,8 @@
 			<div class="service">
 				<h2>SERVICE</h2>
 				<div style="margin-bottom: 40px;">
-					고객님은 안전거래를 위해 현금 등으로 결제시<br /> 저희 쇼핑몰에서 가입한 구매안전 서비스를<br /> 이용하실 수
-					있습니다.
+					고객님은 안전거래를 위해 현금 등으로 결제시<br /> 저희 쇼핑몰에서 가입한 구매안전 서비스를<br /> 이용하실
+					수 있습니다.
 				</div>
 				<div id="service_logo">
 					<img src="/resources/images/escrow_02.png" alt="" /> <img
