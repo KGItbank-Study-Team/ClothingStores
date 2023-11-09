@@ -134,26 +134,26 @@ request.setAttribute("finalmoney","12000");
                       	    <%-- <c:forEach var="item" items="${pastorderList}">
                             <tr class="">
                                 <td class="number ">
-                                	<p>${item.orderdate}</p>
-                                    <p>[${item.ordernum}]</p>
+                                	<p>${item.orderDate}</p>
+                                    <p>[${item.orderNum}]</p>
                                 </td>
                                 <td class="thumb"><a href="/product/detail.html"><img
-                                            src="/resources/images/${item.productimage}"
+                                            src="/resources/images/${item.productImage}"
                                             onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"
                                             alt=""></a></td>
                                 <td class="product">
-                                    <strong class="name">${item.productname}</strong>
-                                    <div class="option ">${item.productoption}</div>
+                                    <strong class="name">${item.productName}</strong>
+                                    <div class="option ">${item.productOption}</div>
                                 </td>
-                                <td>${item.ordercount}</td>
+                                <td>${item.orderCount}</td>
                                 <td class="">
-                                    <div class="">${item.orderamount}원</div>
+                                    <div class="">${item.orderAmount}원</div>
                                 </td>
                                 <td class="state">
-                                    <p class="txtEm">${item.orderstatus}</p>
+                                    <p class="txtEm">${item.orderStatus}</p>
                                 </td>
                                 <td class=" ">
-                                    <p><strong>${item.finalmoney}원</strong></p>
+                                    <p><strong>${item.finalMoney}원</strong></p>
                                 </td>
                             </tr>
                             </c:forEach> --%>

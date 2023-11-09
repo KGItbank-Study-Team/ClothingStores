@@ -94,17 +94,17 @@ request.setAttribute("boardhits", "2");
                             
                             	<%-- <c:forEach var="item" items="${boardList}">
                                 <tr class="xans-record-">
-                                    <td>${item.boardnumber}</td>
-                                    <td><a href="" class="txtEm"></a>${item.boardgroup}</td>
+                                    <td>${item.boardNumber}</td>
+                                    <td><a href="" class="txtEm"></a>${item.boardGroup}</td>
                                     <!-- class ="left subject" -->
                                     <td class="subject"><img src="/resources/images/icon_lock.png"
                                         alt="비밀글" class="ec-common-rwd-image"> <a
-                                        href="http://localhost:9090/views/app/read.jsp">${item.boardtitle}</a>
+                                        href="http://localhost:9090/views/app/read.jsp">${item.boardTitle}</a>
                                     <img src="/resources/images/icon_lednew.gif" alt="NEW"
                                         class="ec-common-rwd-image"></td>
-                                    <td>${item.boardwriter}</td>
-                                    <td><span class="txtNum"></span>${item.boarddate}</td>
-                                    <td><span class="txtNum"></span>${imte.boardhits}</td>
+                                    <td>${item.boardWriter}</td>
+                                    <td><span class="txtNum"></span>${item.boardDate}</td>
+                                    <td><span class="txtNum"></span>${imte.boardHits}</td>
                                 </tr>
                                 </c:forEach> --%>
                                 

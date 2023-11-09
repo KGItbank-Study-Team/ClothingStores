@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 
 <%
-request.setAttribute("accruedeposit", "70000");
-request.setAttribute("usedeposit", "20000");
+request.setAttribute("accrueDeposit", "70000");
+request.setAttribute("useDposit", "20000");
 request.setAttribute("deposit", "50000");
-request.setAttribute("refunddeposit", "0");
+request.setAttribute("refundDeposit", "0");
 
 /* 확인용 임시데이터 */
 request.setAttribute("orderdate", "2023-11-11");
@@ -71,11 +71,11 @@ request.setAttribute("substance", "내요옹");
                         <ul>
                             <li class="">
                                 <strong class="title">누적 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_all_deposit">${accruedeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_all_deposit">${accrueDeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용된 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_used_deposit">${usedeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_used_deposit">${useDeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용가능 예치금</strong> <span class="data"><span
@@ -83,7 +83,7 @@ request.setAttribute("substance", "내요옹");
                             </li>
                             <li class="">
                                 <strong class="title">현금환불요청 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_refund_wait_deposit">${refunddeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_refund_wait_deposit">${refundDeposit}</span>&nbsp;</span>
                             </li>
                         </ul>
                     </div>
@@ -109,9 +109,9 @@ request.setAttribute("substance", "내요옹");
                                 
                               	    <%-- <c:forEach var="item" items="${depositList}">
                                     <tr class="">
-                                        <td>${item.orderdate}</td>
-                                        <td>${item.minusdeposit}</td>
-                                        <td>${item.relatedorder}</td>
+                                        <td>${item.orderDate}</td>
+                                        <td>${item.minusDeposit}</td>
+                                        <td>${item.relatedOrder}</td>
                                         <td>${item.substance}</td>
                                     </tr>
                                     </c:forEach> --%>

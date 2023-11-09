@@ -25,10 +25,19 @@ public class OstController {
 		for(int i=0; i<cardlist.size(); ++i) {
 			totalPrice += cardlist.get(i).getPrice();
 		}
-
+		
 		model.addAttribute("cartList",cardlist);
 		model.addAttribute("totalprice",totalPrice);
 		
 		return "cart"; 
 	}
 }
+
+
+
+
+
+
+
+
+

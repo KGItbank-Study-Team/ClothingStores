@@ -107,7 +107,7 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                             <input id="member_id" name="member_id"
                                                 fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
                                                 fw-label="아이디" fw-msg="" class="inputTypeText" placeholder=""
-                                                readonly="readonly" value="${userid}" type="text"> (영문소문자/숫자, 4~16자)
+                                                readonly="readonly" value="${userID}" type="text"> (영문소문자/숫자, 4~16자)
                                         </td>
                                     </tr>
                                     <tr>
@@ -158,11 +158,11 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                                 <li id="fmodify_baseAddr_wrap" class="">
                                                     <input id="addr1" name="addr1" placeholder="기본주소" fw-filter=""
                                                         class="inputTypeText" type="text" size="60" maxlength="100"
-                                                        readonly="" fw-label="기본주소" value="${defaultaddr}">
+                                                        readonly="" fw-label="기본주소" value="${defaultAddr}">
                                                 </li>
                                                 <li id="fmodify_detailAddr_wrap" class="">
                                                     <input id="addr2" name="addr2" placeholder="나머지 주소(선택 입력 가능)"
-                                                        fw-filter="" class="inputTypeText" vaule="${remainaddr}" type="text" size="60"
+                                                        fw-filter="" class="inputTypeText" vaule="${remainAddr}" type="text" size="60"
                                                         maxlength="255" fw-label="나머지 주소(선택 입력 가능)">
                                                 </li>
                                             </ul>
@@ -205,9 +205,9 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                                 <option value="0508">0508</option>
                                             </select>-<input id="phone2" name="phone[]" maxlength="4"
                                                 fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg=""
-                                                value="${phonef}" type="text">-<input id="phone3" name="phone[]" maxlength="4"
+                                                value="${phoneF}" type="text">-<input id="phone3" name="phone[]" maxlength="4"
                                                 fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg=""
-                                                value="${phonel}" type="text"></td>
+                                                value="${phoneL}" type="text"></td>
                                     </tr>
                                     <tr class="">
                                         <th scope="row">휴대전화 <img src="/resources/images/ico_required_blue.gif" class="" alt="필수">
@@ -224,9 +224,9 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                             </select>-
                                             <input id="mobile2" name="mobile[]" maxlength="4"
                                                 fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
-                                                placeholder="" value="${mobilef}" type="text">-<input id="mobile3" name="mobile[]"
+                                                placeholder="" value="${mobileF}" type="text">-<input id="mobile3" name="mobile[]"
                                                 maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화"
-                                                fw-alone="N" fw-msg="" placeholder="" value="${mobilel}" type="text">
+                                                fw-alone="N" fw-msg="" placeholder="" value="${mobileL}" type="text">
                                         </td>
                                     </tr>
                                     <tr class="">
@@ -273,11 +273,11 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                         <th scope="row">생년월일</th>
                                         <td><input id="birth_year" name="birth_year" fw-filter="" fw-label="생년월일"
                                                 fw-msg="" class="inputTypeText" placeholder="" maxlength="4"
-                                                value="${useryear}" type="text"> 년 <input id="birth_month" name="birth_month"
+                                                value="${userYear}" type="text"> 년 <input id="birth_month" name="birth_month"
                                                 fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText"
-                                                placeholder="" maxlength="2" value="${usermonth}" type="text"> 월 <input
+                                                placeholder="" maxlength="2" value="${userMonth}" type="text"> 월 <input
                                                 id="birth_day" name="birth_day" fw-filter="" fw-label="생년월일" fw-msg=""
-                                                class="inputTypeText" placeholder="" maxlength="2" value="${userday}"
+                                                class="inputTypeText" placeholder="" maxlength="2" value="${userDay}"
                                                 type="text">
                                             일 <span class="gIndent20 "><input id="is_solar_calendar0"
                                                     name="is_solar_calendar" fw-filter="" fw-label="생년월일" fw-msg=""
@@ -292,7 +292,7 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                         <th scope="row">환불계좌 <img src="/resources/images/ico_required_blue.gif" class="" alt="필수">
                                         </th>
                                         <td>
-                                            <span id="id_bank_info">${refundaccount}</span> <a
+                                            <span id="id_bank_info">${refundAccount}</span> <a
                                                 href="#none" class="btnNormal gIndent10"
                                                 onclick="window.open('http://localhost:9090/views/app/refund.jsp','bank_account','width=700,height=500');return false;"><span
                                                     id="id_has_bank_img" class="">환불계좌변경</span></a>

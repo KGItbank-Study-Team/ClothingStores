@@ -8,19 +8,19 @@
 request.setAttribute("username", "페이커");  
 request.setAttribute("grade", "member[멤버]");  
 request.setAttribute("upgrade", "family[패밀리]");  
-request.setAttribute("upgrademoney", "300,000");  
-request.setAttribute("yearmoney", "0");  
+request.setAttribute("upgradeMoney", "300,000");  
+request.setAttribute("yearMoney", "0");  
 
 request.setAttribute("reserve", "1000");  
-request.setAttribute("totalreserve", "3000");  
-request.setAttribute("usereserve", "2000");  
+request.setAttribute("totalReserve", "3000");  
+request.setAttribute("useReserve", "2000");  
 request.setAttribute("deposit", "50000");  
-request.setAttribute("totalorderm", "0원");  
-request.setAttribute("totalordern", "0");  
+request.setAttribute("totalOrderm", "0원");  
+request.setAttribute("totalOrdern", "0");  
 request.setAttribute("coupon", "1");  
 
-request.setAttribute("beforedeposit", "1");  
-request.setAttribute("preparingdelivery", "2");  
+request.setAttribute("beforeDeposit", "1");  
+request.setAttribute("preparingDelivery", "2");  
 request.setAttribute("transit", "3");  
 request.setAttribute("delivered", "4");  
 request.setAttribute("cancel", "5");  
@@ -103,9 +103,9 @@ request.setAttribute("turn", "7");
                                                     class="myshop_benefit_next_group_icon_tag"></span><span
                                                 class="xans-member-var-sNextGrade">${upgrade}</span>]</strong> 까지 남은
                                         구매금액은 <strong><span
-                                                class="xans-member-var-sGradeIncreasePrice">${upgrademoney}원</span></strong>
+                                                class="xans-member-var-sGradeIncreasePrice">${upgradeMoney}원</span></strong>
                                         입니다. (최근 <span class="xans-member-var-sGradePeriod">12개월 동안</span> 구매금액 : <span
-                                            class="xans-member-var-sPeriodOrderPrice">${yearmoney}</span>)
+                                            class="xans-member-var-sPeriodOrderPrice">${yearMoney}</span>)
                                     </p>
                                     <p class="txtInfo txt11">승급 기준에 따른 예상 금액이므로 총주문 금액과 다를 수 있습니다.</p>
                                 </div>
@@ -124,11 +124,11 @@ request.setAttribute("turn", "7");
                         </li>
                         <li class="">
                             <strong class="title">총적립금</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${totalreserve}원</span></strong>
+                            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${totalReserve}원</span></strong>
                         </li>
                         <li class="">
                             <strong class="title">사용적립금</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${usereserve}원</span></strong>
+                            <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${useReserve}원</span></strong>
                         </li>
                         <li class="">
                             <strong class="title">예치금</strong>
@@ -137,8 +137,8 @@ request.setAttribute("turn", "7");
                         </li>
                         <li>
                             <strong class="title">총주문</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_order_price">${totalorderm}</span>(<span
-                                    id="xans_myshop_bankbook_order_count">${totalordern}</span>회)</strong>
+                            <strong class="data"><span id="xans_myshop_bankbook_order_price">${totalOrderM}</span>(<span
+                                    id="xans_myshop_bankbook_order_count">${totalOrderN}</span>회)</strong>
                         </li>
                         <li class="">
                             <strong class="title">쿠폰</strong>
@@ -159,12 +159,12 @@ request.setAttribute("turn", "7");
                             <li>
                                 <strong>입금전</strong>
                                 <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
-                                        id="xans_myshop_orderstate_shppied_before_count">${beforedeposit}</span></a>
+                                        id="xans_myshop_orderstate_shppied_before_count">${beforeDeposit}</span></a>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
                                 <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
-                                        id="xans_myshop_orderstate_shppied_standby_count">${preparingdelivery}</span></a>
+                                        id="xans_myshop_orderstate_shppied_standby_count">${preparingDelivery}</span></a>
                             </li>
                             <li>
                                 <strong>배송중</strong>

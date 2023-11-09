@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 
 <%
-request.setAttribute("boardtitle", "언제오나요");
-request.setAttribute("boardwriter", "성격급한사람");
-request.setAttribute("boarddate", "2023-11-11 09:01:50");
-request.setAttribute("boardsubstance", "잠깐 눈감으면 1시간이 지나간다...");
+request.setAttribute("boardTitle", "언제오나요");
+request.setAttribute("boardWriter", "성격급한사람");
+request.setAttribute("boardDate", "2023-11-11 09:01:50");
+request.setAttribute("boardSubstance", "잠깐 눈감으면 1시간이 지나간다...");
 %>
 
 <html lang="ko">
@@ -45,24 +45,24 @@ request.setAttribute("boardsubstance", "잠깐 눈감으면 1시간이 지나간
                             <tbody>
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                    <td>${boardtitle}</td>
+                                    <td>${boardTitle}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
                                     <td><img
                                             src="/resources/images/member_small.jpg">
-                                        ${boardwriter} <span class="displaynone">(ip:)</span> </td>
+                                        ${boardWriter} <span class="displaynone">(ip:)</span> </td>
                                 </tr>
                                 <tr class="">
                                     <th scope="row">DATE</th>
-                                    <td>${boarddate}</td>
+                                    <td>${boardDate}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="bon">
                                         <div class="detail">
                                             <div class="fr-view fr-view-article">
                                                 <br>
-                                                ${boardsubstance}
+                                                ${boardSubstance}
                                                 
                                                 <tr>
                                                     <td colspan="2"><label for="ma_main_flag0"></td>

@@ -4,7 +4,7 @@
 
 <%
 request.setAttribute("username", "페이커");  
-request.setAttribute("banknumber", "94320200118927");  
+request.setAttribute("bankNumber", "94320200118927");  
 %>
 
 <html lang="ko">
@@ -118,7 +118,7 @@ request.setAttribute("banknumber", "94320200118927");
                                 <th scope="row">계좌번호</th>
                                 <td>
                                     <input id="acc_no" name="acc_no" fw-filter="" fw-label="" fw-msg=""
-                                        class="inputTypeText" placeholder="" value="${banknumber}" type="text">
+                                        class="inputTypeText" placeholder="" value="${bankNumber}" type="text">
                                     <p class="txtInfo gBlank10">'-' 없이 숫자만 입력해 주세요.</p>
                                 </td>
                             </tr>
