@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="header/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +11,7 @@
 <script defer src="/resources/js/boardWrite.js"></script>
 </head>
 <body id="main">
+<jsp:include page="header/header.jsp" />
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
@@ -167,12 +167,14 @@
 								</tr>
 								<tr>
 									<td colspan="2" class="clear">
+									
+									<!-- 게시판 sheet -->
 										<!-- CSS -->
 										<link rel="stylesheet"
 											href="//img.echosting.cafe24.com/editors/froala/3.2.2/css/froala_editor.pkgd.min.css?vs=2310251253">
 										<link rel="stylesheet"
 											href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2310251253">
-
+										
 										<!-- HTML --> 
 										<textarea style="width: 100%;" name="content"
 											id="content" class="ec-fr-never-be-duplicated">

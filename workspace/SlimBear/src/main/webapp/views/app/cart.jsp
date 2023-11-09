@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="/resources/css/baguni.css" rel="stylesheet" />
-<script defer src="/resources/js/baguni.js"></script>
+<link href="/resources/css/cart.css" rel="stylesheet" />
+<script defer src="/resources/js/cart.js"></script>
 <title>장 바 구 니</title>
 </head>
 <body>
@@ -43,14 +43,14 @@
 						<td><input type="checkbox"></td>
 						<td class="yout"><img src="/resources/images/유해커.jpg" alt="magic keyboard"></td>
 						<td>
-							<a href="#">${"cart.desc"}</a>
-							<span class="cart__list__smartstore"> 스마트스토어</span>
-							<p>${"cart.desc2" }</p> 
-							<span class="price">${"cart.price"}</span>
-							<span style="text-decoration: line-through; color: lightgray;">${"price1"}</span>
+							<a href="#">${cart.desc}</a>
+							<span class="cart__list__smartstore">스마트스토어</span>
+							<p>${cart.infoo }</p> 
+							<%-- <span class="price">${price}</span> --%>
+							<%-- <span style="text-decoration: line-through; color: lightgray;">${addprice}</span> --%>
 						</td>
 						<td class="cart__list__option">
-							<p>유해커의 검정후드티 / 1개</p>
+							<p>${cart.infoo}</p>
 							<div class="btn" onclick="toggleHiddenContent(this);">주문 추가/변경▽</div>	
 							<!-- 옵션 변경 -->
 							<!-- <div id="hiddenContent02" class="hiddenContent04"> -->
@@ -59,7 +59,7 @@
 								<table class="change hidden">
 									<tbody class="cchange">
 										<tr class="nammme">
-											<td colspan="3">${productName}</td>
+											<td colspan="3">${"productName"}</td>
 										</tr>
 										<tr class="">
 											<td class="pcolor">
@@ -101,14 +101,16 @@
 									</a>
 							</span>
 						</td>
-						<td><p>${freemoney}</p></td>
-						<td><span class="price" id="price_">${discountPrice}</span>
+						<td><p>${cart.addprice}</p></td>
+						<td><span class="price" id="price_">${cart.price}</span>
 						</td>
-						<td>${baedal }</td>
+						<td>${cart.baedalprice }</td>
 					</tr>
+					
 					
 				</tbody>
 				</c:forEach>
+				
 				<tfoot>
 					<tr>
 						<td colspan="3"><input type="checkbox">
@@ -134,16 +136,16 @@
 			</thead>
 			<tr>
 				<td></td>
-				<td colspan="2">${chongprice }</td>
+				<td colspan="2">${totalprice }</td>
 				<td></td>
-				<td>${chongbaedal}</td>
-				<td>${maybeprice }</td>
+				<td>무료</td>
+				<td>${cart.maybeprice}</td>
 			</tr>
 
 		</table>
 		<div class="cart__mainbtns">
 			<button class="cart__bigorderbtn left"
-				onclick="window.location.href='https://www.slowand.com/'">쇼핑
+				onclick="main.jsp">쇼핑
 				계속하기</button>
 			<button class="cart__bigorderbtn right">주문하기</button>
 

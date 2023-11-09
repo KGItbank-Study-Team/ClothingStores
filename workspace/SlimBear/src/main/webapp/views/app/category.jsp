@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <%
-String productImage = "/resources/images/outerEx01.gif";
-String porductImage = "/resources/images/outerEx01.gif";
-String productName = "상품명들어올곳";
-String productDescription1 = "상품 간단 설명";
-String productDescription2 = "상품 상세 설명";
-int retailPrice = 199000;
-int salePrice = 157000;
-int discountPercentage = 99;
+/* request.setAttribute("productImage", "/resources/images/outerEx01.gif");
+request.setAttribute("productName", "상품명들어올곳");
+request.setAttribute("productDescription", "상품 설명 </br>들어올곳</br>개힘들당");
+request.setAttribute("bestProductCount", 10); //임시
+request.setAttribute("productCount", 10);
+request.setAttribute("retailPrice", 199000);
+request.setAttribute("discountPercentage", 99);
+
+request.setAttribute("salePrice", 199); //백에서 반올림?
+request.setAttribute("category", "Top");
+request.setAttribute("categoryDetail01", "후드티");
+request.setAttribute("categoryDetail02", "셔츠");
+request.setAttribute("categoryDetail03", "맨투맨");
+request.setAttribute("categoryDetail04", "반팔티");
+request.setAttribute("categoryDetail05", "니트"); */
 %>
+
 <html>
 <head>
 <script type="text/javascript">
@@ -22,114 +30,113 @@ int discountPercentage = 99;
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizeruser.css" />
 <style type="text/css"></style>
-<title>TOP - 슬림베어</title>
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&amp;display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+<link rel="stylesheet" href="/resources/css/swiper.css" />
+<script src="/resources/js/swiper.js"></script>
+<title>${category.name}-슬림베어</title>
+<style type="text/css">
+.title {
+	padding-top: 77px;
+}
+</style>
 </head>
+
+<jsp:include page="header/header.jsp" />
+
 <body id="main">
 
 	<div id="wrap">
-		<div id="container"></div>
+		<!--<div id="container"></div>
 		<div id="one_right"></div>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&amp;display=swap"
-			rel="stylesheet" />
-		<link rel="stylesheet"
-			href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
-		<link rel="stylesheet" href="/resources/css/swiper.css" />
-		<script src="/resources/js/swiper.js"></script>
+
 		<header>
 			<div id="oneTop" class="swiper-container"></div>
-		<jsp:include page="header/header.jsp"></jsp:include>
-		</header>
+			
+		</header>-->
 		<div id="contents">
 			<div id="prdBest"
 				class="xans-element- xans-product xans-product-listrecommend">
 				<ul>
 					<div id="slide" class="ec-base-product swiper-container">
-						<!--
-				$count = 60
-					※ 상품진열갯수를 설정하는 변수입니다. 설정하지 않을 경우, 최대 200개의 상품이 진열 됩니다.
-					※ 진열된 상품이 많으면, 쇼핑몰에 부하가 발생할 수 있습니다.
-				$basket_result = /product/add_basket.html
-				$basket_option = /product/basket_option.html
-			-->
 						<div class="title">
 							<span>가장 많이 사랑받은 베스트</span>
 							<h2>BEST ITEM</h2>
 						</div>
 						<ul class="prdList grid4 swiper-wrapper">
-							<%
-							for (int i = 0; i < 6; i++) {
-							%>
-							<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
-								<div class="thumbnail">
-									<div class="salePer"></div>
-									<div class="prdImg">
-										<a href="#" name="anchorBoxName_4777"> <img
-											src="<%=productImage%>" id="eListPrdImage4777_2" alt="상품사진"
-											class="thumgList" />
-										</a> <span class="chk"> <input type="checkbox"
-											class="ProductCompareClass xECPCNO_4777 displaynone" />
-										</span>
-									</div>
-									<!-- .prdImg -->
-								</div> <!-- .thumbnail -->
-								<div class="description">
-									<strong class="name"> <a href="#" class=""> <span
-											class="title displaynone"> <span
-												style="font-size: 12px; color: #555555;">상품명</span> :
-										</span><%=productName%>
-									</a>
-									</strong>
-									<!-- .name -->
-									<ul
-										class="xans-element- xans-product xans-product-listitem spec">
-										<li class=" xans-record-"><strong
-											class="title displaynone"> <span
-												style="font-size: 12px; color: #555555;">상품색상</span> :
-										</strong>
-											<div class="color">
-												<span class="chips" title="#EBE4D3"
-													style="background-color: #EBE4D3" color_no=""
-													displayGroup="2"></span> <span class="chips"
-													title="#000000" style="background-color: #000000"
-													color_no="" displayGroup="2"></span>
-											</div></li>
-										<li class=" xans-record-"><strong
-											class="title displaynone"> <span
-												style="font-size: 12px; color: #999999;">상품간략설명</span> :
-										</strong> <span style="font-size: 12px; color: #999999;"> <%=productDescription1%>
-										</span></li>
-										<li class=" xans-record-"><strong
-											class="title displaynone"> <span
-												style="font-size: 12px; color: #555555;">소비자가</span> :
-										</strong> <span
-											style="font-size: 12px; color: #555555; text-decoration: line-through;"><%=retailPrice%></span>
-										</li>
-										<li class=" xans-record-"><strong
-											class="title displaynone"> <span
-												style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>
-												:
-										</strong> <span
-											style="font-size: 12px; color: #555555; font-weight: bold;"><%=salePrice%></span>
-											<span id="span_product_tax_type_text" style=""></span></li>
-									</ul>
-									<!-- .spec -->
-									<div class="icon">
-										<div class="promotion">
-											<img src="/resources/images/custom_4016861243871563.png" alt="" />
-											<img src="/resources/images/custom_3916861243874417.png" alt="" />
-											<img
-												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
-												alt="" />
+							<c:forEach var="item" items="${productList}">
+								<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
+									<div class="thumbnail">
+										<div class="salePer"></div>
+										<div class="prdImg">
+											<a href="#" name="anchorBoxName_4777"> <img
+												src="/resources/images/${item.main_image}"
+												id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
+											</a> <span class="chk"> <input type="checkbox"
+												class="ProductCompareClass xECPCNO_4777 displaynone" />
+											</span>
 										</div>
-									</div>
-									<!-- .icon -->
-								</div> <!-- .description -->
-							</li>
-							<%
-							}
-							%>
+										<!-- .prdImg -->
+									</div> <!-- .thumbnail -->
+									<div class="description">
+										<strong class="name"> <a href="#" class=""> <span
+												class="title displaynone"> <span
+													style="font-size: 12px; color: #555555;">${item.name}</span>
+													:
+											</span>${item.name}
+										</a>
+										</strong>
+										<!-- .name -->
+										<ul
+											class="xans-element- xans-product xans-product-listitem spec">
+											<li class=" xans-record-"><strong
+												class="title displaynone"> <span
+													style="font-size: 12px; color: #555555;">상품색상</span> :
+											</strong>
+												<div class="color">
+													<span class="chips" title="#EBE4D3"
+														style="background-color: #EBE4D3" color_no=""
+														displayGroup="2"></span> <span class="chips"
+														title="#000000" style="background-color: #000000"
+														color_no="" displayGroup="2"></span>
+												</div></li>
+											<li class=" xans-record-"><strong
+												class="title displaynone"> <span
+													style="font-size: 12px; color: #999999;">상품설명</span> :
+											</strong> <span style="font-size: 12px; color: #999999;">
+													${item.desc } </span></li>
+											<li class=" xans-record-"><strong
+												class="title displaynone"> <span
+													style="font-size: 12px; color: #555555;">소비자가</span> :
+											</strong> <span
+												style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price}</span>
+											</li>
+											<li class=" xans-record-"><strong
+												class="title displaynone"> <span
+													style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>
+													:
+											</strong> <span
+												style="font-size: 12px; color: #555555; font-weight: bold;">${item.price }</span>
+												<span id="span_product_tax_type_text" style=""></span></li>
+										</ul>
+										<!-- .spec -->
+										<div class="icon">
+											<div class="promotion">
+												<img src="/resources/images/custom_4016861243871563.png"
+													alt="" /> <img
+													src="/resources/images/custom_3916861243874417.png" alt="" />
+												<img
+													src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
+													alt="" />
+											</div>
+										</div>
+										<!-- .icon -->
+									</div> <!-- .description -->
+								</li>
+							</c:forEach>
 
 
 						</ul>
@@ -144,7 +151,7 @@ int discountPercentage = 99;
 						<span>현재 위치</span>
 						<ol>
 							<li><a href="/">홈</a></li>
-							<li class=""><a href="/category/outer/24/">OUTER</a></li>
+							<li class=""><a href="/category/outer/24/">${"categoryName(Ex.TOP)"}</a></li>
 							<li class="displaynone"><a href=""></a></li>
 							<li class="displaynone"><a href=""></a></li>
 							<li class="displaynone"><strong> <a href=""></a>
@@ -153,20 +160,12 @@ int discountPercentage = 99;
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory titleArea ">
-						<h2>TOP</h2>
+						<h2>${"categoryName"}</h2>
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory title ">
-						<p class="banner">
-							<img
-								src="https://cafe24img.poxo.com/anne2173/web/upload/category/shop1_24_top_923759.jpg"
-								usemap="#categoryhead_top_image_map_name" alt="" />
-						</p>
-						<style type="text/css">
-.title {
-	padding-top: 77px;
-}
-</style>
+						
+
 						<h2>
 							<span></span>
 						</h2>
@@ -179,36 +178,14 @@ int discountPercentage = 99;
 					<div class="list_title">
 						<div class="left">
 							<ul class="menuCategory">
-								<li style="display:;"
-									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 후드티 <span
-										class="count displaynone">()</span>
-								</a>
-								</li>
-								<li style="display:;"
-									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 셔츠 <span
-										class="count displaynone">()</span>
-								</a>
-								</li>
-								<li style="display:;"
-									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 티셔츠 <span
-										class="count displaynone">()</span>
-								</a>
-								</li>
-								<li style="display:;"
-									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 맨투맨 <span
-										class="count displaynone">()</span>
-								</a>
-								</li>
-								<li style="display:;"
-									class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-									<a href="#"> 니트 <span
-										class="count displaynone">()</span>
-								</a>
-								</li>
+								<c:forEach var="item" items="${category}">
+									<li style="display:;"
+										class="xans-element- xans-product xans-product-displaycategory  xans-record-">
+										<a href="#"> ${item.name} <span class="count displaynone">()</span>
+									</a>
+									</li>
+								</c:forEach>
+
 							</ul>
 						</div>
 						<div class="right">
@@ -218,38 +195,21 @@ int discountPercentage = 99;
 					-->
 								<div class="function" id="Product_ListMenu">
 									<p class="prdCount">
-										등록 제품 : <strong>109</strong> 개
+										등록 제품 : <strong>${"product개수" }</strong> 개
 									</p>
 									<ul id="type"
 										class="xans-element- xans-product xans-product-orderby">
-										<li class="xans-record-"><a
-											href="?cate_no=24&sort_method=5#Product_ListMenu">신상품</a></li>
-										<li class="xans-record-"><a
-											href="?cate_no=24&sort_method=3#Product_ListMenu">낮은가격</a></li>
-										<li class="xans-record-"><a
-											href="?cate_no=24&sort_method=4#Product_ListMenu">높은가격</a></li>
-										<li class="xans-record-"><a
-											href="?cate_no=24&sort_method=7#Product_ListMenu">사용후기</a></li>
+										<li class="xans-record-"><a href="출시일로 정렬">신상품</a></li>
+										<li class="xans-record-"><a href="낮은가격 정렬">낮은가격</a></li>
+										<li class="xans-record-"><a href="높은가격 정렬">높은가격</a></li>
+										<li class="xans-record-"><a href="리뷰페이지">사용후기</a></li>
 									</ul>
 									<span class="compare displaynone"> <a href="#none"
 										class="btnCompare"
 										onclick="EC_ListAction.setProductCompare();">상품비교</a>
 									</span>
 								</div>
-								<fieldset class="condition displaynone">
-									<legend>조건별 검색</legend>
-									<p>
-										<select
-											class="xans-element- xans-product xans-product-firstselect FirstSelect">
-											<option value="">-조건선택-</option>
-											<option value="" class=""></option>
-										</select> <select
-											class="xans-element- xans-product xans-product-secondselect SecondSelect">
-											<option value="">-조건선택-</option>
-											<option value="" class=""></option>
-										</select> <a href="#SelectSearch" class="btnSubmitFix">검색</a>
-									</p>
-								</fieldset>
+
 							</div>
 						</div>
 						<!-- right -->
@@ -257,7 +217,7 @@ int discountPercentage = 99;
 				</div>
 				<%
 				// JSP 반복 루프로 데이터 표시
-				for (int i = 1; i <= 3; i++) { // 4줄의 상품을 생성
+				for (int i = 0; i < 4; i++) { // 4줄의 상품을 생성
 				%>
 				<div class="xans-element- xans-product xans-product-normalpackage ">
 					<div
@@ -271,15 +231,15 @@ int discountPercentage = 99;
 			-->
 						<ul class="prdList grid4">
 							<%
-							for (int j = 1; j <= 3; j++) { //4개
+							for (int j = 0; j < 2; j++) { //4개
 							%>
 							<li id="anchorBoxId_7902" class="xans-record-">
 								<div class="thumbnail">
 									<div class="salePer"></div>
 									<div class="prdImg">
 										<a href="#" name="anchorBoxName_7902"> <img
-											src=<%=productImage%> id="eListPrdImage7902_1" alt="상품사진"
-											class="thumgList" />
+											src=${category.main_image } id="eListPrdImage7902_1"
+											alt="상품사진" class="thumgList" />
 										</a> <span class="chk"> <input type="checkbox"
 											class="ProductCompareClass xECPCNO_7902 displaynone" />
 										</span>
@@ -290,7 +250,7 @@ int discountPercentage = 99;
 									<strong class="name"> <a href="#" class=""> <span
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">상품명</span> :
-										</span><%=productName%>
+										</span>${category}
 									</a>
 									</strong>
 									<!-- .name -->
@@ -311,13 +271,13 @@ int discountPercentage = 99;
 											class="title displaynone"> <span
 												style="font-size: 11px; color: #999999;">소비자가</span> :
 										</strong> <span
-											style="font-size: 11px; color: #999999; text-decoration: line-through;"><%=retailPrice%></span>
+											style="font-size: 11px; color: #999999; text-decoration: line-through;">${category.price }</span>
 										</li>
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">판매가</span> :
 										</strong> <span
-											style="font-size: 12px; color: #555555; text-decoration: line-through;"><%=salePrice%></span>
+											style="font-size: 12px; color: #555555; text-decoration: line-through;">${category.price }</span>
 											<span id="span_product_tax_type_text"
 											style="text-decoration: line-through;"></span></li>
 										<li class=" xans-record-"><strong class="title ">
@@ -325,17 +285,19 @@ int discountPercentage = 99;
 												:
 										</strong> <span style="font-size: 12px; color: #555555;">
 												최종할인판매가 <span
-												style="font-size: 11px; color: #fa6767; font-weight: bold;"><%= discountPercentage %> %</span>
+												style="font-size: 11px; color: #fa6767; font-weight: bold;">할인률DBDBDB
+													%</span>
 										</span></li>
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">상품간략설명</span> :
-										</strong> <span style="font-size: 12px; color: #555555;"> <%=productDescription1%>
-										</span></li>
+										</strong> <span style="font-size: 12px; color: #555555;">상품설명
+												DBDBDBDB </span></li>
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #999999;">상품요약정보</span> :
-										</strong> <span style="font-size: 12px; color: #999999;"><%=productDescription2%></span></li>
+										</strong> <span style="font-size: 12px; color: #999999;">상품설명
+												DBDBDBDB</span></li>
 									</ul>
 									<!-- .spec -->
 									<div class="icon">
