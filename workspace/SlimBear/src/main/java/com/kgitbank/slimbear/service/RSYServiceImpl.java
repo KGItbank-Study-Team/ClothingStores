@@ -17,4 +17,6 @@ public class RSYServiceImpl {
 		List<ProductDTO> list = prodDAO.getProductByCategory(category);
 		return list;
 	}
+	
+	public List<CategoryDTO>
 }
