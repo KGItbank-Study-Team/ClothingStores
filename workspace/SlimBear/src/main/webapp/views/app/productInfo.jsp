@@ -113,7 +113,7 @@
 									<ul class="sizeOptionPosition"> <!-- 사이즈 옵션 -->
 									<c:set var="size" value="<%=sizes%>"/>
 									<c:forEach var="sizeList" items="${size}">
-										<li class="sizeBtn" onclick="<!-- change_btn2(event) -->">
+										<li class="sizeBtn" onclick="updateSelection()">
 											<a href="#none">
 												<span class="sizeOption">${sizeList}</span>
 											</a>
@@ -135,29 +135,9 @@
 								<col>
 								<col>
 							</colgroup>
-							<tbody class="displayNone">
-								<tr>
-									<td class="tdOption"></td>
-									<td class="tdOption">${sizeList}</td>
-									<td>
-										<span class="quantity">
-											<input type="text" value="1" class="inputBox">
-											<a href="#none" class="">
-												<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
-											</a>
-											<a href="#none">
-												<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
-											</a>
-										</span>
-										<a href="#none" class="deleteBtn">
-											<img alt="삭제" src="/resources/images/icon_delete.png"style="width:9px;height:9px;">
-										</a>
-									</td>
-									<td>
-										<div class="tdCell">${price1}</div> 
-									</td>
-								</tr>
-							</tbody>	
+							<tbody>
+							
+							</tbody>
 						</table>
 					</div>
 				</form>
