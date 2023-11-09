@@ -61,10 +61,10 @@
 				
 				<div class="boardnavi">
 					<!-- <a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a> -->
-					<a href="/views/app/notice.jsp" class="navi01"><span>공지사항</span></a> 
-					<a href="/views/app/inquiry.jsp" class="navi02"><span>문의게시판</span></a>
+					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
+					<a href="/app/board/inquiry" class="navi02"><span>문의게시판</span></a>
 					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/views/app/faq.jsp" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/app/board/faq" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				
 				<div class="ec-base-table typeList gBorder">
@@ -108,13 +108,13 @@
 						                </strong>
 						            </td>
 						            <td>${board.name}</td>
-						         <%--    <td class="displaynone"><span class="txtNum">"${board.date}"</span></td>
-						            <td class="displaynone"><span class="txtNum">"${board.hit}"</span></td>
-						            <td class="displaynone"><span class="txtNum">"${board.vote}"</span></td>
-						            <td class="displaynone">
-						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif"
-						                     alt="'${board.point}'점" />
-						            </td> --%>
+<%-- 						          <td class="displaynone"><span class="txtNum">"${board.date}"</span></td> --%>
+<%-- 						            <td class="displaynone"><span class="txtNum">"${board.hit}"</span></td> --%>
+<%-- 						            <td class="displaynone"><span class="txtNum">"${board.vote}"</span></td> --%>
+<!-- 						            <td class="displaynone"> -->
+<%-- 						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif" --%>
+<%-- 						                     alt="'${board.point}'점" /> --%>
+<!-- 						            </td> -->
 						        </tr>
 							</c:forEach>
 							
@@ -158,21 +158,19 @@
 					
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
 				</div>
-				<div
-					class="xans-element- xans-board xans-board-buttonlist-1002 xans-board-buttonlist xans-board-1002 ec-base-button typeBG displaynone ">
+				<div class="xans-element- xans-board xans-board-buttonlist-1002 xans-board-buttonlist xans-board-1002 ec-base-button typeBG displaynone ">
 					<span class="gRight"> <a
 						href="/board/free/write.html?board_no=1"
 						class="btnSubmitFix sizeS displaynone">write</a>
 					</span>
 				</div>
-				<div
-					class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
+				<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
 					<a href="?board_no=1&page=1"><img src="/resources/images/icon_prev2.png" /></a>
 					<ol>
-						<li class="xans-record-"><a href="?board_no=1&page=1"
-							class="this">1</a></li>
-						<li class="xans-record-"><a href="?board_no=1&page=2"
-							class="other">2</a></li>
+						<li class="xans-record-">
+							<a href="#" class="this">1</a></li>
+						<li class="xans-record-">
+							<a href="#" class="other">2</a></li>
 					</ol>
 					<a href="?board_no=1&page=2"><img src="/resources/images/icon_next2.png" /></a>
 				</div>

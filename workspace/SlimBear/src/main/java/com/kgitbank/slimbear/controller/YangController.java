@@ -19,4 +19,20 @@ public class YangController {
       
         return "notice"; // 뷰 이름 설정
     }
+    
+    @RequestMapping("/board/inquiry")
+    public String getBoardList2(Model model) {
+  
+        model.addAttribute("boards", boardService.getBoardList());
+      
+        return "inquiry"; // 뷰 이름 설정
+    }
+    
+    @RequestMapping("/board/faq")
+    public String getFaqBoardList(Model model) {
+  
+        model.addAttribute("boards", boardService.getFaqBoardList());
+      
+        return "faq"; // 뷰 이름 설정
+    }
 }

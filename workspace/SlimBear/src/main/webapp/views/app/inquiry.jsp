@@ -1,32 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-	request.setAttribute("title", "INQUIRY");
-	request.setAttribute("title1", "상품문의");
-	request.setAttribute("title2", "배송문의");	
-	
-//  	request.setAttribute("num", "1");
-	request.setAttribute("name", "양동우");
-	request.setAttribute("regDate", "9999-99-99");
-	
-	ArrayList<String> boards = new ArrayList<String>();
-	boards.add("필독");
-	boards.add("하우스앤드");
-	boards.add("하우스앤드2");
-	request.setAttribute("boards", boards);
-	
-	ArrayList<String> nums = new ArrayList<String>();
-	boards.add("3");
-	boards.add("2");
-	boards.add("1");
-	request.setAttribute("nums", nums);
-%>
-<%
-	// 세션에서 사용자 정보 가져오기 (예: 'user'는 사용자 정보가 담긴 세션 속성 이름)
-	Object user = session.getAttribute("user");
-	boolean isLoggedIn = user != null;
-%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -65,26 +41,26 @@
 					</div>
 					<p class="imgArea"></p>
 				</div>
-				<script
-					src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+				
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
-					<a href="/views/app/notice.jsp" class="navi01"><span>공지사항</span></a> 
-					<a href="/views/app/inquiry.jsp" class="navi02"><span>문의게시판</span></a>
+					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
+					<a href="/app/board/inquiry" class="navi02"><span>문의게시판</span></a>
 					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/views/app/faq.jsp" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/app/board/faq" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="subnavi" style="display: block;">
-					<a href="/board/qa/6/" class="qna01"><span>상품문의</span></a> <a
-						href="/board/%EB%B0%B0%EC%86%A1-%EB%AC%B8%EC%9D%98/3001/"
-						class="qna02"><span>배송문의</span></a> <a
-						href="/board/%EB%B0%B0%EC%86%A1-%EC%A0%84-%EB%B3%80%EA%B2%BD%EC%B7%A8%EC%86%8C/101/"
-						class="qna03"><span>배송 전 변경/취소</span></a>
+					<a href="/app/board/inquiry" class="qna01">
+						<span>상품문의</span></a> 
+					<a href="#" class="qna02">
+						<span>배송문의</span></a>
+					<a href="#" class="qna03">
+						<span>배송 전 변경/취소</span></a>
 					<!-- <a href="/board/배송-후-교환반품/5/" class="qna04"><span>배송 후 교환/반품</span></a> -->
 					<!-- <a href="/board/입금결제-확인/14/" class="qna05"><span>입금/결제 확인</span></a> -->
 				</div>
-				
 				
 				<div class="boardSort">
 					<span class="xans-element- xans-board xans-board-replysort-4 xans-board-replysort xans-board-4 "></span>
@@ -128,13 +104,13 @@
 						                    </a>
 						                </span>
 						                <strong>
-						                    <a href="/article/상품문의/6/${board}" style="color:#555555;">${board}</a>
+						                    <a href="/article/상품문의/6/${board.no}" style="color:#555555;">${board.title}</a>
 						                    <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${board}</td>
-						            <td class=""><span class="txtNum">${board}</span></td>
+						            <td>${board.name}</td>
+						            <td class=""><span class="txtNum">${board.regDate}</span></td>
 						            <td class="displaynone"><span class="txtNum">${board}</span></td>
 						            <td class="displaynone"><span class="txtNum">${board}</span></td>
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
@@ -143,7 +119,7 @@
 						</tbody>
 						
 						<!-- 2번째 tbody for문  -->
-						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
+						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
 						    <c:forEach var="num" items="${nums}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
 						            <td>${num}</td>
@@ -166,33 +142,20 @@
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
 						    </c:forEach>
-						</tbody>
+						</tbody> --%>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
 				</div>
 				
-				<!-- value를 true, false에 따라 write 버튼 숨김 여부를 결정 (나중에 지워야함)-->
-				<c:set var="isLoggedIn" value="false" />
-				
-				<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4 ec-base-button typeBG">
-				    <span class="gRight">
-				        <c:choose>
-				            <c:when test="${isLoggedIn}">
-				                <a href="/views/app/board_write.jsp" class="btnSubmitFix sizeS">WRITE</a>
-				            </c:when>
-				            <c:otherwise>
-				                <%-- 사용자가 로그인되지 않았을 때는 아무것도 렌더링하지 않음 --%>
-				            </c:otherwise>
-				        </c:choose>
-				    </span>
-				</div>
-				<!-- <div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
-					<span class="gRight"> 
-						<a href="/views/app/board_write.jsp" 
-							class="btnSubmitFix sizeS ">WRITE</a>
-					</span>
-				</div> -->
+				<sec:authorize access="isAuthenticated()">
+					<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
+						<span class="gRight"> 
+							<a href="/views/app/board_write.jsp" 
+								class="btnSubmitFix sizeS ">WRITE</a>
+						</span>
+					</div>
+				</sec:authorize>
 				
 			</div>
 			
