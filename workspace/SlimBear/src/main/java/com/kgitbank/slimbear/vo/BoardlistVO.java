@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.vo;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,12 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BoardlistVO {
-	private int boardNumber;
-	private String boardGroup;
-	private String boardTitle;
-	private String boardWriter;
-	private String boardDate;
-	private int boardHits;
-	private String boardSubstance;
+public class BoardListVO {
+	private List<BoardVO> boardList;	// 게시물 목록
+	
 }
