@@ -15,7 +15,7 @@ public class SecurityUser extends User{
 	private long uid;
 
 	public SecurityUser(MemberDTO member) {
-		super(member.getId(), "{noop}" + member.getPassword(), AuthorityUtils.createAuthorityList("MEMBER"));
+		super(member.getId(), member.getPassword(), AuthorityUtils.createAuthorityList("MEMBER"));
 		uid = member.getUid();
 	}
 

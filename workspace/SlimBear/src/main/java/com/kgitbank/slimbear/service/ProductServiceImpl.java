@@ -16,12 +16,7 @@ public class ProductServiceImpl {
 	private ProductDAO prodDAO;
 	
 	public List<ProductDTO> getHotProductList(){
-		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		
-		list = prodDAO.getProductList();
-		System.out.println(list);
-		
-		return list;
+		return prodDAO.getProductList();
 	}
 	
 }
