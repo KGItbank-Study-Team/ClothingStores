@@ -6,15 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script defer src="/resources/js/header.js"></script>
-<script src="https://kit.fontawesome.com/09decccad8.js"
-	crossorigin="anonymous"></script>
+<script src="/resources/js/header.js"></script>
+<script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/header.css">
+
 <title>슬림베어</title>
 </head>
-<body>
+<header>
 	<div id="top_sentence">
 		<div id="oneTop1">
 			<ul class="text-slide">
@@ -39,15 +40,6 @@
 						alt=""></a>
 				</div>
 				<div class="menu-list">
-					<li class="menu-item">
-						<a href="">BEST🔥</a>
-						<ul class="dropdown-content">
-							<li><a href="">TOP</a></li>
-							<li><a href="">BOTTOM</a></li>
-							<li><a href="">OUTER</a></li>
-						</ul>
-					</li>
-					
 					<li class="menu-item">
 						<a href="">탑</a>
 						<ul class="dropdown-content">
@@ -132,8 +124,8 @@
 									<li><a href="/app/login">로그인</a></li>
 									<li><a href="/app/join">회원가입</a></li>
 									<li><a href="">주문조회</a></li>
-								</ul></li>
-							<li>
+								</ul>
+							</li>
 						</sec:authorize>
 						<li>
 						<a href="/app/cart"><img class="fuck"
@@ -145,5 +137,5 @@
 		</div>
 		<!-- 메인메뉴 끝-->
 	</div>
-</body>
+</header>
 </html>
