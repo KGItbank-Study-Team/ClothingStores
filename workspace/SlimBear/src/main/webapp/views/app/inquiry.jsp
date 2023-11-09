@@ -6,7 +6,7 @@
 	request.setAttribute("title1", "상품문의");
 	request.setAttribute("title2", "배송문의");	
 	
-// 	request.setAttribute("num", "1");
+//  	request.setAttribute("num", "1");
 	request.setAttribute("name", "양동우");
 	request.setAttribute("regDate", "9999-99-99");
 	
@@ -21,15 +21,12 @@
 	boards.add("2");
 	boards.add("1");
 	request.setAttribute("nums", nums);
-	
-	
-// 	ArrayList<String> names = new ArrayList<String>();
-// 	boards.add("슬림베어_CR");
-// 	boards.add("양동우");
-// 	boards.add("양동생");
-// 	request.setAttribute("names", names);
 %>
-<jsp:include page="header/header.jsp" />
+<%
+	// 세션에서 사용자 정보 가져오기 (예: 'user'는 사용자 정보가 담긴 세션 속성 이름)
+	Object user = session.getAttribute("user");
+	boolean isLoggedIn = user != null;
+%>
 
 <!DOCTYPE html>
 <html>
@@ -37,12 +34,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xicons@2.0.2/xicons.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>INQUIRY</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/inquiry.js"></script>
 </head>
 <body>
+<jsp:include page="header/header.jsp" />
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
@@ -86,12 +85,6 @@
 					<!-- <a href="/board/입금결제-확인/14/" class="qna05"><span>입금/결제 확인</span></a> -->
 				</div>
 				
-				<!-- <div class="one_tab">
-					<ul module="Layout_BoardInfo">
-						<li><a href=""></a></li>
-						<li><a href=""></a></li>
-					</ul>	
-				</div> -->
 				
 				<div class="boardSort">
 					<span class="xans-element- xans-board xans-board-replysort-4 xans-board-replysort xans-board-4 "></span>
@@ -99,8 +92,7 @@
 				<div class="ec-base-table typeList gBorder">
 					<table border="1" summary="">
 						<caption>상품 게시판 목록</caption>
-						<colgroup
-							class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
+						<colgroup class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
 							<col style="width: 80px;" />
 							<col style="width: 130px;" class="displaynone" />
 							<col style="width: auto;" />
@@ -110,8 +102,7 @@
 							<col style="width: 55px;" class="displaynone" />
 							<col style="width: 80px;" class="displaynone" />
 						</colgroup>
-						<thead
-							class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
+						<thead class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
 							<tr style="">
 								<th scope="col">NO</th>
 								<th scope="col" class="displaynone">CATE</th>
@@ -124,204 +115,113 @@
 							</tr>
 						</thead>
 						
+						<!-- 1번째 tbody for문 -->			
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-						
-							<c:forEach items="${boards}" var="board">
-						      <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						        <td><i class="xi-check"></i></td>
-						        <td class="displaynone"></td>
-						        <td class="subject left txtBreak">
-						          <span class="displaynone">
-						            <a href="#none" onclick="BOARD.viewTarget('${board}','6',this);">
-						              <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" />
-						            </a>
-						          </span>
-						          <strong>
-						            <a href="/article/상품문의/6/${board}/" style="color: #555555;">${board}</a>
-						            <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image" />
-						            <span class="txtEm"></span>
-						          </strong>
-						        </td>
-						        <td>${name}</td>
-						        <td class=""><span class="txtNum">${regDate}</span></td>
-						        <td class="displaynone"><span class="txtNum">${board}</span></td>
-						        <td class="displaynone"><span class="txtNum">${board}</span></td>
-						        <td class="displaynone">
-						          <img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
-						        </td>
-						      </tr>
+						    <c:forEach var="board" items="${boards}" varStatus="loop">
+						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
+						            <td><i class="xi-check"></td>
+						            <td class="displaynone">${board}</td>
+						            <td class="subject left txtBreak">
+						                <span class="displaynone">
+						                    <a href="#none" onclick="BOARD.viewTarget('${board}', '6', this);">
+						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
+						                    </a>
+						                </span>
+						                <strong>
+						                    <a href="/article/상품문의/6/${board}" style="color:#555555;">${board}</a>
+						                    <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
+						                    <span class="txtEm"></span>
+						                </strong>
+						            </td>
+						            <td>${board}</td>
+						            <td class=""><span class="txtNum">${board}</span></td>
+						            <td class="displaynone"><span class="txtNum">${board}</span></td>
+						            <td class="displaynone"><span class="txtNum">${board}</span></td>
+						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
+						        </tr>
 						    </c:forEach>
-							
-							
-<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
-<!-- 								class="xans-record-"> -->
-<!-- 								<td><i class="xi-check"></i></td> -->
-<!-- 								<td class="displaynone"></td> -->
-<!-- 								<td class="subject left txtBreak"> -->
-<!-- 								<span class="displaynone"> -->
-<!-- 								<a href="#none" onclick="BOARD.viewTarget('1684189','6',this);"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif"  -->
-<!-- 									alt="내용 보기" /></a> -->
-<!-- 								</span>  -->
-<!-- 								<strong>  -->
-<!-- 									<a href="/article/상품문의/6/1684189/" -->
-<!-- 										style="color: #555555;">[공지] 배송 후 교환/반품 게시판 이용 종료 안내</a> -->
-<!-- 									<img src="/resources/images/icon_hit.gif" alt="HIT" -->
-<!-- 										class="ec-common-rwd-image" /> -->
-<!-- 									<span class="txtEm"></span> -->
-<!-- 								</strong> -->
-<!-- 								</td> -->
-<!-- 								<td>슬림베어_CR</td> -->
-<!-- 								<td class=""><span class="txtNum">2023-03-10 10:15:33</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">11372</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
-<!-- 								<td class="displaynone"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
-<!-- 									alt="0점" /></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr style="background-color: #FFFFFF; color: #555555;" -->
-<!-- 								class="xans-record-"> -->
-<!-- 								<td><i class="xi-check"></i></td> -->
-<!-- 								<td class="displaynone"></td> -->
-<!-- 								<td class="subject left txtBreak"> -->
-<!-- 								<span class="displaynone">  -->
-<!-- 									<a href="#none" onclick="BOARD.viewTarget('1052853','6',this);"> -->
-<!-- 										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" -->
-<!-- 											alt="내용 보기" /> -->
-<!-- 									</a> -->
-<!-- 								</span>  -->
-<!-- 								<strong> -->
-<!-- 								<a href="/article/상품문의/6/1052853/" -->
-<!-- 									style="color: #555555;">[공지] 산업안전보건법에 의한 고객응대근로자 보호조치</a> -->
-<!-- 								<img src="/resources/images/icon_hit.gif" alt="HIT" -->
-<!-- 									class="ec-common-rwd-image" /><span class="txtEm"></span></strong></td> -->
-									
-<!-- 								<td>슬림베어_CR</td> -->
-<!-- 								<td class=""><span class="txtNum">2020-09-01 14:03:53</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">11715</span></td> -->
-<!-- 								<td class="displaynone"><span class="txtNum">0</span></td> -->
-<!-- 								<td class="displaynone"> -->
-<!-- 								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" -->
-<!-- 									alt="0점" /></td> -->
-<!-- 							</tr> -->
 						</tbody>
-
+						
+						<!-- 2번째 tbody for문  -->
 						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
-							
-							<%-- <c:forEach items="${nums}" var="num">
-						      <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						        <td>${num}</td>
-						        <td class="displaynone"></td>
-						        <td class="subject left txtBreak">
-						          <span class="displaynone">
-						            <a href="#none" onclick="BOARD.viewTarget('${board}','6',this);">
-						              <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" />
-						            </a>
-						          </span>
-						          <strong>
-						            <a href="/article/상품문의/6/${board}/" style="color: #555555;">${board}</a>
-						            <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image" />
-						            <span class="txtEm"></span>
-						          </strong>
-						        </td>
-						        <td>${name}</td>
-						        <td class=""><span class="txtNum">${regDate}</span></td>
-						        <td class="displaynone"><span class="txtNum">${board}</span></td>
-						        <td class="displaynone"><span class="txtNum">${board}</span></td>
-						        <td class="displaynone">
-						          <img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
-						        </td>
-						      </tr>
-						    </c:forEach> --%>
-							
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td>485848</td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak">
-									<span class="displaynone"> 
-										<a href="#none" onclick="BOARD.viewTarget('1728308','6',this);">
-										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
-									</span> 
-									<a href="/article/상품문의/6/1728308/" style="color: #555555;">상품 문의합니다 ♡</a> 
-									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
-									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
-									<span class="txtEm"></span>
-								</td>
-								<td>
-									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />서****</td>
-								<td class=""><span class="txtNum">2023-11-02 09:08:29</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><img
-									src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td>485847</td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak">
-									<span class="displaynone"> 
-										<a href="#none" onclick="BOARD.viewTarget('1728305','6',this);">
-										<img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기" /></a>
-									</span> 
-									<a href="/article/상품문의/6/1728305/" style="color: #555555;">상품 문의합니다 ♡</a>
-									<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image" />
-									<img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image" />
-									<span class="txtEm"></span>
-								</td>
-								<td>
-									<img src="https://cafe24img.poxo.com/anne2173/web/bbs_member_icon/member/1681260536.jpg" />김****</td>
-								<td class=""><span class="txtNum">2023-11-02 09:00:16</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><img
-									src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
-							
+						    <c:forEach var="num" items="${nums}" varStatus="loop">
+						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
+						            <td>${num}</td>
+						            <td class="displaynone">${num}</td>
+						            <td class="subject left txtBreak">
+						                <span class="displaynone">
+						                    <a href="#none" onclick="BOARD.viewTarget('${num}', '6', this);">
+						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
+						                    </a>
+						                </span>
+						                <a href="/article/상품문의/6/${num}" style="color:#555555;">${num}</a>
+						                <img src="/web/upload/icon_201611292036328500.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                <img src="/web/upload/icon_201611292036284200.gif" alt="NEW" class="ec-common-rwd-image"/>
+						                <span class="txtEm"></span>
+						            </td>
+						            <td>${num}</td>
+						            <td class=""><span class="txtNum">${num}</span></td>
+						            <td class="displaynone"><span class="txtNum">${num}</span></td>
+						            <td class="displaynone"><span class="txtNum">${num}</span></td>
+						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
+						        </tr>
+						    </c:forEach>
 						</tbody>
+						
 					</table>
-					
 					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
 				</div>
-				<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
-					<span class="gRight"> <a
-						href="/board/product/write.html?board_no=6"
-						class="btnSubmitFix sizeS ">WRITE</a>
-					</span>
+				
+				<!-- value를 true, false에 따라 write 버튼 숨김 여부를 결정 (나중에 지워야함)-->
+				<c:set var="isLoggedIn" value="false" />
+				
+				<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4 ec-base-button typeBG">
+				    <span class="gRight">
+				        <c:choose>
+				            <c:when test="${isLoggedIn}">
+				                <a href="/views/app/board_write.jsp" class="btnSubmitFix sizeS">WRITE</a>
+				            </c:when>
+				            <c:otherwise>
+				                <%-- 사용자가 로그인되지 않았을 때는 아무것도 렌더링하지 않음 --%>
+				            </c:otherwise>
+				        </c:choose>
+				    </span>
 				</div>
+				<!-- <div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
+					<span class="gRight"> 
+						<a href="/views/app/board_write.jsp" 
+							class="btnSubmitFix sizeS ">WRITE</a>
+					</span>
+				</div> -->
+				
 			</div>
-
-			<div
-				class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
-				<a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
-				<ol>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=1" class="this">1</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=2" class="other">2</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=3" class="other">3</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=4" class="other">4</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=5" class="other">5</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=6" class="other">6</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=7" class="other">7</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=8" class="other">8</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=9" class="other">9</a></li>
-					<li class="xans-record-">
-						<a href="?board_no=6&page=10" class="other">10</a></li>
-				</ol>
-				<a href="?board_no=6&page=2"><img src="/resources/images/icon_next2.png" /></a>
+			
+			<!-- 게시글 개수와 현재 페이지 설정 -->
+			<c:set var="totalPosts" value="50" />
+			<c:set var="postsPerPage" value="10" />
+			<c:set var="currentPage" value="1" />
+			
+			<!-- 페이지 수 계산 -->
+			<c:set var="totalPages" value="${totalPosts / postsPerPage + (totalPosts % postsPerPage > 0 ? 1 : 0)}" />
+			
+			<div class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
+			    <a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
+			    <ol>
+			        <c:forEach begin="1" end="${totalPages}" var="page">
+			            <c:choose>
+			                <c:when test="${page == currentPage}">
+			                    <li class="xans-record-"><a href="?board_no=6&page=${page}" class="this">${page}</a></li>
+			                </c:when>
+			                <c:otherwise>
+			                    <li class="xans-record-"><a href="?board_no=6&page=${page}" class="other">${page}</a></li>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
+			    </ol>
+			    <a href="?board_no=6&page=${currentPage + 1}"><img src="/resources/images/icon_next2.png" /></a>
 			</div>
-
+			
+			
 			<form id="boardSearchForm" name="" action="/board/qa/6" method="get"
 				target="_top" enctype="multipart/form-data">
 				<input id="board_no" name="board_no" value="6" type="hidden" />

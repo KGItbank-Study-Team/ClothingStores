@@ -2,8 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
-	request.setAttribute("title", "NOTICE");
-	ArrayList<String> boards = new ArrayList<String>();
+// 	request.setAttribute("title", "NOTICE");
+// 	ArrayList<String> boards = new ArrayList<String>();
 // 		boards.add("NO");
 // 		boards.add("CATE");
 // 		boards.add("NAME");
@@ -11,15 +11,15 @@
 // 		boards.add("HIT");
 // 		boards.add("VOTE");
 // 		boards.add("POINT");
-		boards.add("필독");
-		boards.add("하우스앤드");
-		boards.add("하우스앤드2");
-		boards.add("하우스앤드3");	
+// 		boards.add("필독");
+// 		boards.add("하우스앤드");
+// 		boards.add("하우스앤드2");
+// 		boards.add("하우스앤드3");	
 		
-		request.setAttribute("boards", boards);
+// 		request.setAttribute("boards", boards);
 %>
-<%@ include file="header/header.jsp"%>
 <!-- VO, DAO import -->
+
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
 <!DOCTYPE html>
 <html>
@@ -31,13 +31,10 @@
 <title>NOTICE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/notice.js"></script>
-
 </head>
+
 <body>
-<<<<<<< HEAD:workspace/SlimBear/src/main/webapp/views/app/slimbearNotice.jsp
 <%@ include file="header/header.jsp"%>
-=======
->>>>>>> 67fc6075a4eb4a164d3cd6c303f2e2d466eeee6f:workspace/SlimBear/src/main/webapp/views/app/notice.jsp
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
@@ -53,7 +50,7 @@
 						</ol>
 					</div>
 					<div class="titleArea">
-						<h2><font color="#555555">${title }</font></h2>
+						<h2><font color="#555555">${title}</font></h2>
 						<p><!-- 부제목 --></p>
 					</div>
 					<p class="imgArea"></p>
@@ -106,18 +103,18 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/article/notice/1/${board}/" style="color: #555555;">${board}</a>
+						                    <a href="/article/notice/1/${board.no}/" style="color: #555555;">${board.title}</a>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${board}</td>
-						            <td class="displaynone"><span class="txtNum">${board}</span></td>
-						            <td class="displaynone"><span class="txtNum">${board}</span></td>
-						            <td class="displaynone"><span class="txtNum">${board}</span></td>
+						            <td>${board.name}</td>
+						         <%--    <td class="displaynone"><span class="txtNum">"${board.date}"</span></td>
+						            <td class="displaynone"><span class="txtNum">"${board.hit}"</span></td>
+						            <td class="displaynone"><span class="txtNum">"${board.vote}"</span></td>
 						            <td class="displaynone">
-						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point${board}.gif"
-						                     alt="${board}점" />
-						            </td>
+						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif"
+						                     alt="'${board.point}'점" />
+						            </td> --%>
 						        </tr>
 							</c:forEach>
 							
