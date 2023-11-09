@@ -35,4 +35,12 @@ public class YangController {
       
         return "faq"; // 뷰 이름 설정
     }
+    
+    @RequestMapping("/board/boardcontent")
+    public String getBoardContentList3(Model model) {
+  
+        model.addAttribute("boards", boardService.getBoardList());
+      
+        return "boardcontent"; // 뷰 이름 설정
+    }
 }

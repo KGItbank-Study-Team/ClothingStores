@@ -18,9 +18,11 @@ public class YangBoardServiceImpl {
 	    for (int i = 1; i <= 5; i++) {
 	        BoardVO board = new BoardVO();
 	        board.setNo(i);
+	        board.setMaintitle("Notice");
 	        board.setTitle("제목 " + i);
 	        board.setName("작성자 " + i);
 	        board.setRegDate(new Date(System.currentTimeMillis()));
+	        board.setContent("내용 " + i);
 //	        board.setId(i);;
 //	        board.setHit(100 + i);
 //	        board.setVote(5 - i);
