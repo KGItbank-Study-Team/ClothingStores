@@ -1,6 +1,5 @@
 package com.kgitbank.slimbear.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
+import com.kgitbank.slimbear.vo.MemberCartVO;
 
 
 @Controller
@@ -19,17 +17,18 @@ public class OstController {
 	@Autowired
 	private OstSerivceImpl ostService;
 	
-	@RequestMapping("board/cart")
+	@RequestMapping("cart")
 	public String cartPage(Model model) {
-		List<CartDTO> cardlist = ostService.getCart();
+		List<MemberCartVO> cardlist = ostService.getCart();
 		
-		for(int i = 0; i<3; ++i) {
-			CartDTO item = new CartDTO();
-			item.setProd_code("상품 : " + i );
-			cardlist.add(item);
+		int totalPrice = 0;
+		for(int i=0; i<cardlist.size(); ++i) {
+			totalPrice += cardlist.get(i).getPrice();
 		}
+
 		model.addAttribute("cartList",cardlist);
+		model.addAttribute("totalprice",totalPrice);
 		
-		return "ba"; 
+		return "cart"; 
 	}
 }
