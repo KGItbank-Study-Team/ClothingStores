@@ -49,7 +49,7 @@ request.setAttribute("turn", "7");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/list.jsp"><span>주문내역</span></a>
+                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
@@ -158,22 +158,22 @@ request.setAttribute("turn", "7");
                         <ul class="order">
                             <li>
                                 <strong>입금전</strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_shppied_before_count">${beforedeposit}</span></a>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_shppied_standby_count">${preparingdelivery}</span></a>
                             </li>
                             <li>
                                 <strong>배송중</strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_shppied_begin_count">${transit}</span></a>
                             </li>
                             <li>
                                 <strong>배송완료</strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_shppied_complate_count">${delivered}</span></a>
                             </li>
                         </ul>
@@ -181,19 +181,19 @@ request.setAttribute("turn", "7");
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>취소 : </strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_order_cancel_count">${cancel}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>교환 : </strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_order_exchange_count">${exchange}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>반품 : </strong>
-                                <a href="http://localhost:9090/views/app/list.jsp" class="count"><span
+                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
                                         id="xans_myshop_orderstate_order_return_count">${turn}</span></a>
                             </li>
                         </ul>

@@ -34,7 +34,7 @@ request.setAttribute("fluctuation","반품신청");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/list.jsp"><span>주문내역</span></a>
+                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
