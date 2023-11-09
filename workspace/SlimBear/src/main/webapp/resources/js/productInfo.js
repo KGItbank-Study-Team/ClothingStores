@@ -63,7 +63,7 @@ $(function () {
             newRow.append($('<td class="tdOption">도라이냐</td>').text(selectedSize));
             newRow.append($("<td></td>").html('<span class="quantity"><input type="text" value="1" class="inputBox"><a href="#none" class=""><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a><a href="#none"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a></span><a href="#none" class="devareBtn"><img alt="삭제" src="/resources/images/icon_devare.png" style="width:9px;height:9px;"></a>'));
             newRow.append($('<td><div class="tdCell">${price}</div></td>'))
-            $(".displayNone").append(newRow);
+            $(".choiceOption").append(newRow);
         }
     }
 });

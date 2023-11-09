@@ -128,7 +128,7 @@
 				<!-- 옵션 선택 시 화면에 출력 -->
 				<form action="/app/order/product" method="post">
 					<div class="tablePosition">
-						<table>
+						<table class="choiceOption">
 							<colgroup>
 								<col>
 								<col>
