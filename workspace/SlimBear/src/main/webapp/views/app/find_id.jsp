@@ -27,6 +27,7 @@
 
 <title>아이디찾기-슬림베어</title>
 </head>
+<jsp:include page="header/header.jsp"></jsp:include>
 <body>
 
 	<div id="wrap">
@@ -37,7 +38,7 @@
 
 
 
-			<jsp:include page="header/header.jsp"></jsp:include>
+			
 
 
 			<div id="contents">
