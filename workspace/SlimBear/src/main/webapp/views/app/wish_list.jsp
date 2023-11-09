@@ -5,9 +5,9 @@
 
 <%
 /* 확인용 임시데이터 */
+request.setAttribute("producturl", "링크링크링크링크");
 request.setAttribute("productimage", "이미지");
 request.setAttribute("productname", "이거완전 개쩌는옷이야");
-request.setAttribute("producturl", "링크링크링크링크");
 request.setAttribute("orderamount", "110000");
 request.setAttribute("orderdiscount", "99000");
 %>
@@ -91,19 +91,19 @@ request.setAttribute("orderdiscount", "99000");
                                 </td>
                                 <!-- 이미지 -->
                                 <td class="thumb"><a
-                                        href="${item.producturl}"><img
-                                            src="/resources/images/${item.productimage}"
+                                        href="${item.productURL}"><img
+                                            src="/resources/images/${item.productImage}"
                                             alt=""></a>
                                 </td>
                                 <!-- 상품정보 -->
                                 <td class="left">
                                     <strong class="name"><a
-                                            href="${item.producturl}"
-                                            class="ec-product-name">${item.productname}</a></strong>
+                                            href="${item.productURL}"
+                                            class="ec-product-name">${item.productName}</a></strong>
                                 </td>
                                 <!-- 판매가 -->
                                 <td class="price">
-                                    <strong class="strike">${item.orderamount}원<br></strong><br><strong class="">${item.orderdiscount}원</strong>
+                                    <strong class="strike">${item.orderAmount}원<br></strong><br><strong class="">${item.orderDiscount}원</strong>
                                 </td>
                                 <!-- 선택 -->
                                 <td class="button">

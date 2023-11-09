@@ -104,14 +104,14 @@ request.setAttribute("remainaddr", "102동 3405호");
                                         <td>
                                             <img src="/resources/images/ico_addr_default.gif"
                                                 class="" alt="기본"> 
-                                                <span>${item.addrname}</span>
+                                                <span>${item.addrName}</span>
                                         </td>
                                         <td><span>${item.username}</span></td>
                                         <td><span>${item.phone}</span></td>
                                         <td><span>${item.mobile}</span></td>
                                         <!-- class="left" -->
-                                        <td class="">(<span>${item.postcode}</span>)<span>${imte.defaultaddr}</span>
-                                            <span>${item.remainaddr}</span>
+                                        <td class="">(<span>${item.postcode}</span>)<span>${imte.defaultAddr}</span>
+                                            <span>${item.remainAddr}</span>
                                         </td>
                                         <td><a href="http://localhost:9090/views/app/addrfix.jsp" class="btnNormal ">수정</a></td>
                                     </tr>

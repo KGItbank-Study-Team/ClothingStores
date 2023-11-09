@@ -161,29 +161,29 @@ request.setAttribute("fluctuation","반품신청");
                         	<%-- <c:forEach var="item" items="${orderList}">
                             <tr class="">
                                 <td class="number ">
-                                    <p>${item.orderdate}</p>
-                                    <p><a href="detail.html" class="line">[${item.ordernum}]</a></p><br>
+                                    <p>${item.orderDate}</p>
+                                    <p><a href="detail.html" class="line">[${item.orderNum}]</a></p><br>
                                     <a href="#none" class="btnNormal " onclick="">주문취소</a>
                                     <a href="cancel.html" class="btnNormal ">취소신청</a>
                                     <a href="exchange.html" class="btnNormal ">교환신청</a>
                                     <a href="return.html" class="btnNormal ">반품신청</a>
                                 </td>
                                 <td class="thumb"><a href="/product/detail.html"><img
-                                            src="/resources/images/${item.productimage}"
+                                            src="/resources/images/${item.productImage}"
                                             onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"
                                             alt=""></a></td>
                                 <td class="product ">
-                                    <strong class="name">${item.productname}</strong>
-                                    <div class="option  ">${item.productoption}</div>
+                                    <strong class="name">${item.productName}</strong>
+                                    <div class="option  ">${item.productOption}</div>
                                 </td>
-                                <td>${item.ordercount}</td>
+                                <td>${item.orderCount}</td>
                                 <td class="">
-                                    <strong>${item.orderamount}원</strong>
+                                    <strong>${item.orderAmount}원</strong>
                                 </td>
                                 <td class="state">
                                     <p class="txtEm"></p>
                                     <p class=" "><a href="" target=""></a></p>
-                                    <p class=" "><a href="#none" class="line" onclick="">${item.orderstatus}</a></p>
+                                    <p class=" "><a href="#none" class="line" onclick="">${item.orderStatus}</a></p>
                                     <a href="/board/product/write.html" class="btnNormal   ">구매후기</a>
                                     <a href="#none" class="btnNormal  " onclick="">취소철회</a>
                                     <a href="#none" class="btnNormal  " onclick="">교환철회</a>

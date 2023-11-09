@@ -92,13 +92,13 @@ request.setAttribute("couponperiod", "2024-02-14");
                         
                         	<%-- <c:forEach var="item" items="${couponList}">	
                             <tr class="">
-                                <td>${item.couponnumber}</td>
-                                <td><strong>${item.couponname}</strong></td>
-                                <td>${item.couponproduct}</td>
-                                <td>${item.productprice}</td>
-                                <td>${item.paymethod}</td>
-                                <td>${item.couponbenefit}</td>
-                                <td>${item.couponperiod}</td>
+                                <td>${item.couponNumber}</td>
+                                <td><strong>${item.couponName}</strong></td>
+                                <td>${item.couponProduct}</td>
+                                <td>${item.productPrice}</td>
+                                <td>${item.payMethod}</td>
+                                <td>${item.couponBenefit}</td>
+                                <td>${item.couponPeriod}</td>
                             </tr>
                             </c:forEach> --%>
                             
