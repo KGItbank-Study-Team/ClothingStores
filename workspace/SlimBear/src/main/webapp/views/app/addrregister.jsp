@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -11,6 +10,8 @@
     <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
     <title>배송지등록</title>
 </head>
+
+<%@ include file="header/header.jsp" %>
 
 <body class="">
     <div id="wrap">

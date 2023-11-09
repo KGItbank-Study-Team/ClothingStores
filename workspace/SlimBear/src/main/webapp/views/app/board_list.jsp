@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <%
@@ -15,7 +14,7 @@ request.setAttribute("boardhits", "2");
 %>
 
 <html lang="ko">
-
+<%@ include file="header/header.jsp" %>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/board_list.css">

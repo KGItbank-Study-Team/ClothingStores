@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
@@ -23,6 +22,8 @@ request.setAttribute("remainaddr", "102동 3405호");
     <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
     <title>배송지관리</title>
 </head>
+
+<%@ include file="header/header.jsp" %>
 
 <body class="">
     <div id="wrap">

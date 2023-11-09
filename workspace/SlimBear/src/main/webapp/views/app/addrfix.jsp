@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -16,6 +15,8 @@ request.setAttribute("mobilel", "3434");
 %>
 
 <html lang="ko">
+
+<%@ include file="header/header.jsp" %>
 
 <head>
     <meta charset="utf-8">

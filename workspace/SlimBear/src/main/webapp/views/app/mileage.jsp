@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -21,7 +20,7 @@ request.setAttribute("substance", "신규회원 적립금");
 %>
 
 <html lang="ko">
-
+<%@ include file="header/header.jsp" %>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/mileage.css">

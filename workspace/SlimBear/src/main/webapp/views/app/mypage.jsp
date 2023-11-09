@@ -2,7 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header.jsp" %>
 <!DOCTYPE html>
 
 <%
@@ -30,7 +29,7 @@ request.setAttribute("turn", "7");
 %>
 
 <html lang="ko">
-
+<%@ include file="header/header.jsp" %>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css">
