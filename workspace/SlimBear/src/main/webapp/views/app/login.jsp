@@ -22,7 +22,7 @@
 			<form action="/app/member/login" method="post">
 				<section class="login-input-section-wrap">
 					<div class="login-input-wrap">
-						<input name="id" placeholder="Username" type="text"></input>
+						<input name="username" placeholder="Username" type="text"></input>
 					</div>
 					<div class="login-input-wrap password-wrap">
 						<input name="password" placeholder="Password" type="password"></input>
