@@ -1,6 +1,14 @@
 body {
 	background-color: #faf9ef;
 }
+li {
+	list-style: none;
+	/* text-decoration: none; */
+}
+a {
+	text-decoration: none;
+}
+
 #container  {
 	/* text-align: center; */
 	padding: 90px;

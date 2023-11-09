@@ -90,7 +90,7 @@
 									<ul class="colorOptionPosition"> <!-- 색상 옵션 -->
 										<c:set var="color" value="<%=colors%>"/>
 										<c:forEach var="colorList" items="${color}">
-										<li class="colorBtn" onclick="<!-- change_btn(event) -->">
+										<li class="colorBtn" onclick="productCnt">
 											<a href="#none">
 												<span class="colorOption">${colorList}</span>
 											</a>
