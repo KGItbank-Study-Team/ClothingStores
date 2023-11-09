@@ -6,17 +6,6 @@ const nameField = document.querySelector('.namee');
 const telNumberField = document.querySelector('.tel-number input[type="tel"]');
 const addressField = document.querySelector('#sample6_address');
 
-// 가입하기 버튼 요소를 가져옵니다.
-const submitButton = document.querySelector('input[type="submit"]');
-
-// 가입하기 버튼 클릭 시 이벤트 핸들러를 추가합니다.
-submitButton.addEventListener('click', function (event) {
-event.preventDefault();
-
-    let errorMessages = [];
-	
-	// 함수를 사용하여 필드에 포커스를 주는 함수를 정의합니다.
-	 checkDuplicateMemberID();
 function focusOnField(field, isInvalid) {
     if (isInvalid) {
         field.focus();
@@ -25,6 +14,13 @@ function focusOnField(field, isInvalid) {
         field.style.border = ''; // 유효한 경우 테두리를 초기화
     }
 }
+
+function sendDataToDatabase() {
+    let errorMessages = [];
+	
+	// 함수를 사용하여 필드에 포커스를 주는 함수를 정의합니다.
+	 checkDuplicateMemberID();
+
 
 // 아이디 필드 유효성 검사
 if (idField.value === '') {
@@ -85,18 +81,44 @@ if (telNumberField.value === '') {
 
     // 에러 메시지가 있으면 경고창을 띄우고 폼 제출을 막습니다.
     if (errorMessages.length > 0) {
-        event.preventDefault(); // 폼 제출 막음
-
         // 에러 메시지를 하나의 문자열로 결합합니다.
         const errorMessage = errorMessages.join('\n');
 
         // 경고 창을 띄웁니다.
         alert(errorMessage);
+        
+        return;
     }
-    var address = $('#sample6_postcode').val() + '|' + $('#sample6_address').val()
-    console.log(address)
-    $('#realdata_address').val(address)
-});
+   
+    // 사용자로부터 입력 받은 주소 정보를 가져옵니다.
+    var postcode = document.getElementById('sample6_postcode').value;
+    var address = document.getElementById('sample6_address').value;
+    var detailAddress = document.getElementById('sample6_detailAddress').value;
+    var extraAddress = document.getElementById('sample6_extraAddress').value;
+
+    // 주소 정보를 " | "로 구분하여 주소 문자열을 생성합니다.
+    var fullAddress = postcode + " | " + address + " | " + detailAddress + " | " + extraAddress;
+
+    // hidden input 요소에 주소 문자열을 설정합니다.
+    document.getElementById('realdata_address').value = fullAddress;
+
+   
+
+    var year = document.querySelector('input[name="year"]').value;
+    var month = document.querySelector('select[name="month"]').value;
+    var day = document.querySelector('input[name="day"]').value;
+
+    // 생년월일을 "년-월-일" 형식으로 결합합니다.
+    var birthdate = year + "년 " + month + "월 " + day + "일";
+
+    // hidden input 요소에 생년월일 문자열을 설정합니다.
+    document.getElementById('realdata_birthdate').value = birthdate;
+
+    // 폼을 제출합니다.
+    document.querySelector('form').submit();
+}
+
+
 $(document).ready(function(){
           $(".idd").blur(checkDuplicateMemberID);
        });
@@ -130,26 +152,10 @@ function checkPasswordMatch() {
         message.textContent = "비밀번호가 일치하지 않습니다.";
     } else {
         // 비밀번호가 일치할 때 메시지 삭제
-        message.textContent = "";
-        // AJAX 요청을 사용하여 서버에서 비밀번호 일치 여부를 추가로 확인할 수 있음
-        $.ajax({
-            url: "/checkPasswordMatch",
-            type: "POST",
-            data: {
-                password: password,
-                confirmPassword: confirmPassword
-            },
-            success: function (data) {
-                if (data.match === true) {
-                    message.textContent = "비밀번호가 일치합니다.";
-                }
-            },
-            error: function () {
-                message.textContent = "비밀번호 확인 중 오류가 발생했습니다.";
-            }
-        });
+        message.textContent = "비밀번호가 일치 합니다.";
     }
 }
+
 
 
 function sample6_execDaumPostcode() {
