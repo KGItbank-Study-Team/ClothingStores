@@ -18,4 +18,9 @@ public class ProductDAO{
 		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_LIST");
 	}
 
+	public List<ProductDTO> getProductByCategory(int category){
+		ProductDTO info = new ProductDTO();
+		info.setCtg_uid(category);
+		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY", info);
+	}
 }
