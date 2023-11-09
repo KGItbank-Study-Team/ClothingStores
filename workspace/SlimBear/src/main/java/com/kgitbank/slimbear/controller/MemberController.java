@@ -31,13 +31,4 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping("myPage")
-	public String myPage(Authentication authentication) {
-
-		SecurityUser user = (SecurityUser)authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		
-		return "mypage";
-	}
 }
