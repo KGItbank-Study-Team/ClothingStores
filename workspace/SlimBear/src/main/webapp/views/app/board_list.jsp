@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%
+/* 확인용 임시데이터 */
+request.setAttribute("boardnumber", "1");
+request.setAttribute("boardgroup", "배송문의");
+request.setAttribute("boardtitle", "언제오나요");
+request.setAttribute("boardwriter", "성격급한사람");
+request.setAttribute("boarddate", "2023-11-11");
+request.setAttribute("boardhits", "2");
+%>
 
 <html lang="ko">
 
@@ -81,44 +92,37 @@
                                 </tr>
                             </thead>
                             <tbody class="center">
+                            
+                            	<%-- <c:forEach var="item" items="${boardList}">
                                 <tr class="xans-record-">
-                                    <td>1</td>
-                                    <td><a href="" class="txtEm"></a>게시글</td>
+                                    <td>${item.boardnumber}</td>
+                                    <td><a href="" class="txtEm"></a>${item.boardgroup}</td>
                                     <!-- class ="left subject" -->
                                     <td class="subject"><img src="/resources/images/icon_lock.png"
                                         alt="비밀글" class="ec-common-rwd-image"> <a
-                                        href="http://localhost:9090/views/app/read.jsp"> 옷추천좀요 ♡</a>
+                                        href="http://localhost:9090/views/app/read.jsp">${item.boardtitle}</a>
                                     <img src="/resources/images/icon_lednew.gif" alt="NEW"
                                         class="ec-common-rwd-image"></td>
-                                    <td>반달곰1호</td>
-                                    <td><span class="txtNum"></span>그믐달이떠오른날</td>
-                                    <td><span class="txtNum"></span>555</td>
+                                    <td>${item.boardwriter}</td>
+                                    <td><span class="txtNum"></span>${item.boarddate}</td>
+                                    <td><span class="txtNum"></span>${imte.boardhits}</td>
                                 </tr>
+                                </c:forEach> --%>
+                                
                                 <tr class="xans-record-">
-                                    <td>2</td>
-                                    <td><a href="" class="txtEm"></a>게시글</td>
+                                    <td>${boardnumber}</td>
+                                    <td><a href="" class="txtEm"></a>${boardgroup}</td>
                                     <!-- class ="left subject" -->
                                     <td class="subject"><img src="/resources/images/icon_lock.png"
                                         alt="비밀글" class="ec-common-rwd-image"> <a
-                                        href="http://localhost:9090/views/app/read.jsp"> 양털추천좀요 ♡</a>
+                                        href="http://localhost:9090/views/app/read.jsp">${boardtitle}</a>
                                     <img src="/resources/images/icon_lednew.gif" alt="NEW"
                                         class="ec-common-rwd-image"></td>
-                                    <td>산양인척하는곰</td>
-                                    <td><span class="txtNum"></span>보름달이떠오른날</td>
-                                    <td><span class="txtNum"></span>135</td>
+                                    <td>${boardwriter}</td>
+                                    <td><span class="txtNum"></span>${boarddate}</td>
+                                    <td><span class="txtNum"></span>${boardhits}</td>
                                 </tr>
-                                <tr class="xans-record-">
-                                    <td>3</td>
-                                    <td><a href="/board/상품문의/6/" class="txtEm">상품문의</a></td>
-                                    <td class="subject"><img src="/resources/images/icon_lock.png"
-                                            alt="비밀글" class="ec-common-rwd-image"> <a
-                                            href="http://localhost:9090/views/app/read.jsp"> 기타 문의합니다 ♡</a>
-                                        <img src="/resources/images/icon_lednew.gif" alt="NEW"
-                                            class="ec-common-rwd-image"></td>
-                                    <td>유****</td>
-                                    <td><span class="txtNum">2023-11-03</span></td>
-                                    <td><span class="txtNum">0</span></td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                         <!-- 게시물이 없을경우 -->

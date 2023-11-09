@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%
+/* 확인용 임시데이터 */
+request.setAttribute("productimage", "이미지");
+request.setAttribute("productname", "이거완전 개쩌는옷이야");
+request.setAttribute("producturl", "링크링크링크링크");
+request.setAttribute("orderamount", "110000");
+request.setAttribute("orderdiscount", "99000");
+%>
 
 <html lang="ko">
 
@@ -73,6 +83,8 @@
                             </tr>
                         </thead>
                         <tbody class="xans-element- xans-myshop xans-myshop-wishlistitem center">
+                        
+                        	<%-- <c:forEach var="item" items="${wishList}">
                             <tr class="xans-record-">
                                 <!-- 체크박스 -->
                                 <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
@@ -80,20 +92,19 @@
                                 </td>
                                 <!-- 이미지 -->
                                 <td class="thumb"><a
-                                        href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"><img
-                                            src="https://cafe24img.poxo.com/anne2173/web/product/medium/202311/07e57156d656c32edfdcc8321bbdf689.webp"
+                                        href="${item.producturl}"><img
+                                            src="/resources/images/${item.productimage}"
                                             alt=""></a>
                                 </td>
                                 <!-- 상품정보 -->
                                 <td class="left">
                                     <strong class="name"><a
-                                            href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"
-                                            class="ec-product-name">[오픈 10%할인!] #SLOWMADE. 어반시티 프리미엄 덕다운 (데일리패딩) - 5
-                                            color (무료배송)</a></strong>
+                                            href="${item.producturl}"
+                                            class="ec-product-name">${item.productname}</a></strong>
                                 </td>
                                 <!-- 판매가 -->
                                 <td class="price">
-                                    <strong class="strike">110,000원<br></strong><br><strong class="">99,000원</strong>
+                                    <strong class="strike">${item.orderamount}원<br></strong><br><strong class="">${item.orderdiscount}원</strong>
                                 </td>
                                 <!-- 선택 -->
                                 <td class="button">
@@ -103,9 +114,10 @@
                                     <a href="#none"
                                         onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
                                         class="btnNormal ">장바구니</a>
-
                                 </td>
                             </tr>
+                            </c:forEach> --%>
+                            
                             <tr class="xans-record-">
                                 <!-- 체크박스 -->
                                 <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
@@ -113,20 +125,19 @@
                                 </td>
                                 <!-- 이미지 -->
                                 <td class="thumb"><a
-                                        href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"><img
-                                            src="https://cafe24img.poxo.com/anne2173/web/product/medium/202311/07e57156d656c32edfdcc8321bbdf689.webp"
+                                        href="${producturl}"><img
+                                            src="/resources/images/${productimage}"
                                             alt=""></a>
                                 </td>
                                 <!-- 상품정보 -->
-                                <td class="left">
+                                <td class="">
                                     <strong class="name"><a
-                                            href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"
-                                            class="ec-product-name">[오픈 10%할인!] #SLOWMADE. 어반시티 프리미엄 덕다운 (데일리패딩) - 5
-                                            color (무료배송)</a></strong>
+                                            href="${producturl}"
+                                            class="ec-product-name">${productname}</a></strong>
                                 </td>
                                 <!-- 판매가 -->
                                 <td class="price">
-                                    <strong class="strike">110,000원<br></strong><br><strong class="">99,000원</strong>
+                                    <strong class="strike">${orderamount}원<br></strong><br><strong class="">${orderdiscount}원</strong>
                                 </td>
                                 <!-- 선택 -->
                                 <td class="button">
@@ -136,42 +147,9 @@
                                     <a href="#none"
                                         onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
                                         class="btnNormal ">장바구니</a>
-
                                 </td>
                             </tr>
-                            <tr class="xans-record-">
-                                <!-- 체크박스 -->
-                                <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
-                                        enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
-                                </td>
-                                <!-- 이미지 -->
-                                <td class="thumb"><a
-                                        href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"><img
-                                            src="https://cafe24img.poxo.com/anne2173/web/product/medium/202311/07e57156d656c32edfdcc8321bbdf689.webp"
-                                            alt=""></a>
-                                </td>
-                                <!-- 상품정보 -->
-                                <td class="left">
-                                    <strong class="name"><a
-                                            href="/product/오픈-10할인-slowmade-어반시티-프리미엄-덕다운-데일리패딩-5-color-무료배송/7910/category/24/"
-                                            class="ec-product-name">[오픈 10%할인!] #SLOWMADE. 어반시티 프리미엄 덕다운 (데일리패딩) - 5
-                                            color (무료배송)</a></strong>
-                                </td>
-                                <!-- 판매가 -->
-                                <td class="price">
-                                    <strong class="strike">110,000원<br></strong><br><strong class="">99,000원</strong>
-                                </td>
-                                <!-- 선택 -->
-                                <td class="button">
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">주문하기</a>
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">장바구니</a>
-
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                     <!-- 위시리스트 비어있을때 -->

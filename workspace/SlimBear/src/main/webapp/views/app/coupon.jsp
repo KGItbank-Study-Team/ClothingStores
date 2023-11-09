@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%
+/* 확인용 임시데이터 */
+request.setAttribute("couponnumber", "1");
+request.setAttribute("couponname", "신규회원 전용쿠폰");
+request.setAttribute("couponproduct", "특가상품");
+request.setAttribute("productprice", "40000");
+request.setAttribute("paymethod", "카드");
+request.setAttribute("couponbenefit", "10%할인");
+request.setAttribute("couponperiod", "2024-02-14");
+%>
 
 <html lang="ko">
 
@@ -78,24 +90,29 @@
                             </tr>
                         </thead>
                         <tbody class="center">
+                        
+                        	<%-- <c:forEach var="item" items="${couponList}">	
                             <tr class="">
-                                <td>1</td>
-                                <td><strong>개쩌는쿠폰</strong></td>
-                                <td>4XL 이상옷</td>
-                                <td>40000</td>
-                                <td>카드</td>
-                                <td>10% 할인</td>
-                                <td>내일까지</td>
+                                <td>${item.couponnumber}</td>
+                                <td><strong>${item.couponname}</strong></td>
+                                <td>${item.couponproduct}</td>
+                                <td>${item.productprice}</td>
+                                <td>${item.paymethod}</td>
+                                <td>${item.couponbenefit}</td>
+                                <td>${item.couponperiod}</td>
                             </tr>
+                            </c:forEach> --%>
+                            
                             <tr class="">
-                                <td>2</td>
-                                <td><strong>고양이쩌는쿠폰</strong></td>
-                                <td>6XL 이상옷</td>
-                                <td>60000</td>
-                                <td>계좌이체</td>
-                                <td>25% 할인</td>
-                                <td>수료까지</td>
+                                <td>${couponnumber}</td>
+                                <td><strong>${couponname}</strong></td>
+                                <td>${couponproduct}</td>
+                                <td>${productprice}</td>
+                                <td>${paymethod}</td>
+                                <td>${couponbenefit}</td>
+                                <td>${couponperiod}</td>
                             </tr>
+                            
                         </tbody>
                         <tbody class="">
                             <tr>

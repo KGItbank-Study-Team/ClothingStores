@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%
+/* 확인용 임시데이터 */
+request.setAttribute("addrname", "우리집");
+request.setAttribute("username", "페이커");
+request.setAttribute("phone", "02-1234-5667");
+request.setAttribute("mobile", "010-2424-3434");
+request.setAttribute("postcode", "13551");
+request.setAttribute("defaultaddr", "서울 서초구 방배천로 18길 11 롯데캐슬");
+request.setAttribute("remainaddr", "102동 3405호");
+%>
 
 <html lang="ko">
 
@@ -80,6 +92,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" center">
+                                
+                                	<%-- <c:forEach var="item" items="${addrList}">
                                     <tr class="xans-record-">
                                         <!-- 체크박스 -->
                                         <td><input name="ma_idx[]" value="2198375" type="checkbox"></td>
@@ -88,17 +102,41 @@
                                         </td>
                                         <td>
                                             <img src="/resources/images/ico_addr_default.gif"
-                                                class="" alt="기본"> <span>집</span>
+                                                class="" alt="기본"> 
+                                                <span>${item.addrname}</span>
                                         </td>
-                                        <td><span>유철훈</span></td>
-                                        <td><span>02-2434-2434</span></td>
-                                        <td><span>010-3427-2434</span></td>
+                                        <td><span>${item.username}</span></td>
+                                        <td><span>${item.phone}</span></td>
+                                        <td><span>${item.mobile}</span></td>
                                         <!-- class="left" -->
-                                        <td class="">(<span>10221</span>)<span>경기 고양시 일산서구 송포로 11 킨텍스아이파크</span>
-                                            <span>803동 1302호</span>
+                                        <td class="">(<span>${item.postcode}</span>)<span>${imte.defaultaddr}</span>
+                                            <span>${item.remainaddr}</span>
                                         </td>
                                         <td><a href="http://localhost:9090/views/app/addrfix.jsp" class="btnNormal ">수정</a></td>
                                     </tr>
+                                    </c:forEach> --%>
+                                    
+                                    <tr class="xans-record-">
+                                        <!-- 체크박스 -->
+                                        <td><input name="ma_idx[]" value="2198375" type="checkbox"></td>
+                                        <td>
+                                            o
+                                        </td>
+                                        <td>
+                                            <img src="/resources/images/ico_addr_default.gif"
+                                                class="" alt="기본"> 
+                                                <span>${addrname}</span>
+                                        </td>
+                                        <td><span>${username}</span></td>
+                                        <td><span>${phone}</span></td>
+                                        <td><span>${mobile}</span></td>
+                                        <!-- class="left" -->
+                                        <td class="">(<span>${postcode}</span>)<span>${defaultaddr}</span>
+                                            <span>${remainaddr}</span>
+                                        </td>
+                                        <td><a href="http://localhost:9090/views/app/addrfix.jsp" class="btnNormal ">수정</a></td>
+                                    </tr>
+                                    
                                 </tbody>
                                 <tbody class="displaynone">
                                     <tr>
