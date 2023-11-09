@@ -12,7 +12,7 @@ public class YangController {
     @Autowired
     private YangBoardServiceImpl boardService;
 
-    @RequestMapping("/board/list")
+    @RequestMapping("/board/notice")
     public String getBoardList(Model model) {
   
         model.addAttribute("boards", boardService.getBoardList());
