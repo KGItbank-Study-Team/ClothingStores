@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="SELECT_PROD_BY_CATEGORY" resultType="product">
-		SELECT * FROM product WHERE category=#{ctg_uid}
+		SELECT * FROM product WHERE ctg_uid=#{ctg_uid}
 	</select>
 	
 </mapper>
