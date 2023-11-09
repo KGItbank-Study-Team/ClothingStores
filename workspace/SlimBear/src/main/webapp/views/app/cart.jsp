@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="/resources/css/baguni.css" rel="stylesheet" />
-<script defer src="/resources/js/baguni.js"></script>
+<link href="/resources/css/cart.css" rel="stylesheet" />
+<script defer src="/resources/js/cart.js"></script>
 <title>장 바 구 니</title>
 </head>
 <body>
@@ -107,8 +107,10 @@
 						<td>${baedal }</td>
 					</tr>
 					
+					
 				</tbody>
 				</c:forEach>
+				
 				<tfoot>
 					<tr>
 						<td colspan="3"><input type="checkbox">
@@ -134,7 +136,7 @@
 			</thead>
 			<tr>
 				<td></td>
-				<td colspan="2">${chongprice }</td>
+				<td colspan="2">${totalprice }</td>
 				<td></td>
 				<td>${chongbaedal}</td>
 				<td>${maybeprice }</td>
@@ -143,7 +145,7 @@
 		</table>
 		<div class="cart__mainbtns">
 			<button class="cart__bigorderbtn left"
-				onclick="window.location.href='https://www.slowand.com/'">쇼핑
+				onclick="main.jsp">쇼핑
 				계속하기</button>
 			<button class="cart__bigorderbtn right">주문하기</button>
 
