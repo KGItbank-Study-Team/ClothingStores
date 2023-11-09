@@ -17,7 +17,16 @@ public class OstSerivceImpl {
 		List<MemberCartVO> list = new ArrayList<MemberCartVO>();
 		
 		for(int i=0; i<5; ++i) {
+			MemberCartVO membercart = new MemberCartVO();
+			membercart.setUid(i);
+			membercart.setDesc("유해커의 후드티");
+			membercart.setInfoo("입는순간 유해커가 되는 후드티");
+			membercart.setQuantity(i);
+			membercart.setAddprice(100);
+			membercart.setPrice(45000);
+			membercart.setBaedalprice(2500);
 			
+			list.add(membercart);
 		}
 		
 		return list;
