@@ -168,7 +168,7 @@
 								<p><strong>한진택배</strong></p>
 							</li>
 						</ul>
-					</div>
+					</div>r
 					<hr/>
 					<div class="productGuide">
 						<p class="name1">제품 가이드</p>
