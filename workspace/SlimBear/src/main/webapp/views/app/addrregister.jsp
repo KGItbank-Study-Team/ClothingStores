@@ -68,14 +68,14 @@
                                             alt="필수"></th>
                                     <td><input id="ma_rcv_title" name="ma_rcv_title"
                                             fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg=""
-                                            class="inputTypeText" placeholder="" value="아무거나입력" type="text"></td>
+                                            class="inputTypeText" placeholder="" value="" type="text"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">성명 <img
                                             src="/resources/images/ico_required_blue.gif"
                                             alt="필수"></th>
                                     <td><input id="ma_rcv_name" name="ma_rcv_name" fw-filter="isFill&amp;isMaxByte[90]"
-                                            fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="아무거나입력"
+                                            fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value=""
                                             type="text"></td>
                                 </tr>
                                 <tr>
