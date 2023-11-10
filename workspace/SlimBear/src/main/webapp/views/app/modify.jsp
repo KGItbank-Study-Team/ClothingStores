@@ -36,28 +36,28 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
+                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
                         <li class="mileage">
-                            <a href="http://localhost:9090/views/app/mileage.jsp"><span>적립금</span></a>
+                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
                         <li class="deposits ">
-                            <a href="http://localhost:9090/views/app/deposits.jsp"><span>예치금</span></a>
+                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
                         </li>
                         <li class="coupon ">
-                            <a href="http://localhost:9090/views/app/coupon.jsp"><span>쿠폰</span></a>
+                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/wish_list.jsp"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/board_list.jsp"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/addr.jsp"><span>배송지 관리</span></a>
+                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
                         </li>
                     </ul>
                 </div>
@@ -294,7 +294,7 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                                         <td>
                                             <span id="id_bank_info">${refundAccount}</span> <a
                                                 href="#none" class="btnNormal gIndent10"
-                                                onclick="window.open('http://localhost:9090/views/app/refund.jsp','bank_account','width=700,height=500');return false;"><span
+                                                onclick="window.open('/app/member/myPage/mileage/refund','bank_account','width=700,height=500');return false;"><span
                                                     id="id_has_bank_img" class="">환불계좌변경</span></a>
                                         </td>
                                     </tr>
@@ -302,11 +302,11 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                             </table>
                         </div>
                         <div class="ec-base-button justify">
-                            <a href="http://localhost:9090/views/app/modify.jsp" class="btnSubmitFix sizeM" onclick="memberEditAction()">회원정보수정</a>
-                            <a href="http://localhost:9090/views/app/index.jsp" class="btnEmFix sizeM">취소</a>
+                            <a href="/app/member/myPage/modify" class="btnSubmitFix sizeM" onclick="memberEditAction()">회원정보수정</a>
+                            <a href="/app/member/myPage" class="btnEmFix sizeM">취소</a>
                             <span class="gRight">
                             <!-- 아직 어찌할지 고민중 -->
-                                <a href="#none" class="btnNormal sizeS" onclick="window.open('http://localhost:9090/views/app/quit.jsp','quit','width=900,height=500');return false;">회원탈퇴</a>
+                                <a href="#none" class="btnNormal sizeS" onclick="window.open('/app/member/myPage/modify/quit','quit','width=900,height=500');return false;">회원탈퇴</a>
                             </span>
                         </div>
                         

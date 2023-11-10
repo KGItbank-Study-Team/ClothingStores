@@ -38,39 +38,34 @@ request.setAttribute("turn", "7");
 </head>
 
 <body class="">
-    <div id="skipNavigation">
-        <p><a href="#category">전체상품목록 바로가기</a></p>
-        <p><a href="#contents">본문 바로가기</a></p>
-    </div>
-
     <div id="wrap">
         <div id="container">
             <div id="contents">
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
+                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
                         <li class="mileage">
-                            <a href="http://localhost:9090/views/app/mileage.jsp"><span>적립금</span></a>
+                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
                         <li class="deposits ">
-                            <a href="http://localhost:9090/views/app/deposits.jsp"><span>예치금</span></a>
+                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
                         </li>
                         <li class="coupon ">
-                            <a href="http://localhost:9090/views/app/coupon.jsp"><span>쿠폰</span></a>
+                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/wish_list.jsp"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/board_list.jsp"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/addr.jsp"><span>배송지 관리</span></a>
+                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
                         </li>
                     </ul>
                 </div>
@@ -120,7 +115,7 @@ request.setAttribute("turn", "7");
                             <strong class="title">가용적립금</strong>
                             <strong class="data use">&nbsp;<span
                                     id="xans_myshop_bankbook_avail_mileage">${reserve}원</span></strong>
-                            <a href="http://localhost:9090/views/app/mileage.jsp" class="btnNormal">조회</a>
+                            <a href="/app/member/myPage/mileage" class="btnNormal">조회</a>
                         </li>
                         <li class="">
                             <strong class="title">총적립금</strong>
@@ -133,7 +128,7 @@ request.setAttribute("turn", "7");
                         <li class="">
                             <strong class="title">예치금</strong>
                             <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_deposit">${deposit}원</span></strong>
-                            <a href="http://localhost:9090/views/app/deposits.jsp" class="btnNormal">조회</a>
+                            <a href="/app/member/myPage/deposits" class="btnNormal">조회</a>
                         </li>
                         <li>
                             <strong class="title">총주문</strong>
@@ -144,7 +139,7 @@ request.setAttribute("turn", "7");
                             <strong class="title">쿠폰</strong>
                             <strong class="data"><span
                                     id="xans_myshop_bankbook_coupon_cnt">${coupon}</span><span>개</span></strong>
-                            <a href="http://localhost:9090/views/app/coupon.jsp" class="btnNormal">조회</a>
+                            <a href="/app/member/myPage/coupon" class="btnNormal">조회</a>
                         </li>
                     </ul>
                 </div>
@@ -158,22 +153,22 @@ request.setAttribute("turn", "7");
                         <ul class="order">
                             <li>
                                 <strong>입금전</strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_shppied_before_count">${beforeDeposit}</span></a>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_shppied_standby_count">${preparingDelivery}</span></a>
                             </li>
                             <li>
                                 <strong>배송중</strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_shppied_begin_count">${transit}</span></a>
                             </li>
                             <li>
                                 <strong>배송완료</strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_shppied_complate_count">${delivered}</span></a>
                             </li>
                         </ul>
@@ -181,19 +176,19 @@ request.setAttribute("turn", "7");
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>취소 : </strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_order_cancel_count">${cancel}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>교환 : </strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_order_exchange_count">${exchange}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>반품 : </strong>
-                                <a href="http://localhost:9090/views/app/order_list.jsp" class="count"><span
+                                <a href="/app/member/myPage/order_list" class="count"><span
                                         id="xans_myshop_orderstate_order_return_count">${turn}</span></a>
                             </li>
                         </ul>

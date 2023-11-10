@@ -34,28 +34,28 @@ request.setAttribute("fluctuation","반품신청");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
+                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
                         <li class="mileage">
-                            <a href="http://localhost:9090/views/app/mileage.jsp"><span>적립금</span></a>
+                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
                         <li class="deposits ">
-                            <a href="http://localhost:9090/views/app/deposits.jsp"><span>예치금</span></a>
+                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
                         </li>
                         <li class="coupon ">
-                            <a href="http://localhost:9090/views/app/coupon.jsp"><span>쿠폰</span></a>
+                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/wish_list.jsp"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/board_list.jsp"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/addr.jsp"><span>배송지 관리</span></a>
+                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
                         </li>
                     </ul>
                 </div>
@@ -72,15 +72,15 @@ request.setAttribute("fluctuation","반품신청");
                 <div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab ">
                     <ul class="menu">
                         <li class="tab_class selected"><a
-                                href="http://localhost:9090/views/app/list.jsp">주문내역조회
+                                href="/app/member/myPage/order_list">주문내역조회
                                 (<span id="xans_myshop_total_orders">0</span>)</a></li>
                                 <!-- 취소, 교환, 반품내역 -->
                         <li class="tab_class_cs"><a
-                                href="http://localhost:9090/views/app/list.jsp">취소/반품/교환
+                                href="/app/member/myPage/order_list">취소/반품/교환
                                 내역 (<span id="xans_myshop_total_orders_cs">0</span>)</a></li>
                                 <!-- 과겨내역 -->
                         <li class="tab_class_past"><a
-                                href="http://localhost:9090/views/app/pastlist.jsp">과거주문내역
+                                href="/app/member/myPage/order_list/pastList">과거주문내역
                                 (<span id="xans_myshop_total_orders_past">0</span>)</a></li> 
                     </ul>
                 </div>
@@ -122,7 +122,7 @@ request.setAttribute("fluctuation","반품신청");
                         <ul>
                             <li class=" ">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 주문처리완료 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
                             <li class=" ">완료 후 36개월 이상 경과한 주문은 <a
-                                    href="http://localhost:9090/views/app/pastlist.jsp">[과거주문내역]</a>에서 확인할 수 있습니다.</li>
+                                    href="/app/member/myPage/order_list/pastList">[과거주문내역]</a>에서 확인할 수 있습니다.</li>
                             <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
                             <li class="">취소/교환/반품 신청은 배송완료일 기준 7일까지 가능합니다.</li>
                         </ul>

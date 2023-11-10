@@ -32,28 +32,28 @@ request.setAttribute("remainaddr", "102동 3405호");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
+                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
                         <li class="mileage">
-                            <a href="http://localhost:9090/views/app/mileage.jsp"><span>적립금</span></a>
+                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
                         <li class="deposits ">
-                            <a href="http://localhost:9090/views/app/deposits.jsp"><span>예치금</span></a>
+                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
                         </li>
                         <li class="coupon ">
-                            <a href="http://localhost:9090/views/app/coupon.jsp"><span>쿠폰</span></a>
+                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/wish_list.jsp"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/board_list.jsp"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/addr.jsp"><span>배송지 관리</span></a>
+                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
                         </li>
                     </ul>
                 </div>
@@ -113,7 +113,7 @@ request.setAttribute("remainaddr", "102동 3405호");
                                         <td class="">(<span>${item.postcode}</span>)<span>${imte.defaultAddr}</span>
                                             <span>${item.remainAddr}</span>
                                         </td>
-                                        <td><a href="http://localhost:9090/views/app/addrfix.jsp" class="btnNormal ">수정</a></td>
+                                        <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>
                                     </tr>
                                     </c:forEach> --%>
                                     
@@ -135,7 +135,7 @@ request.setAttribute("remainaddr", "102동 3405호");
                                         <td class="">(<span>${postcode}</span>)<span>${defaultaddr}</span>
                                             <span>${remainaddr}</span>
                                         </td>
-                                        <td><a href="http://localhost:9090/views/app/addrfix.jsp" class="btnNormal ">수정</a></td>
+                                        <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>
                                     </tr>
                                     
                                 </tbody>
@@ -152,7 +152,7 @@ request.setAttribute("remainaddr", "102동 3405호");
                                     onclick="myshopAddr.deleteAddress(); return false;">선택 주소록 삭제</a>
                             </span>
                             <span class="gRight">
-                                <a href="http://localhost:9090/views/app/addrregister.jsp" class="btnSubmitFix sizeS">배송지등록</a>
+                                <a href="/app/member/myPage/addr/addrRegister" class="btnSubmitFix sizeS">배송지등록</a>
                             </span>
                         </div>
                     </div>
