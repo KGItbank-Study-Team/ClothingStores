@@ -18,4 +18,8 @@ public class SangyhyukServiceImpl {
 	public List<ReviewDTO> getReviewList(){
 		return reviewDAO.getReviewList();
 	}
+	
+	public void insertReview(ReviewDTO review) {
+		reviewDAO.insertReview(review);
+	}
 }

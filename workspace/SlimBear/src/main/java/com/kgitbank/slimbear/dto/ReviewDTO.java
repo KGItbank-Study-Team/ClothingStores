@@ -12,7 +12,7 @@ import lombok.ToString;
 public class ReviewDTO {
 	
 	private long uid;
-	private long mem_uid;
+	private String mem_id;
 	private String prod_code;
 	private String title;
 	private String content;

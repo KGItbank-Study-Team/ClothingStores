@@ -38,10 +38,10 @@
 					<li><a href="#">최근등록순</a></li>
 				</ul>
 				<table>
-					<c:forEach var="review" items="${reviewList}">
+					<c:forEach var="review" items="${reviews}">
 						<tr>
 							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"></a></td>
-							<td><a href="#" class="desc"><b><%-- ${review.product_id} --%></b></a><br />
+							<td><a href="#" class="desc"><b>${review.prod_code}</b></a><br />
 								<div class="review_text">${review.content}</div></td>
 							<td>
 								<ul class="free-delivery">
@@ -67,10 +67,10 @@
 								</div>
 							</td>
 							<td>
-								<div class="rating"><%-- ${review.review_grade} --%></div>
-								<div class=review-id><%-- ${review.review_id} --%></div>
-								<div class="review_uid"><%-- ${review.review_uid} --%></div>
-								<div class=review-date><%-- ${review.regDate} --%></div>
+								<div class="rating">${review.score}</div>
+								<div class=review-id>${review.uid}</div>
+								<div class="review_uid">${review.mem_id}</div>
+								<div class=review-date>${review.reg_date}</div>
 							</td>
 						</tr>
 					</c:forEach>

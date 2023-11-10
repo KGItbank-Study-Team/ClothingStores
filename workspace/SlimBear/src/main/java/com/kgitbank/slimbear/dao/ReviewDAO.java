@@ -13,7 +13,7 @@ public class ReviewDAO {
 
 	@Autowired
 	protected SqlSessionTemplate template;
-	
+	 	
 	public ReviewDTO getReviewById(long uid) {
 		ReviewDTO reviewId = new ReviewDTO();
 		reviewId.setUid(uid);
@@ -22,11 +22,11 @@ public class ReviewDAO {
 	
 	// 리뷰 리스트 받아오기
 	public List<ReviewDTO> getReviewList() {
-		return template.selectList("");
+		return template.selectList("com.slimbear.mapper.Review.SELECT_REVIEW_LIST");
 	}
 	
 	// 데이터 넣기
 	public int insertReview(ReviewDTO review) {
-		return template.insert("com.slimbear.mapper.Review.INSERT_REVIEW");
+		return template.insert("com.slimbear.mapper.Review.INSERT_REVIEW", review);
 	}
 }

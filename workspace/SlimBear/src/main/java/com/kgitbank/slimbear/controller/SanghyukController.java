@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,11 +23,8 @@ public class SanghyukController {
 	public String reviewPage(HttpSession session, Model model) {
 		List<ReviewDTO> list = sanghService.getReviewList();
 		
-		ReviewDTO revie = new ReviewDTO();
-		
-
-		model.addAttribute("reviewList", list);
-		
+		System.out.println(list);
+		model.addAttribute("reviews", list);
 		return "review_page"; 
 	}
 }
