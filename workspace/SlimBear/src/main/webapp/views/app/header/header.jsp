@@ -41,52 +41,52 @@
 				</div>
 				<div class="menu-list">
 					<li class="menu-item">
-						<a href="">탑</a>
+						<a href="#">탑</a>
 						<ul class="dropdown-content">
 							<li><a href="/app/product/category?category=6">후드티</a></li>
-							<li><a href="/app/product/category?category=6">셔츠</a></li>
-							<li><a href="/app/product/category?category=6">반소매 티셔츠</a></li>
-							<li><a href="/app/product/category?category=6">맨투맨</a></li>
-							<li><a href="/app/product/category?category=6">반팔티</a></li>
-							<li><a href="/app/product/category?category=6">니트</a></li>
+							<li><a href="/app/product/category?category=7">셔츠</a></li>
+							<li><a href="/app/product/category?category=8">반소매 티셔츠</a></li>
+							<li><a href="/app/product/category?category=9">맨투맨</a></li>
+							<li><a href="/app/product/category?category=10">반팔티</a></li>
+							<li><a href="/app/product/category?category=11">니트</a></li>
 						</ul>
 					</li>
 					
 					<li class="menu-item">
 						<a href="">아우터</a>
 						<ul class="dropdown-content">
-							<li><a href="/app/product/category?category=6">패딩</a></li>
-							<li><a href="/app/product/category?category=6">코트</a></li>
-							<li><a href="/app/product/category?category=6">재킷</a></li>
-							<li><a href="/app/product/category?category=6">가디건</a></li>
-							<li><a href="/app/product/category?category=6">무스탕</a></li>
-							<li><a href="/app/product/category?category=6">가죽자켓</a></li>
+							<li><a href="/app/product/category?category=12">패딩</a></li>
+							<li><a href="/app/product/category?category=13">코트</a></li>
+							<li><a href="/app/product/category?category=14">재킷</a></li>
+							<li><a href="/app/product/category?category=15">가디건</a></li>
+							<li><a href="/app/product/category?category=16">무스탕</a></li>
+							<li><a href="/app/product/category?category=17">가죽자켓</a></li>
 						</ul>
 					</li>
 					
 					<li class="menu-item">
 						<a href="">바텀</a>
 						<ul class="dropdown-content">
-							<li><a href="/app/product/category?category=6">팬츠</a></li>
-							<li><a href="/app/product/category?category=6">슬랙스</a></li>
-							<li><a href="/app/product/category?category=6">데님</a></li>
-							<li><a href="/app/product/category?category=6">반바지</a></li>
+							<li><a href="/app/product/category?category=18">팬츠</a></li>
+							<li><a href="/app/product/category?category=19">슬랙스</a></li>
+							<li><a href="/app/product/category?category=20">데님</a></li>
+							<li><a href="/app/product/category?category=21">반바지</a></li>
 						</ul>
 					</li>
 					
 					<li class="menu-item">
 						<a href="">언더웨어</a>
 						<ul class="dropdown-content">
-							<li><a href="/app/product/category?category=6">드로즈</a></li>
-							<li><a href="/app/product/category?category=6">삼각</a></li>
+							<li><a href="/app/product/category?category=22">드로즈</a></li>
+							<li><a href="/app/product/category?category=23">삼각</a></li>
 						</ul>
 					</li>
 					
 					<li class="menu-item">
 						<a href="">스포츠</a>
 						<ul class="dropdown-content">
-							<li><a href="/app/product/category?category=6">상의</a></li>
-							<li><a href="/app/product/category?category=6">하의</a></li>
+							<li><a href="/app/product/category?category=24">상의</a></li>
+							<li><a href="/app/product/category?category=25">하의</a></li>
 						</ul>
 					</li>
 				
