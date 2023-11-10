@@ -2,19 +2,20 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setAttribute("title", "Notice");
-	request.setAttribute("boardTitle", "[필독]전품목");
-	request.setAttribute("name", "슬림베어_CR");
-	request.setAttribute("regDate", "9999-99-99");
-	request.setAttribute("boardContent", "내용들");
+// 	request.setAttribute("title", "Notice");
+// 	request.setAttribute("boardTitle", "[필독]전품목");
+// 	request.setAttribute("name", "슬림베어_CR");
+// 	request.setAttribute("regDate", "9999-99-99");
+// 	request.setAttribute("boardContent", "내용들");
 %>
 <%
 	// 게시물의 작성자 정보를 어딘가에서 가져오고, 현재 로그인한 사용자 정보를 세션에서 가져옵니다
-	String postAuthor = "작성자_정보_얻어오기"; // 예: 게시물의 작성자 이름
-	String loggedInUser = (String) session.getAttribute("loggedInUser"); // 세션에서 로그인한 사용자 정보 가져오기
+// 	String postAuthor = "작성자_정보_얻어오기"; // 예: 게시물의 작성자 이름
+// 	String loggedInUser = (String) session.getAttribute("loggedInUser"); // 세션에서 로그인한 사용자 정보 가져오기
 	
-	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
-	boolean isAuthor = postAuthor.equals(loggedInUser);
+// 	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
+// 	boolean isAuthor = postAuthor.equals(loggedInUser);
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -45,7 +46,7 @@
                     </div>
                     <div class="titleArea">
                         <h2>
-                            <font color="#555555">${title}</font>
+                            <font color="#555555">Notice</font>
                         </h2>
                         <p></p>
                     </div>
@@ -75,11 +76,11 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                    <td>${boardTitle}</td>
+                                    <td>${board.title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
-                                    <td>${name}<span class="displaynone">(ip:)</span> </td>
+                                    <td>${board.name}<span class="displaynone">(ip:)</span> </td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">POINT</th>
@@ -88,7 +89,7 @@
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">DATE</th>
-                                    <td>${regDate}</td>
+                                    <td>${board.reg_date}</td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">VOTE</th>

@@ -11,13 +11,9 @@ import lombok.ToString;
 @ToString
 public class BoardNoticeVO {
 
-	private int no;
-	private String title;
-	private String name;
-	private Date reg_date; // 작성일자
-	private String content;
-
-//	private String boardTitle; // 게시글 제목
-//    private String name; // 작성자 이름
-
+		private int no;
+		private String title;
+		private String name;
+		private Date reg_date; // 작성일자
+		private String content;
 }
