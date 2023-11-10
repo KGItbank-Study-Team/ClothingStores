@@ -6,16 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@ToString
 @Getter
 @Setter
-@ToString
-public class InquiryDTO {
+public class WishDTO {
 	private long uid;
-	private String writer_id;
-	private String title;
-	private String content;
+	private long mem_uid;
+	private String prod_code;
 	private Date reg_date;
-	private String status;
-	private String type;
-	private Integer prod_uid;
 }

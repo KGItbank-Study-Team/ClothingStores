@@ -1,6 +1,5 @@
 package com.kgitbank.slimbear.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,10 @@ public class ProductServiceImpl {
 	
 	public List<ProductDTO> getHotProductList(){
 		return prodDAO.getProductList();
+	}
+	
+	public ProductDTO getProductByUid(long uid) {
+		return prodDAO.getProductByUid(uid);
 	}
 	
 }

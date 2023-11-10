@@ -18,6 +18,7 @@
 		<typeAlias alias="member" type="com.kgitbank.slimbear.dto.MemberDTO" />
 		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
 		<typeAlias alias="category" type="com.kgitbank.slimbear.dto.CategoryDTO" />
+		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewtDTO" />
 		
 		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.page.dto.ProductBannerTopDTO" />
 		
@@ -29,6 +30,7 @@
 		<mapper resource="mappings/member-mapping.xml"/>
 		<mapper resource="mappings/product-mapping.xml"/>
 		<mapper resource="mappings/category-mapping.xml"/>
+		<mapper resource="mappings/review-mapping.xml"/>
 		
 		<mapper resource="mappings/page-mapping.xml"/>
 	</mappers>

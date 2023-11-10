@@ -23,4 +23,10 @@ public class ProductDAO{
 		info.setCtg_uid(category);
 		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY", info);
 	}
+	
+	public ProductDTO getProductByUid(long uid) {
+		ProductDTO info = new ProductDTO();
+		info.setUid(uid);
+		return template.selectOne("com.slimbear.mapper.Product.SELECT_PROD_BY_UID", info);
+	}
 }

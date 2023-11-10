@@ -45,14 +45,14 @@
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
-					<img alt="상품01" src="/resources/images/Best_product08.webp">
+					<img alt="상품01" src="/resources/images/${product.main_image}">
 				</div>
 				<div></div>
 			</div>
 			<div class="right">
 				<div class="explanation">
-					<h2 style="padding-bottom: 15px;">${productInfo}</h2>
-					<div class="subExplanation">${subExplanation}</div>
+					<h2 style="padding-bottom: 15px;">${product.name}</h2>
+					<div class="subExplanation">${product.desc}</div>
 				</div>
 				<div>
 					<table>
@@ -72,7 +72,7 @@
 								</th>
 								<td class="solid">
 									<span style="font-size: 12px; color: #555555;">
-										<strong>${price1}</strong>
+										<strong>${product.price}</strong>
 									</span>
 								</td>
 							</tr>

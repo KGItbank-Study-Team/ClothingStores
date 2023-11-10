@@ -9,13 +9,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class InquiryDTO {
+public class FaqDTO {
+
 	private long uid;
-	private String writer_id;
-	private String title;
-	private String content;
-	private Date reg_date;
-	private String status;
+	private String question;
+	private String answer;
 	private String type;
-	private Integer prod_uid;
 }

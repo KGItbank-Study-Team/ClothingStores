@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS `inquiry`;
 
 CREATE TABLE `inquiry` (
 	`uid`	bigint unsigned 	NOT NULL,
-	`id`	varchar(11)	NOT NULL,
+	`writer_id`	varchar(11)	NOT NULL,
 	`title`	varchar(100)	NOT NULL,
 	`content`	varchar(100)	NOT NULL,
 	`reg_date`	datetime	NOT NULL,
