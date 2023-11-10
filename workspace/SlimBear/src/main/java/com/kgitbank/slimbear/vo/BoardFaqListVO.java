@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BoardFaqVO {
+public class BoardFaqListVO {
 	
 	private String question;
 	private String answer;

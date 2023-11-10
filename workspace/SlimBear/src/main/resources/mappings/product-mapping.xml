@@ -6,6 +6,10 @@
 
 <mapper namespace="com.slimbear.mapper.Product"> 
 	
+	<select id="SELECT_PROD_BY_UID" resultType="product">
+		SELECT * FROM product WHERE uid=#{uid}
+	</select>
+	
 	<select id="SELECT_PROD_LIST" resultType="product">
 		SELECT * FROM product
 	</select>

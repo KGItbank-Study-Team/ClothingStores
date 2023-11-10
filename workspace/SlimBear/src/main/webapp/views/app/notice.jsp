@@ -2,24 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
-// 	request.setAttribute("title", "NOTICE");
-// 	ArrayList<String> boards = new ArrayList<String>();
-// 		boards.add("NO");
-// 		boards.add("CATE");
-// 		boards.add("NAME");
-// 		boards.add("DATE");
-// 		boards.add("HIT");
-// 		boards.add("VOTE");
-// 		boards.add("POINT");
-// 		boards.add("필독");
-// 		boards.add("하우스앤드");
-// 		boards.add("하우스앤드2");
-// 		boards.add("하우스앤드3");	
-		
-// 		request.setAttribute("boards", boards);
+	
 %>
 <!-- VO, DAO import -->
-
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
 <!DOCTYPE html>
 <html>
@@ -99,7 +84,7 @@
 							<!-- ArrayList를 반복하면서 테이블 행을 생성합니다 -->
 							<c:forEach var="board" items="${boards}">
 								 <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td><i class="xi-check"></i></td>
+						            <td>${board.no}</td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
@@ -164,16 +149,19 @@
 						class="btnSubmitFix sizeS displaynone">write</a>
 					</span>
 				</div>
+				
 				<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
 					<a href="#"><img src="/resources/images/icon_prev2.png" /></a>
 					<ol>
 						<li class="xans-record-">
 							<a href="#" class="this">1</a></li>
-						<li class="xans-record-">
-							<a href="#" class="other">2</a></li>
+						<!-- <li class="xans-record-">
+							<a href="#" class="other">2</a></li> -->
 					</ol>
 					<a href="?board_no=1&page=2"><img src="/resources/images/icon_next2.png" /></a>
 				</div>
+				
+				
 				<form id="boardSearchForm" name="" action="/board/notice/1"
 					method="get" target="_top" enctype="multipart/form-data">
 					<input id="board_no" name="board_no" value="1" type="hidden" />

@@ -20,6 +20,12 @@ public class YangController {
         return "notice"; // 뷰 이름 설정
     }
     
+    @RequestMapping("/board/noticeBoard")
+    public String getBoardNotice(Model model) {
+    	model.addAttribute("boards", boardService.getBoardNoticeList());
+    	return "noticeBoard";
+    }
+    
     @RequestMapping("/board/inquiry")
     public String getBoardInquiryList(Model model) {
   
