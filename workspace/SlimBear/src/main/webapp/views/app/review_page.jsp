@@ -40,8 +40,8 @@
 				<table>
 					<c:forEach var="review" items="${reviewList}">
 						<tr>
-							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"	style=""></a></td>
-							<td><a href="#" class="desc"><b>${review.product_id}</b></a><br />
+							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"></a></td>
+							<td><a href="#" class="desc"><b><%-- ${review.product_id} --%></b></a><br />
 								<div class="review_text">${review.content}</div></td>
 							<td>
 								<ul class="free-delivery">
@@ -56,7 +56,7 @@
 									</button>
 								</div> 
 								<div class="review-cart"> <!-- 장바구니 추가 버튼 -->
-									<a href="장바구니로 슝~"> 
+									<a href="#"> 
 										<svg xmlns="http://www.w3.org/2000/svg"
 											width="22" height="22" fill="currentColor"
 											class="bi bi-cart4" viewBox="0 0 16 16">
@@ -67,22 +67,17 @@
 								</div>
 							</td>
 							<td>
-								<!--  <div class="rating">
-										<span class="star">&#9733;</span> <span class="star">&#9733;</span>
-										<span class="star">&#9733;</span> <span class="star">&#9733;</span>
-										<span class="star">&#9733;</span>
-								</div>-->
-								<div class="rating">${review.review_grade}</div>
-								<div class=review-id>${review.review_id}</div>
-								<div class="review_uid">${review.review_uid}</div>
-								<div class=review-date>${review.regDate}</div>
+								<div class="rating"><%-- ${review.review_grade} --%></div>
+								<div class=review-id><%-- ${review.review_id} --%></div>
+								<div class="review_uid"><%-- ${review.review_uid} --%></div>
+								<div class=review-date><%-- ${review.regDate} --%></div>
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
 				<div class="paging">
 					<span class="prev"> 
-						<a href="#"> < 이전</a>
+						<a href="#">< 이전</a>
 					</span> 
 					<span class="num">
 						 <a href="#" class="on">1</a> 
