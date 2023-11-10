@@ -15,12 +15,11 @@ public class HunController {
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-		
 		return "mypage";
 	}
 	
-	@RequestMapping("member/myPage/order_list")
-	public String order_list(Authentication authentication) {
+	@RequestMapping("member/myPage/orderList")
+	public String orderList(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
@@ -28,7 +27,7 @@ public class HunController {
 		return "order_list";
 	}
 	
-	@RequestMapping("member/myPage/order_list/pastList")
+	@RequestMapping("member/myPage/orderList/pastList")
 	public String pastList(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
@@ -46,16 +45,7 @@ public class HunController {
 		return "modify";
 	}
 	
-	@RequestMapping("member/myPage/mileage")
-	public String mileage(Authentication authentication) {
-		
-		SecurityUser user = (SecurityUser)authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		return "mileage";
-	}
-	
-	@RequestMapping("member/myPage/mileage/refund")
+	@RequestMapping("member/myPage/modify/refund")
 	public String refund(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
@@ -64,13 +54,22 @@ public class HunController {
 		return "refund";
 	}
 	
-	@RequestMapping("member/myPage/mileage/quit")
+	@RequestMapping("member/myPage/modify/quit")
 	public String quit(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 		return "quit";
+	}
+	
+	@RequestMapping("member/myPage/mileage")
+	public String mileage(Authentication authentication) {
+		
+		SecurityUser user = (SecurityUser)authentication.getPrincipal();
+		System.out.println(user.getUid());
+		System.out.println(user.getUsername());
+		return "mileage";
 	}
 	
 	@RequestMapping("member/myPage/deposits")
@@ -91,8 +90,8 @@ public class HunController {
 		return "coupon";
 	}
 	
-	@RequestMapping("member/myPage/wish_list")
-	public String wish_list(Authentication authentication) {
+	@RequestMapping("member/myPage/wishList")
+	public String wishList(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
@@ -100,8 +99,8 @@ public class HunController {
 		return "wish_list";
 	}
 	
-	@RequestMapping("member/myPage/board_list")
-	public String board_list(Authentication authentication) {
+	@RequestMapping("member/myPage/boardList")
+	public String boardList(Authentication authentication) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());

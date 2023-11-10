@@ -78,7 +78,7 @@ request.setAttribute("boardSubstance", "잠깐 눈감으면 1시간이 지나간
                     </div>
                     <div class="ec-base-button ">
                         <span class="gLeft">
-                            <a href="/app/member/myPage/board_list" class="btnNormalFix sizeS">LIST</a>
+                            <a href="/app/member/myPage/boardList" class="btnNormalFix sizeS">LIST</a>
                         </span>
                         <span class="gRight">
                             <a href="#none" onclick="BOARD_READ.article_delete('BoardDelForm','6');"

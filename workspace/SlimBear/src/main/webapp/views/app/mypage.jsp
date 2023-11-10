@@ -44,7 +44,7 @@ request.setAttribute("turn", "7");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/orderList"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
@@ -59,10 +59,10 @@ request.setAttribute("turn", "7");
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
@@ -153,22 +153,22 @@ request.setAttribute("turn", "7");
                         <ul class="order">
                             <li>
                                 <strong>입금전</strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_shppied_before_count">${beforeDeposit}</span></a>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_shppied_standby_count">${preparingDelivery}</span></a>
                             </li>
                             <li>
                                 <strong>배송중</strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_shppied_begin_count">${transit}</span></a>
                             </li>
                             <li>
                                 <strong>배송완료</strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_shppied_complate_count">${delivered}</span></a>
                             </li>
                         </ul>
@@ -176,19 +176,19 @@ request.setAttribute("turn", "7");
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>취소 : </strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_order_cancel_count">${cancel}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>교환 : </strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_order_exchange_count">${exchange}</span></a>
                             </li>
                             <li>
                                 <span class="icoDot"></span>
                                 <strong>반품 : </strong>
-                                <a href="/app/member/myPage/order_list" class="count"><span
+                                <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_order_return_count">${turn}</span></a>
                             </li>
                         </ul>

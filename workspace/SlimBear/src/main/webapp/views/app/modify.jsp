@@ -17,7 +17,7 @@ request.setAttribute("email", "yeon94@naver.con");
 request.setAttribute("useryear", "1994"); 
 request.setAttribute("usermonth", "9"); 
 request.setAttribute("userday", "11"); 
-request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 연해적"); 
+request.setAttribute("refundAccount", "[산적은행] 123-4567-890 / 예금주: 연해적"); 
 %>
 
 <html lang="ko">
@@ -36,7 +36,7 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/orderList"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
@@ -51,10 +51,10 @@ request.setAttribute("refundaccount", "[산적은행] 123-4567-890 / 예금주: 
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>

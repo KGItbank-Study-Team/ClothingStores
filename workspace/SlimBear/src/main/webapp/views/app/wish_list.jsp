@@ -28,7 +28,7 @@ request.setAttribute("orderdiscount", "99000");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/orderList"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
@@ -43,10 +43,10 @@ request.setAttribute("orderdiscount", "99000");
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
