@@ -182,7 +182,7 @@
 						<!-- right -->
 					</div>
 				</div>
-				<c:forEach begin="1" end="3">
+				
 				<div class="xans-element- xans-product xans-product-normalpackage ">
 					<div
 						class="xans-element- xans-product xans-product-listnormal ec-base-product">
@@ -276,9 +276,10 @@
 							</li>
 							</c:forEach>
 						</ul>
+						
 					</div>
 				</div>
-				</c:forEach>
+				
 				<div
 					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
 					<a href="#none"> <img src="/_images/icon_prev2.png" />
