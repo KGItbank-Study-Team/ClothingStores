@@ -424,7 +424,10 @@ body .title {
 }
 
 .ec-base-product {
-	padding-top: 0 !important
+	padding-top: 0 !important;
+	
+	padding-left: 150px;
+	padding-right: 150px;
 }
 
 .list_title {
@@ -467,6 +470,7 @@ body .title {
 
 .xans-product-normalmenu .function {
 	text-align: right;
+	padding-right:150px;
 }
 
 .xans-product-normalmenu .function .btnCompare {
@@ -1565,6 +1569,7 @@ div.ec-base-help ul li {
 
 .ec-base-product img {
 	vertical-align: middle;
+	height:400px;
 }
 
 .ec-base-product a[href^='/product/detail.html']>img {
@@ -1584,6 +1589,7 @@ div.ec-base-help ul li {
 	display: inline-block;
 	margin: 0 0 60px;
 	vertical-align: top;
+	
 }
 
 .ec-base-product .prdList>li .icon {

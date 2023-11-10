@@ -267,7 +267,7 @@
 										<div class="promotion">
 											<img
 												src="/resources/images/benefit_shop1_83114664803d66b20824.38964181.png"
-												alt="" />
+												alt="무료배송!" />
 										</div>
 									</div>
 									<!-- .icon -->
