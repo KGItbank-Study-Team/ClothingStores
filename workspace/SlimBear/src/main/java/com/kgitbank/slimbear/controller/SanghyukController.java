@@ -20,15 +20,11 @@ public class SanghyukController {
 	
 	@RequestMapping("board/review")
 	public String reviewPage(HttpSession session, Model model) {
-		List<ReviewDTO> list = sanghService.getReview();
+		List<ReviewDTO> list = sanghService.getReviewList();
 		
-		// 임시데이타
-		for(int i=0; i<3; ++i) {
-			ReviewDTO item = new ReviewDTO();
-			item.setContent("리뷰 : " + i );
-			list.add(item);
-		}
+		ReviewDTO revie = new ReviewDTO();
 		
+
 		model.addAttribute("reviewList", list);
 		
 		return "review_page"; 
