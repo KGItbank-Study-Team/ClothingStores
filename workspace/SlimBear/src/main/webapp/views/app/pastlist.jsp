@@ -32,7 +32,7 @@ request.setAttribute("finalmoney","12000");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/orderList"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
@@ -47,10 +47,10 @@ request.setAttribute("finalmoney","12000");
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
@@ -65,13 +65,13 @@ request.setAttribute("finalmoney","12000");
                 <div class="xans-element- xans-myshop xans-myshop-orderhistorytab ec-base-tab ">
                     <ul class="menu">
                         <li class="tab_class"><a
-                                href="/app/member/myPage/order_list">주문내역조회
+                                href="/app/member/myPage/orderList">주문내역조회
                                 (<span id="xans_myshop_total_orders">0</span>)</a></li>
                         <li class="tab_class_cs"><a
-                                href="/app/member/myPage/order_list">취소/반품/교환
+                                href="/app/member/myPage/orderList">취소/반품/교환
                                 내역 (<span id="xans_myshop_total_orders_cs">0</span>)</a></li>
                         <li class="tab_class_past selected"><a
-                                href="/app/member/myPage/order_list/pastList">과거주문내역
+                                href="/app/member/myPage/orderList/pastList">과거주문내역
                                 (<span id="xans_myshop_total_orders_past">0</span>)</a></li>
                     </ul>
                 </div>
