@@ -7,10 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FaqVO {
+public class BoardFaqVO {
 	
-	private String title;
-	private String subtitle;
+	private String question;
+	private String answer;
 	private String content;
 	
 }

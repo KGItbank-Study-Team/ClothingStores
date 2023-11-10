@@ -5,23 +5,23 @@ import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
-import com.kgitbank.slimbear.vo.BoardVO;
-import com.kgitbank.slimbear.vo.FaqVO;
+import com.kgitbank.slimbear.vo.BoardFaqVO;
+import com.kgitbank.slimbear.vo.BoardInquiryVO;
+import com.kgitbank.slimbear.vo.BoardNoticeVO;
 
 @Service
 public class YangBoardServiceImpl {
 
-	public ArrayList<BoardVO> getBoardList() {
-        ArrayList<BoardVO> boards = new ArrayList<>();
+	public ArrayList<BoardNoticeVO> getBoardNoticeList() {
+        ArrayList<BoardNoticeVO> boards = new ArrayList<>();
         
 	     // 임시 데이터 생성
 	    for (int i = 1; i <= 5; i++) {
-	        BoardVO board = new BoardVO();
+	        BoardNoticeVO board = new BoardNoticeVO();
 	        board.setNo(i);
-	        board.setMaintitle("Notice");
 	        board.setTitle("제목 " + i);
 	        board.setName("작성자 " + i);
-	        board.setRegDate(new Date(System.currentTimeMillis()));
+	        board.setReg_date(new Date(System.currentTimeMillis()));
 	        board.setContent("내용 " + i);
 //	        board.setId(i);;
 //	        board.setHit(100 + i);
@@ -34,13 +34,30 @@ public class YangBoardServiceImpl {
 	    return boards;
     }
 	
-	public ArrayList<FaqVO> getFaqBoardList() {
-        ArrayList<FaqVO> boards = new ArrayList<>();
+	public ArrayList<BoardInquiryVO> getBoardInquiryList(){
+		ArrayList<BoardInquiryVO> boards = new ArrayList<>();
+		
+		for (int i = 1; i <= 5; i++) {
+			BoardInquiryVO board = new BoardInquiryVO();
+			board.setNo(i);
+			board.setTitle("상품문의 " + i);
+			board.setWriter_id("작성자 " + i);
+			board.setReg_date(new Date(System.currentTimeMillis()));
+			board.setContent("내용 " + i);
+			
+			boards.add(board);
+		}
+		
+		return boards;
+	}
+	
+	public ArrayList<BoardFaqVO> getBoardFaqList() {
+        ArrayList<BoardFaqVO> boards = new ArrayList<>();
         
         for (int i = 1; i <= 5; i++) {
-	        FaqVO board = new FaqVO();
-	        board.setTitle("배송관련 " + i);
-	        board.setSubtitle("이거 왜이럼 " + i + " ?");
+	        BoardFaqVO board = new BoardFaqVO();
+	        board.setQuestion("배송관련 " + i);
+	        board.setAnswer("이거 왜이럼 " + i + " ?");
 	        board.setContent("내용 작성 " + i);
 	        
 	        boards.add(board);
@@ -48,7 +65,8 @@ public class YangBoardServiceImpl {
         
         return boards;
     }
-		
+	
+	
 }
 	
 

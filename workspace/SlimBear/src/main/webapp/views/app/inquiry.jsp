@@ -109,8 +109,8 @@
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${board.name}</td>
-						            <td class=""><span class="txtNum">${board.regDate}</span></td>
+						            <td>${board.writer_id}</td>
+						            <td class=""><span class="txtNum">${board.reg_date}</span></td>
 						            <td class="displaynone"><span class="txtNum">${board}</span></td>
 						            <td class="displaynone"><span class="txtNum">${board}</span></td>
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
