@@ -18,7 +18,7 @@
 		<typeAlias alias="member" type="com.kgitbank.slimbear.dto.MemberDTO" />
 		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
 		<typeAlias alias="category" type="com.kgitbank.slimbear.dto.CategoryDTO" />
-		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewtDTO" />
+		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewDTO" />
 		
 		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.page.dto.ProductBannerTopDTO" />
 		
