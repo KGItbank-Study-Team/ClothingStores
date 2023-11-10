@@ -2,21 +2,20 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-// 	request.setAttribute("title", "Notice");
-// 	request.setAttribute("boardTitle", "[필독]전품목");
-// 	request.setAttribute("name", "슬림베어_CR");
+	request.setAttribute("title", "[필독]공지사항");
+	request.setAttribute("name", "슬림베어_CR");
 // 	request.setAttribute("regDate", "9999-99-99");
-// 	request.setAttribute("boardContent", "내용들");
+	request.setAttribute("boardContent", "공지사항");
 %>
 <%
 	// 게시물의 작성자 정보를 어딘가에서 가져오고, 현재 로그인한 사용자 정보를 세션에서 가져옵니다
-// 	String postAuthor = "작성자_정보_얻어오기"; // 예: 게시물의 작성자 이름
-// 	String loggedInUser = (String) session.getAttribute("loggedInUser"); // 세션에서 로그인한 사용자 정보 가져오기
+	String postAuthor = "작성자_정보_얻어오기"; // 예: 게시물의 작성자 이름
+	String loggedInUser = (String) session.getAttribute("loggedInUser"); // 세션에서 로그인한 사용자 정보 가져오기
 	
-// 	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
-// 	boolean isAuthor = postAuthor.equals(loggedInUser);
-
+	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
+	boolean isAuthor = postAuthor.equals(loggedInUser);
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,7 +25,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
-<title>BOARD</title>
+<title>NOTICE BOARD</title>
 </head>
 
 <body>
@@ -46,7 +45,7 @@
                     </div>
                     <div class="titleArea">
                         <h2>
-                            <font color="#555555">Notice</font>
+                            <font color="#555555">NOTICE</font>
                         </h2>
                         <p></p>
                     </div>
@@ -76,11 +75,11 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                    <td>${board.title}</td>
+                                    <td>${title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
-                                    <td>${board.name}<span class="displaynone">(ip:)</span> </td>
+                                    <td>${name}<span class="displaynone">(ip:)</span> </td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">POINT</th>
@@ -111,10 +110,10 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${boardContent}</strong>
+                                                	<strong style="font-weight: bolder;">${board.Content}</strong>
                                                 </p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	${boardContent}
+                                                	공지사항 없습니다.
                                                 </p>
                                                 
                                                 <p><br></p>
@@ -130,8 +129,8 @@
                                     <th scope="row">PASSWORD</th>
                                     <td><input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg=""
                                             onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
-                                            value="" type="password" /> <span class="ec-base-help txtInfo">
-                                            수정 및 삭제하려면 비밀번호를 입력하세요.</span>
+                                            value="" type="password" /> 
+                                        <span class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span>
                                     </td>
                                 </tr>
                             </tbody>

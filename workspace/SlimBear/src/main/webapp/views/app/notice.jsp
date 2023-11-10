@@ -35,7 +35,7 @@
 						</ol>
 					</div>
 					<div class="titleArea">
-						<h2><font color="#555555">${title}</font></h2>
+						<h2><font color="#555555">NOTICE</font></h2>
 						<p><!-- 부제목 --></p>
 					</div>
 					<p class="imgArea"></p>
@@ -93,14 +93,14 @@
 						                </strong>
 						            </td>
 						            <td>${board.name}</td>
-						          <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
-<%-- 						            <td class="displaynone"><span class="txtNum">${board.hit}</span></td> --%>
-<%-- 						            <td class="displaynone"><span class="txtNum">${board.vote}</span></td> --%>
-<!-- 						            <td class="displaynone"> -->
-<%-- 						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif" --%>
-<%-- 						                     alt="'${board.point}'점" /> --%>
-<!-- 						            </td> -->
-<!-- 						        </tr> -->
+							        <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
+						            <td class="displaynone"><span class="txtNum">${board.hit}</span></td>
+						            <td class="displaynone"><span class="txtNum">${board.vote}</span></td>
+						            <td class="displaynone">
+						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif"
+						                     alt="'${board.point}'점" />
+						            </td>
+						        </tr>
 							</c:forEach>
 							
 							<!-- 여기에 tbody 내용 추가 -->

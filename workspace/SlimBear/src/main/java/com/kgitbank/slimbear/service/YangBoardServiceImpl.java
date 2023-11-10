@@ -68,6 +68,7 @@ public class YangBoardServiceImpl {
     }
 	
 	public BoardNoticeVO getBoardNotice() {
+		
         BoardNoticeVO board = new BoardNoticeVO();
         board.setNo(1);
         board.setTitle("제목 " );
@@ -75,7 +76,6 @@ public class YangBoardServiceImpl {
         board.setReg_date(new Date(System.currentTimeMillis()));
         board.setContent("내용 " );
         
-    
 	    return board;
     }
 	
