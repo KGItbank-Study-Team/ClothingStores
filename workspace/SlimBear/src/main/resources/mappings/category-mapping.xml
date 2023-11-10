@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : 가짜 영역으로 URL에 폴더대신 사용하여 보안에 유리하며 최소3단계이상으로하는게 좋다 -->
+<mapper namespace="com.slimbear.mapper.Category"> 
+	
+	<select id="SELECT_CTG_BY_UID" resultType="category" parameterType="category">
+		SELECT * FROM category WHERE uid=#{uid}
+	</select>
+	
+	<select id="SELECT_SUBCTG_LIST_BY_TOP_CTG_UID" resultType="category"  parameterType="category">
+		SELECT * FROM category WHERE top_ctg_uid=#{uid}
+	</select>
+	
+	
+</mapper>

@@ -2,24 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<%
-/* request.setAttribute("productImage", "/resources/images/outerEx01.gif");
-request.setAttribute("productName", "상품명들어올곳");
-request.setAttribute("productDescription", "상품 설명 </br>들어올곳</br>개힘들당");
-request.setAttribute("bestProductCount", 10); //임시
-request.setAttribute("productCount", 10);
-request.setAttribute("retailPrice", 199000);
-request.setAttribute("discountPercentage", 99);
-
-request.setAttribute("salePrice", 199); //백에서 반올림?
-request.setAttribute("category", "Top");
-request.setAttribute("categoryDetail01", "후드티");
-request.setAttribute("categoryDetail02", "셔츠");
-request.setAttribute("categoryDetail03", "맨투맨");
-request.setAttribute("categoryDetail04", "반팔티");
-request.setAttribute("categoryDetail05", "니트"); */
-%>
-
 <html>
 <head>
 <script type="text/javascript">
@@ -38,25 +20,11 @@ request.setAttribute("categoryDetail05", "니트"); */
 <link rel="stylesheet" href="/resources/css/swiper.css" />
 <script src="/resources/js/swiper.js"></script>
 <title>${category.name}-슬림베어</title>
-<style type="text/css">
-.title {
-	padding-top: 77px;
-}
-</style>
+<style type="text/css">.title {padding-top: 77px;}</style>
 </head>
-
 <jsp:include page="header/header.jsp" />
-
 <body id="main">
-
 	<div id="wrap">
-		<!--<div id="container"></div>
-		<div id="one_right"></div>
-
-		<header>
-			<div id="oneTop" class="swiper-container"></div>
-			
-		</header>-->
 		<div id="contents">
 			<div id="prdBest"
 				class="xans-element- xans-product xans-product-listrecommend">
@@ -82,10 +50,9 @@ request.setAttribute("categoryDetail05", "니트"); */
 										<!-- .prdImg -->
 									</div> <!-- .thumbnail -->
 									<div class="description">
-										<strong class="name"> <a href="#" class=""> <span
-												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">${item.name}</span>
-													:
+										<strong class="name"> <a href="#" class=""> 
+											<span class="title displaynone"> 
+												<span style="font-size: 12px; color: #555555;">${item.name}</span>:
 											</span>${item.name}
 										</a>
 										</strong>
@@ -137,8 +104,6 @@ request.setAttribute("categoryDetail05", "니트"); */
 									</div> <!-- .description -->
 								</li>
 							</c:forEach>
-
-
 						</ul>
 						<div class="swiper-scrollbar"></div>
 					</div>
@@ -151,16 +116,18 @@ request.setAttribute("categoryDetail05", "니트"); */
 						<span>현재 위치</span>
 						<ol>
 							<li><a href="/">홈</a></li>
-							<li class=""><a href="/category/outer/24/">${"categoryName(Ex.TOP)"}</a></li>
-							<li class="displaynone"><a href=""></a></li>
-							<li class="displaynone"><a href=""></a></li>
-							<li class="displaynone"><strong> <a href=""></a>
+							<li class=""><a href="/category//">${category.name}</a></li>
+							<li class="displaynone"><a href="#"></a></li>
+							<li class="displaynone"><a href="#"></a></li>
+							<li class="displaynone"><strong> <a href="#"></a>
 							</strong></li>
 						</ol>
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory titleArea ">
-						<h2>${"categoryName"}</h2>
+						
+						<h2>${category.name}</h2>
+						
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory title ">
@@ -178,7 +145,7 @@ request.setAttribute("categoryDetail05", "니트"); */
 					<div class="list_title">
 						<div class="left">
 							<ul class="menuCategory">
-								<c:forEach var="item" items="${category}">
+								<c:forEach var="item" items="${categoryList}">
 									<li style="display:;"
 										class="xans-element- xans-product xans-product-displaycategory  xans-record-">
 										<a href="#"> ${item.name} <span class="count displaynone">()</span>
@@ -188,7 +155,7 @@ request.setAttribute("categoryDetail05", "니트"); */
 
 							</ul>
 						</div>
-						<div class="right">
+						<div class="right" >
 							<div class="xans-element- xans-product xans-product-normalmenu ">
 								<!--
 						$compare_page = /product/compare.html
@@ -199,10 +166,10 @@ request.setAttribute("categoryDetail05", "니트"); */
 									</p>
 									<ul id="type"
 										class="xans-element- xans-product xans-product-orderby">
-										<li class="xans-record-"><a href="출시일로 정렬">신상품</a></li>
-										<li class="xans-record-"><a href="낮은가격 정렬">낮은가격</a></li>
-										<li class="xans-record-"><a href="높은가격 정렬">높은가격</a></li>
-										<li class="xans-record-"><a href="리뷰페이지">사용후기</a></li>
+										<li class="xans-record-"><a href="#출시일로 정렬">신상품</a></li>
+										<li class="xans-record-"><a href="#낮은가격 정렬">낮은가격</a></li>
+										<li class="xans-record-"><a href="#높은가격 정렬">높은가격</a></li>
+										<li class="xans-record-"><a href="#리뷰페이지">사용후기</a></li>
 									</ul>
 									<span class="compare displaynone"> <a href="#none"
 										class="btnCompare"
@@ -215,10 +182,7 @@ request.setAttribute("categoryDetail05", "니트"); */
 						<!-- right -->
 					</div>
 				</div>
-				<%
-				// JSP 반복 루프로 데이터 표시
-				for (int i = 0; i < 4; i++) { // 4줄의 상품을 생성
-				%>
+				<c:forEach begin="1" end="3">
 				<div class="xans-element- xans-product xans-product-normalpackage ">
 					<div
 						class="xans-element- xans-product xans-product-listnormal ec-base-product">
@@ -230,15 +194,15 @@ request.setAttribute("categoryDetail05", "니트"); */
 				$basket_option = /product/basket_option.html
 			-->
 						<ul class="prdList grid4">
-							<%
-							for (int j = 0; j < 2; j++) { //4개
-							%>
+							<c:forEach var="item" items="${productList}">
 							<li id="anchorBoxId_7902" class="xans-record-">
+							
 								<div class="thumbnail">
 									<div class="salePer"></div>
 									<div class="prdImg">
+									
 										<a href="#" name="anchorBoxName_7902"> <img
-											src=${category.main_image } id="eListPrdImage7902_1"
+											src="/resources/images/${item.main_image}" id="eListPrdImage7902_1"
 											alt="상품사진" class="thumgList" />
 										</a> <span class="chk"> <input type="checkbox"
 											class="ProductCompareClass xECPCNO_7902 displaynone" />
@@ -250,7 +214,7 @@ request.setAttribute("categoryDetail05", "니트"); */
 									<strong class="name"> <a href="#" class=""> <span
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">상품명</span> :
-										</span>${category}
+										</span>${item.name}
 									</a>
 									</strong>
 									<!-- .name -->
@@ -271,13 +235,13 @@ request.setAttribute("categoryDetail05", "니트"); */
 											class="title displaynone"> <span
 												style="font-size: 11px; color: #999999;">소비자가</span> :
 										</strong> <span
-											style="font-size: 11px; color: #999999; text-decoration: line-through;">${category.price }</span>
+											style="font-size: 11px; color: #999999; text-decoration: line-through;">${item.price}</span>
 										</li>
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">판매가</span> :
 										</strong> <span
-											style="font-size: 12px; color: #555555; text-decoration: line-through;">${category.price }</span>
+											style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price }</span>
 											<span id="span_product_tax_type_text"
 											style="text-decoration: line-through;"></span></li>
 										<li class=" xans-record-"><strong class="title ">
@@ -291,15 +255,14 @@ request.setAttribute("categoryDetail05", "니트"); */
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #555555;">상품간략설명</span> :
-										</strong> <span style="font-size: 12px; color: #555555;">상품설명
-												DBDBDBDB </span></li>
+										</strong> <span style="font-size: 12px; color: #555555;">${item.desc }</span></li>
 										<li class=" xans-record-"><strong
 											class="title displaynone"> <span
 												style="font-size: 12px; color: #999999;">상품요약정보</span> :
-										</strong> <span style="font-size: 12px; color: #999999;">상품설명
-												DBDBDBDB</span></li>
+										</strong> <span style="font-size: 12px; color: #999999;">${item.desc }</span></li>
 									</ul>
 									<!-- .spec -->
+									
 									<div class="icon">
 										<div class="promotion">
 											<img
@@ -309,30 +272,18 @@ request.setAttribute("categoryDetail05", "니트"); */
 									</div>
 									<!-- .icon -->
 								</div> <!-- .description -->
+								
 							</li>
-							<%
-							// 줄 출력 제외
-							}
-							%>
-
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
-				<%
-				} // for 루프 종료
-				%>
-
-
-
-
-
-
-
+				</c:forEach>
 				<div
 					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
 					<a href="#none"> <img src="/_images/icon_prev2.png" />
 					</a>
-					<ol>
+					<ol> <!-- 추후에 페이징처리 -->
 						<li class="xans-record-"><a href="?page=1" class="this">1</a>
 						</li>
 						<li class="xans-record-"><a href="?page=2" class="other">2</a>
@@ -348,19 +299,9 @@ request.setAttribute("categoryDetail05", "니트"); */
 				<jsp:include page="footer/footer.jsp" flush="true" />
 			</main>
 		</div>
-
 		<!-- #footer -->
-
 	</div>
 	</div>
-
-
-	<!-- CMC3 script -->
-	<!-- kmp -->
-	<!-- CMC3 script -->
-
-	<!-- CMC3 script -->
-	<!-- External Script End -->
 	<script type="text/javascript" src="/resources/js/ko.js"
 		charset="utf-8"></script>
 
