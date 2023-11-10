@@ -1,5 +1,5 @@
-// 찜하기 버튼	
 
+// 찜하기 버튼	
 function Toggle1(button) {
     var heartIcon = button.querySelector('i.fa-heart');
     if (heartIcon.style.color == "brown") {
@@ -8,3 +8,13 @@ function Toggle1(button) {
         heartIcon.style.color = "brown";
     }
 }
+
+
+
+$(".desc").on("click", function () {
+    $(this).addClass("hide");
+});
+
+
+
+

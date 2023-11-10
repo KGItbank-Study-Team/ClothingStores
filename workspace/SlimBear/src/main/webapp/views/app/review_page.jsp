@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>슬림베어</title>
-<script
-	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/09decccad8.js"	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/css/review_page.css">
@@ -42,7 +41,8 @@
 						<tr>
 							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"></a></td>
 							<td><a href="#" class="desc"><b>${review.prod_code}</b></a><br />
-								<div class="review_text">${review.content}</div></td>
+								<div class="review_text"><a>${review.content}</a></div>
+							</td>
 							<td>
 								<ul class="free-delivery">
 									<li><img src="/resources/images/free_delivery02.png" alt="무료배송"></li>

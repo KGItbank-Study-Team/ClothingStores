@@ -15,22 +15,28 @@ a {
     text-decoration: none;
     color: #111;
 }
+.desc .hide {
+	display: none;
+}
+.desc {
+	cursor: pointer;
+}
 
-input,
+/* input,
 textarea {
     outline: none;
-}
+} */
 body {
-	width: 100%;
+	/* width: 100%; */
 	/* background: #D7D2C3; */
 	/* background-color: #faf9ef; */
-	   background-color: #eae5dd;
+	   /* background-color: #eae5dd; */
 }
-#wrapper {
+/* #wrapper {
     width: 100%;
-    /* background-color: #b6ac9a; */
+
     background-color: #faf9ef;
-}
+} */
 
 /* 헤더 */
 

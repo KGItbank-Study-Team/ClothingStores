@@ -168,7 +168,7 @@
 								<p><strong>한진택배</strong></p>
 							</li>
 						</ul>
-					</div>r
+					</div>
 					<hr/>
 					<div class="productGuide">
 						<p class="name1">제품 가이드</p>
@@ -250,10 +250,87 @@
 			</div> <!-- right -->
 		</div> <!-- productInfo  -->
 		<hr class="hrPosition"/>
-		<div>
-			<%@ include file="footer/footer.jsp" %>
-		</div>
+			<div id="wrapper">
+		<main id="product">
+			<section class="list">
+				<nav>
+					<h1>REVIEW</h1>
+<!-- 					<p>
+						HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
+					</p> -->
+				</nav>
+				<hr/>
+				<ul class="sort">
+					<li><a href="#" class="on">판매많은순</a></li>
+					<li><a href="#">낮은가격순</a></li>
+					<li><a href="#">높은가격순</a></li>
+					<li><a href="#">평점높은순</a></li>
+					<li><a href="#">후기많은순</a></li>
+					<li><a href="#">최근등록순</a></li>
+				</ul>
+				<table>
+					<%-- <c:forEach var="review" items="${reviews}"> --%>
+						<tr>
+							<td><a href="#" class="thumb"> <img class="review_images" src="/resources/images/Best_product09.webp" alt="상품이미지"></a></td>
+							<td><a href="#" class="desc"><b>셔츠</b></a><br />
+								<div class="review_text"><a>소매 길이가 좀 넉넉한것 같은데 너비는 잘맞습니다. 원단이 탄탄해서 세탁기 돌려도 변형이 잘 없을 것 같아요.</a></div>
+							</td>
+							<td>
+								<ul class="free-delivery">
+									<li><img src="/resources/images/free_delivery02.png" alt="무료배송"></li>
+									<li>무료배송</li>
+								</ul>
+							</td>
+							<td>
+								<div class="btns"> <!-- 찜하기 하트 버튼 -->
+									<button onclick="Toggle1(this)" class="btn">
+										<i class="fa-sharp fa-solid fa-heart"></i>
+									</button>
+								</div> 
+								<div class="review-cart"> <!-- 장바구니 추가 버튼 -->
+									<a href="#"> 
+										<svg xmlns="http://www.w3.org/2000/svg"
+											width="22" height="22" fill="currentColor"
+											class="bi bi-cart4" viewBox="0 0 16 16">
+		                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+		                                 </svg> 
+									</a>
+			                        <span class="cart-text">장바구니에 추가</span>
+								</div>
+							</td>
+							<td>
+								<div class="rating">${review.score}</div>
+								<div class=review-id>${review.uid}</div>
+								<div class="review_uid">${review.mem_id}</div>
+								<div class=review-date>${review.reg_date}</div>
+							</td>
+						</tr>
+					<%-- </c:forEach> --%>
+				</table>
+				<div class="paging">
+					<span class="prev"> 
+						<a href="#">< 이전</a>
+					</span> 
+					<span class="num">
+						 <a href="#" class="on">1</a> 
+						 <a href="#">2</a>
+						<a href="#">3</a> 
+						<a href="#">4</a> 
+						<a href="#">5</a> 
+						<a href="#">6</a>
+						<a href="#">7</a>
+					</span>
+					 <span class="next">
+					  <a href="#">다음 ></a>
+					</span>
+				</div>
+			</section>
+		</main>
+	</div>
 	</div> <!-- container -->
+	<div class="footer">
+		<%@ include file="footer/footer.jsp"%>
+	</div>
 </body>
 </html>
 
