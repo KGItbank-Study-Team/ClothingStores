@@ -17,7 +17,4 @@ public class BoardNoticeListVO {
 	private Date reg_date; // 작성일자
 	private String content;
 
-//	private String boardTitle; // 게시글 제목
-//    private String name; // 작성자 이름
-
 }

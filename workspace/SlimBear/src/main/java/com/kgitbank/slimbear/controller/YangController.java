@@ -19,14 +19,6 @@ public class YangController {
       
         return "notice"; // 뷰 이름 설정
     }
-
-    @RequestMapping("/article/notice")
-    public String getBoardNotice(Model model) {
-  
-        model.addAttribute("boards", boardService.getBoardNotice());
-      
-        return "board_notice"; // 뷰 이름 설정
-    }
     
     @RequestMapping("/board/inquiry")
     public String getBoardInquiryList(Model model) {
@@ -34,14 +26,6 @@ public class YangController {
         model.addAttribute("boards", boardService.getBoardInquiryList());
       
         return "inquiry"; // 뷰 이름 설정
-    }
-    
-    @RequestMapping("/article/inquiry")
-    public String getBoardInquiry(Model model) {
-  
-        model.addAttribute("boards", boardService.getBoardNotice());
-      
-        return "board_inquiry"; // 뷰 이름 설정
     }
     
     @RequestMapping("/board/faq")

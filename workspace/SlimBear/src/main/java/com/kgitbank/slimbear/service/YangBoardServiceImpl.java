@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.slimbear.vo.BoardFaqListVO;
 import com.kgitbank.slimbear.vo.BoardInquiryListVO;
 import com.kgitbank.slimbear.vo.BoardNoticeListVO;
-import com.kgitbank.slimbear.vo.BoardNoticeVO;
 
 @Service
 public class YangBoardServiceImpl {
@@ -31,7 +30,6 @@ public class YangBoardServiceImpl {
 	        
 	        boards.add(board);
 	    }
-    
 	    return boards;
     }
 	
@@ -48,7 +46,6 @@ public class YangBoardServiceImpl {
 			
 			boards.add(board);
 		}
-		
 		return boards;
 	}
 	
@@ -63,21 +60,9 @@ public class YangBoardServiceImpl {
 	        
 	        boards.add(board);
 	    }
-        
         return boards;
     }
 	
-	public BoardNoticeVO getBoardNotice() {
-		
-        BoardNoticeVO board = new BoardNoticeVO();
-        board.setNo(1);
-        board.setTitle("제목 " );
-        board.setName("작성자 " );
-        board.setReg_date(new Date(System.currentTimeMillis()));
-        board.setContent("내용 " );
-        
-	    return board;
-    }
 	
 }
 	

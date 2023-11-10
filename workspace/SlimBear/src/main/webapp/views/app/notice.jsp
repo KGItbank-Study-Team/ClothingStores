@@ -94,12 +94,12 @@
 						            </td>
 						            <td>${board.name}</td>
 							        <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
-						            <td class="displaynone"><span class="txtNum">${board.hit}</span></td>
+						            <%-- <td class="displaynone"><span class="txtNum">${board.hit}</span></td>
 						            <td class="displaynone"><span class="txtNum">${board.vote}</span></td>
 						            <td class="displaynone">
 						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif"
 						                     alt="'${board.point}'점" />
-						            </td>
+						            </td> --%>
 						        </tr>
 							</c:forEach>
 							

@@ -35,7 +35,7 @@
 					</div>
 					<div class="titleArea">
 						<h2>
-							<font color="333333">${title1}</font>
+							<font color="333333">INQUIRY</font>
 						</h2>
 						<p></p>
 					</div>
