@@ -44,7 +44,7 @@
 					<div class="path">
 						<span>현재 위치</span>
 						<ol>
-							<li><a href="/">홈</a></li>
+							<li><a href="#">홈</a></li>
 							<li><a href="/board/index.html">게시판</a></li>
 							<li title="현재 위치"><strong>NOTICE</strong></li>
 						</ol>
@@ -108,14 +108,14 @@
 						                </strong>
 						            </td>
 						            <td>${board.name}</td>
-<%-- 						          <td class="displaynone"><span class="txtNum">"${board.date}"</span></td> --%>
-<%-- 						            <td class="displaynone"><span class="txtNum">"${board.hit}"</span></td> --%>
-<%-- 						            <td class="displaynone"><span class="txtNum">"${board.vote}"</span></td> --%>
+						          <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
+<%-- 						            <td class="displaynone"><span class="txtNum">${board.hit}</span></td> --%>
+<%-- 						            <td class="displaynone"><span class="txtNum">${board.vote}</span></td> --%>
 <!-- 						            <td class="displaynone"> -->
 <%-- 						                <img src="//img.echosting.cafe24.com/skin/base/board/ico_point'${board.point}'.gif" --%>
 <%-- 						                     alt="'${board.point}'점" /> --%>
 <!-- 						            </td> -->
-						        </tr>
+<!-- 						        </tr> -->
 							</c:forEach>
 							
 							<!-- 여기에 tbody 내용 추가 -->
@@ -159,13 +159,13 @@
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
 				</div>
 				<div class="xans-element- xans-board xans-board-buttonlist-1002 xans-board-buttonlist xans-board-1002 ec-base-button typeBG displaynone ">
-					<span class="gRight"> <a
-						href="/board/free/write.html?board_no=1"
+					<span class="gRight"> 
+						<a href="#"
 						class="btnSubmitFix sizeS displaynone">write</a>
 					</span>
 				</div>
 				<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
-					<a href="?board_no=1&page=1"><img src="/resources/images/icon_prev2.png" /></a>
+					<a href="#"><img src="/resources/images/icon_prev2.png" /></a>
 					<ol>
 						<li class="xans-record-">
 							<a href="#" class="this">1</a></li>
@@ -179,30 +179,26 @@
 					<input id="board_no" name="board_no" value="1" type="hidden" />
 					<input id="page" name="page" value="1" type="hidden" />
 					<input id="board_sort" name="board_sort" value="" type="hidden" />
-					<div
-						class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
+					<div class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
 						<fieldset class="boardSearch">
 							<legend>게시물 검색</legend>
 							<p>
-							<select id="search_date" name="search_date" fw-filter=""
-								fw-label="" fw-msg="">
+							<select id="search_date" name="search_date">
 								<option value="week">일주일</option>
 								<option value="month">한달</option>
 								<option value="month3">세달</option>
 								<option value="all">전체</option>
 							</select> 
-							<select id="search_key" name="search_key" fw-filter=""
-								fw-label="" fw-msg="">
+							<select id="search_key" name="search_key">
 								<option value="subject">제목</option>
 								<option value="content">내용</option>
 								<option value="writer_name">글쓴이</option>
 								<option value="member_id">아이디</option>
 								<option value="nick_name">별명</option>
 							</select>
-							<input id="searchs" name="searchs" fw-filter="" fw-label=""
-								fw-msg="" class="searchs" placeholder="" value=""
-								type="text" />
-							<a href="#none" class="btnEmFix"
+							<input id="searchs" name="searchs" class="searchs" placeholder="" 
+									value="" type="text" />
+							<a href="#" class="btnEmFix"
 								onclick="BOARD.form_submit('boardSearchForm');">FIND</a>
 							</p>
 						</fieldset>

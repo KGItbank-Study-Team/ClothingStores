@@ -35,7 +35,7 @@
 			<div class="path">
 				<span>현재 위치</span>
 				<ol>
-					<li><a href="/">home</a></li>
+					<li><a href="#">home</a></li>
 					<li title="현재 위치"><strong>community</strong></li>
 				</ol>
 			</div>
@@ -78,11 +78,11 @@
 					
 					<c:forEach items="${boards}" var="board">
 			            <tr class="xans-record-">
-			                <td class="subject" data-cate="${board.title}">
+			                <td class="subject" data-cate="${board.question}">
 			                    <a href="javascript:void(0);" class="toggle-button">
 			                        <b class="toggle-icon">Q</b>
-			                        <span>${board.title}</span>
-			                        ${board.subtitle}
+ 			                        <span>${board.question}</span>
+			                        ${board.answer}
 			                        <z class="fold"></z>
 			                    </a>
 			                </td>

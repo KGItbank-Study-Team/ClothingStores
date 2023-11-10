@@ -28,28 +28,28 @@ request.setAttribute("orderdiscount", "99000");
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
-                            <a href="http://localhost:9090/views/app/order_list.jsp"><span>주문내역</span></a>
+                            <a href="/app/member/myPage/order_list"><span>주문내역</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/modify.jsp"><span>프로필</span></a>
+                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
                         <li class="mileage">
-                            <a href="http://localhost:9090/views/app/mileage.jsp"><span>적립금</span></a>
+                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
                         <li class="deposits ">
-                            <a href="http://localhost:9090/views/app/deposits.jsp"><span>예치금</span></a>
+                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
                         </li>
                         <li class="coupon ">
-                            <a href="http://localhost:9090/views/app/coupon.jsp"><span>쿠폰</span></a>
+                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
                         <li class="wishlist">
-                            <a href="http://localhost:9090/views/app/wish_list.jsp"><span>위시리스트</span></a>
+                            <a href="/app/member/myPage/wish_list"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/board_list.jsp"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/board_list"><span>게시글 관리</span></a>
                         </li>
                         <li class="board">
-                            <a href="http://localhost:9090/views/app/addr.jsp"><span>배송지 관리</span></a>
+                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
                         </li>
                     </ul>
                 </div>
