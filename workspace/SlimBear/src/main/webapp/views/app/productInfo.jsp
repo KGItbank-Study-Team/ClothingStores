@@ -143,7 +143,7 @@
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="#none" class="btnOption" style="margin-right: 12.5px !important;background:rgb(101,83,69);">
+						<a href="javascript:buyClick()" class="btnOption" style="margin-right: 12.5px !important;background:rgb(101,83,69);">
 							<span class="btnSpan" style="color:white !important;">BUY IT NOW</span>
 						</a>
 						<a href="#none" class="btnOption" style="background:#eae5dd;"><span class="btnSpan">ADD TO CART</span></a>

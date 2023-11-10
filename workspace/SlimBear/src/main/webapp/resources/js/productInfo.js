@@ -1,9 +1,8 @@
 var selectProduct = [];
+var selectedColor = null;
+var selectedSize = null;
 
 $(function () {
-    var selectedColor = null;
-    var selectedSize = null;
-    var defaultCnt = 1;
 
     $(".colorBtn").on("click", function () {
         if ($(this).hasClass("active")) {
@@ -15,7 +14,7 @@ $(function () {
             $(".colorBtn").removeClass("active");
             $(this).addClass("active");
             selectedColor = $('.colorBtn').text();
-            updateSelection($(this).find(".colorOption").text(), selectedSize, defaultCnt);
+            updateSelection($(this).find(".colorOption").text(), selectedSize);
         }
     });
 
@@ -31,95 +30,108 @@ $(function () {
             $(".sizeBtn").removeClass("active2");
             $(this).addClass("active2");
             selectedSize = $('.sizeBtn').text();
-            updateSelection(selectedColor, $(this).find(".sizeOption").text(), defaultCnt);
+            updateSelection(selectedColor, $(this).find(".sizeOption").text());
         }
     });
 
-    function addRowToTable(color, size, cnt, index) {
+   
+
+    function addRowToTable(color, size, cnt) {
         // 행을 생성하고 선택한 옵션 값을 설정
-        var newRow = $("<tr" + " id='optionIndex_" + index + "'></tr>");
+        var newRow = $("<tr id=" + makeProductElementID(color,size) + "></tr>");
         newRow.append($('<td class="tdOption"></td>').text(selectedColor));
         newRow.append($('<td class="tdOption"></td>').text(selectedSize));
-        newRow.append($("<td></td>").html('<span class="quantity"><input type="text" name="pop_out" value="1" class="inputBox"><a href="#none"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a><a href="#none"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a></span><a href="#none" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" style="width:9px;height:9px;"/></a>'));
+        newRow.append($("<td></td>").html('<span class="quantity"><input type="text" name="pop_out" value="' + cnt +'" class="inputBox">' 
+        +'<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color,size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>' 
+        +'<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color,size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>' 
+        +'</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color,size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" style="width:9px;height:9px;"/></a>'));
         newRow.append($('<td><div class="tdCell">${price}</div></td>'))
         $(".choiceOption").append(newRow);
-
     }
 
-
-    function updateSelection(color, size, cnt) {
-
+    function updateSelection(color, size) {
         beforeColor = selectedColor;
         beforesize = selectedSize;
         selectedColor = color;
         selectedSize = size;
-        defaultCnt = cnt;
 
         if (selectedColor != null && selectedSize != null) {
-            if (beforeColor != color || beforesize != size)
-                var newIndex = selectProduct.length;
-                selectProduct.push({ color: selectedColor, size: selectedSize, cnt: defaultCnt});
-                addRowToTable(selectedColor, selectedSize, defaultCnt, newIndex);
-
-
-            // 증가 버튼 클릭 시 
-            $(".countUp").on("click", function () {
-                const currentValue = parseInt($(".inputBox").val(), 10); // 현재 값 가져오기
-                $(".inputBox").val(currentValue + 1); // 값 증가, 10진수로 변환
-
-                // 수량이 변경될 때마다 배열에 정보 추가
-                updateSelection(selectedColor, selectedSize, $(this).siblings(".inputBox").val());
-            });
-            // 감소 버튼 클릭 시
-            $(".countDown").on("click", function () {
-                const currentValue = parseInt($(".inputBox").val(), 10); // 현재 값 가져오기
-                if (currentValue > 1) {
-                    $(".inputBox").val(currentValue - 1); // 값 감소 (최소값은 1로 설정)
-
-                    // 수량이 변경될 때마다 배열에 정보 추가
-                    updateSelection(selectedColor, selectedSize, $(".inputBox").val());
+            if (beforeColor != color || beforesize != size){
+                var index = findProductIndexByOption(color, size);
+                if(index == -1){
+                    // 이미 추가한 옵션이 아니면 새로 추가
+                    selectProduct.push({ color: selectedColor, size: selectedSize, cnt: 1});
+                    addRowToTable(selectedColor, selectedSize, 1);
                 }
-            });
-
-            // 상품 삭제 버튼
-            $("#optionIndex_" + newIndex + ".deleteBtn").on("click", function () {
-                var row = $(this).closest("tr");
-                if (row.length) {
-                    var deletedColor = row.find('.tdOption:first-child').text();
-                    var deletedSize = row.find('.tdOption:nth-child(2)').text();
-                    deleteFromSelectProduct(deletedColor, deletedSize);
-                    row.remove();
-                    selectedColor = null;
-                    selectedSize = null;
-                    $(".sizeBtn").removeClass('active')
+                else{
+                     // 이미 추가한 옵션이면 막음
+                     alert("이미 선택한 옵션입니다");
                 }
-            });
-        }
-    }
-
-    function deleteFromSelectProduct(color, size) {
-        var indexToDelete = -1;
-        for (var i = 0; i < selectProduct.length; i++) {
-            if (selectProduct[i].color === color && selectProduct[i].size === size) {
-                indexToDelete = i;
-                break;
             }
         }
-        if (indexToDelete !== -1) {
-            selectProduct.splice(indexToDelete, 1);
+    }
+});
+
+function makeProductElementID(color, size){
+    return "product_" + color + "_" + size;
+}
+
+function makeColorAndSizeText(color, size){
+
+    return "'" + color + "','" + size +"'";
+}
+
+function findProductIndexByOption(color, size){
+    for (var i = 0; i < selectProduct.length; i++) {
+        if (selectProduct[i].color === color && selectProduct[i].size === size) {
+            return i;
         }
     }
+    return -1;
+}
 
-    function upProductCount(index){
-        console.log(index);
-    }
+function removeProduct(color, size){
+    var index = findProductIndexByOption(color,size);
 
-    function downProductCount(index){
+    if(index < 0 || index >= selectProduct.length)
+        return;
 
-    }
+        var productElement = $('tr#' + makeProductElementID(color, size));
 
-    function removeProduct(index){
+    selectProduct.splice(index, 1);
+    productElement.remove();
+ }
 
-    }
+ function upProductCount(color, size){
 
-});
+    var index = findProductIndexByOption(color,size);
+
+    if(index < 0 || index >= selectProduct.length)
+        return;
+
+   
+    var productElement = $('tr#' + makeProductElementID(color, size));
+
+    // 데이터 변경 및 화면 값 변경
+    selectProduct[index].cnt += 1;
+
+    productElement.find(".inputBox").val(selectProduct[index].cnt);
+ }
+
+ function downProductCount(color, size){
+    var index = findProductIndexByOption(color,size);
+
+    if(index < 0 || index >= selectProduct.length || selectProduct[index].cnt <= 1)
+        return;
+
+   
+    var productElement = $('tr#' + makeProductElementID(color, size));
+
+     // 데이터 변경 및 화면 값 변경
+    selectProduct[index].cnt -= 1;
+    productElement.find(".inputBox").val(selectProduct[index].cnt);
+ }
+
+function buyClick(){
+    console.log(selectProduct);
+}
