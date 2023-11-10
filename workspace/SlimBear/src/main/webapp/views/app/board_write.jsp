@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
-<title>BOARDWRITE</title>
+<title>BOARD WRITE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/boardWrite.js"></script>
 </head>
@@ -223,7 +223,7 @@
 								<tr class="">
 									<th scope="row">PASSWORD</th>
 									<td><input id="password" name="password" fw-filter=""
-										fw-label="비밀번호" fw-msg="" value="" type="password" />
+											fw-label="비밀번호" fw-msg="" value="" type="password" />
 										<span class="displaynone">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
 									</td>
 								</tr>
@@ -232,17 +232,17 @@
 									<td><input id="secure0" name="secure" fw-filter="isFill"
 										fw-label="비밀글설정" fw-msg="" value="F" type="radio"
 										checked="checked" />
-										<label for="secure0">공개글</label>
-										<input id="secure1" name="secure" fw-filter="isFill"
+									<label for="secure0">공개글</label>
+									<input id="secure1" name="secure" fw-filter="isFill"
 										fw-label="비밀글설정" fw-msg="" value="T" type="radio" />
-										<label for="secure1">비밀글</label></td>
+									<label for="secure1">비밀글</label></td>
 								</tr>
 								<tr class="captcha displaynone">
 									<th scope="row">보안문자</th>
 									<td>
 										<p class="gBlank5">
-											<span class="ec-base-help txtInfo">영문, 숫자 조합을 공백없이
-												입력하세요(대소문자구분)</span>
+											<span class="ec-base-help txtInfo">
+											영문, 숫자 조합을 공백없이 입력하세요(대소문자구분)</span>
 										</p>
 									</td>
 								</tr>
@@ -260,11 +260,11 @@
 							<span class="displaynone">
 							<a href="#none" class="btnNormal sizeS" onclick="">관리자 답변보기</a>
 							</span>
-						<a href="/board/상품문의/6/" class="btnNormalFix sizeS">LIST</a>
+						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
 						<span class="gRight">
-							<a href="#none" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
-							<a href="/board/상품문의/6/" class="btnBasicFix sizeS">CANCEL</a>
+							<a href="#" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
+							<a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
 						</span>
 					</div>
 				</div>
