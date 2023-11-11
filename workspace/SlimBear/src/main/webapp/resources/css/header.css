@@ -248,7 +248,7 @@ i {
 main,
 code {
   color: #3f3f3f;
-  text-align: center;
+  /* text-align: center; */
 }
 
 #one-best {

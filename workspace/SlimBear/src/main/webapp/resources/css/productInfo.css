@@ -1,23 +1,29 @@
+code {
+	text-align: left !important;
+}
 body {
 	/* background-color: #faf9ef; */
 	background-color: #eae5dd;
 	width: 100%;
 }
+
 li {
 	list-style: none;
 	/* text-decoration: none; */
 }
+
 a {
 	text-decoration: none;
 }
 
-#container  {
-	/* text-align: center; */
+#container {
+
 	padding: 90px;
 	margin: 107.5px;
 	padding-top: 100px;
 	height: auto;
 }
+
 .productInfo {
 	display: flex;
 	max-width: 1750px;
@@ -26,37 +32,44 @@ a {
 	width: fit-content;
 	margin-bottom: 80px;
 }
+
 .left {
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
 	padding-right: 120px;
 }
+
 .right {
 	width: 550px;
 }
+
 img {
 	width: 460px;
 	height: 611.8px;
 }
+
 .productImg {
 	position: relative;
 	left: 40px;
 }
+
 .subExplanation {
 	font-size: 14px;
-	color:#555555;
+	color: #555555;
 	padding-bottom: 30px;
-	
 }
+
 table {
 	border-spacing: 0;
-	border-collapse: collapse; 
+	border-collapse: collapse;
 }
+
 .solid {
 	width: 430px;
 	border-bottom: 1px solid #555555;
 }
+
 .solid2 {
 	width: 100px;
 	text-align: left;
@@ -64,15 +77,18 @@ table {
 	border-spacing: 0;
 	padding: 6px 0;
 }
+
 th:last-child {
-    border-bottom: none; 
+	border-bottom: none;
 }
+
 .solid3 {
 	width: 100px;
 	text-align: left;
 	border-spacing: 0;
 	padding: 6px 0;
 }
+
 .colorSelect {
 	padding-right: 20px;
 }
@@ -86,11 +102,13 @@ th:last-child {
 .colorOptionPosition {
 	
 }
+
 .sizeOptionPosition {
 	
 }
+
 .sizeBtn, .colorBtn {
-	position:relative;
+	position: relative;
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: top;
@@ -102,12 +120,15 @@ th:last-child {
 	text-decoration: none;
 	z-index: 0;
 }
+
 .colorBtn.active {
-	background: #eae5dd; 
+	background: #eae5dd;
 }
+
 .sizeBtn.active2 {
 	background: #eae5dd;
 }
+
 .colorOption, .sizeOption {
 	display: inline-block;
 	padding: 4px 10px;
@@ -117,13 +138,15 @@ th:last-child {
 	min-width: 30px;
 	z-index: 1;
 }
+
 col {
 	width: 110px;
 }
+
 .inputBox {
 	position: relative;
 	width: 20px;
-	height:	19px;
+	height: 19px;
 	line-height: 22px;
 	word-wrap: break-word;
 	word-break: break-all;
@@ -135,9 +158,10 @@ col {
 	background: #faf9ef;
 	border: 1px solid rgb(217, 212, 205);
 }
+
 input:focus {
-  outline: none; /* 포커스 시 외곽선 제거 */
-  border-color: initial; /* 포커스 시 기본 테두리 색상 유지 */
+	outline: none; /* 포커스 시 외곽선 제거 */
+	border-color: initial; /* 포커스 시 기본 테두리 색상 유지 */
 }
 /* input,
 textarea {
@@ -146,57 +170,64 @@ textarea {
 .displayNone {
 	display: none;
 }
+
 .tablePosition {
 	margin-top: 30px;
 }
+
 .quantity {
 	width: 65px;
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
 }
+
 .tdOption {
-	font-size: 12px; 
-	color: #555555; 
-	font-weight:bold;
+	font-size: 12px;
+	color: #555555;
+	font-weight: bold;
 }
+
 .tdCell {
 	width: 130px !important;
 	padding-left: 50px;
-	font-size: 14px; 
-	color: #black; 
+	font-size: 14px;
+	color: #black;
 	font-weight: bold;
 	text-align: right;
 }
+
 .countUp {
-	width:21px;
-	height:11px;
+	width: 21px;
+	height: 11px;
 	position: absolute;
 	top: 2.5px;
 }
+
 .countDown {
-	width:21px;
-	height:11px;
+	width: 21px;
+	height: 11px;
 	position: absolute;
 	bottom: 0;
-	top: auto;	
+	top: auto;
 }
+
 tbody img {
 	border: 0;
 	vertical-align: middle;
 }
-
-
 
 /* 버튼 클릭 시 적용할 css */
 .clicked-color {
 	background-color: white;
 	z-index: 0;
 }
+
 .btns {
 	position: relative;
 	margin-top: 60px;
 }
+
 .btnOption {
 	display: inline-flex;
 	justify-content: center;
@@ -211,6 +242,7 @@ tbody img {
 	position: relative;
 	font-weight: normal !important;
 }
+
 .btnSpan {
 	display: inline-block;
 	position: relative;
@@ -220,70 +252,86 @@ tbody img {
 .guideBox {
 	margin-top: 70px;
 }
+
 .ulClass li {
-    display: inline-block;
-    margin-right: 50px; /* 각 요소 사이의 간격을 조절할 수 있습니다. */
-    font-weight: nomal !important;
+	display: inline-block;
+	margin-right: 50px; /* 각 요소 사이의 간격을 조절할 수 있습니다. */
+	font-weight: nomal !important;
 }
+
 .name {
 	width: 80px;
 	padding-right: 60px;
 }
+
 .name1 {
 	width: 100px;
 	padding-right: 40px;
 }
-.shoppingInfo   {
+
+.shoppingInfo {
 	display: flex;
 	font-weight: nomal !important;
 	margin-top: 10px;
 }
+
 .productGuide {
 	display: flex;
 }
+
 .customMemo {
 	display: flex;
 }
+
 .tableSize td {
 	width: 126px;
 	border: 1px solid #555555;
 	text-align: center;
-
 }
+
 .tdColor {
 	background: #eae5dd;
 }
+
 .hrPosition {
 	margin: 0 auto;
-	width: 1620px; 
+	width: 1620px;
 	text-align: center;
 }
+
 nav {
 	text-align: left;
 }
-.sort {
-	display: flex;
+.view-align {
+	padding-right: 5px;
+	display: inline-block;
+	float: left;
+	padding-right: 10px;
 }
-.sort > ul > li {
-
+.review-section {
+	background: #b6a589;
+	border: solid 1px;
+	flot: left;
+}
+.info {
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 8px;
+}
+.info span  {
+	font-weight: bold;
+}
+.info p {
+	font-size: 10px;
+}
+.review-score {
+	color: brown;
+	font-size: 20px;
+}
+.photo-review {
+	float: left;
 }
 
 #wrpper {
 	text-align: initial !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
