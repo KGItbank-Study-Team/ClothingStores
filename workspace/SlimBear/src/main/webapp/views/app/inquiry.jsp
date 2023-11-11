@@ -54,9 +54,9 @@
 				<div class="subnavi" style="display: block;">
 					<a href="/app/board/inquiry" class="qna01">
 						<span>상품문의</span></a> 
-					<a href="/app/board/inquiry/2" class="qna02">
+					<a href="/app/board/inquiry/delivery" class="qna02">
 						<span>배송문의</span></a>
-					<a href="/app/board/inquiry/3" class="qna03">
+					<a href="/app/board/inquiry/bipolar" class="qna03">
 						<span>배송 전 변경/취소</span></a>
 					<!-- <a href="/board/배송-후-교환반품/5/" class="qna04"><span>배송 후 교환/반품</span></a> -->
 					<!-- <a href="/board/입금결제-확인/14/" class="qna05"><span>입금/결제 확인</span></a> -->

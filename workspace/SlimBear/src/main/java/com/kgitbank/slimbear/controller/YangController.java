@@ -30,12 +30,12 @@ public class YangController {
         model.addAttribute("boards", boardService.getBoardInquiryList());
         return "inquiry"; // 뷰 이름 설정
     }
-    @RequestMapping("/board/inquiry/2")
+    @RequestMapping("/board/inquiry/delivery")
     public String getBoardInquiry2List(Model model) {
         model.addAttribute("boards", boardService.getBoardInquiry2List());
         return "inquiry";
     }
-    @RequestMapping("/board/inquiry/3")
+    @RequestMapping("/board/inquiry/bipolar")
     public String getBoardInquiry3List(Model model) {
         model.addAttribute("boards", boardService.getBoardInquiry3List());
         return "inquiry";

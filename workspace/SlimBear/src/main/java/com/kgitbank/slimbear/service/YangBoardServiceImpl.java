@@ -35,7 +35,7 @@ public class YangBoardServiceImpl {
     }
 	
 	// 문의게시판
-	public ArrayList<BoardInquiryListVO> getBoardInquiryList(){
+	public ArrayList<BoardInquiryListVO> getBoardInquiryList(){		// 상품문의
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
 		for (int i = 10; i >= 1; i--) {
@@ -50,7 +50,7 @@ public class YangBoardServiceImpl {
 		}
 		return boards;
 	}
-	public ArrayList<BoardInquiryListVO> getBoardInquiry2List(){
+	public ArrayList<BoardInquiryListVO> getBoardInquiry2List(){	// 배송문의
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
 		for (int i = 10; i >= 1; i--) {
@@ -65,7 +65,7 @@ public class YangBoardServiceImpl {
 		}
 		return boards;
 	}
-	public ArrayList<BoardInquiryListVO> getBoardInquiry3List(){
+	public ArrayList<BoardInquiryListVO> getBoardInquiry3List(){	// 배송 전 변경/취소
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
 		for (int i = 10; i >= 1; i--) {
