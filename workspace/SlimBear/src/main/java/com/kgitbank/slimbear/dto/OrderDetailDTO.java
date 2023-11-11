@@ -7,10 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FaqDTO {
-
-	private long uid;
-	private String question;
-	private String answer;
-	private String type;
+public class OrderDetailDTO {
+	
+	private long order_uid;
+	private String prod_code;
+	private int cnt;
+	private Integer review_uid; 
 }

@@ -7,10 +7,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FaqDTO {
 
+public class CouponDTO {
+	
 	private long uid;
-	private String question;
-	private String answer;
+	private String name;
 	private String type;
+	private int value;
+	private int expi_days;
+	private int price;
+	
 }

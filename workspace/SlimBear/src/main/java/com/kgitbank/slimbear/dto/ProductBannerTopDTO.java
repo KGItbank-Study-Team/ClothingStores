@@ -1,4 +1,4 @@
-package com.kgitbank.slimbear.page.dto;
+package com.kgitbank.slimbear.dto;
 
 import lombok.Getter;
 import lombok.Setter;

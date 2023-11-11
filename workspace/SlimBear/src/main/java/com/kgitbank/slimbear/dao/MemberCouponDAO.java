@@ -1,20 +1,15 @@
 package com.kgitbank.slimbear.dao;
 
-import java.util.List;
+import java.sql.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kgitbank.slimbear.dto.ProductBannerTopDTO;
-
 @Repository
-public class PageConfigDAO {
-	
+public class MemberCouponDAO {
+
 	@Autowired
 	protected SqlSessionTemplate template;
-
-	public List<ProductBannerTopDTO> getProductBannerTopList(){
-		return template.selectList("com.slimbear.mapper.Page.SELECT_PRODUCTBANNERTOP_LIST");
-	}
+	
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.dao.PageConfigDAO;
-import com.kgitbank.slimbear.page.dto.ProductBannerTopDTO;
+import com.kgitbank.slimbear.dto.ProductBannerTopDTO;
 
 @Service
 public class PageConfigService {

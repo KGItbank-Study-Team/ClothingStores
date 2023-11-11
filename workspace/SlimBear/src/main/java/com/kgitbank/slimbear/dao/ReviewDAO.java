@@ -21,12 +21,12 @@ public class ReviewDAO {
 	}
 	
 	// 리뷰 리스트 받아오기
-	public List<ReviewDTO> getReviewList() {
-		return template.selectList("com.slimbear.mapper.Review.SELECT_REVIEW_LIST");
+	public List<ReviewDTO> getReviewList() { 
+		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST");
 	}
 	
 	// 데이터 넣기
 	public int insertReview(ReviewDTO review) {
-		return template.insert("com.slimbear.mapper.Review.INSERT_REVIEW", review);
+		return template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);
 	}
 }

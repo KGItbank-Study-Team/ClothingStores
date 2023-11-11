@@ -4,6 +4,7 @@ CREATE TABLE `member` (
 	`uid`	bigint unsigned	NOT NULL ,
 	`id`	varchar(11)	NOT NULL unique,
 	`password`	varchar(100)	NOT NULL,
+    `phone`	varchar(30)	NOT NULL,
 	`email`	varchar(30)	NOT NULL unique,
 	`name`	varchar(30)	NOT NULL,
 	`address`	VARCHAR(30)	NOT NULL,
@@ -45,7 +46,7 @@ DROP TABLE IF EXISTS `productReview`;
 CREATE TABLE `productReview` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`mem_id`	varchar(11)	NOT NULL,
-	`prod_uid`	varchar(30)	NOT NULL,
+	`prod_code`	varchar(30)	NOT NULL,
 	`title`	varchar(100)	NOT NULL,
 	`content`	varchar(100)	NOT NULL,
 	`score`	tinyint	NOT NULL,
@@ -83,7 +84,7 @@ CREATE TABLE `notice` (
 	`reg_date`	datetime	NOT NULL,
 	`priority`	tinyint	NOT NULL	COMMENT '0 이상일경우 상단 고정',
 	`type`	varchar(10)	NOT NULL,
-	`name`	varchar(30)	NOT NULL
+	`writer`	varchar(30)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `faq`;
@@ -216,6 +217,27 @@ CREATE TABLE `ProductBannerTop` (
 );
 
 ALTER TABLE `ProductBannerTop` ADD CONSTRAINT `PK_PRODUCTBANNERTOP` PRIMARY KEY (
+	`uid`
+);
+
+CREATE TABLE `memberCoupon` (
+	`mem_uid`	bigint unsigned 	NOT NULL,
+	`coup_uid`	bigint unsigned 	NOT NULL,
+	`expi_date`	date	NOT NULL,
+	`use_date`	date	NULL	COMMENT 'null이면 사용안함'
+);
+
+
+CREATE TABLE `Coupon` (
+	`uid`	bigint unsigned 	NOT NULL,
+	`name`	varchar(30)	NOT NULL,
+	`type`	varchar(10)	NOT NULL,
+	`value`	int	NOT NULL	COMMENT 'type마다 용도다름',
+	`expi_days`	int	NULL	COMMENT '쿠폰획득일 기준 + 될 일수',
+	`min_price`	int unsigned	NOT NULL
+);
+
+ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
 	`uid`
 );
 

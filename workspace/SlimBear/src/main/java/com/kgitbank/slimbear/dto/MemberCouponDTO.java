@@ -1,6 +1,6 @@
 package com.kgitbank.slimbear.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +9,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrderDTO {
-	
-	private long uid;
+
+
+public class MemberCouponDTO {
+
 	private long mem_uid;
-	private Date order_date;
-	private String status;
-	private int total_price;
+	private long coup_uid;
+	private Date expi_date;
+	private Date use_date;
 	
 }

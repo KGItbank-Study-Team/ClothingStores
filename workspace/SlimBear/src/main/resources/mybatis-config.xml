@@ -15,12 +15,38 @@
 	<!-- 제작한 VO마다 Mybatis에서 사용할 별칭 설정 -->
 	<typeAliases>
 	
+	    <!-- member-mapping -->
 		<typeAlias alias="member" type="com.kgitbank.slimbear.dto.MemberDTO" />
-		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
-		<typeAlias alias="category" type="com.kgitbank.slimbear.dto.CategoryDTO" />
-		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewDTO" />
+		<typeAlias alias="memberOrderAddress" type="com.kgitbank.slimbear.dto.MemberOrderAddressDTO" />
+		<typeAlias alias="memberCoupon" type="com.kgitbank.slimbear.dto.MemberCouponDTO" />
+		<typeAlias alias="wish" type="com.kgitbank.slimbear.dto.WishDTO" />		
+		<typeAlias alias="cart" type="com.kgitbank.slimbear.dto.CartDTO" />	
 		
-		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.page.dto.ProductBannerTopDTO" />
+		 <!-- board-mapping -->
+		<typeAlias alias="inquiry" type="com.kgitbank.slimbear.dto.InquiryDTO" />
+		<typeAlias alias="inquiryAnswer" type="com.kgitbank.slimbear.dto.InquiryAnswerDTO" />
+		<typeAlias alias="faq" type="com.kgitbank.slimbear.dto.FaqDTO" />
+		<typeAlias alias="notice" type="com.kgitbank.slimbear.dto.NoticeDTO" />
+		
+		<!-- product-mapping -->
+		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
+		<typeAlias alias="productDetail" type="com.kgitbank.slimbear.dto.ProductDetailDTO" />
+		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewDTO" />
+		<typeAlias alias="reviewComent" type="com.kgitbank.slimbear.dto.ReviewComentDTO" />
+		
+		<!-- order-mapping -->
+		<typeAlias alias="order" type="com.kgitbank.slimbear.dto.OrderDTO" />
+		<typeAlias alias="orderDetail" type="com.kgitbank.slimbear.dto.OrderDetailDTO" />
+		<typeAlias alias="orderPayment" type="com.kgitbank.slimbear.dto.OrderPaymentDTO" />
+		
+		<!-- category-mapping -->		
+		<typeAlias alias="category" type="com.kgitbank.slimbear.dto.CategoryDTO" />
+		
+		<!-- coupon-mapping -->
+		<typeAlias alias="coupon" type="com.kgitbank.slimbear.dto.CouponDTO" />
+
+		<!-- page-mapping -->
+		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.dto.ProductBannerTopDTO" />
 		
 	</typeAliases>
 	
@@ -30,8 +56,9 @@
 		<mapper resource="mappings/member-mapping.xml"/>
 		<mapper resource="mappings/product-mapping.xml"/>
 		<mapper resource="mappings/category-mapping.xml"/>
-		<mapper resource="mappings/review-mapping.xml"/>
-		
+		<mapper resource="mappings/coupon-mapping.xml"/>
+		<mapper resource="mappings/board-mapping.xml"/>
+		<mapper resource="mappings/order-mapping.xml"/>
 		<mapper resource="mappings/page-mapping.xml"/>
 	</mappers>
 	
