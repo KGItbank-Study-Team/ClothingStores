@@ -67,18 +67,53 @@ function updateQuantity(productId, change) {
 }
 
 $(document).ready(function () {
-    // thead에 있는 체크박스 요소 선택
-    const theadCheckbox = $("thead input[type='checkbox']");
-    
+    // 전체 선택 체크박스 요소 선택
+    const selectAllCheckbox = $("#selectAll");
+
     // tbody에 있는 체크박스 요소 선택
     const tbodyCheckboxes = $("tbody input[type='checkbox']");
 
-    // thead 체크박스 클릭 이벤트 핸들러 추가
-    theadCheckbox.on("click", function () {
-        // thead 체크박스의 상태 (체크되었는지 여부) 가져오기
-        const isChecked = theadCheckbox.prop("checked");
-        
-        // tbody에 있는 모든 체크박스 상태 변경
+    // 전체 선택 체크박스 클릭 이벤트 핸들러 추가
+    selectAllCheckbox.on("click", function () {
+        // 체크 상태에 따라 tbody에 있는 모든 체크박스 상태 변경
+        const isChecked = selectAllCheckbox.prop("checked");
         tbodyCheckboxes.prop("checked", isChecked);
     });
+
+    // 삭제 버튼 클릭 시
+    $("#deleteSelectedBtn").on("click", function () {
+        deleteSelectedItems();
+    });
 });
+
+function deleteSelectedItems() {
+    const checkedItems = $("tbody input[type='checkbox']:checked");
+    const ctg_uid = checkedItems.map(function() {
+        return $(this).closest('tr').find('.quantity input').attr('id').replace('quantity_', '');
+    }).get();
+
+    // AJAX를 사용하여 서버에 선택된 상품 삭제 요청 전송
+    $.ajax({
+        type: "POST",
+        url: "/deleteSelectedItems",
+        data: { ctg_uid: ctg_uid },
+        success: function(updatedCart) {
+            // 성공 시: 서버에서 받은 업데이트된 장바구니 정보로 화면 업데이트
+            updateCart(updatedCart);
+        },
+        error: function(error) {
+            console.error('Error deleting items:', error);
+        }
+    });
+}
+
+function updateCart(updatedCart) {
+    // 업데이트된 장바구니 정보를 사용하여 화면 업데이트
+    // 이 부분은 실제로 업데이트하는 방식에 따라 다를 수 있습니다.
+    console.log("Cart updated:", updatedCart);
+    // 여기에서 화면 업데이트 로직을 추가하세요.
+    // 예: location.reload(); 또는 특정 부분만 업데이트하는 등의 방법으로 화면을 갱신
+}
+
+
+

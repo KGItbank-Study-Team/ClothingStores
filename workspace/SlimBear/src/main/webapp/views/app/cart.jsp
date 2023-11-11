@@ -27,7 +27,7 @@
 				<h1>C A R T</h1>
 				<thead>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="selectAll"></td>
 						<td colspan="2">상품정보</td>
 						<td>옵션</td>
 						<td>수량</td>
@@ -84,8 +84,11 @@
 													<option value="${XXXL}">XXXL</option>
 													<option value="${XXXXL}">XXXXL</option>
 											</select></td>
-										</tr>
-									</tbody>
+										</tr> <tr><td colspan="3">
+		            <button type="submit" class="chchange">변경하기</button>
+						</td></tr>
+		        </tbody>
+		       
 								</table>
 							</div> 
 						</td>
@@ -113,8 +116,8 @@
 				
 				<tfoot>
 					<tr>
-						<td colspan="3"><input type="checkbox">
-							<button class="cart__list__optionbtn">선택상품 삭제</button>
+						<td colspan="3"><!-- <input type="checkbox" id=:selectAll> -->
+							<button id="deleteSelectedBtn" class="cart__list__optionbtn">선택상품 삭제</button>
 							<button class="cart__list__optionbtn">선택상품 찜</button></td>
 						<td></td>
 						<td></td>

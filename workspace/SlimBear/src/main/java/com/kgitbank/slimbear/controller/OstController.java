@@ -1,11 +1,15 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.service.OstSerivceImpl;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -32,6 +36,18 @@ public class OstController {
 		return "cart"; 
 	}
 	
+	@RequestMapping(value = "/deleteSelectedItems", method = RequestMethod.POST)
+	@ResponseBody
+	public List<MemberCartVO> deleteSelectedItems(@RequestParam List<Long> ctg_uid) {
+	    // ctg_uid가 올바르게 전송되는지 로그로 확인
+	    System.out.println("Received ctg_uid: " + ctg_uid);
+
+	    // ctg_uid에 해당하는 상품들을 삭제하고, 업데이트된 장바구니 정보를 반환
+	    List<MemberCartVO> updatedCart = ostService.deleteSelectedItems(ctg_uid);
+
+	    return updatedCart;
+	}
+
 }
 
 
