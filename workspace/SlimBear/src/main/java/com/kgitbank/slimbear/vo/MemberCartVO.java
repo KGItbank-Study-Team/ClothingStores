@@ -18,5 +18,6 @@ public class MemberCartVO {
 	private int maybeprice;
 	private int baedalprice;
 	private int quantity;
+	private int productId;
 	
 }

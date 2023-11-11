@@ -92,17 +92,17 @@
 						<td>
 					 	
 							<span class="quantity">
-									<input type="text" value="1" class="inputBox">
-									<a href="#none" class="">
-										<img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif">
+									<input type="text" value="1" class="inputBox" id="quantity_${cart.uid }">
+									<a href="javascript:void(0)" class="countUp" onclick="addQuantity(${cart.uid},1)">
+										<img alt="수량증가"  src="/resources/images/btn_count_up.gif">
 									</a>
-									<a href="#none">
-										<img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif">
+									<a href="javascript:void(0)" class="countDown" onclick="outQuantity(${cart.uid}, 1)">
+										<img alt="수량감소"  src="/resources/images/btn_count_down.gif">
 									</a>
 							</span>
 						</td>
-						<td><p>${cart.addprice}</p></td>
-						<td><span class="price" id="price_">${cart.price}</span>
+						<td><p id="addPrice_${cart.uid }">${cart.addprice}</p></td>
+						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
 						<td>${cart.baedalprice }</td>
 					</tr>
@@ -145,8 +145,7 @@
 		</table>
 		<div class="cart__mainbtns">
 			<button class="cart__bigorderbtn left"
-				onclick="main.jsp">쇼핑
-				계속하기</button>
+				onclick="location.href ='/'">쇼핑 계속하기</button>
 			<button class="cart__bigorderbtn right">주문하기</button>
 
 		</div>

@@ -25,6 +25,9 @@ public class OstSerivceImpl {
 			membercart.setAddprice(100);
 			membercart.setPrice(45000);
 			membercart.setBaedalprice(2500);
+			membercart.setProductId(i);
+			membercart.setTotalprice(membercart.getQuantity()* membercart.getPrice());
+			membercart.setTotalprice(membercart.getQuantity()* membercart.getAddprice());
 			
 			list.add(membercart);
 		}
