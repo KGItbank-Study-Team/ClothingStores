@@ -2,11 +2,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-// 	request.setAttribute("title", "문의사항");
-// 	request.setAttribute("boardTitle", "[공지]배송 후 교환/반품 게시판 이용 종료 안내");
-// 	request.setAttribute("name", "슬림베어_CR");
-// 	request.setAttribute("regDate", "9999-99-99");
-// 	request.setAttribute("boardContent", "안녕하세요 슬림베어입니다.");
+	request.setAttribute("title", "문의사항");
+	request.setAttribute("boardTitle", "[공지]배송 후 교환/반품 게시판 이용 종료 안내");
+	request.setAttribute("name", "슬림베어_CR");
+	request.setAttribute("regDate", "9999-99-99");
+	request.setAttribute("boardContent", "안녕하세요 슬림베어입니다.");
 %>
 <%
 	// 게시물의 작성자 정보를 어딘가에서 가져오고, 현재 로그인한 사용자 정보를 세션에서 가져옵니다
@@ -25,7 +25,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
-<title>BOARD</title>
+<title>BOARD INQUIRY</title>
 </head>
 
 <body>
@@ -144,7 +144,7 @@
                                 <a href="#" onclick="" class="btnNormalFix sizeS ">스팸신고</a>
                                 <a href="#" onclick="" class="btnNormalFix sizeS ">스팸해제</a>
                             </span>
-                            <a href="/app/board/notice" class="btnNormalFix sizeS">LIST</a>
+                            <a href="/app/board/inquiry" class="btnNormalFix sizeS">LIST</a>
                         </span>
                         
                         <span class="gRight">

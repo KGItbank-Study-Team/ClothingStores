@@ -25,7 +25,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
-<title>NOTICE BOARD</title>
+<title>BOARD NOTICE</title>
 </head>
 
 <body>
@@ -144,7 +144,7 @@
                                 <a href="#none" onclick="" class="btnNormalFix sizeS ">스팸신고</a>
                                 <a href="#none" onclick="" class="btnNormalFix sizeS ">스팸해제</a>
                             </span>
-                            <a href="/views/app/notice.jsp" class="btnNormalFix sizeS">LIST</a>
+                            <a href="/app/board/notice" class="btnNormalFix sizeS">LIST</a>
                         </span>
                         
                         <span class="gRight">
