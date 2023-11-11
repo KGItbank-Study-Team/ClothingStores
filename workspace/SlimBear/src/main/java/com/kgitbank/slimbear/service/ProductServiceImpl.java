@@ -21,5 +21,4 @@ public class ProductServiceImpl {
 	public ProductDTO getProductByUid(long uid) {
 		return prodDAO.getProductByUid(uid);
 	}
-	
 }

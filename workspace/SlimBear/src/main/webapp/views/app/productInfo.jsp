@@ -29,6 +29,13 @@ request.setAttribute("size2", "3XL");
 request.setAttribute("size3", "4XL");
 request.setAttribute("size4", "5XL");
 request.setAttribute("price1", "198,000원");
+request.setAttribute("mem_id", "헤비쇼핑러");
+request.setAttribute("reg_date", "2023-11-11");
+request.setAttribute("score", "5");
+request.setAttribute("images", "");
+request.setAttribute("content", "톱톱하고 예쁜데 사이즈애매하네요<br> <br> 172 62 낭편입었는데 품은 적당한데 팔 왜케길까요<br> <br> 오버핏이라지만 적당히 예쁜오버핏은 아니고 불편하고 별로더라구요<br> 두께나 색은 마음에는데 조금 아쉽네요<br> 키랑몸무게 비슷하시면 참고하세요");
+ArrayList<String> reviewList = new ArrayList<String>();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -126,11 +133,8 @@ request.setAttribute("price1", "198,000원");
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="javascript:buyClick()" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> <span class="btnSpan" style="color: white !important;">BUY IT
-								NOW</span>
-						</a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span class="btnSpan">ADD TO CART</span></a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span
-							class="btnSpan"
-						>ADD TO WISH</span></a>
+						<a href="javascript:buyClick()" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> <span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
+						</a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span class="btnSpan">ADD TO CART</span></a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span class="btnSpan">ADD TO WISH</span></a>
 					</div>
 				</div>
 				<!-- 사이즈 가이드 -->
@@ -279,29 +283,30 @@ request.setAttribute("price1", "198,000원");
 						</div>
 					</div>
 					<hr />
+					<%-- <%for(int i=0; i<5; i++) { %> --%>
+					<c:forEach items="${reviewList}" var="list">
 					<div class="review-section">
 						<div class="info">
 							<div>
-								<span>헤비쇼핑러</span>
+								<span>${list.mem_id}</span>
 								<div>
-									<p>(2023.11.11)</p>
+									<p>${list.reg_date}</p>
 								</div>
 							</div>
-							<div class="review-score">★★★★★</div>
+							<div class="review-score">★★★★★(${list.score})</div>
 						</div>
 						<div class="photo-review">
-							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a>
-							<a><img alt="상품" src="/resources/images/review_images02.jpg"></a>
-							<a><img alt="상품" src="/resources/images/review_images03.jpg"></a>
-							<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
-							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품" src="/resources/images/review_images04.jpg"></a> <a><img
+								alt="상품" src="/resources/images/review_images05.jpg"
+							></a>
 						</div>
 						<div class="review-text">
 							<div>
-								톱톱하고 예쁜데 사이즈애매하네요<br> <br> 172 62 낭편입었는데 품은 적당한데 팔 왜케길까요<br> <br> 오버핏이라지만 적당히 예쁜오버핏은 아니고 불편하고 별로더라구요<br> 두께나 색은 마음에는데 조금 아쉽네요<br> 키랑몸무게 비슷하시면 참고하세요
+								${list.content}
 							</div>
 						</div>
-						<hr/>
+						<hr />
+					</c:forEach>
 						<div class="paging">
 							<span class="prev"> <a href="#">< 이전</a>
 							</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>

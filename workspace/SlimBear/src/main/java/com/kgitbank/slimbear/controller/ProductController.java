@@ -11,7 +11,7 @@ import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
 
 @Controller
-@RequestMapping("product")
+@RequestMapping("")
 public class ProductController {
 	
 	@Autowired

@@ -22,7 +22,7 @@ public class ReviewDAO {
 	
 	// 리뷰 리스트 받아오기
 	public List<ReviewDTO> getReviewList() { 
-		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST");
+		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST"); // 패키지풀네임.id
 	}
 	
 	// 데이터 넣기
