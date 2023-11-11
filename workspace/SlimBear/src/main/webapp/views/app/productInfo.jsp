@@ -278,7 +278,6 @@ request.setAttribute("price1", "198,000원");
 							<a href="#">최근등록순</a>
 						</div>
 					</div>
-					<br />
 					<hr />
 					<div class="review-section">
 						<div class="info">
@@ -290,9 +289,19 @@ request.setAttribute("price1", "198,000원");
 							</div>
 							<div class="review-score">★★★★★</div>
 						</div>
-						<div class="phto-review">
-							<a><img alt="상품" src="/resources/images/outerEx02.gif"></a>
+						<div class="photo-review">
+							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images02.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images03.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
 						</div>
+						<div class="review-text">
+							<div>
+								톱톱하고 예쁜데 사이즈애매하네요<br> <br> 172 62 낭편입었는데 품은 적당한데 팔 왜케길까요<br> <br> 오버핏이라지만 적당히 예쁜오버핏은 아니고 불편하고 별로더라구요<br> 두께나 색은 마음에는데 조금 아쉽네요<br> 키랑몸무게 비슷하시면 참고하세요
+							</div>
+						</div>
+						<hr/>
 						<div class="paging">
 							<span class="prev"> <a href="#">< 이전</a>
 							</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
