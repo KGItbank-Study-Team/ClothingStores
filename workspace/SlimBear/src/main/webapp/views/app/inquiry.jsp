@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -119,30 +118,30 @@
 						</tbody>
 						
 						<!-- 2번째 tbody for문  -->
-						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
-						    <c:forEach var="num" items="${nums}" varStatus="loop">
+						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
+						    <c:forEach var="boardUser" items="${boardUsers}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
-						            <td>${num}</td>
-						            <td class="displaynone">${num}</td>
+						            <td>${boardUser.no}</td>
+						            <td class="displaynone">${boardUser}</td>
 						            <td class="subject left txtBreak">
 						                <span class="displaynone">
-						                    <a href="#none" onclick="BOARD.viewTarget('${num}', '6', this);">
+						                    <a href="#none" onclick="BOARD.viewTarget('${boardUser}', '6', this);">
 						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
 						                    </a>
 						                </span>
-						                <a href="/article/상품문의/6/${num}" style="color:#555555;">${num}</a>
-						                <img src="/web/upload/icon_201611292036328500.png" alt="비밀글" class="ec-common-rwd-image"/>
-						                <img src="/web/upload/icon_201611292036284200.gif" alt="NEW" class="ec-common-rwd-image"/>
+						                <a href="/article/상품문의/6/${boardUser.no}" style="color:#555555;">${boardUser.title}</a>
+						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
 						                <span class="txtEm"></span>
 						            </td>
-						            <td>${num}</td>
-						            <td class=""><span class="txtNum">${num}</span></td>
-						            <td class="displaynone"><span class="txtNum">${num}</span></td>
-						            <td class="displaynone"><span class="txtNum">${num}</span></td>
+						            <td>${boardUser.writer_id}</td>
+						            <td class=""><span class="txtNum">${boardUser.reg_date}</span></td>
+						            <td class="displaynone"><span class="txtNum">${boardUser}</span></td>
+						            <td class="displaynone"><span class="txtNum">${boardUser}</span></td>
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
 						    </c:forEach>
-						</tbody> --%>
+						</tbody>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>

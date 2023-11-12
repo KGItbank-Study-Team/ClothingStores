@@ -17,7 +17,7 @@ public class YangBoardServiceImpl {
         ArrayList<BoardNoticeListVO> boards = new ArrayList<>();
         
 	     // 임시 데이터 생성
-	    for (int i = 10; i >= 1; i--) {
+	    for (int i = 6; i >= 1; i--) {
 	        BoardNoticeListVO board = new BoardNoticeListVO();
 	        board.setNo(i);
 	        board.setTitle("제목 " + i);
@@ -38,7 +38,7 @@ public class YangBoardServiceImpl {
 	public ArrayList<BoardInquiryListVO> getBoardInquiryList(){		// 상품문의
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
-		for (int i = 10; i >= 1; i--) {
+		for (int i = 5; i >= 1; i--) {
 			BoardInquiryListVO board = new BoardInquiryListVO();
 			board.setNo(i);
 			board.setTitle("상품문의 " + i);
@@ -53,7 +53,7 @@ public class YangBoardServiceImpl {
 	public ArrayList<BoardInquiryListVO> getBoardInquiry2List(){	// 배송문의
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
-		for (int i = 10; i >= 1; i--) {
+		for (int i = 2; i >= 1; i--) {
 			BoardInquiryListVO board = new BoardInquiryListVO();
 			board.setNo(i);
 			board.setTitle("배송문의 " + i);
@@ -68,7 +68,7 @@ public class YangBoardServiceImpl {
 	public ArrayList<BoardInquiryListVO> getBoardInquiry3List(){	// 배송 전 변경/취소
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
-		for (int i = 10; i >= 1; i--) {
+		for (int i = 1; i >= 1; i--) {
 			BoardInquiryListVO board = new BoardInquiryListVO();
 			board.setNo(i);
 			board.setTitle("배송 전 변경/취소 " + i);
@@ -80,7 +80,6 @@ public class YangBoardServiceImpl {
 		}
 		return boards;
 	}
-	
 	
 	// FAQ
 	public ArrayList<BoardFaqListVO> getBoardFaqList() {
@@ -96,7 +95,23 @@ public class YangBoardServiceImpl {
 	    }
         return boards;
     }
-
+	
+	// 유저 게시글
+	public ArrayList<BoardInquiryListVO> getBoardUserList(){	
+		ArrayList<BoardInquiryListVO> boardUsers = new ArrayList<>();
+		
+		for (int i = 10; i >= 1; i--) {
+			BoardInquiryListVO boardUser = new BoardInquiryListVO();
+			boardUser.setNo(i);
+			boardUser.setTitle("유저게시글 " + i);
+			boardUser.setWriter_id("유저작성자 " + i);
+			boardUser.setReg_date(new Date(System.currentTimeMillis()));
+			boardUser.setContent("내용 " + i);
+			
+			boardUsers.add(boardUser);
+		}
+		return boardUsers;
+	}
 	
 	// 게시글작성
 	public Object getBoardWrite() {

@@ -4832,4 +4832,8 @@ i {
   top: 0px !important;
 }
 
+/* NO 체크부분 */
+.xi-check:before {
+    content: "\e928"
+}
 
