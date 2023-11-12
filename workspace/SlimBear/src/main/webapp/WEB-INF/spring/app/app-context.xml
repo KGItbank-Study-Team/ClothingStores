@@ -3,19 +3,38 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<context:component-scan
 		base-package="com.kgitbank.slimbear" />
 
+    <!-- View Resolver -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/app/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<!-- AOP -->
+	<!-- root-context에 작성하면 pointcut이 적용되지 않는것으로 보이며 AOP가 정상작동하지 않습니다.-->
+	<aop:config>
+		<!-- Transaction Pointcut-->
+		<aop:pointcut id="transactionPoincut" expression="execution(* com.kgitbank.slimbear.service.*Impl.*(..))" />
+		<!-- Loggin Pointcut-->
+		<aop:pointcut id="controllerLogPointcut" expression="execution(* com.kgitbank.slimbear.controller.*.*(..))" />
 
+		<!-- Transaction Aspect-->
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPoincut" />
+		<!-- Loggin Aspect-->
+		<aop:aspect ref="logginAspect"> 
+			<aop:before method="controllerBeforeLog" pointcut-ref="controllerLogPointcut" />
+		</aop:aspect>
+	</aop:config>
+	
 	<!-- root에 넣고 싶은데 여기아니면 문제가 생깁니다. -->
 	<mvc:annotation-driven/>
 </beans>

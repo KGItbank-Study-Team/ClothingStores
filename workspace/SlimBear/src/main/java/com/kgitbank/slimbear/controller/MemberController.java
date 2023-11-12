@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
-import com.kgitbank.slimbear.service.MemberServiceImpl;
+import com.kgitbank.slimbear.service.MemberService;
 
 
 @Controller
@@ -16,20 +16,24 @@ import com.kgitbank.slimbear.service.MemberServiceImpl;
 public class MemberController {
 	
 	@Autowired
-	private MemberServiceImpl memberService;
+	private MemberService memberService;
 	
 	@RequestMapping("join")
-	public String join(MemberDTO member) {
+	public String join(MemberDTO member){
 		
 		member.setReg_date(new Date(System.currentTimeMillis()));
 		
-		if(memberService.join(member)) {
+		try {
+			if(memberService.join(member)) {
+				return "redirect:/";
+			}else {
 			
-			return "redirect:/";
-		}else {
-		
-			return "redirect:/app/join";
+				return "redirect:/app/join";
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
+		return "redirect:/app/join";
 	}
 
 }

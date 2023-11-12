@@ -51,7 +51,7 @@
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->
-	<!-- @Mapper 어노테이션을 사용하여 java코드로 Mapper구현하면 아래와 mapper파일을 생성할 때 마다 추가하지 않아도 된다. -->
+	<!-- root-context에서 sqlSessionFactory 에 프로퍼티로 추가하여 아래 코드 주석처리
 	<mappers>
 		<mapper resource="mappings/member-mapping.xml"/>
 		<mapper resource="mappings/product-mapping.xml"/>
@@ -61,5 +61,5 @@
 		<mapper resource="mappings/order-mapping.xml"/>
 		<mapper resource="mappings/page-mapping.xml"/>
 	</mappers>
-	
+	 -->
 </configuration>

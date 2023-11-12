@@ -9,7 +9,7 @@ import com.kgitbank.slimbear.dao.PageConfigDAO;
 import com.kgitbank.slimbear.dto.ProductBannerTopDTO;
 
 @Service
-public class PageConfigService {
+public class PageConfigServiceImpl {
 
 	
 
