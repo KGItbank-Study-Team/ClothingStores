@@ -25,13 +25,13 @@
 		<!-- Transaction Pointcut-->
 		<aop:pointcut id="transactionPoincut" expression="execution(* com.kgitbank.slimbear.service.*Impl.*(..))" />
 		<!-- Loggin Pointcut-->
-		<aop:pointcut id="controllerLogPointcut" expression="execution(* com.kgitbank.slimbear.controller.*.*(..))" />
+		<aop:pointcut id="controllerPointcut" expression="execution(* com.kgitbank.slimbear.controller.*.*(..))" />
 
 		<!-- Transaction Aspect-->
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPoincut" />
 		<!-- Loggin Aspect-->
 		<aop:aspect ref="logginAspect"> 
-			<aop:before method="controllerBeforeLog" pointcut-ref="controllerLogPointcut" />
+			<aop:before method="controllerBeforeLog" pointcut-ref="controllerPointcut" />
 		</aop:aspect>
 	</aop:config>
 	
