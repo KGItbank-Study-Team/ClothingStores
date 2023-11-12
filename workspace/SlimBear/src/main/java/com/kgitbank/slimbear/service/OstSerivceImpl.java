@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -23,7 +24,7 @@ public class OstSerivceImpl {
     private void initializeCart() {
         // 데이터베이스에서 초기 장바구니 정보를 가져옴
         // 예시로 가상의 데이터를 추가
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 4; ++i) {
             MemberCartVO membercart = new MemberCartVO();
             membercart.setUid(i);
             membercart.setDesc("유해커의 후드티");
@@ -39,12 +40,10 @@ public class OstSerivceImpl {
             cartList.add(membercart);
         }
     }
-
+    
     public List<MemberCartVO> getCart() {
         return cartList;
     }
-    @RequestMapping(value = "/deleteSelectedItems", method = RequestMethod.POST)
-    @ResponseBody
     public List<MemberCartVO> deleteSelectedItems(List<Long> ctg_uid) {
         System.out.println("Received ctg_uid: " + ctg_uid);
 
@@ -56,15 +55,23 @@ public class OstSerivceImpl {
                 updatedCart.add(cartItem);
             }
         }
-
-        // 여기에서 삭제된 항목들에 대한 처리 추가
-        // 데이터베이스에서도 삭제 작업을 수행해야 합니다.
-
-        // 업데이트된 장바구니 정보를 반영
         cartList = updatedCart;
 
         return updatedCart;
     }
 
+ // 해당 제품의 수량을 업데이트하는 메서드 추가
+    public void updateQuantity(long productId, int newQuantity) {
+        for (MemberCartVO cartItem : cartList) {
+            if (cartItem.getUid() == productId) {
+                // 수량을 업데이트하고 totalprice도 다시 계산
+                cartItem.setQuantity(newQuantity);
+                cartItem.setTotalprice(newQuantity * cartItem.getPrice());
+                break;  // 해당 제품을 찾았으므로 반복 중단
+            }
+        }
+        //ostRepository.updateQuantity(productId, newQuantity); 데이터베이스 업데이트 로직을 추가할 수 있음
+    }
+    
 }
 

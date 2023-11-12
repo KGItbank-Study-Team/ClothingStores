@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link href="/resources/css/cart.css" rel="stylesheet" />
 <script defer src="/resources/js/cart.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <title>장 바 구 니</title>
 </head>
 <body>

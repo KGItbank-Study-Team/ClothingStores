@@ -11,13 +11,16 @@ function toggleHiddenContent(button) {
     }
 }
 
+// JavaScript에서 totalprice를 업데이트하도록 수정
 function addQuantity(id, step) {
     var inputField = document.getElementById('quantity_' + id);
     if (inputField) {
         var currentValue = parseInt(inputField.value);
         if (!isNaN(currentValue)) {
             inputField.value = currentValue + step;
-            updatePrice(id); // 수량을 업데이트한 후, 가격을 다시 업데이트
+            updateTotalPrice(id); // totalprice 업데이트 추가
+            //updatePrice(id); // 기존의 price 업데이트
+            updateServer(id, currentValue + step); // 서버에 업데이트된 수량 전송
         }
     }
 }
@@ -28,21 +31,50 @@ function outQuantity(id, step) {
         var currentValue = parseInt(inputField.value);
         if (!isNaN(currentValue) && currentValue > 1) {
             inputField.value = currentValue - step;
-            updatePrice(id); // 수량을 업데이트한 후, 가격을 다시 업데이트
+            updateTotalPrice(id); // totalprice 업데이트 추가
+            updatePrice(id); // 기존의 price 업데이트
+            updateServer(id, currentValue - step); // 서버에 업데이트된 수량 전송
         }
     }
 }
 
-function updatePrice(productId) {
-    var priceElement = document.getElementById('price_' + productId);
-    if (priceElement) {
+function updateTotalPrice(productId) {
+    var totalpriceElement = document.getElementById('totalprice_' + productId);
+    if (totalpriceElement) {
         var productPrice = 45000; // 상품의 가격 (실제 가격으로 설정해야 함)
         var quantity = parseInt(document.getElementById('quantity_' + productId).value);
-        var newPrice = quantity * productPrice;
-        priceElement.textContent = "₩" + newPrice;
+        var newTotalPrice = quantity * productPrice;
+        totalpriceElement.textContent = newTotalPrice +"원";
     }
 }
+function updateServer(productId, newQuantity) {
+    $.ajax({
+        type: "POST",
+        url: "/updateQuantity",
+        data: { productId: productId, newQuantity: newQuantity },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (error) {
+            console.error('Error updating quantity on the server:', error);
+        }
+    });
+}
 
+// 서버에 업데이트된 수량을 전송하는 함수 추가
+function updateServer(productId, newQuantity) {
+    $.ajax({
+        type: "POST",
+        url: "/updateQuantity",
+        data: { productId: productId, newQuantity: newQuantity },
+        success: function () {
+            console.log("Quantity updated on the server");
+        },
+        error: function (error) {
+            console.error('Error updating quantity on the server:', error);
+        }
+    });
+}
 
 function updateQuantity(productId, change) {
     // 해당 productId에 대한 quantity input 요소를 찾기
@@ -80,10 +112,11 @@ $(document).ready(function () {
         tbodyCheckboxes.prop("checked", isChecked);
     });
 
-    // 삭제 버튼 클릭 시
-    $("#deleteSelectedBtn").on("click", function () {
-        deleteSelectedItems();
-    });
+   
+});
+// 삭제 버튼 클릭 시
+$("#deleteSelectedBtn").on("click", function () {
+    deleteSelectedItems();
 });
 
 function deleteSelectedItems() {
@@ -114,6 +147,8 @@ function updateCart(updatedCart) {
     // 여기에서 화면 업데이트 로직을 추가하세요.
     // 예: location.reload(); 또는 특정 부분만 업데이트하는 등의 방법으로 화면을 갱신
 }
+
+
 
 
 

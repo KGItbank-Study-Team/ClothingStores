@@ -1,11 +1,11 @@
 package com.kgitbank.slimbear.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +47,15 @@ public class OstController {
 
 	    return updatedCart;
 	}
-
+	
+	@PostMapping("/updateQuantity")
+    @ResponseBody
+    public String updateQuantity(@RequestParam long productId, @RequestParam int newQuantity) {
+        // TODO: 서비스를 호출하여 해당 제품의 수량을 업데이트
+        // ostService.updateQuantity(productId, newQuantity);
+        
+        return "Quantity updated successfully";
+    }
 }
 
 
