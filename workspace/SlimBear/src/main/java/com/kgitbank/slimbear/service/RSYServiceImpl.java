@@ -18,6 +18,7 @@ public class RSYServiceImpl {
 	private CategoryDAO ctgDAO;
 	
 	public List<ProductDTO> getProductListByCategory(int category, String order) {
+		if (order == null) {order = "";}
 		switch(order) {
 			case "PRICE_ASC":
 				return prodDAO.getProductByCategoryOrderByPrice(category, order);
