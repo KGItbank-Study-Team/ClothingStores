@@ -109,7 +109,7 @@ public class YangBoardServiceImpl {
 			board.setTitle_ment("자주 묻는 질문 안내드립니다♡");
 	        board.setQuestion("상품관련 " + i);
 	        board.setAnswer("신상품 할인 기간을 알고 싶어요 " + i + " ?");
-	        board.setContent("내용 작성 " + i);
+	        board.setContent("신상품 업데이트 후 3일 동안 5% 할인 가격으로 판매됩니다. " + i);
 	        
 	        boards.add(board);
 	    }
@@ -123,7 +123,7 @@ public class YangBoardServiceImpl {
 			board.setTitle_ment("자주 묻는 질문 안내드립니다♡");
 	        board.setQuestion("배송관련 " + i);
 	        board.setAnswer("무료 배송 가능한가요 " + i + " ?");
-	        board.setContent("내용 작성 " + i);
+	        board.setContent("슬림베어는 항시 무료배송입니다. " + i);
 	        
 	        boards.add(board);
 	    }
@@ -137,7 +137,7 @@ public class YangBoardServiceImpl {
 			board.setTitle_ment("자주 묻는 질문 안내드립니다♡");
 	        board.setQuestion("교환/반품관련 " + i);
 	        board.setAnswer("교환/반품 시 배송비는 어떻게 하나요 " + i + " ?");
-	        board.setContent("내용 작성 " + i);
+	        board.setContent("▶반품 : 환불 금액에서 배송비 차감 후 환불해 드려요. " + i);
 	        
 	        boards.add(board);
 	    }
@@ -151,7 +151,7 @@ public class YangBoardServiceImpl {
 			board.setTitle_ment("자주 묻는 질문 안내드립니다♡");
 	        board.setQuestion("기타관련 " + i);
 	        board.setAnswer("현금영수증 신청은 어떻게 하나요 " + i + " ?");
-	        board.setContent("내용 작성 " + i);
+	        board.setContent("고객님께서 주문서 작성 시 현금영수증 신청 직접 가능합니다. " + i);
 	        
 	        boards.add(board);
 	    }
@@ -165,7 +165,7 @@ public class YangBoardServiceImpl {
 			board.setTitle_ment("자주 묻는 질문 안내드립니다♡");
 	        board.setQuestion("쇼룸관련 " + i);
 	        board.setAnswer("결제수단은 어떻게 될까요 " + i + " ?");
-	        board.setContent("내용 작성 " + i);
+	        board.setContent("카드결제 또는 계좌이체가 가능합니다. " + i);
 	        
 	        boards.add(board);
 	    }

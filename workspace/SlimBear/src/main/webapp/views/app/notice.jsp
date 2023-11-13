@@ -160,59 +160,60 @@
 						</tbody>
 						
 					</table>
-					
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
 				</div>
-				<div class="xans-element- xans-board xans-board-buttonlist-1002 xans-board-buttonlist xans-board-1002 ec-base-button typeBG displaynone ">
-					<span class="gRight"> 
-						<a href="#"
-						class="btnSubmitFix sizeS displaynone">write</a>
-					</span>
-				</div>
 				
-				<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
-					<a href="#"><img src="/resources/images/icon_prev2.png" /></a>
-					<ol>
-						<li class="xans-record-">
-							<a href="#" class="this">1</a></li>
-						<!-- <li class="xans-record-">
-							<a href="#" class="other">2</a></li> -->
-					</ol>
-					<a href="?board_no=1&page=2"><img src="/resources/images/icon_next2.png" /></a>
-				</div>
-				
-				
-				<form id="boardSearchForm" name="" action="/board/notice/1"
-					method="get" target="_top" enctype="multipart/form-data">
-					<input id="board_no" name="board_no" value="1" type="hidden" />
-					<input id="page" name="page" value="1" type="hidden" />
-					<input id="board_sort" name="board_sort" value="" type="hidden" />
-					<div class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
-						<fieldset class="boardSearch">
-							<legend>게시물 검색</legend>
-							<p>
-							<select id="search_date" name="search_date">
-								<option value="week">일주일</option>
-								<option value="month">한달</option>
-								<option value="month3">세달</option>
-								<option value="all">전체</option>
-							</select> 
-							<select id="search_key" name="search_key">
-								<option value="subject">제목</option>
-								<option value="content">내용</option>
-								<option value="writer_name">글쓴이</option>
-								<option value="member_id">아이디</option>
-								<option value="nick_name">별명</option>
-							</select>
-							<input id="searchs" name="searchs" class="searchs" placeholder="" 
-									value="" type="text" />
-							<a href="#" class="btnEmFix"
-								onclick="BOARD.form_submit('boardSearchForm');">FIND</a>
-							</p>
-						</fieldset>
+				<sec:authorize access="isAuthenticated()">
+					<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
+						<span class="gRight"> 
+							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a>
+						</span>
 					</div>
-				</form>
+				</sec:authorize>
 			</div>
+				
+			<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
+				<a href="#"><img src="/resources/images/icon_prev2.png" /></a>
+				<ol>
+					<li class="xans-record-">
+						<a href="#" class="this">1</a></li>
+					<!-- <li class="xans-record-">
+						<a href="#" class="other">2</a></li> -->
+				</ol>
+				<a href="?board_no=1&page=2"><img src="/resources/images/icon_next2.png" /></a>
+			</div>
+			
+			
+			<form id="boardSearchForm" name="" action="/board/notice/1"
+				method="get" target="_top" enctype="multipart/form-data">
+				<input id="board_no" name="board_no" value="1" type="hidden" />
+				<input id="page" name="page" value="1" type="hidden" />
+				<input id="board_sort" name="board_sort" value="" type="hidden" />
+				<div class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
+					<fieldset class="boardSearch">
+						<legend>게시물 검색</legend>
+						<p>
+						<select id="search_date" name="search_date">
+							<option value="week">일주일</option>
+							<option value="month">한달</option>
+							<option value="month3">세달</option>
+							<option value="all">전체</option>
+						</select> 
+						<select id="search_key" name="search_key">
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<option value="writer_name">글쓴이</option>
+							<option value="member_id">아이디</option>
+							<option value="nick_name">별명</option>
+						</select>
+						<input id="searchs" name="searchs" class="searchs" placeholder="" 
+								value="" type="text" />
+						<a href="#" class="btnEmFix"
+							onclick="BOARD.form_submit('boardSearchForm');">FIND</a>
+						</p>
+					</fieldset>
+				</div>
+			</form>
 		</div>
 		<jsp:include page="footer/footer.jsp" />
 	</div>
