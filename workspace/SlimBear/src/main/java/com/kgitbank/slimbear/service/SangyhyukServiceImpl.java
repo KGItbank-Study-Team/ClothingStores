@@ -1,12 +1,15 @@
 package com.kgitbank.slimbear.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kgitbank.slimbear.dao.ProductDAO;
+import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 
 @Service
@@ -26,7 +29,7 @@ public class SangyhyukServiceImpl {
 		return reviewDAO.getReviewListRecent();
 	}
 	
-	// 리뷰 데이터 넣기	
+	// 리뷰 데이터 넣기
 	public void insertReview(ReviewDTO review) {
 		reviewDAO.insertReview(review);
 	}
@@ -42,5 +45,14 @@ public class SangyhyukServiceImpl {
 	
 	public ProductDTO getProductByUid(long uid) {
 		return prodDAO.getProductByUid(uid);
+	}
+	
+	
+	/* 상품 옵션 데이터 받아오기 */
+	@Autowired
+	public ProductDetailDAO prodDetailDAO;
+	
+	public List<ProductDetailDTO> getProductDetailList(long prod_uid) {
+		return prodDetailDAO.getProductDetailList(prod_uid);
 	}
 }

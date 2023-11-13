@@ -1,6 +1,5 @@
 package com.kgitbank.slimbear.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
-import com.kgitbank.slimbear.service.ProductServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 
 @Controller
@@ -50,8 +48,12 @@ public class SanghyukController {
 		
 		System.out.println(reviewList);
 		
+		// 제품의 옵션 가져오기
+		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("productDetailList", productDetailList);
 
 		return "productInfo"; // .jsp 생략
 	}

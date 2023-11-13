@@ -85,8 +85,7 @@ ArrayList<String> reviewList = new ArrayList<String>();
 								<td>
 									<ul class="colorOptionPosition">
 										<!-- 색상 옵션 -->
-										<c:set var="color" value="<%=colors%>" />
-										<c:forEach var="colorList" items="${color}">
+										<c:forEach var="colorList" items="${colors}">
 											<li class="colorBtn" onclick="productCnt"><a href="#none"> <span class="colorOption">${colorList}</span>
 											</a></li>
 										</c:forEach>
@@ -104,8 +103,7 @@ ArrayList<String> reviewList = new ArrayList<String>();
 								<td>
 									<ul class="sizeOptionPosition">
 										<!-- 사이즈 옵션 -->
-										<c:set var="size" value="<%=sizes%>" />
-										<c:forEach var="sizeList" items="${size}">
+										<c:forEach var="sizeList" items="${sizes}">
 											<li class="sizeBtn" onclick="updateSelection()"><a href="#none"> <span class="sizeOption">${sizeList}</span>
 											</a></li>
 										</c:forEach>
@@ -283,7 +281,6 @@ ArrayList<String> reviewList = new ArrayList<String>();
 						</div>
 					</div>
 					<hr />
-					<%-- <%for(int i=0; i<5; i++) { %> --%>
 					<c:forEach items="${reviewList}" var="list">
 					<div class="review-section">
 						<div class="info">
