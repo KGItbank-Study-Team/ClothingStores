@@ -149,7 +149,7 @@
 										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
 										<option value="상품 문의합니다 ♡">배송 문의합니다 ♡</option>
 										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
-										<option value=" 기타 문의합니다 ♡">기타 문의합니다 ♡</option>
+										<option value="기타 문의합니다 ♡">기타 문의합니다 ♡</option>
 									</select>
 									</td>
 								</tr>
