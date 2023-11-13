@@ -533,7 +533,7 @@ legend {
 
 .xans-board-listpackage .boardSort {
     float: left;
-    display: none;
+/*     display: none; */
 }
 
 .xans-board-listpackage select {
@@ -4721,9 +4721,10 @@ input {
 }
 
 /* 자주묻는질문 네비 */
-.boardnavitxt { /* display: none; */
+.boardnavitxt {
+	/* display: none; */
 	width: 480px;
-	margin: 0 auto;
+	margin: 0 350px;
 	border-top: 1px solid #d9d4cd;
 	border-bottom: 1px solid #d9d4cd;
 	padding: 10px;
