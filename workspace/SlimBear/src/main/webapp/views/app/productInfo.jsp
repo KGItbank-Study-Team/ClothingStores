@@ -261,7 +261,7 @@
 							<a href="#">최근등록순</a>
 						</div>
 					</div>
-					<hr />
+					<!-- <hr class="myHrTwo" /> -->
 					<c:forEach items="${reviewList}" var="list">
 					<div class="review-section">
 						<div class="info">
