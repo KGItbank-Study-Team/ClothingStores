@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS `member`;
-
 CREATE TABLE `member` (
 	`uid`	bigint unsigned	NOT NULL ,
 	`id`	varchar(11)	NOT NULL unique,
@@ -11,9 +10,14 @@ CREATE TABLE `member` (
 	`sex`	char(1)	NOT NULL	COMMENT 'Female, Male',
 	`reg_date`	datetime	NOT NULL
 );
+ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
+	`uid`
+);
+ALTER TABLE `SLIMBEAR`.`member` CHANGE COLUMN `uid` `uid` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+
 
 DROP TABLE IF EXISTS `productOrder`;
-
 CREATE TABLE `productOrder` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`mem_uid`	bigint unsigned 	NOT NULL,
@@ -42,8 +46,6 @@ CREATE TABLE `wish` (
 );
 
 DROP TABLE IF EXISTS `productReview`;
-
-drop table productReview;
 
 CREATE TABLE `productReview` (
 	`uid`	bigint unsigned 	NOT NULL,
@@ -100,13 +102,17 @@ CREATE TABLE `faq` (
 );
 
 DROP TABLE IF EXISTS `admin`;
-
 CREATE TABLE `admin` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`id`	varchar(11)	NULL,
 	`password`	varchar(100)	NULL,
 	`name`	varchar(30)	NULL
 );
+ALTER TABLE `admin` ADD CONSTRAINT `PK_ADMIN` PRIMARY KEY (
+	`uid`
+);
+ALTER TABLE `SLIMBEAR`.`admin` 
+CHANGE COLUMN `uid` `uid` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ;
 
 DROP TABLE IF EXISTS `orderPayment`;
 
@@ -170,9 +176,7 @@ ALTER TABLE `inquiryAnswer` ADD CONSTRAINT `PK_INQUIRYANSWER` PRIMARY KEY (
 	`uid`
 );
 
-ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
-	`uid`
-);
+
 
 ALTER TABLE `productOrder` ADD CONSTRAINT `PK_PRODUCTORDER` PRIMARY KEY (
 	`uid`
@@ -206,9 +210,7 @@ ALTER TABLE `faq` ADD CONSTRAINT `PK_FAQ` PRIMARY KEY (
 	`uid`
 );
 
-ALTER TABLE `admin` ADD CONSTRAINT `PK_ADMIN` PRIMARY KEY (
-	`uid`
-);
+
 
 ALTER TABLE `orderPayment` ADD CONSTRAINT `PK_ORDERPAYMENT` PRIMARY KEY (
 	`order_uid`
@@ -270,4 +272,3 @@ CREATE TABLE `memberOrderAddress` (
 ALTER TABLE `memberOrderAddress` ADD CONSTRAINT `PK_MEMBERORDERADDRESS` PRIMARY KEY (
 	`uid`
 );
-

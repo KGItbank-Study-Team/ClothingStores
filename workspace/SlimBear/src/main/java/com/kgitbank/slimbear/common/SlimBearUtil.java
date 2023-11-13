@@ -1,11 +1,9 @@
 package com.kgitbank.slimbear.common;
 
-import com.kgitbank.slimbear.dto.ProductDetailDTO;
-
 public class SlimBearUtil {
 
 	// 제품코드
-	public static String toProductCode(long prodUID, String color, String size) {
+	public static String appendProductCode(long prodUID, String color, String size) {
 		StringBuffer code = new StringBuffer();
 		code.append(prodUID).append(":")
 		.append(color).append(":")
@@ -14,19 +12,12 @@ public class SlimBearUtil {
 		return code.toString();
 	}
 	
-	public static ProductDetailDTO toProductDetail(String code) {
-		ProductDetailDTO productDetail = new ProductDetailDTO();
-		
-		String[] strSplit = code.split(":");
-		productDetail.setProd_uid(Integer.valueOf(strSplit[0]));
-		productDetail.setColor(strSplit[1]);
-		productDetail.setSize(strSplit[2]);
-
-		return productDetail;
+	public static String[] splitProductDetail(String code) {
+		return code.split(":");
 	}
 
 	// 주소
-	public static String toAddress(String number, String address1, String address2) {
+	public static String appendAddress(String number, String address1, String address2) {
 		StringBuffer address = new StringBuffer();
 		address.append(number).append("|")
 		.append(address1).append("|")
@@ -35,8 +26,21 @@ public class SlimBearUtil {
 		return address.toString();
 	}
 	
-	public static SlimBearAddress toAddress(String address) {
-		String[] strSplit = address.split("|");
-		return new SlimBearAddress(strSplit[0],strSplit[1],strSplit[2]);
+	public static String[] splitAddress(String address) {
+		return address.split("|");
+	}
+	
+	// 전화번호
+	public static String appendPhoneNumber(String number1, String number2, String number3) {
+		StringBuffer phone = new StringBuffer();
+		phone.append(number1).append("-")
+		.append(number2).append("-")
+		.append(number3);
+		
+		return phone.toString();
+	}
+	
+	public static String[] splitPhoneNumber(String phoneNumber) {
+		return phoneNumber.split("-");
 	}
 }
