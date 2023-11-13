@@ -217,8 +217,22 @@
 			<!-- right -->
 		</div>
 		<!-- productInfo  -->
-		<hr class="hrPosition" />
-		
+		<hr/>
+		<br/>
+		<div class="DetailInfo">
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo01.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo02.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo03.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo04.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo05.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo06.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo07.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo08.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo09.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo10.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo11.jpg"></div>
+			<div><img alt="이미지" src="/resources/images/product_DetailInfo12.jpg"></div>
+		</div>
 		<!-- 리뷰 영역 -->
 		<div id="wrapper">
 			<main id="product">
@@ -226,7 +240,7 @@
 					<nav>
 						<h1>REVIEW</h1>
 					</nav>
-					<hr />
+					<hr class="myHr" />
 					<div class="sort">
 						<div class="view-align">
 							<a href="#" class="on">판매많은순</a>
@@ -269,7 +283,7 @@
 								${list.content}
 							</div>
 						</div>
-						<hr />
+						<!-- <hr /> -->
 					</c:forEach>
 						<div class="paging">
 							<span class="prev"> <a href="#">< 이전</a>
