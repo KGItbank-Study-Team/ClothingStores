@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 
 public class MemberOrderAddressDTO {
-	
+	private long uid;
 	private long mem_uid;
 	private String name;
 	private String phone;

@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class InquiryAnswerDTO {
 
+	private long uid;
 	private long inqr_uid;
 	private String title;
 	private String content;
