@@ -18,4 +18,11 @@
 		SELECT * FROM product WHERE ctg_uid=#{ctg_uid}
 	</select>
 	
+	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE" resultType="product">
+      SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY price;
+   </select>
+   
+   <select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC" resultType="product">
+      SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY price DESC;
+   </select>
 </mapper>

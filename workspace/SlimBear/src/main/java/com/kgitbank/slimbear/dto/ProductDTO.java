@@ -15,4 +15,5 @@ public class ProductDTO {
 	private int price;
 	private String maker;
 	private String main_image;
+	private String order;
 }
