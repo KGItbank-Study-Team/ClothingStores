@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kgitbank.slimbear.service.PageConfigService;
+import com.kgitbank.slimbear.service.PageConfigServiceImpl;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
 
 @Controller
 public class PageController {
 
 	@Autowired
-	private PageConfigService pageConfigService;
+	private PageConfigServiceImpl pageConfigService;
 	
 	@Autowired
 	private ProductServiceImpl productService;

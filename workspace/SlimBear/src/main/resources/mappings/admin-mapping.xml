@@ -6,7 +6,7 @@
  
  <mapper namespace="com.slimbear.mapper.Admin">
  
- 	<!-- 리뷰 전체 목록 조회 -->
+ 	<!-- 관리자(admin) -->
  	<select id="SELECT_ADMIN_BY_ID" resultType="admin">
  		SELECT * FROM admin id=#{id}
  	</select>

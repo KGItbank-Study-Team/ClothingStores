@@ -8,7 +8,7 @@ import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 
 @Service
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO memDAO;
@@ -16,6 +16,7 @@ public class MemberServiceImpl {
 	@Autowired
 	private PasswordEncoder pwdEncoder;
 
+	@Override
 	public boolean join(MemberDTO member) {
 		
 		member.setPassword(pwdEncoder.encode(member.getPassword()));
@@ -26,6 +27,7 @@ public class MemberServiceImpl {
 		return false;
 	}
 
+	@Override
 	public MemberDTO getMemberById(String id) {
 		return memDAO.getMemberById(id);
 	}
