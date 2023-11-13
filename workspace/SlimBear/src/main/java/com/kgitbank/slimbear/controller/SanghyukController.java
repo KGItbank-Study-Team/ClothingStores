@@ -18,18 +18,8 @@ import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 @Controller
 public class SanghyukController {
 	
-	/* 리뷰 데이터 CONTROLLER */
 	@Autowired
 	private SangyhyukServiceImpl sanghService;
-	
-//	@RequestMapping("product")
-//	public String reviewPage(HttpSession session, Model model) throws Exception {
-//		List<ReviewDTO> reviewList = sanghService.getReviewList();
-//		
-//		System.out.println(reviewList);
-//		model.addAttribute("reviews", reviewList);
-//		return "productInfo"; // .jsp 생략
-//	}
 	
 	/* 상품 상세 데이터 CONTROLLER */
 	@RequestMapping("product")
@@ -45,7 +35,6 @@ public class SanghyukController {
 			
 		// 모든 제품 리뷰 가져오기
 		List<ReviewDTO> reviewList = sanghService.getReviewList();
-		
 		System.out.println(reviewList);
 		
 		// 제품의 옵션 가져오기

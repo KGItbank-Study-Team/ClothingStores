@@ -1,42 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-request.setAttribute("productInfo", "#SLIMEBEAR.WARM PLUS LIGHT V NECK JACKET 블랙");
-request.setAttribute("subExplanation", "made by slimebear, 성숙한 감성의 더플코트 :)<br/>핸드메이드 봉제로 더 고급스럽게,<br/>"
-		+ "퀄리티 있는 부자재로 더 완성도 높게 :)<br/>하나하나 매력있는 세 컬러로 만나보세요!");
-ArrayList<String> colors = new ArrayList<String>();
-colors.add("화이트");
-colors.add("크림");
-colors.add("브라운");
-colors.add("챠콜");
-colors.add("블랙");
-ArrayList<String> sizes = new ArrayList<String>();
-sizes.add("2XL");
-sizes.add("3XL");
-sizes.add("4XL");
-sizes.add("5XL");
 
-request.setAttribute("productInfo1", "없음");
-request.setAttribute("productInfo2", "보통");
-request.setAttribute("productInfo3", "있음");
-request.setAttribute("productInfo4", "없음");
-request.setAttribute("productInfo5", "오버핏");
-request.setAttribute("customMemo1", "⦁ 여유로운 오버핏 사이즈<br/>⦁ 전면 양쪽 포켓 디테일	<br/>⦁ 전면 양쪽 포켓 디테일<br/>⦁ 베이직한 스냅 디자인<br/>"
-		+ "⦁ 충전재 덕다운 80:20<br/>⦁ 나일론 원단<br/>");
-request.setAttribute("size1", "2XL");
-request.setAttribute("size2", "3XL");
-request.setAttribute("size3", "4XL");
-request.setAttribute("size4", "5XL");
-request.setAttribute("price1", "198,000원");
-request.setAttribute("mem_id", "헤비쇼핑러");
-request.setAttribute("reg_date", "2023-11-11");
-request.setAttribute("score", "5");
-request.setAttribute("images", "");
-request.setAttribute("content", "톱톱하고 예쁜데 사이즈애매하네요<br> <br> 172 62 낭편입었는데 품은 적당한데 팔 왜케길까요<br> <br> 오버핏이라지만 적당히 예쁜오버핏은 아니고 불편하고 별로더라구요<br> 두께나 색은 마음에는데 조금 아쉽네요<br> 키랑몸무게 비슷하시면 참고하세요");
-ArrayList<String> reviewList = new ArrayList<String>();
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,8 +50,8 @@ ArrayList<String> reviewList = new ArrayList<String>();
 								<td>
 									<ul class="colorOptionPosition">
 										<!-- 색상 옵션 -->
-										<c:forEach var="colorList" items="${colors}">
-											<li class="colorBtn" onclick="productCnt"><a href="#none"> <span class="colorOption">${colorList}</span>
+										<c:forEach var="detailList" items="${productDetailList}">
+											<li class="colorBtn" onclick="productCnt"><a href="#none"> <span class="colorOption">${detailList.color}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -103,8 +68,8 @@ ArrayList<String> reviewList = new ArrayList<String>();
 								<td>
 									<ul class="sizeOptionPosition">
 										<!-- 사이즈 옵션 -->
-										<c:forEach var="sizeList" items="${sizes}">
-											<li class="sizeBtn" onclick="updateSelection()"><a href="#none"> <span class="sizeOption">${sizeList}</span>
+										<c:forEach var="detailList" items="${productDetailList}">
+											<li class="sizeBtn" onclick="updateSelection()"><a href="#none"> <span class="sizeOption">${detailList.size}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -253,6 +218,8 @@ ArrayList<String> reviewList = new ArrayList<String>();
 		</div>
 		<!-- productInfo  -->
 		<hr class="hrPosition" />
+		
+		<!-- 리뷰 영역 -->
 		<div id="wrapper">
 			<main id="product">
 				<section class="list">
