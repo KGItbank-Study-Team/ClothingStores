@@ -1,17 +1,22 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
+import com.kgitbank.slimbear.vo.BoardFaqListVO;
 
 @Controller
 public class YangController {
     @Autowired
     private YangBoardServiceImpl boardService;
 
+    // 공지사항
     @RequestMapping("/board/notice")
     public String getBoardNoticeList(Model model) {
         model.addAttribute("boards", boardService.getBoardNoticeList());
@@ -26,6 +31,7 @@ public class YangController {
     }
     
     
+    // 문의사항
     @RequestMapping("/board/inquiry")
     public String getBoardInquiryList(Model model) {
         model.addAttribute("boards", boardService.getBoardInquiryList());
@@ -52,13 +58,43 @@ public class YangController {
     }
     
     
+    // 자주묻는질문
     @RequestMapping("/board/faq")
-    public String getBoardFaqList(Model model) {
-        model.addAttribute("boards", boardService.getBoardFaqList());
-        return "faq"; // 뷰 이름 설정
+    public String getBoardFaqList(@RequestParam(name = "category_no", required = false, defaultValue = "0") int categoryNo, Model model) {
+    	ArrayList<BoardFaqListVO> boards;
+    	
+    	try {
+	    	switch(categoryNo) {
+		    	case 1:
+		            boards = boardService.getBoardFaq1List();
+		            break;
+		        case 2:
+		            boards = boardService.getBoardFaq2List();
+		            break;
+		        case 3:
+		            boards = boardService.getBoardFaq3List();
+		            break;
+		        case 4:
+		            boards = boardService.getBoardFaq4List();
+		            break;
+		        case 5:
+		            boards = boardService.getBoardFaq5List();
+		            break;
+		        default:
+		            boards = boardService.getBoardFaqList();
+		    }
+	    	model.addAttribute("boards", boards);
+	    } catch (Exception e) {
+	    	// 예외 처리 로직을 추가
+	    	e.printStackTrace();	// 실제로는 로그에 기록하거나 적절한 예외 처리를 수행해야 합니다.
+	    	// 예외가 발생한 경우에 대한 사용자에게 보여줄 메시지 등을 추가할 수 있습니다.
+	    	model.addAttribute("errorMessage", "카테고리 조회 중 오류가 발생했습니다.");
+	    }
+        return "faq";
     }
     
     
+    // 게시글쓰기
     @RequestMapping("/board/write")
     public String getBoardWrite(Model model) {
         model.addAttribute("boards", boardService.getBoardWrite());

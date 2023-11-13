@@ -32,12 +32,14 @@
 							<li title="현재 위치"><strong>상품문의</strong></li>
 						</ol>
 					</div>
-					<div class="titleArea">
-						<h2>
-							<font color="333333">INQUIRY</font>
-						</h2>
-						<p></p>
-					</div>
+					<c:if test="${not empty boards}">
+					    <div class="titleArea">
+					        <h2>
+					            <font color="333333">${boards[0].inquiry_title}</font>
+					        </h2>
+					        <p>${boards[0].title_ment}</p>
+					    </div>
+					</c:if>
 					<p class="imgArea"></p>
 				</div>
 				

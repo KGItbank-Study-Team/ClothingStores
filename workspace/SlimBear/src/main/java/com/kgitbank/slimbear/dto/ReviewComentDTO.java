@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ReviewComentDTO {
+	private long uid;
 	private long review_uid;
 	private String title;
 	private String content;

@@ -43,6 +43,8 @@ CREATE TABLE `wish` (
 
 DROP TABLE IF EXISTS `productReview`;
 
+drop table productReview;
+
 CREATE TABLE `productReview` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`mem_id`	varchar(11)	NOT NULL,
@@ -56,6 +58,7 @@ CREATE TABLE `productReview` (
 DROP TABLE IF EXISTS `reviewComent`;
 
 CREATE TABLE `reviewComent` (
+	`uid`	bigint unsigned 	NOT NULL,
 	`review_uid`	bigint unsigned 	NOT NULL,
 	`title`	varchar(100)	NOT NULL,
 	`content`	varchar(100)	NOT NULL,
@@ -156,10 +159,15 @@ CREATE TABLE `orderDetail` (
 DROP TABLE IF EXISTS `inquiryAnswer`;
 
 CREATE TABLE `inquiryAnswer` (
+	`uid`	bigint unsigned 	NOT NULL,
 	`inqr_uid`	bigint unsigned 	NOT NULL,
 	`title`	varchar(100)	NOT NULL,
 	`content`	varchar(100)	NOT NULL,
 	`mem_id`	varchar(11)	NOT NULL
+);
+
+ALTER TABLE `inquiryAnswer` ADD CONSTRAINT `PK_INQUIRYANSWER` PRIMARY KEY (
+	`uid`
 );
 
 ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY (
@@ -179,6 +187,10 @@ ALTER TABLE `wish` ADD CONSTRAINT `PK_WISH` PRIMARY KEY (
 );
 
 ALTER TABLE `productReview` ADD CONSTRAINT `PK_PRODUCTREVIEW` PRIMARY KEY (
+	`uid`
+);
+
+ALTER TABLE `reviewComent` ADD CONSTRAINT `PK_REVIEWCOMENT` PRIMARY KEY (
 	`uid`
 );
 
@@ -221,10 +233,15 @@ ALTER TABLE `ProductBannerTop` ADD CONSTRAINT `PK_PRODUCTBANNERTOP` PRIMARY KEY 
 );
 
 CREATE TABLE `memberCoupon` (
+	`uid`	bigint unsigned 	NOT NULL,
 	`mem_uid`	bigint unsigned 	NOT NULL,
 	`coup_uid`	bigint unsigned 	NOT NULL,
 	`expi_date`	date	NOT NULL,
 	`use_date`	date	NULL	COMMENT 'null이면 사용안함'
+);
+
+ALTER TABLE `memberCoupon` ADD CONSTRAINT `PK_MEMBERCOUPON` PRIMARY KEY (
+	`uid`
 );
 
 
@@ -238,6 +255,19 @@ CREATE TABLE `Coupon` (
 );
 
 ALTER TABLE `Coupon` ADD CONSTRAINT `PK_COUPON` PRIMARY KEY (
+	`uid`
+);
+
+CREATE TABLE `memberOrderAddress` (
+	`uid`	bigint unsigned 	NOT NULL,
+	`mem_uid`	bigint unsigned 	NOT NULL,
+	`name`	varchar(30)	NOT NULL,
+	`phone`	varchar(30)	NULL,
+	`nomal_phone`	varchar(30)	NOT NULL,
+	`address`	varchar(100)	NOT NULL
+);
+
+ALTER TABLE `memberOrderAddress` ADD CONSTRAINT `PK_MEMBERORDERADDRESS` PRIMARY KEY (
 	`uid`
 );
 

@@ -40,11 +40,13 @@
 				</ol>
 			</div>
 			
-			<div class="xans-element- xans-board xans-board-title-3 xans-board-title xans-board-3 titleArea ">
-				<h2>FAQ</h2>
-				<p class="desc">자주 묻는 질문 안내드립니다♡</p>
-			</div>
-
+			<c:if test="${not empty boards}">
+				<div class="xans-element- xans-board xans-board-title-3 xans-board-title xans-board-3 titleArea ">
+					<h2>FAQ</h2>
+					<p class="desc">${boards[0].title_ment}</p>
+				</div>
+			</c:if>
+			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 			<div class="boardnavi">
 				<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
@@ -54,48 +56,47 @@
 			</div>
 
 			<div class="xans-element- xans-board xans-board-listpackage-3 xans-board-listpackage xans-board-3 board ">
-				<!-- <div class="boardSort">
+				<div class="boardSort">
 					<div class="boardnavitxt">
-						<a href="/board/index.html" class="faq01">
+						<a href="/app/board/faq" class="faq01">
 							<span>전체보기</span></a> 
-						<a href="/board/index.html?board_no=3&amp;category_no=1" class="faq02">
+						<a href="/app/board/faq?board_no=3&amp;category_no=1" class="faq02">
 							<span>상품관련</span></a> 
-						<a href="/board/index.html?board_no=3&amp;category_no=2" class="faq03">
+						<a href="/app/board/faq?board_no=3&amp;category_no=2" class="faq03">
 							<span>배송관련</span></a> 
-						<a href="/board/index.html?board_no=3&amp;category_no=3" class="faq04">
+						<a href="/app/board/faq?board_no=3&amp;category_no=3" class="faq04">
 							<span>교환/반품관련</span></a> 
-						<a href="/board/index.html?board_no=3&amp;category_no=4" class="faq05">
+						<a href="/app/board/faq?board_no=3&amp;category_no=4" class="faq05">
 							<span>기타관련</span></a> 
-						<a href="/board/index.html?board_no=3&amp;category_no=5" class="faq06">
+						<a href="/app/board/faq?board_no=3&amp;category_no=5" class="faq06">
 							<span>쇼룸관련</span></a>
 					</div>
-				</div> -->
+				</div>
 				
 				<table border="1" summary="">
 					<caption>이용안내 목록</caption>
 					
 					<tbody class="xans-element- xans-board xans-board-list-3 xans-board-list xans-board-3 center">
-					
-					<c:forEach items="${boards}" var="board">
-			            <tr class="xans-record-">
-			                <td class="subject" data-cate="${board.question}">
-			                    <a href="javascript:void(0);" class="toggle-button">
-			                        <b class="toggle-icon">Q</b>
- 			                        <span>${board.question}</span>
-			                        ${board.answer}
-			                        <z class="fold"></z>
-			                    </a>
-			                </td>
-			            </tr>
-			            <tr id="content-view" style="display: none;" class>
-			                <td colspan="1" class>
-			                    <div class="fr-view fr-view-article">
-			                        <p class="p-indented">
-			                        <span style="font-family: Verdana,Geneva,sans-serif;">${board.content}</span></p>
-			                    </div>
-			                </td>
-			            </tr>
-			        </c:forEach>
+						<c:forEach items="${boards}" var="board">
+				            <tr class="xans-record-">
+				                <td class="subject" data-cate="${board.question}">
+				                    <a href="javascript:void(0);" class="toggle-button">
+				                        <b class="toggle-icon">Q</b>
+	 			                        <span>${board.question}</span>
+				                        ${board.answer}
+				                        <z class="fold"></z>
+				                    </a>
+				                </td>
+				            </tr>
+				            <tr id="content-view" style="display: none;" class>
+				                <td colspan="1" class>
+				                    <div class="fr-view fr-view-article">
+				                        <p class="p-indented">
+				                        <span style="font-family: Verdana,Geneva,sans-serif;">${board.content}</span></p>
+				                    </div>
+				                </td>
+				            </tr>
+				        </c:forEach>
 							
 <!-- 						<tr class="xans-record-"> -->
 <!-- 							<td class="subject" data-cate="쇼룸관련"> -->

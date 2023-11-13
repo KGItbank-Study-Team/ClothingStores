@@ -8,7 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BoardFaqListVO {
-	
+
+	private String title_ment;
 	private String question;
 	private String answer;
 	private String content;
