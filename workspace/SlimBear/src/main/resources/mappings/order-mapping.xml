@@ -5,6 +5,55 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.slimbear.mapper.Order">
- 
+		<!-- 주문(productOrder) -->
+		<select id="SELECT_ORDER_LIST_BY_MEMBER_UID" resultType="order" parameterType="member">
+			SELECT * FROM productOrder WHERE mem_uid=#{mem_uid}
+		</select>
+		
+		<insert id="INSERT_ORDER"> 
+			INSERT INTO productOrder
+			(member_uid, order_date, status, total_price)
+			VALUES(#{member_uid},#{order_date},#{status},#{total_price})
+		</insert>
+		
+		<update id="UPDATE_ORDER">
+			UPDATE productOrder
+			SET member_uid=#{member_uid}, order_date=#{order_date}, status=#{status}, total_price=#{total_price}
+			WHERE uid=#{uid}
+		</update>
+		
+		<delete id="DELETE_ORDER">
+			DELETE FROM productOrder WHERE uid=#{uid}
+		</delete>
  	
+ 	
+ 	
+ 		<!-- 주문상세(orderDetail) -->
+		<select id="SELECT_ORDERDETAIL_LIST_BY_ORDER_UID" resultType="orderDetail" parameterType="order">
+			SELECT * FROM productOrder WHERE order_uid=#{uid}
+		</select>
+		
+		<insert id="INSERT_ORDERDETAIL"> 
+			INSERT INTO productOrder
+			(order_uid, prod_code, cnt, review_uid)
+			VALUES(#{order_uid},#{prod_code},#{cnt},#{review_uid})
+		</insert>
+
+ 		<!-- 주문결제(orderPayment) -->	
+ 		<select id="SELECT_PAYMENT_BY_ORDER_UID" resultType="orderPayment" parameterType="order">
+			SELECT * FROM orderPayment WHERE order_uid=#{uid}
+		</select>
+		
+		<insert id="INSERT_PAYMENT"> 
+			INSERT INTO orderPayment
+			(order_uid, pay_date, type, status, price)
+			VALUES(#{order_uid},#{pay_date},#{type},#{status},#{price})
+		</insert>
+		
+		<update id="UPDATE_PAYMENT">
+			UPDATE orderPayment
+			SET pay_date=#{pay_date}, type=#{type}, status=#{status}, price=#{price}
+			WHERE order_uid=#{order_uid}
+		</update>
+
  </mapper>

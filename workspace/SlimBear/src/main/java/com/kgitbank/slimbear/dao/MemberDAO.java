@@ -14,6 +14,12 @@ public class MemberDAO{
 	@Autowired
 	protected SqlSessionTemplate template;
 
+	public MemberDTO getMemberByUID(long uid) {
+		MemberDTO info = new MemberDTO();
+		info.setUid(uid);
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_UID", info);
+	}
+	
 	public MemberDTO getMemberById(String id) {
 		MemberDTO info = new MemberDTO();
 		info.setId(id);
@@ -28,4 +34,7 @@ public class MemberDAO{
 		return template.insert("com.slimbear.mapper.Member.INSERT_MEM", member);
 	}
 	
+	public int updateMember(MemberDTO member) {
+		return template.update("com.slimbear.mapper.Member.UPDATE_MEM", member);
+	}
 }
