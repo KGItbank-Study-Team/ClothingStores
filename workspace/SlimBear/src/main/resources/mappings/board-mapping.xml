@@ -6,6 +6,7 @@
  
  <mapper namespace="com.slimbear.mapper.Board">
  
+ 	<!-- REVIEW -->
  	<!-- 리뷰 전체 목록 조회 -->
  	<select id="SELECT_REVIEW_LIST" resultType="review">
  		SELECT * FROM productReview
@@ -16,9 +17,170 @@
  		SELECT * FROM productReview ORDER BY reg_date DESC
  	</select>
  	
+ 	<!-- 데이터 삽입 -->
  	<insert id="INSERT_REVIEW">
  		INSERT INTO productReview
- 		(uid, mem_id, prod_code, title, content, score, reg_date)
- 		VALUES(#{uid}, #{mem_id}, #{prod_code}, #{title}, #{content}, #{score}, #{reg_date})
+ 		(mem_id, prod_code, title, content, score, reg_date)
+ 		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score}, #{reg_date})
  	</insert>
+ 	
+ 	<!-- 리뷰 업데이트 -->
+ 	<update id="UPDATE_REVIEW">
+ 		UPDATE productReview
+ 		SET title=#{title}, content=#{content}, score=#{score}
+ 		WHERE uid=#{uid}
+ 	</update>
+ 	
+ 	<!-- 리뷰 삭제 -->
+ 	<delete id="DELETE_REVIEW">
+ 		 DELETE FROM productReview WHERE uid=#{uid}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- REVIEWCOMMENT -->
+ 	<!-- 리뷰 전체 목록 조회 -->
+ 	<select id="SELECT_REVIEWCOMENT_LIST" resultType="review">
+ 		SELECT * FROM reviewComent
+ 	</select>
+ 	
+ 	<!-- 데이터 삽입 -->
+ 	<insert id="INSERT_REVIEWCOMENT">
+ 		INSERT INTO reviewComent
+ 		(review_id, title, content, mem_id)
+ 		VALUES(#{review_id}, #{title}, #{content}, #{mem_id})
+ 	</insert>
+ 	
+ 	<!-- 리뷰 업데이트 -->
+ 	<update id="UPDATE_REVIEWCOMENT">
+ 		UPDATE reviewComent
+ 		SET title=#{title}, content=#{content}, score=#{score}
+ 		WHERE uid=#{uid}
+ 	</update>
+ 	
+ 	<!-- 리뷰 삭제 -->
+ 	<delete id="DELETE_REVIEWCOMENT">
+ 		 DELETE FROM productReview WHERE uid=#{uid}
+ 	</delete>
+ 	
+
+ 	
+ 	
+ 	
+ 	
+ 	<!-- INQUIRY -->
+ 	<!-- 전체 질문 목록 조회 -->
+ 	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
+ 		SELECT * FROM inquiry;
+ 	</select>
+ 	
+ 	<!-- 질문 목록 데이터 삽입 -->
+ 	<insert id="INSERT_INQUIRY">
+ 		INSERT INTO inquiry
+ 		(writer_id, content, reg_date, status, type, prod_uid)
+ 		VALUES(#{writer_id}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid})
+ 	</insert>
+ 	
+ 	<!-- 목록 업데이트 -->
+ 	<update id="UPDATE_INQUIRY">
+ 		UPDATE inquiry
+ 		SET content=#{content}, status=#{status}
+ 		WHERE uid=#{uid}
+ 	</update>
+ 	
+ 	<!-- 질문 목록 삭제 -->
+ 	<delete id="DELETE_INQUIRY">
+ 		DELETE FROM inquiry WHERE uid = #{uid}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- inquiryAnswer -->
+ 	<!-- 질문답변 조회 -->
+ 	<select id="SELECT_INQUIRYANSWER_LIST" resultType="inquiryAnswer" parameterType="inquiry">
+ 		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{uid}
+ 	</select>
+ 	
+ 	<!-- 질문답변 데이터 삽입 -->
+ 	<insert id="INSERT_INQUIRYANSWER">
+ 		INSERT INTO inquiry
+ 		(inqr_uid, title, content, mem_id)
+ 		VALUES(#{inqr_uid}, #{title}, #{content}, #{mem_id})
+ 	</insert>
+ 	
+ 	<!-- 질문답변 업데이트 -->
+ 	<update id="UPDATE_INQUIRYANSWER">
+ 		UPDATE 
+ 		SET title=#{title}, content=#{content}
+ 		WHERE uid=#{uid}
+ 	</update>
+ 	
+ 	<!-- 질문답변 삭제 -->
+ 	<delete id="DELETE_INQUIRYANSWER">
+ 		DELETE FROM inquiryAnswer WHERE inqr_uid = #{uid}
+ 	</delete>                         
+ 	
+ 	
+ 	
+ 
+ 	
+ 	<!-- faq -->
+ 	<!-- faq 목록 조회 -->
+ 	<select id="SELECT_FAQ_LIST" resultType="faq">
+ 		SELECT * FROM seq
+ 	</select>
+ 	
+ 	<!-- faq 데이터 삽입 -->
+ 	<insert id="INSERT_FAQ">
+	 	INSERT INTO faq
+	 	(question, answer, type)
+	 	VALUES(#{question}, #{answer}, #{type})
+ 	</insert>
+
+	<!-- faq 업데이트 -->
+	<update id="UPDATE_FAQ">
+		UPDATE faq
+		SET question=#{question}, answer=#{answer}, type=#{type}
+		WHERE uid=#{uid}
+	</update>
+	
+	<!-- faq 삭제 -->
+	<delete id="DELETE_FAQ">
+		DELETE FROM faq WHERE uid=#{uid}
+	</delete>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- notice -->
+ 	<!-- notice 조회 -->
+ 	<select id="SELECT_NOTICE_LIST" resultType="notice">
+ 		SELECT * FROM notice
+ 	</select>
+ 	
+ 	<!-- notice 데이터 삽입 -->
+ 	<insert id="INSERT_NOTICE">
+ 		INSERT INTO notice
+ 		(title, content, reg_date, priority, type, writer)
+ 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer})
+ 		WHERE uid=#{uid}
+ 	</insert>
+ 	
+ 	<!-- notice 업데이트 -->
+	<update id="UPDATE_NOTICE">
+		UPDATE notice
+		SET title=#{title}, priority=#{priority}, type=#{type}, writer=#{writer}
+		WHERE uid=#{uid}
+	</update>
+	
+	<!-- notice 삭제 -->
+	<delete id="DELETE_NOTICE">
+		DELETE FROM notice WHERE uid=#{uid}
+	</delete>
+ 	
  </mapper>
