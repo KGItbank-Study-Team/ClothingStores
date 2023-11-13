@@ -4,25 +4,90 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slimbear.mapper.Product"> 
-	
+<mapper namespace="com.slimbear.mapper.Product">
+
+	<!-- 제품(product) -->
 	<select id="SELECT_PROD_BY_UID" resultType="product">
-		SELECT * FROM product WHERE uid=#{uid}
+		SELECT * FROM product
+		WHERE uid=#{uid}
 	</select>
-	
+
 	<select id="SELECT_PROD_LIST" resultType="product">
 		SELECT * FROM product
 	</select>
-	
+
 	<select id="SELECT_PROD_BY_CATEGORY" resultType="product">
-		SELECT * FROM product WHERE ctg_uid=#{ctg_uid}
+		SELECT * FROM
+		product WHERE ctg_uid=#{ctg_uid}
 	</select>
-	
-	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE" resultType="product">
-      SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY price;
-   </select>
-   
-   <select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC" resultType="product">
-      SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY price DESC;
-   </select>
+
+	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE"
+		resultType="product">
+		SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY
+		price;
+	</select>
+
+	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC"
+		resultType="product">
+		SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY
+		price DESC;
+	</select>
+
+	<!-- 제품상세(productDetail) -->
+	<!-- 제품상세검색 -->
+	<select id="SELECT_PRODUCT_DETAIL" parameterType="productDetail"
+		resultType="productDetail">
+		SELECT *
+		FROM productDetail
+		WHERE
+		prod_uid = #{prod_uid} AND
+		color = #{color} AND
+		size = #{size}
+	</select>
+
+	<!-- 제품상세검색리스트 -->
+	<select id="SELECT_PRODUCT_DETAIL_LIST" parameterType="product"
+		resultType="productDetail">
+		SELECT *
+		FROM productDetail
+		WHERE
+		uid = #{uid}
+	</select>
+
+	<!-- 제품상세등록 -->
+	<insert id="INSERT_PRODUCT_DETAIL" parameterType="productDetail">
+		INSERT INTO
+		productDetail(product_uid, color, size, cnt)
+		VALUES (
+		#{prod_uid},
+		#{color},
+		#{size},
+		#{cnt}
+		)
+	</insert>
+
+	<!-- 제품상세수정 -->
+	<update id="UPDATE_PRODUCT_DETAIL" parameterType="productDetail">
+		UPDATE
+		productDetail
+		SET
+		color = #{color},
+		size = #{size},
+		cnt = #{cnt}
+		WHERE
+		prod_uid = #{prod_uid} AND
+		color = #{color} AND
+		size = #{size}
+	</update>
+
+	<!-- 제품상세삭제 -->
+	<delete id="DELETE_PRODUCT_DETAIL" parameterType="productDetail">
+		DELETE FROM
+		productDetail
+		WHERE
+		prod_uid = #{prod_uid} AND
+		color = #{color} AND
+		size = #{size}
+	</delete>
+
 </mapper>
