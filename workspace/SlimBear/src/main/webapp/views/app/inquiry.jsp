@@ -98,26 +98,26 @@
 						
 						<!-- 1번째 tbody for문 -->			
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-						    <c:forEach var="board" items="${boards}" varStatus="loop">
+						    <c:forEach var="inquiry" items="${inquiries}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
 						            <td><i class="xi-check"></td>
-						            <td class="displaynone">${board}</td>
+						            <td class="displaynone">${inquiry}</td>
 						            <td class="subject left txtBreak">
 						                <span class="displaynone">
-						                    <a href="#none" onclick="BOARD.viewTarget('${board}', '6', this);">
+						                    <a href="#none" onclick="BOARD.viewTarget('${inquiry}', '6', this);">
 						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
 						                    </a>
 						                </span>
 						                <strong>
-						                    <a href="/article/상품문의/6/${board.no}" style="color:#555555;">${board.title}</a>
+						                    <a href="/article/상품문의/6/${inquiry.no}" style="color:#555555;">${inquiry.title}</a>
 						                    <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${board.writer_id}</td>
-						            <td class=""><span class="txtNum">${board.reg_date}</span></td>
-						            <td class="displaynone"><span class="txtNum">${board}</span></td>
-						            <td class="displaynone"><span class="txtNum">${board}</span></td>
+						            <td>${inquiry.writer_id}</td>
+						            <td class=""><span class="txtNum">${inquiry.reg_date}</span></td>
+						            <td class="displaynone"><span class="txtNum">${inquiry}</span></td>
+						            <td class="displaynone"><span class="txtNum">${inquiry}</span></td>
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
 						    </c:forEach>
