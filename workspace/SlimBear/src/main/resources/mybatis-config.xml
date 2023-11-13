@@ -27,12 +27,13 @@
 		<typeAlias alias="inquiryAnswer" type="com.kgitbank.slimbear.dto.InquiryAnswerDTO" />
 		<typeAlias alias="faq" type="com.kgitbank.slimbear.dto.FaqDTO" />
 		<typeAlias alias="notice" type="com.kgitbank.slimbear.dto.NoticeDTO" />
+		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewDTO" />
+		<typeAlias alias="reviewComent" type="com.kgitbank.slimbear.dto.ReviewComentDTO" />
 		
 		<!-- product-mapping -->
 		<typeAlias alias="product" type="com.kgitbank.slimbear.dto.ProductDTO" />
 		<typeAlias alias="productDetail" type="com.kgitbank.slimbear.dto.ProductDetailDTO" />
-		<typeAlias alias="review" type="com.kgitbank.slimbear.dto.ReviewDTO" />
-		<typeAlias alias="reviewComent" type="com.kgitbank.slimbear.dto.ReviewComentDTO" />
+
 		
 		<!-- order-mapping -->
 		<typeAlias alias="order" type="com.kgitbank.slimbear.dto.OrderDTO" />
@@ -48,6 +49,8 @@
 		<!-- page-mapping -->
 		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.dto.ProductBannerTopDTO" />
 		
+		<!-- admin-mapping -->
+		<typeAlias alias="admin" type="com.kgitbank.slimbear.admin.dto.AdminDTO" />
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->

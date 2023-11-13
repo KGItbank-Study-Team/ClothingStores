@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- property -->
+	<property name="ROOT_PATH" value="C:/slimbear/logs"/>
+	<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %-5level --- [%thread] %logger{35} : %msg %n"/>
+	
+	<!-- property처럼 사용할 수 있습니다 -->
+ 	<timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
+	
+	<!-- appender -->
+	<appender name="infoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 필터사용해서 특정 레벨일때만 로그사용가능 -->
+		<filter class = "ch.qos.logback.classic.filter.LevelFilter">
+       		<level>INFO</level>
+        	<onMatch>ACCEPT</onMatch>
+       		<onMismatch>DENY</onMismatch>
+        </filter>
+		<file>${ROOT_PATH}/info/${BY_DATE}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${ROOT_PATH}/backup/info/%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- 파일당 최고 용량 kb, mb, gb -->	
+       		<maxFileSize>100MB</maxFileSize> 
+			<!-- 일자별 백업파일의 보관기간 -->
+			<maxHistory>30</maxHistory> 
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="warnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class = "ch.qos.logback.classic.filter.LevelFilter">
+       		<level>WARN</level>
+        	<onMatch>ACCEPT</onMatch>
+       		<onMismatch>DENY</onMismatch>
+        </filter>
+		<file>${ROOT_PATH}/warn/${BY_DATE}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${ROOT_PATH}/backup/warn/%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+       		<maxFileSize>100MB</maxFileSize> 
+			<maxHistory>30</maxHistory> 
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<appender name="errFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class = "ch.qos.logback.classic.filter.LevelFilter">
+       		<level>ERROR</level>
+        	<onMatch>ACCEPT</onMatch>
+       		<onMismatch>DENY</onMismatch>
+        </filter>
+		<file>${ROOT_PATH}/error/${BY_DATE}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${ROOT_PATH}/backup/error/%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+       		<maxFileSize>100MB</maxFileSize> 
+			<maxHistory>30</maxHistory> 
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 패키지별 설정 -->
+	<!-- additivity=false설정시 root설정을 상속하지않아 독립적인 설정 가능 -->
+	<logger name="com.kgitbank.slimbear" level="INFO" additivity="true"> 
+		<appender-ref ref="infoFileAppender" />
+		<appender-ref ref="warnFileAppender" />
+		<appender-ref ref="errFileAppender" />
+	</logger>
+
+
+	<!-- 기본설정 -->
+	<root level="INFO">
+		<appender-ref ref="consoleAppender" />
+	</root>
+
+</configuration>

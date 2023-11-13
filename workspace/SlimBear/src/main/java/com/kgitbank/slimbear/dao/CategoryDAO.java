@@ -21,6 +21,7 @@ public class CategoryDAO {
 	}
 
 	public List<CategoryDTO> getSubCategoryListByTopCtgUid(long category) {
+		
 		return template.selectList("com.slimbear.mapper.Category.SELECT_SUBCTG_LIST_BY_TOP_CTG_UID",category);
 	}
 

@@ -18,8 +18,8 @@ public class RSYController {
 	private RSYServiceImpl RSYService;
 
 	@RequestMapping("product/category")
-	public String categoryPage01(@RequestParam int category, Model model) {
-		List<ProductDTO> productList = RSYService.getProductListByCategory(category);
+	public String categoryPage01(@RequestParam int category, @RequestParam(name = "order", required = false) String order, Model model) {
+		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order);
 
 		model.addAttribute("productList", productList);
 
@@ -29,10 +29,12 @@ public class RSYController {
 
 		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
 		model.addAttribute("category", topCategory);
-
+		
+		
+		
 		System.out.println(categoryList);
 		return "category";
 
-	}
 
+	}
 }

@@ -17,10 +17,18 @@ public class RSYServiceImpl {
 	@Autowired
 	private CategoryDAO ctgDAO;
 	
-	public List<ProductDTO> getProductListByCategory(int category) {
-		List<ProductDTO> list = prodDAO.getProductByCategory(category);
-		return list;
+	public List<ProductDTO> getProductListByCategory(int category, String order) {
+		switch(order) {
+			case "PRICE_ASC":
+				return prodDAO.getProductByCategoryOrderByPrice(category, order);
+			case "PRICE_DESC":
+				return prodDAO.getProductByCategoryOrderByPriceDesc(category, order);
+			default:
+				return prodDAO.getProductByCategory(category);
+		}
 	}
+	
+
 	
 	public CategoryDTO getCategoryByUid(long category){
 		CategoryDTO ctg = ctgDAO.getCategoryByUid(category);

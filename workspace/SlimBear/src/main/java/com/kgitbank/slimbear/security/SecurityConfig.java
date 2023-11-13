@@ -1,31 +1,31 @@
-package com.kgitbank.slimbear.config;
+package com.kgitbank.slimbear.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.kgitbank.slimbear.security.MemberUserDetailsService;
-
 @EnableWebSecurity
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private MemberUserDetailsService memberUserDetailsService;
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
-
+	
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+	
 	@Override
 	protected void configure(HttpSecurity security) throws Exception {
-		security.authorizeRequests().antMatchers("/").permitAll();
+		security.authorizeRequests().antMatchers("/app/").permitAll();
 		security.authorizeRequests().antMatchers("/app/member/myPage/**").authenticated();
-		//security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 		security.csrf().disable();
 		
 		security.formLogin().loginPage("/app/login").loginProcessingUrl("/app/member/login")

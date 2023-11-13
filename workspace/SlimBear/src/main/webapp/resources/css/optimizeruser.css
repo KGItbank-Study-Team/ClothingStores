@@ -484,9 +484,9 @@ body .title {
 }
 
 .xans-product-normalmenu .prdCount {
-	float: left;
-	color: #000;
-	display: none;
+	color: #222;
+	text-align: right;
+	padding-right: 153px;
 }
 
 .xans-product-normalmenu ul#type {
