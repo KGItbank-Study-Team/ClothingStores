@@ -1,6 +1,8 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +19,35 @@ public class RSYServiceImpl {
 	@Autowired
 	private CategoryDAO ctgDAO;
 	
-	public List<ProductDTO> getProductListByCategory(int category, String order) {
-		if (order == null) {order = "";}
-		switch(order) {
-			case "PRICE_ASC":
-				return prodDAO.getProductByCategoryOrderByPrice(category, order);
+	public List<ProductDTO> getProductListByCategory(int category, String order, int currentPage, int offset,int pageSize) {
+	    if (order == null) {
+	        order = "";
+	    }
+
+	    offset = (currentPage - 1) * pageSize;
+	    
+	    Map<String, Object> paramMap = new HashMap<>();
+	    paramMap.put("ctg_uid", category);
+	    paramMap.put("order", order);
+	    paramMap.put("offset", offset);
+	    paramMap.put("pageSize", pageSize);
+	    
+	    System.out.println(paramMap);
+
+	    switch (order) {
+	        case "PRICE_ASC":
+	            return prodDAO.getProductByCategoryOrderByPrice(paramMap);
 			case "PRICE_DESC":
 				return prodDAO.getProductByCategoryOrderByPriceDesc(category, order);
 			default:
 				return prodDAO.getProductByCategory(category);
 		}
 	}
+	
+	public int getTotalItems(long category) {
+		int prod = prodDAO.selectTotalItems(category);
+        return prod; // 총 아이템 수를 가져오는 메서드 호출
+    }
 	
 
 	

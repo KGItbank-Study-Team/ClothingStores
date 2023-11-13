@@ -45,7 +45,8 @@
 									<div class="thumbnail">
 										<div class="salePer"></div>
 										<div class="prdImg">
-											<a href="/app/product?p=${item.uid}" name="anchorBoxName_4777"> <img
+											<a href="/app/product?p=${item.uid}"
+												name="anchorBoxName_4777"> <img
 												src="/resources/images/${item.main_image}"
 												id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
 											</a> <span class="chk"> <input type="checkbox"
@@ -153,7 +154,8 @@
 								<c:forEach var="item" items="${categoryList}">
 									<li style="display:;"
 										class="xans-element- xans-product xans-product-displaycategory  xans-record-">
-										<a href="/app/product/category?category=${item.uid }"> ${item.name} <span class="count displaynone">()</span>
+										<a href="/app/product/category?category=${item.uid }">
+											${item.name} <span class="count displaynone">()</span>
 									</a>
 									</li>
 								</c:forEach>
@@ -173,8 +175,10 @@
 									<ul id="type"
 										class="xans-element- xans-product xans-product-orderby">
 										<li class="xans-record-"><a href="#출시일로 정렬">신상품</a></li>
-										<li class="xans-record-"><a href="/app/product/category/?category=${category.uid }&order=PRICE_ASC">낮은가격</a></li>
-										<li class="xans-record-"><a href="/app/product/category/?category=${category.uid }&order=PRICE_DESC">높은가격</a></li>
+										<li class="xans-record-"><a
+											href="/app/product/category/?category=${category.uid }&order=PRICE_ASC">낮은가격</a></li>
+										<li class="xans-record-"><a
+											href="/app/product/category/?category=${category.uid }&order=PRICE_DESC">높은가격</a></li>
 										<li class="xans-record-"><a href="#리뷰페이지">사용후기</a></li>
 									</ul>
 
@@ -293,15 +297,31 @@
 					<a href="#none"> <img src="/_images/icon_prev2.png" />
 					</a>
 					<ol>
-						<!-- 추후에 페이징처리 -->
-						<li class="xans-record-"><a href="?page=1" class="this">1</a>
-						</li>
-						<li class="xans-record-"><a href="?page=2" class="other">2</a>
-						</li>
-						<li class="xans-record-"><a href="?page=3" class="other">3</a>
-						</li>
-						<li class="xans-record-"><a href="?page=4" class="other">4</a>
-						</li>
+						<c:if test="${totalPages > 1}">
+							<c:forEach var="pageNumber" begin="1" end="${totalPages}">
+								<c:url value="product/category" var="pageUrl">
+									<c:param name="currentPage" value="${pageNumber}" />
+								</c:url>
+
+								<c:choose>
+									<c:when test="${pageNumber eq currentPage}">
+										<span class="current-page">${pageNumber}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="${pageUrl}">${pageNumber}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+						<!-- 						추후에 페이징처리 -->
+						<!-- 						<li class="xans-record-"><a href="?page=1" class="this">1</a> -->
+						<!-- 						</li> -->
+						<!-- 						<li class="xans-record-"><a href="?page=2" class="other">2</a> -->
+						<!-- 						</li> -->
+						<!-- 						<li class="xans-record-"><a href="?page=3" class="other">3</a> -->
+						<!-- 						</li> -->
+						<!-- 						<li class="xans-record-"><a href="?page=4" class="other">4</a> -->
+						<!-- 						</li> -->
 					</ol>
 					<a href="?page=2"> <img src="/_images/icon_next2.png" />
 					</a>

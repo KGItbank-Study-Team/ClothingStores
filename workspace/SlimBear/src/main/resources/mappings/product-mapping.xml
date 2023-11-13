@@ -21,10 +21,13 @@
 		product WHERE ctg_uid=#{ctg_uid}
 	</select>
 
-	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE"
-		resultType="product">
-		SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY
-		price;
+	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE" parameterType="product"
+		resultType="product">		
+		SELECT *
+		FROM product
+		WHERE ctg_uid=#{ctg_uid}
+		ORDER BY price
+		LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 
 	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC"
