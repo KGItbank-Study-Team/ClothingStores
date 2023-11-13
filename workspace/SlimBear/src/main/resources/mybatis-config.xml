@@ -48,6 +48,8 @@
 		<!-- page-mapping -->
 		<typeAlias alias="productBannerTop" type="com.kgitbank.slimbear.dto.ProductBannerTopDTO" />
 		
+		<!-- admin-mapping -->
+		<typeAlias alias="admin" type="com.kgitbank.slimbear.admin.dto.AdminDTO" />
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->
