@@ -2,7 +2,7 @@
 <configuration>
 
 	<!-- property -->
-	<property name="ROOT_PATH" value="C:/slimbear/logs"/>
+	<property name="ROOT_PATH" value="C:/logs/slimbear"/>
 	<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %-5level --- [%thread] %logger{35} : %msg %n"/>
 	
 	<!-- property처럼 사용할 수 있습니다 -->
