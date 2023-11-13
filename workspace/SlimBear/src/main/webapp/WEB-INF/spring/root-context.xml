@@ -19,6 +19,7 @@
 		base-package="com.kgitbank.slimbear" />
 
 	<!-- 정적 자원 매핑 -->
+	<!-- 사용했을 때 차이를 눈으로 확인하지못해서 일단 주석처리 -->
 	<!-- <mvc:resources mapping="/resources/**" location="/resources/"/> -->
 
 	<!-- DB 설정 불러오기 -->

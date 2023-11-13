@@ -8,7 +8,7 @@
  
  	<!-- 관리자(admin) -->
  	<select id="SELECT_ADMIN_BY_ID" resultType="admin">
- 		SELECT * FROM admin id=#{id}
+ 		SELECT * FROM admin WHERE id=#{id}
  	</select>
  
  </mapper>
