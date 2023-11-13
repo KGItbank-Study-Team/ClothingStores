@@ -51,7 +51,7 @@
 		SELECT *
 		FROM productDetail
 		WHERE
-		uid = #{uid}
+		prod_uid = #{prod_uid}
 	</select>
 
 	<!-- 제품상세등록 -->

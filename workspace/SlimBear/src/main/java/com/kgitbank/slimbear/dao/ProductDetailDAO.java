@@ -15,9 +15,9 @@ public class ProductDetailDAO {
 	@Autowired
 	protected SqlSessionTemplate template;
 
-	public List<ProductDetailDTO> getProductDetailList(long uid) {
-		ProductDTO info = new ProductDTO();
-		info.setUid(uid);
+	public List<ProductDetailDTO> getProductDetailList(long prod_uid) {
+		ProductDetailDTO info = new ProductDetailDTO();
+		info.setProd_uid(prod_uid);
 		return template.selectList("com.slimbear.mapper.Product.SELECT_PRODUCT_DETAIL_LIST", info);
 	}
 

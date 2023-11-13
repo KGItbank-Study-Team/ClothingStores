@@ -52,7 +52,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public ProductDetailDAO prodDetailDAO;
 	
-	public List<ProductDetailDTO> getProductDetailList(long prod_uid) {
-		return prodDetailDAO.getProductDetailList(prod_uid);
+	public List<ProductDetailDTO> getProductDetailList(long uid) {
+		return prodDetailDAO.getProductDetailList(uid);
 	}
 }
