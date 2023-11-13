@@ -122,11 +122,14 @@ th:last-child {
 }
 
 .colorBtn.active {
-	background: #eae5dd;
+	background: #dcd3c5;
+
 }
 
 .sizeBtn.active2 {
-	background: #eae5dd;
+	background: #dcd3c5;
+
+	
 }
 
 .colorOption, .sizeOption {

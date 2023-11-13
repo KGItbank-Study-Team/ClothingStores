@@ -25,6 +25,11 @@ public class ReviewDAO {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST"); // 패키지풀네임.id
 	}
 	
+	// 최신순으로 리뷰 리스트 받아오기
+	public List<ReviewDTO> getReviewListRecent() {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_RECENT");
+	}
+	
 	// 데이터 넣기
 	public int insertReview(ReviewDTO review) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);

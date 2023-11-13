@@ -16,10 +16,17 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private ReviewDAO reviewDAO;
 	
-	public List<ReviewDTO> getReviewList() throws Exception {
+	// 모든 리뷰 리스트 받아오기
+	public List<ReviewDTO> getReviewList() {
 		return reviewDAO.getReviewList();
 	}
 	
+	// 최신순으로 리뷰 리스트 받아오기
+	public List<ReviewDTO> getReviewListRecent() {
+		return reviewDAO.getReviewListRecent();
+	}
+	
+	// 리뷰 데이터 넣기	
 	public void insertReview(ReviewDTO review) {
 		reviewDAO.insertReview(review);
 	}
@@ -29,7 +36,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private ProductDAO prodDAO;
 	
-	public List<ProductDTO> getHotProductList() throws Exception {
+	public List<ProductDTO> getHotProductList() {
 		return prodDAO.getProductList();
 	}
 	

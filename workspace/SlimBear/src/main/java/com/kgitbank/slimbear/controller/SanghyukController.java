@@ -24,28 +24,34 @@ public class SanghyukController {
 	@Autowired
 	private SangyhyukServiceImpl sanghService;
 	
-	@RequestMapping(value = "product", method = RequestMethod.POST)
-	public String reviewPage(HttpSession session, Model model) throws Exception {
-		List<ReviewDTO> reviewList = sanghService.getReviewList();
-		
-		System.out.println(reviewList);
-		model.addAttribute("reviews", reviewList);
-		return "productInfo"; // .jsp 생략
-	}
+//	@RequestMapping("product")
+//	public String reviewPage(HttpSession session, Model model) throws Exception {
+//		List<ReviewDTO> reviewList = sanghService.getReviewList();
+//		
+//		System.out.println(reviewList);
+//		model.addAttribute("reviews", reviewList);
+//		return "productInfo"; // .jsp 생략
+//	}
 	
 	/* 상품 상세 데이터 CONTROLLER */
+	@RequestMapping("product")
+	public String productPage(@RequestParam("p")long productUid, HttpSession session, Model model)  {
 		
-	@RequestMapping(value = "product", method = RequestMethod.GET)
-	public String productPage(@RequestParam("p")long productUid, Model model) {
-		
+		// 제품 상세 정보 가져오기
 		ProductDTO product = sanghService.getProductByUid(productUid);	
-		
+		System.out.println(product);
 		// 잘못된 UID일 경우 메인페이지로
 		if(product == null) {
 			return "redirct:/";
-		}
+			}
+			
+		// 모든 제품 리뷰 가져오기
+		List<ReviewDTO> reviewList = sanghService.getReviewList();
+		
+		System.out.println(reviewList);
 		
 		model.addAttribute("product", product);
+		model.addAttribute("reviewList", reviewList);
 
 		return "productInfo"; // .jsp 생략
 	}
