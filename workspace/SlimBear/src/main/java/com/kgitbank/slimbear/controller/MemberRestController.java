@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
-import com.kgitbank.slimbear.service.MemberService;
+import com.kgitbank.slimbear.service.MemberServiceImpl;
 
 @RestController
 @RequestMapping("member")
 public class MemberRestController {
 	
 	@Autowired
-	private MemberService memberService;
+	private MemberServiceImpl memberService;
 	
 	@PostMapping("id/duplicate")
 	public HashMap<String, Object> CheckDuplicateMemberID(@RequestParam HashMap<String, Object> data) {
