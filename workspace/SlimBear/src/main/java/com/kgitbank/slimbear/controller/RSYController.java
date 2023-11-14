@@ -55,16 +55,29 @@ public class RSYController {
 	}
 
 	@PostMapping("/findId")
-
 	public String findId(@RequestParam String name, @RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "phone", required = false) String phone, Model model) {
 		MemberDTO member = RSYService.findId(name, email, phone);
 		if (member != null) {
 			model.addAttribute("member", member);
 			return "/findId_result";
-		}else {
+		} else {
 			model.addAttribute("error", "아이디를 찾을 수 없습니다. 다시 입력해주세요.");
-	        return "/find_id"; // 실패 시 해당 페이지로 이동
+			return "/find_id"; // 실패 시 해당 페이지로 이동
 		}
 	}
+
+	@PostMapping("/findPassword")
+	public String findPassword(@RequestParam String name, @RequestParam String id, @RequestParam(name = "email", required = false) String email,
+			@RequestParam(name = "phone", required = false) String phone, Model model) {
+		MemberDTO member = RSYService.findPassword(name, id, email, phone);
+		if (member != null) {
+			model.addAttribute("member", member);
+			return "/find_password_result";
+		} else {
+			model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
+			return "/find_password"; // 실패 시 해당 페이지로 이동
+		}
+	}
+
 }

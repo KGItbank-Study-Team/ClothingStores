@@ -41,11 +41,8 @@
 
 
 			<div id="contents">
-				<form id="findIdForm" name="findIdForm"
-					action="/exec/front/Member/findId/" method="post" target="_self"
-					enctype="multipart/form-data">
-					<input id="returnUrl" name="returnUrl"
-						value="/member/id/find_id_result.html" type="hidden" />
+				<form id="findPasswordForm" name="findPasswordForm"
+					action="/app/findPassword" method="post">
 					<div
 						class="xans-element- xans-member xans-member-findid ec-base-box typeThin ">
 						<!--
@@ -109,9 +106,8 @@
 										maxlength="7" value="" type="password" />
 								</p>
 								<div class="ec-base-button gColumn">
-									<a href="#none" class="btnLogin2"
-										onclick="findId.action('anne2173', 'kcp'); return false;">확인</a>
-								</div>
+										<button type="submit" class="btnLogin2">확인</button>
+									</div>
 							</fieldset>
 						</div>
 					</div>

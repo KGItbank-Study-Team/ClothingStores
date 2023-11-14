@@ -73,4 +73,17 @@ public class RSYServiceImpl {
         }        
         return null;
     }
+	
+	//비밀번호찾기
+		public MemberDTO findPassword(String name, String id, String email, String phone) {
+	        List<MemberDTO> memberList = memDAO.getMemberList();
+	        for (MemberDTO member : memberList) {
+	            if (member.getName().equals(name) &&
+	            		(member.getId().equals(id)) &&
+	                    	(member.getEmail().equals(email) || member.getPhone().equals(phone))) {
+	                return member;
+	            }
+	        }        
+	        return null;
+	    }
 }
