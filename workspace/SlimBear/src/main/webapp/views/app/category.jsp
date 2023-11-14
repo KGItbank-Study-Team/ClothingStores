@@ -168,7 +168,7 @@
 						$compare_page = /product/compare.html
 					-->
 								<p class="prdCount">
-									등록 제품 : <strong>${fn:length(productList) }</strong> 개
+									등록 제품 : <strong>${totalItems}</strong> 개
 								</p>
 								<div class="function" id="Product_ListMenu">
 
@@ -294,25 +294,44 @@
 
 				<div
 					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
-					<a href="#none"> <img src="/_images/icon_prev2.png" />
-					</a>
-					
-						<c:if test="${totalPages > 1}">
-							<c:forEach var="pageNumber" begin="1" end="${totalPages}">
-								<c:url value="product/category" var="pageUrl">
-									<c:param name="currentPage" value="${pageNumber}" />
-								</c:url>
 
-								<c:choose>
+
+					<ol>
+
+						<!-- Previous Page Button -->
+						<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a>
+						</li>
+
+						<!-- Page Number Buttons -->
+						<c:forEach begin="1" end="${totalPages}" var="pageNumber">
+							<li class="xans-record- "><c:choose>
 									<c:when test="${pageNumber eq currentPage}">
-										<span class="current-page">${pageNumber}</span>
+										<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+										<a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+											class="this">${pageNumber}</a>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageUrl}">${pageNumber}</a>
+										<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+										<a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+										class="other">${pageNumber}</a>
 									</c:otherwise>
 								</c:choose>
-							</c:forEach>
-						</c:if>
+							</li>
+						</c:forEach>
+
+						<!-- Next Page Button -->
+						<li
+							class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+
 						<!-- 						추후에 페이징처리 -->
 						<!-- 						<li class="xans-record-"><a href="?page=1" class="this">1</a> -->
 						<!-- 						</li> -->
@@ -322,9 +341,8 @@
 						<!-- 						</li> -->
 						<!-- 						<li class="xans-record-"><a href="?page=4" class="other">4</a> -->
 						<!-- 						</li> -->
-					
-					<a href="?page=2"> <img src="/_images/icon_next2.png" />
-					</a>
+					</ol>
+
 				</div>
 				<jsp:include page="footer/footer.jsp" flush="true" />
 			</main>

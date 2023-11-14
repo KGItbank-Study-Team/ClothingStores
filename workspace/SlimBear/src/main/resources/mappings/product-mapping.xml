@@ -19,6 +19,7 @@
 	<select id="SELECT_PROD_BY_CATEGORY" resultType="product">
 		SELECT * FROM
 		product WHERE ctg_uid=#{ctg_uid}
+		LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 
 	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE" parameterType="product"
@@ -33,7 +34,8 @@
 	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC"
 		resultType="product">
 		SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY
-		price DESC;
+		price DESC
+		LIMIT #{pageSize} OFFSET #{offset};
 	</select>
 	
 	<select id="SELECT_COUNT_PROD_BY_UID"

@@ -22,7 +22,7 @@ public class RSYController {
 			@RequestParam(name = "order", required = false) String order, @RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset, Integer pageSize, Model model) {
 		
 		if(offset==null) {offset=0;}
-		pageSize = 10; // 페이지 당 아이템 수
+		pageSize = 12; // 페이지 당 아이템 수
 		
 		
 
@@ -32,9 +32,11 @@ public class RSYController {
 		
 		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order,currentPage, offset, pageSize);
 		
+		model.addAttribute("order", order);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("productList", productList);
+		model.addAttribute("totalItems", totalItems);
 
 		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
 
