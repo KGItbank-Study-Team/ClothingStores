@@ -41,7 +41,9 @@ public class OstSerivceImpl {
     	  	long productUID =  Long.valueOf(prodctInfos[0]);
     	  	
     	  	ProductDTO product = productDAO.getProductByUid(productUID);
-    	  	vo.setPrice(product.getPrice());
+    	  	vo.setPrice(product.getPrice() * i.getCnt());
+    	  	
+			/* vo.setPrice(product.getPrice()); */
     	  	vo.setDesc(product.getDesc());
     	  	vo.setName(product.getName());
     	  	vo.setMaker(product.getMaker());
@@ -53,24 +55,6 @@ public class OstSerivceImpl {
 		
     	return list;
     }
-
-	/*
-	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
-	 * }
-	 */
-    private List<MemberCartVO> cartList = new ArrayList<>();
-    
-    public List<MemberCartVO> getCart() {
-        return cartList;
-    }
-
-    public void deleteSelectedItems(List<Long> itemIds) {
-        // 선택된 상품들을 삭제하
-        for (Long itemId : itemIds) {
-    //        cartDAO.deleteCartItem(itemId);
-            
-        }
-    }
     public int calculateTotalPrice(List<MemberCartVO> cartList) {
         int totalPrice = 0;
         for (MemberCartVO cartItem : cartList) {
@@ -79,21 +63,45 @@ public class OstSerivceImpl {
         return totalPrice;
     }
     public String formatPrice(int price) {
-    	 // 필요한 포맷팅 로직 추가
-    	return String.format("%,d원", price);
-    }
-    // 해당 제품의 수량을 업데이트하는 메서드 추가
-    public void updateQuantity(long productId, int newQuantity) {
-        for (MemberCartVO cartItem : cartList) {
-            if (cartItem.getUid() == productId) {
-                // 수량을 업데이트하고 totalprice도 다시 계산
-                int quantityDiff = newQuantity - cartItem.getQuantity();
-                cartItem.setQuantity(newQuantity);
-                cartItem.setTotalprice(cartItem.getTotalprice() + (quantityDiff * cartItem.getPrice()));
-                break;  // 해당 제품을 찾았으므로 반복 중단
-            }
+   	 // 필요한 포맷팅 로직 추가
+   	return String.format("%,d원", price);
+   }
+	/*
+	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
+	 * }
+	 */
+	/* private List<MemberCartVO> cartList = new ArrayList<>(); */
+    
+	/*
+	 * public List<MemberCartVO> getCart() { return cartList; }
+	 */
+
+    public void deleteSelectedItems(List<Long> itemIds) {
+        // 선택된 상품들을 삭제하
+        for (Long itemId : itemIds) {
+            cartDAO.deleteCartItem(itemId);
+            
         }
-        //ostRepository.updateQuantity(productId, newQuantity); 데이터베이스 업데이트 로직을 추가할 수 있음
     }
+ 
+   
+    public void updateCartItemQuantity(long productId, int newQuantity) {
+        cartDAO.updateCartItemQuantity(productId, newQuantity);
+    }
+    public void updateCartItem(long productId, int newQuantity) {
+        cartDAO.updateCartItemQuantity(productId, newQuantity);
+    }
+
+    // 해당 제품의 수량을 업데이트하는 메서드 추가
+	/*
+	 * public void updateQuantity(long productId, int newQuantity) { for
+	 * (MemberCartVO cartItem : cartList) { if (cartItem.getUid() == productId) { //
+	 * 수량을 업데이트하고 totalprice도 다시 계산 int quantityDiff = newQuantity -
+	 * cartItem.getQuantity(); cartItem.setQuantity(newQuantity);
+	 * cartItem.setTotalprice(cartItem.getTotalprice() + (quantityDiff *
+	 * cartItem.getPrice())); break; // 해당 제품을 찾았으므로 반복 중단 } }
+	 * //ostRepository.updateQuantity(productId, newQuantity); 데이터베이스 업데이트 로직을 추가할 수
+	 * 있음 }
+	 */
   
 }

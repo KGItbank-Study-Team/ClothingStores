@@ -26,7 +26,18 @@ public class CartDAO {
 		return template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 	
-	public int updateAddress(CartDTO cart) {
+	public int updateAddress(CartDTO cart) {//이거 adress>> cart로 바꿔줭
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART", cart);
 	}
+	public int deleteCartItem(Long itemId) {//장바구니에 있는거 삭제 
+		return 1;
+	    //return template.delete("com.slimbear.mapper.Member.DELETE_CART_ITEM", itemId);
+	}
+	 public void updateCartItemQuantity(Long itemId, int newQuantity) {// 장바구니에 있는거 수량 업데이
+	      
+	}
+	
+	    //    template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_QUANTITY", params);
+//	<update id="UPDATE_CART_ITEM_QUANTITY"> UPDATE cart SET cnt = #{newQuantity} WHERE uid = #{productId}
+//</update>
 }

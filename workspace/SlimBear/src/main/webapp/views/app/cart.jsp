@@ -95,7 +95,7 @@
 						</td>
 							<td><span class="quantity"> <input type="text"
 								class="inputBox" id="quantity_${cart.uid }" value="${cart.cnt}"> <a
-								href="javascript:void(0)" class="countUp"
+								href="/app/updateQuantity?productId=${cart.uid}&newQuantity=${cart.cnt + 1}" class="countUp"
 								onclick="addQuantity(${cart.uid},1)"> <img alt="수량증가"
 									src="/resources/images/btn_count_up.gif">
 							</a> <a href="javascript:void(0)" class="countDown"

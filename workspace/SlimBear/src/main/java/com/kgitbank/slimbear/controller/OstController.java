@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
@@ -45,6 +45,25 @@ public class OstController {
 
 		return "cart"; 
 	}
+
+	@RequestMapping(value = "/updateQuantity", method = { RequestMethod.GET, RequestMethod.POST })
+	public String updateQuantity(@RequestParam long productId, @RequestParam int newQuantity, Model model, Authentication authentication) {
+	    if (authentication != null) {
+	        SecurityUser user = (SecurityUser) authentication.getPrincipal();
+
+	        // 서비스를 호출하여 수량을 업데이트
+	        ostService.updateCartItem(productId, newQuantity);
+
+	        // "cart" 페이지로 리다이렉션
+	        return "redirect:/app/cart";
+	    } else {
+	        // 사용자 정보가 없을 경우 처리 (예: 로그인 페이지로 리다이렉션)
+	        return "redirect:/app/login";
+	    }
+	}
+
+
+
 	
 	/*
 	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
@@ -71,26 +90,6 @@ public class OstController {
 
 	    return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트
 	}
-
-
-	@PostMapping("/updateQuantity")
-    @ResponseBody
-    public String updateQuantity(@RequestParam long productId, @RequestParam int newQuantity) {
-        // TODO: 서비스를 호출하여 해당 제품의 수량을 업데이트
-        // ostService.updateQuantity(productId, newQuantity);
-        
-        return "Quantity updated successfully";
-    }
-
-
-
+	
 }
-
-
-
-
-
-
-
-
 

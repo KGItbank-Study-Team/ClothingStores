@@ -12,73 +12,57 @@ function toggleHiddenContent(button) {
     }
 }
 
-// JavaScript에서 totalprice를 업데이트하도록 수정
 function addQuantity(id, step) {
-    var inputField = document.getElementById('quantity_' + id);
-    if (inputField) {
-        var currentValue = parseInt(inputField.value);
-        if (!isNaN(currentValue)) {
-            inputField.value = currentValue + step;
-            updateTotalPrice(id); // totalprice 업데이트 추가
-            //updatePrice(id); // 기존의 price 업데이트
-            updateServer(id, currentValue + step); // 서버에 업데이트된 수량 전송
-        }
-    }
+    
 }
 
 function outQuantity(id, step) {
-    var inputField = document.getElementById('quantity_' + id);
-    if (inputField) {
-        var currentValue = parseInt(inputField.value);
-        if (!isNaN(currentValue) && currentValue > 1) {
-            inputField.value = currentValue - step;
-            updateTotalPrice(id); // totalprice 업데이트 추가
-           // updatePrice(id); // 기존의 price 업데이트
-            updateServer(id, currentValue - step); // 서버에 업데이트된 수량 전송
-        }
-    }
+ 
 }
-
-
-function updateTotalPrice(productId) {
-    var totalpriceElement = document.getElementById('totalprice_' + productId);
-    if (totalpriceElement) {
-    
-        var quantity = parseInt(document.getElementById('quantity_' + productId).value);
- //      var productPrice = ${cart.price};
-        var newTotalPrice = quantity * productPrice; // 변수 사용
-        totalpriceElement.textContent = newTotalPrice + "원";
-    }
-}
-
-
-// 서버에 업데이트된 수량을 전송하는 함수 추가
 function updateServer(productId, newQuantity) {
-    $.ajax({
-        type: "POST",
-        url: "/app/updateQuantity",
-        data: { productId: productId, newQuantity: newQuantity },
-        success: function () {
-            console.log("Quantity updated on the server");
-        },
-        error: function (error) {
-            console.error('Error updating quantity on the server:', error);
-        }
-    });
+    // 서버에 업데이트된 수량을 전송하고 서버 응답을 받은 후에 페이지를 새로고침
+   $.ajax({
+    type: "POST",  // POST로 변경
+    url: "/app/updateQuantity",
+    data: { productId: productId, newQuantity: newQuantity },
+    success: function () {
+        console.log("서버에서 수량이 업데이트되었습니다.");
+        // 서버 응답을 받은 후에 페이지를 새로고침
+        location.reload();
+    },
+    error: function (error) {
+        console.error('서버에서 수량을 업데이트하는 중 오류 발생:', error);
+    }
+});
+
 }
 
+// updateQuantity 함수도 수정
 function updateQuantity(productId, action) {
     var quantityInput = document.getElementById("quantity_" + productId);
     var currentQuantity = parseInt(quantityInput.value);
 
     if (action === 'increase') {
         quantityInput.value = currentQuantity + 1;
+        // 서버에 업데이트된 수량을 전송하고 서버 응답을 받은 후에 페이지를 새로고침
+        updateServer(productId, currentQuantity + 1);
     } else if (action === 'decrease' && currentQuantity > 1) {
         quantityInput.value = currentQuantity - 1;
+        // 서버에 업데이트된 수량을 전송하고 서버 응답을 받은 후에 페이지를 새로고침
+        updateServer(productId, currentQuantity - 1);
     }
-
-    // 서버에 수량을 업데이트하는 부분은 생략하고 페이지 전체를 새로고침합니다.
-    location.reload();
+}
+function updateCartOnServerResponse() {
+    fetch('/app/getUpdatedCartData')
+        .then(response => response.json())
+        .then(data => {
+            console.log("서버 응답:", data);
+            // 업데이트된 장바구니 정보를 사용하여 화면 업데이트
+            updateCart(data);
+        })
+        .catch(error => {
+            console.log('Error fetching updated cart data:', error);
+        });
 }
 $(document).ready(function () {
     // 전체 선택 체크박스 요소 선택
