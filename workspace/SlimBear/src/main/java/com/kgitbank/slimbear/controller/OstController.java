@@ -1,22 +1,18 @@
 package com.kgitbank.slimbear.controller;
 
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.common.SlimBearUtil;
-import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -30,51 +26,52 @@ public class OstController {
 	
 	@RequestMapping("cart")
 	public String cartPage(Authentication authentication ,Model model) {
-		
+		//cartpage 메서드는 사용자의 인증 정보를 받아 해당 사용자의 장바구니 정보를 조회하고,모델에 필요한데이터를 추가함
 		
 		if(authentication != null) {
 			SecurityUser user = (SecurityUser)authentication.getPrincipal();
 			System.out.println(user.getUid());
 			System.out.println(user.getUsername());
 			
-			List<MemberCartVO> cardlist = ostService.getCartList(user.getUid());
+			List<MemberCartVO> cartlist = ostService.getCartList(user.getUid());
 			
-			int totalPrice = 0;
-			for(int i=0; i<cardlist.size(); ++i) {
-				totalPrice += cardlist.get(i).getPrice();
-			}
-			
-			model.addAttribute("cartList",cardlist);
+			 int totalPrice = ostService.calculateTotalPrice(cartlist);
+			 String formattedTotalPrice = ostService.formatPrice(totalPrice);
+			 
+			 
+			model.addAttribute("cartList",cartlist);
 			model.addAttribute("totalprice",totalPrice);
 		}
 
 		return "cart"; 
 	}
 	
-	public int insertAddress(CartDTO cart, HttpServletRequest request) {
-		
-//		SlimBearUtil.appendProductCode(request.getAttribute("productUID"), request.getAttribute("color"), request.getAttribute("size"));
-		
-		CartDTO cartList = new CartDTO();
-		cartList.setMem_uid(9767);
-		cartList.setCnt(1);
-		cartList.setProd_code("productCode");
-		cartList.setReg_date(new Date(System.currentTimeMillis()));
-		return ostService.insertAddress(cartList);
+	/*
+	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
+	 * 
+	 * // SlimBearUtil.appendProductCode(request.getAttribute("productUID"),
+	 * request.getAttribute("color"), request.getAttribute("size"));
+	 * 
+	 * CartDTO cartList = new CartDTO(); cartList.setMem_uid(9767);
+	 * cartList.setCnt(1); cartList.setProd_code("productCode");
+	 * cartList.setReg_date(new Date(System.currentTimeMillis())); return
+	 * ostService.insertAddress(cartList); }
+	 */
+
+	
+	@PostMapping("/app/deleteSelectedItems")
+	public String deleteSelectedItems(@RequestParam("selectedItems") String selectedItems) {
+	    // 쉼표로 구분된 선택된 상품의 UID를 리스트로 변환
+	    List<Long> itemIds = Arrays.stream(selectedItems.split(","))
+	                                 .map(Long::parseLong)
+	                                 .collect(Collectors.toList());
+
+	    // 서비스 레이어를 통해 선택된 상품들을 삭제
+	    ostService.deleteSelectedItems(itemIds);
+
+	    return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트
 	}
 
-
-	@PostMapping("/deleteSelectedItems")
-	@ResponseBody
-	public List<MemberCartVO> deleteSelectedItems(@RequestBody List<MemberCartVO> ctg_uid) {
-	    // ctg_uid가 올바르게 전송되는지 로그로 확인
-	    System.out.println("Received ctg_uid: " + ctg_uid);
-	    
-	    // ctg_uid에 해당하는 상품들을 삭제하고, 업데이트된 장바구니 정보를 반환
-	    List<MemberCartVO> updatedCart = ostService.deleteSelectedItems(ctg_uid);
-
-	    return updatedCart;
-	}
 
 	@PostMapping("/updateQuantity")
     @ResponseBody

@@ -17,8 +17,7 @@ import com.kgitbank.slimbear.vo.MemberCartVO;
 @Service
 public class OstSerivceImpl {
 
-    private List<MemberCartVO> cartList = new ArrayList<>();
-    
+   
     @Autowired
     private CartDAO cartDAO;
     @Autowired
@@ -26,8 +25,8 @@ public class OstSerivceImpl {
     @Autowired
     private ProductDAO productDAO;
     
-    public List<MemberCartVO> getCartList(long memberUID) {
-    	ArrayList<MemberCartVO> list = new ArrayList<MemberCartVO>();
+    public List<MemberCartVO> getCartList(long memberUID) {//getCartList(long memberUID) 메서드는 회원의 장바구니 목록을 가져오는 역할
+    	ArrayList<MemberCartVO> list = new ArrayList<MemberCartVO>();//원의 장바구니에 담긴 각 상품의 가격 정보를 포함한 MemberCartVO 리스트를 반환
     	
     	List<CartDTO> memberCartList = cartDAO.getCartListByMemberUID(memberUID);
     	
@@ -36,12 +35,17 @@ public class OstSerivceImpl {
     		MemberCartVO vo = new MemberCartVO();
     		
     		vo.setUid(i.getUid());
+    		vo.setCnt(i.getCnt());
     		
     	  	String[] prodctInfos = SlimBearUtil.splitProductDetail(i.getProd_code());
     	  	long productUID =  Long.valueOf(prodctInfos[0]);
     	  	
     	  	ProductDTO product = productDAO.getProductByUid(productUID);
     	  	vo.setPrice(product.getPrice());
+    	  	vo.setDesc(product.getDesc());
+    	  	vo.setName(product.getName());
+    	  	vo.setMaker(product.getMaker());
+    	  	vo.setMain_image(product.getMain_image());
     	  	
     	  	list.add(vo);
     	  	
@@ -49,30 +53,35 @@ public class OstSerivceImpl {
 		
     	return list;
     }
-    public int insertAddress(CartDTO cart) {
-    	return cartDAO.insertAddress(cart);
-    }
+
+	/*
+	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
+	 * }
+	 */
+    private List<MemberCartVO> cartList = new ArrayList<>();
     
     public List<MemberCartVO> getCart() {
         return cartList;
     }
 
-    public List<MemberCartVO> deleteSelectedItems(List<MemberCartVO> ctg_uid) {
-        System.out.println("Received ctg_uid: " + ctg_uid);
-
-        List<MemberCartVO> updatedCart = new ArrayList<>();
-
-        // ctg_uid에 해당하는 상품들을 삭제하고, 업데이트된 장바구니 정보를 반환
-        for (MemberCartVO cartItem : cartList) {
-            if (!ctg_uid.contains(cartItem.getUid())) {
-                updatedCart.add(cartItem);
-            }
+    public void deleteSelectedItems(List<Long> itemIds) {
+        // 선택된 상품들을 삭제하
+        for (Long itemId : itemIds) {
+    //        cartDAO.deleteCartItem(itemId);
+            
         }
-        cartList = updatedCart;
-
-        return updatedCart;
     }
-
+    public int calculateTotalPrice(List<MemberCartVO> cartList) {
+        int totalPrice = 0;
+        for (MemberCartVO cartItem : cartList) {
+            totalPrice += cartItem.getPrice();
+        }
+        return totalPrice;
+    }
+    public String formatPrice(int price) {
+    	 // 필요한 포맷팅 로직 추가
+    	return String.format("%,d원", price);
+    }
     // 해당 제품의 수량을 업데이트하는 메서드 추가
     public void updateQuantity(long productId, int newQuantity) {
         for (MemberCartVO cartItem : cartList) {

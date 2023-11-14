@@ -39,15 +39,18 @@ function outQuantity(id, step) {
     }
 }
 
+
 function updateTotalPrice(productId) {
     var totalpriceElement = document.getElementById('totalprice_' + productId);
     if (totalpriceElement) {
-        var productPrice = 45000; // 상품의 가격 (실제 가격으로 설정해야 함)
+    
         var quantity = parseInt(document.getElementById('quantity_' + productId).value);
-        var newTotalPrice = quantity * productPrice;
-        totalpriceElement.textContent = newTotalPrice +"원";
+ //      var productPrice = ${cart.price};
+        var newTotalPrice = quantity * productPrice; // 변수 사용
+        totalpriceElement.textContent = newTotalPrice + "원";
     }
 }
+
 
 // 서버에 업데이트된 수량을 전송하는 함수 추가
 function updateServer(productId, newQuantity) {
@@ -64,28 +67,19 @@ function updateServer(productId, newQuantity) {
     });
 }
 
-function updateQuantity(productId, change) {
-    // 해당 productId에 대한 quantity input 요소를 찾기
-    var quantityElement = document.getElementById('quantity_' + productId);
+function updateQuantity(productId, action) {
+    var quantityInput = document.getElementById("quantity_" + productId);
+    var currentQuantity = parseInt(quantityInput.value);
 
-    if (quantityElement) {
-        // quantity input 요소가 존재하면 수량 변경 로직 수행
-        var currentQuantity = parseInt(quantityElement.value);
-        var newQuantity = currentQuantity + change;
-
-        // 수량이 1 미만으로 내려가지 않도록 보장
-        newQuantity = Math.max(newQuantity, 1);
-
-        // 수량 입력란을 업데이트
-        quantityElement.value = newQuantity;
-
-        // 추가적인 로직 수행...
-        updatePrice(productId, newQuantity); // 가격 업데이트 함수 호출
-    } else {
-        console.error('Quantity element not found for productId ' + productId);
+    if (action === 'increase') {
+        quantityInput.value = currentQuantity + 1;
+    } else if (action === 'decrease' && currentQuantity > 1) {
+        quantityInput.value = currentQuantity - 1;
     }
-}
 
+    // 서버에 수량을 업데이트하는 부분은 생략하고 페이지 전체를 새로고침합니다.
+    location.reload();
+}
 $(document).ready(function () {
     // 전체 선택 체크박스 요소 선택
     const selectAllCheckbox = $("#selectAll");
@@ -102,36 +96,22 @@ $(document).ready(function () {
 
    
 });
-// ... (기존 코드) ...
-
-$("#deleteSelectedBtn").on("click", function () {
-    deleteSelectedItems();
-});
 
 function deleteSelectedItems() {
-    var checkedItems = $("tbody input[type='checkbox']:checked");
-    var ctg_uid = checkedItems.map(function() {
-        return $(this).closest('tr').find('.quantity input').attr('id').replace('quantity_', '');
-    }).get();
-
-    var formData = new FormData();
-    formData.append("ctg_uid", ctg_uid.join(','));
-
-    fetch('/app/deleteSelectedItems', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded' // Content-Type 설정
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("서버 응답:", data);
-        updateCart(data);
-    })
-    .catch(error => {
-        console.log('Error deleting items:', error);
+    var selectedItems = document.querySelectorAll('input[name="selectedItems"]:checked');
+    var itemIds = [];
+    
+    selectedItems.forEach(function(item) {
+        itemIds.push(item.value);
     });
+
+    if (itemIds.length > 0) {
+        // 선택된 상품의 UID를 hidden input에 할당
+        document.getElementById('selectedItemsInput').value = itemIds.join(',');
+
+        // 폼 제출
+        document.getElementById('deleteForm').submit();
+    }
 }
 
 
