@@ -42,12 +42,11 @@ public class SanghyukController {
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
 		
 		// 제품의 inquiry 가져오기
-		List<InquiryDTO> inquiryList = sanghService.getInquiryList();
+		
 		
 		model.addAttribute("product", product);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("productDetailList", productDetailList);
-		model.addAttribute("inquiryList", inquiryList);
 
 		return "productInfo"; // .jsp 생략
 	}

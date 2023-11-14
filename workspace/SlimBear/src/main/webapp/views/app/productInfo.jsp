@@ -7,8 +7,6 @@
 	request.setAttribute("title", "상품 문의합니다.");
 	request.setAttribute("reg_date", "2023-11-14");
 	request.setAttribute("reg_date", "2023-11-14");
-	
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -471,15 +469,15 @@
 					</tr>	
 				</thead>
 				<tbody>
-					<%-- <c:forEach var="inquiryList" items="inquiryList"> --%>
+					<c:forEach var="inquiryList" items="inquiryList">
 						<tr>
-							<td>${uid}</td>
-							<td>${writer_id}</td>
-							<td>${title}</td>
-							<td>${reg_date}</td>
+							<td>${inquiryList.prod_uid}</td>
+							<td>${inquiryList.writer_id}</td>
+							<td>${inquiryList.title}</td>
+							<td>${inquiryList.reg_date}</td>
 							<%-- <td>${ }</td> --%>
 						</tr>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

@@ -1,6 +1,7 @@
 package com.kgitbank.slimbear.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,5 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public InquiryDAO inquiryDAO;
 	
-	public List<InquiryDTO> getInquiryList() {
-		return inquiryDAO.getInquiryList();
-	}
+	
 }
