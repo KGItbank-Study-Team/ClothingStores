@@ -11,7 +11,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

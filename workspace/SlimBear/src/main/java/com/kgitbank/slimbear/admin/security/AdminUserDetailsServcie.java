@@ -16,6 +16,7 @@ public class AdminUserDetailsServcie implements UserDetailsService{
 	@Override
 	public AdminSecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {
 		AdminDTO admin = adminDAO.getAdminById(username);
+		System.out.println(username);
 		if (admin == null) {
 			throw new UsernameNotFoundException(username + " 사용자 없음");
 		} else {

@@ -2,55 +2,65 @@ package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kgitbank.slimbear.dao.InquiryDAO;
+import com.kgitbank.slimbear.dao.NoticeDAO;
+import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.vo.BoardFaqListVO;
 import com.kgitbank.slimbear.vo.BoardInquiryListVO;
-import com.kgitbank.slimbear.vo.BoardNoticeListVO;
 
 @Service
 public class YangBoardServiceImpl {
 
-	// 공지사항
-	public ArrayList<BoardNoticeListVO> getBoardNoticeList() {
-        ArrayList<BoardNoticeListVO> boards = new ArrayList<>();
-        
-	     // 임시 데이터 생성
-	    for (int i = 6; i >= 1; i--) {
-	        BoardNoticeListVO board = new BoardNoticeListVO();
-	        board.setNo(i);
-	        board.setTitle("제목 " + i);
-	        board.setName("작성자 " + i);
-	        board.setReg_date(new Date(System.currentTimeMillis()));
-	        board.setContent("내용 " + i);
-//	        board.setId(i);;
-//	        board.setHit(100 + i);
-//	        board.setVote(5 - i);
-//	        board.setPoint(i * 10);
-	        
-	        boards.add(board);
-	    }
-	    return boards;
+	@Autowired
+    private NoticeDAO noticeDAO;
+	@Autowired
+	private InquiryDAO inquiryDAO;
+
+    // 공지사항
+	public List<NoticeDTO> getBoardNoticeList() {
+        List<NoticeDTO> notices = noticeDAO.getNoticeList();
+
+        return notices;
+//        return new ArrayList<>(notices);
     }
+	/*
+	 * public ArrayList<BoardNoticeListVO> getBoardNoticeList() {
+	 * ArrayList<BoardNoticeListVO> boards = new ArrayList<>();
+	 * 
+	 * // 임시 데이터 생성 for (int i = 6; i >= 1; i--) { BoardNoticeListVO board = new
+	 * BoardNoticeListVO(); board.setNo(i); board.setTitle("제목 " + i);
+	 * board.setName("작성자 " + i); board.setReg_date(new
+	 * Date(System.currentTimeMillis())); board.setContent("내용 " + i); //
+	 * board.setId(i);; // board.setHit(100 + i); // board.setVote(5 - i); //
+	 * board.setPoint(i * 10);
+	 * 
+	 * boards.add(board); } return boards; }
+	 */
+	
 	
 	// 문의게시판
-	public ArrayList<BoardInquiryListVO> getBoardInquiryList(){		// 상품문의
-		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
-		
-		for (int i = 5; i >= 1; i--) {
-			BoardInquiryListVO board = new BoardInquiryListVO();
-			board.setNo(i);
-			board.setInquiry_title("상품문의");
-			board.setTitle("상품문의 " + i);
-			board.setWriter_id("작성자 " + i);
-			board.setReg_date(new Date(System.currentTimeMillis()));
-			board.setContent("내용 " + i);
-			
-			boards.add(board);
-		}
-		return boards;
-	}
+	public List<InquiryDTO> getBoardInquiryList() {
+		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
+        return inquiries;
+    }
+	/*
+	 * public ArrayList<BoardInquiryListVO> getBoardInquiryList(){ // 상품문의
+	 * ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
+	 * 
+	 * for (int i = 5; i >= 1; i--) { BoardInquiryListVO board = new
+	 * BoardInquiryListVO(); board.setNo(i); board.setInquiry_title("상품문의");
+	 * board.setTitle("상품문의 " + i); board.setWriter_id("작성자 " + i);
+	 * board.setReg_date(new Date(System.currentTimeMillis()));
+	 * board.setContent("내용 " + i);
+	 * 
+	 * boards.add(board); } return boards; }
+	 */
 	public ArrayList<BoardInquiryListVO> getBoardInquiry2List(){	// 배송문의
 		ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
 		
