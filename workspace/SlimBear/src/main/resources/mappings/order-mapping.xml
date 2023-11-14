@@ -7,7 +7,7 @@
  <mapper namespace="com.slimbear.mapper.Order">
 		<!-- 주문(productOrder) -->
 		<select id="SELECT_ORDER_LIST_BY_MEMBER_UID" resultType="order" parameterType="member">
-			SELECT * FROM productOrder WHERE mem_uid=#{mem_uid}
+			SELECT * FROM productOrder WHERE mem_uid=#{uid}
 		</select>
 		
 		<insert id="INSERT_ORDER"> 
