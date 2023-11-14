@@ -77,9 +77,9 @@ table {
 	padding: 6px 0;
 }
 
-th:last-child {
+/* th:last-child {
 	border-bottom: none;
-}
+} */
 
 .solid3 {
 	width: 100px;
@@ -321,6 +321,7 @@ tbody img {
 }
 .guideSection h2 {
 	cursor: pointer;
+	color:  #555555;
 }
 .hrCss {
 	margin: 10px 0;
@@ -331,7 +332,9 @@ tbody img {
 .guideSection .guideText {
 	display: none;
 }
-
+section > h1 {
+	color: #555555;
+}
 
 /* ==================== */
 /* ==================== */
@@ -375,9 +378,6 @@ tbody img {
 .paging {
 	text-align: center;
 }
-#wrapper {
-	/* width: 1620px; */
-}
 
 
 
@@ -386,31 +386,13 @@ tbody img {
 /* ==================== */
 /* ==================== */
 /* Q&A CSS */
-.inquirySection > table th {
-	border-left: 1px black solid;
-	border-right: 1px black sloid; 
+.inquirySection {
+	margin-top: 100px;
 }
-.inquirySection > table td  {
-	border-left: 1px black solid;
-	border-right: 1px black sloid;
-}
-.inquirySection > table th:first-child {
-	border-left: 0;
-}
-.inquirySection > table td:first-child {
-	border-left: 0;	
-}
-.inquirySection > table th:last-child {
-	border-right: 0;
-}
-.inquirySection > table td:last-child {
-	border-right: 0;	
+.inquirySection th, td {
+	text-align: center;
 }
 
-
-
-
-
-
-
-
+.inquirySection td {
+	padding: 20px 0;
+}

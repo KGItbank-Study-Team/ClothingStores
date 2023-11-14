@@ -285,7 +285,7 @@
 				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="QnA">Q/A</a></span>
+				<span><a href="QnA">Q&A</a></span>
 			</div>
 		</div>
 		<hr class="hrCss">
@@ -299,6 +299,8 @@
 						<p>
 							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. 
 							<br /> <br /> 
+							무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.<br>
+							주문 시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.<br><br>
 							A/S 책임자 : 070-7705-5595 슬림베어 고객센터
 						</p>
 						<p>품질보증기준: 전자상거래 소비자 보호법에 의거하여 소비자 청약철회 가능한 기준에 따름.</p>
@@ -452,9 +454,9 @@
 		<div class="inquirySection">
 			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
-			<table border="1">
+			<table>
 				<colgroup>
-					<col style="width: 70px;">
+					<col  style="width: 70px;">
 					<col style="width: atuo;">
 					<col style="width: 150px;">
 					<col style="width: 130px;">
@@ -462,20 +464,20 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
+						<th class="solid2" scope="col">번호</th>
+						<th class="solid2" scope="col">제목</th>
+						<th class="solid2" scope="col">작성자</th>
+						<th class="solid2" scope="col">작성일</th>
 						<!-- <th>조회</th> -->
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${inquiryList}" var="inquiryItems">
 						<tr>
-							<td>${inquiryItems.prod_uid}</td>
-							<td>${inquiryItems.writer_id}</td>
-							<td>${inquiryItems.title}</td>
-							<td>${inquiryItems.reg_date}</td>
+							<td class="solid">${inquiryItems.prod_uid}</td>
+							<td class="solid">${inquiryItems.writer_id}</td>
+							<td class="solid">${inquiryItems.title}</td>
+							<td class="solid">${inquiryItems.reg_date}</td>
 							<%-- <td>${ }</td> --%>
 						</tr>
 					</c:forEach>
