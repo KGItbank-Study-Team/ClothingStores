@@ -34,6 +34,7 @@ public class YangBoardServiceImpl {
 		return notices;
 //        return new ArrayList<>(notices);
 	}
+	
 
 	/*
 	 * public ArrayList<BoardNoticeListVO> getBoardNoticeVOList() {
@@ -51,19 +52,25 @@ public class YangBoardServiceImpl {
 
 	
 	// 문의게시판
-	public List<InquiryDTO> getBoardInquiryListByType(String type) {
-		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-
-		// Filter inquiries based on the specified type
-		List<InquiryDTO> filteredInquiries = inquiries.stream().filter(inquiry -> inquiry.getType().equals(type))
-				.collect(Collectors.toList());
-		return filteredInquiries;
-	}
-
-	public List<InquiryDTO> getBoardInquiryList() {
-		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-		return inquiries;
-	}
+    public List<InquiryDTO> getInquiryList() {
+        return inquiryDAO.getInquiryList();
+    }
+	
+	
+//	public List<InquiryDTO> getBoardInquiryListByType(String type) {
+//		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
+//
+//		// Filter inquiries based on the specified type
+//		List<InquiryDTO> filteredInquiries = inquiries.stream().filter(inquiry -> inquiry.getType().equals(type))
+//				.collect(Collectors.toList());
+//		return filteredInquiries;
+//	}
+//
+//	public List<InquiryDTO> getBoardInquiryList() {
+//		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
+//		return inquiries;
+//	}
+	
 
 	/*
 	 * public ArrayList<BoardInquiryListVO> getBoardInquiryList(){ // 상품문의
@@ -106,20 +113,22 @@ public class YangBoardServiceImpl {
 	 * boards.add(board); } return boards; }
 	 */
 
-	// FAQ
-	public List<FaqDTO> getBoardFaqListByType(String type) {
-		List<FaqDTO> faqs = faqDAO.getFaqList();
 
-		// Filter inquiries based on the specified type
-		List<FaqDTO> filteredFaqs = faqs.stream().filter(faq -> faq.getType().equals(type))
-				.collect(Collectors.toList());
-		return filteredFaqs;
-	}
+	// FAQ
+	/*
+	 * public List<FaqDTO> getBoardFaqListByType(String type) { List<FaqDTO> faqs =
+	 * faqDAO.getFaqList();
+	 * 
+	 * // Filter inquiries based on the specified type List<FaqDTO> filteredFaqs =
+	 * faqs.stream().filter(faq -> faq.getType().equals(type))
+	 * .collect(Collectors.toList()); return filteredFaqs; }
+	 */
 
 	public List<FaqDTO> getBoardFaqList() {
 		List<FaqDTO> faqs = faqDAO.getFaqList();
 		return faqs;
 	}
+	
 
 	/*
 	 * public ArrayList<BoardFaqListVO> getBoardFaqList() {
@@ -172,6 +181,7 @@ public class YangBoardServiceImpl {
 	 * boards.add(board); } return boards; }
 	 */
 
+
 	// 유저 게시글
 	public ArrayList<BoardInquiryListVO> getBoardUserList() {
 		ArrayList<BoardInquiryListVO> boardUsers = new ArrayList<>();
@@ -188,6 +198,7 @@ public class YangBoardServiceImpl {
 		}
 		return boardUsers;
 	}
+
 
 	// 게시글작성
 	public Object getBoardWrite() {

@@ -112,7 +112,6 @@
 						            </td>
 									<td>${board.writer_id}</td>
 									<td>${board.reg_date}</td>
-<%-- 									<td>${board.content}</td> --%>
 								</tr>
 							</c:forEach>
 							
