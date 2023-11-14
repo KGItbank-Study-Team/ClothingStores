@@ -164,7 +164,7 @@
 					<hr />
 					<div class="customMemo">
 						<p class="name">제품 설명</p>
-						<p>${customMemo1}</p>
+						<p>${product.desc}</p>
 					</div>
 					<hr />
 					<div>
@@ -217,52 +217,214 @@
 			<!-- right -->
 		</div>
 		<!-- productInfo  -->
-		<hr/>
-		<br/>
+		<hr />
+		<br />
+		<!-- 보기 선택  -->
+		<div class="menuChoice">
+			<div>
+				<span><a href="#productDetail">DETAIL</a></span>
+			</div>
+			<div>
+				<span><a href="#reviewSection">REVIEW</a></span>
+			</div>
+			<div>
+				<span><a href="#guide">GUIDE</a></span>
+			</div>
+			<div>
+				<span><a href="">Q/A</a></span>
+			</div>
+		</div>
 		<div class="DetailInfo">
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo01.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo02.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo03.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo04.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo05.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo06.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo07.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo08.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo09.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo10.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo11.jpg"></div>
-			<div><img alt="이미지" src="/resources/images/product_DetailInfo12.jpg"></div>
+			<a name="productDetail"></a>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo01.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo02.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo03.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo04.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo05.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo06.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo07.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo08.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo09.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo10.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo11.jpg">
+			</div>
+			<div>
+				<img alt="이미지" src="/resources/images/product_DetailInfo12.jpg">
+			</div>
+		</div>
+		<!-- 클릭시 클릭한 영역으로 이동 -->
+		<div class="menuChoice">
+			<div>
+				<span><a href="#productDetail">DETAIL</a></span>
+			</div>
+			<div>
+				<span><a href="#reviewSection">REVIEW</a></span>
+			</div>
+			<div>
+				<span><a href="">GUIDE</a></span>
+			</div>
+			<div>
+				<span><a href="">Q/A</a></span>
+			</div>
+		</div>
+		<hr class="hrCss">
+		<!-- GUIDE 영역 -->
+		<a name="guide"></a>
+		<div class="guideSection">
+			<ul>
+				<li>
+					<h2>상품결제정보</h2>
+					<div class="guideText">
+						<p>
+							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. <br /> <br /> A/S 책임자 : 070-7705-5595 슬림베어 고객센터
+						</p>
+						<p>품질보증기준: 전자상거래 소비자 보호법에 의거하여 소비자 청약철회 가능한 기준에 따름.</p>
+						<p>구매자가 미성년자일 경우 법정 대리인이 계약에 동의하지 않을 때 구매를 취소할 수 있습니다.</p>
+					</div>
+				</li>
+				<hr class="hrCss">
+				<li>
+					<h2>배송정보</h2>
+					<div class="guideText">
+						<ul>
+							<li>배송 방법 : 택배</li>
+							<li>배송 지역 : 전국지역</li>
+							<li>배송 비용 : 무료</li>
+							<li>배송 기간 : 2일 ~ 7일</li>
+							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여
+								<br/>
+								가장 안전하고, 신속하게 배송하여 드립니다 :) 
+								<br/>
+								대부분 출고 다음날에 바로 도착하며 (주말 제외)
+								<br/>
+								지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. 
+								<br/>
+								기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다.
+								<br/>
+								7만원 이상 결제시 무료배송 혜택이 추가되며 
+								<br/>
+								최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰) 할인금액이 포함됩니다.
+							</li>
+						</ul>
+					</div>
+				</li>
+				<hr class="hrCss">
+				<li style="boder-top: 1px solid red;">
+					<h2>교환 및 반품정보</h2>
+					<div class="guideText">
+						<p>
+							[교환/반품 안내]
+							<br/>
+							물품 수령 후(택배 도착일자 기준) 7일 이내에 [MY PAGE]-[ORDER LIST] 에서 직접 접수 또는 '실시간 문의'로 접수해 주세요.
+							<br/>
+							사전에 신청해 주신 상품에 한해서만 교환/반품이 가능합니다. 접수 시 슬로우앤드에서 우체국 택배 회수접수를 도와드리고 있습니다.
+						</p>
+						<p><br></p>
+						<p><br></p>
+						<p>*패킹하여 보내실 때는 물품 수령시와 동일하게 포장해 주세요.</p>
+						<br>
+						<p>
+							택에 손상이 있는 경우에는 반품과 교환이 모두 불가합니다.
+							<br>
+							성함,주소,전화번호,보내시는 상품,사유등 반품카드 양식에 맞게 적어 보내주셔야 처리가 가능합니다.	
+						</p>
+						<p><br></p>
+						<p><br></p>
+						<p>보내시는 주소지 : [04792] 서울특별시 종로구 돈화문로 26 단성사 5층 하우스슬림 종로</p>
+						<p><br></p>
+						<p><br></p>
+						<p>
+							<교환반품 불가사항>
+							<br>
+							-상품 수령 후 7일 이상 경과된 경우
+							<br>
+							-상품 구매시 교환/환불 불가능이 명시되어 있는경우
+							<br>
+							-사용 흔적(집냄새,향수냄새,체취) / 텍 제거 및 바코드 훼손, 오염이 발견된 상품
+						</p>
+						<p>
+							-라벨, 태그 등 상품의 포장재 또는 구성품이 훼손된 상품
+							<br>
+							-수영복, 세일상품
+						</p>
+						<p>
+							-배송시 생긴 구김, 마감 박음질, 제작과정에서 발생하는 냄새나 초크자국 등 대량생산으로 인해 생긴 사유는 불량으로 간주되지 않습니다.
+						</p>
+						<p>
+							<br>
+							*불량상품의 재발송 시 왕복배송비는 슬림베어가 부담합니다.
+						</p>
+					</div>
+				</li>
+			</ul>
+			<hr class="hrCss">	
+		</div>
+	 	<!-- 클릭시 클릭한 영역으로 이동 -->
+		<div class="menuChoice">
+			<div>
+				<span><a href="#productDetail">DETAIL</a></span>
+			</div>
+			<div>
+				<span><a href="#reviewSection">REVIEW</a></span>
+			</div>
+			<div>
+				<span><a href="">GUIDE</a></span>
+			</div>
+			<div>
+				<span><a href="">Q/A</a></span>
+			</div>
 		</div>
 		<!-- 리뷰 영역 -->
+		<a name="reviewSection"></a>
 		<div id="wrapper">
-			<main id="product">
-				<section class="list">
-					<nav>
-						<h1>REVIEW</h1>
-					</nav>
-					<hr class="myHr" />
-					<div class="sort">
-						<div class="view-align">
-							<a href="#" class="on">판매많은순</a>
-						</div>
-						<div class="view-align">
-							<a href="#">낮은가격순</a>
-						</div>
-						<div class="view-align">
-							<a href="#">높은가격순</a>
-						</div>
-						<div class="view-align">
-							<a href="#">평점높은순</a>
-						</div>
-						<div class="view-align">
-							<a href="#">후기많은순</a>
-						</div>
-						<div class="view-align">
-							<a href="#">최근등록순</a>
-						</div>
+			<section class="list">
+				<nav>
+					<h1>REVIEW</h1>
+				</nav>
+				<hr class="myHr" />
+				<div class="sort">
+					<div class="view-align">
+						<a href="#" class="on">판매많은순</a>
 					</div>
-					<!-- <hr class="myHrTwo" /> -->
-					<c:forEach items="${reviewList}" var="list">
+					<div class="view-align">
+						<a href="#">낮은가격순</a>
+					</div>
+					<div class="view-align">
+						<a href="#">높은가격순</a>
+					</div>
+					<div class="view-align">
+						<a href="#">평점높은순</a>
+					</div>
+					<div class="view-align">
+						<a href="#">후기많은순</a>
+					</div>
+					<div class="view-align">
+						<a href="#">최근등록순</a>
+					</div>
+				</div>
+				<!-- <hr class="myHrTwo" /> -->
+				<c:forEach items="${reviewList}" var="list">
 					<div class="review-section">
 						<div class="info">
 							<div>
@@ -279,22 +441,19 @@
 							></a>
 						</div>
 						<div class="review-text">
-							<div>
-								${list.content}
-							</div>
+							<div>${list.content}</div>
 						</div>
 						<!-- <hr /> -->
-					</c:forEach>
-						<div class="paging">
-							<span class="prev"> <a href="#">< 이전</a>
-							</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
-							</span> <span class="next"> <a href="#">다음 ></a>
-							</span>
-						</div>
-					</div>
-				</section>
-			</main>
+				</c:forEach>
+				<div class="paging">
+					<span class="prev"> <a href="#">< 이전</a>
+					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
+					</span> <span class="next"> <a href="#">다음 ></a>
+					</span>
+				</div>
 		</div>
+		</section>
+	</div>
 	</div>
 	<!-- container -->
 	<div class="footer">
