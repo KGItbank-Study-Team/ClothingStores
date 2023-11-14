@@ -17,7 +17,6 @@ a {
 }
 
 #container {
-
 	padding: 90px;
 	margin: 107.5px;
 	padding-top: 100px;
@@ -91,20 +90,6 @@ th:last-child {
 
 .colorSelect {
 	padding-right: 20px;
-}
-
-/* .color2 {
-	width: 100px;
-	text-align: left;
-	border-spacing: 0;
-	padding: 6px 0;
-} */
-.colorOptionPosition {
-	
-}
-
-.sizeOptionPosition {
-	
 }
 
 .sizeBtn, .colorBtn {
@@ -351,9 +336,6 @@ tbody img {
 /* ==================== */
 /* ==================== */
 /* 리뷰 영역 CSS */
-nav {
-	/* text-align: left; */
-}
 .sort {
 	margin-bottom: 10px;
 }
@@ -396,3 +378,39 @@ nav {
 #wrapper {
 	/* width: 1620px; */
 }
+
+
+
+
+
+/* ==================== */
+/* ==================== */
+/* Q&A CSS */
+.inquirySection > table th {
+	border-left: 1px black solid;
+	border-right: 1px black sloid; 
+}
+.inquirySection > table td  {
+	border-left: 1px black solid;
+	border-right: 1px black sloid;
+}
+.inquirySection > table th:first-child {
+	border-left: 0;
+}
+.inquirySection > table td:first-child {
+	border-left: 0;	
+}
+.inquirySection > table th:last-child {
+	border-right: 0;
+}
+.inquirySection > table td:last-child {
+	border-right: 0;	
+}
+
+
+
+
+
+
+
+

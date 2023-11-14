@@ -297,7 +297,9 @@
 					<h2>상품결제정보</h2>
 					<div class="guideText">
 						<p>
-							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. <br /> <br /> A/S 책임자 : 070-7705-5595 슬림베어 고객센터
+							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. 
+							<br /> <br /> 
+							A/S 책임자 : 070-7705-5595 슬림베어 고객센터
 						</p>
 						<p>품질보증기준: 전자상거래 소비자 보호법에 의거하여 소비자 청약철회 가능한 기준에 따름.</p>
 						<p>구매자가 미성년자일 경우 법정 대리인이 계약에 동의하지 않을 때 구매를 취소할 수 있습니다.</p>
@@ -312,8 +314,12 @@
 							<li>배송 지역 : 전국지역</li>
 							<li>배송 비용 : 무료</li>
 							<li>배송 기간 : 2일 ~ 7일</li>
-							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여 <br /> 가장 안전하고, 신속하게 배송하여 드립니다 :) <br /> 대부분 출고 다음날에 바로 도착하며 (주말 제외) <br /> 지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. <br /> 기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다. <br /> 7만원 이상 결제시 무료배송 혜택이 추가되며 <br /> 최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰)
-								할인금액이 포함됩니다.
+							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여 <br /> 가장 안전하고, 신속하게 배송하여 드립니다 :) 
+							<br /><br /> 대부분 출고 다음날에 바로 도착하며 (주말 제외) <br /><br /> 
+							지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. <br /> 
+							기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다. <br /><br /> 
+							7만원 이상 결제시 무료배송 혜택이 추가되며 <br /> 
+							최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰)할인금액이 포함됩니다.
 							</li>
 						</ul>
 					</div>
@@ -379,7 +385,7 @@
 				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="QnA">Q/A</a></span>
+				<span><a href="#QnA">Q/A</a></span>
 			</div>
 		</div>
 		<!-- 리뷰 영역 -->
@@ -423,9 +429,9 @@
 							<div class="review-score">★★★★★(${list.score})</div>
 						</div>
 						<div class="photo-review">
-							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품" src="/resources/images/review_images04.jpg"></a> <a><img
-								alt="상품" src="/resources/images/review_images05.jpg"
-							></a>
+							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품"
+								src="/resources/images/review_images04.jpg"
+							></a> <a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
 						</div>
 						<div class="review-text">
 							<div>${list.content}</div>
@@ -442,8 +448,9 @@
 			</section>
 		</div>
 		<!-- QnA -->
-		<div>
-			<h1>Q&A</h1>
+		<a name="QnA"></a>
+		<div class="inquirySection">
+			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
 			<table border="1">
 				<colgroup>
@@ -460,10 +467,10 @@
 						<th>작성자</th>
 						<th>작성일</th>
 						<!-- <th>조회</th> -->
-					</tr>	
+					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${inquiryList}" var="inquiryItems" >
+					<c:forEach items="${inquiryList}" var="inquiryItems">
 						<tr>
 							<td>${inquiryItems.prod_uid}</td>
 							<td>${inquiryItems.writer_id}</td>
