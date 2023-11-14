@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	request.setAttribute("uid", "1");
-	request.setAttribute("writer_id", "해적왕");
-	request.setAttribute("title", "상품 문의합니다.");
-	request.setAttribute("reg_date", "2023-11-14");
-	request.setAttribute("reg_date", "2023-11-14");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -469,12 +463,12 @@
 					</tr>	
 				</thead>
 				<tbody>
-					<c:forEach var="inquiryList" items="inquiryList">
+					<c:forEach items="${inquiryList}" var="inquiryItems" >
 						<tr>
-							<td>${inquiryList.prod_uid}</td>
-							<td>${inquiryList.writer_id}</td>
-							<td>${inquiryList.title}</td>
-							<td>${inquiryList.reg_date}</td>
+							<td>${inquiryItems.prod_uid}</td>
+							<td>${inquiryItems.writer_id}</td>
+							<td>${inquiryItems.title}</td>
+							<td>${inquiryItems.reg_date}</td>
 							<%-- <td>${ }</td> --%>
 						</tr>
 					</c:forEach>
@@ -487,26 +481,3 @@
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -17,5 +17,5 @@ public class InquiryDTO {
 	private Date reg_date;
 	private String status;
 	private String type;
-	private Integer prod_uid;
+	private Long prod_uid;
 }
