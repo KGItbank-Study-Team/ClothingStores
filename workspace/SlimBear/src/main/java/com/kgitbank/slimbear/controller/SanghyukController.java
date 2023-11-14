@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -40,9 +41,13 @@ public class SanghyukController {
 		// 제품의 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
 		
+		// 제품의 inquiry 가져오기
+		List<InquiryDTO> inquiryList = sanghService.getInquiryList();
+		
 		model.addAttribute("product", product);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("productDetailList", productDetailList);
+		model.addAttribute("inquiryList", inquiryList);
 
 		return "productInfo"; // .jsp 생략
 	}

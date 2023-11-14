@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	request.setAttribute("uid", "1");
+	request.setAttribute("writer_id", "해적왕");
+	request.setAttribute("title", "상품 문의합니다.");
+	request.setAttribute("reg_date", "2023-11-14");
+	request.setAttribute("reg_date", "2023-11-14");
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -231,7 +239,7 @@
 				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="">Q/A</a></span>
+				<span><a href="#QnA">Q/A</a></span>
 			</div>
 		</div>
 		<div class="DetailInfo">
@@ -282,10 +290,10 @@
 				<span><a href="#reviewSection">REVIEW</a></span>
 			</div>
 			<div>
-				<span><a href="">GUIDE</a></span>
+				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="">Q/A</a></span>
+				<span><a href="QnA">Q/A</a></span>
 			</div>
 		</div>
 		<hr class="hrCss">
@@ -312,19 +320,8 @@
 							<li>배송 지역 : 전국지역</li>
 							<li>배송 비용 : 무료</li>
 							<li>배송 기간 : 2일 ~ 7일</li>
-							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여
-								<br/>
-								가장 안전하고, 신속하게 배송하여 드립니다 :) 
-								<br/>
-								대부분 출고 다음날에 바로 도착하며 (주말 제외)
-								<br/>
-								지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. 
-								<br/>
-								기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다.
-								<br/>
-								7만원 이상 결제시 무료배송 혜택이 추가되며 
-								<br/>
-								최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰) 할인금액이 포함됩니다.
+							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여 <br /> 가장 안전하고, 신속하게 배송하여 드립니다 :) <br /> 대부분 출고 다음날에 바로 도착하며 (주말 제외) <br /> 지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. <br /> 기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다. <br /> 7만원 이상 결제시 무료배송 혜택이 추가되며 <br /> 최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰)
+								할인금액이 포함됩니다.
 							</li>
 						</ul>
 					</div>
@@ -334,53 +331,51 @@
 					<h2>교환 및 반품정보</h2>
 					<div class="guideText">
 						<p>
-							[교환/반품 안내]
-							<br/>
-							물품 수령 후(택배 도착일자 기준) 7일 이내에 [MY PAGE]-[ORDER LIST] 에서 직접 접수 또는 '실시간 문의'로 접수해 주세요.
-							<br/>
-							사전에 신청해 주신 상품에 한해서만 교환/반품이 가능합니다. 접수 시 슬로우앤드에서 우체국 택배 회수접수를 도와드리고 있습니다.
+							[교환/반품 안내] <br /> 물품 수령 후(택배 도착일자 기준) 7일 이내에 [MY PAGE]-[ORDER LIST] 에서 직접 접수 또는 '실시간 문의'로 접수해 주세요. <br /> 사전에 신청해 주신 상품에 한해서만 교환/반품이 가능합니다. 접수 시 슬로우앤드에서 우체국 택배 회수접수를 도와드리고 있습니다.
 						</p>
-						<p><br></p>
-						<p><br></p>
+						<p>
+							<br>
+						</p>
+						<p>
+							<br>
+						</p>
 						<p>*패킹하여 보내실 때는 물품 수령시와 동일하게 포장해 주세요.</p>
 						<br>
 						<p>
-							택에 손상이 있는 경우에는 반품과 교환이 모두 불가합니다.
-							<br>
-							성함,주소,전화번호,보내시는 상품,사유등 반품카드 양식에 맞게 적어 보내주셔야 처리가 가능합니다.	
+							택에 손상이 있는 경우에는 반품과 교환이 모두 불가합니다. <br> 성함,주소,전화번호,보내시는 상품,사유등 반품카드 양식에 맞게 적어 보내주셔야 처리가 가능합니다.
 						</p>
-						<p><br></p>
-						<p><br></p>
+						<p>
+							<br>
+						</p>
+						<p>
+							<br>
+						</p>
 						<p>보내시는 주소지 : [04792] 서울특별시 종로구 돈화문로 26 단성사 5층 하우스슬림 종로</p>
-						<p><br></p>
-						<p><br></p>
 						<p>
-							<교환반품 불가사항>
 							<br>
-							-상품 수령 후 7일 이상 경과된 경우
-							<br>
-							-상품 구매시 교환/환불 불가능이 명시되어 있는경우
-							<br>
-							-사용 흔적(집냄새,향수냄새,체취) / 텍 제거 및 바코드 훼손, 오염이 발견된 상품
-						</p>
-						<p>
-							-라벨, 태그 등 상품의 포장재 또는 구성품이 훼손된 상품
-							<br>
-							-수영복, 세일상품
-						</p>
-						<p>
-							-배송시 생긴 구김, 마감 박음질, 제작과정에서 발생하는 냄새나 초크자국 등 대량생산으로 인해 생긴 사유는 불량으로 간주되지 않습니다.
 						</p>
 						<p>
 							<br>
-							*불량상품의 재발송 시 왕복배송비는 슬림베어가 부담합니다.
+						</p>
+						<p>
+							<교환반품 불가사항> <br>
+							-상품 수령 후 7일 이상 경과된 경우 <br>
+							-상품 구매시 교환/환불 불가능이 명시되어 있는경우 <br>
+							-사용 흔적(집냄새,향수냄새,체취) / 텍 제거 및 바코드 훼손, 오염이 발견된 상품 
+						</p>
+						<p>
+							-라벨, 태그 등 상품의 포장재 또는 구성품이 훼손된 상품 <br> -수영복, 세일상품
+						</p>
+						<p>-배송시 생긴 구김, 마감 박음질, 제작과정에서 발생하는 냄새나 초크자국 등 대량생산으로 인해 생긴 사유는 불량으로 간주되지 않습니다.</p>
+						<p>
+							<br> *불량상품의 재발송 시 왕복배송비는 슬림베어가 부담합니다.
 						</p>
 					</div>
 				</li>
 			</ul>
-			<hr class="hrCss">	
+			<hr class="hrCss">
 		</div>
-	 	<!-- 클릭시 클릭한 영역으로 이동 -->
+		<!-- 클릭시 클릭한 영역으로 이동 -->
 		<div class="menuChoice">
 			<div>
 				<span><a href="#productDetail">DETAIL</a></span>
@@ -389,10 +384,10 @@
 				<span><a href="#reviewSection">REVIEW</a></span>
 			</div>
 			<div>
-				<span><a href="">GUIDE</a></span>
+				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="">Q/A</a></span>
+				<span><a href="QnA">Q/A</a></span>
 			</div>
 		</div>
 		<!-- 리뷰 영역 -->
@@ -443,7 +438,8 @@
 						<div class="review-text">
 							<div>${list.content}</div>
 						</div>
-						<!-- <hr /> -->
+					</div>
+					<!-- <hr /> -->
 				</c:forEach>
 				<div class="paging">
 					<span class="prev"> <a href="#">< 이전</a>
@@ -451,13 +447,45 @@
 					</span> <span class="next"> <a href="#">다음 ></a>
 					</span>
 				</div>
+			</section>
 		</div>
-		</section>
-	</div>
-	</div>
-	<!-- container -->
-	<div class="footer">
-		<%@ include file="footer/footer.jsp"%>
+		<!-- QnA -->
+		<div>
+			<h1>Q&A</h1>
+			<hr class="myHr" />
+			<table border="1">
+				<colgroup>
+					<col style="width: 70px;">
+					<col style="width: atuo;">
+					<col style="width: 150px;">
+					<col style="width: 130px;">
+					<%-- <col style="70px;"> --%>
+				</colgroup>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<!-- <th>조회</th> -->
+					</tr>	
+				</thead>
+				<tbody>
+					<%-- <c:forEach var="inquiryList" items="inquiryList"> --%>
+						<tr>
+							<td>${uid}</td>
+							<td>${writer_id}</td>
+							<td>${title}</td>
+							<td>${reg_date}</td>
+							<%-- <td>${ }</td> --%>
+						</tr>
+					<%-- </c:forEach> --%>
+				</tbody>
+			</table>
+		</div>
+		<div class="footer">
+			<%@ include file="footer/footer.jsp"%>
+		</div>
 	</div>
 </body>
 </html>
