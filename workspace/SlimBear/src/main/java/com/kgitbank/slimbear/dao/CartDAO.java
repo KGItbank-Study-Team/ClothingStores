@@ -19,7 +19,7 @@ public class CartDAO {
 	public List<CartDTO> getCartListByMemberUID(long memberUID) {
 		MemberDTO info = new MemberDTO();
 		info.setUid(memberUID);
-		return template.selectList("com.slimbear.mapper.Member.SELECT_WISH_LIST_BY_MEMBER_UID", info);
+		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
 	}
 
 	public int insertAddress(CartDTO cart) {
