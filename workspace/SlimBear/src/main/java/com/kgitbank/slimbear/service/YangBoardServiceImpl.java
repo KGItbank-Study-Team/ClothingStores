@@ -14,28 +14,29 @@ import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
-import com.kgitbank.slimbear.vo.BoardFaqListVO;
 import com.kgitbank.slimbear.vo.BoardInquiryListVO;
+import com.kgitbank.slimbear.vo.BoardNoticeListVO;
 
 @Service
 public class YangBoardServiceImpl {
 
 	@Autowired
-    private NoticeDAO noticeDAO;
+	private NoticeDAO noticeDAO;
 	@Autowired
 	private InquiryDAO inquiryDAO;
 	@Autowired
 	private FaqDAO faqDAO;
 
-    // 공지사항
+	// 공지사항
 	public List<NoticeDTO> getBoardNoticeList() {
-        List<NoticeDTO> notices = noticeDAO.getNoticeList();
+		List<NoticeDTO> notices = noticeDAO.getNoticeList();
 
-        return notices;
+		return notices;
 //        return new ArrayList<>(notices);
-    }
+	}
+
 	/*
-	 * public ArrayList<BoardNoticeListVO> getBoardNoticeList() {
+	 * public ArrayList<BoardNoticeListVO> getBoardNoticeVOList() {
 	 * ArrayList<BoardNoticeListVO> boards = new ArrayList<>();
 	 * 
 	 * // 임시 데이터 생성 for (int i = 6; i >= 1; i--) { BoardNoticeListVO board = new
@@ -47,24 +48,23 @@ public class YangBoardServiceImpl {
 	 * 
 	 * boards.add(board); } return boards; }
 	 */
-	
+
 	
 	// 문의게시판
 	public List<InquiryDTO> getBoardInquiryListByType(String type) {
-        List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
+		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
 
-        // Filter inquiries based on the specified type
-        List<InquiryDTO> filteredInquiries = inquiries.stream()
-                .filter(inquiry -> inquiry.getType().equals(type))
-                .collect(Collectors.toList());
-        return filteredInquiries;
-    }
+		// Filter inquiries based on the specified type
+		List<InquiryDTO> filteredInquiries = inquiries.stream().filter(inquiry -> inquiry.getType().equals(type))
+				.collect(Collectors.toList());
+		return filteredInquiries;
+	}
+
 	public List<InquiryDTO> getBoardInquiryList() {
 		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-        return inquiries;
-    }
-	
-	
+		return inquiries;
+	}
+
 	/*
 	 * public ArrayList<BoardInquiryListVO> getBoardInquiryList(){ // 상품문의
 	 * ArrayList<BoardInquiryListVO> boards = new ArrayList<>();
@@ -105,24 +105,22 @@ public class YangBoardServiceImpl {
 	 * 
 	 * boards.add(board); } return boards; }
 	 */
-	
-	
+
 	// FAQ
 	public List<FaqDTO> getBoardFaqListByType(String type) {
-        List<FaqDTO> faqs = faqDAO.getFaqList();
+		List<FaqDTO> faqs = faqDAO.getFaqList();
 
-        // Filter inquiries based on the specified type
-        List<FaqDTO> filteredFaqs = faqs.stream()
-                .filter(faq -> faq.getType().equals(type))
-                .collect(Collectors.toList());
-        return filteredFaqs;
-    }
+		// Filter inquiries based on the specified type
+		List<FaqDTO> filteredFaqs = faqs.stream().filter(faq -> faq.getType().equals(type))
+				.collect(Collectors.toList());
+		return filteredFaqs;
+	}
+
 	public List<FaqDTO> getBoardFaqList() {
 		List<FaqDTO> faqs = faqDAO.getFaqList();
-        return faqs;
-    }
-	
-	
+		return faqs;
+	}
+
 	/*
 	 * public ArrayList<BoardFaqListVO> getBoardFaqList() {
 	 * ArrayList<BoardFaqListVO> boards = new ArrayList<>();
@@ -173,14 +171,11 @@ public class YangBoardServiceImpl {
 	 * 
 	 * boards.add(board); } return boards; }
 	 */
-	 
-	 
-	
-	
+
 	// 유저 게시글
-	public ArrayList<BoardInquiryListVO> getBoardUserList(){	
+	public ArrayList<BoardInquiryListVO> getBoardUserList() {
 		ArrayList<BoardInquiryListVO> boardUsers = new ArrayList<>();
-		
+
 		for (int i = 10; i >= 1; i--) {
 			BoardInquiryListVO boardUser = new BoardInquiryListVO();
 			boardUser.setNo(i);
@@ -188,17 +183,15 @@ public class YangBoardServiceImpl {
 			boardUser.setWriter_id("유저작성자 " + i);
 			boardUser.setReg_date(new Date(System.currentTimeMillis()));
 			boardUser.setContent("내용 " + i);
-			
+
 			boardUsers.add(boardUser);
 		}
 		return boardUsers;
 	}
-	
+
 	// 게시글작성
 	public Object getBoardWrite() {
-		
+
 		return null;
 	}
 }
-	
-

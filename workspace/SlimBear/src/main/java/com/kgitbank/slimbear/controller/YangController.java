@@ -22,6 +22,7 @@ public class YangController {
 	public String getBoardNoticeList(Model model) {
 		model.addAttribute("boards", boardService.getBoardNoticeList());
 		model.addAttribute("boardUsers", boardService.getBoardUserList());
+//		model.addAttribute("notices", boardService.getBoardNoticeVOList());
 		return "notice"; // 뷰 이름 설정
 	}
 
@@ -39,13 +40,13 @@ public class YangController {
 
 		switch (categoryNo) {
 		case "1":
-			inquiries = boardService.getBoardInquiryListByType("배송문의");
+			inquiries = boardService.getBoardInquiryListByType("DELIVERY");
 			break;
 		case "2":
-			inquiries = boardService.getBoardInquiryListByType("배송 전 변경/취소");
+			inquiries = boardService.getBoardInquiryListByType("DELIVERY_C");
 			break;
 		default:
-			inquiries = boardService.getBoardInquiryListByType("상품문의");
+			inquiries = boardService.getBoardInquiryListByType("PRODUCT");
 		}
 		model.addAttribute("inquiries", inquiries);
 		model.addAttribute("boardUsers", boardService.getBoardUserList());
@@ -77,19 +78,19 @@ public class YangController {
     	List<FaqDTO> faqs;
     	switch(categoryNo) {
     	case "1":
-    		faqs = boardService.getBoardFaqListByType("상품관련");
+    		faqs = boardService.getBoardFaqListByType("PRODUCT_R");
 			break;
     	case "2":
-    		faqs = boardService.getBoardFaqListByType("배송관련");
+    		faqs = boardService.getBoardFaqListByType("DELIVERY_R");
 			break;
     	case "3":
-    		faqs = boardService.getBoardFaqListByType("교환/반품관련");
+    		faqs = boardService.getBoardFaqListByType("CHANGE_R");
 			break;
     	case "4":
-    		faqs = boardService.getBoardFaqListByType("기타관련");
+    		faqs = boardService.getBoardFaqListByType("ETC_R");
 			break;
     	case "5":
-    		faqs = boardService.getBoardFaqListByType("쇼룸관련");
+    		faqs = boardService.getBoardFaqListByType("SHOWROOM_R");
 			break;
 		default:
 			faqs = boardService.getBoardFaqList();

@@ -44,6 +44,49 @@ toggleButtons.forEach(button => {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    var links = document.querySelectorAll('.subnavi a');
+
+    links.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var type = getTypeFromHref(link.getAttribute('href'));
+            applyValuesToPage(type);
+        });
+    });
+
+    function getTypeFromHref(href) {
+        var typeStartIndex = href.lastIndexOf('/') + 1;
+        var typeEndIndex = href.indexOf('?');
+        return href.substring(typeStartIndex, typeEndIndex);
+    }
+
+    function applyValuesToPage(type) {
+        var inquiryH2 = document.getElementById('inquiryH2');
+        if (inquiryH2) {
+            switch (type) {
+                case '1':
+                    inquiryH2.innerHTML = '<font color="333333">' + TYPE_PRODUCT_R + '</font>';
+                    break;
+                case '2':
+                    inquiryH2.innerHTML = '<font color="333333">' + TYPE_DELIVERY_R + '</font>';
+                    break;
+                case '3':
+                    inquiryH2.innerHTML = '<font color="333333">' + TYPE_CHANGE_R + '</font>';
+                    break;
+                case '4':
+                    inquiryH2.innerHTML = '<font color="333333">' + TYPE_ETC_R + '</font>';
+                    break;
+                case '5':
+                    inquiryH2.innerHTML = '<font color="333333">' + TYPE_SHOWROOM_R + '</font>';
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+});
+
 
  
  

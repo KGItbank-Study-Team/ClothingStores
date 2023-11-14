@@ -80,41 +80,44 @@
 						</thead>
 						
 						<tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
-							<c:forEach items="${boards}" var="board">
+							<c:forEach var="board" items="${boards}">
 								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
 						            <td><i class="xi-check"></td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						            <strong>
-					                    <a style="color: #555555;">${board.title}</a>
+					                    <a href="#" style="color: #555555;">${board.title}</a>
 					                    <span class="txtEm"></span>
 					                </strong>
 						            </td>
-<%-- 									<td>${board.uid}</td> --%>
 									<td>${board.writer}</td>
 <%-- 									<td>${board.reg_date}</td> --%>
 <%-- 									<td>${board.content}</td> --%>
 								</tr>
 							</c:forEach>
-							
-							<%-- <c:forEach var="notice" items="${notices}">
+						</tbody>
+						
+						<%-- <tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
+							<c:forEach var="board" items="${notices}">
 								 <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
 						            <td><i class="xi-check"></td>
-						            <td>${notice.uid}</td>
+						            <td>${board.no}</td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/article/notice/1/${notice.uid}/" style="color: #555555;">${notice.title}</a>
+						                    <a href="/article/notice/1/${board.no}/" style="color: #555555;">${board.title}</a>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${notice.writer}</td>
-							        <td class="displaynone"><span class="txtNum">${notice.reg_date}</span></td>
+						            <td>${board.name}</td>
+							        <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
 						        </tr>
-							</c:forEach> --%>
+							</c:forEach>
+						</tbody> --%>
 							
-							<!-- 여기에 tbody 내용 추가 -->
-							<!-- <tr style="background-color: #FFFFFF; color: #555555;"
+						<!-- 여기에 tbody 내용 추가 -->
+						<!-- <tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
+							<tr style="background-color: #FFFFFF; color: #555555;"
 								class="xans-record-">
 								<td><i class="xi-check"></i></td>
 								<td class="displaynone"></td>
@@ -146,8 +149,8 @@
 								<td class="displaynone"><img
 									src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
 									alt="0점" /></td>
-							</tr> -->
-						</tbody>
+							</tr>
+						</tbody> -->
 						
 						<!-- 2번째 tbody for문  -->
 						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
@@ -161,7 +164,7 @@
 						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
 						                    </a>
 						                </span>
-						                <a href="/article/상품문의/6/${boardUser.no}" style="color:#555555;">${boardUser.title}</a>
+						                <a href="#" style="color:#555555;">${boardUser.title}</a>
 						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
 						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
 						                <span class="txtEm"></span>

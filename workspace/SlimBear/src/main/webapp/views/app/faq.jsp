@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-// 	request.setAttribute("title", "FAQ");
-// 	ArrayList<String> boards = new ArrayList<String>();
-// 	boards.add("필독");
-// 	boards.add("하우스앤드");
-// 	boards.add("하우스앤드2");
-// 	boards.add("하우스앤드3");
-	
-// 	request.setAttribute("boards", boards);
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,9 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
+
 <script defer src="/resources/js/faq.js"></script>
 </head>
-
 <body>
 <%@ include file="header/header.jsp"%>
 <div id="wrap">
@@ -40,12 +31,10 @@
 				</ol>
 			</div>
 			
-			<c:if test="${not empty boards}">
-				<div class="xans-element- xans-board xans-board-title-3 xans-board-title xans-board-3 titleArea ">
-					<h2>FAQ</h2>
-					<p class="desc">${boards[0].title_ment}</p>
-				</div>
-			</c:if>
+			<div class="xans-element- xans-board xans-board-title-3 xans-board-title xans-board-3 titleArea ">
+				<h2>FAQ</h2>
+				<p class="desc">자주 묻는 질문 안내드립니다♡</p>
+			</div>
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 			<div class="boardnavi">
@@ -77,7 +66,6 @@
 					<caption>이용안내 목록</caption>
 					
 					<tbody class="xans-element- xans-board xans-board-list-3 xans-board-list xans-board-3 center">
-					
 						<c:forEach items="${faqs}" var="board">
 				            <tr class="xans-record-">
 				                <td class="subject" data-cate="${board.question}">
