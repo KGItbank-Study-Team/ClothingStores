@@ -7,15 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrderlistVO {
-	private String orderDate;
-	private int orderNum;
+public class WishListVO {
+	private String productURL;
 	private String productImage;
 	private String productName;
-	private String productOption;
-	private int orderCount;
 	private int orderAmount;
-	private String orderStauts;
-	private String fluctuation;
-	private int finalMoney;
+	private int orderDiscount;
 }

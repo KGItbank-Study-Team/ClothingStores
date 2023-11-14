@@ -7,10 +7,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class WishlistVO {
-	private String productURL;
+public class OrderListVO {
+	private String orderDate;
+	private int orderNum;
 	private String productImage;
 	private String productName;
+	private String productOption;
+	private int orderCount;
 	private int orderAmount;
-	private int orderDiscount;
+	private String orderStauts;
+	private String fluctuation;
+	private int finalMoney;
 }
+	

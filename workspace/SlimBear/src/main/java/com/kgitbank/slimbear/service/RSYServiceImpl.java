@@ -19,7 +19,7 @@ public class RSYServiceImpl {
 	@Autowired
 	private CategoryDAO ctgDAO;
 	
-	public List<ProductDTO> getProductListByCategory(int category, String order, int currentPage, int offset,int pageSize) {
+	public List<ProductDTO> getProductListByCategory(long category, String order, int currentPage, Integer offset, Integer pageSize) {
 	    if (order == null) {
 	        order = "";
 	    }
