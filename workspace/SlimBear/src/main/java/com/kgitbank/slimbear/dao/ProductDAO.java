@@ -20,10 +20,8 @@ public class ProductDAO {
 		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_LIST");
 	}
 
-	public List<ProductDTO> getProductByCategory(long category) {
-		ProductDTO info = new ProductDTO();
-		info.setCtg_uid(category);
-		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY", info);
+	public List<ProductDTO> getProductByCategory(Map<String, Object> paramMap) {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY", paramMap);
 	}
 
 	public ProductDTO getProductByUid(long uid) {
@@ -41,11 +39,8 @@ public class ProductDAO {
 		return template.selectOne("com.slimbear.mapper.Product.SELECT_COUNT_PROD_BY_UID", info);
 	}
 
-	public List<ProductDTO> getProductByCategoryOrderByPriceDesc(long category, String order) {
-		ProductDTO info = new ProductDTO();
-		info.setCtg_uid(category);
-		info.setOrder(order);
-		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC", info);
+	public List<ProductDTO> getProductByCategoryOrderByPriceDesc(Map<String, Object> paramMap) {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC", paramMap);
 	}
 
 }

@@ -614,6 +614,7 @@ body .title {
 }
 
 #main .titleArea {
+	text-align:center;
 	padding-bottom: 25px;
 }
 

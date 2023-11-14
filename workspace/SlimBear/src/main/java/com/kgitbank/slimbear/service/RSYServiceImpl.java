@@ -38,9 +38,9 @@ public class RSYServiceImpl {
 	        case "PRICE_ASC":
 	            return prodDAO.getProductByCategoryOrderByPrice(paramMap);
 			case "PRICE_DESC":
-				return prodDAO.getProductByCategoryOrderByPriceDesc(category, order);
+				return prodDAO.getProductByCategoryOrderByPriceDesc(paramMap);
 			default:
-				return prodDAO.getProductByCategory(category);
+				return prodDAO.getProductByCategory(paramMap);
 		}
 	}
 	
