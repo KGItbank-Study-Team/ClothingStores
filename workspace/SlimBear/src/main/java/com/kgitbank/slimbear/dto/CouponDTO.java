@@ -15,6 +15,6 @@ public class CouponDTO {
 	private String type;
 	private int value;
 	private int expi_days;
-	private int price;
+	private int min_price;
 	
 }
