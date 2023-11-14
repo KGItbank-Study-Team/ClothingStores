@@ -296,7 +296,7 @@
 					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
 					<a href="#none"> <img src="/_images/icon_prev2.png" />
 					</a>
-					<ol>
+					
 						<c:if test="${totalPages > 1}">
 							<c:forEach var="pageNumber" begin="1" end="${totalPages}">
 								<c:url value="product/category" var="pageUrl">
@@ -322,7 +322,7 @@
 						<!-- 						</li> -->
 						<!-- 						<li class="xans-record-"><a href="?page=4" class="other">4</a> -->
 						<!-- 						</li> -->
-					</ol>
+					
 					<a href="?page=2"> <img src="/_images/icon_next2.png" />
 					</a>
 				</div>

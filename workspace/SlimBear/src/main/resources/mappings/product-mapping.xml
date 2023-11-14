@@ -35,6 +35,11 @@
 		SELECT * FROM product WHERE ctg_uid=#{ctg_uid} ORDER BY
 		price DESC;
 	</select>
+	
+	<select id="SELECT_COUNT_PROD_BY_UID"
+		resultType="int">
+		SELECT COUNT(*) FROM product WHERE ctg_uid=#{ctg_uid};
+	</select>
 
 	<!-- 제품상세(productDetail) -->
 	<!-- 제품상세검색 -->

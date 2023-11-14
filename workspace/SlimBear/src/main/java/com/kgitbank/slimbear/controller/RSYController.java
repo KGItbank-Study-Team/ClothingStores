@@ -18,18 +18,19 @@ public class RSYController {
 	private RSYServiceImpl RSYService;
 
 	@RequestMapping("product/category")
-	public String categoryPage01(@RequestParam int category,
-			@RequestParam(name = "order", required = false) String order, @RequestParam(name = "currentPage", defaultValue = "1") Integer currentPage,Integer offset, Integer pageSize, Model model) {
+	public String categoryPage01(@RequestParam long category,
+			@RequestParam(name = "order", required = false) String order, @RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset, Integer pageSize, Model model) {
 		
-		offset = (offset != null) ? offset : 1;
+		if(offset==null) {offset=0;}
 		pageSize = 10; // 페이지 당 아이템 수
 		
-		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order,currentPage, offset, pageSize);
+		
 
 		// 페이징에 관련된 정보 추가
 		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
 		int totalPages = (int) Math.ceil( (double)totalItems / pageSize); // 전체 페이지 수
-
+		
+		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order,currentPage, offset, pageSize);
 		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", totalPages);
