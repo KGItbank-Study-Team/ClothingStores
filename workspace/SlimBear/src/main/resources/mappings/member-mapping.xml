@@ -36,7 +36,7 @@
 	
 	<!-- 회원배송지(memberOrderAddress) -->
 	<select id="SELECT_ORDERADDRESS_LIST_BY_MEMBER_UID" resultType="memberOrderAddress" parameterType="member">
-		SELECT * FROM memberOrderAddress WHERE mem_uid=#{mem_uid}
+		SELECT * FROM memberOrderAddress WHERE mem_uid=#{uid}
 	</select>
 	
 	<insert id="INSERT_ORDERADDRESS"> 
@@ -59,7 +59,7 @@
 	
 	<!-- 회원쿠폰(memberCoupon) -->
 	<select id="SELECT_COUPON_LIST_BY_MEMBER_UID" resultType="memberCoupon" parameterType="member">
-		SELECT * FROM memberCoupon WHERE mem_uid=#{mem_uid}
+		SELECT * FROM memberCoupon WHERE mem_uid=#{uid}
 	</select>
 	
 	<insert id="INSERT_COUPON"> 
@@ -78,7 +78,7 @@
 	
 	<!-- 찜(wish) -->
 	<select id="SELECT_WISH_LIST_BY_MEMBER_UID" resultType="wish" parameterType="member">
-		SELECT * FROM wish WHERE mem_uid=#{mem_uid}
+		SELECT * FROM wish WHERE mem_uid=#{uid}
 	</select>
 	
 	<insert id="INSERT_WISH"> 
@@ -97,7 +97,7 @@
 	
 	<!-- 카드(cart) -->
 	<select id="SELECT_CART_LIST_BY_MEMBER_UID" resultType="cart" parameterType="member">
-		SELECT * FROM cart WHERE mem_uid=#{mem_uid}
+		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
 	
 	<insert id="INSERT_CART"> 
