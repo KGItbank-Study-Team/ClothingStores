@@ -68,22 +68,18 @@ request.setAttribute("remainaddr", "102동 3405호");
                             <table border="1" summary="">
                                 <caption>배송 주소록 목록</caption>
                                 <colgroup>
-                                    <col style="width:27px">
-                                    <col style="width:80px">
-                                    <col style="width:95px">
-                                    <col style="width:95px">
-                                    <col style="width:120px">
-                                    <col style="width:120px">
+                                    <col style="width:30px">
+                                    <col style="width:110px">
+                                    <col style="width:110px">
+                                    <col style="width:130px">
+                                    <col style="width:130px">
                                     <col style="width:auto">
                                     <col style="width:76px">
                                 </colgroup>
                                 <thead>
                                     <tr>
                                         <!-- 체크박스 -->
-                                        <th scope="col"><span class=""><input id="allCheck"
-                                                    onclick="myshopAddr.checkAll(this)" value="" type="checkbox"></span>
-                                        </th>
-                                        <th scope="col">주소록 고정</th>
+                                        <th scope="col"><input type="checkbox" onclick='selectAll(this)'></th>
                                         <th scope="col">배송지명</th>
                                         <th scope="col">수령인</th>
                                         <th scope="col">일반전화</th>
@@ -97,10 +93,10 @@ request.setAttribute("remainaddr", "102동 3405호");
                                 	<%-- <c:forEach var="item" items="${addrList}">
                                     <tr class="xans-record-">
                                         <!-- 체크박스 -->
-                                        <td><input name="ma_idx[]" value="2198375" type="checkbox"></td>
-                                        <td>
-                                            o
+                                        <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
+                                        	enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
                                         </td>
+                                        
                                         <td>
                                             <img src="/resources/images/ico_addr_default.gif"
                                                 class="" alt="기본"> 
@@ -119,9 +115,8 @@ request.setAttribute("remainaddr", "102동 3405호");
                                     
                                     <tr class="xans-record-">
                                         <!-- 체크박스 -->
-                                        <td><input name="ma_idx[]" value="2198375" type="checkbox"></td>
-                                        <td>
-                                            o
+                                        <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
+                                        	enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
                                         </td>
                                         <td>
                                             <img src="/resources/images/ico_addr_default.gif"

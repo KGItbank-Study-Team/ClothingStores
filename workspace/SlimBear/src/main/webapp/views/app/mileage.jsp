@@ -7,10 +7,6 @@
 <!DOCTYPE html>
 
 <%
-request.setAttribute("totalReserve", "3000");  
-request.setAttribute("reserve", "1000");  
-request.setAttribute("useReserve", "2000"); 
-request.setAttribute("unReserve", "0"); 
 
 /* 확인용 임시데이터 */
 request.setAttribute("orderDate", "2023-11-05"); 
@@ -75,19 +71,19 @@ request.setAttribute("substance", "신규회원 적립금");
                         <ul>
                             <li class="">
                                 <strong class="title">총 적립금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_total_mileage">${totalReserve}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_total_mileage">${mile.totalReserve}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용가능 적립금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_avail_mileage">${reserve}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_avail_mileage">${mile.reserve}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용된 적립금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_used_mileage">${useReserve}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_used_mileage">${mile.useReserve}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">미가용 적립금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_unavail_mileage">${unReserve}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_unavail_mileage">${mile.unReserve}</span>&nbsp;</span>
                             </li>
                         </ul>
                     </div>

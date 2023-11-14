@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
+<%-- <%
 /* 확인용 임시데이터 */
 request.setAttribute("orderdate","2023-11-11");
 request.setAttribute("ordernum","37859");
@@ -14,7 +14,7 @@ request.setAttribute("ordercount","1");
 request.setAttribute("orderamount","15000");
 request.setAttribute("orderstatus","배송중");
 request.setAttribute("fluctuation","반품신청");
-%>
+%> --%>
 
 <!DOCTYPE html>
 
@@ -158,7 +158,7 @@ request.setAttribute("fluctuation","반품신청");
                         </thead>
                         <tbody class="center">
                         
-                        	<%-- <c:forEach var="item" items="${orderList}">
+                            <c:forEach var="item" items="${orderList}">
                             <tr class="">
                                 <td class="number ">
                                     <p>${item.orderDate}</p>
@@ -194,41 +194,7 @@ request.setAttribute("fluctuation","반품신청");
                                     <p class=" "><a href="#none" class="btnNormal" onclick="">상세정보</a></p>
                                 </td>
                             </tr>
-                            </c:forEach> --%>
-                            
-                            <tr class="">
-                                <td class="number ">
-                                    <p>${orderdate}</p>
-                                    <p><a href="detail.html" class="line">[${ordernum}]</a></p><br>
-                                    <a href="#none" class="btnNormal " onclick="">주문취소</a>
-                                    <a href="cancel.html" class="btnNormal ">취소신청</a>
-                                    <a href="exchange.html" class="btnNormal ">교환신청</a>
-                                    <a href="return.html" class="btnNormal ">반품신청</a>
-                                </td>
-                                <td class="thumb"><a href="/product/detail.html"><img
-                                            src="/resources/images/Best_product02.webp"
-                                            onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"
-                                            alt=""></a></td>
-                                <td class="product ">
-                                    <strong class="name">${productname}</strong>
-                                    <div class="option  ">${productoption}</div>
-                                </td>
-                                <td>${ordercount}</td>
-                                <td class="">
-                                    <strong>${orderamount}원</strong>
-                                </td>
-                                <td class="state">
-                                    <p class=" "><a href="#none" class="line" onclick="">${orderstatus}</a></p>
-                                    <a href="/board/product/write.html" class="btnNormal   ">구매후기</a>
-                                    <a href="#none" class="btnNormal  " onclick="">취소철회</a>
-                                    <a href="#none" class="btnNormal  " onclick="">교환철회</a>
-                                    <a href="#none" class="btnNormal  " onclick="">반품철회</a>
-                                </td>
-                                <td>
-                                    <p class=" ">${fluctuation}</p><br>
-                                    <p class=" "><a href="#none" class="btnNormal" onclick="">상세정보</a></p>
-                                </td>
-                            </tr>
+                            </c:forEach> 
                         
                         </tbody>
                     </table>
