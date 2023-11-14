@@ -98,7 +98,24 @@
 						
 						<!-- 1번째 tbody for문 -->			
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-						    <c:forEach var="inquiry" items="${inquiries}" varStatus="loop">
+							<c:forEach items="${inquiries}" var="board">
+								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
+						            <td><i class="xi-check"></td>
+						            <td class="displaynone"></td>
+						            <td class="subject left txtBreak">
+						            <strong>
+					                    <a style="color: #555555;">${board.title}</a>
+					                    <span class="txtEm"></span>
+					                </strong>
+						            </td>
+<%-- 									<td>${board.uid}</td> --%>
+									<td>${board.writer_id}</td>
+									<td>${board.reg_date}</td>
+<%-- 									<td>${board.content}</td> --%>
+								</tr>
+							</c:forEach>
+							
+						    <%-- <c:forEach var="inquiry" items="${inquiries}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
 						            <td><i class="xi-check"></td>
 						            <td class="displaynone">${inquiry}</td>
@@ -120,7 +137,7 @@
 						            <td class="displaynone"><span class="txtNum">${inquiry}</span></td>
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
-						    </c:forEach>
+						    </c:forEach> --%>
 						</tbody>
 						
 						<!-- 2번째 tbody for문  -->

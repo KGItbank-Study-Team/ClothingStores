@@ -77,13 +77,14 @@
 					<caption>이용안내 목록</caption>
 					
 					<tbody class="xans-element- xans-board xans-board-list-3 xans-board-list xans-board-3 center">
-						<c:forEach items="${boards}" var="board">
+					
+						<c:forEach items="${faqs}" var="board">
 				            <tr class="xans-record-">
 				                <td class="subject" data-cate="${board.question}">
 				                    <a href="javascript:void(0);" class="toggle-button">
 				                        <b class="toggle-icon">Q</b>
-	 			                        <span>${board.question}</span>
-				                        ${board.answer}
+	 			                        <span>${board.type}</span>
+				                        ${board.question}
 				                        <z class="fold"></z>
 				                    </a>
 				                </td>
@@ -92,7 +93,7 @@
 				                <td colspan="1" class>
 				                    <div class="fr-view fr-view-article">
 				                        <p class="p-indented">
-				                        <span style="font-family: Verdana,Geneva,sans-serif;">${board.content}</span></p>
+				                        <span style="font-family: Verdana,Geneva,sans-serif;">${board.answer}</span></p>
 				                    </div>
 				                </td>
 				            </tr>
