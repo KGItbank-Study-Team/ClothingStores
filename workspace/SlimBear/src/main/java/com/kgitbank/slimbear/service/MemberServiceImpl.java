@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,4 +33,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO getMemberById(String id) {
 		return memDAO.getMemberById(id);
 	}
+
+	@Override
+	public List<MemberDTO> getMemberList() {
+		return memDAO.getMemberList();
+	}
+
 }

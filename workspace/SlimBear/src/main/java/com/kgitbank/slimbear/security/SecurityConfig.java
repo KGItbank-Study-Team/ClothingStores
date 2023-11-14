@@ -27,20 +27,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 로그인해야만 갈수있는 화면
 		security.authorizeRequests().antMatchers("/app/member/myPage/**").authenticated();
-		security.authorizeRequests().antMatchers("/admin/home/**").authenticated();
+		//security.authorizeRequests().antMatchers("/admin/home/**").authenticated();
 		
 		// 로그인한 사용자가 해당 권한일경우 사용가능
 		security.authorizeRequests().antMatchers("/app/member/myPage/**").hasAnyAuthority("MEMBER");
-		security.authorizeRequests().antMatchers("/admin/home/**").hasAnyAuthority("ADMIN");
+		//security.authorizeRequests().antMatchers("/admin/home/**").hasAnyAuthority("ADMIN");
 		
 		security.csrf().disable();
 		
-		// 화면 설정
-		security.formLogin().loginProcessingUrl("/auth/login").successHandler(new SecuritySuccessHandler());
-		/* .defaultSuccessUrl("/").failureForwardUrl("/app/login?error"); */
-		security.logout().logoutUrl("/auth/logout").invalidateHttpSession(true);// .deleteCookies(); 쿠키까지 하고싶으면 사용		
+		security.formLogin().loginPage("/app/login").loginProcessingUrl("/app/member/login")
+		.defaultSuccessUrl("/").failureForwardUrl("/app/login?error");
+		security.logout().logoutUrl("/app/member/logout").invalidateHttpSession(true);// .deleteCookies(); 쿠키까지 하고싶으면 사용
+		
 		// 권한 없을 경우
-		security.exceptionHandling().accessDeniedHandler(new SecurityAccessDeniedHandler());
+		security.exceptionHandling().accessDeniedPage("/");
 		
 		security.userDetailsService(userDetailsService);
 	}

@@ -34,7 +34,6 @@
             <aop:before method="controllerBeforeLog" pointcut-ref="controllerLogPointcut" />
         </aop:aspect>
     </aop:config>
-    
-	<!-- root에 넣고 싶은데 여기아니면 문제가 생깁니다. -->
+   
 	<mvc:annotation-driven/>
 </beans>

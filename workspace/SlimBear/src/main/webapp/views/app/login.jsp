@@ -19,8 +19,7 @@
 			<div class="logo-wrap">
 				<img src="../../images/SlimBear-Logo01.png">
 			</div>
-			<form action="/auth/login" method="post">
-				
+			<form action="/app/member/login" method="post">
 				<section class="login-input-section-wrap">
 					<div class="login-input-wrap">
 						<input name="username" placeholder="Username" type="text"></input>
