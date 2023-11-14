@@ -3,6 +3,7 @@ package com.kgitbank.slimbear.security;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
+import com.kgitbank.slimbear.admin.dto.AdminDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 
 import lombok.Getter;
@@ -19,4 +20,8 @@ public class SecurityUser extends User{
 		uid = member.getUid();
 	}
 
+	public SecurityUser(AdminDTO admin) {
+		super(admin.getId(), "{noop}"+ admin.getPassword(), AuthorityUtils.createAuthorityList("ADMIN"));
+		uid = admin.getUid();
+	}
 }
