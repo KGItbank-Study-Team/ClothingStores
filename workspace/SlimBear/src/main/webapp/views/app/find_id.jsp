@@ -3,55 +3,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="//www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
-
-
-
+<script th:if="${error != null}" th:inline="javascript">
+	window.onload = function() {
+		var errorMessage = "[[${error}]]";
+		if (errorMessage.trim() !== "") {
+			alert(errorMessage);
+			// 또는 모달 창을 띄우는 스크립트를 추가할 수 있습니다.
+			// 모달 창을 띄우기 위해 별도의 JavaScript 라이브러리(예: Bootstrap 등) 사용 가능
+		}
+	};
+</script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizer.css" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizeruser.css" />
 
-<link
-	href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&amp;display=swap"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
 <link rel="stylesheet" href="/resources/css/swiper.css" />
 <script src="/resources/js/swiper.js"></script>
 <script src="/resources/js/optimizeruser.js"></script>
-<script type="text/javascript"
-	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.js"></script>
-<script type="text/javascript"
-	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.plugin.js"></script>
-
-
 <title>아이디찾기-슬림베어</title>
 </head>
 <jsp:include page="header/header.jsp"></jsp:include>
 <body>
-
 	<div id="wrap">
 		<div id="container">
-
-
-
-
-
-
-
-
-
 			<div id="contents">
-				<form id="findIdForm" name="findIdForm"
-					action="/exec/front/Member/findId/" method="post" target="_self"
-					enctype="multipart/form-data">
+				<form id="findIdForm" name="findIdForm" action="/app/findId"
+					method="post">
 					<input id="returnUrl" name="returnUrl"
 						value="/member/id/find_id_result.html" type="hidden" />
 					<div
 						class="xans-element- xans-member xans-member-findid ec-base-box typeThin ">
-						<!--
-        $returnURL = /member/id/find_id_result.html
-     -->
+						<!--  $returnURL = /member/id/find_id_result.html     -->
 						<div class="findId">
 							<div class="titleArea">
 								<h2>FIND ID</h2>
@@ -105,25 +88,17 @@
 											placeholder="0000000" maxlength="7" value="" type="password" />
 									</p>
 									<div class="ec-base-button gColumn">
-										<a href="#none" class="btnLogin2"
-											onclick="findId.action('anne2173', 'kcp'); return false;">확인</a>
+										<button type="submit" class="btnLogin2">확인</button>
 									</div>
 							</fieldset>
 						</div>
 					</div>
 				</form>
-
 			</div>
-
-
 			<jsp:include page="footer/footer.jsp" flush="true" />
 			<!-- #bottom_info -->
-
 			<!-- #footer -->
-
 		</div>
 	</div>
-
-
 </body>
 </html>

@@ -3,14 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="//www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
-
-
-
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizer.css" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizeruser.css" />
-
 <link
 	href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&amp;display=swap"
 	rel="stylesheet" />
@@ -27,13 +23,9 @@
 <title>아이디찾기-슬림베어</title>
 </head>
 <body>
-
 	<div id="wrap">
 		<div id="container">
-
 			<jsp:include page="header/header.jsp"></jsp:include>
-
-
 			<div id="contents">
                 <div class="path">
                     <span>현재 위치</span>
@@ -64,26 +56,36 @@
                                 </p>
                                 <div class="description">
                                     <ul class="ec-base-desc gSmall">
-                                        <li>
+                                        <li>                                        
                                             <strong class="term">이름</strong>
                                             <strong class="desc">
-                                                : <span class="authssl_name">*****</span>
+                                                : <span class="authssl_name">${member.name}</span>
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong class="term">아이디</strong>
+                                            <strong class="desc">
+                                                : <span class="authssl_searchInfo">${member.id }</span>
                                             </strong>
                                         </li>
                                         <li>
                                             <strong class="term">이메일</strong>
                                             <span class="desc">
-                                                : <span class="authssl_searchInfo">*****</span>
+                                                : <span class="authssl_searchInfo">${member.email }</span>
+                                            </span>
+                                        </li>                                        
+                                        <li>
+                                            <strong class="term">성별</strong>
+                                            <span class="desc">
+                                                : <span class="authssl_searchInfo">${member.sex }</span>
                                             </span>
                                         </li>
                                         <li>
-                                            <label>
-                                                <input type='radio' name='fid' onclick="set_findpwdid( '' , 'indi' );" checked/>
-                                                <span class='id'>sms****</span>
-                                                <span class='gaip'>( 개인회원, 2023-11-07 가입 )</span>
-                                            </label>
-                                            <br/>
-                                        </li>
+                                            <strong class="term">가입날짜</strong>
+                                            <span class="desc">
+                                                : <span class="authssl_searchInfo">${member.reg_date }</span>
+                                            </span>
+                                        </li>                                        
                                     </ul>
                                 </div>
                             </div>
@@ -95,16 +97,10 @@
                     </div>
                 </div>
             </div>
-
 			<jsp:include page="footer/footer.jsp" flush="true" />
-
 			<!-- #bottom_info -->
-
 			<!-- #footer -->
-
 		</div>
 	</div>
-
-
 </body>
 </html>
