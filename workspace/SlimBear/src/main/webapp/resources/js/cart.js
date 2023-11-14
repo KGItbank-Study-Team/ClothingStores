@@ -1,3 +1,4 @@
+
 function toggleHiddenContent(button) {
     var hiddenContent = button.nextElementSibling;
     var btn = button;
@@ -32,7 +33,7 @@ function outQuantity(id, step) {
         if (!isNaN(currentValue) && currentValue > 1) {
             inputField.value = currentValue - step;
             updateTotalPrice(id); // totalprice 업데이트 추가
-            updatePrice(id); // 기존의 price 업데이트
+           // updatePrice(id); // 기존의 price 업데이트
             updateServer(id, currentValue - step); // 서버에 업데이트된 수량 전송
         }
     }
@@ -47,25 +48,12 @@ function updateTotalPrice(productId) {
         totalpriceElement.textContent = newTotalPrice +"원";
     }
 }
-function updateServer(productId, newQuantity) {
-    $.ajax({
-        type: "POST",
-        url: "/updateQuantity",
-        data: { productId: productId, newQuantity: newQuantity },
-        success: function (response) {
-            console.log(response);
-        },
-        error: function (error) {
-            console.error('Error updating quantity on the server:', error);
-        }
-    });
-}
 
 // 서버에 업데이트된 수량을 전송하는 함수 추가
 function updateServer(productId, newQuantity) {
     $.ajax({
         type: "POST",
-        url: "/updateQuantity",
+        url: "/app/updateQuantity",
         data: { productId: productId, newQuantity: newQuantity },
         success: function () {
             console.log("Quantity updated on the server");
@@ -114,41 +102,63 @@ $(document).ready(function () {
 
    
 });
-// 삭제 버튼 클릭 시
+// ... (기존 코드) ...
+
 $("#deleteSelectedBtn").on("click", function () {
     deleteSelectedItems();
 });
 
 function deleteSelectedItems() {
-    const checkedItems = $("tbody input[type='checkbox']:checked");
-    const ctg_uid = checkedItems.map(function() {
+    var checkedItems = $("tbody input[type='checkbox']:checked");
+    var ctg_uid = checkedItems.map(function() {
         return $(this).closest('tr').find('.quantity input').attr('id').replace('quantity_', '');
     }).get();
 
-    // AJAX를 사용하여 서버에 선택된 상품 삭제 요청 전송
-    $.ajax({
-        type: "POST",
-        url: "/deleteSelectedItems",
-        data: { ctg_uid: ctg_uid },
-        success: function(updatedCart) {
-            // 성공 시: 서버에서 받은 업데이트된 장바구니 정보로 화면 업데이트
-            updateCart(updatedCart);
-        },
-        error: function(error) {
-            console.error('Error deleting items:', error);
+    var formData = new FormData();
+    formData.append("ctg_uid", ctg_uid.join(','));
+
+    fetch('/app/deleteSelectedItems', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // Content-Type 설정
         }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("서버 응답:", data);
+        updateCart(data);
+    })
+    .catch(error => {
+        console.log('Error deleting items:', error);
     });
 }
 
+
+document.getElementById('myForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    fetch('/app/deleteSelectedItems', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("서버 응답:", data);
+        // 업데이트된 장바구니 정보를 사용하여 화면 업데이트
+        updateCart(data);
+    })
+    .catch(error => {
+        console.log('Error deleting items:', error);
+    });
+});
+
 function updateCart(updatedCart) {
-    // 업데이트된 장바구니 정보를 사용하여 화면 업데이트
-    // 이 부분은 실제로 업데이트하는 방식에 따라 다를 수 있습니다.
-    console.log("Cart updated:", updatedCart);
+    console.log("장바구니 업데이트:", updatedCart);
     // 여기에서 화면 업데이트 로직을 추가하세요.
     // 예: location.reload(); 또는 특정 부분만 업데이트하는 등의 방법으로 화면을 갱신
 }
-
-
-
 
 

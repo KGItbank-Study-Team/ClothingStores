@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 
@@ -8,12 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <link href="/resources/css/cart.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/cart.js"></script>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+
 <title>장 바 구 니</title>
 </head>
 <body>
-<%@ include file="header/header.jsp"%>
+	<%@ include file="header/header.jsp"%>
 	<section class="cart">
 		<div class="cart__information">
 			<ul>
@@ -24,37 +27,35 @@
 			</ul>
 		</div>
 		<table class="cart__list">
-			<form>
+			<form id="myForm" action="/app/deleteSelectedItems" method="post">
+				
 				<h1>C A R T</h1>
-				<thead>
-					<tr>
-						<td><input type="checkbox" id="selectAll"></td>
-						<td colspan="2">상품정보</td>
-						<td>옵션</td>
-						<td>수량</td>
-						<td>적립금</td>
-						<td>상품금액</td>
-						<td>배송비</td>
+			<thead>
+				<tr>
+					<td><input type="checkbox" id="selectAll"></td>
+					<td colspan="2">상품정보</td>
+					<td>옵션</td>
+					<td>수량</td>
+					<td>적립금</td>
+					<td>상품금액</td>
+					<td>배송비</td>
 
-					</tr>
-				</thead>
-				<c:forEach var="cart" items="${cartList}">
-				<tbody>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="cart" items="${cartList}">
 					<tr class="cart__list__detail">
-						<td><input type="checkbox"></td>
-						<td class="yout"><img src="/resources/images/유해커.jpg" alt="magic keyboard"></td>
-						<td>
-							<a href="#">${cart.desc}</a>
-							<span class="cart__list__smartstore">스마트스토어</span>
-							<p>${cart.infoo }</p> 
-							<%-- <span class="price">${price}</span> --%>
-							<%-- <span style="text-decoration: line-through; color: lightgray;">${addprice}</span> --%>
-						</td>
+						<td><input type="checkbox" name="selectedItems"
+							value="${cart.uid }"></td>
+						<td class="yout"><img src="/resources/images/유해커.jpg"
+							alt="magic keyboard"></td>
+						<td><a href="#">${cart.desc}</a> <span
+							class="cart__list__smartstore">스마트스토어</span>
+							<p>${cart.infoo }</p></td>
 						<td class="cart__list__option">
 							<p>${cart.infoo}</p>
-							<div class="btn" onclick="toggleHiddenContent(this);">주문 추가/변경▽</div>	
-							<!-- 옵션 변경 -->
-							<!-- <div id="hiddenContent02" class="hiddenContent04"> -->
+							<div class="btn" onclick="toggleHiddenContent(this);">주문
+								추가/변경▽</div>
 							<div class="hiddenContent02 hiddenContent04">
 								<div class="option hidden"></div>
 								<table class="change hidden">
@@ -66,13 +67,11 @@
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
 											</td>
-											<td colspan="2" class="colorrr">
-												<select class="colorr">
-														<option value="${red}">빨강</option>
-														<option value="${blue}">파랑</option>
-														<option value="${gray}">회색</option>
-												</select>
-											</td>
+											<td colspan="2" class="colorrr"><select class="colorr">
+													<option value="${red}">빨강</option>
+													<option value="${blue}">파랑</option>
+													<option value="${gray}">회색</option>
+											</select></td>
 										</tr>
 										<tr class="">
 											<td>
@@ -85,49 +84,50 @@
 													<option value="${XXXL}">XXXL</option>
 													<option value="${XXXXL}">XXXXL</option>
 											</select></td>
-										</tr> <tr><td colspan="3">
-		            <button type="submit" class="chchange">변경하기</button>
-						</td></tr>
-		        </tbody>
-		       
+										</tr>
+										<tr>
+											<td colspan="3">
+												<button type="submit" class="chchange">변경하기</button>
+											</td>
+										</tr>
+									</tbody>
 								</table>
-							</div> 
+							</div>
 						</td>
-						<td>
-					 	
-							<span class="quantity">
-									<input type="text" value="1" class="inputBox" id="quantity_${cart.uid }">
-									<a href="javascript:void(0)" class="countUp" onclick="addQuantity(${cart.uid},1)">
-										<img alt="수량증가"  src="/resources/images/btn_count_up.gif">
-									</a>
-									<a href="javascript:void(0)" class="countDown" onclick="outQuantity(${cart.uid}, 1)">
-										<img alt="수량감소"  src="/resources/images/btn_count_down.gif">
-									</a>
-							</span>
-						</td>
+						<td><span class="quantity"> <input type="text"
+								value="1" class="inputBox" id="quantity_${cart.uid }"> <a
+								href="javascript:void(0)" class="countUp"
+								onclick="addQuantity(${cart.uid},1)"> <img alt="수량증가"
+									src="/resources/images/btn_count_up.gif">
+							</a> <a href="javascript:void(0)" class="countDown"
+								onclick="outQuantity(${cart.uid}, 1)"> <img alt="수량감소"
+									src="/resources/images/btn_count_down.gif">
+							</a>
+						</span></td>
 						<td><p id="addPrice_${cart.uid }">${cart.addprice}</p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
 						<td>${cart.baedalprice }</td>
 					</tr>
 					
-					
+					</c:forEach>
 				</tbody>
-				</c:forEach>
-				
-				<tfoot>
-					<tr>
-						<td colspan="3"><!-- <input type="checkbox" id=:selectAll> -->
-							<button id="deleteSelectedBtn" class="cart__list__optionbtn">선택상품 삭제</button>
-							<button class="cart__list__optionbtn">선택상품 찜</button></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tfoot>
+			
 
-			</form>
+			<tfoot>
+				<tr>
+					<td colspan="3">
+						<input type="button" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
+						<button class="cart__list__optionbtn">선택상품 찜</button>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tfoot>
+					
 		</table>
+				
 		<table class="cart__list__detail">
 			<thead>
 				<tr>
@@ -145,14 +145,17 @@
 				<td>무료</td>
 				<td>${cart.maybeprice}</td>
 			</tr>
-
 		</table>
 		<div class="cart__mainbtns">
-			<button class="cart__bigorderbtn left"
-				onclick="location.href ='/'">쇼핑 계속하기</button>
-			<button class="cart__bigorderbtn right">주문하기</button>
-
+			<button class="cart__bigorderbtn left" onclick="location.href ='/'">쇼핑
+				계속하기</button>
+			<button class="cart__bigorderbtn right"
+				onclick="submitForm('/app/checkout')">주문하기</button>
 		</div>
+		</form>
+		<form>
+		<input type="hidden" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
+		</form>
 		<div>
 			<h4>이용안내</h4>
 			<div class="cart__list__optionb">
