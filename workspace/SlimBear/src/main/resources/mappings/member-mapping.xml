@@ -111,5 +111,16 @@
 		SET prod_code=#{prod_code},cnt=#{cnt},reg_date=#{reg_date}
 		WHERE uid=#{uid}
 	</update>
+	
+	<update id="UPDATE_CART_CNT">
+		UPDATE cart
+		SET cnt=#{cnt}
+		WHERE uid=#{uid}
+	</update>
+	
+	<delete id="DELETE_CART">
+		DELETE FROM cart
+		WHERE uid=#{uid}
+	</delete>
 
 </mapper>

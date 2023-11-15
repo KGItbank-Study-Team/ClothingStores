@@ -93,7 +93,12 @@
                 <option value="">대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력"value="01012312322" name="telphone">
+                <input type="tel" placeholder="전화번호 입력"value="010" name="telphone" id="tel1"><p>-</p>
+                <input type="tel" placeholder=""value="1234" name="telphone" id="tel2"><p>-</p>
+                <input type="tel" placeholder=""value="5678" name="telphone" id="tel3">
+                </div>
+                <input type="hidden" id="realdata_phone">
+                <div>
                 <input type="button" value="인증번호 받기">
             </div>
             <input type="number" placeholder="인증번호를 입력하세요" value="" name="phoneck">

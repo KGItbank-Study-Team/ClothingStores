@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
-import com.kgitbank.slimbear.dto.WishDTO;
 
 
 @Repository //스프링에서 dao로 인식
@@ -29,12 +29,15 @@ public class CartDAO {
 	public int updateAddress(CartDTO cart) {//이거 adress>> cart로 바꿔줭
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART", cart);
 	}
-	public int deleteCartItem(Long itemId) {//장바구니에 있는거 삭제 
-		return 1;
+	public int deleteCartItem(Long cartUId) {//장바구니에 있는거 삭제 
+		return template.update("com.slimbear.mapper.Member.DELETE_CART", cartUId);
 	    //return template.delete("com.slimbear.mapper.Member.DELETE_CART_ITEM", itemId);
 	}
-	public void updateCartItemQuantity(Long itemId, int newQuantity) {// 장바구니에 있는거 수량 업데이
-	      
+	public int updateCartItemQuantity(Long cartUId, int newQuantity) {// 장바구니에 있는거 수량 업데이
+		HashMap<String, String> info = new HashMap<String, String>();
+		info.put("uid", cartUId.toString());
+		info.put("cnt", String.valueOf(newQuantity));
+		return template.update("com.slimbear.mapper.Member.UPDATE_CART_CNT", info);
 	}
 //    template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_QUANTITY", params);
 //	<update id="UPDATE_CART_ITEM_QUANTITY"> UPDATE cart SET cnt = #{newQuantity} WHERE uid = #{productId}

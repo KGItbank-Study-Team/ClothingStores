@@ -102,7 +102,15 @@ if (telNumberField.value === '') {
     // hidden input 요소에 주소 문자열을 설정합니다.
     document.getElementById('realdata_address').value = fullAddress;
 
-   
+   function combinePhoneNumber() {
+        var tel1 = document.getElementById('tel1').value;
+        var tel2 = document.getElementById('tel2').value;
+        var tel3 = document.getElementById('tel3').value;
+
+        var fullPhoneNumber = tel1 + "-" + tel2 + "-" + tel3;
+
+        document.getElementById('realdata_phone').value = fullPhoneNumber;
+    }
 
     var year = document.querySelector('input[name="year"]').value;
     var month = document.querySelector('select[name="month"]').value;
