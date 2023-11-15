@@ -55,7 +55,10 @@ public class YangBoardServiceImpl {
     public List<InquiryDTO> getInquiryList() {
         return inquiryDAO.getInquiryList();
     }
-	
+
+	public List<InquiryDTO> getInquiryListByType(String type) {
+        return inquiryDAO.getInquiryListByType(type);
+	}
 	
 //	public List<InquiryDTO> getBoardInquiryListByType(String type) {
 //		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
@@ -205,4 +208,5 @@ public class YangBoardServiceImpl {
 
 		return null;
 	}
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dao.FaqDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
@@ -17,8 +18,8 @@ import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
-	@Autowired
-	private InquiryDAO inquiryDAO;
+//	@Autowired
+//	private InquiryDAO inquiryDAO;
 	@Autowired
 	private FaqDAO faqDAO;
 
@@ -40,11 +41,26 @@ public class YangController {
 	// 문의사항
 	// 한번 변경해본 코드
 	@RequestMapping("/board/inquiry")
-	public String getBoardInquiryList(Model model) {
-		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-		model.addAttribute("inquiries", inquiries);
-		return "inquiry";
-	}
+    public String getBoardInquiryList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo,
+            Model model) {
+        List<InquiryDTO> inquiries;
+
+        switch (categoryNo) {
+            case "1":
+                inquiries = boardService.getInquiryListByType("DELIVERY");
+                break;
+            case "2":
+                inquiries = boardService.getInquiryListByType("DELIVERY_C");
+                break;
+            default:
+                inquiries = boardService.getInquiryListByType("PRODUCT");
+        }
+
+        model.addAttribute("inquiries", inquiries);
+        model.addAttribute("boardUsers", boardService.getBoardUserList());
+
+        return "inquiry";
+    }
 	
 	// 두번 변경해본 코드
 	/*
@@ -96,6 +112,7 @@ public class YangController {
 	 * return "inquiry"; }
 	 */
 
+	
 	// 자주묻는질문
 	@RequestMapping("/board/faq")
 	public String getBoardFaqList(Model model) {

@@ -102,7 +102,7 @@
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 							<c:forEach items="${inquiries}" var="board">
 								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td><i class="xi-check"></td>
+						            <td><i class="xi-check"></i></td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						            <strong>

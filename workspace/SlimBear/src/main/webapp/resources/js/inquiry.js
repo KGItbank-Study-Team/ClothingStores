@@ -92,6 +92,16 @@ $(function() {
 });
 
 
+$(document).ready(function() {
+    $(".qnaLink").click(function() {
+        // 클릭된 링크의 인덱스를 가져오기
+        var index = $(".qnaLink").index(this);
+        // 상품문의 링크에 해당하는 type 값 설정
+        var type = ["PRODUCT", "DELIVERY", "DELIVERY_R"][index];
+        // 새로운 URL로 리다이렉트
+        window.location.href = "/app/board/inquiry?type=" + type;
+    });
+});
 
 
 
