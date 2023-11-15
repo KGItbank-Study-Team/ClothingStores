@@ -3,15 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<%
-/* 확인용 임시데이터 */
-request.setAttribute("producturl", "링크링크링크링크");
-request.setAttribute("productimage", "이미지");
-request.setAttribute("productname", "이거완전 개쩌는옷이야");
-request.setAttribute("orderamount", "110000");
-request.setAttribute("orderdiscount", "99000");
-%>
-
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
 <head>
@@ -83,7 +74,7 @@ request.setAttribute("orderdiscount", "99000");
                         </thead>
                         <tbody class="xans-element- xans-myshop xans-myshop-wishlistitem center">
                         
-                        	<%-- <c:forEach var="item" items="${wishList}">
+                        	<c:forEach var="item" items="${wishList}">
                             <tr class="xans-record-">
                                 <!-- 체크박스 -->
                                 <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
@@ -115,39 +106,7 @@ request.setAttribute("orderdiscount", "99000");
                                         class="btnNormal ">장바구니</a>
                                 </td>
                             </tr>
-                            </c:forEach> --%>
-                            
-                            <tr class="xans-record-">
-                                <!-- 체크박스 -->
-                                <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
-                                        enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
-                                </td>
-                                <!-- 이미지 -->
-                                <td class="thumb"><a
-                                        href="${producturl}"><img
-                                            src="/resources/images/${productimage}"
-                                            alt=""></a>
-                                </td>
-                                <!-- 상품정보 -->
-                                <td class="">
-                                    <strong class="name"><a
-                                            href="${producturl}"
-                                            class="ec-product-name">${productname}</a></strong>
-                                </td>
-                                <!-- 판매가 -->
-                                <td class="price">
-                                    <strong class="strike">${orderamount}원<br></strong><br><strong class="">${orderdiscount}원</strong>
-                                </td>
-                                <!-- 선택 -->
-                                <td class="button">
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">주문하기</a>
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">장바구니</a>
-                                </td>
-                            </tr>
+                            </c:forEach>
                             
                         </tbody>
                     </table>

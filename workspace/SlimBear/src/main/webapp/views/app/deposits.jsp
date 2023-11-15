@@ -71,19 +71,19 @@ request.setAttribute("substance", "내요옹");
                         <ul>
                             <li class="">
                                 <strong class="title">누적 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_all_deposit">${accrueDeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_all_deposit">${depo.accrueDeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용된 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_used_deposit">${useDeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_used_deposit">${depo.useDeposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">사용가능 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_deposit">${deposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_deposit">${depo.deposit}</span>&nbsp;</span>
                             </li>
                             <li class="">
                                 <strong class="title">현금환불요청 예치금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_refund_wait_deposit">${refundDeposit}</span>&nbsp;</span>
+                                        id="xans_myshop_summary_refund_wait_deposit">${depo.refundDeposit}</span>&nbsp;</span>
                             </li>
                         </ul>
                     </div>

@@ -8,10 +8,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class DepositsVO {
-	private int accureDeposit;
-	private int useDeposit;
-	private int deposit;
-	private int refundDeposit;
+	private int accrueDeposit; //누적예치금
+	private int useDeposit;	   //사용된예치금
+	private int deposit;		//사용가능예치금
+	private int refundDeposit;	//환불요청예치금
 	
 	private String orderDate;
 	private int minusDeposit;

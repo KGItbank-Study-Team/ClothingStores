@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <%
@@ -92,7 +92,7 @@ request.setAttribute("boardhits", "2");
                             </thead>
                             <tbody class="center">
                             
-                            	<%-- <c:forEach var="item" items="${boardList}">
+                            	<c:forEach var="item" items="${boardList}">
                                 <tr class="xans-record-">
                                     <td>${item.boardNumber}</td>
                                     <td><a href="" class="txtEm"></a>${item.boardGroup}</td>
@@ -106,21 +106,7 @@ request.setAttribute("boardhits", "2");
                                     <td><span class="txtNum"></span>${item.boardDate}</td>
                                     <td><span class="txtNum"></span>${imte.boardHits}</td>
                                 </tr>
-                                </c:forEach> --%>
-                                
-                                <tr class="xans-record-">
-                                    <td>${boardnumber}</td>
-                                    <td><a href="" class="txtEm"></a>${boardgroup}</td>
-                                    <!-- class ="left subject" -->
-                                    <td class="subject"><img src="/resources/images/icon_lock.png"
-                                        alt="비밀글" class="ec-common-rwd-image"> <a
-                                        href="http://localhost:9090/views/app/read.jsp">${boardtitle}</a>
-                                    <img src="/resources/images/icon_lednew.gif" alt="NEW"
-                                        class="ec-common-rwd-image"></td>
-                                    <td>${boardwriter}</td>
-                                    <td><span class="txtNum"></span>${boarddate}</td>
-                                    <td><span class="txtNum"></span>${boardhits}</td>
-                                </tr>
+                                </c:forEach>
                                
                             </tbody>
                         </table>

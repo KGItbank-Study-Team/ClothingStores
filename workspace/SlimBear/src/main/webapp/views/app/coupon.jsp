@@ -3,17 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<%
-/* 확인용 임시데이터 */
-request.setAttribute("couponnumber", "1");
-request.setAttribute("couponname", "신규회원 전용쿠폰");
-request.setAttribute("couponproduct", "특가상품");
-request.setAttribute("productprice", "40000");
-request.setAttribute("paymethod", "카드");
-request.setAttribute("couponbenefit", "10%할인");
-request.setAttribute("couponperiod", "2024-02-14");
-%>
-
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
 <head>
@@ -90,7 +79,7 @@ request.setAttribute("couponperiod", "2024-02-14");
                         </thead>
                         <tbody class="center">
                         
-                        	<%-- <c:forEach var="item" items="${couponList}">	
+                        	<c:forEach var="item" items="${couponList}">	
                             <tr class="">
                                 <td>${item.couponNumber}</td>
                                 <td><strong>${item.couponName}</strong></td>
@@ -100,17 +89,7 @@ request.setAttribute("couponperiod", "2024-02-14");
                                 <td>${item.couponBenefit}</td>
                                 <td>${item.couponPeriod}</td>
                             </tr>
-                            </c:forEach> --%>
-                            
-                            <tr class="">
-                                <td>${couponnumber}</td>
-                                <td><strong>${couponname}</strong></td>
-                                <td>${couponproduct}</td>
-                                <td>${productprice}</td>
-                                <td>${paymethod}</td>
-                                <td>${couponbenefit}</td>
-                                <td>${couponperiod}</td>
-                            </tr>
+                            </c:forEach>
                             
                         </tbody>
                         <tbody class="">

@@ -3,17 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<%
-/* 확인용 임시데이터 */
-request.setAttribute("addrname", "우리집");
-request.setAttribute("username", "페이커");
-request.setAttribute("phone", "02-1234-5667");
-request.setAttribute("mobile", "010-2424-3434");
-request.setAttribute("postcode", "13551");
-request.setAttribute("defaultaddr", "서울 서초구 방배천로 18길 11 롯데캐슬");
-request.setAttribute("remainaddr", "102동 3405호");
-%>
-
 <html lang="ko">
 
 <head>
@@ -90,7 +79,7 @@ request.setAttribute("remainaddr", "102동 3405호");
                                 </thead>
                                 <tbody class=" center">
                                 
-                                	<%-- <c:forEach var="item" items="${addrList}">
+                                	<c:forEach var="item" items="${addrList}">
                                     <tr class="xans-record-">
                                         <!-- 체크박스 -->
                                         <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
@@ -111,27 +100,7 @@ request.setAttribute("remainaddr", "102동 3405호");
                                         </td>
                                         <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>
                                     </tr>
-                                    </c:forEach> --%>
-                                    
-                                    <tr class="xans-record-">
-                                        <!-- 체크박스 -->
-                                        <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
-                                        	enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
-                                        </td>
-                                        <td>
-                                            <img src="/resources/images/ico_addr_default.gif"
-                                                class="" alt="기본"> 
-                                                <span>${addrname}</span>
-                                        </td>
-                                        <td><span>${username}</span></td>
-                                        <td><span>${phone}</span></td>
-                                        <td><span>${mobile}</span></td>
-                                        <!-- class="left" -->
-                                        <td class="">(<span>${postcode}</span>)<span>${defaultaddr}</span>
-                                            <span>${remainaddr}</span>
-                                        </td>
-                                        <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>
-                                    </tr>
+                                    </c:forEach>
                                     
                                 </tbody>
                                 <tbody class="displaynone">
