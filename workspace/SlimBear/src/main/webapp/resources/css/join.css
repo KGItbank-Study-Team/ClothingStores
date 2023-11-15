@@ -83,8 +83,11 @@ color:#fff
     gap:10px;
   
 }
-
-.field.tel-number div input:nth-child(1){
+.field.tel-number p{
+	text-align: center;
+	margin-top: 15px;
+}
+/* .field.tel-number div input:nth-child(1){
     flex:2;
     background-color: #fff;
 }
@@ -92,7 +95,7 @@ color:#fff
 .field.tel-number div input:nth-child(2){
     flex:2;
     
-}
+} */
 .field.tel-number input[type="number"] {
     background-color: white; /* 바탕색을 흰색(white)으로 설정 */
 }
