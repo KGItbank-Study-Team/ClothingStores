@@ -33,11 +33,10 @@ public class CartDAO {
 		return 1;
 	    //return template.delete("com.slimbear.mapper.Member.DELETE_CART_ITEM", itemId);
 	}
-	 public void updateCartItemQuantity(Long itemId, int newQuantity) {// 장바구니에 있는거 수량 업데이
+	public void updateCartItemQuantity(Long itemId, int newQuantity) {// 장바구니에 있는거 수량 업데이
 	      
 	}
-	
-	    //    template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_QUANTITY", params);
+//    template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_QUANTITY", params);
 //	<update id="UPDATE_CART_ITEM_QUANTITY"> UPDATE cart SET cnt = #{newQuantity} WHERE uid = #{productId}
 //</update>
 }

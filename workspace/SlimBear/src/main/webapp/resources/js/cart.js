@@ -31,27 +31,25 @@ function updateServer(productId, newQuantity) {
         location.reload();
     },
     error: function (error) {
-        console.error('서버에서 수량을 업데이트하는 중 오류 발생:', error);
+        console.log('서버에서 수량을 업데이트하는 중 오류 발생:', error);
     }
 });
 
 }
 
-// updateQuantity 함수도 수정
 function updateQuantity(productId, action) {
     var quantityInput = document.getElementById("quantity_" + productId);
     var currentQuantity = parseInt(quantityInput.value);
-
+	
     if (action === 'increase') {
         quantityInput.value = currentQuantity + 1;
-        // 서버에 업데이트된 수량을 전송하고 서버 응답을 받은 후에 페이지를 새로고침
         updateServer(productId, currentQuantity + 1);
     } else if (action === 'decrease' && currentQuantity > 1) {
         quantityInput.value = currentQuantity - 1;
-        // 서버에 업데이트된 수량을 전송하고 서버 응답을 받은 후에 페이지를 새로고침
         updateServer(productId, currentQuantity - 1);
     }
 }
+
 function updateCartOnServerResponse() {
     fetch('/app/getUpdatedCartData')
         .then(response => response.json())
@@ -81,21 +79,19 @@ $(document).ready(function () {
    
 });
 
-function deleteSelectedItems() {
-    var selectedItems = document.querySelectorAll('input[name="selectedItems"]:checked');
-    var itemIds = [];
-    
-    selectedItems.forEach(function(item) {
-        itemIds.push(item.value);
+function deleteCartItem(productId) {
+    fetch(`/app/deleteCartItem?productId=${productId}`, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("서버 응답:", data);
+        // 삭제 후 장바구니 화면을 업데이트하거나 필요한 작업 수행
+        updateCart(data);
+    })
+    .catch(error => {
+        console.log('Error deleting item:', error);
     });
-
-    if (itemIds.length > 0) {
-        // 선택된 상품의 UID를 hidden input에 할당
-        document.getElementById('selectedItemsInput').value = itemIds.join(',');
-
-        // 폼 제출
-        document.getElementById('deleteForm').submit();
-    }
 }
 
 

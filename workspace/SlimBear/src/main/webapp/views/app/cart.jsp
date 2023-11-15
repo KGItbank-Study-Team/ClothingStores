@@ -94,14 +94,9 @@
 							</div>
 						</td>
 							<td><span class="quantity"> <input type="text"
-								class="inputBox" id="quantity_${cart.uid }" value="${cart.cnt}"> <a
-								href="/app/updateQuantity?productId=${cart.uid}&newQuantity=${cart.cnt + 1}" class="countUp"
-								onclick="addQuantity(${cart.uid},1)"> <img alt="수량증가"
-									src="/resources/images/btn_count_up.gif">
-							</a> <a href="javascript:void(0)" class="countDown"
-								onclick="outQuantity(${cart.uid}, 1)"> <img alt="수량감소"
-									src="/resources/images/btn_count_down.gif">
-							</a>
+								class="inputBox" id="quantity_${cart.uid }" value="${cart.cnt}"><a href="#" class="countUp" onclick="updateQuantity(${cart.uid}, 'increase')"></a>
+ 									<img alt="수량증가" src="/resources/images/btn_count_up.gif"> </a> <a href="#" class="countDown" onclick="updateQuantity(${cart.uid}, 'decrease')"></a>
+										<img alt="수량감소" src="/resources/images/btn_count_down.gif"> </a>
 						</span></td>
 						<td><p id="addPrice_${cart.uid }">100<%-- ${cart.addprice} --%></p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
@@ -116,6 +111,7 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
+					<a href="#" onclick="deleteCartItem(${cart.uid})">삭제</a>
 						<form id="deleteForm" action="/app/deleteSelectedItems" method="post">
                 <input type="button" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
                 <button class="cart__list__optionbtn">선택상품 찜</button>

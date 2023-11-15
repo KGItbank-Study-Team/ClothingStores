@@ -83,7 +83,10 @@ public class OstSerivceImpl {
             
         }
     }
- 
+    public void deleteCartItem(long productId) {
+        // 여기에 삭제 로직 구현
+        cartDAO.deleteCartItem(productId);
+    }
    
     public void updateCartItemQuantity(long productId, int newQuantity) {
         cartDAO.updateCartItemQuantity(productId, newQuantity);
