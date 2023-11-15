@@ -1,15 +1,16 @@
 package com.kgitbank.slimbear.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
+import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
@@ -66,4 +67,22 @@ public class SangyhyukServiceImpl {
 	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
 		return inquiryDAO.getInquiryListByProdUid(prodUid);
 	}
+	
+	/* 상품 장바구니에 추가 */
+	@Autowired
+	public CartDAO cartDAO;
+	
+	public int insertAddress(CartDTO cart) {
+		return cartDAO.insertInCart(cart);
+	}
+	
+	public List<CartDTO> getCartListByMemberUID(long memberUid) {
+		return cartDAO.getCartListByMemberUID(memberUid);
+	}
+	
+	/* 장바구니에 동일한 상품이 있는지 조회 */
+	public boolean findProducts(CartDTO cartDTO) {
+		return cartDAO.findProducts(cartDTO);
+	}
+	
 }

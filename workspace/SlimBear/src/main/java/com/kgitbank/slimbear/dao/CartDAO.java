@@ -21,8 +21,12 @@ public class CartDAO {
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
 	}
+	
+	public boolean findProducts(CartDTO cartDTO) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUNT_IN_CART", cartDTO);
+	}
 
-	public int insertAddress(CartDTO cart) {
+	public int insertInCart(CartDTO cart) {
 		return template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 	

@@ -31,12 +31,13 @@ $(function () {
             $(this).addClass("active2");
             selectedSize = $('.sizeBtn').text();
             updateSelection(selectedColor, $(this).find(".sizeOption").text());
+            console.log(selectProduct);
         }
     });
 
-    var prodPrice = '${product.price}' 
+    
 
-    function addRowToTable(color, size, cnt) {
+    function addRowToTable(color, size, cnt) {  
         // 행을 생성하고 선택한 옵션 값을 설정
         var newRow = $("<tr id=" + makeProductElementID(color,size) + "></tr>");
         newRow.append($('<td class="tdOption"></td>').text(selectedColor));
@@ -45,8 +46,8 @@ $(function () {
         +'<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color,size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>' 
         +'<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color,size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>' 
         +'</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color,size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" class="deleteImg"/></a>'));
-        newRow.append($('<td><div class="tdCell">' + prodPrice + '</div></td>'));
-        // newRow.append($('<td><div class="tdCell">${product.price}</div></td>'))
+        // newRow.append($('<td><div class="tdCell">' + prodPrice + '</div></td>'));
+        newRow.append($('<td><div class="tdCell">${product.price}</div></td>'));
         $(".choiceOption").append(newRow);
     }
 
@@ -151,3 +152,43 @@ $(document).ready(function(){
         // $(this).next("div").toggleClass("guideText");
     });
 });
+
+// 장바구니 추가 기능
+function addCart(prodCode) {
+    $.ajax({
+        type: "POST",
+        async : false,
+        url : "${contextPath}/",
+        data : {prodCode : prodCode},
+        success: function(data, textStatus){
+            if(data.trim() == '이미 존재하는 상품입니다.') {
+                imagePopUp('open','.layer011');
+            } else if(data.trim() == 'already_existed') {
+                alert("이미 카트에 등록된 제품입니다.");
+            }
+        },
+        error : function(data, textStatus) {
+            alert("에러가 발생했습니다." + data);
+        },
+        complete : function(data, textStatus) {
+            //alert("작업을 완료했습니다.");
+        }
+
+    })
+}
+function cartAlert(result) {
+    if(result == '0') {
+        alert("장바구니에 추가를 하지 못했습니다.")
+    } else if(result == '1') {
+        alert("장바구니에 추가되었습니다.");
+    } else if(result == '2') {
+        alert("장바구니에 동일 상품이 있습니다.")
+    }
+}
+
+// BUY IT NOW 클릭 시 결제 페이지로
+$("#buyBtn").click(function(){
+    location.assign("");
+})
+
+
