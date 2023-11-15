@@ -96,8 +96,15 @@
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="javascript:buyClick()" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> <span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
-						</a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span class="btnSpan">ADD TO CART</span></a> <a href="#none" class="btnOption" style="background: #eae5dd;"><span class="btnSpan">ADD TO WISH</span></a>
+						<a href="javascript:buyClick()" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
+							<span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
+						</a> 
+						<a href="#none" id="cartBtn" class="btnOption" style="background: #eae5dd;">
+							<span class="btnSpan">ADD TO CART</span>
+						</a> 
+						<a href="#none" id="wishBtn" class="btnOption" style="background: #eae5dd;">
+							<span class="btnSpan">ADD TO WISH</span>
+						</a>
 					</div>
 				</div>
 				<!-- 사이즈 가이드 -->
@@ -297,11 +304,8 @@
 					<h2>상품결제정보</h2>
 					<div class="guideText">
 						<p>
-							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. 
-							<br /> <br /> 
-							무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.<br>
-							주문 시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.<br><br>
-							A/S 책임자 : 070-7705-5595 슬림베어 고객센터
+							고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다. <br /> <br /> 무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.<br> 주문 시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.<br>
+							<br> A/S 책임자 : 070-7705-5595 슬림베어 고객센터
 						</p>
 						<p>품질보증기준: 전자상거래 소비자 보호법에 의거하여 소비자 청약철회 가능한 기준에 따름.</p>
 						<p>구매자가 미성년자일 경우 법정 대리인이 계약에 동의하지 않을 때 구매를 취소할 수 있습니다.</p>
@@ -316,12 +320,10 @@
 							<li>배송 지역 : 전국지역</li>
 							<li>배송 비용 : 무료</li>
 							<li>배송 기간 : 2일 ~ 7일</li>
-							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여 <br /> 가장 안전하고, 신속하게 배송하여 드립니다 :) 
-							<br /><br /> 대부분 출고 다음날에 바로 도착하며 (주말 제외) <br /><br /> 
-							지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. <br /> 
-							기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다. <br /><br /> 
-							7만원 이상 결제시 무료배송 혜택이 추가되며 <br /> 
-							최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰)할인금액이 포함됩니다.
+							<li>배송 안내 : 슬로우앤드는 대한민국 택배 no.1 우체국택배를 이용하여 <br /> 가장 안전하고, 신속하게 배송하여 드립니다 :) <br />
+							<br /> 대부분 출고 다음날에 바로 도착하며 (주말 제외) <br />
+							<br /> 지역 택배 기사님들의 일정과 기상상황에 따라 변동이 있을 수 있습니다. <br /> 기본 배송 준비일은 입고지연 상품 제외, 2~5일 정도가 소요되고 있습니다. <br />
+							<br /> 7만원 이상 결제시 무료배송 혜택이 추가되며 <br /> 최종 주문(결제)금액 기준으로, 쿠폰(상품별 쿠폰)할인금액이 포함됩니다.
 							</li>
 						</ul>
 					</div>
@@ -431,9 +433,8 @@
 							<div class="review-score">★★★★★(${list.score})</div>
 						</div>
 						<div class="photo-review">
-							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품"
-								src="/resources/images/review_images04.jpg"
-							></a> <a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
 						</div>
 						<div class="review-text">
 							<div>${list.content}</div>
@@ -456,7 +457,7 @@
 			<hr class="myHr" />
 			<table>
 				<colgroup>
-					<col  style="width: 70px;">
+					<col style="width: 70px;">
 					<col style="width: atuo;">
 					<col style="width: 150px;">
 					<col style="width: 130px;">
@@ -483,6 +484,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<button class="qnaBtn">
+				<a href="" class="qnaBtnColor">문의하기</a>
+			</button>
 		</div>
 		<div class="footer">
 			<%@ include file="footer/footer.jsp"%>

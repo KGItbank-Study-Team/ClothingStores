@@ -21,13 +21,16 @@ a {
 	margin: 107.5px;
 	padding-top: 100px;
 	height: auto;
+/* 	position: absolute;
+	top: 50%;
+	left: 50%; */
 }
 
 .productInfo {
 	display: flex;
 	max-width: 1750px;
 	position: relative;
-	left: 25%;
+	left: 15%;
 	width: fit-content;
 	margin-bottom: 80px;
 }
@@ -126,7 +129,13 @@ table {
 	min-width: 30px;
 	z-index: 1;
 }
-
+.deleteBtn {
+	
+}
+.deleteImg {
+	width:9px;
+	height:9px;	
+}
 col {
 	width: 110px;
 }
@@ -389,10 +398,21 @@ section > h1 {
 .inquirySection {
 	margin-top: 100px;
 }
-.inquirySection th, td {
+.inquirySection > th, td {
 	text-align: center;
 }
 
-.inquirySection td {
+.inquirySection > td {
 	padding: 20px 0;
+}
+.qnaBtn {
+	margin-top: 30px;
+	float: right;
+	width: 100px;
+	height: 42px;
+	background-color: #655345;
+	border: none;
+}
+.qnaBtnColor {
+	color: white;
 }

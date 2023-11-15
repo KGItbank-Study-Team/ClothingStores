@@ -34,7 +34,7 @@ $(function () {
         }
     });
 
-   
+    var prodPrice = '${product.price}' 
 
     function addRowToTable(color, size, cnt) {
         // 행을 생성하고 선택한 옵션 값을 설정
@@ -44,8 +44,9 @@ $(function () {
         newRow.append($("<td></td>").html('<span class="quantity"><input type="text" name="pop_out" value="' + cnt +'" class="inputBox">' 
         +'<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color,size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>' 
         +'<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color,size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>' 
-        +'</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color,size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" style="width:9px;height:9px;"/></a>'));
-        newRow.append($('<td><div class="tdCell">${product.price}</div></td>'))
+        +'</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color,size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" class="deleteImg"/></a>'));
+        newRow.append($('<td><div class="tdCell">' + prodPrice + '</div></td>'));
+        // newRow.append($('<td><div class="tdCell">${product.price}</div></td>'))
         $(".choiceOption").append(newRow);
     }
 
