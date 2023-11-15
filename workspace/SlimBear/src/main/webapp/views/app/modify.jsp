@@ -144,7 +144,7 @@
                                                 </li>
                                                 <li id="fmodify_detailAddr_wrap" class="">
                                                     <input id="addr2" name="addr2" placeholder="나머지 주소(선택 입력 가능)"
-                                                        fw-filter="" class="inputTypeText" vaule="${modi.remainAddr}" type="text" size="60"
+                                                        fw-filter="" class="inputTypeText" value="${modi.remainAddr}" type="text" size="60"
                                                         maxlength="255" fw-label="나머지 주소(선택 입력 가능)">
                                                 </li>
                                             </ul>

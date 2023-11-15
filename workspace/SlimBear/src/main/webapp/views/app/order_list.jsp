@@ -3,18 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%
-/* 확인용 임시데이터 */
-request.setAttribute("orderdate","2023-11-11");
-request.setAttribute("ordernum","37859");
-request.setAttribute("productimage","이미지");  
-request.setAttribute("productname","손오공이입은 개쩌는 옷");  
-request.setAttribute("productoption","특별 손오공 에디션");  
-request.setAttribute("ordercount","1");  
-request.setAttribute("orderamount","15000");
-request.setAttribute("orderstatus","배송중");
-request.setAttribute("fluctuation","반품신청");
-%> --%>
 
 <!DOCTYPE html>
 
@@ -190,7 +178,7 @@ request.setAttribute("fluctuation","반품신청");
                                     <a href="#none" class="btnNormal  " onclick="">반품철회</a>
                                 </td>
                                 <td>
-                                    <p class=" ">${item.fluctuations}</p><br>
+                                    <p class=" ">${item.fluctuation}</p><br>
                                     <p class=" "><a href="#none" class="btnNormal" onclick="">상세정보</a></p>
                                 </td>
                             </tr>
