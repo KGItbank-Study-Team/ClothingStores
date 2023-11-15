@@ -80,21 +80,24 @@ $(document).ready(function () {
 });
 
 function deleteCartItem(productId) {
-    fetch(`/app/deleteCartItem?productId=${productId}`, {
-        method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("서버 응답:", data);
-        // 삭제 후 장바구니 화면을 업데이트하거나 필요한 작업 수행
-        updateCart(data);
-    })
-    .catch(error => {
-        console.log('Error deleting item:', error);
-    });
+    // productId가 유효한 경우에만 서버로 요청을 보냄
+    if (productId !== undefined) {
+        fetch(`/app/deleteCartItem?productId=${productId}`, {
+            method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("서버 응답:", data);
+            // 삭제 후 장바구니 화면을 업데이트하거나 필요한 작업 수행
+            updateCart(data);
+        })
+        .catch(error => {
+            console.log('Error deleting item:', error);
+        });
+    } else {
+        console.log('productId가 유효하지 않습니다.');
+    }
 }
-
-
 document.getElementById('myForm').addEventListener('submit', function (event) {
     event.preventDefault();
 

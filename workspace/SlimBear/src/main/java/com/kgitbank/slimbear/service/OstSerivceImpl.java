@@ -66,28 +66,17 @@ public class OstSerivceImpl {
    	 // 필요한 포맷팅 로직 추가
    	return String.format("%,d원", price);
    }
-	/*
-	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
-	 * }
-	 */
-	/* private List<MemberCartVO> cartList = new ArrayList<>(); */
-    
-	/*
-	 * public List<MemberCartVO> getCart() { return cartList; }
-	 */
 
     public void deleteSelectedItems(List<Long> itemIds) {
         // 선택된 상품들을 삭제하
         for (Long itemId : itemIds) {
             cartDAO.deleteCartItem(itemId);
-            
         }
     }
     public void deleteCartItem(long productId) {
         // 여기에 삭제 로직 구현
         cartDAO.deleteCartItem(productId);
     }
-   
     public void updateCartItemQuantity(long productId, int newQuantity) {
         cartDAO.updateCartItemQuantity(productId, newQuantity);
     }
@@ -106,5 +95,15 @@ public class OstSerivceImpl {
 	 * //ostRepository.updateQuantity(productId, newQuantity); 데이터베이스 업데이트 로직을 추가할 수
 	 * 있음 }
 	 */
-  
+	 
+	/*
+	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
+	 * }
+	 */
+	/* private List<MemberCartVO> cartList = new ArrayList<>(); */
+    
+	/*
+	 * public List<MemberCartVO> getCart() { return cartList; }
+	 */
+
 }

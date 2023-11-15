@@ -31,7 +31,7 @@ public class CartDAO {
 	}
 	public int deleteCartItem(Long cartUId) {//장바구니에 있는거 삭제 
 		return template.update("com.slimbear.mapper.Member.DELETE_CART", cartUId);
-	    //return template.delete("com.slimbear.mapper.Member.DELETE_CART_ITEM", itemId);
+	   
 	}
 	public int updateCartItemQuantity(Long cartUId, int newQuantity) {// 장바구니에 있는거 수량 업데이
 		HashMap<String, String> info = new HashMap<String, String>();
@@ -39,7 +39,5 @@ public class CartDAO {
 		info.put("cnt", String.valueOf(newQuantity));
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART_CNT", info);
 	}
-//    template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_QUANTITY", params);
-//	<update id="UPDATE_CART_ITEM_QUANTITY"> UPDATE cart SET cnt = #{newQuantity} WHERE uid = #{productId}
-//</update>
+
 }

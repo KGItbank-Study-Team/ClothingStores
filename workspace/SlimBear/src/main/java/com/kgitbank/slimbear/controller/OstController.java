@@ -64,6 +64,14 @@ public class OstController {
 	        return "redirect:/app/login";
 	    }
 	}
+	
+	@PostMapping("/app/updateQuantity")
+	@ResponseBody
+	public ResponseEntity<String> updateQuantity(@RequestParam long productId, @RequestParam int quantity) {
+	    // 여기에 수량 업데이트 로직을 추가하고 성공 여부에 따라 응답을 보냄
+	    ostService.updateCartItemQuantity(productId, quantity);
+	    return new ResponseEntity<>("수량이 업데이트되었습니다.", HttpStatus.OK);
+	}
 	@PostMapping("/deleteCartItem")
     @ResponseBody
     public ResponseEntity<String> deleteCartItem(@RequestParam long productId) {
@@ -71,22 +79,6 @@ public class OstController {
          ostService.deleteCartItem(productId);
         return new ResponseEntity<>("삭제되었습니다.", HttpStatus.OK);
     }
-
-
-	
-	/*
-	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
-	 * 
-	 * // SlimBearUtil.appendProductCode(request.getAttribute("productUID"),
-	 * request.getAttribute("color"), request.getAttribute("size"));
-	 * 
-	 * CartDTO cartList = new CartDTO(); cartList.setMem_uid(9767);
-	 * cartList.setCnt(1); cartList.setProd_code("productCode");
-	 * cartList.setReg_date(new Date(System.currentTimeMillis())); return
-	 * ostService.insertAddress(cartList); }
-	 */
-
-	
 	@PostMapping("/app/deleteSelectedItems")
 	public String deleteSelectedItems(@RequestParam("selectedItems") String selectedItems) {
 	    // 쉼표로 구분된 선택된 상품의 UID를 리스트로 변환
@@ -99,6 +91,17 @@ public class OstController {
 
 	    return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트
 	}
-	
+	/*
+	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
+	 * 
+	 * // SlimBearUtil.appendProductCode(request.getAttribute("productUID"),
+	 * request.getAttribute("color"), request.getAttribute("size"));
+	 * 
+	 * CartDTO cartList = new CartDTO(); cartList.setMem_uid(9767);
+	 * cartList.setCnt(1); cartList.setProd_code("productCode");
+	 * cartList.setReg_date(new Date(System.currentTimeMillis())); return
+	 * ostService.insertAddress(cartList); }
+	 */
+
 }
 
