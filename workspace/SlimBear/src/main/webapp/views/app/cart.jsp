@@ -12,7 +12,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/cart.js"></script>
 
-
 <title>장 바 구 니</title>
 </head>
 <body>
@@ -47,13 +46,13 @@
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
 							value="${cart.uid }"></td>
-						<td class="yout"><img src="/resources/images/유해커.jpg"
-							alt="magic keyboard"></td>
-						<td><a href="#">${cart.desc}</a> <span
-							class="cart__list__smartstore">스마트스토어</span>
-							<p>${cart.infoo }</p></td>
+						<td class="yout"><img src="/resources/images/${cart.main_image}"
+							alt="${cart.desc}"></td>
+						<td><a href="#">${cart.maker}</a> <span
+							class="cart__list__smartstore">${cart.maker}</span>
+							<p>${cart.name }</p></td>
 						<td class="cart__list__option">
-							<p>${cart.infoo}</p>
+							<p>${cart.name}</p>
 							<div class="btn" onclick="toggleHiddenContent(this);">주문
 								추가/변경▽</div>
 							<div class="hiddenContent02 hiddenContent04">
@@ -61,7 +60,7 @@
 								<table class="change hidden">
 									<tbody class="cchange">
 										<tr class="nammme">
-											<td colspan="3">${"productName"}</td>
+											<td colspan="3">${cart.name}</td>
 										</tr>
 										<tr class="">
 											<td class="pcolor">
@@ -94,9 +93,9 @@
 								</table>
 							</div>
 						</td>
-						<td><span class="quantity"> <input type="text"
-								value="1" class="inputBox" id="quantity_${cart.uid }"> <a
-								href="javascript:void(0)" class="countUp"
+							<td><span class="quantity"> <input type="text"
+								class="inputBox" id="quantity_${cart.uid }" value="${cart.cnt}"> <a
+								href="/app/updateQuantity?productId=${cart.uid}&newQuantity=${cart.cnt + 1}" class="countUp"
 								onclick="addQuantity(${cart.uid},1)"> <img alt="수량증가"
 									src="/resources/images/btn_count_up.gif">
 							</a> <a href="javascript:void(0)" class="countDown"
@@ -104,10 +103,10 @@
 									src="/resources/images/btn_count_down.gif">
 							</a>
 						</span></td>
-						<td><p id="addPrice_${cart.uid }">${cart.addprice}</p></td>
+						<td><p id="addPrice_${cart.uid }">100<%-- ${cart.addprice} --%></p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
-						<td>${cart.baedalprice }</td>
+						<td>무료<%-- ${cart.baedalprice } --%></td>
 					</tr>
 					
 					</c:forEach>
@@ -117,9 +116,10 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
-						<input type="button" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
-						<button class="cart__list__optionbtn">선택상품 찜</button>
-					</td>
+						<form id="deleteForm" action="/app/deleteSelectedItems" method="post">
+                <input type="button" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
+                <button class="cart__list__optionbtn">선택상품 찜</button>
+            </form></td>
 					<td></td>
 					<td></td>
 					<td></td>

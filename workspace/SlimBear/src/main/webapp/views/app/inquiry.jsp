@@ -14,6 +14,7 @@
 <title>INQUIRY</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/inquiry.js"></script>
+
 </head>
 <body>
 <jsp:include page="header/header.jsp" />
@@ -30,22 +31,25 @@
 							<li title="현재 위치"><strong>상품문의</strong></li>
 						</ol>
 					</div>
-					<c:if test="${not empty boards}">
+					<%-- <c:if test="${not empty inquiries}">
 					    <div class="titleArea">
 					        <h2>
-					            <font color="333333">${boards[0].inquiry_title}</font>
+					            <font color="333333">${inquiries[0].type}</font>
 					        </h2>
-					        <p>${boards[0].title_ment}</p>
+					        <p>${inquiries[0].title}</p>
 					    </div>
-					</c:if>
+					</c:if> --%>
+					
+					<div class="titleArea">
+                        <h2 id="inquiryH2">
+                            <font color="333333">문의사항</font>
+                        </h2>
+                        <p id="inquiryP"></p>
+                    </div>
+					
 					<p class="imgArea"></p>
 				</div>
 				
-				 <c:if test="${not empty errorMessage}">
-			        <div class="error-message">
-			            <strong>Error:</strong> ${errorMessage}
-			        </div>
-			    </c:if>
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
@@ -63,8 +67,6 @@
 						<span>배송문의</span></a>
 					<a href="/app/board/inquiry?board_no=3&amp;category_no=2" class="qna03">
 						<span>배송 전 변경/취소</span></a>
-					<!-- <a href="/board/배송-후-교환반품/5/" class="qna04"><span>배송 후 교환/반품</span></a> -->
-					<!-- <a href="/board/입금결제-확인/14/" class="qna05"><span>입금/결제 확인</span></a> -->
 				</div>
 				
 				<div class="boardSort">
@@ -104,16 +106,15 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						            <strong>
-					                    <a style="color: #555555;">${board.title}</a>
+					                    <a href="#" style="color: #555555;">${board.title}</a>
 					                    <span class="txtEm"></span>
 					                </strong>
 						            </td>
-<%-- 									<td>${board.uid}</td> --%>
 									<td>${board.writer_id}</td>
 									<td>${board.reg_date}</td>
-<%-- 									<td>${board.content}</td> --%>
 								</tr>
 							</c:forEach>
+							
 							
 						    <%-- <c:forEach var="inquiry" items="${inquiries}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">

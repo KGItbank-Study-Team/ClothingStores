@@ -13,22 +13,27 @@ public class InquiryDAO {
 	@Autowired
 	protected SqlSessionTemplate template;
 	
-	// Inquiry 리스트 조회
+	// 상품문의 리스트 조회
 	public List<InquiryDTO> getInquiryList() { 
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST"); // 패키지풀네임.id
 	}
+	
+	// 특정 prod_uid 상품문의 조회
+	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
+	}
 
-	// Inquiry 데이터 삽입
+	// 상품문의 데이터 삽입
 	public int insertInquiry(InquiryDTO Inquiry) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRY", Inquiry);
 	}
 	
-	// Inquiry 업데이트
+	// 상품문의 업데이트
 	public int updateInquiry(InquiryDTO Inquiry) {
 		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRY", Inquiry);
 	}
 	
-	// Inquiry 데이터 삭제
+	// 상품문의 데이터 삭제
 	public int deleteInquiry(long uid) {
 		InquiryDTO Inquiry = new InquiryDTO();
 		Inquiry.setUid(uid);

@@ -14,13 +14,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-
-	<context:component-scan
-		base-package="com.kgitbank.slimbear" />
-
-	<!-- 정적 자원 매핑 -->
-	<!-- 사용했을 때 차이를 눈으로 확인하지못해서 일단 주석처리 -->
-	<!-- <mvc:resources mapping="/resources/**" location="/resources/"/> -->
+	
+	<context:component-scan base-package="com.kgitbank.slimbear">
+    	<context:exclude-filter type="regex" expression="com.kgitbank.slimbear.controller.*"/>
+    	<context:exclude-filter type="regex" expression="com.kgitbank.slimbear.admin.controller.*"/>
+  	</context:component-scan>
 
 	<!-- DB 설정 불러오기 -->
 	<context:property-placeholder

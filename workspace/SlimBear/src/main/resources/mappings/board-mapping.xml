@@ -71,26 +71,31 @@
  	
  	
  	<!-- INQUIRY -->
- 	<!-- 전체 질문 목록 조회 -->
+ 	<!-- 상품문의 목록 조회 -->
  	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
  		SELECT * FROM inquiry;
  	</select>
  	
- 	<!-- 질문 목록 데이터 삽입 -->
+ 	<!-- 특정 prod_uid 상품문의 조회 -->
+ 	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
+ 		SELECT * FROM inquiry WHERE prod_uid=#{prod_uid}
+ 	</select>
+ 	
+ 	<!-- 상품문의 데이터 삽입 -->
  	<insert id="INSERT_INQUIRY">
  		INSERT INTO inquiry
  		(writer_id, content, reg_date, status, type, prod_uid)
  		VALUES(#{writer_id}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid})
  	</insert>
  	
- 	<!-- 목록 업데이트 -->
+ 	<!-- 상품문의 업데이트 -->
  	<update id="UPDATE_INQUIRY">
  		UPDATE inquiry
  		SET content=#{content}, status=#{status}
  		WHERE uid=#{uid}
  	</update>
  	
- 	<!-- 질문 목록 삭제 -->
+ 	<!-- 상품문의 목록 삭제 -->
  	<delete id="DELETE_INQUIRY">
  		DELETE FROM inquiry WHERE uid = #{uid}
  	</delete>

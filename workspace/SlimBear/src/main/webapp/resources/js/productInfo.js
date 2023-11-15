@@ -45,7 +45,7 @@ $(function () {
         +'<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color,size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>' 
         +'<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color,size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>' 
         +'</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color,size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" style="width:9px;height:9px;"/></a>'));
-        newRow.append($('<td><div class="tdCell">${price}</div></td>'))
+        newRow.append($('<td><div class="tdCell">${product.price}</div></td>'))
         $(".choiceOption").append(newRow);
     }
 
