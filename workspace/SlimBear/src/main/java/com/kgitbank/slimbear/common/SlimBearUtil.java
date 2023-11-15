@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.common;
 
+import org.springframework.util.StringUtils;
+
 public class SlimBearUtil {
 
 	// 제품코드
@@ -27,7 +29,7 @@ public class SlimBearUtil {
 	}
 	
 	public static String[] splitAddress(String address) {
-		return address.split("|");
+		return address.split("\\|");
 	}
 	
 	// 전화번호
