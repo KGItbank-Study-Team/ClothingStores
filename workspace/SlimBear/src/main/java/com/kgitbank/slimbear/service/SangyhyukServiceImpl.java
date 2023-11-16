@@ -72,7 +72,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public CartDAO cartDAO;
 	
-	public int insertAddress(CartDTO cart) {
+	public int insertInCart(CartDTO cart) {
 		return cartDAO.insertInCart(cart);
 	}
 	
