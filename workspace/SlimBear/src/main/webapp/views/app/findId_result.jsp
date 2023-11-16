@@ -91,8 +91,8 @@
                             </div>
                         </div>
                         <div class="ec-base-button gBlank20">
-                            <a href="/views/app/login.jsp" class="btnSubmitFix sizeM ">로그인</a>
-                            <a href="javascript:go_findpwd('','indi');" class="btnEmFix sizeM ">비밀번호 찾기</a>
+                            <a href="/app/login" class="btnSubmitFix sizeM ">로그인</a>
+                            <a href="/views/app/find_password.jsp" class="btnEmFix sizeM ">비밀번호 찾기</a>
                         </div>
                     </div>
                 </div>

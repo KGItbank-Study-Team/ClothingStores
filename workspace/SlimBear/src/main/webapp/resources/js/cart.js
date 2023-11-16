@@ -1,4 +1,4 @@
-var selectcartUId = [];
+
 function toggleHiddenContent(button) {
     var hiddenContent = button.nextElementSibling;
     var btn = button;

@@ -42,6 +42,12 @@
 		resultType="int">
 		SELECT COUNT(*) FROM product WHERE ctg_uid=#{ctg_uid};
 	</select>
+	
+	<insert id="INSERT_PRODUCT">
+		INSERT INTO 
+		`product` (`ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`, `reg_date`) 
+		VALUES(#{ctg_uid}, #{name}, #{desc}, #{price}, #{maker}, #{main_image}, #{reg_date})
+	</insert>
 
 	<!-- 제품상세(productDetail) -->
 	<!-- 제품상세검색 -->

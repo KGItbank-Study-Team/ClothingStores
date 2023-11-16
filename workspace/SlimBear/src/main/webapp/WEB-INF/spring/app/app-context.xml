@@ -13,10 +13,14 @@
 
 	<mvc:annotation-driven />
 	
+	<!-- 설정 파일 불러오기 -->
+	<context:property-placeholder
+		location="classpath:application.properties" />
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/views/app/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="${viewResolver.app.prefix}" />
+		<property name="suffix" value="${viewResolver.app.suffix}" />
 	</bean>
 	
     <!-- AOP -->

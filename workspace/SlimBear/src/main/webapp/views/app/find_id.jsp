@@ -5,7 +5,7 @@
 <head>
 <script th:if="${error != null}" th:inline="javascript">
 	window.onload = function() {
-		var errorMessage = "[[${error}]]";
+		var errorMessage = "${error}";
 		if (errorMessage.trim() !== "") {
 			alert(errorMessage);
 			// 또는 모달 창을 띄우는 스크립트를 추가할 수 있습니다.

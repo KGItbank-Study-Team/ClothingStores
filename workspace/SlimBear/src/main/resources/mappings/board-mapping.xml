@@ -73,13 +73,19 @@
  	<!-- INQUIRY -->
  	<!-- 상품문의 목록 조회 -->
  	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
- 		SELECT * FROM inquiry;
+ 		SELECT uid, writer, title, content, reg_date, NULL AS status, type, NULL AS prod_uid, 1 AS order_priority
+		FROM notice
+		WHERE type IN ('DELIVERY', 'DELIVERY_C', 'PRODUCT')
+		
+		UNION ALL
+		
+		SELECT uid, writer_id AS writer, title, content, reg_date, status, type, prod_uid, 2 AS order_priority
+		FROM inquiry
+		WHERE type IN ('DELIVERY', 'DELIVERY_C', 'PRODUCT')
+		
+		ORDER BY order_priority, reg_date DESC;
  	</select>
 
- 	<!-- 특정 type으로 필터링된 상품문의 목록 조회 -->
-	<select id="SELECT_INQUIRY_LIST_BY_TYPE" resultType="inquiry" parameterType="java.lang.String">
-	    SELECT * FROM inquiry WHERE type = #{type};
-	</select>
 	
  	<!-- 특정 prod_uid 상품문의 조회 -->
  	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
@@ -176,7 +182,7 @@
  	<!-- notice 조회 -->
  	<select id="SELECT_NOTICE_LIST" resultType="notice">
 <!--  		SELECT * FROM notice -->
-		select * from notice order by FIELD(priority, 1, 2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
+		SELECT * FROM notice WHERE priority != 0 ORDER BY FIELD(priority, 1, 2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
  	</select>
  	
  	<!-- notice 데이터 삽입 -->

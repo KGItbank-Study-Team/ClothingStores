@@ -86,26 +86,4 @@ public class OstSerivceImpl {
         cartDAO.updateCartItemQuantity(productId, newQuantity);
     }
 
-    // 해당 제품의 수량을 업데이트하는 메서드 추가
-	/*
-	 * public void updateQuantity(long productId, int newQuantity) { for
-	 * (MemberCartVO cartItem : cartList) { if (cartItem.getUid() == productId) { //
-	 * 수량을 업데이트하고 totalprice도 다시 계산 int quantityDiff = newQuantity -
-	 * cartItem.getQuantity(); cartItem.setQuantity(newQuantity);
-	 * cartItem.setTotalprice(cartItem.getTotalprice() + (quantityDiff *
-	 * cartItem.getPrice())); break; // 해당 제품을 찾았으므로 반복 중단 } }
-	 * //ostRepository.updateQuantity(productId, newQuantity); 데이터베이스 업데이트 로직을 추가할 수
-	 * 있음 }
-	 */
-	 
-	/*
-	 * public int insertAddress(CartDTO cart) { return cartDAO.insertAddress(cart);
-	 * }
-	 */
-	/* private List<MemberCartVO> cartList = new ArrayList<>(); */
-    
-	/*
-	 * public List<MemberCartVO> getCart() { return cartList; }
-	 */
-
 }

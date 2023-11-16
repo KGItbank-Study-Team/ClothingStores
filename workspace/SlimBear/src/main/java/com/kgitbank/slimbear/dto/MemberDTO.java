@@ -21,3 +21,4 @@ public class MemberDTO {
 	private char sex;				
 	private Date reg_date;
 }
+     

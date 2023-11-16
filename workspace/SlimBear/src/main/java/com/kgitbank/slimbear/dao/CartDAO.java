@@ -43,5 +43,5 @@ public class CartDAO {
 		info.put("cnt", String.valueOf(newQuantity));
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART_CNT", info);
 	}
-
+	
 }
