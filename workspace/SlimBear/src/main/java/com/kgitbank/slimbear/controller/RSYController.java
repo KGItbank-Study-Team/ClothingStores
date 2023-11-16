@@ -73,31 +73,41 @@ public class RSYController {
 	@PostMapping("/findPassword") // 비밀번호 찾기
 	public String findPassword(@RequestParam String name, @RequestParam String id,
 			@RequestParam(name = "email", required = false) String email,
-			@RequestParam(name = "phone", required = false) String phone, Model model) {
+			@RequestParam(name = "phone", required = false) String phone,
+			Model model) {
 
-		String temporaryPassword = 
-				name + "회원님의 임시 비밀번호는 " + generateTemporaryPassword() +" 입니다.";
+		String temporaryPassword = name + "회원님의 임시 비밀번호는 " + generateTemporaryPassword() + " 입니다.";
 		String subject = "슬림베어 임시 비밀번호 발급";
 		// 이메일 발송
 		String resultMessage;
-		try {
-			resultMessage = RSYService.sendEmail(email, subject, temporaryPassword);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "Failed to send email.";
-		}
+
 		MemberDTO member = RSYService.findPassword(name, id, email, phone);
 		if (member != null) {
-			model.addAttribute("member", member);
-			// 결과 메시지를 모델에 추가
-			model.addAttribute("messageSent", resultMessage.equals("Email sent successfully!"));
-			return "/find_password_result";
+	        model.addAttribute("member", member);
+	        System.out.println(phone);
+	        System.out.println(email);
+	        // 휴대폰 번호가 비어있지 않으면 문자 발송
+	        if (phone != null && !phone.isEmpty()) {
+	            RSYService.sendTemporaryPassword(phone, temporaryPassword);
+	        }
 
-		} else {
-			model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
-			return "/find_password"; // 실패 시 해당 페이지로 이동
-		}
+	        // 이메일이 비어있지 않으면 이메일 발송
+	        if (email != null && !email.isEmpty()) {
+	            try {
+	                resultMessage = RSYService.sendEmail(email, subject, temporaryPassword);
+	                model.addAttribute("messageSent", resultMessage.equals("Email sent successfully!"));
+	            } catch (MessagingException e) {
+	                e.printStackTrace();
+	                return "error-pages/emailSendError";  // 에러 페이지 경로를 정확하게 지정
+	            }
+	        }
+
+	        return "/find_password_result";
+
+	    } else {
+	        model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
+	        return "/find_password"; // 실패 시 해당 페이지로 이동
+	    }
 
 	}
 
