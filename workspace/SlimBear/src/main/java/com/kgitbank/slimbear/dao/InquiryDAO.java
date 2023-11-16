@@ -14,15 +14,12 @@ public class InquiryDAO {
 	protected SqlSessionTemplate template;
 	
 	// 상품문의 리스트 조회
-	public List<InquiryDTO> getInquiryList() {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST"); // 패키지풀네임.id
-	}
-	// 특정 type으로 필터링된 상품문의 리스트 조회
-    public List<InquiryDTO> getInquiryListByType(String type) { 
+	public List<InquiryDTO> getInquiryList(String type) {
 		InquiryDTO Inquiry = new InquiryDTO();
 		Inquiry.setType(type);
-        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_BY_TYPE", Inquiry);
-    }
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
+	}
+	
     
 	// 특정 prod_uid 상품문의 조회
 	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {

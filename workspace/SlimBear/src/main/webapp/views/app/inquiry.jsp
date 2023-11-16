@@ -97,7 +97,13 @@
 							</tr>
 						</thead>
 						
-						<!-- 1번째 tbody for문 -->			
+						
+						<!-- 1번째 tbody for문 -->	
+						<!-- <tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
+						
+						</tbody> -->
+						
+						
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 							<c:forEach items="${inquiries}" var="board">
 								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
@@ -106,7 +112,6 @@
 						            <td class="subject left txtBreak">
 						            <strong>
 					                    <a href="#" style="color: #555555;">${board.title}</a>
-						                <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
 						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
 						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
 					                    <span class="txtEm"></span>
@@ -116,35 +121,10 @@
 									<td>${board.reg_date}</td>
 								</tr>
 							</c:forEach>
-							
-							
-						    <%-- <c:forEach var="inquiry" items="${inquiries}" varStatus="loop">
-						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
-						            <td><i class="xi-check"></td>
-						            <td class="displaynone">${inquiry}</td>
-						            <td class="subject left txtBreak">
-						                <span class="displaynone">
-						                    <a href="#none" onclick="BOARD.viewTarget('${inquiry}', '6', this);">
-						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
-						                    </a>
-						                </span>
-						                <strong>
-						                    <a href="/article/상품문의/6/${inquiry.no}" style="color:#555555;">${inquiry.title}</a>
-						                    <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
-						                    <span class="txtEm"></span>
-						                </strong>
-						            </td>
-						            <td>${inquiry.writer_id}</td>
-						            <td class=""><span class="txtNum">${inquiry.reg_date}</span></td>
-						            <td class="displaynone"><span class="txtNum">${inquiry}</span></td>
-						            <td class="displaynone"><span class="txtNum">${inquiry}</span></td>
-						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
-						        </tr>
-						    </c:forEach> --%>
 						</tbody>
 						
 						<!-- 2번째 tbody for문  -->
-						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
+						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
 						    <c:forEach var="boardUser" items="${boardUsers}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
 						            <td>${boardUser.no}</td>
@@ -167,7 +147,7 @@
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
 						    </c:forEach>
-						</tbody>
+						</tbody> --%>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
