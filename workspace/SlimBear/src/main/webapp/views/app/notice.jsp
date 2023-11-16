@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!-- VO, DAO import -->
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
@@ -60,7 +61,7 @@
 							<col style="width: 100px;" class="displaynone" />
 							<col style="width: auto;" />
 							<col style="width: 130px;" />
-							<col style="width: 100px;" class="displaynone" />
+							<col style="width: 100px;" class="" />
 							<col style="width: 80px;" class="displaynone" />
 							<col style="width: 55px;" class="displaynone" />
 							<col style="width: 80px;" class="displaynone" />
@@ -72,88 +73,52 @@
 								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
-								<th scope="col" class="displaynone">DATE</th>
+								<th scope="col" class="">DATE</th>
 								<th scope="col" class="displaynone">HIT</th>
 								<th scope="col" class="displaynone">VOTE</th>
 								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
 						
-						<tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
-							<c:forEach var="board" items="${boards}">
-								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td><i class="xi-check"></td>
-						            <td class="displaynone"></td>
-						            <td class="subject left txtBreak">
-						            <strong>
-					                    <a href="#" style="color: #555555;">${board.title}</a>
-					                    <span class="txtEm"></span>
-					                </strong>
-						            </td>
-									<td>${board.writer}</td>
-<%-- 									<td>${board.reg_date}</td> --%>
-<%-- 									<td>${board.content}</td> --%>
-								</tr>
-							</c:forEach>
-						</tbody>
 						
-						<%-- <tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
-							<c:forEach var="board" items="${notices}">
-								 <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td><i class="xi-check"></td>
-						            <td>${board.no}</td>
+						<!-- 1번째 tbody for문  -->
+						<c:set var="sequenceNumber" value="0" />
+						<tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
+						    <c:forEach var="board" items="${notices}" varStatus="loop">
+						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
+						            <td>
+						                <c:choose>
+						                    <c:when test="${board.priority eq 1}">
+						                        <i class="xi-check"></i>
+						                    </c:when>
+						                    <c:when test="${board.priority eq 2}">
+						                        <c:if test="${sequenceNumber eq 0}">
+						                            <c:set var="sequenceNumber" value="${fn:length(notices)}" />
+						                        </c:if>
+						                        ${sequenceNumber - loop.index}
+						                    </c:when>
+						                    <c:otherwise>
+						                        <!-- handle other cases if needed -->
+						                    </c:otherwise>
+						                </c:choose>
+						            </td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/article/notice/1/${board.no}/" style="color: #555555;">${board.title}</a>
+						                    <a href="#" style="color: #555555;">${board.title}</a>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
-						            <td>${board.name}</td>
-							        <td class="displaynone"><span class="txtNum">${board.reg_date}</span></td>
+						            <td>${board.writer}</td>
+						            <td>${board.reg_date}</td>
+<%-- 						            <td>${board.content}</td> --%>
 						        </tr>
-							</c:forEach>
-						</tbody> --%>
-							
-						<!-- 여기에 tbody 내용 추가 -->
-						<!-- <tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td><i class="xi-check"></i></td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak">
-								<strong>
-									<a href="/article/notice/1/1724624/" style="color: #555555;">[필독]전품목 무료배송 이벤트 공지사항[10/14~16]</a>
-									<span class="txtEm"></span>
-								</strong>
-								</td>
-								<td>슬림베어_CR</td>
-								<td class="displaynone"><span class="txtNum">2023-10-13</span></td>
-								<td class="displaynone"><span class="txtNum">2854</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone">
-								<img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
-							<tr style="background-color: #FFFFFF; color: #555555;"
-								class="xans-record-">
-								<td><i class="xi-check"></i></td>
-								<td class="displaynone"></td>
-								<td class="subject left txtBreak"><strong> <a
-										href="/article/notice/1/807415/" style="color: #555555;">♡지그재그 제트결제 운영 정책 공지사항</a> 
-										<span class="txtEm"></span></strong></td>
-								<td>슬림베어</td>
-								<td class="displaynone"><span class="txtNum">2019-12-05</span></td>
-								<td class="displaynone"><span class="txtNum">23975</span></td>
-								<td class="displaynone"><span class="txtNum">0</span></td>
-								<td class="displaynone"><img
-									src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif"
-									alt="0점" /></td>
-							</tr>
-						</tbody> -->
+						    </c:forEach>
+						</tbody>
+						
 						
 						<!-- 2번째 tbody for문  -->
-						<tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
+						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
 						    <c:forEach var="boardUser" items="${boardUsers}" varStatus="loop">
 						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
 						            <td>${boardUser.no}</td>
@@ -176,7 +141,7 @@
 						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
 						        </tr>
 						    </c:forEach>
-						</tbody>
+						</tbody> --%>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>

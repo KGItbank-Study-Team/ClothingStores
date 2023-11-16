@@ -175,7 +175,8 @@
  	<!-- notice -->
  	<!-- notice 조회 -->
  	<select id="SELECT_NOTICE_LIST" resultType="notice">
- 		SELECT * FROM notice
+<!--  		SELECT * FROM notice -->
+		select * from notice order by FIELD(priority, 1, 2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
  	</select>
  	
  	<!-- notice 데이터 삽입 -->
