@@ -26,7 +26,7 @@
 			</ul>
 		</div>
 		<table class="cart__list">
-			<form id="myForm" action="/app/deleteSelectedItems" method="post">
+			<!-- <form id="myForm" action="/app/deleteSelectedItems" method="post"> -->
 				
 				<h1>C A R T</h1>
 			<thead>
@@ -111,11 +111,12 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
-					<a href="#" onclick="deleteCartItem(${cart.uid})">삭제</a>
-						<form id="deleteForm" action="/app/deleteSelectedItems" method="post">
-                <input type="button" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
-                <button class="cart__list__optionbtn">선택상품 찜</button>
-            </form></td>
+				
+   <button class="cart__list__optionbtn" onclick="deleteSelectedItems()">선택상품 삭제</button>
+
+    <button class="cart__list__optionbtn">선택상품 찜</button>
+    
+          <!--   </form> --></td>
 					<td></td>
 					<td></td>
 					<td></td>

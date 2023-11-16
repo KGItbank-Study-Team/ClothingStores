@@ -72,25 +72,35 @@ public class OstController {
 	    ostService.updateCartItemQuantity(productId, quantity);
 	    return new ResponseEntity<>("수량이 업데이트되었습니다.", HttpStatus.OK);
 	}
-	@PostMapping("/deleteCartItem")
-    @ResponseBody
-    public ResponseEntity<String> deleteCartItem(@RequestParam long productId) {
-        // 여기에 삭제 로직 구현
-         ostService.deleteCartItem(productId);
-        return new ResponseEntity<>("삭제되었습니다.", HttpStatus.OK);
-    }
+	// OstController.java
+
 	@PostMapping("/app/deleteSelectedItems")
-	public String deleteSelectedItems(@RequestParam("selectedItems") String selectedItems) {
-	    // 쉼표로 구분된 선택된 상품의 UID를 리스트로 변환
-	    List<Long> itemIds = Arrays.stream(selectedItems.split(","))
-	                                 .map(Long::parseLong)
-	                                 .collect(Collectors.toList());
+    @ResponseBody
+    public ResponseEntity<String> deleteItems(@RequestParam("selectedItems") String selectedItems) {
+        List<Long> itemIds = Arrays.stream(selectedItems.split(","))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
 
-	    // 서비스 레이어를 통해 선택된 상품들을 삭제
-	    ostService.deleteSelectedItems(itemIds);
+        int deletedItemCount = ostService.deleteSelectedItems(itemIds);
 
-	    return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트
-	}
+        if (deletedItemCount > 0) {
+            return new ResponseEntity<>("선택된 상품이 삭제되었습니다.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("선택된 상품 삭제에 실패했습니다.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+	/*
+	 * @PostMapping("/app/deleteSelectedItems") public String
+	 * deleteSelectedItems(@RequestParam("selectedItems") String selectedItems) { //
+	 * 쉼표로 구분된 선택된 상품의 UID를 리스트로 변환 List<Long> itemIds =
+	 * Arrays.stream(selectedItems.split(",")) .map(Long::parseLong)
+	 * .collect(Collectors.toList());
+	 * 
+	 * // 서비스 레이어를 통해 선택된 상품들을 삭제 ostService.deleteSelectedItems(itemIds);
+	 * 
+	 * return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트 }
+	 */
 	/*
 	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
 	 * 

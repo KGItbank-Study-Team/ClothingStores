@@ -1,4 +1,4 @@
-
+var selectcartUId = [];
 function toggleHiddenContent(button) {
     var hiddenContent = button.nextElementSibling;
     var btn = button;
@@ -28,7 +28,7 @@ function updateServer(productId, newQuantity) {
     success: function () {
         console.log("서버에서 수량이 업데이트되었습니다.");
         // 서버 응답을 받은 후에 페이지를 새로고침
-        location.reload();
+         location.reload();
     },
     error: function (error) {
         console.log('서버에서 수량을 업데이트하는 중 오류 발생:', error);
@@ -36,7 +36,34 @@ function updateServer(productId, newQuantity) {
 });
 
 }
+function deleteSelectedItems() {
+    // 선택된 체크박스의 값을 가져오기
+    var selectedItems = [];
+    $('input[name="selectedItems"]:checked').each(function () {
+        selectedItems.push($(this).val());
+    });
 
+    // 선택된 상품이 없으면 알림 메시지 출력
+    if (selectedItems.length === 0) {
+        alert("삭제할 상품을 선택하세요.");
+        return;
+    }
+
+    // 서버로 선택된 상품 삭제 요청 보내기
+    $.ajax({
+        type: "POST",
+        url: "/app/deleteSelectedItems",
+        data: { selectedItems: selectedItems.join(",") },
+        success: function (response) {
+            console.log(response);
+            // 삭제 성공 시 페이지 새로고침 또는 장바구니 업데이트 로직 추가
+            location.reload();
+        },
+        error: function (error) {
+            console.error('상품 삭제 중 오류 발생:', error);
+        }
+    });
+}
 function updateQuantity(productId, action) {
     var quantityInput = document.getElementById("quantity_" + productId);
     var currentQuantity = parseInt(quantityInput.value);
@@ -79,44 +106,7 @@ $(document).ready(function () {
    
 });
 
-function deleteCartItem(productId) {
-    // productId가 유효한 경우에만 서버로 요청을 보냄
-    if (productId !== undefined) {
-        fetch(`/app/deleteCartItem?productId=${productId}`, {
-            method: 'POST',
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("서버 응답:", data);
-            // 삭제 후 장바구니 화면을 업데이트하거나 필요한 작업 수행
-            updateCart(data);
-        })
-        .catch(error => {
-            console.log('Error deleting item:', error);
-        });
-    } else {
-        console.log('productId가 유효하지 않습니다.');
-    }
-}
-document.getElementById('myForm').addEventListener('submit', function (event) {
-    event.preventDefault();
 
-    var formData = new FormData(this);
-
-    fetch('/app/deleteSelectedItems', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("서버 응답:", data);
-        // 업데이트된 장바구니 정보를 사용하여 화면 업데이트
-        updateCart(data);
-    })
-    .catch(error => {
-        console.log('Error deleting items:', error);
-    });
-});
 
 function updateCart(updatedCart) {
     console.log("장바구니 업데이트:", updatedCart);
