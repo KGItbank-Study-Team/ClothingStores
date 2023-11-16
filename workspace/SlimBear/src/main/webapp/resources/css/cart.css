@@ -5,6 +5,8 @@
         max-height: 0;
          background-color: #f0f0f0;
          position: absolute;
+         z-index:2;
+        
     }
 .cchange{
 	background-color: #D7D2C3;

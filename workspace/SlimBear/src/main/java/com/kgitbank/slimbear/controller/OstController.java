@@ -90,28 +90,7 @@ public class OstController {
         }
     }
 
-	/*
-	 * @PostMapping("/app/deleteSelectedItems") public String
-	 * deleteSelectedItems(@RequestParam("selectedItems") String selectedItems) { //
-	 * 쉼표로 구분된 선택된 상품의 UID를 리스트로 변환 List<Long> itemIds =
-	 * Arrays.stream(selectedItems.split(",")) .map(Long::parseLong)
-	 * .collect(Collectors.toList());
-	 * 
-	 * // 서비스 레이어를 통해 선택된 상품들을 삭제 ostService.deleteSelectedItems(itemIds);
-	 * 
-	 * return "redirect:/cart"; // 삭제 후 장바구니 페이지로 리다이렉트 }
-	 */
-	/*
-	 * public int insertAddress(CartDTO cart, HttpServletRequest request) {
-	 * 
-	 * // SlimBearUtil.appendProductCode(request.getAttribute("productUID"),
-	 * request.getAttribute("color"), request.getAttribute("size"));
-	 * 
-	 * CartDTO cartList = new CartDTO(); cartList.setMem_uid(9767);
-	 * cartList.setCnt(1); cartList.setProd_code("productCode");
-	 * cartList.setReg_date(new Date(System.currentTimeMillis())); return
-	 * ostService.insertAddress(cartList); }
-	 */
+	
 
 }
 
