@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kgitbank.slimbear.dao.FaqDAO;
-import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
@@ -20,8 +21,8 @@ public class YangController {
 	private YangBoardServiceImpl boardService;
 //	@Autowired
 //	private InquiryDAO inquiryDAO;
-	@Autowired
-	private FaqDAO faqDAO;
+//	@Autowired
+//	private FaqDAO faqDAO;
 
 	// 공지사항
 	@RequestMapping("/board/notice")
@@ -57,7 +58,7 @@ public class YangController {
         }
 
         model.addAttribute("inquiries", inquiries);
-        model.addAttribute("boardUsers", boardService.getBoardUserList());
+//        model.addAttribute("boardUsers", boardService.getBoardUserList());
 
         return "inquiry";
     }
@@ -115,11 +116,41 @@ public class YangController {
 	
 	// 자주묻는질문
 	@RequestMapping("/board/faq")
-	public String getBoardFaqList(Model model) {
-		List<FaqDTO> faqs = faqDAO.getFaqList();
-		model.addAttribute("faqs", faqs);
-		return "faq";
-	}
+    public String getBoardFaqList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
+        List<FaqDTO> faqs;
+
+        switch (categoryNo) {
+            case "1":
+                faqs = boardService.getFaqListByType("PRODUCT_R");
+                break;
+            case "2":
+                faqs = boardService.getFaqListByType("DELIVERY_R");
+                break;
+            case "3":
+                faqs = boardService.getFaqListByType("CHANGE_R");
+                break;
+            case "4":
+                faqs = boardService.getFaqListByType("ETC_R");
+                break;
+            case "5":
+                faqs = boardService.getFaqListByType("SHOWROOM_R");
+                break;
+            default:
+                faqs = boardService.getFaqList();
+        }
+
+        model.addAttribute("faqs", faqs);
+//        model.addAttribute("boardUsers", boardService.getBoardUserList());
+
+        return "faq";
+    }
+	
+	
+	/*
+	 * @RequestMapping("/board/faq") public String getBoardFaqList(Model model) {
+	 * List<FaqDTO> faqs = faqDAO.getFaqList(); model.addAttribute("faqs", faqs);
+	 * return "faq"; }
+	 */
 	
 	
 	/*
@@ -171,10 +202,21 @@ public class YangController {
 	 */
 
 	// 게시글쓰기
-	@RequestMapping("/board/write")
-	public String getBoardWrite(Model model) {
-		model.addAttribute("boards", boardService.getBoardWrite());
-		return "board_write"; // 뷰 이름 설정
-	}
+	@GetMapping(value = "/board/write")
+    public String getBoardWriteForm() {
+        return "board_write";
+    }
+
+    @RequestMapping(value = "/board/write", method = RequestMethod.POST)
+    public String postBoardWrite(@ModelAttribute InquiryDTO inquiryDTO) {
+        boardService.insertInquiry(inquiryDTO);
+        return "redirect:/board/inquiry";
+    }
+	
+	/*
+	 * @RequestMapping("/board/write") public String getBoardWrite(Model model) {
+	 * model.addAttribute("boards", boardService.getBoardWrite()); return
+	 * "board_write"; // 뷰 이름 설정 }
+	 */
 
 }

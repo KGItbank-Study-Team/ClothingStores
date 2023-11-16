@@ -1,6 +1,9 @@
 package com.kgitbank.slimbear.controller;
 
+import java.security.SecureRandom;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,7 @@ public class RSYController {
 	@Autowired
 	private RSYServiceImpl RSYService;
 
-	@RequestMapping("product/category")
+	@RequestMapping("product/category") // 상품 목록
 	public String categoryPage01(@RequestParam long category,
 			@RequestParam(name = "order", required = false) String order,
 			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
@@ -54,7 +57,7 @@ public class RSYController {
 		return "category";
 	}
 
-	@PostMapping("/findId")
+	@PostMapping("/findId") // 아이디 찾기
 	public String findId(@RequestParam String name, @RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "phone", required = false) String phone, Model model) {
 		MemberDTO member = RSYService.findId(name, email, phone);
@@ -67,17 +70,50 @@ public class RSYController {
 		}
 	}
 
-	@PostMapping("/findPassword")
-	public String findPassword(@RequestParam String name, @RequestParam String id, @RequestParam(name = "email", required = false) String email,
+	@PostMapping("/findPassword") // 비밀번호 찾기
+	public String findPassword(@RequestParam String name, @RequestParam String id,
+			@RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "phone", required = false) String phone, Model model) {
+
+		String temporaryPassword = 
+				name + "회원님의 임시 비밀번호는 " + generateTemporaryPassword() +" 입니다.";
+		String subject = "슬림베어 임시 비밀번호 발급";
+		// 이메일 발송
+		String resultMessage;
+		try {
+			resultMessage = RSYService.sendEmail(email, subject, temporaryPassword);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Failed to send email.";
+		}
 		MemberDTO member = RSYService.findPassword(name, id, email, phone);
 		if (member != null) {
 			model.addAttribute("member", member);
+			// 결과 메시지를 모델에 추가
+			model.addAttribute("messageSent", resultMessage.equals("Email sent successfully!"));
 			return "/find_password_result";
+
 		} else {
 			model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
 			return "/find_password"; // 실패 시 해당 페이지로 이동
 		}
+
 	}
 
+	// 임시 비밀번호 생성
+	private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	private static final int PASSWORD_LENGTH = 10;
+
+	public static String generateTemporaryPassword() {
+		SecureRandom random = new SecureRandom();
+		StringBuilder password = new StringBuilder();
+
+		for (int i = 0; i < PASSWORD_LENGTH; i++) {
+			int randomIndex = random.nextInt(CHARACTERS.length());
+			password.append(CHARACTERS.charAt(randomIndex));
+		}
+
+		return password.toString();
+	}
 }

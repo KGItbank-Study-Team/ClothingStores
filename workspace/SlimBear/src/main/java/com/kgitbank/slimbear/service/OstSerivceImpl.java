@@ -67,15 +67,17 @@ public class OstSerivceImpl {
    	return String.format("%,d원", price);
    }
 
-    public void deleteSelectedItems(List<Long> itemIds) {
-        // 선택된 상품들을 삭제하
+    public int deleteSelectedItems(List<Long> itemIds) {
+        int deletedItemCount = 0;
         for (Long itemId : itemIds) {
-            cartDAO.deleteCartItem(itemId);
+            deletedItemCount += cartDAO.deleteCartItem(itemId);
         }
+        return deletedItemCount;
     }
-    public void deleteCartItem(long productId) {
+
+    public void deleteCartItem(long cartUId) {
         // 여기에 삭제 로직 구현
-        cartDAO.deleteCartItem(productId);
+        cartDAO.deleteCartItem(cartUId);
     }
     public void updateCartItemQuantity(long productId, int newQuantity) {
         cartDAO.updateCartItemQuantity(productId, newQuantity);

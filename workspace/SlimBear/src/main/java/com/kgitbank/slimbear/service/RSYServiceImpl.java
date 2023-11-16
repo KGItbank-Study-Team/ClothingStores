@@ -3,8 +3,20 @@ package com.kgitbank.slimbear.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.dao.CategoryDAO;
@@ -15,6 +27,7 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 
 @Service
+@PropertySource("classpath:gmail.properties")
 public class RSYServiceImpl {
 	@Autowired
 	private ProductDAO prodDAO;
@@ -85,5 +98,40 @@ public class RSYServiceImpl {
 	            }
 	        }        
 	        return null;
+	    }
+		
+		//이메일 발송
+		@Value("${spring.mail.username}")
+	    private String senderEmail;
+
+	    @Value("${spring.mail.password}")
+	    private String senderPassword;
+
+	    public String sendEmail(String email, String subject, String content) throws MessagingException {
+	        // 이메일 설정
+	        Properties props = new Properties();
+	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.starttls.enable", "true");
+	        props.put("mail.smtp.host", "smtp.gmail.com");
+	        props.put("mail.smtp.port", "587");
+
+	        // 세션 생성 및 인증
+	        Session session = Session.getInstance(props, new Authenticator() {
+	            @Override
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(senderEmail, senderPassword);
+	            }
+	        });
+
+	        // 메시지 생성
+	        Message message = new MimeMessage(session);
+	        message.setFrom(new InternetAddress(senderEmail));
+	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+	        message.setSubject(subject);
+	        message.setText(content);
+
+	        // 메일 발송
+	        Transport.send(message);
+	        return "Email sent successfully!";
 	    }
 }
