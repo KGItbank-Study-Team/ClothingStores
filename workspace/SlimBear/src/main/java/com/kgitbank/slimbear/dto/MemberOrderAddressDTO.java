@@ -11,6 +11,7 @@ import lombok.ToString;
 public class MemberOrderAddressDTO {
 	private long uid;
 	private long mem_uid;
+	private String recipient; // 수령인
 	private String name;
 	private String phone;
 	private String nomal_phone;
