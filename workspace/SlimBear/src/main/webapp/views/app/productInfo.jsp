@@ -99,10 +99,10 @@
 						<a href="javascript:buyClick()" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
 							<span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
 						</a> 
-						<a href="#none" id="cartBtn" class="btnOption" style="background: #eae5dd;">
+						<a href="javascript:addCart(${product.uid})" id="cartBtn" class="btnOption" style="background: #eae5dd;">
 							<span class="btnSpan">ADD TO CART</span>
 						</a> 
-						<a href="#none" id="wishBtn" class="btnOption" style="background: #eae5dd;">
+						<a href="#" id="wishBtn" class="btnOption" style="background: #eae5dd;">
 							<span class="btnSpan">ADD TO WISH</span>
 						</a>
 					</div>

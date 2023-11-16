@@ -72,17 +72,18 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public CartDAO cartDAO;
 	
-	public int insertInCart(CartDTO cart) {
-		return cartDAO.insertInCart(cart);
+	public void insertInCart(CartDTO cart) {
+		cartDAO.insertInCart(cart);
+	}
+	
+	/* 장바구니에 동일한 상품이 있는지 조회 */
+	public boolean findProducts(CartDTO cart) {
+		return cartDAO.findProducts(cart);
 	}
 	
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {
 		return cartDAO.getCartListByMemberUID(memberUid);
 	}
 	
-	/* 장바구니에 동일한 상품이 있는지 조회 */
-	public boolean findProducts(CartDTO cartDTO) {
-		return cartDAO.findProducts(cartDTO);
-	}
 	
 }

@@ -3,7 +3,6 @@ var selectedColor = null;
 var selectedSize = null;
 
 $(function () {
-
     $(".colorBtn").on("click", function () {
         if ($(this).hasClass("active")) {
             // 이미 선택한 상태라면 해제
@@ -153,29 +152,36 @@ $(document).ready(function(){
     });
 });
 
+// 현재 페이지의 URL을 가져온다.
+var currentUrl = window.location.href;
+
+// URL에서 "p" 파라미터값을 추가한다.
+var urlParams = new URLSearchParams(currentUrl.search);
+var prod_code = urlParams.get("p");
+
 // 장바구니 추가 기능
-function addCart(prodCode) {
+function addCart(uid){
     $.ajax({
         type: "POST",
-        async : false,
-        url : "${contextPath}/",
-        data : {prodCode : prodCode},
-        success: function(data, textStatus){
-            if(data.trim() == '이미 존재하는 상품입니다.') {
-                imagePopUp('open','.layer011');
-            } else if(data.trim() == 'already_existed') {
-                alert("이미 카트에 등록된 제품입니다.");
+        async: false,
+        url: "/add/cart/" + uid,
+        traditional: true,
+        contentType: "application/json",
+        data: {data : JSON.stringify(selectProduct)},
+        dataType: "JSON",
+        success : function(result){
+            if(result.trim() === "add_success") {
+                alert("장바구니에 추가되었습니다.");
+            } else {
+                alert("동일한 상품이 장바구니에 있습니다.")
             }
         },
-        error : function(data, textStatus) {
-            alert("에러가 발생했습니다." + data);
-        },
-        complete : function(data, textStatus) {
-            //alert("작업을 완료했습니다.");
+        error : function(error) {
+            console.log("Ajax 요청 중 에러 발생: " + error.statusText);
         }
-
     })
-}
+};
+
 function cartAlert(result) {
     if(result == '0') {
         alert("장바구니에 추가를 하지 못했습니다.")
