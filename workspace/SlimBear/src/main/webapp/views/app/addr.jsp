@@ -91,11 +91,11 @@
                                                 class="" alt="기본"> 
                                                 <span>${item.addrName}</span>
                                         </td>
-                                        <td><span>${item.username}</span></td>
+                                        <td><span>${item.recipient}</span></td>
                                         <td><span>${item.phone}</span></td>
                                         <td><span>${item.mobile}</span></td>
                                         <!-- class="left" -->
-                                        <td class="">(<span>${item.postcode}</span>)<span>${imte.defaultAddr}</span>
+                                        <td class="">(<span>${item.postcode}</span>)<span>${item.defaultAddr}</span>
                                             <span>${item.remainAddr}</span>
                                         </td>
                                         <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>

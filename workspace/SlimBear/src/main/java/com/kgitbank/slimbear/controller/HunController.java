@@ -151,6 +151,9 @@ public class HunController {
 		
 		List<WishListVO> vo = hunService.getWishListInfo(user.getUid());
 		model.addAttribute("wishList", vo);
+		
+		System.out.println(vo);
+		
 		return "wish_list";
 	}
 	
@@ -161,7 +164,7 @@ public class HunController {
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 		
-		List<MemberBoardVO> vo = hunService.getMemberBoardInfo();
+		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(0);
 		model.addAttribute("boardList", vo);
 		return "board_list";
 	}
@@ -175,15 +178,22 @@ public class HunController {
 		
 		List<AddrVO> vo = hunService.getAddrInfo(user.getUid());
 		model.addAttribute("addrList", vo);
+		
 		return "addr";
 	}
 	
 	@RequestMapping("member/myPage/addr/addrFix")
-	public String addrFix(Authentication authentication) {
+	public String addrFix(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
+		
+//		AddrVO vo = hunService.getAddrFixInfo(user.getUid());
+//		model.addAttribute("fix", vo);
+//		
+//		System.out.println(vo);
+		
 		return "addrfix";
 	}
 	
