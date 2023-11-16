@@ -237,13 +237,19 @@
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.5.6</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jvnet.mimepull</groupId> <!-- MimePull library -->
 			<artifactId>mimepull</artifactId>
 			<version>1.9.13</version>
 		</dependency>
 
+		<!-- 문자 -->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>sdk</artifactId>
+			<version>4.2.7</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
