@@ -19,8 +19,17 @@
 	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.js"></script>
 <script type="text/javascript"
 	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.plugin.js"></script>
-
-<title>아이디찾기-슬림베어</title>
+<script th:if="${error}" th:inline="javascript">
+    window.onload = function() {
+        var errorMessage = /*[[${error}]]*/ "";
+        if (errorMessage.trim() !== "") {
+            alert(errorMessage);
+            // 또는 모달 창을 띄우는 스크립트를 추가할 수 있습니다.
+            // 모달 창을 띄우기 위해 별도의 JavaScript 라이브러리(예: Bootstrap 등) 사용 가능
+        }
+    };
+</script>
+<title>비밀번호찾기-슬림베어</title>
 </head>
 <body>
 	<div id="wrap">
@@ -50,9 +59,9 @@
         $nextURL = /member/passwd/find_passwd_result.html
      -->
 					<div class="inner">
-						<h3 class="boxTitle">임시 비밀번호 전송</h3>
+						<h3 class="boxTitle">임시 비밀번호 발급 완료</h3>
 						<fieldset>
-							<legend>임시 비밀번호 전송</legend>
+							<legend>임시 비밀번호 발급 완료</legend>
 							<ul class="ec-base-desc">
 								<li><strong class="term">임시 비밀번호</strong><span class="desc"><input
 										id="passwd_method_type0" name="passwd_method_type"
@@ -66,13 +75,12 @@
 									class="desc"><strong class="txtEm"><span
 											class="authssl_c_email">${member.email }</span></strong></span></li>
 								<li id="passwd_method_mobile_info"><strong class="term">휴대폰
-										번호</strong><span class="desc"><strong class="txtEm number"></strong></span>
+										번호</strong><span class="desc">${member.phone}<strong class="txtEm number"></strong></span>
 								</li>
 							</ul>
 							<div class="ec-base-button gColumn">
-								<a href="#none" class="btnSubmit sizeM"
-									onclick="sendPasswdMethod();">임시 비밀번호 전송</a> <a href="#none"
-									class="btnNormal sizeM" onclick="cancelPasswdMethod();">취소</a>
+								<a href="/app/login" class="btnSubmit sizeM">로그인</a> <a href="/"
+									class="btnNormal sizeM">홈</a>
 							</div>
 						</fieldset>
 					</div>

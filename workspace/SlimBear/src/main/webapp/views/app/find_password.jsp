@@ -5,7 +5,16 @@
 <head>
 
 <!--  추후에 아이디찾기jsp랑 합쳐볼게요 -->
-
+<script th:if="${error != null}" th:inline="javascript">
+	window.onload = function() {
+		var errorMessage = "${error}";
+		if (errorMessage.trim() !== "") {
+			alert(errorMessage);
+			// 또는 모달 창을 띄우는 스크립트를 추가할 수 있습니다.
+			// 모달 창을 띄우기 위해 별도의 JavaScript 라이브러리(예: Bootstrap 등) 사용 가능
+		}
+	};
+</script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizer.css" />
 <link rel="stylesheet" type="text/css"
@@ -56,7 +65,8 @@
 									<li>이메일, 전화번호 또는 주민등록번호 중 찾을 방법을 선택한 후,<br />이름과 정보를 입력해
 										주세요.
 									</li>
-									<li><Strong></Strong></li>
+									<li>(주의)비밀번호 찾기 진행시 기존 비밀번호는 삭제되며,<br/>
+												새로운 임시 비밀번호가 발급됩니다.</li>
 								</ul>
 							</div>
 							<fieldset>
@@ -85,16 +95,10 @@
 										fw-filter="isEmail" fw-label="이메일" fw-msg="" class="lostInput"
 										placeholder="이메일" value="" type="text" />
 								</p>
-								<p id="mobile_view" class="mobile" style="display: block;">
-									<strong>휴대폰 번호로 찾기</strong> <input id="mobile1" name="mobile1"
-										fw-filter="isMin[3]&isMax[3]&isNumber" fw-label="휴대전화 번호"
-										fw-msg="" class="mobile1" placeholder="000" maxlength="3"
-										value="" type="text" /> - <input id="mobile2" name="mobile2"
-										fw-filter="isMin[3]&isMax[4]&isNumber" fw-label="휴대전화 번호"
-										fw-msg="" class="mobile2" placeholder="0000" maxlength="4"
-										value="" type="text" /> - <input id="mobile3" name="mobile3"
-										fw-filter="isMin[4]&isMax[4]&isNumber" fw-label="휴대전화 번호"
-										fw-msg="" class="mobile2" placeholder="0000" maxlength="4"
+								<p id="mobile_view" class="phone" style="display: block;">
+									<strong>휴대폰 번호로 찾기</strong> <input id="phone" name="phone"
+										fw-filter="" fw-label="휴대전화 번호"
+										fw-msg="" class="phone" placeholder="-없이 전화번호를 적어주세요" maxlength="11"
 										value="" type="text" />
 								</p>
 								<p id="ssn_view" class="ssn_no" style="display: none;">

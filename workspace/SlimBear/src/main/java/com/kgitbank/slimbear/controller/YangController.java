@@ -27,18 +27,17 @@ public class YangController {
 	// 공지사항
 	@RequestMapping("/board/notice")
 	public String getBoardNoticeList(Model model) {
-		model.addAttribute("boards", boardService.getBoardNoticeList());
-		model.addAttribute("boardUsers", boardService.getBoardUserList());
-//		model.addAttribute("notices", boardService.getBoardNoticeVOList());
-		return "notice"; // 뷰 이름 설정
+	    model.addAttribute("notices", boardService.getNoticeList(0));
+	    return "notice";
 	}
 
 	@RequestMapping("/article/notice")
 	public String getBoardNotice(Model model) {
-		model.addAttribute("boards", boardService.getBoardNoticeList());
+		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "board_notice";
 	}
 
+	
 	// 문의사항
 	// 한번 변경해본 코드
 	@RequestMapping("/board/inquiry")

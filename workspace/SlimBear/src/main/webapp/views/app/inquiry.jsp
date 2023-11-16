@@ -50,7 +50,6 @@
 					<p class="imgArea"></p>
 				</div>
 				
-				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
 					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
@@ -107,6 +106,9 @@
 						            <td class="subject left txtBreak">
 						            <strong>
 					                    <a href="#" style="color: #555555;">${board.title}</a>
+						                <img src="/resources/images/icon_hit.gif" alt="HIT" class="ec-common-rwd-image"/>
+						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
 					                    <span class="txtEm"></span>
 					                </strong>
 						            </td>

@@ -14,9 +14,11 @@ public class NoticeDAO {
 	@Autowired
 	protected SqlSessionTemplate template;
 	
-	// Notice 리스트 조회
-		public List<NoticeDTO> getNoticeList() { 
-			return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST"); // 패키지풀네임.id
+		// Notice 리스트 조회
+		public List<NoticeDTO> getNoticeList(int priority) { 
+			NoticeDTO notice = new NoticeDTO();
+			notice.setPriority(priority);
+			return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST", notice); // 패키지풀네임.id
 		}
 
 		// Notice 데이터 삽입
