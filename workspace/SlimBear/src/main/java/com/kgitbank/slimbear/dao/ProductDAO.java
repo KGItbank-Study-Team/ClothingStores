@@ -43,4 +43,7 @@ public class ProductDAO {
 		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC", paramMap);
 	}
 
+	public int insertProduct(ProductDTO product) {
+		return template.insert("com.slimbear.mapper.Product.INSERT_PRODUCT", product);
+	}
 }

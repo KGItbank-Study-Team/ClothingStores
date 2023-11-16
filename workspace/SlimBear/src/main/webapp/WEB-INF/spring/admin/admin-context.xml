@@ -14,11 +14,15 @@
 	<mvc:resources location="/resources/admin/" mapping="/**" />
 	
 	<mvc:annotation-driven />
+	
+	<!-- 설정 파일 불러오기 -->
+	<context:property-placeholder
+		location="classpath:application.properties" />
 
 	<bean id="templateResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-		<property name="prefix" value="/views/admin/" />
-		<property name="suffix" value=".html" />
+		<property name="prefix" value="${viewResolver.admin.prefix}" />
+		<property name="suffix" value="${viewResolver.admin.suffix}" />
 		<property name="templateMode" value="HTML" />
 		<property name="characterEncoding" value="UTF-8" />
 		<property name="cacheable" value="false" />

@@ -8,9 +8,8 @@
 <configuration>
 
 	<!-- 설정 프로퍼티 -->
-	<!-- 여기서는 database.properties 라는 프로퍼티파일을 사용했지만 DB설정뿐만 아니라 다른 설정도 많은 듯합니다. -->
-	<!-- 없어도 정상작동하긴 합니다. -->
-	<properties resource="database.properties"/>
+	<!-- 따로 mybatis 설정이 없어서 없어도 정상작동하긴 합니다. -->
+	<properties resource="application.properties"/>
 	
 	<!-- 제작한 VO마다 Mybatis에서 사용할 별칭 설정 -->
 	<typeAliases>
@@ -51,6 +50,9 @@
 		
 		<!-- admin-mapping -->
 		<typeAlias alias="admin" type="com.kgitbank.slimbear.admin.dto.AdminDTO" />
+		<typeAlias alias="productTotalListItem" type="com.kgitbank.slimbear.admin.dto.ProductTotalListDTO" />
+		
+		
 	</typeAliases>
 	
 	<!-- mapper 설정 XML파일 -->

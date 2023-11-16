@@ -13,6 +13,10 @@ public class ProductServiceImpl {
 
 	@Autowired
 	private ProductDAO prodDAO;
+
+	public List<ProductDTO> getProductList(){
+		return prodDAO.getProductList();
+	}
 	
 	public List<ProductDTO> getHotProductList(){
 		return prodDAO.getProductList();
@@ -21,4 +25,5 @@ public class ProductServiceImpl {
 	public ProductDTO getProductByUid(long uid) {
 		return prodDAO.getProductByUid(uid);
 	}
+
 }

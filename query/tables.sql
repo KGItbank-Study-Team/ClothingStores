@@ -150,8 +150,11 @@ CREATE TABLE `product` (
 	`desc`	varchar(100)	NOT NULL,
 	`price`	int unsigned	NOT NULL,
 	`maker`	varchar(100)	NOT NULL,
-	`main_image`	varchar(100)	NOT NULL
+	`main_image`	varchar(100)	NOT NULL,
+    `reg_date`	date	NOT NULL
 );
+
+ALTER TABLE product ADD column reg_date date;
 
 DROP TABLE IF EXISTS `orderDetail`;
 
