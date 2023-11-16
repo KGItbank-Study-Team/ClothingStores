@@ -74,7 +74,7 @@ public class OstController {
 	}
 	// OstController.java
 
-	@PostMapping("/app/deleteSelectedItems")
+	@PostMapping("/deleteSelectedItems")
     @ResponseBody
     public ResponseEntity<String> deleteItems(@RequestParam("selectedItems") String selectedItems) {
         List<Long> itemIds = Arrays.stream(selectedItems.split(","))
