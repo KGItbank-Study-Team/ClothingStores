@@ -101,7 +101,7 @@
 	</select>
 	
 	<!--cart에 동일한 상품이 있는지 확인 -->
-	<select id="SELECT_COUNT_IN_CART" resultType="String" parameterType="CartDTO">
+<!-- 	<select id="SELECT_COUNT_IN_CART" resultType="cart" parameterType="cart">
 		SELECT 
 		CASE
 		WHEN COUNT(*)=0
@@ -111,7 +111,7 @@
 		FROM cart
 		WHERE prod_code=#{prod_cod}
 		AND mem_uid=#{mem_uid}
-	</select>
+	</select> -->
 	
 	<insert id="INSERT_CART"> 
 		INSERT INTO cart
