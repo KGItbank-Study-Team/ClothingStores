@@ -110,13 +110,12 @@ request.setAttribute("finalmoney","12000");
                     <table border="1" summary="">
                         <caption></caption>
                         <colgroup>
-                            <col style="width:135px;">
-                            <col style="width:93px;">
+                            <col style="width:146px;">
+                            <col style="width:114px;">
                             <col style="width:auto;">
-                            <col style="width:61px;">
-                            <col style="width:111px;">
-                            <col style="width:111px;">
-                            <col style="width:111px;">
+                            <col style="width:82px;">
+                            <col style="width:132px;">
+                            <col style="width:132px;">
                         </colgroup>
                         <thead>
                             <tr>
@@ -126,12 +125,11 @@ request.setAttribute("finalmoney","12000");
                                 <th scope="col">수량</th>
                                 <th scope="col">상품구매금액</th>
                                 <th scope="col">주문처리상태</th>
-                                <th scope="col">최종 실결제금액</th>
                             </tr>
                         </thead>
                         <tbody class="center ">
                         
-                      	    <%-- <c:forEach var="item" items="${pastorderList}">
+                      	    <c:forEach var="item" items="${pastorderList}">
                             <tr class="">
                                 <td class="number ">
                                 	<p>${item.orderDate}</p>
@@ -152,36 +150,8 @@ request.setAttribute("finalmoney","12000");
                                 <td class="state">
                                     <p class="txtEm">${item.orderStatus}</p>
                                 </td>
-                                <td class=" ">
-                                    <p><strong>${item.finalMoney}원</strong></p>
-                                </td>
                             </tr>
-                            </c:forEach> --%>
-                            
-                            <tr class="">
-                                <td class="number ">
-                                	<p>${orderdate}</p>
-                                    <p>[${ordernum}]</p>
-                                </td>
-                                <td class="thumb"><a href="/product/detail.html"><img
-                                            src="/resources/images/Best_product02.webp"
-                                            onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"
-                                            alt=""></a></td>
-                                <td class="product">
-                                    <strong class="name">${productname}</strong>
-                                    <div class="option ">${productoption}</div>
-                                </td>
-                                <td>${ordercount}</td>
-                                <td class="">
-                                    <div class="">${orderamount}원</div>
-                                </td>
-                                <td class="state">
-                                    <p class="txtEm">${orderstatus}</p>
-                                </td>
-                                <td class="">
-                                    <p><strong>${finalmoney}원</strong></p>
-                                </td>
-                            </tr>
+                            </c:forEach>
                            
                         </tbody>
                     </table>

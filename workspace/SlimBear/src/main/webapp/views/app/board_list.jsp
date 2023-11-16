@@ -3,16 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<%
-/* 확인용 임시데이터 */
-request.setAttribute("boardnumber", "1");
-request.setAttribute("boardgroup", "배송문의");
-request.setAttribute("boardtitle", "언제오나요");
-request.setAttribute("boardwriter", "성격급한사람");
-request.setAttribute("boarddate", "2023-11-11");
-request.setAttribute("boardhits", "2");
-%>
-
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
 <head>
@@ -104,7 +94,7 @@ request.setAttribute("boardhits", "2");
                                         class="ec-common-rwd-image"></td>
                                     <td>${item.boardWriter}</td>
                                     <td><span class="txtNum"></span>${item.boardDate}</td>
-                                    <td><span class="txtNum"></span>${imte.boardHits}</td>
+                                    <td><span class="txtNum"></span>${item.boardHits}</td>
                                 </tr>
                                 </c:forEach>
                                

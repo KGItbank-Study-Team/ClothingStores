@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.vo;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +15,7 @@ public class MileageVO {
 	private int useReserve;
 	private int unReserve;
 	
-	private String orderDate;
+	private Date orderDate;
 	private int addReserve;
 	private String relatedOrder;
 	private String substance;

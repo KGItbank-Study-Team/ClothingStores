@@ -9,5 +9,5 @@ import lombok.ToString;
 @ToString
 public class RefundVO {
 	private String username;
-	private int bankNumber;
+	private String bankNumber;
 }

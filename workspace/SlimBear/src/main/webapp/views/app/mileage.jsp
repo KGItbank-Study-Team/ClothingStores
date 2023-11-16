@@ -116,13 +116,6 @@ request.setAttribute("substance", "신규회원 적립금");
                                     </tr>
                                     </c:forEach> --%>
                                     
-                                    <tr class="xans-record-">
-                                        <td>${orderdate}</td>
-                                        <td class="right">${addreserve}</td>
-                                        <td>${reletedorder}</td>
-                                        <td class="left">${substance}</td>
-                                    </tr>
-                                    
                                 </tbody>
                             </table>
                             <p class="message displaynone">적립금 내역이 없습니다.</p>

@@ -18,6 +18,7 @@ import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
+import com.kgitbank.slimbear.vo.RefundVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 
 @Controller
@@ -46,18 +47,22 @@ public class HunController {
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 		
-		List<OrderListVO> order = hunService.getOrderListInfo(user.getUid());
-		model.addAttribute("orderList", order);
+		List<OrderListVO> vo = hunService.getOrderListInfo(user.getUid());
+		model.addAttribute("orderList", vo);
 		
 		return "order_list";
 	}
 	
 	@RequestMapping("member/myPage/orderList/pastList")
-	public String pastList(Authentication authentication) {
+	public String pastList(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
+		
+		List<OrderListVO> vo = hunService.getPastListInfo(user.getUid());
+		model.addAttribute("pastorderList", vo);
+		
 		return "pastlist";
 	}
 	
@@ -75,11 +80,15 @@ public class HunController {
 	}
 	
 	@RequestMapping("member/myPage/modify/refund")
-	public String refund(Authentication authentication) {
+	public String refund(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
+		
+		RefundVO vo = hunService.getRefundInfo(user.getUid());
+		model.addAttribute("info", vo);
+		
 		return "refund";
 	}
 	
@@ -127,6 +136,9 @@ public class HunController {
 		
 		List<CouponVO> vo = hunService.getCouponListInfo(user.getUid());
 		model.addAttribute("couponList", vo);
+		
+		System.out.println(vo);
+		
 		return "coupon";
 	}
 	

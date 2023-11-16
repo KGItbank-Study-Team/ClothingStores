@@ -71,7 +71,7 @@
                                 <th scope="col">번호</th>
                                 <th scope="col">쿠폰명</th>
                                 <th scope="col">쿠폰적용 상품</th>
-                                <th scope="col">구매금액</th>
+                                <th scope="col">최소 구매금액</th>
                                 <th scope="col" class="">결제수단</th>
                                 <th scope="col">쿠폰 혜택</th>
                                 <th scope="col">사용가능 기간</th>
@@ -84,7 +84,7 @@
                                 <td>${item.couponNumber}</td>
                                 <td><strong>${item.couponName}</strong></td>
                                 <td>${item.couponProduct}</td>
-                                <td>${item.productPrice}</td>
+                                <td>${item.minimumAmount}</td>
                                 <td>${item.payMethod}</td>
                                 <td>${item.couponBenefit}</td>
                                 <td>${item.couponPeriod}</td>

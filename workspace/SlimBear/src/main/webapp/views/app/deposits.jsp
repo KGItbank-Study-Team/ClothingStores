@@ -4,11 +4,6 @@
 <!DOCTYPE html>
 
 <%
-request.setAttribute("accrueDeposit", "70000");
-request.setAttribute("useDposit", "20000");
-request.setAttribute("deposit", "50000");
-request.setAttribute("refundDeposit", "0");
-
 /* 확인용 임시데이터 */
 request.setAttribute("orderdate", "2023-11-11");
 request.setAttribute("minusdeposit", "20000");

@@ -276,7 +276,7 @@
                                         <td>
                                             <span id="id_bank_info">${modi.refundAccount}</span> <a
                                                 href="#none" class="btnNormal gIndent10"
-                                                onclick="window.open('/app/member/myPage/mileage/refund','bank_account','width=700,height=500');return false;"><span
+                                                onclick="window.open('/app/member/myPage/modify/refund','bank_account','width=700,height=500');return false;"><span
                                                     id="id_has_bank_img" class="">환불계좌변경</span></a>
                                         </td>
                                     </tr>

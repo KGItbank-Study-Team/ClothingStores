@@ -37,7 +37,7 @@ request.setAttribute("bankNumber", "94320200118927");
                                 <th scope="row">예금주</th>
                                 <td>
                                     <input id="acc_depositor" name="acc_depositor" fw-filter="" fw-label="" fw-msg=""
-                                        class="inputTypeText" placeholder="" value="${username}" type="text">
+                                        class="inputTypeText" placeholder="" value="${info.username}" type="text">
                                     <p class="txtInfo gBlank10">예금주명은 주문자명과 동일해야 합니다.</p>
                                 </td>
                             </tr>
@@ -118,7 +118,7 @@ request.setAttribute("bankNumber", "94320200118927");
                                 <th scope="row">계좌번호</th>
                                 <td>
                                     <input id="acc_no" name="acc_no" fw-filter="" fw-label="" fw-msg=""
-                                        class="inputTypeText" placeholder="" value="${bankNumber}" type="text">
+                                        class="inputTypeText" placeholder="" value="${info.bankNumber}" type="text">
                                     <p class="txtInfo gBlank10">'-' 없이 숫자만 입력해 주세요.</p>
                                 </td>
                             </tr>
