@@ -3,7 +3,6 @@ package com.kgitbank.slimbear.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.vo.BoardInquiryListVO;
-import com.kgitbank.slimbear.vo.BoardNoticeListVO;
 
 @Service
 public class YangBoardServiceImpl {
@@ -49,7 +47,7 @@ public class YangBoardServiceImpl {
 	 * 
 	 * boards.add(board); } return boards; }
 	 */
-
+	
 	
 	// 문의게시판
     public List<InquiryDTO> getInquiryList() {
@@ -59,6 +57,11 @@ public class YangBoardServiceImpl {
 	public List<InquiryDTO> getInquiryListByType(String type) {
         return inquiryDAO.getInquiryListByType(type);
 	}
+	
+	public void insertInquiry(InquiryDTO inquiryDTO) {
+		inquiryDAO.insertInquiry(inquiryDTO);
+	}
+	
 	
 //	public List<InquiryDTO> getBoardInquiryListByType(String type) {
 //		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
@@ -127,10 +130,19 @@ public class YangBoardServiceImpl {
 	 * .collect(Collectors.toList()); return filteredFaqs; }
 	 */
 
-	public List<FaqDTO> getBoardFaqList() {
-		List<FaqDTO> faqs = faqDAO.getFaqList();
-		return faqs;
+	
+	public List<FaqDTO> getFaqList() {
+        return faqDAO.getFaqList();
+    }
+
+	public List<FaqDTO> getFaqListByType(String type) {
+        return faqDAO.getFaqListByType(type);
 	}
+	
+//	public List<FaqDTO> getBoardFaqList() {
+//		List<FaqDTO> faqs = faqDAO.getFaqList();
+//		return faqs;
+//	}
 	
 
 	/*
