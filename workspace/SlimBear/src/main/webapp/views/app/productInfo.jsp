@@ -51,7 +51,7 @@
 									<ul class="colorOptionPosition">
 										<!-- 색상 옵션 -->
 										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="colorBtn" onclick="productCnt"><a href="#none"> <span class="colorOption">${detailList.color}</span>
+											<li class="colorBtn"><a href="#none"> <span class="colorOption">${detailList.color}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -69,7 +69,7 @@
 									<ul class="sizeOptionPosition">
 										<!-- 사이즈 옵션 -->
 										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="sizeBtn" onclick="updateSelection()"><a href="#none"> <span class="sizeOption">${detailList.size}</span>
+											<li class="sizeBtn"><a href="#none"> <span class="sizeOption">${detailList.size}</span>
 											</a></li>
 										</c:forEach>
 									</ul>

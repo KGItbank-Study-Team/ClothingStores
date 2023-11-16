@@ -2,6 +2,8 @@ package com.kgitbank.slimbear.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -50,5 +55,24 @@ public class SanghyukController {
 		model.addAttribute("inquiryList", inquiryList);
 
 		return "productInfo"; // .jsp 생략
+	}
+	
+	/* 장바구니 추가 기능*/
+	@RequestMapping(value = "/add/cart")
+	public @ResponseBody String insertAddress(@RequestParam("prod_code")String prodCode, HttpSession session) {
+		MemberDTO member = (MemberDTO)session.getAttribute("uid");
+		long userUid = member.getUid();
+		CartDTO cartDTO = new CartDTO();
+		cartDTO.setUid(userUid);
+		cartDTO.setProd_code(prodCode);
+		
+		boolean isAlreadyExisted = sanghService.findProducts(cartDTO);
+		System.out.println("isAlreadyExisted" + isAlreadyExisted);
+		if(isAlreadyExisted == true) {
+			return "이미 존재하는 상품입니다.";
+		} else {
+			sanghService.insertAddress(cartDTO);
+			return "장바구에 상품이 추가되었습니다.";
+		}
 	}
 }

@@ -93,11 +93,11 @@
 								</table>
 							</div>
 						</td>
-							<td><span class="quantity"> <input type="text"
-								class="inputBox" id="quantity_${cart.uid }" value="${cart.cnt}"><a href="#" class="countUp" onclick="updateQuantity(${cart.uid}, 'increase')"></a>
- 									<img alt="수량증가" src="/resources/images/btn_count_up.gif"> </a> <a href="#" class="countDown" onclick="updateQuantity(${cart.uid}, 'decrease')"></a>
-										<img alt="수량감소" src="/resources/images/btn_count_down.gif"> </a>
-						</span></td>
+							<td><span class="quantity">
+                                    <input type="text" class="inputBox" id="quantity_${cart.uid}" value="${cart.cnt}">
+                                    <button type="button" onclick="updateQuantity(${cart.uid}, 'increase')">수량증가</button>
+                                    <button type="button" onclick="updateQuantity(${cart.uid}, 'decrease')">수량감소</button>
+                                </span></td>
 						<td><p id="addPrice_${cart.uid }">100<%-- ${cart.addprice} --%></p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
