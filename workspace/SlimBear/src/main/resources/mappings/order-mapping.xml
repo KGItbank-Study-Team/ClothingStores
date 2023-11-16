@@ -10,6 +10,13 @@
 			SELECT * FROM productOrder WHERE mem_uid=#{uid}
 		</select>
 		
+		<select id="SELECT_ORDER_TOTAL_CNTS_BY_LIST" resultType="java.util.HashMap">
+			SELECT SUBSTRING_INDEX(prod_code,':',1) as prod_uid, count(*) as toc, SUM(cnt) as tpc 
+			FROM orderDetail 
+			WHERE prod_code 
+			GROUP BY prod_uid;
+		</select>
+		
 		<insert id="INSERT_ORDER"> 
 			INSERT INTO productOrder
 			(member_uid, order_date, status, total_price)
@@ -26,8 +33,7 @@
 			DELETE FROM productOrder WHERE uid=#{uid}
 		</delete>
  	
- 	
- 	
+
  		<!-- 주문상세(orderDetail) -->
 		<select id="SELECT_ORDERDETAIL_LIST_BY_ORDER_UID" resultType="orderDetail" parameterType="order">
 			SELECT * FROM productOrder WHERE order_uid=#{uid}

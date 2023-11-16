@@ -12,7 +12,13 @@
 	</select>
 	
 	<select id="SELECT_SUBCTG_LIST_BY_TOP_CTG_UID" resultType="category"  parameterType="category">
-		SELECT * FROM category WHERE top_ctg_uid=#{uid}
+		SELECT * FROM category 
+		<if test="uid lte 0">
+			WHERE top_ctg_uid IS NULL
+		</if>
+		<if test="uid gt 0">
+			WHERE top_ctg_uid=#{uid}
+		</if>
 	</select>
 	
 	
