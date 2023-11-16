@@ -58,21 +58,6 @@ public class SanghyukController {
 	}
 	
 	/* 장바구니 추가 기능*/
-	@RequestMapping(value = "/add/cart")
-	public @ResponseBody String insertAddress(@RequestParam("prod_code")String prodCode, HttpSession session) {
-		MemberDTO member = (MemberDTO)session.getAttribute("uid");
-		long userUid = member.getUid();
-		CartDTO cartDTO = new CartDTO();
-		cartDTO.setUid(userUid);
-		cartDTO.setProd_code(prodCode);
-		
-		boolean isAlreadyExisted = sanghService.findProducts(cartDTO);
-		System.out.println("isAlreadyExisted" + isAlreadyExisted);
-		if(isAlreadyExisted == true) {
-			return "이미 존재하는 상품입니다.";
-		} else {
-			sanghService.insertAddress(cartDTO);
-			return "장바구에 상품이 추가되었습니다.";
-		}
+
 	}
 }
