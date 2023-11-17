@@ -164,7 +164,7 @@ var prod_code = urlParams.get("p");
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
 function addCart(prod_code) {
-    console.log(selectedColor, selectedSize);
+    console.log(selectProduct);
     console.log("prod_code", prod_code);
     $.ajax({
         type: "POST",
