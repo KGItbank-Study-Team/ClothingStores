@@ -12,6 +12,7 @@ import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.vo.MemberCartVO;
 
 @Service
@@ -55,6 +56,20 @@ public class OstSerivceImpl {
 		
     	return list;
     }
+	/*
+	 * public void changeProductOptions(long productUID, String color, String size,
+	 * int quantity) { // 해당 제품의 옵션 및 수량을 변경합니다. ProductDetailDTO productDetail =
+	 * productDetailDAO.getProductDetailByUid(productUID);
+	 * 
+	 * // 새로운 옵션 정보를 설정합니다. productDetail.setColor(color);
+	 * productDetail.setSize(size); productDetail.setCnt(quantity);
+	 * 
+	 * // 선택적 변경사항으로 제품 상세 정보를 업데이트합니다.
+	 * productDetailDAO.updateProductDetail(productDetail);
+	 * 
+	 * // 수량을 업데이트합니다. cartDAO.updateCartItemQuantity(productUID, quantity); }
+	 */
+
     public int calculateTotalPrice(List<MemberCartVO> cartList) {
         int totalPrice = 0;
         for (MemberCartVO cartItem : cartList) {

@@ -89,8 +89,16 @@ public class OstController {
             return new ResponseEntity<>("선택된 상품 삭제에 실패했습니다.", HttpStatus.BAD_REQUEST);
         }
     }
-
-	
+	/*
+	 * @PostMapping("/changeOptions")
+	 * 
+	 * @ResponseBody public ResponseEntity<String> changeOptions(@RequestParam long
+	 * productUID, @RequestParam String color,
+	 * 
+	 * @RequestParam String size, @RequestParam int quantity) {
+	 * ostService.changeProductOptions(productUID, color, size, quantity); return
+	 * new ResponseEntity<>("옵션이 변경되었습니다.", HttpStatus.OK); }
+	 */
 
 }
 
