@@ -68,17 +68,18 @@ public class SangyhyukServiceImpl {
 		return inquiryDAO.getInquiryListByProdUid(prodUid);
 	}
 	
-	/* 상품 장바구니에 추가 */
+	/* 상품 장바구니 */
 	@Autowired
 	public CartDAO cartDAO;
 	
+	/* 장바구니에 상품 추가 */
 	public void insertInCart(CartDTO cart) {
 		cartDAO.insertInCart(cart);
 	}
 	
 	/* 장바구니에 동일한 상품이 있는지 조회 */
 	public boolean findProducts(CartDTO cart) {
-		return cartDAO.findProducts(cart);
+		return cartDAO.selectCountInCart(cart);
 	}
 	
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {

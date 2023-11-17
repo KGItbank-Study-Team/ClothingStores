@@ -107,6 +107,9 @@
 		AND prod_code=#{prod_code}
 	</select>
 	
+	<select id="SELECT_MAX_UID" parameterType="cart">
+		SELECT COALESCE(max(uid), 0) + 1 FROM cart;
+	</select>
 	<!-- cart에 추가 -->
 	<insert id="INSERT_CART"> 
 		INSERT INTO cart

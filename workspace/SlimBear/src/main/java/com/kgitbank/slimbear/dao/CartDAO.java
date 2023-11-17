@@ -22,12 +22,20 @@ public class CartDAO {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
 	}
 	
-	public boolean findProducts(CartDTO cartDTO) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUNT_IN_CART", cartDTO);
+	/* 상품 번호의 개수를 조회 */
+	public boolean selectCountInCart(CartDTO cart) {
+		String result = template.selectOne("com.slimbear.mapper.Member.SELECT_COUNT_IN_CART", cart);
+		return Boolean.parseBoolean(result);
 	}
-
-	public int insertInCart(CartDTO cart) {
-		return template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
+	
+	private long selectMaxUid() {
+		long uid = template.selectOne("SELECT_MAX_UID");
+		return uid;
+	}
+	/* 상품 추가 */
+	public void insertInCart(CartDTO cart) {
+		long uid = selectMaxUid();
+		template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 	
 	public int updateAddress(CartDTO cart) {//이거 adress>> cart로 바꿔줭

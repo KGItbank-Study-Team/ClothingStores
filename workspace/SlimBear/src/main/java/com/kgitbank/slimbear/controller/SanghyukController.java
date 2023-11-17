@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,19 +57,19 @@ public class SanghyukController {
 		return "productInfo"; // .jsp 생략
 	}
 
-	// 장바구니에 상품 추가
-	@RequestMapping("/add/cart/{uid}")
-	public @ResponseBody String insertInCart(@RequestParam("uid") int mem_uid, HttpSession session) {
-		MemberDTO member = (MemberDTO) session.getAttribute("uid");
-		String id = member.getId(); // 회원의 아이디를 받아옴. -> 회원의 장바구니 검사해여지.
-		
+	/* 장바구니에 상품 추가 */
+	@RequestMapping("/add/cart/")
+	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) {
+		MemberDTO member = (MemberDTO)session.getAttribute("id"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
+		System.out.println(prod_code);
+		long mem_uid = member.getUid(); // Member 테이블의 uid
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setMem_uid(mem_uid);
-		cartDTO.setProd_code(prod_code);
-		boolean isAreadyExisted=sanghService.findProducts(cartDTO);
-		System.out.println("isAreadyExisted"+isAreadyExisted);
-		if(isAreadyExisted==true) {
-			return "alreay_existed";
+		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid -> Member 테이블의 uid와 매칭
+		cartDTO.setProd_code(prod_code); // 상품 코드 설정
+		boolean isAreadyExited = sanghService.findProducts(cartDTO);
+		System.out.println("isAreadyExited: " + isAreadyExited);
+		if(isAreadyExited==true) {
+			return "already_existed";
 		} else {
 			sanghService.insertInCart(cartDTO);
 			return "add_success";
