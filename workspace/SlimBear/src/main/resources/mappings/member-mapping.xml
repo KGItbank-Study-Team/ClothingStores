@@ -101,18 +101,16 @@
 	</select>
 	
 	<!--cart에 동일한 상품이 있는지 확인 -->
-<!-- 	<select id="SELECT_COUNT_IN_CART" resultType="cart" parameterType="cart">
-		SELECT 
-		CASE
-		WHEN COUNT(*)=0
-		THEN 'false'
-		ELSE 'true'
-		END AS result
-		FROM cart
-		WHERE prod_code=#{prod_cod}
-		AND mem_uid=#{mem_uid}
-	</select> -->
+	<select id="SELECT_COUNT_IN_CART" resultType="int" parameterType="cart">
+		SELECT COUNT(*) FROM cart
+		WHERE mem_uid=#{mem_uid}
+		AND prod_code=#{prod_code}
+	</select>
 	
+	<select id="SELECT_MAX_UID" parameterType="cart">
+		SELECT COALESCE(max(uid), 0) + 1 FROM cart;
+	</select>
+	<!-- cart에 추가 -->
 	<insert id="INSERT_CART"> 
 		INSERT INTO cart
 		(member_uid, prod_code, cnt, reg_date)

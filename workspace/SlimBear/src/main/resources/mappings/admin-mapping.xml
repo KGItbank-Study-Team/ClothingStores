@@ -10,5 +10,15 @@
  	<select id="SELECT_ADMIN_BY_ID" resultType="admin">
  		SELECT * FROM admin WHERE id=#{id}
  	</select>
+ 	
+ 	
+ 	<!-- 상품 전체 보기 -->
+ 	<select id="SELECT_PRODUCT_TOTAL_LIST" resultType="productTotalListItem" >
+ 		SELECT p.* , count(po.order_uid) as toc, if(po.order_uid is not null, SUM(cnt), 0) as tpc 
+		FROM product p LEFT JOIN 
+		orderDetail po ON(p.uid=SUBSTRING_INDEX(po.prod_code,':',1))
+		GROUP BY p.uid
+ 	</select>
+ 	
  
  </mapper>

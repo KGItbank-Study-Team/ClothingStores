@@ -23,44 +23,44 @@ public class YangController {
 //	private InquiryDAO inquiryDAO;
 //	@Autowired
 //	private FaqDAO faqDAO;
-
+	
 	// 공지사항
 	@RequestMapping("/board/notice")
 	public String getBoardNoticeList(Model model) {
 	    model.addAttribute("notices", boardService.getNoticeList(0));
 	    return "notice";
 	}
-
+	
 	@RequestMapping("/article/notice")
 	public String getBoardNotice(Model model) {
 		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "board_notice";
 	}
-
+	
 	
 	// 문의사항
-	// 한번 변경해본 코드
 	@RequestMapping("/board/inquiry")
-    public String getBoardInquiryList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo,
-            Model model) {
+    public String getBoardInquiryList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
         List<InquiryDTO> inquiries;
 
         switch (categoryNo) {
             case "1":
-                inquiries = boardService.getInquiryListByType("DELIVERY");
+                inquiries = boardService.getInquiryList("DELIVERY");
                 break;
             case "2":
-                inquiries = boardService.getInquiryListByType("DELIVERY_C");
+                inquiries = boardService.getInquiryList("DELIVERY_C");
                 break;
             default:
-                inquiries = boardService.getInquiryListByType("PRODUCT");
+                inquiries = boardService.getInquiryList("PRODUCT");
         }
-
         model.addAttribute("inquiries", inquiries);
-//        model.addAttribute("boardUsers", boardService.getBoardUserList());
 
         return "inquiry";
     }
+	
+	
+	
+	
 	
 	// 두번 변경해본 코드
 	/*

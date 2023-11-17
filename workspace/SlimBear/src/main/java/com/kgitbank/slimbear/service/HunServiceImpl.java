@@ -40,6 +40,9 @@ public class HunServiceImpl {
 
 	@Autowired
 	private OrderDAO orderDAO;
+	
+	@Autowired
+	private CouponDAO couponDAO;
 
 	@Autowired
 	private MemberCouponDAO membercouponDAO;
@@ -215,7 +218,7 @@ public class HunServiceImpl {
 			WishListVO vo = new WishListVO();
 			vo.setProductURL("http://localhost:9090/app/product?p=1");
 			vo.setProductImage("여기는 상품 이미지 링크가 박힐거에요");
-			vo.setProductName("상품이름이 들어갈거에요");
+			vo.setProductName(i.getProd_code());
 			vo.setOrderAmount(110000);
 			vo.setOrderDiscount(99000);
 			
@@ -224,16 +227,16 @@ public class HunServiceImpl {
 		return list;
 	}
 
-	public List<MemberBoardVO> getMemberBoardInfo() {
+	public List<MemberBoardVO> getMemberBoardInfo(int priority) {
 		ArrayList<MemberBoardVO> list = new ArrayList<>();
-		List<NoticeDTO> boardlist = noticeDAO.getNoticeList();
+		List<NoticeDTO> boardlist = noticeDAO.getNoticeList(priority);
 
 		for (NoticeDTO i : boardlist) {
 			MemberBoardVO vo = new MemberBoardVO();
-			vo.setBoardNumber(1);
-			vo.setBoardGroup("상품문의");
-			vo.setBoardTitle("상품문의합니다");
-			vo.setBoardWriter("연해적");
+			vo.setBoardNumber(i.getPriority());
+			vo.setBoardGroup(i.getType());
+			vo.setBoardTitle(i.getTitle());
+			vo.setBoardWriter(i.getWriter());
 			vo.setBoardDate(i.getReg_date());
 			vo.setBoardHits(1);
 			
@@ -242,23 +245,93 @@ public class HunServiceImpl {
 		return list;
 	}
 
-	public List<AddrVO> getAddrInfo(long memberUID) {
+	public List<AddrVO> getAddrInfo(long memberUID){
 		ArrayList<AddrVO> list = new ArrayList<>();
 		List<MemberOrderAddressDTO> addrlist = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
-
-		for (MemberOrderAddressDTO i : addrlist) {
+		
+		for(MemberOrderAddressDTO i : addrlist) {
 			AddrVO vo = new AddrVO();
 			vo.setAddrName(i.getName());
-			vo.setUsername("연해적");
+			vo.setRecipient(i.getRecipient());
 			vo.setPhone(i.getNomal_phone());
 			vo.setMobile(i.getPhone());
-			vo.setPostcode(12312);
-			vo.setDefaultAddr("서울어딘가");
-			vo.setRemainAddr("강남어딘가");
+			
+			String[] address = SlimBearUtil.splitAddress(i.getAddress());
+			vo.setPostcode(address[0]);
+			vo.setDefaultAddr(address[1]);
+			vo.setRemainAddr(address[2]);
 			
 			list.add(vo);
 		}
 		return list;
 	}
-
+	
+//	public List<AddrVO> getAddrFixInfo(long memberUID) {
+//		ArrayList<AddrVO> list = new ArrayList<>();
+//		List<MemberOrderAddressDTO> fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
+//		
+//		for(MemberOrderAddressDTO i : fix) {
+//			AddrVO vo = new AddrVO();
+//			vo.setAddrName(i.getName());
+//			vo.setRecipient(i.getRecipient());
+//			
+//			String[] address = SlimBearUtil.splitAddress(i.getAddress());
+//			vo.setPostcode(address[0]);
+//			vo.setDefaultAddr(address[1]);
+//			vo.setRemainAddr(address[2]);
+//			
+//			String[] phone = SlimBearUtil.splitPhoneNumber(i.getNomal_phone());
+//			vo.setPhone1(phone[0]);
+//			vo.setPhone2(phone[1]);
+//			vo.setPhone3(phone[2]);
+//			
+//			String[] mobile = SlimBearUtil.splitPhoneNumber(i.getPhone());
+//			vo.setMobile1(mobile[0]);
+//			vo.setMobile2(mobile[1]);
+//			vo.setMobile3(mobile[2]);
+//			
+//			list.add(vo);
+//		}
+//		return list;
+//	}
+	
+//	public AddrVO getAddrFixInfo(long memberUID) {
+//		AddrVO vo = new AddrVO();
+//		MemberOrderAddressDTO fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
+//		
+//		vo.setAddrName(fix.getName());
+//		vo.setRecipient(fix.getRecipient());
+//		
+//		String[] address = SlimBearUtil.splitAddress(fix.getAddress());
+//		vo.setPostcode(address[0]);
+//		vo.setDefaultAddr(address[1]);
+//		vo.setRemainAddr(address[2]);
+//		
+//		String[] phone = SlimBearUtil.splitPhoneNumber(fix.getNomal_phone());
+//		vo.setPhone1(phone[0]);
+//		vo.setPhone2(phone[1]);
+//		vo.setPhone3(phone[2]);
+//		
+//		String[] mobile = SlimBearUtil.splitPhoneNumber(fix.getPhone());
+//		vo.setMobile1(mobile[0]);
+//		vo.setMobile2(mobile[1]);
+//		vo.setMobile3(mobile[2]);
+//		
+//		return vo;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%
+<%-- <%
 request.setAttribute("addrName", "우리집");
 request.setAttribute("username", "페이커");
 request.setAttribute("postcode", "13551");
@@ -12,7 +12,7 @@ request.setAttribute("phoneF", "1234");
 request.setAttribute("phoneL", "5667");
 request.setAttribute("mobileF", "2424");
 request.setAttribute("mobileL", "3434");
-%>
+%> --%>
 
 <html lang="ko">
 
@@ -80,14 +80,14 @@ request.setAttribute("mobileL", "3434");
                                             alt="필수"></th>
                                     <td><input id="ma_rcv_title" name="ma_rcv_title"
                                             fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg=""
-                                            class="inputTypeText" placeholder="" value="${addrName}" type="text"></td>
-                                </tr>
+                                            class="inputTypeText" placeholder="" value="${fix.AddrName}" type="text"></td>
+                                </tr>										
                                 <tr>
                                     <th scope="row">성명 <img
                                             src="/resources/images/ico_required_blue.gif"
                                             alt="필수"></th>
                                     <td><input id="ma_rcv_name" name="ma_rcv_name" fw-filter="isFill&amp;isMaxByte[90]"
-                                            fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="${username}"
+                                            fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="${fix.recipient}"
                                             type="text"></td>
                                 </tr>
                                 <tr>
@@ -99,7 +99,7 @@ request.setAttribute("mobileL", "3434");
                                             <li id="shippingUpdate_zipcode_wrap" class="ec-address-zipcode">
                                                 <input id="address_zip1" name="address_zip1" placeholder="우편번호"
                                                     fw-filter="" class="inputTypeText" type="text" maxlength="14"
-                                                     readonly="" fw-label="우편번호" value="${postcode	}"> <button id="SearchAddress"
+                                                     readonly="" fw-label="우편번호" value="${fix.postcode	}"> <button id="SearchAddress"
                                                     class="btnBasic" type="button"
                                                     style="cursor: pointer;">주소검색</button><span class="ec-base-label">
                                                     <input id="nozip" name="nozip" class="displaynone" type="checkbox"
@@ -108,10 +108,10 @@ request.setAttribute("mobileL", "3434");
                                             <li id="shippingUpdate_baseAddr_wrap" class="">
                                                 <input id="address_addr1" name="address_addr1" placeholder="기본주소"
                                                     fw-filter="" class="inputTypeText" type="text" size="60"
-                                                    maxlength="100" readonly="" fw-label="기본주소" value="${defaultAddr}">
+                                                    maxlength="100" readonly="" fw-label="기본주소" value="${fix.defaultAddr}">
                                             </li>
                                             <li id="shippingUpdate_detailAddr_wrap" class="">
-                                                <input id="address_addr2" name="address_addr2" value="${remainAddr}"
+                                                <input id="address_addr2" name="address_addr2" value="${fix.remainAddr}"
                                                     placeholder="나머지 주소(선택 입력 가능)" fw-filter="" class="inputTypeText"
                                                     type="text" size="60" maxlength="255" fw-label="나머지 주소(선택 입력 가능)">
                                             </li>
@@ -156,10 +156,11 @@ request.setAttribute("mobileL", "3434");
                                             <option value="018">018</option>
                                             <option value="019">019</option>
                                             <option value="0508">0508</option>
-                                        </select>-<input id="ma_rcv_phone2" name="ma_rcv_phone[]" maxlength="4"
-                                            fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="${phoneF}"
+                                        </select>
+                                        <input type="hidden" id="ma_rcv_phone1" value="${fix.phone1}">-<input id="ma_rcv_phone2" name="ma_rcv_phone[]" maxlength="4"
+                                            fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="${fix.phone2}"
                                             type="text">-<input id="ma_rcv_phone3" name="ma_rcv_phone[]" maxlength="4"
-                                            fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="${phoneL}"
+                                            fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="${fix.phone3}"
                                             type="text"></td>
                                 </tr>
                                 <tr>
@@ -175,11 +176,11 @@ request.setAttribute("mobileL", "3434");
                                             <option value="017">017</option>
                                             <option value="018">018</option>
                                             <option value="019">019</option>
-                                        </select>-<input id="ma_rcv_mobile_no2" name="ma_rcv_mobile_no[]" maxlength="4"
+                                        </select><input type="hidden" id="ma_rcv_mobile_no1" value="${fix.mobile1}">-<input id="ma_rcv_mobile_no2" name="ma_rcv_mobile_no[]" maxlength="4"
                                             fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
-                                            placeholder="" value="${mobileF}" type="text">-<input id="ma_rcv_mobile_no3"
+                                            placeholder="" value="${fix.mobile2}" type="text">-<input id="ma_rcv_mobile_no3"
                                             name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&amp;isFill"
-                                            fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="${mobileL}" type="text">
+                                            fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="${fix.mobile3}" type="text">
                                     </td>
                                 </tr>
                                 <tr class="right">

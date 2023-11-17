@@ -39,13 +39,10 @@ public class YangBoardServiceImpl {
 	
 	
 	// 문의게시판
-    public List<InquiryDTO> getInquiryList() {
-        return inquiryDAO.getInquiryList();
+    public List<InquiryDTO> getInquiryList(String type) {
+        return inquiryDAO.getInquiryList(type);
     }
 
-	public List<InquiryDTO> getInquiryListByType(String type) {
-        return inquiryDAO.getInquiryListByType(type);
-	}
 	
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		inquiryDAO.insertInquiry(inquiryDTO);
