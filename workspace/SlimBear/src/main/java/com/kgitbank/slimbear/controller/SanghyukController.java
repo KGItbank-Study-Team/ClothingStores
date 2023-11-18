@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -58,8 +58,8 @@ public class SanghyukController {
 	}
 
 	/* 장바구니에 상품 추가 */
-	@RequestMapping(value = "/add/cart/")
-	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) {
+	@RequestMapping(value = "/add/cart/", method = RequestMethod.POST)
+	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) throws Exception {
 		MemberDTO member = (MemberDTO)session.getAttribute("uid"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		System.out.println(prod_code);
 		

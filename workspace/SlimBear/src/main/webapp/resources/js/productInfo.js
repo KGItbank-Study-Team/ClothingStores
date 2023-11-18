@@ -1,4 +1,4 @@
-var selectProduct = [];
+var selectProduct = new Array();
 var selectedColor = null;
 var selectedSize = null;
 
@@ -159,7 +159,7 @@ var currentUrl = window.location.href;
 // URL에서 "p" 파라미터값을 추가한다.
 var urlParams = new URLSearchParams(currentUrl.search);
 var prod_code = urlParams.get("p");
-
+var options = new Array();
 
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
@@ -167,14 +167,12 @@ function addCart(prod_code) {
     console.log(selectedColor, selectedSize);
     console.log("prod_code", prod_code);
     $.ajax({
+        url: "/add/cart/" + prod_code,
         type: "POST",
+        data: JSON.stringify({data: selectProduct}),
         async: true,
-        url: "${contextPath}/add/cart/",
         traditional: true,
         contentType: "application/json",
-        data: { 
-            data: JSON.stringify(selectProduct)
-        },
         success: function (result) {
             if (result.trim() === "add_success") {
                 alert("장바구니에 추가되었습니다.");
