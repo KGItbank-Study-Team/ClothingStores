@@ -51,6 +51,15 @@ public class CartDAO {
 		info.put("cnt", String.valueOf(newQuantity));
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART_CNT", info);
 	}
+	public void updateProductOptions(long cartUid, String color, String size) {
+	    HashMap<String, String> info = new HashMap<String, String>();
+	    info.put("uid", String.valueOf(cartUid));
+	    info.put("color", color);
+	    info.put("size", size);
+
+	    template.update("com.slimbear.mapper.Member.UPDATE_PRODUCT_OPTIONS", info);
+	}
+
 	/*
 	 * public ProductDetailDTO getProductDetailByUid(long productUID) { return
 	 * template.selectOne(

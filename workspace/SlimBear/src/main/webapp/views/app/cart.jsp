@@ -67,30 +67,29 @@
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
 											</td>
-											<td colspan="2" class="colorrr"><select class="colorr">
-													<option value="${red}">빨강</option>
-													<option value="${blue}">파랑</option>
-													<option value="${gray}">회색</option>
+											<td colspan="2" class="colorrr"><select class="colorr" id="color_${cart.uid}">
+													<option value="${red}"></option>
+													<option value="${blue}"></option>
+													<option value="${gray}"></option>
 											</select></td>
 										</tr>
 										<tr class="">
 											<td>
 												<p>SIZE</p>
 											</td>
-											<td colspan="2" class="colorrr"><select class="colorr">
-													<option value="${L}">L</option>
-													<option value="${XL}">XL</option>
-													<option value="${XXL}">XXL</option>
-													<option value="${XXXL}">XXXL</option>
-													<option value="${XXXXL}">XXXXL</option>
+											<td colspan="2" class="colorrr"><select class="colorr" id="size_${cart.uid}">
+													<option value="${L}"></option>
+													<option value="${XL}"></option>
+													<option value="${XXL}"></option>
+													<option value="${XXXL}"></option>
+													<option value="${XXXXL}"></option>
 											</select></td>
 										</tr>
 										<tr>
 											<td colspan="3">
 												<div class="cart__mainbtns">
 			<button class="cart__bigorderbtn left" onclick="location.href ='/'">자세히 보러가기</button>
-			<button class="cart__bigorderbtn right"
-				onclick="submitForm('/app/checkout')">변경하기</button>
+			<button class="cart__bigorderbtn right" onclick="submitForm('/app/checkout')">변경하기</button>
 		</div>
 											</td>
 										</tr>

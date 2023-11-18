@@ -76,6 +76,30 @@ function updateQuantity(productId, action) {
         updateServer(productId, currentQuantity - 1);
     }
 }
+function updateOptions(cartUid) {
+    var selectedColor = document.getElementById("color_" + cartUid).value;
+    var selectedSize = document.getElementById("size_" + cartUid).value;
+
+    // 여기에서 서버로 옵션 변경 요청을 보낼 수 있습니다.
+    // 서버로 변경된 옵션 정보를 전송하는 방식은 해당 프로젝트의 통신 방식에 따라 달라집니다.
+
+    // 예시: Ajax를 사용한 서버 요청
+    $.ajax({
+        type: "POST",
+        url: "/changeOptions",
+        data: {
+            cartUid: cartUid,
+            color: selectedColor,
+            size: selectedSize
+        },
+        success: function (response) {
+            alert(response); // 성공 시 알림
+        },
+        error: function (error) {
+            alert("옵션 변경 실패");
+        }
+    });
+}
 
 function updateCartOnServerResponse() {
     fetch('/app/getUpdatedCartData')
