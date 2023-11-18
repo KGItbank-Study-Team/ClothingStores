@@ -42,7 +42,11 @@ public class YangBoardServiceImpl {
     public List<InquiryDTO> getInquiryList(String type) {
         return inquiryDAO.getInquiryList(type);
     }
-
+    
+    // Notice 리스트 조회
+    public List<NoticeDTO> getInquiryNList(String type) {
+        return noticeDAO.getInquiryNList(type);
+    }
 	
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		inquiryDAO.insertInquiry(inquiryDTO);

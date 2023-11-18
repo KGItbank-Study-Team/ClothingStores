@@ -73,7 +73,45 @@
  	<!-- INQUIRY -->
  	<!-- 상품문의 목록 조회 -->
  	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
- 		SELECT uid, writer, title, content, reg_date, NULL AS status, type, NULL AS prod_uid, 1 AS order_priority
+	    SELECT 
+	        uid,
+	        null AS writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        null AS status,
+	        type,
+	        priority,
+	        writer
+	    FROM 
+	        notice
+	    WHERE 
+	        type = #{type}
+	    UNION
+	    SELECT 
+	        uid,
+	        writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        status,
+	        type,
+	        prod_uid AS priority,  
+	        null AS writer
+	    FROM 
+	        inquiry
+	    WHERE 
+	        type = #{type}
+ 	
+ 	
+<!--  		SELECT * FROM inquiry WHERE type = #{type}; -->
+ 		
+<!--  		SELECT i.*, n.title AS notice_title, n.content AS notice_content -->
+<!--     FROM inquiry i -->
+<!--     LEFT JOIN notice n ON i.uid = n.uid -->
+<!--     WHERE i.type = #{type} AND n.type = #{type}; -->
+ 		
+ 		<!-- SELECT uid, writer, title, content, reg_date, NULL AS status, type, NULL AS prod_uid, 1 AS order_priority
 		FROM notice
 		WHERE type IN ('DELIVERY', 'DELIVERY_C', 'PRODUCT')
 		
@@ -83,7 +121,8 @@
 		FROM inquiry
 		WHERE type IN ('DELIVERY', 'DELIVERY_C', 'PRODUCT')
 		
-		ORDER BY order_priority, reg_date DESC;
+		ORDER BY order_priority, reg_date DESC; -->
+		
  	</select>
 
 	

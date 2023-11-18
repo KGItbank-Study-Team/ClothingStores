@@ -20,6 +20,14 @@ public class NoticeDAO {
 			notice.setPriority(priority);
 			return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST", notice); // 패키지풀네임.id
 		}
+		
+		// Inquiry 리스트에서 조회
+		public List<NoticeDTO> getInquiryNList(String type) { 
+			NoticeDTO notice = new NoticeDTO();
+			notice.setType(type);
+			return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST", notice); // 패키지풀네임.id
+		}
+		
 
 		// Notice 데이터 삽입
 		public int insertNotice(NoticeDTO notice) {

@@ -10,7 +10,6 @@ import lombok.ToString;
 @Setter
 @Getter
 public class NoticeDTO {
-	
 	private long uid;
 	private String title;
 	private String content;
@@ -18,5 +17,4 @@ public class NoticeDTO {
 	private int priority;
 	private String type;
 	private String writer;
-	
 }
