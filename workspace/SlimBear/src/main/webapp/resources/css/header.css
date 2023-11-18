@@ -153,10 +153,15 @@ header {
   font-weight: bold;
 }
 .dropdown-content {
+  padding: 14px 19px;
+  background : #ffffffa8;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 9%);
   position: absolute;
-  min-width: 150px;
+  min-width: 100%;
   display: none;
-  color: brown !important;
+  top: 37px;
+  left: -9px;
+  width: max-content;
 }
 .dropdown-content a {
   display: flex;
