@@ -96,7 +96,7 @@
 				<div>
 					<input type="text" id="sample6_postcode" placeholder="우편번호" value="${postNum}"> <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 				</div>
-				<input type="text" placeholder="기본 주소" id="sample6_address" value="${addressOne}"> <input type="text" placeholder="상세 주소" id="sample6_detailAddress" value="${addressTwo}"> <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+				<input type="text" placeholder="기본 주소" id="sample6_address" value="${addressOne}"> <input type="text" placeholder="상세 주소" id="sample6_detailAddress" value="${addressTwo}"> <input type="text" id="sample6_extraAddress" placeholder="참고항목" value="${extraInput}">
 			</div>
 			<!--휴대전화-->
 			<div class="field birth">
@@ -113,7 +113,7 @@
 				<div>
 					<input type="tel" placeholder="전화번호 입력" value="${phoneNum}"> <input type="button" value="인증번호 받기">
 				</div>
-				<input type="number" placeholder="인증번호를 입력하세요">
+				<input type="number" placeholder="인증번호를 입력하세요" value="${imsiNum}">
 			</div>
 
 
