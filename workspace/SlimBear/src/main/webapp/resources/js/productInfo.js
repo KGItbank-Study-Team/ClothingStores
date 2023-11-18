@@ -186,6 +186,7 @@ function addCart(prod_code) {
             console.log("request:", request);
             console.log("status:", status);
             console.log("error:", error);
+            alert('!!Error!!');
         }
     });
 };
