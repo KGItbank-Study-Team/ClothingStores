@@ -98,12 +98,7 @@
 						</thead>
 						
 						
-						<!-- 1번째 tbody for문 -->	
-						<!-- <tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-						
-						</tbody> -->
-						
-						
+						<!-- 1번째 tbody for문 -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 							<c:forEach items="${inquiries}" var="board">
 								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
@@ -122,6 +117,11 @@
 								</tr>
 							</c:forEach>
 						</tbody>
+						
+						
+						
+						
+						
 						
 						<!-- 2번째 tbody for문  -->
 						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">

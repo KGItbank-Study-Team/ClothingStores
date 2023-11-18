@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 
 @Controller
@@ -42,19 +43,22 @@ public class YangController {
 	@RequestMapping("/board/inquiry")
     public String getBoardInquiryList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
         List<InquiryDTO> inquiries;
-
+        List<NoticeDTO> notices;
         switch (categoryNo) {
             case "1":
                 inquiries = boardService.getInquiryList("DELIVERY");
+                notices = boardService.getInquiryNList("DELIVERY");
                 break;
             case "2":
                 inquiries = boardService.getInquiryList("DELIVERY_C");
+                notices = boardService.getInquiryNList("DELIVERY_C");
                 break;
             default:
                 inquiries = boardService.getInquiryList("PRODUCT");
+                notices = boardService.getInquiryNList("PRODUCT");
         }
         model.addAttribute("inquiries", inquiries);
-
+        model.addAttribute("notices", notices);
         return "inquiry";
     }
 	
