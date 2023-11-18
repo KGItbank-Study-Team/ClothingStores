@@ -169,7 +169,7 @@ function addCart(prod_code) {
     $.ajax({
         type: "POST",
         async: true,
-        url: "/add/cart/",
+        url: "/add/cart/" + prod_code,
         traditional: true,
         contentType: "application/json",
         data: JSON.stringify(selectProduct),
@@ -185,7 +185,7 @@ function addCart(prod_code) {
             console.log("status:", status);
             console.log("error:", error);
         }
-    })
+    });
 };
 
 function cartAlert(result) {
@@ -201,6 +201,6 @@ function cartAlert(result) {
 // BUY IT NOW 클릭 시 결제 페이지로
 $("#buyBtn").click(function () {
     location.assign("");
-})
+});
 
 

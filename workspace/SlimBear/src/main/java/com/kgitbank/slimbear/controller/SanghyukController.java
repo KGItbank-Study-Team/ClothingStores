@@ -58,13 +58,14 @@ public class SanghyukController {
 	}
 
 	/* 장바구니에 상품 추가 */
-	@RequestMapping("/add/cart/")
+	@RequestMapping("/add/cart/{prod_code}")
 	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) {
-		MemberDTO member = (MemberDTO)session.getAttribute("id"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
+		MemberDTO member = (MemberDTO)session.getAttribute("uid"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		System.out.println(prod_code);
-		long mem_uid = member.getUid(); // Member 테이블의 uid
+		
+		long mem_uid = member.getUid(); 
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid -> Member 테이블의 uid와 매칭
+		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid -> Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
 		cartDTO.setProd_code(prod_code); // 상품 코드 설정
 		boolean isAreadyExited = sanghService.findProducts(cartDTO);
 		System.out.println("isAreadyExited: " + isAreadyExited);
