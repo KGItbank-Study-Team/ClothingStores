@@ -92,7 +92,7 @@ public class OstController {
 	@PostMapping("/changeOptions")
 	@ResponseBody
 	public ResponseEntity<String> changeOptions(@RequestParam long cartUid, @RequestParam String color, @RequestParam String size) {
-	    ostService.changeProductOptions(cartUid, color, size);
+	  //  ostService.changeProductOptions(cartUid, color, size);
 	    return new ResponseEntity<>("옵션이 변경되었습니다.", HttpStatus.OK);
 	}
 
