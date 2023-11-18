@@ -23,6 +23,7 @@ public class CartDAO {
 	}
 	
 	/* 상품 번호의 개수를 조회 */
+	// 쿼리 결과가 1보다 크면 true, 그 외에는 false
 	public boolean selectCountInCart(CartDTO cart) {
 		String result = template.selectOne("com.slimbear.mapper.Member.SELECT_COUNT_IN_CART", cart);
 		return Boolean.parseBoolean(result);

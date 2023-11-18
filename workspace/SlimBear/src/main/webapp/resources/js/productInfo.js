@@ -169,10 +169,12 @@ function addCart(prod_code) {
     $.ajax({
         type: "POST",
         async: true,
-        url: "/add/cart/" + prod_code,
+        url: "${contextPath}/add/cart/",
         traditional: true,
         contentType: "application/json",
-        data: JSON.stringify(selectProduct),
+        data: { 
+            data: JSON.stringify(selectProduct)
+        },
         success: function (result) {
             if (result.trim() === "add_success") {
                 alert("장바구니에 추가되었습니다.");

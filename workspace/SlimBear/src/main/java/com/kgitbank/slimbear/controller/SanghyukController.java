@@ -58,7 +58,7 @@ public class SanghyukController {
 	}
 
 	/* 장바구니에 상품 추가 */
-	@RequestMapping("/add/cart/{prod_code}")
+	@RequestMapping(value = "/add/cart/")
 	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) {
 		MemberDTO member = (MemberDTO)session.getAttribute("uid"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		System.out.println(prod_code);
@@ -73,7 +73,7 @@ public class SanghyukController {
 			return "already_existed";
 		} else {
 			sanghService.insertInCart(cartDTO);
-			return "add_success";
+			return "add_success"; 
 		}
 	}
 }
