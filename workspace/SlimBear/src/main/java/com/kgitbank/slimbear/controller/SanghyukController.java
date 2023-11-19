@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,18 +55,19 @@ public class SanghyukController {
 		model.addAttribute("productDetailList", productDetailList);
 		model.addAttribute("inquiryList", inquiryList);
 
-		return "productInfo"; // .jsp 생략
+		return "productInfo"; // .jsp 생략 
 	}
 
 	/* 장바구니에 상품 추가 */
-	@RequestMapping(value = "/add/cart/", method = RequestMethod.POST)
-	public @ResponseBody String insertInCart(@PathVariable("prod_code")String prod_code, HttpSession session) throws Exception {
+	@RequestMapping(value="/app/insert/cart/{prod_code}", method=RequestMethod.POST)
+	@ResponseBody
+	public String insertInCart(@RequestParam("prod_code")String prod_code, @RequestBody List<Object> selectProduct, HttpSession session) throws Exception {
 		MemberDTO member = (MemberDTO)session.getAttribute("uid"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
-		System.out.println(prod_code);
-		
+		System.out.println("prod_code: " + prod_code);	
 		long mem_uid = member.getUid(); 
+		
 		CartDTO cartDTO = new CartDTO();
-		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid -> Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
+		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
 		cartDTO.setProd_code(prod_code); // 상품 코드 설정
 		boolean isAreadyExited = sanghService.findProducts(cartDTO);
 		System.out.println("isAreadyExited: " + isAreadyExited);

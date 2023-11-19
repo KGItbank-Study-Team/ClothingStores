@@ -1,6 +1,8 @@
 var selectProduct = new Array();
+// var selectProduct = {"color": selectedColor, "size": selectedSize, "cnt": cnt}
 var selectedColor = null;
 var selectedSize = null;
+var cnt = 1;
 
 $(function () {
     $(".colorBtn").on("click", function () {
@@ -30,7 +32,6 @@ $(function () {
             $(this).addClass("active2");
             selectedSize = $('.sizeBtn').text();
             updateSelection(selectedColor, $(this).find(".sizeOption").text());
-            console.log(selectProduct);
         }
     });
 
@@ -164,15 +165,17 @@ var options = new Array();
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
 function addCart(prod_code) {
-    console.log(selectedColor, selectedSize);
+    console.log(selectProduct);
     console.log("prod_code", prod_code);
+    // 컨트롤러로 보내는 데이터
+    // prod_code, selectProduct(옵션값을 저장한 배열)
     $.ajax({
-        url: "/add/cart/" + prod_code,
+        url: "/app/insert/cart/" + prod_code,
         type: "POST",
         data: JSON.stringify({data: selectProduct}),
         async: true,
         traditional: true,
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         success: function (result) {
             if (result.trim() === "add_success") {
                 alert("장바구니에 추가되었습니다.");
@@ -191,12 +194,10 @@ function addCart(prod_code) {
 
 function cartAlert(result) {
     if (result == '0') {
-        alert("장바구니에 추가를 하지 못했습니다.")
+        alert("장바구니에 추가되었습니다.")
     } else if (result == '1') {
-        alert("장바구니에 추가되었습니다.");
-    } else if (result == '2') {
-        alert("장바구니에 동일 상품이 있습니다.")
-    }
+        alert("장바구니에 동일 상품이 있습니다.");
+    } 
 }
 
 // BUY IT NOW 클릭 시 결제 페이지로
