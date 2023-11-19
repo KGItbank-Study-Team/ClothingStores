@@ -20,10 +20,6 @@ import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
-//	@Autowired
-//	private InquiryDAO inquiryDAO;
-//	@Autowired
-//	private FaqDAO faqDAO;
 	
 	// 공지사항
 	@RequestMapping("/board/notice")
