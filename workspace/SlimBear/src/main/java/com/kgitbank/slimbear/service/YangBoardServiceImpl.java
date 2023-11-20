@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.dao.FaqDAO;
+import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
@@ -22,6 +23,8 @@ public class YangBoardServiceImpl {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private InquiryDAO inquiryDAO;
+	@Autowired
+    private InquiryAnswerDAO inquiryAnswerDAO;
 	@Autowired
 	private FaqDAO faqDAO;
 	
@@ -47,7 +50,11 @@ public class YangBoardServiceImpl {
     public List<NoticeDTO> getInquiryNList(String type) {
         return noticeDAO.getInquiryNList(type);
     }
+    
+    // 문의게시판 답변
+    
 	
+    // 문의게시판 등록
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		inquiryDAO.insertInquiry(inquiryDTO);
 	}

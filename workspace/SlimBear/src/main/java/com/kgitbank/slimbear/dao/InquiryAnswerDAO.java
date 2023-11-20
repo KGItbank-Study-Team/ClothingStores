@@ -35,4 +35,9 @@ public class InquiryAnswerDAO {
 	public int updateInquiryAnswer(InquiryAnswerDTO InquiryAnswer) {
 		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRYANSWER", InquiryAnswer);
 	}
+	
+	
+	
+	
+	
 }

@@ -2,6 +2,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -99,24 +103,46 @@
 						
 						
 						<!-- 1번째 tbody for문 -->
-						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-							<c:forEach items="${inquiries}" var="board">
+						<%-- <tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
+							<c:forEach items="${notices}" var="board">
 								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
 						            <td><i class="xi-check"></i></td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						            <strong>
 					                    <a href="#" style="color: #555555;">${board.title}</a>
-						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
-						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
+						                <img src="/resources/images/icon_hit.gif" alt="NEW" class="ec-common-rwd-image"/>
 					                    <span class="txtEm"></span>
 					                </strong>
 						            </td>
-									<td>${board.writer_id}</td>
+									<td>${board.writer}</td>
 									<td>${board.reg_date}</td>
 								</tr>
 							</c:forEach>
+						</tbody> --%>
+						
+						
+						<!-- 2번째 tbody for문  -->
+						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
+						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
+						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
+						            <td>${inquiries.size() - loop.index}</td>
+						            <td class="displaynone"></td>
+						            <td class="subject left txtBreak">
+						                <strong>
+						                    <a href="#" style="color: #555555;">${board.title}</a>
+						                    <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
+						                    <span class="txtEm"></span>
+						                </strong>
+						            </td>
+						            <td>${board.writer_id}</td>
+						            <td>${board.reg_date}</td>
+						        </tr>
+						    </c:forEach>
 						</tbody>
+
+
 						
 						
 						
