@@ -164,8 +164,10 @@ var prod_code = urlParams.get("p");
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
 function addCart(prod_code) {
+
     console.log(selectProduct);
     console.log("prod_code", prod_code);
+
     // 컨트롤러로 보내는 데이터
     // prod_code, selectProduct(옵션값을 저장한 배열)
     $.ajax({
