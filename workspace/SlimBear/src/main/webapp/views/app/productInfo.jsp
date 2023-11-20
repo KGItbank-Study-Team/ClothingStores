@@ -13,6 +13,10 @@
 </head>
 <body>
 	<%@ include file="header/header.jsp"%>
+<%-- 	<%
+		HttpSession mySession = request.getSession();
+		long sessionID = (long)mySession.getAttribute("uid");
+	%> --%>
 	<div id="container">
 		<div class="productInfo">
 			<div class="left">
@@ -102,7 +106,7 @@
 						<a href="javascript:addCart(${product.uid})" id="cartBtn" class="btnOption" style="background: #eae5dd;">
 							<span class="btnSpan">ADD TO CART</span>
 						</a> 
-						<a href="#" id="wishBtn" class="btnOption" style="background: #eae5dd;">
+						<a href="javascript:addWish(${product.uid})" id="wishBtn" class="btnOption" style="background: #eae5dd;">
 							<span class="btnSpan">ADD TO WISH</span>
 						</a>
 					</div>

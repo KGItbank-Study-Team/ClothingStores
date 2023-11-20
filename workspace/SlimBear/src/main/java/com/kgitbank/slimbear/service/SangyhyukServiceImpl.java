@@ -10,11 +10,13 @@ import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
+import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
+import com.kgitbank.slimbear.dto.WishDTO;
 
 @Service
 public class SangyhyukServiceImpl {
@@ -86,5 +88,16 @@ public class SangyhyukServiceImpl {
 		return cartDAO.getCartListByMemberUID(memberUid);
 	}
 	
+	/* 위시리스트에 상품 추가 */
+	@Autowired
+	public WishDAO wishDAO;
 	
+	public void insertAddress(WishDTO wish) {
+		wishDAO.insertAddress(wish);
+	}
+	
+	/* uid로 위시리스트 불러오기 */
+	public List<WishDTO> getWishListByMemberUID(long memberUid) {
+		return wishDAO.getWishListByMemberUID(memberUid);
+	}
 }

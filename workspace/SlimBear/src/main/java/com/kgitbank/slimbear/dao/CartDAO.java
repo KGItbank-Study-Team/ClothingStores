@@ -36,6 +36,7 @@ public class CartDAO {
 	/* 상품 추가 */
 	public void insertInCart(CartDTO cart) {
 		long uid = selectMaxUid();
+		cart.setUid(uid);
 		template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 	

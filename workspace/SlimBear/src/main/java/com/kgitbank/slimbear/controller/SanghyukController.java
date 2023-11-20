@@ -1,14 +1,15 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
-import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
+import com.kgitbank.slimbear.security.SecurityUser;
+import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 
 @Controller
@@ -59,12 +61,13 @@ public class SanghyukController {
 	}
 
 	/* 장바구니에 상품 추가 */
-	@RequestMapping(value="/app/insert/cart/{prod_code}", method=RequestMethod.POST)
+	@RequestMapping(value="insert/cart/{prod_code}", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertInCart(@RequestParam("prod_code")String prod_code, @RequestBody List<Object> selectProduct, HttpSession session) throws Exception {
-		MemberDTO member = (MemberDTO)session.getAttribute("uid"); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
-		System.out.println("prod_code: " + prod_code);	
-		long mem_uid = member.getUid(); 
+	public String insertInCart(@PathVariable("prod_code") String prod_code, @RequestParam HashMap<String, Object> data, Authentication authentication) throws Exception {
+		SecurityUser user = (SecurityUser)authentication.getPrincipal(); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
+		long mem_uid = user.getUid();
+		System.out.println(user.getUid());
+		System.out.println(data);	
 		
 		CartDTO cartDTO = new CartDTO();
 		cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
@@ -78,4 +81,15 @@ public class SanghyukController {
 			return "add_success"; 
 		}
 	}
+	
+	/* wish 리스트 추가*/
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/wish", method=RequestMethod.GET) public int
+	 * wishPOST(ProductDTO prod, HttpSession session, Model model) {
+	 * 
+	 * }
+	 */
+	
 }
