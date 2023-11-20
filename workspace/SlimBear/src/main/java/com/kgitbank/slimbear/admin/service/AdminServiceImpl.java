@@ -1,7 +1,5 @@
 package com.kgitbank.slimbear.admin.service;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,9 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
-
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,16 +18,21 @@ import com.kgitbank.slimbear.admin.command.ProductUpdateCMD;
 import com.kgitbank.slimbear.admin.dao.AdminDAO;
 import com.kgitbank.slimbear.admin.dto.ProductTotalListDTO;
 import com.kgitbank.slimbear.dao.ProductDAO;
+import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 
 @Service
-public class AdminService {
+public class AdminServiceImpl {
 
 	@Autowired
 	private AdminDAO adminDAO;
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private ProductDetailDAO productDtailDAO;
 
 	public List<ProductTotalListDTO> getProductTotalListDTO() {
 		return adminDAO.getProductTotalList();
@@ -50,14 +50,70 @@ public class AdminService {
 		saveInfo.setMaker("슬림베어");
 		
 		// 대표이미지 파일
-		String mainImageName = SaveMainImageFile(product.getMain_image(), uploadPath);
-		if (mainImageName == null) {
-			// 파일 저장 실패 
-			return;
+		if(product.getMain_image().getSize() != 0)
+		{
+			String mainImageName = SaveMainImageFile(product.getMain_image(), uploadPath);
+			if (mainImageName == null) {
+				// 파일 저장 실패 
+				return;
+			}
+			saveInfo.setMain_image(mainImageName);
 		}
-		saveInfo.setMain_image(mainImageName);
+		else {
+			saveInfo.setMain_image("");
+		}
 
-		productDAO.insertProduct(saveInfo);
+		long uid = productDAO.insertProductReturnUID(saveInfo);
+		
+		for(int i=0; i<product.getColors().size(); ++i) {
+			ProductDetailDTO productDetail = new ProductDetailDTO();
+			productDetail.setProd_uid(uid);
+			productDetail.setColor(product.getColors().get(i));
+			productDetail.setSize(product.getSizes().get(i));
+			productDetail.setCnt(0);
+			productDtailDAO.addProductDetail(productDetail);
+		}
+		
+	}
+	
+	public void updateProduct(ProductUpdateCMD product, String uploadPath) {
+		ProductDTO saveInfo = new ProductDTO();
+
+		saveInfo.setUid(product.getUid());
+		saveInfo.setName(product.getName());
+		saveInfo.setDesc(product.getDescription());
+		saveInfo.setCtg_uid(product.getCategory());
+		saveInfo.setPrice(product.getPrice());
+		saveInfo.setReg_date(new Date(System.currentTimeMillis()));
+		saveInfo.setMaker("슬림베어");
+	
+		if(product.getMain_image().getSize() != 0)
+		{
+			String mainImageName = SaveMainImageFile(product.getMain_image(), uploadPath);
+			if (mainImageName == null) {
+				// 파일 저장 실패 
+				return;
+			}
+			saveInfo.setMain_image(mainImageName);
+		}
+		else {
+			saveInfo.setMain_image(null);
+		}
+		
+		productDAO.updateProduct(saveInfo);
+	}
+	
+	public void addProductDetail(ProductDetailDTO detail) {
+		productDtailDAO.addProductDetail(detail);
+	}
+	
+	public void updateProductDetail(ProductDetailDTO detail) {
+
+		productDtailDAO.updateProductDetail(detail);
+	}
+	
+	public void deleteProductDetail(ProductDetailDTO detail) {
+		productDtailDAO.deleteProductDetail(detail);
 	}
 
 	private String SaveMainImageFile(MultipartFile file, String uploadPath) {
@@ -115,4 +171,6 @@ public class AdminService {
 		
 		return folderPath;
 	}
+
+
 }
