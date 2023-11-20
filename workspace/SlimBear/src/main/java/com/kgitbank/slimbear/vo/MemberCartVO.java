@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +31,8 @@ public class MemberCartVO {
 	private int cnt;
 	private String color;
 	private String size;
+	 private List<String> ColorOptions;
+	 private List<String> SizeOptions;
+	
+	
 }

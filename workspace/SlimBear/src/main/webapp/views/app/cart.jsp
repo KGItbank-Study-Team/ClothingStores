@@ -67,11 +67,12 @@
 										<tr class="">
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
-											</td>
+											</td>${cart.color }
 											<td colspan="2" class="colorrr"><select class="colorr"
 												id="color_${status.index}_${cart.uid}">
-													<c:forEach var="color" items="${optionList}">
-														<option value="${color}">${optionList.color}</option>
+													<c:forEach var="color" items="${cart.colorOptions}">
+														<option value="${color}"
+															<c:if test="${color eq cart.color}">selected</c:if>>${color}</option>
 													</c:forEach>
 											</select></td>
 										</tr>
@@ -81,8 +82,10 @@
 											</td>
 											<td colspan="2" class="colorrr"><select class="colorr"
 												id="size_${status.index}_${cart.uid}">
-													<c:forEach var="size" items="${optionList}">
-														<option value="${size}">${optionList.size}</option>
+													<c:forEach var="size" items="${cart.sizeOptions}">
+														<!-- sizeOptionList 변수가 있어야 합니다. -->
+														<option value="${size}"
+															<c:if test="${size eq cart.size}">selected</c:if>>${size}</option>
 													</c:forEach>
 											</select></td>
 										</tr>

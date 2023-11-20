@@ -99,7 +99,10 @@
 	<select id="SELECT_CART_LIST_BY_MEMBER_UID" resultType="cart" parameterType="member">
 		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
-	
+	<!-- 색상,컬러(color,size) -->
+	<select id="SELECT_PRODUCTDETAIL_RECENT" resultType="cart" parameterType="cart">
+		SELECT color,size FROM productDetail WHERE prod_uid = #{productUID}
+	</select>
 	<!--cart에 동일한 상품이 있는지 확인 -->
 	<select id="SELECT_COUNT_IN_CART" resultType="String" parameterType="cart">
 		SELECT COUNT(*) FROM cart
@@ -110,6 +113,7 @@
 	<select id="SELECT_MAX_UID" parameterType="cart" resultType="long">
 		SELECT COALESCE(max(uid), 0) + 1 FROM cart;
 	</select>
+	
 	<!-- cart에 추가 -->
 	<insert id="INSERT_CART"> 
 		INSERT INTO cart

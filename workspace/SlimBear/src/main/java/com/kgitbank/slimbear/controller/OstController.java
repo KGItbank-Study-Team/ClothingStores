@@ -10,13 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -89,6 +89,19 @@ public class OstController {
         } else {
             return new ResponseEntity<>("선택된 상품 삭제에 실패했습니다.", HttpStatus.BAD_REQUEST);
         }
+    }
+	@GetMapping("/cartList")
+    public String getCartList(Model model) {
+        // 여기서 서비스의 메서드를 호출하여 데이터를 가져옵니다.
+        List<MemberCartVO> cartList = ostService.getCartList(1); // 여기에 회원 UID를 넣어주세요.
+        
+        List<String> sizeOptionList = ostService.getSizeOptionList();
+
+        // 모델에 데이터를 추가하여 화면으로 전달합니다.
+        model.addAttribute("cartList", cartList);
+        model.addAttribute("sizeOptionList", sizeOptionList);
+        // "cartList"는 Thymeleaf에서 사용할 변수 이름입니다.
+        return "cartList";
     }
 //	@PostMapping("/changeOptions")
 //	@ResponseBody

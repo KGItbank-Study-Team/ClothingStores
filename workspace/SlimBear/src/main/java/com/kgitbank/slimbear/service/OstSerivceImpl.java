@@ -1,6 +1,7 @@
 package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class OstSerivceImpl {
 	
 	@Autowired
 	private ProductDetailDAO productdetailDAO;
-	public List<MemberCartVO> getCartList(long memberUID) {// getCartList(long memberUID) 메서드는 회원의 장바구니 목록을 가져오는 역할
+	public List<MemberCartVO> getCartList(long memberUID ) {// getCartList(long memberUID) 메서드는 회원의 장바구니 목록을 가져오는 역할
 		ArrayList<MemberCartVO> list = new ArrayList<MemberCartVO>();// 원의 장바구니에 담긴 각 상품의 가격 정보를 포함한 MemberCartVO 리스트를
 																		// 반환
 
@@ -41,18 +42,27 @@ public class OstSerivceImpl {
 			vo.setUid(i.getUid());
 			vo.setCnt(i.getCnt());
 
-			String[] prodctInfos = SlimBearUtil.splitProductDetail(i.getProd_code());
-			long productUID = Long.valueOf(prodctInfos[0]);
-
+			 String[] prodctInfos = SlimBearUtil.splitProductDetail(i.getProd_code());
+	            if (prodctInfos.length >= 3) {
+	                vo.setColor(prodctInfos[1]);
+	                vo.setSize(prodctInfos[2]);
+	            }
+	            long productUID = Long.valueOf(prodctInfos[0]);
 			ProductDTO product = productDAO.getProductByUid(productUID);
 			vo.setPrice(product.getPrice() * i.getCnt());
-			
+		
 			/* vo.setPrice(product.getPrice()); */
 			vo.setDesc(product.getDesc());
 			vo.setName(product.getName());
 			vo.setMaker(product.getMaker());
 			vo.setMain_image(product.getMain_image());
+			
+			// 상품의 색상 옵션 리스트 추가
+		    vo.setColorOptions(productdetailDAO.getColorOptions(productUID));
 
+		    // 상품의 크기 옵션 리스트 추가
+		    vo.setSizeOptions(productdetailDAO.getSizeOptions(productUID));
+			
 			list.add(vo);
 
 		}
@@ -97,5 +107,19 @@ public class OstSerivceImpl {
 	public void updateCartItem(long productId, int newQuantity) {
 		cartDAO.updateCartItemQuantity(productId, newQuantity);
 	}
+	// 새로 추가된 메서드
+    public List<CartDTO> getCartListByMemberUID(long memberUID) {
+        return cartDAO.getCartListByMemberUID(memberUID);
+    }
+
+    public List<ProductDetailDTO> getProductDetailList() {
+        return cartDAO.getproductdetail();
+    }
+    public List<String> getSizeOptionList() {
+        // 여기에서 적절한 방식으로 사이즈 옵션 리스트를 가져오는 코드를 구현해야 합니다.
+        // 예를 들어, ProductDetailDAO나 ProductService를 이용하여 데이터를 가져올 수 있습니다.
+        // 아래는 가상의 코드이며, 실제로는 데이터를 어떻게 가져올지에 따라 수정해야 합니다.
+        return Arrays.asList("100", "105", "110", "115"); // 가상의 리스트를 반환하고 있습니다.
+    }
 
 }

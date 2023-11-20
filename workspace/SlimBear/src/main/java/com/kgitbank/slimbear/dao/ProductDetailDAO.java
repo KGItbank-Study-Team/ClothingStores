@@ -40,4 +40,11 @@ public class ProductDetailDAO {
 	public int deleteProductDetail(ProductDetailDTO productDetail) {
 		return template.delete("com.slimbear.mapper.Product.DELETE_PRODUCT_DETAIL", productDetail);
 	}
+	public List<String> getColorOptions(long productUID) {
+        return template.selectList("com.slimbear.mapper.Product.getColorOptions", productUID);
+    }
+
+    public List<String> getSizeOptions(long productUID) {
+        return template.selectList("com.slimbear.mapper.Product.getSizeOptions", productUID);
+    }
 }

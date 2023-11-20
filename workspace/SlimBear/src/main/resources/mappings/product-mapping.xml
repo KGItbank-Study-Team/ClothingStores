@@ -59,6 +59,13 @@
 	</update>
 
 	<!-- 제품상세(productDetail) -->
+	<select id="getColorOptions" resultType="string" parameterType="long">
+    SELECT DISTINCT color FROM productDetail WHERE prod_uid = #{productUID}
+</select>
+
+<select id="getSizeOptions" resultType="string" parameterType="long">
+    SELECT DISTINCT size FROM productDetail WHERE prod_uid = #{productUID}
+</select>
 	<!-- 제품상세검색 -->
 	<select id="SELECT_PRODUCT_DETAIL" parameterType="productDetail"
 		resultType="productDetail">
