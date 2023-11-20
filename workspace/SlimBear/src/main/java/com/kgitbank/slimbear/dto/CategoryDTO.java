@@ -9,6 +9,6 @@ import lombok.ToString;
 @Setter
 public class CategoryDTO {
 	private long uid;
-	private long ctg_uid;
+	private Long top_ctg_uid;
 	private String name;
 }
