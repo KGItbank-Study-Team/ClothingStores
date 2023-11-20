@@ -32,7 +32,7 @@ CREATE TABLE `cart` (
 	`uid`	bigint unsigned 	NOT NULL,
 	`mem_uid`	bigint unsigned 	NOT NULL,
 	`prod_code`	varchar(30)	NOT NULL,
-	`cnt`	tinyint unsigned	NOT NULL,
+	`cnt`	int unsigned	NOT NULL,
 	`reg_date`	datetime	NOT NULL	COMMENT '지정일수 지나면 제거'
 );
 
@@ -138,7 +138,7 @@ CREATE TABLE `productDetail` (
 	`prod_uid`	bigint unsigned 	NOT NULL,
 	`color`	varchar(10)	NOT NULL,
 	`size`	varchar(10)	NOT NULL,
-	`cnt`	tinyint unsigned	NULL	COMMENT '재고관련 테이블 따로 관리할 필요성있음'
+	`cnt`	int unsigned	NULL	COMMENT '재고관련 테이블 따로 관리할 필요성있음'
 );
 
 DROP TABLE IF EXISTS `product`;
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS `orderDetail`;
 CREATE TABLE `orderDetail` (
 	`order_uid`	bigint unsigned 	NOT NULL,
 	`prod_code`	varchar(30)	NOT NULL,
-	`cnt`	tinyint unsigned	NOT NULL,
+	`cnt`	int unsigned	NOT NULL,
 	`review_uid`	bigint unsigned 	NULL
 );
 

@@ -26,6 +26,31 @@
 <link
 	href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
 	rel="stylesheet">
+	
+		<!-- Bootstrap core JavaScript-->
+	<script src="/admin/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script
+		src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/admin/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script
+		src="/admin/vendor/datatables/jquery.dataTables.js"></script>
+	<script
+		src="/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/admin/js/demo/datatables-demo.js"></script>
+	
+	
+	<script src="/admin/js/script.js"></script>
+	<script src="/admin/js/tables-member.js"></script>
 
 </head>
 
@@ -274,19 +299,22 @@
 									</tfoot>
 									<tbody>
 										<tr th:each="member, i : ${memberList}">
-											<td><a th:text="${member.id}" th:href="@{/admin/home/member}"></a></td>
+											<td><a th:text="${member.id}" class="btn btn-primary" th:href="@{/admin/home/member(memberID=${member.id})}"></a></td>
 											<td th:text="${member.name}"></td>
 											<td th:text="111"></td>
 											<td th:text="${#dates.format(member.reg_date,'yyyy-MM-dd HH:mm:ss')}"></td>
 										</tr>
+
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-
+		
 				</div>
 				<!-- /.container-fluid -->
+
+
 
 			</div>
 			<!-- End of Main Content -->
@@ -334,35 +362,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="/admin/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script
-		src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="/admin/js/sb-admin-2.min.js"></script>
-
-	<!-- Page level plugins -->
-	<script
-		src="/admin/vendor/datatables/jquery.dataTables.js"></script>
-	<script
-		src="/admin/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-	<!-- Page level custom scripts -->
-	<script src="/admin/js/demo/datatables-demo.js"></script>
-	
-	
-	<script src="/admin/js/script.js"></script>
-	
-	<script>
-		pageSliderMenuActive("accordionSidebar_member_nav", 0);
-	</script>
-	
 </body>
 
 </html>
