@@ -14,6 +14,6 @@ public class MemberOrderAddressDTO {
 	private String recipient; // 수령인
 	private String name;
 	private String phone;
-	private String nomal_phone;
+	private String normal_phone; // nomal -> normal
 	private String address;
 }
