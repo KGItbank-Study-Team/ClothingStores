@@ -27,8 +27,8 @@
 		</div>
 		<table class="cart__list">
 			<!-- <form id="myForm" action="/app/deleteSelectedItems" method="post"> -->
-				
-				<h1>C A R T</h1>
+
+			<h1>C A R T</h1>
 			<thead>
 				<tr>
 					<td><input type="checkbox" id="selectAll"></td>
@@ -42,19 +42,20 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="cart" items="${cartList}">
+				<c:forEach var="cart" items="${cartList}" varStatus="status">
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
 							value="${cart.uid }"></td>
-						<td class="yout"><img src="/resources/images/${cart.main_image}"
-							alt="${cart.desc}"></td>
+						<td class="yout"><img
+							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
 						<td><a href="#">${cart.maker}</a> <span
 							class="cart__list__smartstore">${cart.maker}</span>
 							<p>${cart.name }</p></td>
 						<td class="cart__list__option">
 							<p>${cart.name}</p>
-							
-							<div class="btn" onclick="toggleHiddenContent(this);">주문
+
+							<div class="btn"
+								onclick="toggleHiddenContent(this, ${status.index});">주문
 								추가/변경▽</div>
 							<div class="hiddenContent04">
 								<div class="option hidden"></div>
@@ -67,69 +68,76 @@
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
 											</td>
-											<td colspan="2" class="colorrr"><select class="colorr" id="color_${cart.uid}">
-													<option value="${red}"></option>
-													<option value="${blue}"></option>
-													<option value="${gray}"></option>
+											<td colspan="2" class="colorrr"><select class="colorr"
+												id="color_${status.index}_${cart.uid}">
+													<c:forEach var="color" items="${optionList}">
+														<option value="${color}">${optionList.color}</option>
+													</c:forEach>
 											</select></td>
 										</tr>
 										<tr class="">
 											<td>
 												<p>SIZE</p>
 											</td>
-											<td colspan="2" class="colorrr"><select class="colorr" id="size_${cart.uid}">
-													<option value="${L}"></option>
-													<option value="${XL}"></option>
-													<option value="${XXL}"></option>
-													<option value="${XXXL}"></option>
-													<option value="${XXXXL}"></option>
+											<td colspan="2" class="colorrr"><select class="colorr"
+												id="size_${status.index}_${cart.uid}">
+													<c:forEach var="size" items="${optionList}">
+														<option value="${size}">${optionList.size}</option>
+													</c:forEach>
 											</select></td>
 										</tr>
 										<tr>
 											<td colspan="3">
 												<div class="cart__mainbtns">
-			<button class="cart__bigorderbtn left" onclick="location.href ='/'">자세히 보러가기</button>
-			<button class="cart__bigorderbtn right" onclick="submitForm('/app/checkout')">변경하기</button>
-		</div>
+													<button class="cart__bigorderbtn left"
+														onclick="location.href ='/'">자세히 보러가기</button>
+													<button class="cart__bigorderbtn right"
+														onclick="submitForm('/app/checkout')">변경하기</button>
+												</div>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</td>
-						
-							<td><span class="quantity">
-                                    <input type="text" class="inputBox" id="quantity_${cart.uid}" value="${cart.cnt}">
-                                    <button type="button" onclick="updateQuantity(${cart.uid}, 'increase')">수량증가</button>
-                                    <button type="button" onclick="updateQuantity(${cart.uid}, 'decrease')">수량감소</button>
-                                </span></td>
-						<td><p id="addPrice_${cart.uid }">100<%-- ${cart.addprice} --%></p></td>
+
+						<td><span class="quantity"> <input type="text"
+								class="inputBox" id="quantity_${cart.uid}" value="${cart.cnt}">
+								<button type="button"
+									onclick="updateQuantity(${cart.uid}, 'increase')">수량증가</button>
+								<button type="button"
+									onclick="updateQuantity(${cart.uid}, 'decrease')">수량감소</button>
+						</span></td>
+						<td><p id="addPrice_${cart.uid }">
+								100
+								<%-- ${cart.addprice} --%>
+							</p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
 						<td>무료<%-- ${cart.baedalprice } --%></td>
 					</tr>
-					
-					</c:forEach>
-				</tbody>
-			
+
+				</c:forEach>
+			</tbody>
+
 
 			<tfoot>
 				<tr>
 					<td colspan="3">
-				
-   <button class="cart__list__optionbtn" onclick="deleteSelectedItems()">선택상품 삭제</button>
 
-    <button class="cart__list__optionbtn">선택상품 찜</button>
-    
-          <!--   </form> --></td>
+						<button class="cart__list__optionbtn"
+							onclick="deleteSelectedItems()">선택상품 삭제</button>
+
+						<button class="cart__list__optionbtn">선택상품 찜</button> <!--   </form> -->
+					</td>
 					<td></td>
 					<td></td>
 					<td></td>
 				</tr>
 			</tfoot>
-					
+
 		</table>
-				
+
 		<table class="cart__list__detail">
 			<thead>
 				<tr>
@@ -156,7 +164,8 @@
 		</div>
 		</form>
 		<form>
-		<input type="hidden" value="선택상품 삭제" id="deleteSelectedBtn" class="cart__list__optionbtn">
+			<input type="hidden" value="선택상품 삭제" id="deleteSelectedBtn"
+				class="cart__list__optionbtn">
 		</form>
 		<div>
 			<h4>이용안내</h4>

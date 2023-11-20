@@ -27,4 +27,6 @@ public class MemberCartVO {
 	private int productId;
 	
 	private int cnt;
+	private String color;
+	private String size;
 }

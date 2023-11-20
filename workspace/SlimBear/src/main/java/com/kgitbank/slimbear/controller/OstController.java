@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -89,12 +90,13 @@ public class OstController {
             return new ResponseEntity<>("선택된 상품 삭제에 실패했습니다.", HttpStatus.BAD_REQUEST);
         }
     }
-	@PostMapping("/changeOptions")
-	@ResponseBody
-	public ResponseEntity<String> changeOptions(@RequestParam long cartUid, @RequestParam String color, @RequestParam String size) {
-	  //  ostService.changeProductOptions(cartUid, color, size);
-	    return new ResponseEntity<>("옵션이 변경되었습니다.", HttpStatus.OK);
-	}
+//	@PostMapping("/changeOptions")
+//	@ResponseBody
+//	public List<ProductDetailDTO> getProductDetailByUid(long productUid) {
+//	   return ostService.getProductDetailByUid(productUid); 
+//	}
+//	List<ProductDetailDTO> optionList = ostService.getProductDetailByUid(1);
+
 
 	/*
 	 * @PostMapping("/changeOptions")
