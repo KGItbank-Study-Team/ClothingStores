@@ -1,6 +1,6 @@
 $(function(){
 	pageSliderMenuActive("accordionSidebar_product_nav", 1);
-	addCategoryGroup(0, 0);
+	addCategoryGroup(0, 0, null);
 });
 
 function addOption(){

@@ -211,5 +211,13 @@
 	</div>
 
 </body>
-
+	<script>
+		function ctgSelect(depth){
+			var list = [[${ctgList}]];
+			if(list.length <= depth) return;
+			var ctg_id = list[depth];
+			selectCategory($('.ctg-' + ctg_id), ctgSelect);
+		}
+		addCategoryGroup(0, 0, ctgSelect);
+	</script>
 </html>

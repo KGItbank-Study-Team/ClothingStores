@@ -60,7 +60,7 @@ function displaySelectedImage(event, elementId) {
     }
 }
 
-function selectCategory(selectItem){
+function selectCategory(selectItem, callback){
   var ctg = selectItem.data("ctg");
   var depth = selectItem.data("depth");
 
@@ -78,10 +78,10 @@ function selectCategory(selectItem){
   }
 
   // 하위 카테고리 추가
-  addCategoryGroup(ctg, depth + 1);
+  addCategoryGroup(ctg, depth + 1, callback);
 }
 
-function addCategoryGroup(topCtg, depth){
+function addCategoryGroup(topCtg, depth, callback){
 
   $.ajax({
     url: "/admin/category/childs",
@@ -120,8 +120,9 @@ function addCategoryGroup(topCtg, depth){
 	                      });
 	    
 	    
-	        newCtg.click(function(){ selectCategory($(this)); });
+	        newCtg.click(function(){ selectCategory($(this), null); });
 	        newCtg.html(name);
+	        newCtg.addClass('ctg-' + uid);
 	        newCtg.data("ctg", uid);
 	        newCtg.data("depth", depth);
 	        newGroupItems.append(newCtg);
@@ -129,6 +130,8 @@ function addCategoryGroup(topCtg, depth){
 	      newGroup.append(newGroupItems);
 	    
 	      $('#category-selector').append(newGroup);
+	      
+	      if(callback != null) callback(depth);
 	    },
 	    error: function(){
 	        alert("err");

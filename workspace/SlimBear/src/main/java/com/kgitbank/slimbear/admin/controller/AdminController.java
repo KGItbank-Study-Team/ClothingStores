@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.admin.command.ProductUpdateCMD;
 import com.kgitbank.slimbear.admin.service.AdminServiceImpl;
-import com.kgitbank.slimbear.controller.SanghyukController;
+import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
+import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 
 //ADMIN작업중....
@@ -34,15 +36,18 @@ public class AdminController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private ProductServiceImpl productService;
 
 	@Autowired
 	private AdminServiceImpl adminService;
-	
+
 	@Autowired
 	private SangyhyukServiceImpl sanghService;
+
+	@Autowired
+	private RSYServiceImpl rsyService;
 
 	@RequestMapping("home")
 	public String homePage() {
@@ -66,19 +71,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("home/member")
-	public String memberPage(@RequestParam(name="memberID", required = false) String memberID, Model model) {
-		if(memberID != null) {
+	public String memberPage(@RequestParam(name = "memberID", required = false) String memberID, Model model) {
+		if (memberID != null) {
 			MemberDTO member = memberService.getMemberById(memberID);
-			if(member == null) {
+			if (member == null) {
 				model.addAttribute("member", -1);
 				model.addAttribute("beforeID", memberID);
-			}else {
+			} else {
 				model.addAttribute("member", member);
 			}
-		}else {
+		} else {
 			model.addAttribute("member", null);
 		}
-		
+
 		return "member-detail";
 	}
 
@@ -88,35 +93,50 @@ public class AdminController {
 	}
 
 	@PostMapping("/home/product/add")
-	public String productAddPage(HttpServletRequest request, ProductUpdateCMD product){
+	public String productAddPage(HttpServletRequest request, ProductUpdateCMD product) {
 		adminService.addProduct(product, request.getSession().getServletContext().getRealPath("/resources/images"));
 		return "product-add";
 	}
-	
+
 	@RequestMapping("home/product")
-	public String productPage(@RequestParam(name="productUID", required = false) Long productUID, Model model) {
-		if(productUID != null) {
+	public String productPage(@RequestParam(name = "productUID", required = false) Long productUID, Model model) {
+		if (productUID != null) {
 			ProductDTO product = productService.getProductByUid(productUID);
-			if(product == null) {
+			if (product == null) {
 				return "redirect:/admin/home/board/product";
-			}else {
-				
+			} else {
+
 				List<ProductDetailDTO> detailList = sanghService.getProductDetailList(product.getUid());
-				
+
+				// 카테고리
+				List<Long> ctgList = new ArrayList<Long>();
+				CategoryDTO ctg = rsyService.getCategoryByUid(product.getCtg_uid());
+				if (ctg != null) {
+					ctgList.add(0, ctg.getUid());
+
+					// 상위 카테고리 존재
+					while (ctg != null && ctg.getTop_ctg_uid() != null) {
+						ctg = rsyService.getCategoryByUid(ctg.getTop_ctg_uid());
+						ctgList.add(0, ctg.getUid());
+					}
+				}
+
 				model.addAttribute("product", product);
 				model.addAttribute("detailList", detailList);
+				model.addAttribute("ctgList", ctgList);
 				return "product-detail";
+
 			}
-		}else {
+		} else {
 			return "redirect:/admin/home/board/product";
 		}
 	}
-	
+
 	@PostMapping("/home/product/update")
-	public String producUpdate(HttpServletRequest request, ProductUpdateCMD product, Model model){
-		
+	public String producUpdate(HttpServletRequest request, ProductUpdateCMD product, Model model) {
+
 		adminService.updateProduct(product, request.getSession().getServletContext().getRealPath("/resources/images"));
-		
+
 		model.addAttribute("productUID", product.getUid());
 		return "redirect:/admin/home/product";
 
