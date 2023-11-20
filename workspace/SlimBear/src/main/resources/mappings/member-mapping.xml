@@ -41,7 +41,7 @@
 	
 	<insert id="INSERT_ORDERADDRESS"> 
 		INSERT INTO memberOrderAddress
-		(member_uid, name, phone, normal_phone, address)
+		(mem_uid, name, phone, normal_phone, address)
 		VALUES(#{member_uid},#{name},#{phone},#{normal_phone},#{address})
 	</insert>
 	
