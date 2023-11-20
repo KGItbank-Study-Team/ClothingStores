@@ -11,9 +11,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class InsertCartVO {
-	ArrayList<HashMap<String,Object>> selectProduct = new ArrayList<>();
+	ArrayList<HashMap<String,Object>> selectOptionList = new ArrayList<>();
 
-	public HashMap<String, Object>[] entrySet() {
-		return null;
-	}
 }

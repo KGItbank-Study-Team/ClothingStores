@@ -1,4 +1,4 @@
-var selectProduct = new Array();
+var selectOptionList = new Array();
 // var selectProduct = {"color": selectedColor, "size": selectedSize, "cnt": cnt}
 var selectedColor = null;
 var selectedSize = null;
@@ -62,7 +62,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectProduct.push({ color: selectedColor, size: selectedSize, cnt: 1 });
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1 });
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -85,8 +85,8 @@ function makeColorAndSizeText(color, size) {
 }
 
 function findProductIndexByOption(color, size) {
-    for (var i = 0; i < selectProduct.length; i++) {
-        if (selectProduct[i].color === color && selectProduct[i].size === size) {
+    for (var i = 0; i < selectOptionList.length; i++) {
+        if (selectOptionList[i].color === color && selectOptionList[i].size === size) {
             return i;
         }
     }
@@ -96,12 +96,12 @@ function findProductIndexByOption(color, size) {
 function removeProduct(color, size) {
     var index = findProductIndexByOption(color, size);
 
-    if (index < 0 || index >= selectProduct.length)
+    if (index < 0 || index >= selectOptionList.length)
         return;
 
     var productElement = $('tr#' + makeProductElementID(color, size));
 
-    selectProduct.splice(index, 1);
+    selectOptionList.splice(index, 1);
     productElement.remove();
 }
 
@@ -109,34 +109,34 @@ function upProductCount(color, size) {
 
     var index = findProductIndexByOption(color, size);
 
-    if (index < 0 || index >= selectProduct.length)
+    if (index < 0 || index >= selectOptionList.length)
         return;
 
 
     var productElement = $('tr#' + makeProductElementID(color, size));
 
     // 데이터 변경 및 화면 값 변경
-    selectProduct[index].cnt += 1;
+    selectOptionList[index].cnt += 1;
 
-    productElement.find(".inputBox").val(selectProduct[index].cnt);
+    productElement.find(".inputBox").val(selectOptionList[index].cnt);
 }
 
 function downProductCount(color, size) {
     var index = findProductIndexByOption(color, size);
 
-    if (index < 0 || index >= selectProduct.length || selectProduct[index].cnt <= 1)
+    if (index < 0 || index >= selectOptionList.length || selectOptionList[index].cnt <= 1)
         return;
 
 
     var productElement = $('tr#' + makeProductElementID(color, size));
 
     // 데이터 변경 및 화면 값 변경
-    selectProduct[index].cnt -= 1;
-    productElement.find(".inputBox").val(selectProduct[index].cnt);
+    selectOptionList[index].cnt -= 1;
+    productElement.find(".inputBox").val(selectOptionList[index].cnt);
 }
 
 function buyClick() {
-    console.log(selectProduct);
+    console.log(selectOptionList);
 }
 
 // GUIDE 정보 펼치고 접기
@@ -163,17 +163,17 @@ var prod_code = urlParams.get("p");
 
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
-function addCart(prod_code) {
+function addCart(uid) {
 
-    console.log(selectProduct);
-    console.log("prod_code", prod_code);
+    console.log(selectOptionList);
+    console.log("prod_code", uid);
 
     // 컨트롤러로 보내는 데이터
-    // prod_code, selectProduct(옵션값을 저장한 배열)
+    // prod_code, selectOptionList(옵션값을 저장한 배열)
     $.ajax({
-        url: "/app/insert/cart/" + prod_code,
+        url: "/app/insert/cart/" + uid,
         type: "POST",
-        data: { selectProduct : selectProduct },
+        data: { selectOptionList : selectOptionList },
         success: function (result) {
             if (result.trim() === "add_success") {
                 alert("장바구니에 추가되었습니다.");
