@@ -46,4 +46,13 @@ public class ProductDAO {
 	public int insertProduct(ProductDTO product) {
 		return template.insert("com.slimbear.mapper.Product.INSERT_PRODUCT", product);
 	}
+	
+	public long insertProductReturnUID(ProductDTO product) {
+		template.insert("com.slimbear.mapper.Product.INSERT_PRODUCT", product);
+		return product.getUid();
+	}
+	
+	public int updateProduct(ProductDTO product) {
+		return template.update("com.slimbear.mapper.Product.UPDATE_PRODUCT", product);
+	}
 }

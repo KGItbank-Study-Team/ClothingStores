@@ -43,11 +43,20 @@
 		SELECT COUNT(*) FROM product WHERE ctg_uid=#{ctg_uid};
 	</select>
 	
-	<insert id="INSERT_PRODUCT">
+	<insert id="INSERT_PRODUCT" useGeneratedKeys="true" keyProperty="uid" >
 		INSERT INTO 
 		`product` (`ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`, `reg_date`) 
 		VALUES(#{ctg_uid}, #{name}, #{desc}, #{price}, #{maker}, #{main_image}, #{reg_date})
 	</insert>
+	
+	<update id="UPDATE_PRODUCT" parameterType="product">
+		UPDATE product 
+		SET ctg_uid=#{ctg_uid}, `name`=#{name}, `desc`=#{desc}, price=#{price}
+		<if test="main_image != null">
+		,main_image=#{main_image}
+		</if>
+		WHERE uid=#{uid}
+	</update>
 
 	<!-- 제품상세(productDetail) -->
 	<!-- 제품상세검색 -->
@@ -73,7 +82,7 @@
 	<!-- 제품상세등록 -->
 	<insert id="INSERT_PRODUCT_DETAIL" parameterType="productDetail">
 		INSERT INTO
-		productDetail(product_uid, color, size, cnt)
+		productDetail(prod_uid, color, size, cnt)
 		VALUES (
 		#{prod_uid},
 		#{color},
@@ -87,8 +96,6 @@
 		UPDATE
 		productDetail
 		SET
-		color = #{color},
-		size = #{size},
 		cnt = #{cnt}
 		WHERE
 		prod_uid = #{prod_uid} AND

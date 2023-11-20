@@ -1,12 +1,4 @@
 
-
-$(function(){
-
-	addCategoryGroup(0, 0);
-
-});
-
-
 //좌측 슬라이더 메뉴 펼치기
 function pageSliderMenuActive(navID, menuIndex){
 	$('#' + navID).find(".collapsed").removeClass("collapsed");
@@ -14,8 +6,32 @@ function pageSliderMenuActive(navID, menuIndex){
 	$('#' + navID).find('.collapse-item').eq(menuIndex).addClass("active");
 }
 
+$.fn.serializeObject = function() {
+  "use strict"
+  var result = {}
+  var extend = function(i, element) {
+    var node = result[element.name]
+    if ("undefined" !== typeof node && node !== null) {
+      if ($.isArray(node)) {
+        node.push(element.value)
+      } else {
+        result[element.name] = [node, element.value]
+      }
+    } else {
+      result[element.name] = element.value
+    }
+  }
+
+  $.each(this.serializeArray(), extend)
+  return result
+}
+
+
+// 상품 등록====================================================================================================
+
 // 가격 텍스트박스에서 사용항 유효성 체크
 function checkPriceTest(evt, me) {
+
   // 문자 제거
   me.value = me.value.replace(/[^0-9]/g, "");
   
@@ -43,7 +59,6 @@ function displaySelectedImage(event, elementId) {
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
-
 
 function selectCategory(selectItem){
   var ctg = selectItem.data("ctg");
