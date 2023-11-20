@@ -40,7 +40,7 @@ public class HunServiceImpl {
 
 	@Autowired
 	private OrderDAO orderDAO;
-	
+
 	@Autowired
 	private CouponDAO couponDAO;
 
@@ -54,7 +54,7 @@ public class HunServiceImpl {
 	private NoticeDAO noticeDAO;
 
 	@Autowired
-	private MemberOrderAddressDAO memberorderaddressDAO;
+	private MemberOrderAddressDAO addressDAO;
 
 	public MyPageVO getMyPageInfo(long uid) {
 		MyPageVO vo = new MyPageVO();
@@ -84,7 +84,7 @@ public class HunServiceImpl {
 	}
 
 	public List<OrderListVO> getOrderListInfo(long memberUID) {
-		
+
 		ArrayList<OrderListVO> list = new ArrayList<>();
 		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUID);
 
@@ -107,7 +107,7 @@ public class HunServiceImpl {
 	}
 
 	public List<OrderListVO> getPastListInfo(long memberUID) {
-		
+
 		ArrayList<OrderListVO> list = new ArrayList<>();
 		List<OrderDTO> pastlist = orderDAO.getOrderListByMemberUID(memberUID);
 
@@ -196,7 +196,7 @@ public class HunServiceImpl {
 
 		for (MemberCouponDTO i : membercouponlist) {
 			CouponVO vo = new CouponVO();
-			
+
 			vo.setCouponNumber(1);
 			vo.setCouponName("개쩌는쿠폰");
 			vo.setCouponProduct("4XL 이상 상품");
@@ -217,11 +217,11 @@ public class HunServiceImpl {
 		for (WishDTO i : wishlist) {
 			WishListVO vo = new WishListVO();
 			vo.setProductURL("http://localhost:9090/app/product?p=1");
-			vo.setProductImage("여기는 상품 이미지 링크가 박힐거에요");
+			vo.setProductImage("outerEx01.gif");
 			vo.setProductName(i.getProd_code());
 			vo.setOrderAmount(110000);
 			vo.setOrderDiscount(99000);
-			
+
 			list.add(vo);
 		}
 		return list;
@@ -239,33 +239,33 @@ public class HunServiceImpl {
 			vo.setBoardWriter(i.getWriter());
 			vo.setBoardDate(i.getReg_date());
 			vo.setBoardHits(1);
-			
+
 			list.add(vo);
 		}
 		return list;
 	}
 
-	public List<AddrVO> getAddrInfo(long memberUID){
+	public List<AddrVO> getAddrInfo(long memberUID) {
 		ArrayList<AddrVO> list = new ArrayList<>();
-		List<MemberOrderAddressDTO> addrlist = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
-		
-		for(MemberOrderAddressDTO i : addrlist) {
+		List<MemberOrderAddressDTO> addrlist = addressDAO.getAddressListByMemberUID(memberUID);
+
+		for (MemberOrderAddressDTO i : addrlist) {
 			AddrVO vo = new AddrVO();
 			vo.setAddrName(i.getName());
 			vo.setRecipient(i.getRecipient());
 			vo.setPhone(i.getNomal_phone());
 			vo.setMobile(i.getPhone());
-			
+
 			String[] address = SlimBearUtil.splitAddress(i.getAddress());
 			vo.setPostcode(address[0]);
 			vo.setDefaultAddr(address[1]);
 			vo.setRemainAddr(address[2]);
-			
+
 			list.add(vo);
 		}
 		return list;
 	}
-	
+
 //	public List<AddrVO> getAddrFixInfo(long memberUID) {
 //		ArrayList<AddrVO> list = new ArrayList<>();
 //		List<MemberOrderAddressDTO> fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
@@ -294,7 +294,7 @@ public class HunServiceImpl {
 //		}
 //		return list;
 //	}
-	
+
 //	public AddrVO getAddrFixInfo(long memberUID) {
 //		AddrVO vo = new AddrVO();
 //		MemberOrderAddressDTO fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
@@ -319,19 +319,16 @@ public class HunServiceImpl {
 //		
 //		return vo;
 //	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+//	public AddrVO addAddr(MemberOrderAddressDTO address) {
+//		AddrVO vo = new AddrVO();
+//		
+//		addressDAO.insertAddress(address);
+//		return vo;
+//	}
+//	
+	public int insertAddress(MemberOrderAddressDTO address) {
+		return addressDAO.insertAddress(address);
+	}
+
 }

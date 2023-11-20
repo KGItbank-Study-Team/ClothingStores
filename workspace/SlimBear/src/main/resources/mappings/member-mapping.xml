@@ -42,12 +42,12 @@
 	<insert id="INSERT_ORDERADDRESS"> 
 		INSERT INTO memberOrderAddress
 		(mem_uid, name, phone, normal_phone, address)
-		VALUES(#{member_uid},#{name},#{phone},#{normal_phone},#{address})
+		VALUES(#{mem_uid},#{name},#{phone},#{normal_phone},#{address})
 	</insert>
 	
 	<update id="UPDATE_ORDERADDRESS">
 		UPDATE memberOrderAddress
-		SET member_uid=#{member_uid}, name=#{name}, phone=#{phone}, normal_phone=#{normal_phone}, address=#{address}
+		SET mem_uid=#{mem_uid}, name=#{name}, phone=#{phone}, normal_phone=#{normal_phone}, address=#{address}
 		WHERE uid=#{uid}
 	</update>
 	
@@ -64,13 +64,13 @@
 	
 	<insert id="INSERT_COUPON"> 
 		INSERT INTO memberCoupon
-		(member_uid, coup_uid, expi_date, use_date)
-		VALUES(#{member_uid},#{coup_uid},#{expi_date},#{use_date})
+		(mem_uid, coup_uid, expi_date, use_date)
+		VALUES(#{mem_uid},#{coup_uid},#{expi_date},#{use_date})
 	</insert>
 	
 	<update id="UPDATE_COUPON">
 		UPDATE memberCoupon
-		SET member_uid=#{member_uid}, coup_uid=#{coup_uid}, expi_date=#{expi_date}, use_date=#{use_date}
+		SET mem_uid=#{member_uid}, coup_uid=#{coup_uid}, expi_date=#{expi_date}, use_date=#{use_date}
 		WHERE uid=#{uid}
 	</update>
 	
@@ -83,8 +83,8 @@
 	
 	<insert id="INSERT_WISH"> 
 		INSERT INTO wish
-		(member_uid, prod_code, reg_date)
-		VALUES(#{member_uid},#{prod_code},#{reg_date})
+		(mem_uid, prod_code, reg_date)
+		VALUES(#{mem_uid},#{prod_code},#{reg_date})
 	</insert>
 	
 	<update id="UPDATE_WISH">

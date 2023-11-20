@@ -87,7 +87,7 @@
                                             alt=""></a>
                                 </td>
                                 <!-- 상품정보 -->
-                                <td class="left">
+                                <td class="">
                                     <strong class="name"><a
                                             href="${item.productURL}"
                                             class="ec-product-name">${item.productName}</a></strong>

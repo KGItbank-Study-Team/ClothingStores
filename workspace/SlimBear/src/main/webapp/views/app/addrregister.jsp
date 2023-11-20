@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/addr.css">
     <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>배송지등록</title>
 </head>
 
@@ -55,6 +57,8 @@
 
                 <div class="xans-element- xans-myshop xans-myshop-addrmodify ">
                     <div class="ec-base-table typeWrite">
+                    
+                    <form action="/app/member/myPage/addr/addrRegister" method="post">
                         <table border="1" summary="">
                             <caption>배송 주소록 입력</caption>
                             <colgroup>
@@ -87,8 +91,8 @@
                                             <li id="shippingUpdate_zipcode_wrap" class="ec-address-zipcode">
                                                 <input id="address_zip1" name="address_zip1" placeholder="우편번호"
                                                     fw-filter="" class="inputTypeText" type="text" maxlength="14"
-                                                     readonly="" fw-label="우편번호"> <button id="SearchAddress"
-                                                    class="btnBasic" type="button"
+                                                     readonly="" fw-label="우편번호" value=""> <button id="SearchAddress"
+                                                    class="btnBasic" type="button" onclick="searchAddress()"
                                                     style="cursor: pointer;">주소검색</button><span class="ec-base-label">
                                                     <input id="nozip" name="nozip" class="displaynone" type="checkbox"
                                                         disabled="" style="display: none; cursor: unset;" fw-filter="">
@@ -96,12 +100,13 @@
                                             <li id="shippingUpdate_baseAddr_wrap" class="">
                                                 <input id="address_addr1" name="address_addr1" placeholder="기본주소"
                                                     fw-filter="" class="inputTypeText" type="text" size="60"
-                                                    maxlength="100" readonly="" fw-label="기본주소">
+                                                    maxlength="100" readonly="" fw-label="기본주소" value="">
                                             </li>
                                             <li id="shippingUpdate_detailAddr_wrap" class="">
                                                 <input id="address_addr2" name="address_addr2"
                                                     placeholder="나머지 주소(선택 입력 가능)" fw-filter="" class="inputTypeText"
-                                                    type="text" size="60" maxlength="255" fw-label="나머지 주소(선택 입력 가능)">
+                                                    type="text" size="60" maxlength="255" fw-label="나머지 주소(선택 입력 가능)"
+                                                    value="">
                                             </li>
                                         </ul>
                                     </td>
@@ -177,10 +182,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </form>
                     </div>
                     <div class="ec-base-button">
                         <span class="gRight">
-                            <a href="#none" class="btnSubmitFix sizeS" onclick="myshopAddr.formCheck();">등록</a>
+                            <a href="/app/member/mypage/addr" class="btnSubmitFix sizeS" onclick="myshopAddr.formCheck();">등록</a>
                             <a href="/app/member/myPage/addr" class="btnNormalFix sizeS">취소</a>
                         </span>
                     </div>

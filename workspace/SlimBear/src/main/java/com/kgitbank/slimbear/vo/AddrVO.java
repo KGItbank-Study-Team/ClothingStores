@@ -16,7 +16,7 @@ public class AddrVO {
 	private String defaultAddr;		//기본주소
 	private String remainAddr;		//상세주소
 	
-	//addrfix 에서만 씀
+	//addrfix, addrregister
 	private String phone1;
 	private String phone2;
 	private String phone3;
