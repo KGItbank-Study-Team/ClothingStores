@@ -33,6 +33,7 @@
 		<property name="additionalDialects">
 			<set>
 			  <bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+			  <bean class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect"/>  <!-- Security -->
 			</set>
 		</property>
 	</bean>	
