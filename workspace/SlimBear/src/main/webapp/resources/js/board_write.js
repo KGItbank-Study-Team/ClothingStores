@@ -985,3 +985,35 @@ function validateForm() {
   return true; // 유효성 검사 통과 시 폼을 제출
 }
 
+
+$(document).ready(function () {
+    // OK 버튼 클릭 시 이벤트 처리
+    $(".btnSubmitFix").click(function () {
+        // 게시글 정보 수집
+        var title = $("#subject option:selected").text();
+        var content = $('#content').froalaEditor('html.get');
+        var selectedTitleForm = $("input[name='subject']:checked").val();
+
+        // Ajax를 이용해 서버로 데이터 전송
+        $.ajax({
+            type: "POST",
+            url: "/board/write",  // 실제 서버의 URL로 수정
+            data: {
+                title: title,
+                content: content,
+                selectedTitleForm: selectedTitleForm
+            },
+            success: function (response) {
+                // 성공적으로 데이터를 전송하고 응답받았을 때 수행할 동작
+                console.log("게시글이 성공적으로 등록되었습니다.");
+                // 추가로 필요한 동작 수행
+            },
+            error: function (error) {
+                // 데이터 전송 중 오류가 발생했을 때 수행할 동작
+                console.error("게시글 등록 중 오류가 발생했습니다.");
+                // 추가로 필요한 동작 수행
+            }
+        });
+    });
+});
+

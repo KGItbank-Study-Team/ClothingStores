@@ -27,13 +27,14 @@ public class InquiryDAO {
 	}
 
 	// 상품문의 데이터 삽입
-	public int insertInquiry(InquiryDTO Inquiry) {
-		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRY", Inquiry);
+	public int insertInquiry(InquiryDTO inquiry) {
+		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRY", inquiry);
+		
 	}
 	
 	// 상품문의 업데이트
-	public int updateInquiry(InquiryDTO Inquiry) {
-		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRY", Inquiry);
+	public int updateInquiry(InquiryDTO inquiry) {
+		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRY", inquiry);
 	}
 	
 	// 상품문의 데이터 삭제

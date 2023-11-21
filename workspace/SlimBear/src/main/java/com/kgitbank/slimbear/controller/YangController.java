@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,58 +61,32 @@ public class YangController {
     }
 	
 	
+	// 게시글 작성
+	@PostMapping("/app/board/inquiry")
+    public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
+        // 상품 문의할 경우 TYPE값 설정
+        if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+            inquiryDTO.setType("PRODUCT");
+        }
+        // 배송 문의할 경우 TYPE값 설정
+        else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+            inquiryDTO.setType("DELIVERY");
+        }
+        // 불량/오배송 문의할 경우 TYPE값 설정
+        else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+            inquiryDTO.setType("DELIVERY_C");
+        }
+        
+        // reg_date 설정(현재 시간)
+        inquiryDTO.setReg_date(new Date());
+        // TITLE값을 CONTENT에 설정
+        inquiryDTO.setContent(inquiryDTO.getTitle());
+        // DAO로 전달
+        boardService.insertInquiry(inquiryDTO);
+        // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
+        return "redirect:/app/board/inquiry/";
+    }
 	
-	
-	
-	// 두번 변경해본 코드
-	/*
-	 * public String getBoardInquiryList(Model model) { // 전체 상품문의 조회
-	 * List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-	 * model.addAttribute("inquiries", inquiries);
-	 * 
-	 * // 특정 prod_uid에 해당하는 상품문의 조회 long prodUid = 123L; // 원하는 prod_uid 값으로 변경
-	 * List<InquiryDTO> inquiriesByProdUid =
-	 * inquiryDAO.getInquiryListByProdUid(prodUid);
-	 * model.addAttribute("inquiriesByProdUid", inquiriesByProdUid);
-	 * 
-	 * return "inquiry"; // 여러분이 사용하는 JSP 페이지의 이름을 반환합니다. }
-	 */
-
-
-	// 기존 코드
-	/*
-	 * @RequestMapping("/board/inquiry") public String getBoardInquiryList(
-	 * 
-	 * @RequestParam(name = "category_no", required = false, defaultValue = "0")
-	 * String categoryNo, Model model) { List<InquiryDTO> inquiries;
-	 * 
-	 * switch (categoryNo) { case "1": inquiries =
-	 * boardService.getBoardInquiryListByType("DELIVERY"); break; case "2":
-	 * inquiries = boardService.getBoardInquiryListByType("DELIVERY_C"); break;
-	 * default: inquiries = boardService.getBoardInquiryListByType("PRODUCT"); }
-	 * model.addAttribute("inquiries", inquiries); model.addAttribute("boardUsers",
-	 * boardService.getBoardUserList());
-	 * 
-	 * return "inquiry"; }
-	 */
-
-	/*
-	 * @RequestMapping("/board/inquiry") public String
-	 * getBoardInquiryList(@RequestParam(name = "category_no", required = false,
-	 * defaultValue = "0") String categoryNo, Model model) { List<InquiryDTO>
-	 * inquiries;
-	 * 
-	 * switch (categoryNo) { case "1": // 추가적인 로직이 필요하다면
-	 * boardService.getBoardInquiry2List()로 변경 inquiries =
-	 * boardService.getBoardInquiryList(); break; case "2": // 추가적인 로직이 필요하다면
-	 * boardService.getBoardInquiry3List()로 변경 inquiries =
-	 * boardService.getBoardInquiryList(); break; default: inquiries =
-	 * boardService.getBoardInquiryList(); } model.addAttribute("inquiries",
-	 * inquiries); model.addAttribute("boardUsers",
-	 * boardService.getBoardUserList());
-	 * 
-	 * return "inquiry"; }
-	 */
 
 	
 	// 자주묻는질문

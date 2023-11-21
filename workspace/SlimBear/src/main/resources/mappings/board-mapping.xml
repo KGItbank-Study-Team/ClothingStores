@@ -104,12 +104,6 @@
 	        type = #{type}
  	</select>
  	
- 	<!-- inquiry에서 notice type 값만 가져오기  -->
-<!-- 	<select id="SELECT_NOTICE_LIST" resultType="inquiry"> -->
-<!-- 	    SELECT * FROM notice WHERE (priority != 0 AND type IS NOT NULL) ORDER BY FIELD(priority, 1, 2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC -->
-<!-- 	</select> -->
-
- 	
 	
  	<!-- 특정 prod_uid 상품문의 조회 -->
  	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
@@ -119,8 +113,8 @@
  	<!-- 상품문의 데이터 삽입 -->
  	<insert id="INSERT_INQUIRY">
  		INSERT INTO inquiry
- 		(writer_id, content, reg_date, status, type, prod_uid)
- 		VALUES(#{writer_id}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid})
+ 		(writer_id, title, content, reg_date, status, type, prod_uid)
+ 		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid})
  	</insert>
  	
  	<!-- 상품문의 업데이트 -->

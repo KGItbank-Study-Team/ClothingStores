@@ -5,20 +5,17 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>BOARD WRITE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script defer src="/resources/js/boardWrite.js"></script>
+<script defer src="/resources/js/board_write.js"></script>
 </head>
 <body id="main">
 <jsp:include page="header/header.jsp" />
 <div id="wrap">
 	<div id="container">
 		<div id="contents">
-			<div
-				class="xans-element- xans-board xans-board-writepackage-4 xans-board-writepackage xans-board-4 ">
-				<div
-					class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
+			<div class="xans-element- xans-board xans-board-writepackage-4 xans-board-writepackage xans-board-4 ">
+				<div class="xans-element- xans-board xans-board-title-4 xans-board-title xans-board-4 ">
 					<div class="path">
 						<span>현재 위치</span>
 						<ol>
@@ -35,8 +32,8 @@
 					</div>
 				</div>
 				
-				<form id="boardWriteForm" name="" action="/exec/front/Board/write/6"
-					method="post" target="_self" enctype="multipart/form-data">
+<!-- 				<form id="boardWriteForm" name="boardWriteForm" action="/board/write" method="post" target="_self" enctype="multipart/form-data"> -->
+				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data">
 					<input id="board_no" name="board_no" value="6" type="hidden" /> 
 					<input id="product_no" name="product_no" value="0" type="hidden" /> 
 					<input id="move_write_after" name="move_write_after"
@@ -48,8 +45,11 @@
 					<input id="isExceptBoardUseFroalaImg" name="isExceptBoardUseFroalaImg" 
 						value="" type="hidden" /> 
 					<input id="isGalleryBoard" name="isGalleryBoard" value="" type="hidden" />
-					<input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
-							value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
+					<input id="type" name="type" value="" type="hidden" />
+
+				    <input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
+				           value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
+							
 					<input id="fix_title_form_0" name="fix_title_form_0" value="상품 문의합니다 ♡"
 							type="hidden" /> 
 					<input id="fix_title_form_1" name="fix_title_form_1" value="불량/오배송 문의합니다 ♡" 
@@ -96,11 +96,16 @@
 							불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 							&lt;br /&gt;
 							--------------------------------------------------------------"
-						type="hidden" /> 
+						type="hidden" />
 					<input id="fix_add_content"
 						name="fix_add_content" value="" type="hidden" />
-					<div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
 						
+					<input id="type" name="type" value="" type="hidden" />
+				    <input id="reg_date" name="reg_date" type="hidden" />
+				    <input id="writer_id" name="writer_id" type="hidden" />
+						
+						
+					<div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
 					<div class="ec-base-box typeProduct displaynone ">
 						<p class="thumbnail">
 							<a href="">
@@ -133,6 +138,7 @@
 							</p>
 						</div>
 					</div>
+					
 					<div class="ec-base-table typeWrite ">
 						<table border="1" summary="">
 							<caption>글쓰기 폼</caption>
@@ -144,12 +150,11 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-									<select id="subject" name="subject"
-										fw-filter="isFill" fw-label="제목" fw-msg="">
+<!-- 									<select id="subject" name="subject" fw-filter="isFill" fw-label="제목" fw-msg=""> -->
+									<select id="subject" name="subject" th:field="*{subject}">
 										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
-										<option value="상품 문의합니다 ♡">배송 문의합니다 ♡</option>
+										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option>
 										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
-										<option value="기타 문의합니다 ♡">기타 문의합니다 ♡</option>
 									</select>
 									</td>
 								</tr>
@@ -176,12 +181,12 @@
 											href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2310251253">
 										
 										<!-- HTML --> 
-										<textarea style="width: 100%;" name="content"
-											id="content" class="ec-fr-never-be-duplicated">
+										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated">
 										</textarea> 
-										<input type="hidden" id="content_hidden" 
-											fw-filter="isSimplexEditorFill" fw-label="내용"
-											value="EC_FROALA_INSTANCE" /> <!-- JavaScript --> 
+										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
+										<input type="hidden" name="reg_date" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>" />
+    
+										<!-- JavaScript --> 
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/polyfill.min.js?vs=2310251253"></script>
 										<script type="text/javascript"
@@ -247,9 +252,8 @@
 									</td>
 								</tr>
 								<tr class="agree displaynone">
-									<th scope="row">개인정보 수집 및 <br />이용 동의
-									</th>
-									<td><br /> 개인정보 수집 및 이용에 동의하십니까?</td>
+									<th scope="row">개인정보 수집 및 <br/>이용 동의</th>
+									<td><br/> 개인정보 수집 및 이용에 동의하십니까?</td>
 								</tr>
 							</tbody>
 						</table>
@@ -262,12 +266,49 @@
 							</span>
 						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
-						<span class="gRight">
+						<!-- <span class="gRight">
 							<a href="#" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
 							<a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
-						</span>
+						</span> -->
+						<span class="gRight">
+                            <button type="submit" class="btnSubmitFix sizeS">OK</button>
+                            <a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
+                        </span>
 					</div>
 				</div>
+				
+				<script>
+			    $(document).ready(function () {
+			        // TITLE값이 변경될 때 TYPE값을 설정하는 함수
+			        $("#subject").change(function () {
+			            var selectedTitle = $(this).val();
+			            var type = ""; // 기본값
+			
+			            // TITLE값에 따라 TYPE값 설정
+			            if (selectedTitle === "상품 문의합니다 ♡") {
+			                type = "PRODUCT";
+			            } else if (selectedTitle === "배송 문의합니다 ♡") {
+			                type = "DELIVERY";
+			            } else if (selectedTitle === "불량/오배송 문의합니다 ♡") {
+			                type = "DELIVERY_C";
+			            }
+			
+			            // TYPE값을 hidden input에 설정
+			            $("#type").val(type);
+			        });
+			    });
+				</script>
+				<script>
+			   // 현재 날짜 및 시간을 가져오는 함수
+			   function getCurrentDateTime() {
+			      return new Date().toISOString().slice(0, 19).replace("T", " ");
+			   }
+			
+			   // 폼 제출 시 reg_date 설정
+			   $("#boardWriteForm").submit(function () {
+			      $("#reg_date").val(getCurrentDateTime());
+			   });
+				</script>
 			</form>
 		</div>
 	</div>
