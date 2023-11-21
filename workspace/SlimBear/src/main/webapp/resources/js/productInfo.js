@@ -196,8 +196,8 @@ function addWish(uid) {
         url: "/app/insert/wish/" + uid,
         type: "POST",
         data: uid,
-        sucess: function(result) {
-            if(result.trim === "add_success") {
+        success: function(result) {
+            if(result.trim() === "add_success") {
                 alert("위시리스트에 추가되었습니다.");
             } else {
                 alert("이미 추가된 상품입니다.")

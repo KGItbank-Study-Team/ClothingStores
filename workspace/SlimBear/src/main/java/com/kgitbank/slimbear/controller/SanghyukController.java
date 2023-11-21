@@ -111,11 +111,12 @@ public class SanghyukController {
 		WishDTO wishDTO = new WishDTO();
 		wishDTO.setMem_uid(mem_uid);
 		wishDTO.setUid(uid);
-		wishDTO.setProd_code("Test");
+		wishDTO.setProd_code("Test3");
 		wishDTO.setReg_date(new Timestamp(System.currentTimeMillis()));
 		System.out.println(wishDTO);
 		int isAreadyExited = sanghService.findWishProduct(wishDTO);
-		if(isAreadyExited>=1) {
+		System.out.println("isAreadyExited: " + isAreadyExited);
+		if(isAreadyExited>0) {
 			return "already_existed";
 		} else {
 			sanghService.insertInWish(wishDTO);

@@ -84,7 +84,7 @@
 	<select id="SELECT_COUNT_IN_WISH" resultType="int" parameterType="wish">
 		SELECT COUNT(*) FROM wish
 		WHERE mem_uid=#{mem_uid}
-		AND prod_code=#{uid}
+		AND prod_code=#{prod_code}
 	</select>
 	<!-- 추가 시 새로운 uid 부여  -->
 	<select id="SELECT_MAX_UID_WISH" resultType="long" parameterType="wish">
