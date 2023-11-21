@@ -80,7 +80,7 @@ public class SangyhyukServiceImpl {
 	}
 	
 	/* 장바구니에 동일한 상품이 있는지 조회 */
-	public boolean findProducts(CartDTO cart) {
+	public int findProducts(CartDTO cart) {
 		return cartDAO.selectCountInCart(cart);
 	}
 	

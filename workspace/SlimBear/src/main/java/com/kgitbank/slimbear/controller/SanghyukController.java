@@ -68,9 +68,10 @@ public class SanghyukController {
 	public String insertInCart(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
 		SecurityUser user = (SecurityUser)authentication.getPrincipal(); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		long mem_uid = user.getUid();
-		System.out.println("mem_uid: " + mem_uid);
-		System.out.println("data: " + data);
-		// for문 돌려야해!!!! 정신 차려라 이상혁!!! 깡다구로 버텨라 시발 지지 않는다. 마음이 꺾이면 끝이다.
+		// 테스트 코드
+		//System.out.println("mem_uid: " + mem_uid);
+		//System.out.println("data: " + data);
+
 		String prod_code = null;
 		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
 		System.out.println("selectOptionList = " + selectOptionList);
@@ -86,9 +87,9 @@ public class SanghyukController {
 			cartDTO.setProd_code(prod_code); // 상품 코드 설정
 			cartDTO.setCnt(cnt);
 			
-			boolean isAreadyExited = sanghService.findProducts(cartDTO);
+			int isAreadyExited = sanghService.findProducts(cartDTO);
 			System.out.println("isAreadyExited: " + isAreadyExited);
-			if(isAreadyExited==true) {
+			if(isAreadyExited>=1) {
 				return "already_existed";
 			} else {
 				sanghService.insertInCart(cartDTO);

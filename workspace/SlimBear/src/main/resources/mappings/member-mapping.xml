@@ -104,7 +104,7 @@
 		SELECT color,size FROM productDetail WHERE prod_uid = #{productUID}
 	</select>
 	<!--cart에 동일한 상품이 있는지 확인 -->
-	<select id="SELECT_COUNT_IN_CART" resultType="String" parameterType="cart">
+	<select id="SELECT_COUNT_IN_CART" resultType="int" parameterType="cart">
 		SELECT COUNT(*) FROM cart
 		WHERE mem_uid=#{mem_uid}
 		AND prod_code=#{prod_code}
