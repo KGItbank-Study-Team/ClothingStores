@@ -1,34 +1,34 @@
 .xans-member-findpasswdmethod.ec-base-box {
-    padding: 49px 0 39px;
+	padding: 49px 0 39px;
 }
 
 .xans-member-findpasswdmethod .inner {
-    width: 375px;
-    margin: 0 auto;
+	width: 375px;
+	margin: 0 auto;
 }
 
 .xans-member-findpasswdmethod .inner .ec-base-desc li {
-    margin: 5px 0 0;
+	margin: 5px 0 0;
 }
 
 .xans-member-findpasswdmethod .inner .ec-base-desc li.mobile .number {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .xans-member-findpasswdmethod .inner input[type=text] {
-    width: 172px;
+	width: 172px;
 }
 
 .xans-member-findpasswdmethod .inner .ec-base-desc .term {
-    width: 35%;
+	width: 35%;
 }
 
 .xans-member-findpasswdmethod .inner .ec-base-desc .desc {
-    padding-left: 35%;
+	padding-left: 35%;
 }
 
 .xans-member-findpasswdmethod .inner .ec-base-button {
-    padding: 40px 3px 10px 0;
+	padding: 40px 3px 10px 0;
 }
 
 .xans-member-findidresult.ec-base-box {
@@ -458,7 +458,6 @@ body .title {
 
 .ec-base-product {
 	padding-top: 0 !important;
-	
 	padding-left: 150px;
 	padding-right: 150px;
 }
@@ -476,7 +475,7 @@ body .title {
 }
 
 .list_title>.left {
-	
+	padding-left:148px;
 }
 
 .list_title>.left h2 {
@@ -503,7 +502,7 @@ body .title {
 
 .xans-product-normalmenu .function {
 	text-align: right;
-	padding-right:150px;
+	padding-right: 150px;
 }
 
 .xans-product-normalmenu .function .btnCompare {
@@ -647,7 +646,7 @@ body .title {
 }
 
 #main .titleArea {
-	text-align:center;
+	text-align: center;
 	padding-bottom: 25px;
 }
 
@@ -1603,7 +1602,7 @@ div.ec-base-help ul li {
 
 .ec-base-product img {
 	vertical-align: middle;
-	height:400px;
+	height: 400px;
 }
 
 .ec-base-product a[href^='/product/detail.html']>img {
@@ -1623,7 +1622,6 @@ div.ec-base-help ul li {
 	display: inline-block;
 	margin: 0 0 60px;
 	vertical-align: top;
-	
 }
 
 .ec-base-product .prdList>li .icon {
@@ -3858,31 +3856,30 @@ body.oneTop #container {
 	z-index: 2;
 }
 
-#oneTop .btns input {
-	position: relative;
-	z-index: 2;
-	display: inline-block;
-	width: 17px;
-	height: 17px;
-	border: 0;
-	text-align: center;
-	background: rgba(255, 255, 255, 0.85);
-	margin-right: 6px;
-}
+/* #oneTop .btns input { */
+/* 	position: relative; */
+/* 	z-index: 2; */
+/* 	display: inline-block; */
+/* 	width: 17px; */
+/* 	height: 17px; */
+/* 	border: 0; */
+/* 	text-align: center; */
+/* 	background: rgba(255, 255, 255, 0.85); */
+/* 	margin-right: 6px; */
+/* } */
 
-#oneTop .btns a {
-	display: inline-block;
-	margin-left: 4px;
-	vertical-align: middle;
-}
+/* #oneTop .btns a { */
+/* 	display: inline-block; */
+/* 	margin-left: 4px; */
+/* 	vertical-align: middle; */
+/* } */
 
-#oneTop .btns i {
-	font-size: 23px;
-	display: inline-block;
-	color: rgba(255, 255, 255, .67);
-	;
-}
-
+/* #oneTop .btns i { */
+/* 	font-size: 23px; */
+/* 	display: inline-block; */
+/* 	color: rgba(255, 255, 255, .67); */
+/* 	; */
+/* } */
 #oneTop label {
 	font-size: 10px;
 	letter-spacing: .5px;

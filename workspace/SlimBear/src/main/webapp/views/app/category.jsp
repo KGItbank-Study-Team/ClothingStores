@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
+<jsp:include page="header/header.jsp" />
 <html>
 <head>
 <script type="text/javascript">
@@ -27,7 +28,6 @@
 }
 </style>
 </head>
-<jsp:include page="header/header.jsp" />
 <body id="main">
 	<div id="wrap">
 		<div id="contents">
@@ -200,7 +200,8 @@
 									<div class="thumbnail">
 										<div class="salePer"></div>
 										<div class="prdImg">
-											<a href="#" name="anchorBoxName_7902"> <img
+											<a href="/app/product?p=${item.uid}"
+												name="anchorBoxName_7902"> <img
 												src="/resources/images/${item.main_image}"
 												id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
 											</a> <span class="chk"> <input type="checkbox"
@@ -312,11 +313,11 @@
 						</li>
 					</ol>
 				</div>
-				<jsp:include page="footer/footer.jsp" flush="true" />
+
 			</main>
+
 		</div>
 		<!-- #footer -->
-	</div>
 	</div>
 	<script type="text/javascript" src="/resources/js/ko.js"
 		charset="utf-8"></script>
@@ -325,3 +326,5 @@
 
 </body>
 </html>
+
+<jsp:include page="footer/footer.jsp" flush="false" />
