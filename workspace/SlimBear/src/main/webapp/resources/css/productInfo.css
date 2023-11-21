@@ -21,29 +21,29 @@ a {
 	margin: 107.5px;
 	padding-top: 100px;
 	height: auto;
-/* 	position: absolute;
-	top: 50%;
-	left: 50%; */
+	/* text-align: center; */
 }
 
 .productInfo {
 	display: flex;
 	max-width: 1750px;
 	position: relative;
-	left: 15%;
+	/* left: 15%; */
 	width: fit-content;
 	margin-bottom: 80px;
+	text-align: center;
 }
 
 .left {
-	position: relative;
+	/* position: relative; */
 	display: inline-block;
 	vertical-align: top;
-	padding-right: 120px;
+	text-align:center;
 }
 
 .right {
 	width: 550px;
+	text-align: center;
 }
 
 .productImg img {
@@ -398,9 +398,9 @@ section > h1 {
 .inquirySection {
 	margin-top: 100px;
 }
-.inquirySection > th, td {
+/* .inquirySection > th, td {
 	text-align: center;
-}
+} */
 
 .inquirySection > td {
 	padding: 20px 0;

@@ -13,10 +13,6 @@
 </head>
 <body>
 	<%@ include file="header/header.jsp"%>
-<%-- 	<%
-		HttpSession mySession = request.getSession();
-		long sessionID = (long)mySession.getAttribute("uid");
-	%> --%>
 	<div id="container">
 		<div class="productInfo">
 			<div class="left">
@@ -83,6 +79,7 @@
 					</table>
 				</div>
 				<!-- 옵션 선택 시 화면에 출력 -->
+				<input type="hidden" id="productDetailList" value="${product.price}"/>
 				<form action="/app/order/product" method="post">
 					<div class="tablePosition">
 						<table class="choiceOption">
@@ -296,7 +293,7 @@
 				<span><a href="#guide">GUIDE</a></span>
 			</div>
 			<div>
-				<span><a href="QnA">Q&A</a></span>
+				<span><a href="#QnA">Q&A</a></span>
 			</div>
 		</div>
 		<hr class="hrCss">
@@ -425,23 +422,24 @@
 					</div>
 				</div>
 				<!-- <hr class="myHrTwo" /> -->
-				<c:forEach items="${reviewList}" var="list">
+				<c:forEach items="${reviewList}" var="reviewList">
 					<div class="review-section">
 						<div class="info">
 							<div>
-								<span>${list.mem_id}</span>
+								<span>${reviewList.mem_id}</span>
 								<div>
-									<p>${list.reg_date}</p>
+									<p>${reviewList.reg_date}</p>
 								</div>
 							</div>
-							<div class="review-score">★★★★★(${list.score})</div>
+							<div class="review-score">★★★★★(${reviewList.score})</div>
+							<input type="hidden" id="reviewList" value="${reviewList.score}"/>
 						</div>
 						<div class="photo-review">
 							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
 							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
 						</div>
 						<div class="review-text">
-							<div>${list.content}</div>
+							<div>${reviewList.content}</div>
 						</div>
 					</div>
 					<!-- <hr /> -->
@@ -465,7 +463,6 @@
 					<col style="width: atuo;">
 					<col style="width: 150px;">
 					<col style="width: 130px;">
-					<%-- <col style="70px;"> --%>
 				</colgroup>
 				<thead>
 					<tr>
@@ -483,13 +480,12 @@
 							<td class="solid">${inquiryItems.writer_id}</td>
 							<td class="solid">${inquiryItems.title}</td>
 							<td class="solid">${inquiryItems.reg_date}</td>
-							<%-- <td>${ }</td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<button class="qnaBtn">
-				<a href="" class="qnaBtnColor">문의하기</a>
+				<a href="/app/board/write" class="qnaBtnColor">문의하기</a>
 			</button>
 		</div>
 		<div class="footer">

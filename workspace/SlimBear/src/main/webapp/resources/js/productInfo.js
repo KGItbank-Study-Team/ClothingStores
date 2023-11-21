@@ -3,6 +3,9 @@ var selectOptionList = new Array();
 var selectedColor = null;
 var selectedSize = null;
 var cnt = 1;
+var productPrice = document.getElementById('productDetailList').value;
+var score = document.getElementById('reviewList').value;
+var totalPrice = null;
 
 // 상품 색상, 사이즈 옵션 선택
 $(function () {
@@ -46,8 +49,8 @@ $(function () {
             + '<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color, size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>'
             + '<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color, size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>'
             + '</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color, size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" class="deleteImg"/></a>'));
-        // newRow.append($('<td><div class="tdCell">' + prodPrice + '</div></td>'));
-        newRow.append($('<td><div class="tdCell">${product.price}</div></td>'));
+        newRow.append($('<td><div class="tdCell">' + productPrice + '</div></td>'));
+
         $(".choiceOption").append(newRow);
     }
 
