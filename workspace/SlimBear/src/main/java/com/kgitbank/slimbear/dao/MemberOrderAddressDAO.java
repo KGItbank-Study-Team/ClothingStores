@@ -20,6 +20,10 @@ public class MemberOrderAddressDAO {
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_ORDERADDRESS_LIST_BY_MEMBER_UID", info);
 	}
+	
+	public MemberOrderAddressDTO getAddressByUID(long addressUID) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_ORDERADDRESS_UID", addressUID);
+	}
 
 	public int insertAddress(MemberOrderAddressDTO address) {
 		return template.insert("com.slimbear.mapper.Member.INSERT_ORDERADDRESS", address);
