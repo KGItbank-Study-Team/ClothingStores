@@ -372,9 +372,11 @@ section > h1 {
 .info p {
 	font-size: 10px;
 }
-.review-score {
+#review-score {
 	color: brown;
 	font-size: 20px;
+	position: relative;
+	top: -15px;
 }
 .photo-review  img {
 	width: 116px;
@@ -382,7 +384,7 @@ section > h1 {
 	padding-left: 5px;
 }
 .review-text {
-	padding-left: 5px;
+/* 	padding-left: 5px; */
 }
 .paging {
 	text-align: center;

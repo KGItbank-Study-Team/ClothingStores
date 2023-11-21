@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
@@ -431,7 +432,13 @@
 									<p>${reviewList.reg_date}</p>
 								</div>
 							</div>
-							<div class="review-score">★★★★★(${reviewList.score})</div>
+						    <div id="review-score">
+						        <i class="far fa-star"></i>
+						        <i class="far fa-star"></i>
+						        <i class="far fa-star"></i>
+						        <i class="far fa-star"></i>
+						        <i class="far fa-star"></i>
+						    </div>
 							<input type="hidden" id="reviewList" value="${reviewList.score}"/>
 						</div>
 						<div class="photo-review">

@@ -4,7 +4,6 @@ var selectedColor = null;
 var selectedSize = null;
 var cnt = 1;
 var productPrice = document.getElementById('productDetailList').value;
-var score = document.getElementById('reviewList').value;
 var totalPrice = null;
 
 // 상품 색상, 사이즈 옵션 선택
@@ -214,3 +213,43 @@ function addWish(uid) {
         }
     });
 };
+
+// 리뷰점수를 별모양으로 표시
+// window.onload = function() {
+//     const reviewScore = document.getElementById('reviewList').value;
+//     console.log('reviewScore: ' + reviewScore);
+
+//     function showScoreByStars(reviewScore) {
+//         const starRating = Math.ceil(reviewScore / 10);
+//         const stars ='⭐'.repeat(starRating);
+//         console.log('stars: ' + stars);
+//         console.log('reviewScore: ' + reviewScore);
+//         document.getElementById('review-score').innerHTML = '<div id="review-score">' + stars + '(' + reviewScore+ ')' +  '</div>';
+
+//     }
+
+//     showScoreByStars(reviewScore);
+// }
+window.onload = function() {
+    const reviewScore = document.getElementById('reviewList').value;
+    console.log('reviewScore: ' + reviewScore);
+    
+    function showScoreByStars(reviewScore){
+    
+        const Score = Math.round(reviewScore);
+        const reviewScoreElement = document.getElementById('review-score');
+        const stars = reviewScoreElement.getElementsByTagName('i');
+    
+        // 기존 클래스 초기화
+        for(let i=0; i<stars.length; i++){
+            stars[i].classList.remove('fas');
+        }
+    
+        // fas 클래스 적용
+        for(let i=0; i<Score/10; i++) {
+            stars[i].classList.add('fas');
+        }
+    }
+    console.log('reviewScore: ' + reviewScore);
+    showScoreByStars(reviewScore);
+}
