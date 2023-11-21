@@ -57,12 +57,15 @@ public class OstSerivceImpl {
 			vo.setMaker(product.getMaker());
 			vo.setMain_image(product.getMain_image());
 			
+			
 			// 상품의 색상 옵션 리스트 추가
 		    vo.setColorOptions(productdetailDAO.getColorOptions(productUID));
 
 		    // 상품의 크기 옵션 리스트 추가
 		    vo.setSizeOptions(productdetailDAO.getSizeOptions(productUID));
-			
+		    
+		    
+		    
 			list.add(vo);
 
 		}
@@ -119,7 +122,7 @@ public class OstSerivceImpl {
         // 여기에서 적절한 방식으로 사이즈 옵션 리스트를 가져오는 코드를 구현해야 합니다.
         // 예를 들어, ProductDetailDAO나 ProductService를 이용하여 데이터를 가져올 수 있습니다.
         // 아래는 가상의 코드이며, 실제로는 데이터를 어떻게 가져올지에 따라 수정해야 합니다.
-        return Arrays.asList("100", "105", "110", "115"); // 가상의 리스트를 반환하고 있습니다.
+        return Arrays.asList(); // 가상의 리스트를 반환하고 있습니다.
     }
 
 }

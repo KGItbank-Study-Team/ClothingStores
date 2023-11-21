@@ -52,9 +52,24 @@
 							class="cart__list__smartstore">${cart.maker}</span>
 							<p>${cart.name }</p></td>
 						<td class="cart__list__option">
-							<p>${cart.name}</p>
+							<p>
+   ${cart.name}
+   <c:forEach var="color" items="${cart.colorOptions}">
+      <c:if test="${color eq cart.color}">
+         <c:out value="${color}" />
+      </c:if>
+   </c:forEach>
+   , 
+   
+   <c:forEach var="size" items="${cart.sizeOptions}">
+      <c:if test="${size eq cart.size}">
+         <c:out value="${size}" />
 
-							<div class="btn"
+      </c:if>
+     
+   </c:forEach>
+</p>
+	<div class="btn"
 								onclick="toggleHiddenContent(this, ${status.index});">주문
 								추가/변경▽</div>
 							<div class="hiddenContent04">
@@ -63,11 +78,12 @@
 									<tbody class="cchange">
 										<tr class="nammme">
 											<td colspan="3">${cart.name}</td>
+
 										</tr>
 										<tr class="">
 											<td class="pcolor">
 												<p class="colooo">COLOR</p>
-											</td>${cart.color }
+											</td>
 											<td colspan="2" class="colorrr"><select class="colorr"
 												id="color_${status.index}_${cart.uid}">
 													<c:forEach var="color" items="${cart.colorOptions}">

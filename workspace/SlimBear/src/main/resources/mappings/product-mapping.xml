@@ -22,13 +22,14 @@
 		LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 
-	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE" parameterType="product"
-		resultType="product">		
+	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE"
+		parameterType="product" resultType="product">
 		SELECT *
 		FROM product
 		WHERE ctg_uid=#{ctg_uid}
 		ORDER BY price
-		LIMIT #{pageSize} OFFSET #{offset}
+		LIMIT #{pageSize}
+		OFFSET #{offset}
 	</select>
 
 	<select id="SELECT_PROD_BY_CATEGORY_ORDER_BY_PRICE_DESC"
@@ -37,35 +38,39 @@
 		price DESC
 		LIMIT #{pageSize} OFFSET #{offset};
 	</select>
-	
-	<select id="SELECT_COUNT_PROD_BY_UID"
-		resultType="int">
-		SELECT COUNT(*) FROM product WHERE ctg_uid=#{ctg_uid};
+
+	<select id="SELECT_COUNT_PROD_BY_UID" resultType="int">
+		SELECT COUNT(*)
+		FROM product WHERE ctg_uid=#{ctg_uid};
 	</select>
-	
-	<insert id="INSERT_PRODUCT" useGeneratedKeys="true" keyProperty="uid" >
-		INSERT INTO 
-		`product` (`ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`, `reg_date`) 
+
+	<insert id="INSERT_PRODUCT" useGeneratedKeys="true"
+		keyProperty="uid">
+		INSERT INTO
+		`product` (`ctg_uid`, `name`, `desc`, `price`, `maker`, `main_image`,
+		`reg_date`)
 		VALUES(#{ctg_uid}, #{name}, #{desc}, #{price}, #{maker}, #{main_image}, #{reg_date})
 	</insert>
-	
+
 	<update id="UPDATE_PRODUCT" parameterType="product">
-		UPDATE product 
+		UPDATE product
 		SET ctg_uid=#{ctg_uid}, `name`=#{name}, `desc`=#{desc}, price=#{price}
 		<if test="main_image != null">
-		,main_image=#{main_image}
+			,main_image=#{main_image}
 		</if>
 		WHERE uid=#{uid}
 	</update>
 
 	<!-- 제품상세(productDetail) -->
-	<select id="getColorOptions" resultType="string" parameterType="long">
-    SELECT DISTINCT color FROM productDetail WHERE prod_uid = #{productUID}
-</select>
+	<select id="getColorOptions" resultType="string"
+		parameterType="long">
+		SELECT DISTINCT color FROM productDetail WHERE prod_uid = #{productUID}
+	</select>
 
-<select id="getSizeOptions" resultType="string" parameterType="long">
-    SELECT DISTINCT size FROM productDetail WHERE prod_uid = #{productUID}
-</select>
+	<select id="getSizeOptions" resultType="string"
+		parameterType="long">
+		SELECT DISTINCT size FROM productDetail WHERE prod_uid = #{productUID}
+	</select>
 	<!-- 제품상세검색 -->
 	<select id="SELECT_PRODUCT_DETAIL" parameterType="productDetail"
 		resultType="productDetail">
@@ -106,7 +111,8 @@
 		cnt = #{cnt}
 		WHERE
 		prod_uid = #{prod_uid} AND
-		color = #{color} AND
+		color =
+		#{color} AND
 		size = #{size}
 	</update>
 
@@ -117,7 +123,8 @@
 		WHERE
 		prod_uid = #{prod_uid} AND
 		color = #{color} AND
-		size = #{size}
+		size =
+		#{size}
 	</delete>
 
 </mapper>
