@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.dao.FaqDAO;
-import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
@@ -24,21 +23,12 @@ public class YangBoardServiceImpl {
 	@Autowired
 	private InquiryDAO inquiryDAO;
 	@Autowired
-    private InquiryAnswerDAO inquiryAnswerDAO;
-	@Autowired
 	private FaqDAO faqDAO;
 	
 	// 공지사항
 	public List<NoticeDTO> getNoticeList(int priority) {
 		return noticeDAO.getNoticeList(priority);
 	}
-	
-	/*
-	 * public List<NoticeDTO> getBoardNoticeList() { List<NoticeDTO> notices =
-	 * noticeDAO.getNoticeList();
-	 * 
-	 * return notices; }
-	 */
 	
 	
 	// 문의게시판
@@ -52,26 +42,17 @@ public class YangBoardServiceImpl {
     }
     
     // 문의게시판 답변
-    
+    public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
+        return inquiryDAO.getInquiryListByProdUid(prodUid);
+    }
 	
     // 문의게시판 등록
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		inquiryDAO.insertInquiry(inquiryDTO);
 	}
 	
-//	public List<InquiryDTO> getBoardInquiryListByType(String type) {
-//		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-//
-//		// Filter inquiries based on the specified type
-//		List<InquiryDTO> filteredInquiries = inquiries.stream().filter(inquiry -> inquiry.getType().equals(type))
-//				.collect(Collectors.toList());
-//		return filteredInquiries;
-//	}
-//
-//	public List<InquiryDTO> getBoardInquiryList() {
-//		List<InquiryDTO> inquiries = inquiryDAO.getInquiryList();
-//		return inquiries;
-//	}
+	// 문의게시판 조회
+	
 	
 	
 	// FAQ
@@ -107,10 +88,5 @@ public class YangBoardServiceImpl {
 	}
 
 
-	// 게시글작성
-	public Object getBoardWrite() {
-
-		return null;
-	}
 
 }

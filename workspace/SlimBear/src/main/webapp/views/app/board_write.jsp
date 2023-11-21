@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>BOARD WRITE</title>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/board_write.js"></script>
 </head>
@@ -89,7 +90,7 @@
 							(상품 바코드 옆 검수자 숫자 한자리/두자리를 기재합니다.)"
 						type="hidden" />
 					<input id="fix_content_2" name="fix_content_2"
-						value="이곳은 상품문의를 위한 게시판입니다!&lt;br /&gt;
+						value="이곳은 기타문의를 위한 게시판입니다!&lt;br /&gt;
 							게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
 							&lt;br /&gt;
 							배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.&lt;br /&gt;
@@ -102,6 +103,7 @@
 						
 					<input id="type" name="type" value="" type="hidden" />
 				    <input id="reg_date" name="reg_date" type="hidden" />
+<%-- 				    <input id="reg_date" name="reg_date" type="hidden" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>" /> --%>
 				    <input id="writer_id" name="writer_id" type="hidden" />
 						
 						
@@ -151,7 +153,7 @@
 									<th scope="row">TITLE</th>
 									<td>
 <!-- 									<select id="subject" name="subject" fw-filter="isFill" fw-label="제목" fw-msg=""> -->
-									<select id="subject" name="subject" th:field="*{subject}">
+									<select id="subject" name="title" th:field="*{title}">
 										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
 										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option>
 										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
@@ -173,19 +175,14 @@
 								<tr>
 									<td colspan="2" class="clear">
 									
-									<!-- 게시판 sheet -->
 										<!-- CSS -->
-										<link rel="stylesheet"
-											href="//img.echosting.cafe24.com/editors/froala/3.2.2/css/froala_editor.pkgd.min.css?vs=2310251253">
-										<link rel="stylesheet"
-											href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2310251253">
+										<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/3.2.2/css/froala_editor.pkgd.min.css?vs=2311171259">
+            							<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2311171259">
 										
 										<!-- HTML --> 
-										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated">
-										</textarea> 
+										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated"></textarea> 
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
-										<input type="hidden" name="reg_date" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>" />
-    
+										
 										<!-- JavaScript --> 
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/polyfill.min.js?vs=2310251253"></script>
@@ -276,39 +273,6 @@
                         </span>
 					</div>
 				</div>
-				
-				<script>
-			    $(document).ready(function () {
-			        // TITLE값이 변경될 때 TYPE값을 설정하는 함수
-			        $("#subject").change(function () {
-			            var selectedTitle = $(this).val();
-			            var type = ""; // 기본값
-			
-			            // TITLE값에 따라 TYPE값 설정
-			            if (selectedTitle === "상품 문의합니다 ♡") {
-			                type = "PRODUCT";
-			            } else if (selectedTitle === "배송 문의합니다 ♡") {
-			                type = "DELIVERY";
-			            } else if (selectedTitle === "불량/오배송 문의합니다 ♡") {
-			                type = "DELIVERY_C";
-			            }
-			
-			            // TYPE값을 hidden input에 설정
-			            $("#type").val(type);
-			        });
-			    });
-				</script>
-				<script>
-			   // 현재 날짜 및 시간을 가져오는 함수
-			   function getCurrentDateTime() {
-			      return new Date().toISOString().slice(0, 19).replace("T", " ");
-			   }
-			
-			   // 폼 제출 시 reg_date 설정
-			   $("#boardWriteForm").submit(function () {
-			      $("#reg_date").val(getCurrentDateTime());
-			   });
-				</script>
 			</form>
 		</div>
 	</div>

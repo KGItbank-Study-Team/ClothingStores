@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,34 +62,42 @@ public class YangController {
         return "inquiry";
     }
 	
+	// 문의사항 조회
+	
 	
 	// 게시글 작성
-	@PostMapping("/app/board/inquiry")
-    public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
-        // 상품 문의할 경우 TYPE값 설정
-        if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-            inquiryDTO.setType("PRODUCT");
-        }
-        // 배송 문의할 경우 TYPE값 설정
-        else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-            inquiryDTO.setType("DELIVERY");
-        }
-        // 불량/오배송 문의할 경우 TYPE값 설정
-        else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-            inquiryDTO.setType("DELIVERY_C");
-        }
-        
-        // reg_date 설정(현재 시간)
-        inquiryDTO.setReg_date(new Date());
-        // TITLE값을 CONTENT에 설정
-        inquiryDTO.setContent(inquiryDTO.getTitle());
-        // DAO로 전달
-        boardService.insertInquiry(inquiryDTO);
-        // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
-        return "redirect:/app/board/inquiry/";
-    }
+	@PostMapping("/board/inquiry")
+	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
+		// Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUserId = authentication.getName();
+		
+	    
+	    // 문의사항에 따른 TYPE값 설정
+	    if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("PRODUCT");
+	    } else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("DELIVERY");
+	    } else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("DELIVERY_C");
+	    }
+	    
+	    // 현재 로그인한 사용자의 ID를 writer_id로 설정
+	    inquiryDTO.setWriter_id(currentUserId);
+	    
+	    // reg_date 설정(현재 시간)
+	    inquiryDTO.setReg_date(new Date());
+	    
+	    // DAO로 전달
+	    boardService.insertInquiry(inquiryDTO);
+	    
+	    // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
+	    return "redirect:/app/board/inquiry";
+	}
 	
-
+	
+	
+	
 	
 	// 자주묻는질문
 	@RequestMapping("/board/faq")
@@ -119,62 +129,6 @@ public class YangController {
 
         return "faq";
     }
-	
-	
-	/*
-	 * @RequestMapping("/board/faq") public String getBoardFaqList(Model model) {
-	 * List<FaqDTO> faqs = faqDAO.getFaqList(); model.addAttribute("faqs", faqs);
-	 * return "faq"; }
-	 */
-	
-	
-	/*
-	 * @RequestMapping("/board/faq") public String getBoardFaqList(
-	 * 
-	 * @RequestParam(name = "category_no", required = false, defaultValue = "0")
-	 * String categoryNo, Model model) { List<FaqDTO> faqs; switch (categoryNo) {
-	 * case "1": faqs = boardService.getBoardFaqListByType("PRODUCT_R"); break; case
-	 * "2": faqs = boardService.getBoardFaqListByType("DELIVERY_R"); break; case
-	 * "3": faqs = boardService.getBoardFaqListByType("CHANGE_R"); break; case "4":
-	 * faqs = boardService.getBoardFaqListByType("ETC_R"); break; case "5": faqs =
-	 * boardService.getBoardFaqListByType("SHOWROOM_R"); break; default: faqs =
-	 * boardService.getBoardFaqList(); } model.addAttribute("faqs", faqs);
-	 * 
-	 * return "faq"; }
-	 */
-
-	/*
-	 * @RequestMapping("/board/faq") public String getBoardFaqList(
-	 * 
-	 * @RequestParam(name = "category_no", required = false, defaultValue = "0")
-	 * String categoryNo, Model model) { List<FaqDTO> faqs; switch (categoryNo) {
-	 * case "1": faqs = boardService.getBoardFaqListByType("2"); break; case "2":
-	 * faqs = boardService.getBoardFaqListByType("3"); break; case "3": faqs =
-	 * boardService.getBoardFaqListByType("4"); break; case "4": faqs =
-	 * boardService.getBoardFaqListByType("5"); break; case "5": faqs =
-	 * boardService.getBoardFaqListByType("6"); break; default: faqs =
-	 * boardService.getBoardFaqList(); } model.addAttribute("faqs", faqs);
-	 * model.addAttribute("boardUsers", boardService.getBoardUserList());
-	 * 
-	 * return "faqs"; }
-	 */
-
-	/*
-	 * @RequestMapping("/board/faq") public String
-	 * getBoardFaqList(@RequestParam(name = "category_no", required = false,
-	 * defaultValue = "0") String categoryNo, Model model) {
-	 * ArrayList<BoardFaqListVO> boards;
-	 * 
-	 * try { switch(categoryNo) { case "1": boards =
-	 * boardService.getBoardFaq1List(); break; case "2": boards =
-	 * boardService.getBoardFaq2List(); break; case "3": boards =
-	 * boardService.getBoardFaq3List(); break; case "4": boards =
-	 * boardService.getBoardFaq4List(); break; case "5": boards =
-	 * boardService.getBoardFaq5List(); break; default: boards =
-	 * boardService.getBoardFaqList(); } model.addAttribute("boards", boards); }
-	 * catch (Exception e) { e.printStackTrace(); model.addAttribute("errorMessage",
-	 * "조회 중 오류가 발생했습니다."); } return "faq"; }
-	 */
 
 	// 게시글쓰기
 	@GetMapping(value = "/board/write")

@@ -114,7 +114,11 @@
  	<insert id="INSERT_INQUIRY">
  		INSERT INTO inquiry
  		(writer_id, title, content, reg_date, status, type, prod_uid)
- 		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid})
+		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, COALESCE(#{status}, 'WAIT'), #{type}, #{prod_uid})
+		
+		
+		
+<!--  		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid}) -->
  	</insert>
  	
  	<!-- 상품문의 업데이트 -->
