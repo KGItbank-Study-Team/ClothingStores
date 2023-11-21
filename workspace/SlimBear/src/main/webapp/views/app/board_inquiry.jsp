@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="your.package.name.InquiryDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setAttribute("title", "문의사항");
-	request.setAttribute("boardTitle", "[공지]배송 후 교환/반품 게시판 이용 종료 안내");
-	request.setAttribute("name", "슬림베어_CR");
-	request.setAttribute("regDate", "9999-99-99");
-	request.setAttribute("boardContent", "안녕하세요 슬림베어입니다.");
+// 	request.setAttribute("title", "문의사항");
+// 	request.setAttribute("boardTitle", "[공지]배송 후 교환/반품 게시판 이용 종료 안내");
+// 	request.setAttribute("name", "슬림베어_CR");
+// 	request.setAttribute("regDate", "9999-99-99");
+// 	request.setAttribute("boardContent", "안녕하세요 슬림베어입니다.");
 %>
 <%
 	// 게시물의 작성자 정보를 어딘가에서 가져오고, 현재 로그인한 사용자 정보를 세션에서 가져옵니다
@@ -73,13 +74,14 @@
                                 <col style="width:auto;" />
                             </colgroup>
                             <tbody>
+                            
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                    <td>${boardTitle}</td>
+                                     <td>${inquiry.title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
-                                    <td>${name}<span class="displaynone">(ip:)</span> </td>
+                                    <td>${inquiry.writer_id}</td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">POINT</th>
@@ -88,7 +90,7 @@
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td>${regDate}</td>
+                                    <td>${inquiry.regDate}</td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">VOTE</th>
@@ -110,7 +112,7 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${boardContent}</strong>
+                                                	<strong style="font-weight: bolder;">${inquiry.boardContent}</strong>
                                                 </p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
                                                 	교환/반품은 못합니다.

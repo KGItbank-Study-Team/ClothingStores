@@ -20,11 +20,16 @@ public class InquiryDAO {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
 	}
 	
+	// 문의게시글 조회
+	public InquiryDTO getInquiryDetail(Long id) {
+	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
+	}
+	
 	
 	// 특정 prod_uid 상품문의 조회
-	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
-	}
+    public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
+    }
 
 	// 상품문의 데이터 삽입
 	public int insertInquiry(InquiryDTO inquiry) {

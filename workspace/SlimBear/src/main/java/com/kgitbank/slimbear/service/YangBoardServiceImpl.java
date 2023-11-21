@@ -51,8 +51,10 @@ public class YangBoardServiceImpl {
 		inquiryDAO.insertInquiry(inquiryDTO);
 	}
 	
-	// 문의게시판 조회
-	
+	// 문의게시판 상세페이지조회
+    public InquiryDTO getInquiryDetail(Long id) {
+        return inquiryDAO.getInquiryDetail(id);
+    }
 	
 	
 	// FAQ

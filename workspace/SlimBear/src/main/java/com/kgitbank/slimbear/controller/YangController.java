@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,7 +64,12 @@ public class YangController {
     }
 	
 	// 문의사항 조회
-	
+	@RequestMapping("/board/inquiry/{id}")
+    public String getInquiryDetail(@PathVariable("id") Long id, Model model) {
+        InquiryDTO inquiry = boardService.getInquiryDetail(id);
+        model.addAttribute("inquiry", inquiry);
+        return "yourJspPage"; // 실제 JSP 페이지의 경로
+    }
 	
 	// 게시글 작성
 	@PostMapping("/board/inquiry")
