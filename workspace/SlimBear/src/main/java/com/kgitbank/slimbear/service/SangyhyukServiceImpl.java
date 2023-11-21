@@ -79,8 +79,8 @@ public class SangyhyukServiceImpl {
 		cartDAO.insertInCart(cart);
 	}
 	
-	/* 장바구니에 동일한 상품이 있는지 조회 */
-	public int findProducts(CartDTO cart) {
+	/* 동일상품 체크 */
+	public int findCartProducts(CartDTO cart) {
 		return cartDAO.selectCountInCart(cart);
 	}
 	
@@ -92,12 +92,17 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public WishDAO wishDAO;
 	
-	public void insertAddress(WishDTO wish) {
-		wishDAO.insertAddress(wish);
+	public void insertInWish(WishDTO wish) {
+		wishDAO.insertInWish(wish);
 	}
 	
 	/* uid로 위시리스트 불러오기 */
 	public List<WishDTO> getWishListByMemberUID(long memberUid) {
 		return wishDAO.getWishListByMemberUID(memberUid);
+	}
+	
+	/* 동일상품 체크 */
+	public int findWishProduct(WishDTO wish) {
+		return wishDAO.selectCountInWish(wish);
 	}
 }

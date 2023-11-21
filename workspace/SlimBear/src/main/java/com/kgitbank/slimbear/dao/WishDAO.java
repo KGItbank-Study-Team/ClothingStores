@@ -20,12 +20,24 @@ public class WishDAO {
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_WISH_LIST_BY_MEMBER_UID", info);
 	}
-
-	public int insertAddress(WishDTO wish) {
-		return template.insert("com.slimbear.mapper.Member.INSERT_WISH", wish);
+	
+	public void insertInWish(WishDTO wish) {
+		long uid = selectMaxUid();
+		wish.setUid(uid);
+		template.insert("com.slimbear.mapper.Member.INSERT_WISH", wish);
 	}
 	
-	public int updateAddress(WishDTO wish) {
+	public int updateWishList(WishDTO wish) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_WISH", wish);
+	}
+	
+	public int selectCountInWish(WishDTO wish) {
+		int result = template.selectOne("com.slimbear.mapper.Member.SELECT_COUNT_IN_WISH", wish);
+		return result;
+	}
+	
+	private long selectMaxUid() {
+		long uid = template.selectOne("com.slimbear.mapper.Member.SELECT_MAX_UID_WISH");
+		return uid;
 	}
 }

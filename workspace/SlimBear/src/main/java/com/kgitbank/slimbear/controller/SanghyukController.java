@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
+import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
@@ -87,7 +89,7 @@ public class SanghyukController {
 			cartDTO.setProd_code(prod_code); // 상품 코드 설정
 			cartDTO.setCnt(cnt);
 			
-			int isAreadyExited = sanghService.findProducts(cartDTO);
+			int isAreadyExited = sanghService.findCartProducts(cartDTO);
 			System.out.println("isAreadyExited: " + isAreadyExited);
 			if(isAreadyExited>=1) {
 				return "already_existed";
@@ -100,5 +102,34 @@ public class SanghyukController {
 	}
 	
 	/* 위시리스트 추가 */
+	@RequestMapping(value="insert/wish/{uid}", method=RequestMethod.POST)
+	@ResponseBody
+	public String insertInWish(@PathVariable("uid") long uid, Authentication authentication) {
+		SecurityUser user = (SecurityUser)authentication.getPrincipal();
+		long mem_uid = user.getUid();
+		System.out.println("mem_uid: " + mem_uid);
+		WishDTO wishDTO = new WishDTO();
+		wishDTO.setMem_uid(mem_uid);
+		wishDTO.setUid(uid);
+		wishDTO.setProd_code("Test");
+		wishDTO.setReg_date(new Timestamp(System.currentTimeMillis()));
+		System.out.println(wishDTO);
+		int isAreadyExited = sanghService.findWishProduct(wishDTO);
+		if(isAreadyExited>=1) {
+			return "already_existed";
+		} else {
+			sanghService.insertInWish(wishDTO);
+		}
+		return "add_success";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

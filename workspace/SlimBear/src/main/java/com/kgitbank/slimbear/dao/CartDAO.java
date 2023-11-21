@@ -31,7 +31,7 @@ public class CartDAO {
 	}
 	
 	private long selectMaxUid() {
-		long uid = template.selectOne("SELECT_MAX_UID");
+		long uid = template.selectOne("com.slimbear.mapper.Member.SELECT_MAX_UID_CART");
 		return uid;
 	}
 	/* 상품 추가 */
@@ -41,10 +41,10 @@ public class CartDAO {
 		template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 	
-	public int updateAddress(CartDTO cart) {//이거 adress>> cart로 바꿔줭
+	public int updateAddress(CartDTO cart) { // 이거 adress>> cart로 바꿔줭
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART", cart);
 	}
-	public int deleteCartItem(Long cartUId) {//장바구니에 있는거 삭제 
+	public int deleteCartItem(Long cartUId) { // 장바구니에 있는거 삭제 
 		return template.update("com.slimbear.mapper.Member.DELETE_CART", cartUId);
 	   
 	}

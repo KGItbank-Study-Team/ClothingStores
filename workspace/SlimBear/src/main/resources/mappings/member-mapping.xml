@@ -80,13 +80,23 @@
 	<select id="SELECT_WISH_LIST_BY_MEMBER_UID" resultType="wish" parameterType="member">
 		SELECT * FROM wish WHERE mem_uid=#{uid}
 	</select>
-	
+	<!-- 동일상품 체크 -->
+	<select id="SELECT_COUNT_IN_WISH" resultType="int" parameterType="wish">
+		SELECT COUNT(*) FROM wish
+		WHERE mem_uid=#{mem_uid}
+		AND prod_code=#{uid}
+	</select>
+	<!-- 추가 시 새로운 uid 부여  -->
+	<select id="SELECT_MAX_UID_WISH" resultType="long" parameterType="wish">
+		SELECT COALESCE(max(uid), 0) + 1 FROM wish;
+	</select>
+	<!-- 위시리스트에 추가 -->
 	<insert id="INSERT_WISH"> 
 		INSERT INTO wish
 		(mem_uid, prod_code, reg_date)
-		VALUES(#{mem_uid},#{prod_code},#{reg_date})
+		VALUES(#{mem_uid},#{prod_code},NOW())
 	</insert>
-	
+	<!-- 위시리스트 수정 -->
 	<update id="UPDATE_WISH">
 		UPDATE wish
 		SET prod_code=#{prod_code}
@@ -95,7 +105,7 @@
 	
 	
 	
-	<!-- 카트(cart) -->
+	<!-- 장바구니(cart) -->
 	<select id="SELECT_CART_LIST_BY_MEMBER_UID" resultType="cart" parameterType="member">
 		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
@@ -103,24 +113,24 @@
 	<select id="SELECT_PRODUCTDETAIL_RECENT" resultType="cart" parameterType="cart">
 		SELECT color,size FROM productDetail WHERE prod_uid = #{productUID}
 	</select>
-	<!--cart에 동일한 상품이 있는지 확인 -->
+	<!-- 동일상품 체크 -->
 	<select id="SELECT_COUNT_IN_CART" resultType="int" parameterType="cart">
 		SELECT COUNT(*) FROM cart
 		WHERE mem_uid=#{mem_uid}
 		AND prod_code=#{prod_code}
 	</select>
-	
-	<select id="SELECT_MAX_UID" parameterType="cart" resultType="long">
+	<!-- 추가 시 새로운 uid 부여  -->
+	<select id="SELECT_MAX_UID_CART" resultType="long" parameterType="cart">
 		SELECT COALESCE(max(uid), 0) + 1 FROM cart;
 	</select>
 	
-	<!-- cart에 추가 -->
+	<!-- 장바구니에 추가 -->
 	<insert id="INSERT_CART"> 
 		INSERT INTO cart
 		(mem_uid, prod_code, cnt, reg_date)
 		VALUES(#{mem_uid},#{prod_code},#{cnt},NOW())
 	</insert>
-	
+	<!-- 장바구니 수정 -->
 	<update id="UPDATE_CART">
 		UPDATE cart
 		SET prod_code=#{prod_code},cnt=#{cnt},reg_date=#{reg_date}
