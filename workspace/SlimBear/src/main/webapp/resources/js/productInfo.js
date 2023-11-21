@@ -1,9 +1,10 @@
+// 옵션값을 담을 배열과 변수 선언
 var selectOptionList = new Array();
-// var selectProduct = {"color": selectedColor, "size": selectedSize, "cnt": cnt}
 var selectedColor = null;
 var selectedSize = null;
 var cnt = 1;
 
+// 상품 색상, 사이즈 옵션 선택
 $(function () {
     $(".colorBtn").on("click", function () {
         if ($(this).hasClass("active")) {
@@ -36,9 +37,8 @@ $(function () {
     });
 
 
-
+    // 행을 생성하고 선택한 옵션 값을 설정
     function addRowToTable(color, size, cnt) {
-        // 행을 생성하고 선택한 옵션 값을 설정
         var newRow = $("<tr id=" + makeProductElementID(color, size) + "></tr>");
         newRow.append($('<td class="tdOption"></td>').text(selectedColor));
         newRow.append($('<td class="tdOption"></td>').text(selectedSize));
@@ -160,11 +160,11 @@ var currentUrl = window.location.href;
 var urlParams = new URLSearchParams(currentUrl.search);
 var prod_code = urlParams.get("p");
 
-
+// 테스트 출력
 console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
 function addCart(uid) {
-
+    // 테스트 출력
     console.log(selectOptionList);
     console.log("prod_code", uid);
 
@@ -189,21 +189,3 @@ function addCart(uid) {
         }
     });
 };
-function cartAlert(result) {
-    if (result == '0') {
-        alert("장바구니에 추가되었습니다.")
-    } else if (result == '1') {
-        alert("장바구니에 동일 상품이 있습니다.");
-    } 
-}
-$("#wishBtn").on("click", function(){
-
-    var uid = sessionStorage.getItemF("uid");
-
-    if(uid == null) {
-        alert("로그인 후 가능한 서비스입니다.");
-    } else {
-        //찜하기 수행 로직
-        alert("위시리스트에 추가되었습니다.");
-    }
-});

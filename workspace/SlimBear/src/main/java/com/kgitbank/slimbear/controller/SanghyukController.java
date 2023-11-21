@@ -62,7 +62,7 @@ public class SanghyukController {
 		return "productInfo"; // .jsp 생략 
 	}
 
-	/* 장바구니에 상품 추가 */
+	/* 장바구니 상품 추가 */
 	@RequestMapping(value="insert/cart/{uid}", method=RequestMethod.POST)
 	@ResponseBody
 	public String insertInCart(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
@@ -98,4 +98,7 @@ public class SanghyukController {
 		}
 		return "add_success"; 
 	}
+	
+	/* 위시리스트 추가 */
+	
 }
