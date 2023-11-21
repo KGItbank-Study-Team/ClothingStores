@@ -16,11 +16,14 @@ import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.RSYServiceImpl;
+import com.kgitbank.slimbear.service.SocialService;
 
 @Controller
 public class RSYController {
 	@Autowired
 	private RSYServiceImpl RSYService;
+	@Autowired
+	private SocialService SocialService;
 
 	@RequestMapping("product/category") // 상품 목록
 	public String categoryPage01(@RequestParam long category,
@@ -88,13 +91,13 @@ public class RSYController {
 	        System.out.println(email);
 	        // 휴대폰 번호가 비어있지 않으면 문자 발송
 	        if (phone != null && !phone.isEmpty()) {
-	            RSYService.sendTemporaryPassword(phone, temporaryPassword);
+	            SocialService.sendTemporaryPassword(phone, temporaryPassword);
 	        }
 
 	        // 이메일이 비어있지 않으면 이메일 발송
 	        if (email != null && !email.isEmpty()) {
 	            try {
-	                resultMessage = RSYService.sendEmail(email, subject, temporaryPassword);
+	                resultMessage = SocialService.sendEmail(email, subject, temporaryPassword);
 	                model.addAttribute("messageSent", resultMessage.equals("Email sent successfully!"));
 	            } catch (MessagingException e) {
 	                e.printStackTrace();
