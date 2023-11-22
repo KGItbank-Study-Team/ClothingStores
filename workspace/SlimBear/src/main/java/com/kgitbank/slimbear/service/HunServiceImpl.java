@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dao.CouponDAO;
+import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.MemberCouponDAO;
 import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
-import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
-import com.kgitbank.slimbear.dto.CouponDTO;
+import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
@@ -51,7 +51,7 @@ public class HunServiceImpl {
 	private WishDAO wishDAO;
 
 	@Autowired
-	private NoticeDAO noticeDAO;
+	private InquiryDAO inquiryDAO;
 
 	@Autowired
 	private MemberOrderAddressDAO addressDAO;
@@ -227,18 +227,18 @@ public class HunServiceImpl {
 		return list;
 	}
 
-	public List<MemberBoardVO> getMemberBoardInfo(int priority) {
+	public List<MemberBoardVO> getMemberBoardInfo(String type) {
 		ArrayList<MemberBoardVO> list = new ArrayList<>();
-		List<NoticeDTO> boardlist = noticeDAO.getNoticeList(priority);
+		List<InquiryDTO> boardlist = inquiryDAO.getInquiryList(type);
 
-		for (NoticeDTO i : boardlist) {
+		for (InquiryDTO i : boardlist) {
 			MemberBoardVO vo = new MemberBoardVO();
-			vo.setBoardNumber(i.getPriority());
+			vo.setBoardNumber(1);	//번호가 없넹
 			vo.setBoardGroup(i.getType());
 			vo.setBoardTitle(i.getTitle());
-			vo.setBoardWriter(i.getWriter());
+			vo.setBoardWriter(i.getWriter_id()); //이름이 없넹
 			vo.setBoardDate(i.getReg_date());
-			vo.setBoardHits(1);
+			vo.setBoardHits(4);
 
 			list.add(vo);
 		}

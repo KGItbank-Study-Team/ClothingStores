@@ -161,13 +161,16 @@ public class HunController {
 	}
 
 	@RequestMapping("member/myPage/boardList")
-	public String boardList(Authentication authentication, Model model) {
+	public String boardList(String type, Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 
-		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(0);
+		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(type);
+		
+		System.out.println(vo);
+		
 		model.addAttribute("boardList", vo);
 		return "board_list";
 	}
