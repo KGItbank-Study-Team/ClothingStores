@@ -57,22 +57,19 @@ public class CartDAO {
 	public List<ProductDetailDTO> getproductdetail(){
 		return template.selectList("com.slimbear.mapper.Member.SELECT_PRODUCTDETAIL_RECENT");
 	}
-	
+	 public void updateCartItemOptions(long uid, String updatedProdCode) {
+	        HashMap<String, String> info = new HashMap<>();
+	        info.put("uid", String.valueOf(uid));
+	        info.put("prodCode", updatedProdCode);
+	        template.update("com.slimbear.mapper.Member.UPDATE_CART_OPTIONS", info);
+	    }
 	/*
-	 * public ProductDetailDTO getProductDetailByUid(long productUID) { return
-	 * template.selectOne(
-	 * "com.slimbear.mapper.Product.SELECT_PRODUCT_DETAIL_BY_UID", productUID); }
-	 * 
-	 * public int updateProductDetail(ProductDetailDTO productDetail) { return
-	 * template.update("com.slimbear.mapper.Product.UPDATE_PRODUCT_DETAIL",
-	 * productDetail); }
-	 */	//밑에는 매핑에 추가해야할것
-	/*
-	 * <select id="SELECT_PRODUCT_DETAIL_BY_UID" resultType="productDetail"
-	 * parameterType="long"> SELECT * FROM productDetail WHERE prod_uid=#{prod_uid}
-	 * </select>
-	 * 
-	 * <update id="UPDATE_PRODUCT_DETAIL"> UPDATE productDetail SET color=#{color},
-	 * size=#{size}, cnt=#{cnt} WHERE prod_uid=#{prod_uid} </update>
+	 * public void updateCartItemOptions(long uid, String color, String size) {
+	 * HashMap<String, String> info = new HashMap<>(); info.put("uid",
+	 * String.valueOf(uid)); info.put("color", color); info.put("size", size);
+	 * template.update("com.slimbear.mapper.Member.UPDATE_CART_ITEM_OPTIONS", info);
+	 * }
 	 */
+
+	
 }

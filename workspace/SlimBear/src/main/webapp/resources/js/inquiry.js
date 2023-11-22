@@ -1,6 +1,36 @@
 /**
  * 
  */
+
+// inquiry.js 수정
+function hideNewImageAfterOneWeek() {
+    var images = document.querySelectorAll('.new-image'); // 클래스 변경
+
+    images.forEach(function (image) {
+        var regDateText = image.closest('tr').querySelector('td:nth-child(5)').textContent; // 5번째 열에 있는 reg_date 값 가져오기
+
+        // 'yyyy-MM-dd HH:mm:ss' 형식의 날짜를 JavaScript Date 객체로 변환
+        var regDate = new Date(regDateText.replace(/-/g, '/').replace(' ', 'T') + 'Z');
+
+        var oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+        // 현재 날짜와 등록 날짜를 비교
+        if (regDate <= oneWeekAgo) {
+            image.style.display = 'none'; // 이미지를 숨김
+        } else {
+            image.style.display = 'block'; // 이미지를 보임
+        }
+    });
+}
+
+// 페이지 로드 시 함수 호출
+window.onload = function () {
+    hideNewImageAfterOneWeek();
+};
+ 
+ 
+ 
  
 $(function() {
 	var hrefCate = location.href;

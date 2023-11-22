@@ -103,24 +103,24 @@ public class OstController {
         // "cartList"는 Thymeleaf에서 사용할 변수 이름입니다.
         return "cartList";
     }
-//	@PostMapping("/changeOptions")
-//	@ResponseBody
-//	public List<ProductDetailDTO> getProductDetailByUid(long productUid) {
-//	   return ostService.getProductDetailByUid(productUid); 
-//	}
-//	List<ProductDetailDTO> optionList = ostService.getProductDetailByUid(1);
-
-
+	@PostMapping("/updateCartItemOptions")
+    @ResponseBody
+    public ResponseEntity<String> updateCartItemOptions(@RequestParam long uid,
+            @RequestParam String color, @RequestParam String size) {
+        // 여기에 옵션 업데이트 로직을 추가하고 성공 또는 실패에 따라 응답을 보냄
+        ostService.updateCartItemOptions(uid, color, size);
+        return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK);
+    }
 	/*
-	 * @PostMapping("/changeOptions")
+	 * @PostMapping("/updateCartItemOptions")
 	 * 
-	 * @ResponseBody public ResponseEntity<String> changeOptions(@RequestParam long
-	 * productUID, @RequestParam String color,
-	 * 
-	 * @RequestParam String size, @RequestParam int quantity) {
-	 * ostService.changeProductOptions(productUID, color, size, quantity); return
-	 * new ResponseEntity<>("옵션이 변경되었습니다.", HttpStatus.OK); }
+	 * @ResponseBody public ResponseEntity<String>
+	 * updateCartItemOptions(@RequestParam int index, @RequestParam long
+	 * uid, @RequestParam String color, @RequestParam String size) { // 여기에 옵션 업데이트
+	 * 로직을 추가하고 성공 또는 실패에 따라 응답을 보냄 ostService.updateCartItemOptions(uid, color,
+	 * size); return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK); }
 	 */
+
 
 }
 

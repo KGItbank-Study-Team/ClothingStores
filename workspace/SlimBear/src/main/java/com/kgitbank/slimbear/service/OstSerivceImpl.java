@@ -72,7 +72,18 @@ public class OstSerivceImpl {
 
 		return list;
 	}
-	
+	public void updateCartItemOptions(long uid, String color, String size) {
+        // 여기에 실제 업데이트 로직을 추가하세요.
+        // 새로운 prod_code 생성 및 업데이트
+		String updatedProdCode = SlimBearUtil.appendProductCode(uid, color, size);
+        cartDAO.updateCartItemOptions(uid, updatedProdCode);
+    }
+	/*
+	 * public void updateCartItemOptions(long uid, String color, String size) { //
+	 * 여기에 실제 업데이트 로직을 추가하세요. cartDAO.updateCartItemOptions(uid, color, size); }
+	 */
+
+
 
 	
 
@@ -124,5 +135,5 @@ public class OstSerivceImpl {
         // 아래는 가상의 코드이며, 실제로는 데이터를 어떻게 가져올지에 따라 수정해야 합니다.
         return Arrays.asList(); // 가상의 리스트를 반환하고 있습니다.
     }
-
+    
 }

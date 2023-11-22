@@ -47,4 +47,5 @@ public class ProductDetailDAO {
     public List<String> getSizeOptions(long productUID) {
         return template.selectList("com.slimbear.mapper.Product.getSizeOptions", productUID);
     }
+    
 }

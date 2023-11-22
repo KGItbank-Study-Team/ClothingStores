@@ -20,7 +20,7 @@ public class InquiryDAO {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
 	}
 	
-	// 문의게시글 조회
+	// 문의게시글 상세페이지조회
 	public InquiryDTO getInquiryDetail(Long id) {
 	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
 	}

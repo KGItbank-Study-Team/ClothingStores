@@ -36,7 +36,7 @@ public class YangBoardServiceImpl {
         return inquiryDAO.getInquiryList(type);
     }
     
-    // Notice에서 공지사항 조회
+    // Inquiry에서 공지사항 조회
     public List<NoticeDTO> getInquiryNList(String type) {
         return noticeDAO.getInquiryNList(type);
     }
@@ -53,6 +53,7 @@ public class YangBoardServiceImpl {
 	
 	// 문의게시판 상세페이지조회
     public InquiryDTO getInquiryDetail(Long id) {
+    	System.out.println("Inquiry Detail ID: " + id);
         return inquiryDAO.getInquiryDetail(id);
     }
 	

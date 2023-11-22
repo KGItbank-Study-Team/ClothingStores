@@ -69,8 +69,7 @@
      
    </c:forEach>
 </p>
-	<div class="btn"
-								onclick="toggleHiddenContent(this, ${status.index});">주문
+	<div class="btn" onclick="toggleHiddenContent(this, ${status.index});">주문
 								추가/변경▽</div>
 							<div class="hiddenContent04">
 								<div class="option hidden"></div>
@@ -110,8 +109,7 @@
 												<div class="cart__mainbtns">
 													<button class="cart__bigorderbtn left"
 														onclick="location.href ='/'">자세히 보러가기</button>
-													<button class="cart__bigorderbtn right"
-														onclick="submitForm('/app/checkout')">변경하기</button>
+													<button class="cart__bigorderbtn right" onclick="updateCartItemOptions(${status.index}, ${cart.uid});">Add/Change Order</button>
 												</div>
 											</td>
 										</tr>

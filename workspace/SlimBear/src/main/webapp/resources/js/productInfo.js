@@ -141,21 +141,6 @@ function buyClick() {
     console.log(selectOptionList);
 }
 
-// GUIDE 정보 펼치고 접기
-$(document).ready(function () {
-    $("h2").click(function () {
-        var submenu = $(this).next("div");
-
-        // submenu가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-        if (submenu.is(":visible")) {
-            submenu.slideUp();
-        } else {
-            submenu.slideDown();
-        }
-        // $(this).next("div").toggleClass("guideText");
-    });
-});
-
 // 현재 페이지의 URL을 가져온다.
 var currentUrl = window.location.href;
 // URL에서 "p" 파라미터값을 추가한다.
@@ -230,6 +215,23 @@ function addWish(uid) {
 
 //     showScoreByStars(reviewScore);
 // }
+
+// GUIDE 정보 펼치고 접기
+$(document).ready(function () {
+    $("h2").click(function () {
+        var submenu = $(this).next("div");
+
+        // submenu가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if (submenu.is(":visible")) {
+            submenu.slideUp();
+        } else {
+            submenu.slideDown();
+        }
+        // $(this).next("div").toggleClass("guideText");
+    });
+});
+
+// 리뷰점수를 별모양으로 표시
 window.onload = function() {
     const reviewScore = document.getElementById('reviewList').value;
     console.log('reviewScore: ' + reviewScore);

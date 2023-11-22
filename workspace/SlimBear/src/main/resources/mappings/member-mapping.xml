@@ -5,97 +5,113 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace : 가짜 영역으로 URL에 폴더대신 사용하여 보안에 유리하며 최소3단계이상으로하는게 좋다 -->
-<mapper namespace="com.slimbear.mapper.Member"> 
-	
+<mapper namespace="com.slimbear.mapper.Member">
+
 	<!-- 회원(member) -->
-	<select id="SELECT_MEM_BY_UID" resultType="member" parameterType="member">
+	<select id="SELECT_MEM_BY_UID" resultType="member"
+		parameterType="member">
 		SELECT * FROM member WHERE uid=#{uid}
 	</select>
-	
-	<select id="SELECT_MEM_BY_ID" resultType="member"  parameterType="member">
+
+	<select id="SELECT_MEM_BY_ID" resultType="member"
+		parameterType="member">
 		SELECT * FROM member WHERE id=#{id}
 	</select>
-	
+
 	<select id="SELECT_MEM_LIST" resultType="member">
 		SELECT * FROM member
 	</select>
-	
-	<insert id="INSERT_MEM"> 
+
+	<insert id="INSERT_MEM">
 		INSERT INTO member
 		(id, password, email, name, address, sex, reg_date)
 		VALUES(#{id},#{password},#{email},#{name},#{address},#{sex},#{reg_date})
 	</insert>
-	
+
 	<update id="UPDATE_MEM">
 		UPDATE member
-		SET id=#{id}, password=#{password}, email=#{email}, name=#{name}, address=#{address}, sex=#{sex}
-		WHERE uid=#{uid}
+		SET id=#{id}, password=#{password},
+		email=#{email}, name=#{name}, address=#{address}, sex=#{sex}
+		WHERE
+		uid=#{uid}
 	</update>
-	
-	
-	
+
+
+
 	<!-- 회원배송지(memberOrderAddress) -->
-	<select id="SELECT_ORDERADDRESS_LIST_BY_MEMBER_UID" resultType="memberOrderAddress" parameterType="member">
-		SELECT * FROM memberOrderAddress WHERE mem_uid=#{uid}
+	<select id="SELECT_ORDERADDRESS_LIST_BY_MEMBER_UID"
+		resultType="memberOrderAddress" parameterType="member">
+		SELECT * FROM
+		memberOrderAddress WHERE mem_uid=#{uid}
 	</select>
-		
-	<select id="SELECT_ORDERADDRESS_UID" resultType="memberOrderAddress">
+
+	<select id="SELECT_ORDERADDRESS_UID"
+		resultType="memberOrderAddress">
 		SELECT * FROM memberOrderAddress WHERE uid=#{addressUID}
 	</select>
-	
-	<insert id="INSERT_ORDERADDRESS"> 
+
+	<insert id="INSERT_ORDERADDRESS">
 		INSERT INTO memberOrderAddress
 		(mem_uid, name, phone, nomal_phone, address)
 		VALUES(#{mem_uid},#{name},#{phone},#{nomal_phone},#{address})
 	</insert>
-	
+
 	<update id="UPDATE_ORDERADDRESS">
 		UPDATE memberOrderAddress
-		SET mem_uid=#{mem_uid}, name=#{name}, phone=#{phone}, nomal_phone=#{nomal_phone}, address=#{address}
+		SET mem_uid=#{mem_uid},
+		name=#{name}, phone=#{phone}, nomal_phone=#{nomal_phone},
+		address=#{address}
 		WHERE uid=#{uid}
 	</update>
-	
+
 	<delete id="DELETE_ORDERADDRESS">
 		DELETE FROM memberOrderAddress WHERE uid=#{uid}
 	</delete>
-	
-	
-	
+
+
+
 	<!-- 회원쿠폰(memberCoupon) -->
-	<select id="SELECT_COUPON_LIST_BY_MEMBER_UID" resultType="memberCoupon" parameterType="member">
-		SELECT * FROM memberCoupon WHERE mem_uid=#{uid}
+	<select id="SELECT_COUPON_LIST_BY_MEMBER_UID"
+		resultType="memberCoupon" parameterType="member">
+		SELECT * FROM memberCoupon
+		WHERE mem_uid=#{uid}
 	</select>
-	
-	<insert id="INSERT_COUPON"> 
+
+	<insert id="INSERT_COUPON">
 		INSERT INTO memberCoupon
 		(mem_uid, coup_uid, expi_date, use_date)
 		VALUES(#{mem_uid},#{coup_uid},#{expi_date},#{use_date})
 	</insert>
-	
+
 	<update id="UPDATE_COUPON">
 		UPDATE memberCoupon
-		SET mem_uid=#{member_uid}, coup_uid=#{coup_uid}, expi_date=#{expi_date}, use_date=#{use_date}
+		SET mem_uid=#{member_uid},
+		coup_uid=#{coup_uid}, expi_date=#{expi_date}, use_date=#{use_date}
 		WHERE uid=#{uid}
 	</update>
-	
-	
-	
+
+
+
 	<!-- 찜(wish) -->
-	<select id="SELECT_WISH_LIST_BY_MEMBER_UID" resultType="wish" parameterType="member">
+	<select id="SELECT_WISH_LIST_BY_MEMBER_UID" resultType="wish"
+		parameterType="member">
 		SELECT * FROM wish WHERE mem_uid=#{uid}
 	</select>
 	<!-- 동일상품 체크 -->
-	<select id="SELECT_COUNT_IN_WISH" resultType="int" parameterType="wish">
+	<select id="SELECT_COUNT_IN_WISH" resultType="int"
+		parameterType="wish">
 		SELECT COUNT(*) FROM wish
 		WHERE mem_uid=#{mem_uid}
-		AND prod_code=#{prod_code}
+		AND
+		prod_code=#{prod_code}
 	</select>
-	<!-- 추가 시 새로운 uid 부여  -->
-	<select id="SELECT_MAX_UID_WISH" resultType="long" parameterType="wish">
+	<!-- 추가 시 새로운 uid 부여 -->
+	<select id="SELECT_MAX_UID_WISH" resultType="long"
+		parameterType="wish">
 		SELECT COALESCE(max(uid), 0) + 1 FROM wish;
 	</select>
 	<!-- 위시리스트에 추가 -->
-	<insert id="INSERT_WISH"> 
+	<insert id="INSERT_WISH">
 		INSERT INTO wish
 		(mem_uid, prod_code, reg_date)
 		VALUES(#{mem_uid},#{prod_code},NOW())
@@ -106,30 +122,36 @@
 		SET prod_code=#{prod_code}
 		WHERE uid=#{uid}
 	</update>
-	
-	
-	
+
+
+
 	<!-- 장바구니(cart) -->
-	<select id="SELECT_CART_LIST_BY_MEMBER_UID" resultType="cart" parameterType="member">
+	<select id="SELECT_CART_LIST_BY_MEMBER_UID" resultType="cart"
+		parameterType="member">
 		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
 	<!-- 색상,컬러(color,size) -->
-	<select id="SELECT_PRODUCTDETAIL_RECENT" resultType="cart" parameterType="cart">
-		SELECT color,size FROM productDetail WHERE prod_uid = #{productUID}
+	<select id="SELECT_PRODUCTDETAIL_RECENT" resultType="cart"
+		parameterType="cart">
+		SELECT color,size FROM productDetail WHERE prod_uid =
+		#{productUID}
 	</select>
 	<!-- 동일상품 체크 -->
-	<select id="SELECT_COUNT_IN_CART" resultType="int" parameterType="cart">
+	<select id="SELECT_COUNT_IN_CART" resultType="int"
+		parameterType="cart">
 		SELECT COUNT(*) FROM cart
 		WHERE mem_uid=#{mem_uid}
-		AND prod_code=#{prod_code}
+		AND
+		prod_code=#{prod_code}
 	</select>
-	<!-- 추가 시 새로운 uid 부여  -->
-	<select id="SELECT_MAX_UID_CART" resultType="long" parameterType="cart">
+	<!-- 추가 시 새로운 uid 부여 -->
+	<select id="SELECT_MAX_UID_CART" resultType="long"
+		parameterType="cart">
 		SELECT COALESCE(max(uid), 0) + 1 FROM cart;
 	</select>
-	
+
 	<!-- 장바구니에 추가 -->
-	<insert id="INSERT_CART"> 
+	<insert id="INSERT_CART">
 		INSERT INTO cart
 		(mem_uid, prod_code, cnt, reg_date)
 		VALUES(#{mem_uid},#{prod_code},#{cnt},NOW())
@@ -137,16 +159,23 @@
 	<!-- 장바구니 수정 -->
 	<update id="UPDATE_CART">
 		UPDATE cart
-		SET prod_code=#{prod_code},cnt=#{cnt},reg_date=#{reg_date}
+		SET
+		prod_code=#{prod_code},cnt=#{cnt},reg_date=#{reg_date}
 		WHERE uid=#{uid}
 	</update>
-	
+	<update id="UPDATE_CART_OPTIONS" parameterType="hashmap">
+        UPDATE cart
+        SET prod_code = #{prodCode}
+        WHERE uid = #{uid}
+    </update>
+
+
 	<update id="UPDATE_CART_CNT">
 		UPDATE cart
 		SET cnt=#{cnt}
 		WHERE uid=#{uid}
 	</update>
-	
+
 	<delete id="DELETE_CART">
 		DELETE FROM cart
 		WHERE uid=#{uid}

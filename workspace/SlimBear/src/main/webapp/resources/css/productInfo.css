@@ -396,14 +396,16 @@ section > h1 {
 
 /* ==================== */
 /* ==================== */
-/* Q&A CSS */
+/* Inquirys CSS */
 .inquirySection {
 	margin-top: 100px;
 }
-/* .inquirySection > th, td {
+.inquirySection  th {
 	text-align: center;
-} */
-
+}
+.inquirySection > th, td {
+	text-align: center;
+}
 .inquirySection > td {
 	padding: 20px 0;
 }
@@ -418,3 +420,7 @@ section > h1 {
 .qnaBtnColor {
 	color: white;
 }
+.inquirysContent {
+	padding-left: 20px;
+}
+

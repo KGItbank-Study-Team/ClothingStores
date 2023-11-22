@@ -34,6 +34,29 @@ function updateServer(productId, newQuantity) {
 });
 
 }
+function updateCartItemOptions(index, uid) {
+    var selectedColor = document.getElementById("color_" + index + "_" + uid).value;
+    var selectedSize = document.getElementById("size_" + index + "_" + uid).value;
+
+    $.ajax({
+        type: "POST",
+        url: "/app/updateCartItemOptions",
+        data: {
+            index: index,
+            uid: uid,
+            color: selectedColor,
+            size: selectedSize
+        },
+        success: function (response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error("업데이트 실패: " + error);
+        }
+    });
+}
+
 function deleteSelectedItems() {
     // 선택된 체크박스의 값을 가져오기
     var selectedItems = [];

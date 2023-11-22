@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="your.package.name.InquiryDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 // 	request.setAttribute("title", "문의사항");
@@ -17,6 +16,8 @@
 // 	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
 // 	boolean isAuthor = postAuthor.equals(loggedInUser);
 %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,7 +66,6 @@
 	                <input id="bdf_action_type" name="bdf_action_type" value="" type="hidden" />
                     
                     <div class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
-                        <!-- Your content goes here -->
                         <div class="ec-base-table typeWrite ">
                         <table border="1" summary="">
                             <caption>게시판 상세</caption>
@@ -77,22 +77,22 @@
                             
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                     <td>${inquiry.title}</td>
+                                    <td>${inquiries.title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
-                                    <td>${inquiry.writer_id}</td>
-                                </tr>
-                                <tr class="displaynone">
-                                    <th scope="row">POINT</th>
-                                    <td><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
-                                    </td>
+                                    <td>${inquiries.writer_id}</td>
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td>${inquiry.regDate}</td>
+                                    <td>${inquiries.reg_date}</td>
                                 </tr>
-                                <tr class="displaynone">
+                                <!-- <tr class="displaynone">
+                                    <th scope="row">POINT</th>
+                                    <td><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
+                                    </td>
+                                </tr> -->
+                                <!-- <tr class="displaynone">
                                     <th scope="row">VOTE</th>
                                     <td><span class="txtNum"> 
                                     		<a href="#none" class="btnNormal"
@@ -105,19 +105,15 @@
                                 <tr class="displaynone">
                                     <th scope="row">HIT</th>
                                     <td>2852</td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td colspan="2" class="bon">
                                         <div class="detail">
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${inquiry.boardContent}</strong>
+                                                	<strong style="font-weight: bolder;">${inquiries.content}</strong>
                                                 </p>
-                                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	교환/반품은 못합니다.
-                                                </p>
-                                                
                                                 <p><br></p>
                                             </div>
                                         </div>
@@ -127,14 +123,15 @@
                                     <th scope="row">FILE</th>
                                     <td></td>
                                 </tr>
-                                <tr class="displaynone ">
+                                <!-- <tr class="displaynone ">
                                     <th scope="row">PASSWORD</th>
                                     <td><input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg=""
                                             onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
                                             value="" type="password" /> <span class="ec-base-help txtInfo">
                                             수정 및 삭제하려면 비밀번호를 입력하세요.</span>
                                     </td>
-                                </tr>
+                                </tr> -->
+                                
                             </tbody>
                         </table>
                     </div>
