@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
@@ -185,38 +185,94 @@ public class HunController {
 		return "addr";
 	}
 
-	@RequestMapping("member/myPage/addr/addrFix")
+	@RequestMapping("member/myPage/addr/fix")
 	public String addrFix(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-
-//		AddrVO vo = hunService.getAddrFixInfo(user.getUid());
-//		model.addAttribute("fix", vo);
-//		
-//		System.out.println(vo);
-
+		
+		AddrVO vo = hunService.getAddrFixInfo(user.getUid());
+		model.addAttribute("fix", vo);
+		
+		System.out.println(vo);
+		
 		return "addrfix";
+	}
+	
+	@PostMapping("member/myPage/addr/fix")
+	public String fix(Authentication authentication,
+    		@RequestParam String name,
+            @RequestParam("address1") String addressZip1,
+            @RequestParam("address2") String addressAddr1,
+            @RequestParam("address3") String addressAddr2,
+    		@RequestParam("nomal_phone1") String nomal_phone1,
+    		@RequestParam("nomal_phone2") String nomal_phone2,
+    		@RequestParam("nomal_phone3") String nomal_phone3,
+    		@RequestParam("phone1") String phone1,
+    		@RequestParam("phone2") String phone2,
+			@RequestParam("phone3") String phone3 ){
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+        System.out.println(user.getUid());
+        System.out.println(user.getUsername());
+        
+        MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
+        addr.setMem_uid(user.getUid());
+        addr.setName(name);
+        addr.setAddress(addressZip1 + " | " + addressAddr1 + " | " + addressAddr2);
+		addr.setNomal_phone(nomal_phone1 + "-" + nomal_phone2 + "-" + nomal_phone3);
+		addr.setPhone(phone1 + "-" + phone2 + "-" + phone3);
+        
+		System.out.println("name : " + name);
+		System.out.println(addr);
+		
+		hunService.updateAddress(user.getUid(), addr);
+		
+		return "redirect:/app/member/myPage/addr";
 	}
 
 	
-	@RequestMapping("member/myPage/addr/addrRegister")
-	public int addrRegister(Authentication authentication, MemberOrderAddressDTO address) {
+	@RequestMapping("member/myPage/addr/register")
+	public String addrRegister(Authentication authentication, MemberOrderAddressDTO address) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 		
-		return hunService.insertAddress(address);
+		return "addrregister";
+		
+	}
+	
+	@PostMapping("member/myPage/addr/register")
+	public String register(Authentication authentication,
+    		@RequestParam String name,
+            @RequestParam("address1") String addressZip1,
+            @RequestParam("address2") String addressAddr1,
+            @RequestParam("address3") String addressAddr2,
+    		@RequestParam("nomal_phone1") String nomal_phone1,
+    		@RequestParam("nomal_phone2") String nomal_phone2,
+    		@RequestParam("nomal_phone3") String nomal_phone3,
+    		@RequestParam("phone1") String phone1,
+    		@RequestParam("phone2") String phone2,
+			@RequestParam("phone3") String phone3 ){
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+        System.out.println(user.getUid());
+        System.out.println(user.getUsername());
+        
+        MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
+        addr.setMem_uid(user.getUid());
+        addr.setName(name);
+        addr.setAddress(addressZip1 + " | " + addressAddr1 + " | " + addressAddr2);
+		addr.setNomal_phone(nomal_phone1 + "-" + nomal_phone2 + "-" + nomal_phone3);
+		addr.setPhone(phone1 + "-" + phone2 + "-" + phone3);
+		
+		hunService.insertAddress(user.getUid(), addr);
+		
+		return "redirect:/app/member/myPage/addr";
 	}
 
-
-	
-	
-	
-	
-	
 	
 	
 	

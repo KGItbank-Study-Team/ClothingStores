@@ -20,9 +20,39 @@ function searchAddress() {
         }).open();
     }
     
-// insert addr 유효성검사
 
-// HTML에서 필드 요소 가져오기
-const nameField = document.querySelector('.ec-member-name');
-const telNumberField = document.querySelector('.ma_rcv_phone1-number input[type="text"]');
-const addressField = document.querySelector('#address_addr1');
+// submit 추가
+
+function subMit() {
+        //유효성 검사
+
+    // HTML에서 필드 요소 가져오기
+    const nameField = document.getElementById('ma_rcv_name');
+    const addressField = document.getElementById('address_addr1');
+
+    // 에러 메시지를 담을 배열
+    const errorMessages = [];
+
+    // 이름 필드 유효성 검사
+    if (nameField.value.trim() === '') {
+        errorMessages.push('성명을 입력하세요.');
+    }
+
+    // 주소 필드 유효성 검사
+    if (addressField.value.trim() === '') {
+        errorMessages.push('주소를 입력하세요.');
+    }
+
+    // 에러가 있을 경우 처리
+    if (errorMessages.length > 0) {
+        // 에러 메시지 출력
+        alert('유효성 검사에 실패하였습니다:\n' + errorMessages.join('\n'));
+
+        // 페이지 이동 막기
+        return false;
+    }
+
+ 
+        // 폼 제출
+        document.getElementById("myForm").submit();
+    }

@@ -260,75 +260,45 @@ public class HunServiceImpl {
 			vo.setPostcode(address[0]);
 			vo.setDefaultAddr(address[1]);
 			vo.setRemainAddr(address[2]);
+			vo.setAddr_uid(i.getUid());
 
 			list.add(vo);
 		}
 		return list;
 	}
-
-//	public List<AddrVO> getAddrFixInfo(long memberUID) {
-//		ArrayList<AddrVO> list = new ArrayList<>();
-//		List<MemberOrderAddressDTO> fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
-//		
-//		for(MemberOrderAddressDTO i : fix) {
-//			AddrVO vo = new AddrVO();
-//			vo.setAddrName(i.getName());
-//			vo.setRecipient(i.getRecipient());
-//			
-//			String[] address = SlimBearUtil.splitAddress(i.getAddress());
-//			vo.setPostcode(address[0]);
-//			vo.setDefaultAddr(address[1]);
-//			vo.setRemainAddr(address[2]);
-//			
-//			String[] phone = SlimBearUtil.splitPhoneNumber(i.getNomal_phone());
-//			vo.setPhone1(phone[0]);
-//			vo.setPhone2(phone[1]);
-//			vo.setPhone3(phone[2]);
-//			
-//			String[] mobile = SlimBearUtil.splitPhoneNumber(i.getPhone());
-//			vo.setMobile1(mobile[0]);
-//			vo.setMobile2(mobile[1]);
-//			vo.setMobile3(mobile[2]);
-//			
-//			list.add(vo);
-//		}
-//		return list;
-//	}
-
-//	public AddrVO getAddrFixInfo(long memberUID) {
-//		AddrVO vo = new AddrVO();
-//		MemberOrderAddressDTO fix = memberorderaddressDAO.getAddressListByMemberUID(memberUID);
-//		
-//		vo.setAddrName(fix.getName());
-//		vo.setRecipient(fix.getRecipient());
-//		
-//		String[] address = SlimBearUtil.splitAddress(fix.getAddress());
-//		vo.setPostcode(address[0]);
-//		vo.setDefaultAddr(address[1]);
-//		vo.setRemainAddr(address[2]);
-//		
-//		String[] phone = SlimBearUtil.splitPhoneNumber(fix.getNomal_phone());
-//		vo.setPhone1(phone[0]);
-//		vo.setPhone2(phone[1]);
-//		vo.setPhone3(phone[2]);
-//		
-//		String[] mobile = SlimBearUtil.splitPhoneNumber(fix.getPhone());
-//		vo.setMobile1(mobile[0]);
-//		vo.setMobile2(mobile[1]);
-//		vo.setMobile3(mobile[2]);
-//		
-//		return vo;
-//	}
-
-//	public AddrVO addAddr(MemberOrderAddressDTO address) {
-//		AddrVO vo = new AddrVO();
-//		
-//		addressDAO.insertAddress(address);
-//		return vo;
-//	}
-//	
-	public int insertAddress(MemberOrderAddressDTO address) {
-		return addressDAO.insertAddress(address);
+	
+	public AddrVO getAddrFixInfo(long addressUID) {
+		AddrVO vo = new AddrVO();
+		MemberOrderAddressDTO fix = addressDAO.getAddressByUID(addressUID);
+		
+		vo.setAddrName(fix.getName());
+		vo.setRecipient(fix.getRecipient());
+		vo.setAddr_uid(fix.getUid());
+		
+		String[] phone = SlimBearUtil.splitPhoneNumber(fix.getNomal_phone());
+		vo.setPhone1(phone[0]);
+		vo.setPhone2(phone[1]);
+		vo.setPhone3(phone[2]);
+				
+		String[] mobile = SlimBearUtil.splitPhoneNumber(fix.getPhone());
+		vo.setMobile1(mobile[0]);		
+		vo.setMobile2(mobile[1]);		
+		vo.setMobile3(mobile[2]);		
+		
+		String[] address = SlimBearUtil.splitAddress(fix.getAddress());
+		vo.setPostcode(address[0]);
+		vo.setDefaultAddr(address[1]);
+		vo.setRemainAddr(address[2]);
+		
+		return vo;
+	}
+	
+	public void updateAddress(long memberUID, MemberOrderAddressDTO address) {
+		addressDAO.updateAddress(address);
+	}
+	
+	public void insertAddress(long memberUID, MemberOrderAddressDTO address) {
+		 addressDAO.insertAddress(address);
 	}
 
 }

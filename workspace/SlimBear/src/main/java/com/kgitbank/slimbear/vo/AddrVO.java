@@ -15,6 +15,7 @@ public class AddrVO {
 	private String postcode;		//우편번호
 	private String defaultAddr;		//기본주소
 	private String remainAddr;		//상세주소
+	private long addr_uid;			//배송지uid
 	
 	//addrfix, addrregister
 	private String phone1;

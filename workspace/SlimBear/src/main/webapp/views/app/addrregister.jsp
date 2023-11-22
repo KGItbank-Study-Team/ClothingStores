@@ -58,7 +58,7 @@
                 <div class="xans-element- xans-myshop xans-myshop-addrmodify ">
                     <div class="ec-base-table typeWrite">
                     
-                    <form action="/app/member/myPage/addr/addrRegister" method="post">
+                    <form id="myForm" action="/app/member/myPage/addr/register" method="post">
                         <table border="1" summary="">
                             <caption>배송 주소록 입력</caption>
                             <colgroup>
@@ -70,7 +70,7 @@
                                     <th scope="row">배송지명 <img
                                             src="/resources/images/ico_required_blue.gif"
                                             alt="필수"></th>
-                                    <td><input id="ma_rcv_title" name="ma_rcv_title"
+                                    <td><input id="ma_rcv_title" name="name"
                                             fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg=""
                                             class="inputTypeText" placeholder="" value="" type="text"></td>
                                 </tr>
@@ -78,7 +78,7 @@
                                     <th scope="row">성명 <img
                                             src="/resources/images/ico_required_blue.gif"
                                             alt="필수"></th>
-                                    <td><input id="ma_rcv_name" name="ma_rcv_name" fw-filter="isFill&amp;isMaxByte[90]"
+                                    <td><input id="ma_rcv_name" name="recipient" fw-filter="isFill&amp;isMaxByte[90]"
                                             fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value=""
                                             type="text"></td>
                                 </tr>
@@ -89,7 +89,7 @@
                                     <td>
                                         <ul class="ec-address">
                                             <li id="shippingUpdate_zipcode_wrap" class="ec-address-zipcode">
-                                                <input id="address_zip1" name="address_zip1" placeholder="우편번호"
+                                                <input id="address_zip1" name="address1" placeholder="우편번호"
                                                     fw-filter="" class="inputTypeText" type="text" maxlength="14"
                                                      readonly="" fw-label="우편번호" value=""> <button id="SearchAddress"
                                                     class="btnBasic" type="button" onclick="searchAddress()"
@@ -98,12 +98,12 @@
                                                         disabled="" style="display: none; cursor: unset;" fw-filter="">
                                             </li>
                                             <li id="shippingUpdate_baseAddr_wrap" class="">
-                                                <input id="address_addr1" name="address_addr1" placeholder="기본주소"
+                                                <input id="address_addr1" name="address2" placeholder="기본주소"
                                                     fw-filter="" class="inputTypeText" type="text" size="60"
                                                     maxlength="100" readonly="" fw-label="기본주소" value="">
                                             </li>
                                             <li id="shippingUpdate_detailAddr_wrap" class="">
-                                                <input id="address_addr2" name="address_addr2"
+                                                <input id="address_addr2" name="address3"
                                                     placeholder="나머지 주소(선택 입력 가능)" fw-filter="" class="inputTypeText"
                                                     type="text" size="60" maxlength="255" fw-label="나머지 주소(선택 입력 가능)"
                                                     value="">
@@ -116,7 +116,7 @@
                                                 src="/resources/images/ico_required_blue.gif"
                                                 alt="필수"></span>
                                     </th>
-                                    <td><select id="ma_rcv_phone1" name="ma_rcv_phone[]" fw-filter="isNumber"
+                                    <td><select id="ma_rcv_phone1" name="nomal_phone1" fw-filter="isNumber"
                                             fw-label="유선전화" fw-alone="N" fw-msg="">
                                             <option value="02">02</option>
                                             <option value="031">031</option>
@@ -149,9 +149,9 @@
                                             <option value="018">018</option>
                                             <option value="019">019</option>
                                             <option value="0508">0508</option>
-                                        </select>-<input id="ma_rcv_phone2" name="ma_rcv_phone[]" maxlength="4"
+                                        </select>-<input id="ma_rcv_phone2" name="nomal_phone2" maxlength="4"
                                             fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value=""
-                                            type="text">-<input id="ma_rcv_phone3" name="ma_rcv_phone[]" maxlength="4"
+                                            type="text">-<input id="ma_rcv_phone3" name="nomal_phone3" maxlength="4"
                                             fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value=""
                                             type="text"></td>
                                 </tr>
@@ -160,7 +160,7 @@
                                                 src="/resources/images/ico_required_blue.gif"
                                                 alt="필수"></span>
                                     </th>
-                                    <td><select id="ma_rcv_mobile_no1" name="ma_rcv_mobile_no[]"
+                                    <td><select id="ma_rcv_mobile_no1" name="phone1"
                                             fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="">
                                             <option value="010">010</option>
                                             <option value="011">011</option>
@@ -168,10 +168,10 @@
                                             <option value="017">017</option>
                                             <option value="018">018</option>
                                             <option value="019">019</option>
-                                        </select>-<input id="ma_rcv_mobile_no2" name="ma_rcv_mobile_no[]" maxlength="4"
+                                        </select>-<input id="ma_rcv_mobile_no2" name="phone2" maxlength="4"
                                             fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
                                             placeholder="" value="" type="text">-<input id="ma_rcv_mobile_no3"
-                                            name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&amp;isFill"
+                                            name="phone3" maxlength="4" fw-filter="isNumber&amp;isFill"
                                             fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
                                     </td>
                                 </tr>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="ec-base-button">
                         <span class="gRight">
-                            <a href="/app/member/mypage/addr" class="btnSubmitFix sizeS" onclick="myshopAddr.formCheck();">등록</a>
+                            <a class="btnSubmitFix sizeS" onclick="subMit();">등록</a>
                             <a href="/app/member/myPage/addr" class="btnNormalFix sizeS">취소</a>
                         </span>
                     </div>

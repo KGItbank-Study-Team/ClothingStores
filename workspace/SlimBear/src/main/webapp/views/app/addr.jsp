@@ -98,7 +98,7 @@
                                         <td class="">(<span>${item.postcode}</span>)<span>${item.defaultAddr}</span>
                                             <span>${item.remainAddr}</span>
                                         </td>
-                                        <td><a href="/app/member/myPage/addr/addrFix" class="btnNormal ">수정</a></td>
+                                        <td><a href="/app/member/myPage/addr/fix?addrUID=${item.addr_uid}" class="btnNormal">수정</a></td>
                                     </tr>
                                     </c:forEach>
                                     
@@ -116,7 +116,7 @@
                                     onclick="myshopAddr.deleteAddress(); return false;">선택 주소록 삭제</a>
                             </span>
                             <span class="gRight">
-                                <a href="/app/member/myPage/addr/addrRegister" class="btnSubmitFix sizeS">배송지등록</a>
+                                <a href="/app/member/myPage/addr/register" class="btnSubmitFix sizeS">배송지등록</a>
                             </span>
                         </div>
                     </div>
