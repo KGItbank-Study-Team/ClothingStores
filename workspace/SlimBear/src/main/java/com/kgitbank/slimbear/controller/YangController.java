@@ -33,6 +33,14 @@ public class YangController {
 	    return "notice";
 	}
 	
+	// 공지사항 상세페이지조회
+	@RequestMapping("/board/notice/detail/{uid}")
+	public String getNoticeDetail(@PathVariable Long uid, Model model) {
+	    NoticeDTO notices = boardService.getNoticeDetail(uid);
+	    model.addAttribute("notices", notices);
+	    return "board_notice";
+	}
+	
 	@RequestMapping("/article/notice")
 	public String getBoardNotice(Model model) {
 		model.addAttribute("notices", boardService.getNoticeList(0));
@@ -44,22 +52,22 @@ public class YangController {
 	@RequestMapping("/board/inquiry")
     public String getBoardInquiryList(@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
         List<InquiryDTO> inquiries;
-        List<NoticeDTO> notices;
+//        List<NoticeDTO> notices;
         switch (categoryNo) {
             case "1":
                 inquiries = boardService.getInquiryList("DELIVERY");
-                notices = boardService.getInquiryNList("DELIVERY");
+//                notices = boardService.getInquiryNList("DELIVERY");
                 break;
             case "2":
                 inquiries = boardService.getInquiryList("DELIVERY_C");
-                notices = boardService.getInquiryNList("DELIVERY_C");
+//                notices = boardService.getInquiryNList("DELIVERY_C");
                 break;
             default:
                 inquiries = boardService.getInquiryList("PRODUCT");
-                notices = boardService.getInquiryNList("PRODUCT");
+//                notices = boardService.getInquiryNList("PRODUCT");
         }
         model.addAttribute("inquiries", inquiries);
-        model.addAttribute("notices", notices);
+//        model.addAttribute("notices", notices);
         return "inquiry";
     }
 	

@@ -45,9 +45,9 @@
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
-					<a href="/app/board/notice" class="navi01"><span>공지사항 (NOTICE)</span></a> 
-					<a href="/app/board/inquiry" class="navi02"><span>문의게시판 (INQUIRY)</span></a>
-					<a href="/app/board/faq" class="navi05"><span>자주묻는질문 (FAQ)</span></a>
+					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
+					<a href="/app/board/inquiry" class="navi02"><span>문의게시판</span></a>
+					<a href="/app/board/faq" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
