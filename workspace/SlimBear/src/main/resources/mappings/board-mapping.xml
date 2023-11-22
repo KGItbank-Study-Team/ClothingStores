@@ -143,7 +143,9 @@
  	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
  		SELECT * FROM inquiry WHERE prod_uid=#{prod_uid}
  	</select>
- 	
+ 	<select id="SELECT_INQUIRYUID" resultType="long" parameterType="inquiry">
+ 		SELECT uid FROM inquiry WHERE prod_code = #{prod_code}
+ 	</select>
  	<!-- 상품문의 데이터 삽입 -->
  	<insert id="INSERT_INQUIRY">
  		INSERT INTO inquiry
@@ -174,7 +176,6 @@
  	<select id="SELECT_INQUIRYANSWER_LIST" resultType="inquiryAnswer" parameterType="inquiry">
  		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{uid}
  	</select>
- 	
  	<!-- 질문답변 데이터 삽입 -->
  	<insert id="INSERT_INQUIRYANSWER">
  		INSERT INTO inquiry

@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.dao.CartDAO;
+import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
@@ -69,6 +71,15 @@ public class SangyhyukServiceImpl {
 	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
 		return inquiryDAO.getInquiryListByProdUid(prodUid);
 	}
+	
+	/* inquiryAnswer 데이터 받아오기 */
+	@Autowired
+	private InquiryAnswerDAO inquiryAnswerDAO;
+	
+	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid){
+		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
+	}
+	
 	
 	/* 상품 장바구니 */
 	@Autowired

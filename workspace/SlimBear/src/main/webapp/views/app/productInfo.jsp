@@ -24,10 +24,10 @@
 			</div>
 			<div class="right">
 				<div class="explanation">
-					<h2 style="padding-bottom: 15px;">${product.name}</h2>
+					<h2 class="prodName">${product.name}</h2>
 					<div class="subExplanation">${product.desc}</div>
 				</div>
-				<div>
+				<div class="info">
 					<table>
 						<tbody>
 							<tr>
@@ -176,7 +176,7 @@
 						<p>${product.desc}</p>
 					</div>
 					<hr />
-					<div>
+					<div class="sizeGuide">
 						<p style="margin-bottom: 5px;">사이즈 정보</p>
 						<table border="1" class="tableSize" style="width: 540px; height: 200px;">
 							<tr>
@@ -442,7 +442,10 @@
 							<input type="hidden" id="reviewList" value="${reviewList.score}"/>
 						</div>
 						<div class="photo-review">
-							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> <a><img alt="상품" src="/resources/images/review_images02.jpg"></a> <a><img alt="상품" src="/resources/images/review_images03.jpg"></a> <a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
+							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> 
+							<a><img alt="상품" src="/resources/images/review_images02.jpg"></a> 
+							<a><img alt="상품" src="/resources/images/review_images03.jpg"></a> 
+							<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
 							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
 						</div>
 						<div class="review-text">
@@ -464,34 +467,43 @@
 		<div class="inquirySection">
 			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
-			<table>
-				<%-- <colgroup>
-					<col style="width: 20px;">
-					<col style="width: 400px;">
-					<col style="width: 150px;">
-					<col style="width: 130px;">
-				</colgroup> --%>
+			<table class="inquiryTable">
+				<colgroup>
+					<col style="width: 100px;">
+					<col style="width: 1000px;">
+					<col style="width: 500px;">
+					<col style="width: 500px;">
+				</colgroup>
 				<thead>
 					<tr>
-						<th class="solid2" scope="col" style="width: 80px;">번호</th>
-						<th class="solid2" scope="col">제목</th>
-						<th class="solid2" scope="col">작성자</th>
-						<th class="solid2" scope="col">작성일</th>
-						<!-- <th>조회</th> -->
+						<th scope="col" class="thCss thCssOne">번호</th>
+						<th scope="col" class="thCss">제목</th>
+						<th scope="col" class="thCss">작성자</th>
+						<th scope="col" class="thCss">작성일</th>
 					</tr>
 				</thead>
 				<c:forEach items="${inquiryList}" var="inquirys">
 					<tbody>
 						<tr>
-							<td class="solid">${inquirys.prod_uid}</td>
-							<td class="solid"><div class="clickTitle">${inquirys.title}</div></td>
-							<td class="solid">${inquirys.writer_id}</td>
-							<td class="solid">${inquirys.reg_date}</td>
+							<td class="borderRemove">${inquirys.uid}</td>
+							<td>
+								<div class="clickTitle ">${inquirys.title}</div>
+							</td>
+							<td>${inquirys.writer_id}</td>
+							<td>${inquirys.reg_date}</td>
+						</tr>
+						<tr class="inquiryContent">
+							<td>&nbsp;</td>
+							<td class="centerNo">
+								<div class="contentPadding">
+									${inquirys.content}	
+								</div>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td class="">
-								<div class="inquirysContent">${inquirys.content}</div> 
-							</td>
+							<td>${inquiryAnswerList.title}</td>
 						</tr>
 					</tbody>
 				</c:forEach>
