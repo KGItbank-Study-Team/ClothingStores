@@ -66,8 +66,6 @@ public class YangController {
 	// 문의사항 상세페이지조회
 	@RequestMapping("/board/inquiry/detail/{uid}")
 	public String getInquiryDetail(@PathVariable Long uid, Model model) {
-		System.out.println("Request for Inquiry Detail with UID: " + uid);
-        
 	    InquiryDTO inquiries = boardService.getInquiryDetail(uid);
 	    model.addAttribute("inquiries", inquiries);
 	    return "board_inquiry";

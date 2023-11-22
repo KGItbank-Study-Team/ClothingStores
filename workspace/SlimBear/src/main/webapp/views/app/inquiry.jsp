@@ -32,14 +32,6 @@
 							<li title="현재 위치"><strong>상품문의</strong></li>
 						</ol>
 					</div>
-					<%-- <c:if test="${not empty inquiries}">
-					    <div class="titleArea">
-					        <h2>
-					            <font color="333333">${inquiries[0].type}</font>
-					        </h2>
-					        <p>${inquiries[0].title}</p>
-					    </div>
-					</c:if> --%>
 					
 					<div class="titleArea">
                         <h2 id="inquiryH2">
@@ -53,10 +45,9 @@
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="boardnavi">
-					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
-					<a href="/app/board/inquiry" class="navi02"><span>문의게시판</span></a>
-					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
-					<a href="/app/board/faq" class="navi05"><span>자주묻는질문</span></a>
+					<a href="/app/board/notice" class="navi01"><span>공지사항 (NOTICE)</span></a> 
+					<a href="/app/board/inquiry" class="navi02"><span>문의게시판 (INQUIRY)</span></a>
+					<a href="/app/board/faq" class="navi05"><span>자주묻는질문 (FAQ)</span></a>
 				</div>
 				
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -100,26 +91,7 @@
 						
 						
 						<!-- 1번째 tbody for문 -->
-						<%-- <tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
-							<c:forEach items="${notices}" var="board">
-								<tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td><i class="xi-check"></i></td>
-						            <td class="displaynone"></td>
-						            <td class="subject left txtBreak">
-						            <strong>
-					                    <a href="#" style="color: #555555;">${board.title}</a>
-						                <img src="/resources/images/icon_hit.gif" alt="NEW" class="ec-common-rwd-image"/>
-					                    <span class="txtEm"></span>
-					                </strong>
-						            </td>
-									<td>${board.writer}</td>
-									<td>${board.reg_date}</td>
-								</tr>
-							</c:forEach>
-						</tbody> --%>
 						
-						
-						<!-- 2번째 tbody for문  -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
@@ -127,11 +99,8 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>
-<%-- 						                    <a href="<c:url value='/board/inquiry/detail/${board.uid}'/>" style="color: #555555;">${board.title}</a>	 --%>
-						                    
-						                    <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
-						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
+						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>	
+											<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>

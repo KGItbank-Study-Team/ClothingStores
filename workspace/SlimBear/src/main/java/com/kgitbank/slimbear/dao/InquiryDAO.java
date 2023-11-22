@@ -22,7 +22,6 @@ public class InquiryDAO {
 	
 	// 문의게시글 상세페이지조회
 	public InquiryDTO getInquiryDetail(Long id) {
-		System.out.println("Inquiry Detail ID: " + id);
 	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
 	}
 	
