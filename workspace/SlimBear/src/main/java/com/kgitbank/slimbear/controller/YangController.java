@@ -63,15 +63,17 @@ public class YangController {
         return "inquiry";
     }
 	
-	// 문의사항 조회
-	@RequestMapping("/board/inquiry/{id}")
-    public String getInquiryDetail(@PathVariable("id") Long id, Model model) {
-        InquiryDTO inquiry = boardService.getInquiryDetail(id);
-        model.addAttribute("inquiry", inquiry);
-        return "yourJspPage"; // 실제 JSP 페이지의 경로
-    }
+	// 문의사항 상세페이지조회
+	@RequestMapping("/board/inquiry/detail/{uid}")
+	public String getInquiryDetail(@PathVariable Long uid, Model model) {
+		System.out.println("Request for Inquiry Detail with UID: " + uid);
+        
+	    InquiryDTO inquiries = boardService.getInquiryDetail(uid);
+	    model.addAttribute("inquiries", inquiries);
+	    return "board_inquiry";
+	}
 	
-	// 게시글 작성
+	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
 	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
 		// Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
@@ -136,22 +138,18 @@ public class YangController {
         return "faq";
     }
 
-	// 게시글쓰기
+	// 게시글 작성
 	@GetMapping(value = "/board/write")
     public String getBoardWriteForm() {
         return "board_write";
     }
-
     @RequestMapping(value = "/board/write", method = RequestMethod.POST)
     public String postBoardWrite(@ModelAttribute InquiryDTO inquiryDTO) {
         boardService.insertInquiry(inquiryDTO);
         return "redirect:/board/inquiry";
     }
-	
-	/*
-	 * @RequestMapping("/board/write") public String getBoardWrite(Model model) {
-	 * model.addAttribute("boards", boardService.getBoardWrite()); return
-	 * "board_write"; // 뷰 이름 설정 }
-	 */
-
+    
+    
+    
+    
 }

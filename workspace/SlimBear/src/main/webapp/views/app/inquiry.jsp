@@ -127,7 +127,9 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="#" style="color: #555555;">${board.title}</a>
+						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>
+<%-- 						                    <a href="<c:url value='/board/inquiry/detail/${board.uid}'/>" style="color: #555555;">${board.title}</a>	 --%>
+						                    
 						                    <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
 						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
 						                    <span class="txtEm"></span>

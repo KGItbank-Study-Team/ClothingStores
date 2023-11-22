@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="your.package.name.InquiryDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 // 	request.setAttribute("title", "문의사항");
@@ -17,6 +16,8 @@
 // 	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
 // 	boolean isAuthor = postAuthor.equals(loggedInUser);
 %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,7 +66,6 @@
 	                <input id="bdf_action_type" name="bdf_action_type" value="" type="hidden" />
                     
                     <div class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
-                        <!-- Your content goes here -->
                         <div class="ec-base-table typeWrite ">
                         <table border="1" summary="">
                             <caption>게시판 상세</caption>
@@ -77,7 +77,7 @@
                             
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                     <td>${inquiry.title}</td>
+                                    <td>${inquiry.title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
@@ -90,7 +90,8 @@
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td>${inquiry.regDate}</td>
+                                    <td>${inquiry.reg_date}</td>
+                                    
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">VOTE</th>
@@ -112,7 +113,7 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${inquiry.boardContent}</strong>
+                                                	<strong style="font-weight: bolder;">${inquiry.content}</strong>
                                                 </p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
                                                 	교환/반품은 못합니다.
@@ -135,6 +136,7 @@
                                             수정 및 삭제하려면 비밀번호를 입력하세요.</span>
                                     </td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </div>

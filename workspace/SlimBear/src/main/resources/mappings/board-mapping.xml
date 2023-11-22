@@ -104,6 +104,39 @@
 	        type = #{type}
  	</select>
  	
+ 	<!-- 문의게시글 조회 -->
+ 	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
+ 		SELECT * FROM inquiry WHERE uid=#{uid}
+ 		<!-- SELECT
+	        uid,
+	        null AS writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        null AS status,
+	        type,
+	        priority,
+	        writer
+	    FROM 
+	        notice
+	    WHERE 
+	        uid = #{id}
+	    UNION
+	    SELECT 
+	        uid,
+	        CONCAT(SUBSTRING(writer_id, 1, 1), REPEAT('*', LENGTH(writer_id) - 1)) AS writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        status,
+	        type,
+	        prod_uid AS priority,  
+	        null AS writer
+	    FROM 
+	        inquiry
+	    WHERE
+	        uid = #{id} -->
+	</select>
 	
  	<!-- 특정 prod_uid 상품문의 조회 -->
  	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
@@ -115,8 +148,6 @@
  		INSERT INTO inquiry
  		(writer_id, title, content, reg_date, status, type, prod_uid)
 		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, COALESCE(#{status}, 'WAIT'), #{type}, #{prod_uid})
-		
-		
 		
 <!--  		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, #{status}, #{type}, #{prod_uid}) -->
  	</insert>
