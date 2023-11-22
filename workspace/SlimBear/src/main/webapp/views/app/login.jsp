@@ -44,9 +44,11 @@
 					<li><button>
 							<i class="fab fa-facebook-square"></i><span>페이스북</span>
 						</button></li>
-					<li><button>
-							<i class="fab fa-line"></i><span>라인</span>
-						</button></li>
+					<li><div class="login-container">
+							<a href="/app/login/naver/oauth" class="naver-login-button"> <img
+								src="/resources/images/naver_login.png" alt="네이버 로그인">
+							</a>
+						</div></li>
 				</ul>
 				<p class="forget-msg">아이디º비밀번호 찾기 | 회원가입</p>
 			</section>

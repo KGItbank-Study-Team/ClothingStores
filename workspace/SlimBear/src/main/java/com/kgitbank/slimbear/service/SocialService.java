@@ -1,7 +1,9 @@
 package com.kgitbank.slimbear.service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -15,13 +17,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
@@ -99,54 +95,39 @@ public class SocialService {
 
 	}
 
-	
 	// 카카오 로그인
-	@Value("${spring.kakao.clientId}")
-    private String clientId;
+	 private static final String KAKAO_API_URL = "https://kapi.kakao.com/v2/user/me";
+	    private static final String ACCESS_TOKEN = "0b83e6e79ced6252c01ebae15f43a21c"; // 발급받은 액세스 토큰
 
-    @Value("${spring.kakao.redirectUri}")
-    private String redirectUri;
+	    public String getUserInfo() {
+	        try {
+	            URL url = new URL(KAKAO_API_URL);
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-    private final RestTemplate restTemplate;
+	            connection.setRequestMethod("GET");
+	            connection.setRequestProperty("Authorization", "Bearer " + ACCESS_TOKEN);
 
-    public SocialService() {
-        this.restTemplate = new RestTemplate();
-    }
+	            int responseCode = connection.getResponseCode();
 
-    public String createLoginLink() throws UnsupportedEncodingException {
-        String loginLink = "https://kauth.kakao.com/oauth/authorize?" +
-                "client_id=" + clientId +
-                "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
-                "&response_type=code";
-        return loginLink;
-    }
+	            if (responseCode == HttpURLConnection.HTTP_OK) {
+	                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                String inputLine;
+	                StringBuilder response = new StringBuilder();
 
-    public String getAccessToken(String authorizationCode) {
-        String tokenUrl = "https://kauth.kakao.com/oauth/token?" +
-                "grant_type=authorization_code" +
-                "&client_id=" + clientId +
-                "&redirect_uri=" + redirectUri +
-                "&code=" + authorizationCode;
+	                while ((inputLine = in.readLine()) != null) {
+	                    response.append(inputLine);
+	                }
+	                in.close();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+	                return response.toString();
+	            } else {
+	                System.out.println("Error: " + responseCode);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 
-        HttpEntity<String> request = new HttpEntity<>(headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, request, String.class);
-        return response.getBody();
-    }
-
-    public String getUserInfo(String accessToken) {
-        String userInfoUrl = "https://kapi.kakao.com/v2/user/me";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + accessToken);
-
-        HttpEntity<String> request = new HttpEntity<>(headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(userInfoUrl, HttpMethod.GET, request, String.class);
-        return response.getBody();
-    }
+	        return null;
+	    }
 
 }
