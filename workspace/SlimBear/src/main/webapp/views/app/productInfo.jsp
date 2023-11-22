@@ -465,31 +465,36 @@
 			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
 			<table>
-				<colgroup>
-					<col style="width: 70px;">
-					<col style="width: atuo;">
+				<%-- <colgroup>
+					<col style="width: 20px;">
+					<col style="width: 400px;">
 					<col style="width: 150px;">
 					<col style="width: 130px;">
-				</colgroup>
+				</colgroup> --%>
 				<thead>
 					<tr>
-						<th class="solid2" scope="col">번호</th>
+						<th class="solid2" scope="col" style="width: 80px;">번호</th>
 						<th class="solid2" scope="col">제목</th>
 						<th class="solid2" scope="col">작성자</th>
 						<th class="solid2" scope="col">작성일</th>
 						<!-- <th>조회</th> -->
 					</tr>
 				</thead>
-				<tbody>
-					<c:forEach items="${inquiryList}" var="inquiryItems">
+				<c:forEach items="${inquiryList}" var="inquirys">
+					<tbody>
 						<tr>
-							<td class="solid">${inquiryItems.prod_uid}</td>
-							<td class="solid">${inquiryItems.writer_id}</td>
-							<td class="solid">${inquiryItems.title}</td>
-							<td class="solid">${inquiryItems.reg_date}</td>
+							<td class="solid">${inquirys.prod_uid}</td>
+							<td class="solid"><div clss="clickTitle">${inquirys.title}</div></td>
+							<td class="solid">${inquirys.writer_id}</td>
+							<td class="solid">${inquirys.reg_date}</td>
 						</tr>
-					</c:forEach>
-				</tbody>
+						<tr>
+							<td class="">
+								<div class="inquirysContent">${inquirys.content}</div> 
+							</td>
+						</tr>
+					</tbody>
+				</c:forEach>
 			</table>
 			<button class="qnaBtn">
 				<a href="/app/board/write" class="qnaBtnColor">문의하기</a>

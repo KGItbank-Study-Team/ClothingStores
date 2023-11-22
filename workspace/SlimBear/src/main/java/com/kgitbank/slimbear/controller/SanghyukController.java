@@ -40,7 +40,7 @@ public class SanghyukController {
 		
 		// 제품 상세 정보 가져오기
 		ProductDTO product = sanghService.getProductByUid(productUid);	
-		System.out.println(product);
+		System.out.println("product: " + product);
 		// 잘못된 UID일 경우 메인페이지로
 		if(product == null) {
 			return "redirct:/";
@@ -48,18 +48,18 @@ public class SanghyukController {
 			
 		// 모든 제품 리뷰 가져오기
 		List<ReviewDTO> reviewList = sanghService.getReviewList();
-		System.out.println(reviewList);
+		System.out.println("reviewList: " + reviewList);
 		
 		// 제품의 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
 		
 		// 제품의 inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
-		System.out.println(inquiryList);
-		model.addAttribute("product", product);
-		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("productDetailList", productDetailList);
-		model.addAttribute("inquiryList", inquiryList);
+		System.out.println("inquiryList: " + inquiryList);
+		model.addAttribute("product", product); // 상품정보
+		model.addAttribute("reviewList", reviewList); // 리뷰리스트
+		model.addAttribute("productDetailList", productDetailList); // 상품옵션리스트
+		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
 
 		return "productInfo"; // .jsp 생략 
 	}
@@ -123,14 +123,4 @@ public class SanghyukController {
 		}
 		return "add_success";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
