@@ -484,7 +484,7 @@
 					<tbody>
 						<tr>
 							<td class="solid">${inquirys.prod_uid}</td>
-							<td class="solid"><div clss="clickTitle">${inquirys.title}</div></td>
+							<td class="solid"><div class="clickTitle">${inquirys.title}</div></td>
 							<td class="solid">${inquirys.writer_id}</td>
 							<td class="solid">${inquirys.reg_date}</td>
 						</tr>

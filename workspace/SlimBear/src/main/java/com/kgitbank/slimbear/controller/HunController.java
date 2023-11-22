@@ -186,13 +186,13 @@ public class HunController {
 	}
 
 	@RequestMapping("member/myPage/addr/fix")
-	public String addrFix(Authentication authentication, Model model) {
+	public String addrFix(Authentication authentication,@RequestParam("addrUID")long addrUID, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 		
-		AddrVO vo = hunService.getAddrFixInfo(user.getUid());
+		AddrVO vo = hunService.getAddrFixInfo(addrUID);
 		model.addAttribute("fix", vo);
 		
 		System.out.println(vo);
