@@ -69,6 +69,11 @@ public class AdminController {
 
 		return "tables-product";
 	}
+	
+	@RequestMapping("/home/board/order")
+	public String boardOrder(HttpServletRequest request, ProductUpdateCMD product, Model model) {
+		return  "tables-order";
+	}
 
 	@RequestMapping("home/member")
 	public String memberPage(@RequestParam(name = "memberID", required = false) String memberID, Model model) {
@@ -141,4 +146,6 @@ public class AdminController {
 		return "redirect:/admin/home/product";
 
 	}
+	
+	
 }

@@ -13,5 +13,5 @@ public class ProductDetailDTO {
 	private String color;
 	private String size;
 	private int cnt;
-
+	private Long review_uid;
 }

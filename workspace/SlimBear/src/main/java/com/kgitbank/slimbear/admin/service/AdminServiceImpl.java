@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.admin.command.ProductUpdateCMD;
 import com.kgitbank.slimbear.admin.dao.AdminDAO;
+import com.kgitbank.slimbear.admin.dto.OrderListDTO;
 import com.kgitbank.slimbear.admin.dto.ProductTotalListDTO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
@@ -115,6 +116,20 @@ public class AdminServiceImpl {
 	public void deleteProductDetail(ProductDetailDTO detail) {
 		productDtailDAO.deleteProductDetail(detail);
 	}
+	
+
+	public List<OrderListDTO> getOrderInfos() {
+		
+		return adminDAO.getOrderList();
+	}
+	
+	public OrderListDTO getOrderDetailInfos(long order_uid) {
+		OrderListDTO order = new OrderListDTO();
+		
+		order.setProductDetails(adminDAO.getOrderProductDetilsListByOrderUID(order_uid));;
+
+		return order;
+	}
 
 	private String SaveMainImageFile(MultipartFile file, String uploadPath) {
 		
@@ -171,6 +186,7 @@ public class AdminServiceImpl {
 		
 		return folderPath;
 	}
+
 
 
 }
