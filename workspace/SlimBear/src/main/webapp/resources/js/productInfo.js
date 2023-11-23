@@ -164,13 +164,15 @@ function addCart(uid) {
         success: function (result) {
             if (result.trim() === "add_success") {
                 //alert("장바구니에 추가되었습니다.");
-                var addToCart = "장바구니에 추가되었습니다.";
-                var moveToCart = "장바구니로 이동하시겠습니까?";
-                var choice = confirm(addToCart + "\n\n" + moveToCart);
+                // var addToCart = "장바구니에 추가되었습니다.";
+                // var moveToCart = "장바구니로 이동하시겠습니까?";
+                // var choice = confirm(addToCart + "\n\n" + moveToCart);
 
-                if(choice) {
-                    window.location.href="/app/cart";
-                }
+                // if(choice) {
+                //     window.location.href="/app/cart";
+                // }
+
+                $('.popUp').css('display', 'block');
 
             } else {
                 alert("동일한 상품이 장바구니에 있습니다.")
@@ -181,10 +183,17 @@ function addCart(uid) {
             console.log("status:", status);
             console.log("error:", error);
             alert('로그인 후 이용 가능합니다.');
+            setTimeout(function() {
+                window.location.href="/app/login"
+            })
         }
     });
 };
-
+$(function(){
+    $(".keepShop").on("click", function(){
+        $('.popUp').css('display', 'none');
+    })
+})
 // 위시 리스트 추가
 function addWish(uid) {
     $.ajax({

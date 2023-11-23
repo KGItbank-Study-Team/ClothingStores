@@ -14,6 +14,21 @@
 </head>
 <body>
 	<%@ include file="header/header.jsp"%>
+	
+	<div class="popUp">
+        <div class="cartHeader">
+            <h3>장바구니 담기</h3>
+        </div>
+        <div class="content">
+            <p>장바구니에 상품이 정상적으로 담겼습니다.</p>
+        </div>
+        <div class="choiBtn">
+            <a href="/app/cart" class="goToCartBtn">장바구니 이동</a>
+            <a href="#" class="keepShop">쇼핑계속하기</a>
+        </div>
+        <a class="close" onclick="$('#confirmLayer').remove();"><img src="//img.echosting.cafe24.com/skin/base/common/btn_close.gif" alt="닫기"></a>
+    </div>
+    
 	<div id="container">
 		<div class="productInfo">
 			<div class="left">
