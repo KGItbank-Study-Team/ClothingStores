@@ -503,7 +503,7 @@
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td>${inquiryAnswerList.title}</td>
+							<td><%-- ${inquiryAnswerList.title} --%></td>
 						</tr>
 					</tbody>
 				</c:forEach>

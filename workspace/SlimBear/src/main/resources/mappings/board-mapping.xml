@@ -174,7 +174,7 @@
  	<!-- inquiryAnswer -->
  	<!-- 질문답변 조회 -->
  	<select id="SELECT_INQUIRYANSWER_LIST" resultType="inquiryAnswer" parameterType="inquiry">
- 		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{uid}
+ 		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{inqr_uid}
  	</select>
  	<!-- 질문답변 데이터 삽입 -->
  	<insert id="INSERT_INQUIRYANSWER">
