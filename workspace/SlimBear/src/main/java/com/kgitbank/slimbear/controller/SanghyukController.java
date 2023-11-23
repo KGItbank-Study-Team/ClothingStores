@@ -66,11 +66,12 @@ public class SanghyukController {
 		// inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
 		System.out.println("inquiryList: " + inquiryList);
-		long uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
+		long inqr_uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
+		System.out.println("inqr_uid: " + inqr_uid);
 
 		// inquiryAnswer 가져오기
-		List<InquiryAnswerDTO> inquiryAnswerList = sanghService.getInquiryAnswerList(uid);
-		System.out.println("inquiryAnswerList: " + inquiryAnswerList);
+		//public InquiryAnswerDTO inquiryAnswer = sanghService.getInquiryAnswerList(inqr_uid);
+		//System.out.println("inquiryAnswerList: " + inquiryAnswer);
 		
 		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
@@ -78,7 +79,7 @@ public class SanghyukController {
 		model.addAttribute("colorList", colorList); // color 옵션리스트
 		model.addAttribute("sizeList", sizeList); // size 옵션리스트
 		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
-		model.addAttribute("inquiryAnswerList", inquiryAnswerList);
+		//model.addAttribute("inquiryAnswerList", inquiryAnswerList);
 
 		return "productInfo"; // .jsp 생략 
 	}

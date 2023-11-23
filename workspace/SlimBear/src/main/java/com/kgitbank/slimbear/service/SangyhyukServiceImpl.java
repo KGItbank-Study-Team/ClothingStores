@@ -86,7 +86,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private InquiryAnswerDAO inquiryAnswerDAO;
 	
-	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid){
+	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid){
 		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
 	}
 	

@@ -54,6 +54,7 @@
 								<th scope="row" class="solid2"><span style="font-size: 12px; color: #555555;">PRICE</span></th>
 								<td class="solid"><span style="font-size: 12px; color: #555555;"> <strong>${product.price}</strong>
 								</span></td>
+								<input type="hidden" id="productPrice" value="${product.price}">
 							</tr>
 						</tbody>
 					</table>
@@ -95,8 +96,7 @@
 					</table>
 				</div>
 				<!-- 옵션 선택 시 화면에 출력 -->
-				<input type="hidden" id="productDetailList" value="${product.price}"/>
-				<form action="/app/order/product" method="post">
+				<form action="/app/order/product" method="post" id="buyForm">
 					<div class="tablePosition">
 						<table class="choiceOption">
 							<colgroup>
@@ -106,7 +106,7 @@
 								<col>
 							</colgroup>
 							<tbody>
-
+								<input type="hidden"  id="hiddenInput" name="optionsList"  value="" />
 							</tbody>
 						</table>
 					</div>

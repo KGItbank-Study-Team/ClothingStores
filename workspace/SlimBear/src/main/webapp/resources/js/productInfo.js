@@ -3,7 +3,7 @@ var selectOptionList = new Array();
 var selectedColor = null;
 var selectedSize = null;
 var cnt = 1;
-var productPrice = document.getElementById('productDetailList').value;
+var productPrice = document.getElementById('productPrice').value;
 var totalPrice = null;
 
 // 상품 색상, 사이즈 옵션 선택
@@ -138,7 +138,8 @@ function downProductCount(color, size) {
 }
 
 function buyClick() {
-    console.log(selectOptionList);
+    document.getElementById("hiddenInput").value = JSON.stringify(selectOptionList);
+    document.getElementById("buyForm").submit();
 }
 
 // 현재 페이지의 URL을 가져온다.
@@ -285,3 +286,5 @@ window.onload = function() {
     }
     showScoreByStars(reviewScore);
 }
+
+
