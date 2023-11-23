@@ -38,19 +38,24 @@
 			<section class="Easy-sgin-in-wrap">
 				<h2>간편 로그인</h2>
 				<ul class="sign-button-list">
-					<li><button>
-							<i class="fas fa-qrcode"></i><span>QR코드로 로그인</span>
-						</button></li>
-					<li><button>
-							<i class="fab fa-facebook-square"></i><span>페이스북</span>
-						</button></li>
+					<li><div class="login-container">
+							<a href="/app/login/kakao/oauth" class="naver-login-button"> <img
+								src="/resources/images/kakao_login.png" alt="카카오 로그인">
+							</a>
+						</div></li>
 					<li><div class="login-container">
 							<a href="/app/login/naver/oauth" class="naver-login-button"> <img
 								src="/resources/images/naver_login.png" alt="네이버 로그인">
 							</a>
 						</div></li>
 				</ul>
-				<p class="forget-msg">아이디º비밀번호 찾기 | 회원가입</p>
+				<a href="http://localhost:8080/views/app/find_id.jsp" >아이디찾기
+							</a>
+							<p>|</p><a href="http://localhost:8080/views/app/find_password.jsp" >비밀번호찾기
+							</a>
+							<p>|</p><a href="http://localhost:8080/views/app/join.jsp" >회원가입
+							</a>
+							
 			</section>
 			<footer>
 				<div class="copyright-wrap">
