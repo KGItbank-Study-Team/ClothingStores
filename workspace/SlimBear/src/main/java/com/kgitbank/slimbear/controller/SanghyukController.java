@@ -51,8 +51,17 @@ public class SanghyukController {
 		List<ReviewDTO> reviewList = sanghService.getReviewList();
 		System.out.println("reviewList: " + reviewList);
 		
-		// 제품의 옵션 가져오기
+		// 제품 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
+		System.out.println("productDetailList: " + productDetailList);
+		
+		// 제품 색상 옵션 가져오기
+		List<String> colorList = sanghService.getColorOptions(productUid);
+		System.out.println("colorList: " + colorList);
+		
+		// 제품 사이즈 옵션 가져오기
+		List<String> sizeList = sanghService.getSizeOptions(productUid);
+		System.out.println("sizeList: " + sizeList);
 		
 		// inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
@@ -66,7 +75,8 @@ public class SanghyukController {
 		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
 		model.addAttribute("reviewList", reviewList); // 리뷰리스트
-		model.addAttribute("productDetailList", productDetailList); // 상품옵션리스트
+		model.addAttribute("colorList", colorList); // color 옵션리스트
+		model.addAttribute("sizeList", sizeList); // size 옵션리스트
 		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
 		model.addAttribute("inquiryAnswerList", inquiryAnswerList);
 

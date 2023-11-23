@@ -66,8 +66,8 @@
 								<td>
 									<ul class="colorOptionPosition">
 										<!-- 색상 옵션 -->
-										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="colorBtn"><a href="#none"> <span class="colorOption">${detailList.color}</span>
+										<c:forEach var="colors" items="${colorList}">
+											<li class="colorBtn"><a href="#none"> <span class="colorOption">${colors}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -84,8 +84,8 @@
 								<td>
 									<ul class="sizeOptionPosition">
 										<!-- 사이즈 옵션 -->
-										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="sizeBtn"><a href="#none"> <span class="sizeOption">${detailList.size}</span>
+										<c:forEach var="sizes" items="${sizeList}">
+											<li class="sizeBtn"><a href="#none"> <span class="sizeOption">${sizes}</span>
 											</a></li>
 										</c:forEach>
 									</ul>

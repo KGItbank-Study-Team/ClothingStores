@@ -64,6 +64,16 @@ public class SangyhyukServiceImpl {
 		return prodDetailDAO.getProductDetailList(uid);
 	}
 	
+	/* 상품 색상 옵션 조회 */
+	public List<String> getColorOptions(long productUID) {
+		return prodDetailDAO.getColorOptions(productUID);
+	}
+	
+	/* 상품 사이즈 옵션 조회 */
+	public List<String> getSizeOptions(long productUID) {
+		return prodDetailDAO.getSizeOptions(productUID);
+	}
+	
 	/* inquiry 데이터 받아오기 */
 	@Autowired
 	public InquiryDAO inquiryDAO;
