@@ -52,14 +52,14 @@
 
 	<insert id="INSERT_ORDERADDRESS">
 		INSERT INTO memberOrderAddress
-		(mem_uid, name, phone, nomal_phone, address)
-		VALUES(#{mem_uid},#{name},#{phone},#{nomal_phone},#{address})
+		(mem_uid, name, phone, nomal_phone, address, recipient)
+		VALUES(#{mem_uid},#{name},#{phone},#{nomal_phone},#{address}, #{recipient})
 	</insert>
 
 	<update id="UPDATE_ORDERADDRESS">
 		UPDATE memberOrderAddress
 		SET mem_uid=#{mem_uid},
-		name=#{name}, phone=#{phone}, nomal_phone=#{nomal_phone},
+		name=#{name}, phone=#{phone}, nomal_phone=#{nomal_phone}, recipient=#{recipient},
 		address=#{address}
 		WHERE uid=#{uid}
 	</update>
