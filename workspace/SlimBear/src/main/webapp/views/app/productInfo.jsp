@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
+<link rel="stylesheet" href="/resources/css/swiper.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" defer src="/resources/js/productInfo.js"></script>

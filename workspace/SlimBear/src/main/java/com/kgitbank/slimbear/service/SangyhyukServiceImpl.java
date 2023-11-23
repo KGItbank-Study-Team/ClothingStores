@@ -86,9 +86,9 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private InquiryAnswerDAO inquiryAnswerDAO;
 	
-	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid){
-		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
-	}
+//	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid){
+//		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
+//	}
 	
 	
 	/* 상품 장바구니 */
