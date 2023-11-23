@@ -180,5 +180,18 @@
 		DELETE FROM cart
 		WHERE uid=#{uid}
 	</delete>
-
+	
+	
+	<!-- 마일리지 내역 -->
+	<select id="SELECT_MILEAGERECORD_BY_MEM_UID">
+		SELECT * FROM memberMileageRecord
+		WHERE mem_uid=#{mem_uid}
+	</select>
+	
+	<insert id="INSERT_MILEAGERECORD">
+		INSERT INTO cart
+		(mem_uid, date, order_code, type, mileage)
+		VALUES(#{mem_uid},#{date},#{order_code},#{type},#{mileage})
+	</insert>
+	
 </mapper>

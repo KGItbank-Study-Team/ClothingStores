@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.dto.MemberMileageRecordDTO;
 
 @Repository
 public class MemberDAO{
@@ -36,5 +37,14 @@ public class MemberDAO{
 	
 	public int updateMember(MemberDTO member) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_MEM", member);
+	}
+	
+	// 마일리지 내역
+	public int getMemberMileageRecordListByMemberUID(long mem_uid) {
+		return  template.update("com.slimbear.mapper.Member.SELECT_MILEAGERECORD_BY_MEM_UID", mem_uid);
+	}
+	
+	public int insertMemberMileageRecord(MemberMileageRecordDTO record) {
+		return  template.update("com.slimbear.mapper.Member.INSERT_MILEAGERECORD", record);
 	}
 }

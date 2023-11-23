@@ -20,6 +20,8 @@
 		<typeAlias alias="memberCoupon" type="com.kgitbank.slimbear.dto.MemberCouponDTO" />
 		<typeAlias alias="wish" type="com.kgitbank.slimbear.dto.WishDTO" />		
 		<typeAlias alias="cart" type="com.kgitbank.slimbear.dto.CartDTO" />	
+		<typeAlias alias="mileageRecord" type="com.kgitbank.slimbear.dto.MemberMileageRecordDTO" />	
+		
 		
 		 <!-- board-mapping -->
 		<typeAlias alias="inquiry" type="com.kgitbank.slimbear.dto.InquiryDTO" />
