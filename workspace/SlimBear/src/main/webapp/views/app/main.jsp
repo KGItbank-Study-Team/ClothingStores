@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/main_page.css" />
+<link rel="stylesheet" href="/resources/css/swiper.css" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/main_page.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js"
