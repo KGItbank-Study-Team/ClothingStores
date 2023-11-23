@@ -1,7 +1,5 @@
 package com.kgitbank.slimbear.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
-import com.kgitbank.slimbear.vo.BoardInquiryListVO;
 
 @Service
 public class YangBoardServiceImpl {
@@ -40,11 +37,6 @@ public class YangBoardServiceImpl {
         return inquiryDAO.getInquiryList(type);
     }
     
-	/*
-	 * // Inquiry에서 공지사항 조회 public List<NoticeDTO> getInquiryNList(String type) {
-	 * return noticeDAO.getInquiryNList(type); }
-	 */
-    
     // 문의게시판 답변
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
         return inquiryDAO.getInquiryListByProdUid(prodUid);
@@ -60,6 +52,16 @@ public class YangBoardServiceImpl {
         return inquiryDAO.getInquiryDetail(id);
     }
 	
+    // 문의게시판 삭제
+    public void deleteInquiry(Long id) {
+        inquiryDAO.deleteInquiry(id);
+    }
+    
+    // 문의게시판 수정
+    public void updateInquiry(InquiryDTO inquiry) {
+    	inquiryDAO.updateInquiry(inquiry);
+    }
+    
 	
 	// FAQ
 	public List<FaqDTO> getFaqList() {
@@ -74,25 +76,6 @@ public class YangBoardServiceImpl {
 //		List<FaqDTO> faqs = faqDAO.getFaqList();
 //		return faqs;
 //	}
-	
-	
-	// 유저 게시글 (나중에 지울예정)
-	public ArrayList<BoardInquiryListVO> getBoardUserList() {
-		ArrayList<BoardInquiryListVO> boardUsers = new ArrayList<>();
-
-		for (int i = 10; i >= 1; i--) {
-			BoardInquiryListVO boardUser = new BoardInquiryListVO();
-			boardUser.setNo(i);
-			boardUser.setTitle("유저게시글 " + i);
-			boardUser.setWriter_id("유저작성자 " + i);
-			boardUser.setReg_date(new Date(System.currentTimeMillis()));
-			boardUser.setContent("내용 " + i);
-
-			boardUsers.add(boardUser);
-		}
-		return boardUsers;
-	}
-
 
 
 }

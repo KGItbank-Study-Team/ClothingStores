@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class InquiryDTO {
-	private long uid;
+	private Long uid;
 	private String writer_id;
 	private String title;
 	private String content;
