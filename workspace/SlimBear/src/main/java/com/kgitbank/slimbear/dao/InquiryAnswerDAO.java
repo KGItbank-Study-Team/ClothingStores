@@ -15,8 +15,8 @@ public class InquiryAnswerDAO {
 	protected SqlSessionTemplate template;
 	
 	// InquiryAnswer 리스트 조회
-	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid) { 
-		return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST"); // 패키지풀네임.id
+	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid) { 
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST"); // 패키지풀네임.id
 	}
 	
 	// InquiryAnswer 데이터 삽입
