@@ -25,7 +25,7 @@ public class InquiryDAO {
 	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
 	}
 	
-//	 문의게시글 삭제
+	// 문의게시글 삭제
 	public int deleteInquiry(Long uid) {
         return template.delete("com.slimbear.mapper.Board.DELETE_INQUIRY", uid);
     }
@@ -38,7 +38,6 @@ public class InquiryDAO {
 	// 상품문의 데이터 삽입
 	public int insertInquiry(InquiryDTO inquiry) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRY", inquiry);
-		
 	}
 	
 	// 상품문의 업데이트
@@ -52,4 +51,5 @@ public class InquiryDAO {
 //		inquiry.setUid(uid);
 //		return template.delete("com.slimbear.mapper.Board.DELETE_INQUIRY", inquiry);
 //	}
+	
 }

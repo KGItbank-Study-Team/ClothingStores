@@ -21,4 +21,5 @@ public class InquiryDTO {
 	private String status;
 	private String type;
 	private Long prod_uid;
+    private String name;  // 변경된 부분: name 필드 추가
 }

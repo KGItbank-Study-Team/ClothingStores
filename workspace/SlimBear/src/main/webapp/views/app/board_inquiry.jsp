@@ -97,7 +97,7 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${inquiries.content}</strong>
+                                                	${inquiries.content}
                                                 </p>
                                                 <p><br></p>
                                             </div>
@@ -136,9 +136,7 @@
 						    <c:choose>
 						        <c:when test="${isAuthor}">
 						            <a href="/app/board/inquiry/detail/delete/${inquiries.uid}" onclick="return confirm('게시글을 삭제하시겠습니까?');" class="btnNormalFix sizeS">DELETE</a>
-<%-- 						            <a href="javascript:void(0);" onclick="deleteInquiry(${board.uid});" class="btnNormalFix sizeS">DELETE</a> --%>
-<%--             						<a href="/app/board/inquiry/delete/${board.uid}" onclick="return confirm('정말로 삭제하시겠습니까?');" class="btnNormalFix sizeS">DELETE</a> --%>
-            						<a href="/app/board/inquiry/update/${inquiries.uid}" class="btnEmFix sizeS">EDIT</a>
+            						<a href="/app/board/inquiry/detail/update/${inquiries.uid}" class="btnEmFix sizeS">EDIT</a>
 						        </c:when>
 						        <c:otherwise>
 						            <!-- 작성자가 아니면 표시하지 않음 -->

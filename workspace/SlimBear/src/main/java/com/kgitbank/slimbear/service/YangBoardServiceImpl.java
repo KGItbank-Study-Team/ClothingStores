@@ -57,6 +57,10 @@ public class YangBoardServiceImpl {
         inquiryDAO.deleteInquiry(id);
     }
     
+    // 문의게시판 수정페이지조회
+    public InquiryDTO getInquiryUpdate(Long id) {
+        return inquiryDAO.getInquiryDetail(id);
+    }
     // 문의게시판 수정
     public void updateInquiry(InquiryDTO inquiry) {
     	inquiryDAO.updateInquiry(inquiry);
