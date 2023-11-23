@@ -177,7 +177,10 @@
                                 <tr class="right">
                                     <td colspan="2"><input id="ma_main_flag0" name="ma_main_flag" fw-filter=""
                                             fw-label="기본 배송지로 저장" fw-msg="" value="T" type="checkbox"
-                                            checked="checked"><label for="ma_main_flag0">기본 배송지로 저장</label></td>
+                                            checked="checked">
+                                            <input type="hidden" name="addressUID" value="${fix.addr_uid}"><label for="ma_main_flag0">기본 배송지로 저장</label></td>
+                                            
+                                            
                                 </tr>
                             </tbody>
                         </table>

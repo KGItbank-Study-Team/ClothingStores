@@ -205,6 +205,7 @@ public class HunController {
 	
 	@PostMapping("member/myPage/addr/fix")
 	public String fix(Authentication authentication,
+			@RequestParam("addressUID") long addressUID,
     		@RequestParam String name,
             @RequestParam("address1") String addressZip1,
             @RequestParam("address2") String addressAddr1,
@@ -221,6 +222,7 @@ public class HunController {
         System.out.println(user.getUsername());
         
         MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
+        addr.setUid(addressUID);
         addr.setMem_uid(user.getUid());
         addr.setName(name);
         addr.setAddress(addressZip1 + " | " + addressAddr1 + " | " + addressAddr2);

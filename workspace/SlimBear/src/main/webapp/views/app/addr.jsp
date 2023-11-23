@@ -87,8 +87,6 @@
                                         </td>
                                         
                                         <td>
-                                            <img src="/resources/images/ico_addr_default.gif"
-                                                class="" alt="기본"> 
                                                 <span>${item.addrName}</span>
                                         </td>
                                         <td><span>${item.recipient}</span></td>
