@@ -48,7 +48,6 @@
 					<!-- <a href="/_onedesign/html/company.html" class="navi00"><span>ABOUT</span></a> -->
 					<a href="/app/board/notice" class="navi01"><span>공지사항</span></a> 
 					<a href="/app/board/inquiry" class="navi02"><span>문의게시판</span></a>
-					<a href="/views/app/review_page.jsp" class="navi04"><span>사용후기</span></a> 
 					<a href="/app/board/faq" class="navi05"><span>자주묻는질문</span></a>
 				</div>
 				
@@ -105,7 +104,8 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="#" style="color: #555555;">${board.title}</a>
+						                    <a href="/app/board/notice/detail/${board.uid}" style="color: #555555;">${board.title}</a>
+						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image new-image" data-regdate="${board.reg_date}"/>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
@@ -116,32 +116,35 @@
 						    </c:forEach>
 						</tbody>
 						
+						<script>
+    // 현재 날짜를 가져오는 함수
+    function getCurrentDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    }
+
+    // 페이지 로드 시 이미지 처리 함수 호출
+    window.onload = function () {
+        var images = document.querySelectorAll('.new-image');
+
+        images.forEach(function (image) {
+            var regDate = new Date(image.getAttribute('data-regdate'));
+            var oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+            // 현재 날짜와 등록 날짜를 비교
+            if (regDate > oneWeekAgo && regDate <= new Date(getCurrentDate())) {
+                image.style.display = 'inline-block'; // 이미지를 보임
+            } else {
+                image.style.display = 'none'; // 이미지를 숨김
+            }
+        });
+    };
+</script>
 						
-						<!-- 2번째 tbody for문  -->
-						<%-- <tbody class="xans-element- xans-board xans-board-list-4 xans-board-list xans-board-4 center">
-						    <c:forEach var="boardUser" items="${boardUsers}" varStatus="loop">
-						        <tr style="background-color:#FFFFFF; color:#555555;" class="xans-record-">
-						            <td>${boardUser.no}</td>
-						            <td class="displaynone">${boardUser}</td>
-						            <td class="subject left txtBreak">
-						                <span class="displaynone">
-						                    <a href="#none" onclick="BOARD.viewTarget('${boardUser}', '6', this);">
-						                        <img src="//img.echosting.cafe24.com/skin/base/board/btn_unfold.gif" alt="내용 보기"/>
-						                    </a>
-						                </span>
-						                <a href="#" style="color:#555555;">${boardUser.title}</a>
-						                <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
-						                <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image"/>
-						                <span class="txtEm"></span>
-						            </td>
-						            <td>${boardUser.writer_id}</td>
-						            <td class="displaynone"><span class="txtNum">${boardUser.reg_date}</span></td>
-						            <td class="displaynone"><span class="txtNum">${boardUser}</span></td>
-						            <td class="displaynone"><span class="txtNum">${boardUser}</span></td>
-						            <td class="displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점"/></td>
-						        </tr>
-						    </c:forEach>
-						</tbody> --%>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
@@ -150,7 +153,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
 						<span class="gRight"> 
-							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a>
+<!-- 							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a> -->
 						</span>
 					</div>
 				</sec:authorize>

@@ -194,3 +194,27 @@ footer .copyright-wrap span{
 	font-size: 13px;
 	line-height: 15px;
 }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
+.naver-login-button {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.naver-login-button img {
+    width: 300px; /* 이미지의 크기를 조절하세요 */
+    height: 65px;
+    border: 0;
+}

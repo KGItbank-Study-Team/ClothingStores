@@ -1,47 +1,22 @@
 package com.kgitbank.slimbear.controller;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kgitbank.slimbear.service.SocialService;
-
-@Controller
+@RestController
 public class SocialController {
-	
-	@Autowired
-    private SocialService socialService;
 
-    @GetMapping("/login/kakao")
-    public String login() {
-        try {
-            String loginLink = socialService.createLoginLink();
-            return "redirect:" + loginLink;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return "error";
+    public static void main(String[] args) throws IOException {
+        SocialService kakaoApiService = new SocialService();
+        String userInfo = kakaoApiService.getUserInfo();
+
+        if (userInfo != null) {
+            System.out.println("Kakao User Info: " + userInfo);
+            // 여기에서 필요한 로직을 추가하세요 (예: 사용자 정보 파싱, 로그인 처리 등)
+        } else {
+            System.out.println("Failed to get Kakao user info");
         }
     }
-
-    @GetMapping("/login/kakao/callback")
-    public String loginCallback(@RequestParam String code) {
-        try {
-            String accessToken = socialService.getAccessToken(code);
-            String userInfo = socialService.getUserInfo(accessToken);
-
-            // 콘솔에 출력
-            System.out.println("Access Token: " + accessToken);
-            System.out.println("User Info: " + userInfo);
-
-            return "success";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-    }
-	
-	
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
@@ -53,9 +54,18 @@ public class SanghyukController {
 		// 제품의 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
 		
-		// 제품의 inquiry 가져오기
+		// inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
 		System.out.println("inquiryList: " + inquiryList);
+		InquiryDTO Uid = inquiryList.get(0);
+		long inquiryUid = Uid.getUid();
+		System.out.println("inquiryUid: " + inquiryUid);
+		
+		// inquiryAnswer 가져오기
+		List<InquiryAnswerDTO> inquiryAnswerList = sanghService.getInquiryAnswerList(inquiryUid);
+		System.out.println("inquiryAnswerList: " + inquiryAnswerList);
+		
+		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
 		model.addAttribute("reviewList", reviewList); // 리뷰리스트
 		model.addAttribute("productDetailList", productDetailList); // 상품옵션리스트

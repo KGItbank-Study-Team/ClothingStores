@@ -1,15 +1,11 @@
-code {
-	text-align: left !important;
-}
 body {
-	/* background-color: #faf9ef; */
-	background-color: #eae5dd;
+	/* background-color: #eae5dd; */
+	background-color: white !important;
 	width: 100%;
 }
 
 li {
 	list-style: none;
-	/* text-decoration: none; */
 }
 
 a {
@@ -21,7 +17,6 @@ a {
 	margin: 107.5px;
 	padding-top: 100px;
 	height: auto;
-	/* text-align: center; */
 }
 
 .productInfo {
@@ -30,15 +25,17 @@ a {
 	position: relative;
 	/* left: 15%; */
 	width: fit-content;
-	margin-bottom: 80px;
+	margin: 0 500px 80px 500px;
 	text-align: center;
 }
-
+.prodName {
+	text-align: left !important;
+	
+}
 .left {
 	/* position: relative; */
 	display: inline-block;
 	vertical-align: top;
-	text-align:center;
 }
 
 .right {
@@ -53,16 +50,17 @@ a {
 
 .productImg {
 	position: relative;
-	left: 40px;
+	padding-right: 70px;
 }
 
 .subExplanation {
 	font-size: 14px;
 	color: #555555;
 	padding-bottom: 30px;
+	text-align: left !important;
 }
 
-table {
+.info > table {
 	border-spacing: 0;
 	border-collapse: collapse;
 }
@@ -70,20 +68,15 @@ table {
 .solid {
 	width: 430px;
 	border-bottom: 1px solid #555555;
+	text-align: left !important;
 }
-
 .solid2 {
 	width: 100px;
-	text-align: left;
+	text-align: left !important;
 	border-bottom: 1px solid #555555;
 	border-spacing: 0;
 	padding: 6px 0;
 }
-
-/* th:last-child {
-	border-bottom: none;
-} */
-
 .solid3 {
 	width: 100px;
 	text-align: left;
@@ -94,7 +87,6 @@ table {
 .colorSelect {
 	padding-right: 20px;
 }
-
 .sizeBtn, .colorBtn {
 	position: relative;
 	overflow: hidden;
@@ -116,10 +108,7 @@ table {
 
 .sizeBtn.active2 {
 	background: #dcd3c5;
-
-	
 }
-
 .colorOption, .sizeOption {
 	display: inline-block;
 	padding: 4px 10px;
@@ -136,10 +125,6 @@ table {
 	width:9px;
 	height:9px;	
 }
-col {
-	width: 110px;
-}
-
 .inputBox {
 	position: relative;
 	width: 20px;
@@ -157,8 +142,8 @@ col {
 }
 
 input:focus {
-	outline: none; /* 포커스 시 외곽선 제거 */
-	border-color: initial; /* 포커스 시 기본 테두리 색상 유지 */
+	outline: none; 포커스 시 외곽선 제거
+	border-color: initial; 포커스 시 기본 테두리 색상 유지
 }
 
 .displayNone {
@@ -262,6 +247,10 @@ tbody img {
 	width: 100px;
 	padding-right: 40px;
 }
+.sizeGuide > table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
 
 .shoppingInfo {
 	display: flex;
@@ -277,11 +266,11 @@ tbody img {
 	display: flex;
 }
 
-.tableSize td {
+/* .tableSize > td {
 	width: 126px;
 	border: 1px solid #555555;
 	text-align: center;
-}
+} */
 
 .tdColor {
 	background: #eae5dd;
@@ -363,7 +352,7 @@ section > h1 {
 }
 .info {
 
-	padding-left: 10px;
+	/* padding-left: 10px; */
 	padding-top: 8px;
 }
 .info span  {
@@ -399,16 +388,31 @@ section > h1 {
 /* Inquirys CSS */
 .inquirySection {
 	margin-top: 100px;
+	width: auto;
 }
-.inquirySection  th {
+/* .inquirySection > th {
 	text-align: center;
 }
-.inquirySection > th, td {
+.inquirySection  th, td {
+	text-align: center;
+} */
+.inquirySection > table {
+	/* border: 1px solid gray; */
+	border-collapse: collapse; 
+}
+.inquirySection > table  td {
+	padding: 10px 0;
+	text-align: center;
+	border: 1px solid;
+	border-right: none;
+	border-left: none;
+}
+.thCss {
 	text-align: center;
 }
-.inquirySection > td {
-	padding: 20px 0;
-}
+/* .borderRemove {
+	border-right: none;
+} */
 .qnaBtn {
 	margin-top: 30px;
 	float: right;
@@ -420,7 +424,17 @@ section > h1 {
 .qnaBtnColor {
 	color: white;
 }
-.inquirysContent {
-	padding-left: 20px;
+.clickTitle {
+	cursor: pointer;
+	text-align: left !important;
 }
-
+.centerNo {
+	text-align: left !important;
+}
+.inquiryContent {
+	display: none;
+	padding-top: 20px;
+}
+.inquirysContent .active {
+	display: block;
+}

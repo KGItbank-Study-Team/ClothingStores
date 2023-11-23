@@ -231,6 +231,20 @@ $(document).ready(function () {
     });
 });
 
+// 문의제목 클릭 -> 문의 내용 출력
+$(document).ready(function(){
+    $(".clickTitle").click(function(){
+        var content = $(this).closest("tbody").find(".inquiryContent");
+
+        if(content.is(":visible")) {
+            content.slideUp();
+        } else {
+            content.slideDown();
+        }
+    });
+
+});
+
 // 리뷰점수를 별모양으로 표시
 window.onload = function() {
     const reviewScore = document.getElementById('reviewList').value;
@@ -252,6 +266,5 @@ window.onload = function() {
             stars[i].classList.add('fas');
         }
     }
-    console.log('reviewScore: ' + reviewScore);
     showScoreByStars(reviewScore);
 }

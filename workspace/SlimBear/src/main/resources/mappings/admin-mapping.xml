@@ -20,5 +20,20 @@
 		GROUP BY p.uid
  	</select>
  	
+ 	<select id="SELECT_ORDER_LIST" resultType="com.kgitbank.slimbear.admin.dto.OrderListDTO">
+ 		SELECT m.id AS owner_id, o.*, p.status AS pay_status, p.type AS pay_type
+		FROM productOrder o LEFT JOIN orderPayment p 
+		ON(o.uid=p.order_uid)
+		LEFT JOIN member m
+		ON(o.mem_uid=m.uid);
+ 	</select>
  
+ 	
+ 	<select id="SELECT_ORDER_PRODUCTDETAIL_LIST_BY_ORDER_UID" resultType="java.util.HashMap">
+ 	 	SELECT SUBSTRING_INDEX(op.prod_code,':',1) AS prod_uid, SUBSTRING_INDEX(SUBSTRING_INDEX(op.prod_code,':',2),':',-1) AS color, SUBSTRING_INDEX(SUBSTRING_INDEX(op.prod_code,':',3),':',-1) AS size 
+		, op.cnt, op.review_uid, p.*
+		FROM orderDetail op LEFT JOIN product p ON(SUBSTRING_INDEX(op.prod_code,':',1) = p.uid)
+		WHERE order_uid=#{order_id};
+ 	</select>
+ 	
  </mapper>

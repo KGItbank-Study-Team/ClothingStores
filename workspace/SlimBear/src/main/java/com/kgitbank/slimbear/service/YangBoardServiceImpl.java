@@ -30,16 +30,20 @@ public class YangBoardServiceImpl {
 		return noticeDAO.getNoticeList(priority);
 	}
 	
+	// 공지사항 상세페이지조회
+    public NoticeDTO getNoticeDetail(Long id) {
+        return noticeDAO.getNoticeDetail(id);
+    }
 	
 	// 문의게시판
     public List<InquiryDTO> getInquiryList(String type) {
         return inquiryDAO.getInquiryList(type);
     }
     
-    // Inquiry에서 공지사항 조회
-    public List<NoticeDTO> getInquiryNList(String type) {
-        return noticeDAO.getInquiryNList(type);
-    }
+	/*
+	 * // Inquiry에서 공지사항 조회 public List<NoticeDTO> getInquiryNList(String type) {
+	 * return noticeDAO.getInquiryNList(type); }
+	 */
     
     // 문의게시판 답변
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
@@ -53,7 +57,6 @@ public class YangBoardServiceImpl {
 	
 	// 문의게시판 상세페이지조회
     public InquiryDTO getInquiryDetail(Long id) {
-    	System.out.println("Inquiry Detail ID: " + id);
         return inquiryDAO.getInquiryDetail(id);
     }
 	

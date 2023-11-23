@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 로그인해야만 갈수있는 화면
 		security.authorizeRequests().antMatchers("/app/member/myPage/**").authenticated();
-		security.authorizeRequests().antMatchers("/admin/home/**").authenticated();
+		//security.authorizeRequests().antMatchers("/admin/home/**").authenticated();
 		
 		// 로그인한 사용자가 해당 권한일경우 사용가능
 		security.authorizeRequests().antMatchers("/app/member/myPage/**").hasAnyAuthority("MEMBER");
-		security.authorizeRequests().antMatchers("/admin/home/**").hasAnyAuthority("ADMIN");
+		//security.authorizeRequests().antMatchers("/admin/home/**").hasAnyAuthority("ADMIN");
 		
 		security.csrf().disable();
 		
