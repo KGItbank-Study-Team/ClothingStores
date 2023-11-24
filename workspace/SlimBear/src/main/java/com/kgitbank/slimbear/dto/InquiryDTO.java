@@ -21,5 +21,5 @@ public class InquiryDTO {
 	private String status;
 	private String type;
 	private Long prod_uid;
-    private String name;  // 변경된 부분: name 필드 추가
+    private int secure; // 비밀글 여부를 나타내는 필드
 }

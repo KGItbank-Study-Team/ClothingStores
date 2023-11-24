@@ -57,7 +57,7 @@
 					<a href="/app/board/inquiry?board_no=3&amp;category_no=1" class="qna02">
 						<span>배송문의</span></a>
 					<a href="/app/board/inquiry?board_no=3&amp;category_no=2" class="qna03">
-						<span>배송 전 변경/취소</span></a>
+						<span>기타문의</span></a>
 				</div>
 				
 				<div class="boardSort">
@@ -99,30 +99,17 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>	
-											<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>
+						                    <!-- 비밀글인 경우에만 아이콘 표시 -->
+						                    <c:if test="${board.secure eq '1'}">
+						                        <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                    </c:if>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
 						            <td>${board.writer_id}</td>
 						            <td>${board.reg_date}</td>
 						        </tr>
-						        
-						        <!-- 현재 문의에 대한 답변 표시 -->
-        <c:forEach var="answer" items="${inquiry.answers}">
-            <tr style="background-color: #EFEFEF; color: #555555;" class="xans-record-">
-                <td></td>
-                <td class="displaynone"></td>
-                <td class="subject left txtBreak">
-                    <strong>
-                        <span class="txtEm">답변:</span> ${answer.answerContent}
-                    </strong>
-                </td>
-                <td>${answer.answerWriter}</td>
-                <td>${answer.answerRegDate}</td>
-            </tr>
-        </c:forEach>
-						        
 						    </c:forEach>
 						</tbody>
 						

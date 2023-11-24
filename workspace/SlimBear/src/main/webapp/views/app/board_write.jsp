@@ -98,15 +98,12 @@
 							&lt;br /&gt;
 							--------------------------------------------------------------"
 						type="hidden" />
-					<input id="fix_add_content"
-						name="fix_add_content" value="" type="hidden" />
-						
+					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />
+					
 					<input id="type" name="type" value="" type="hidden" />
 				    <input id="reg_date" name="reg_date" type="hidden" />
-<%-- 				    <input id="reg_date" name="reg_date" type="hidden" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>" /> --%>
 				    <input id="writer_id" name="writer_id" type="hidden" />
-						
-						
+					
 					<div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
 					<div class="ec-base-box typeProduct displaynone ">
 						<p class="thumbnail">
@@ -152,12 +149,13 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-<!-- 									<select id="subject" name="subject" fw-filter="isFill" fw-label="제목" fw-msg=""> -->
 									<select id="subject" name="title" th:field="*{title}">
 										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
 										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option>
 										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
 									</select>
+<!-- 									<textarea style="width: 30%;" name="title" id="subject" class="ec-fr-never-be-duplicated"></textarea> -->
+
 									</td>
 								</tr>
 								<tr class="displaynone">
@@ -190,7 +188,7 @@
 										--------------------------------------------------------------&lt;br /&gt;
 										</textarea> 
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
-    
+										
 										<!-- JavaScript --> 
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/polyfill.min.js?vs=2310251253"></script>
@@ -200,11 +198,6 @@
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
 										
 									</td>
-								</tr>
-								<tr class="ucc">
-									<th scope="row">UCC</th>
-									<td><input id="ucc" name="ucc" size="35" fw-filter=""
-										fw-label="UCC URL" value="" type="text" /></td>
 								</tr>
 							</tbody>
 							<tbody class="">
@@ -229,37 +222,21 @@
 									<td><input name="attach_file[]" type="file" /></td>
 								</tr>
 							</tbody>
+							
 							<tbody>
 								<tr class="">
-									<th scope="row">PASSWORD</th>
-									<td><input id="password" name="password" fw-filter=""
-											fw-label="비밀번호" fw-msg="" value="" type="password" />
-										<span class="displaynone">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
-									</td>
-								</tr>
-								<tr class="">
 									<th scope="row">SECRET</th>
-									<td><input id="secure0" name="secure" fw-filter="isFill"
-										fw-label="비밀글설정" fw-msg="" value="F" type="radio"
-										checked="checked" />
-									<label for="secure0">공개글</label>
-									<input id="secure1" name="secure" fw-filter="isFill"
-										fw-label="비밀글설정" fw-msg="" value="T" type="radio" />
-									<label for="secure1">비밀글</label></td>
-								</tr>
-								<tr class="captcha displaynone">
-									<th scope="row">보안문자</th>
 									<td>
-										<p class="gBlank5">
-											<span class="ec-base-help txtInfo">
-											영문, 숫자 조합을 공백없이 입력하세요(대소문자구분)</span>
-										</p>
+										<input id="secure0" name="secure" fw-filter="isFill"
+											fw-label="비밀글설정" fw-msg="" value="0" type="radio" checked="checked" />
+										<label for="secure0">공개글</label>
+										
+										<input id="secure1" name="secure" fw-filter="isFill"
+											fw-label="비밀글설정" fw-msg="" value="1" type="radio" />
+										<label for="secure1">비밀글</label>
 									</td>
 								</tr>
-								<tr class="agree displaynone">
-									<th scope="row">개인정보 수집 및 <br/>이용 동의</th>
-									<td><br/> 개인정보 수집 및 이용에 동의하십니까?</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -271,10 +248,6 @@
 							</span>
 						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
-						<!-- <span class="gRight">
-							<a href="#" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
-							<a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
-						</span> -->
 						<span class="gRight">
                             <button type="submit" class="btnSubmitFix sizeS">OK</button>
                             <a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
@@ -282,6 +255,7 @@
 					</div>
 				</div>
 			</form>
+			
 		</div>
 	</div>
 	<jsp:include page="footer/footer.jsp" />

@@ -25,14 +25,14 @@ import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
-
+	
 	// 공지사항
 	@RequestMapping("/board/notice")
 	public String getBoardNoticeList(Model model) {
 		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "notice";
 	}
-
+	
 	// 공지사항 상세페이지조회
 	@RequestMapping("/board/notice/detail/{uid}")
 	public String getNoticeDetail(@PathVariable Long uid, Model model) {
@@ -40,14 +40,14 @@ public class YangController {
 		model.addAttribute("notices", notices);
 		return "board_notice";
 	}
-
+	
 	@RequestMapping("/article/notice")
 	public String getBoardNotice(Model model) {
 		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "board_notice";
 	}
-
-	// 문의사항
+	
+	// 문의사항 목록
 	@RequestMapping("/board/inquiry")
 	public String getBoardInquiryList(
 			@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
@@ -67,10 +67,6 @@ public class YangController {
 	}
 	
 	
-	
-	
-	
-	
 	// 문의사항 상세페이지조회
 	@RequestMapping("/board/inquiry/detail/{uid}")
 	public String getInquiryDetail(@PathVariable Long uid, Model model) {
@@ -82,16 +78,13 @@ public class YangController {
 	
 	
 	
-	
-	
-	// 문의게시글 작성
 	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
 	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUserName = authentication.getName();
-
+	    
 	    // 문의사항에 따른 TYPE값 설정
 	    if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
 	        inquiryDTO.setType("PRODUCT");
@@ -100,19 +93,20 @@ public class YangController {
 	    } else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
 	        inquiryDTO.setType("DELIVERY_C");
 	    }
-
+	    
 	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
 	    inquiryDTO.setWriter_id(currentUserName);
-
+	    
 	    // reg_date 설정(현재 시간)
 	    inquiryDTO.setReg_date(new Date());
-
+	    
 	    // DAO로 전달
 	    boardService.insertInquiry(inquiryDTO);
-
+	    
 	    // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
 	    return "redirect:/app/board/inquiry";
 	}
+	
 
 	// 문의게시글 삭제 작성
 	@RequestMapping(value = "/board/inquiry/detail/delete/{uid}", method = RequestMethod.GET)
