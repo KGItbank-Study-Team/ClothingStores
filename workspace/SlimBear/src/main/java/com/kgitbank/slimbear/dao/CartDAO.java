@@ -30,6 +30,11 @@ public class CartDAO {
 		return result;
 	}
 	
+	/* 동일 상품 갯수(결제 버튼 클릭 시 사용) */
+	public int equalProdCnt(CartDTO cart) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_CNT_EQUALS_PROD", cart);
+	}
+	
 	private long selectMaxUid() {
 		long uid = template.selectOne("com.slimbear.mapper.Member.SELECT_MAX_UID_CART");
 		return uid;
