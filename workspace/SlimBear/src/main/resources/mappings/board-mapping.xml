@@ -74,69 +74,25 @@
  	<!-- 상품문의 목록 조회 -->
  	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
  		SELECT * FROM inquiry WHERE type=#{type}
-	    <!-- SELECT
-	        uid,
-	        null AS writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        null AS status,
-	        type,
-	        priority,
-	        writer
-	    FROM 
-	        notice
-	    WHERE 
-	        type = #{type}
-	    UNION
-	    SELECT 
-	        uid,
-	        CONCAT(SUBSTRING(writer_id, 1, 1), REPEAT('*', LENGTH(writer_id) - 1)) AS writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        status,
-	        type,
-	        prod_uid AS priority,  
-	        null AS writer
-	    FROM 
-	        inquiry
-	    WHERE 
-	        type = #{type} -->
+<!-- 	    SELECT  -->
+<!-- 	        uid, -->
+<!-- 	        CONCAT(SUBSTRING(writer_id, 1, 1), REPEAT('*', LENGTH(writer_id) - 1)) AS writer_id, -->
+<!-- 	        title, -->
+<!-- 	        content, -->
+<!-- 	        reg_date, -->
+<!-- 	        status, -->
+<!-- 	        type, -->
+<!-- 	        prod_uid AS priority,   -->
+<!-- 	        null AS writer -->
+<!-- 	    FROM  -->
+<!-- 	        inquiry -->
+<!-- 	    WHERE  -->
+<!-- 	        type = #{type} -->
  	</select>
  	
  	<!-- 문의게시글 조회 -->
  	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
  		SELECT * FROM inquiry WHERE uid=#{uid}
- 		<!-- SELECT
-	        uid,
-	        null AS writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        null AS status,
-	        type,
-	        priority,
-	        writer
-	    FROM 
-	        notice
-	    WHERE 
-	        uid = #{id}
-	    UNION
-	    SELECT 
-	        uid,
-	        CONCAT(SUBSTRING(writer_id, 1, 1), REPEAT('*', LENGTH(writer_id) - 1)) AS writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        status,
-	        type,
-	        prod_uid AS priority,  
-	        null AS writer
-	    FROM 
-	        inquiry
-	    WHERE
-	        uid = #{id} -->
 	</select>
 	
  	<!-- 특정 prod_uid 상품문의 조회 -->
@@ -148,9 +104,23 @@
  	</select>
  	<!-- 상품문의 데이터 삽입 -->
  	<insert id="INSERT_INQUIRY">
- 		INSERT INTO inquiry
- 		(writer_id, title, content, reg_date, status, type, prod_uid)
-		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, COALESCE(#{status}, 'WAIT'), #{type}, #{prod_uid})
+<!--  		INSERT INTO inquiry -->
+<!--  		(writer_id, title, content, reg_date, status, type, prod_uid) -->
+<!-- 		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, COALESCE(#{status}, 'WAIT'), #{type}, #{prod_uid}) -->
+
+		<!-- id 대신 name 가져오기 -->
+	 	INSERT INTO inquiry
+	    (writer_id, title, content, reg_date, status, type, prod_uid)
+	    VALUES(
+	        COALESCE((SELECT name FROM member WHERE id = #{writer_id}), 'DefaultName'),
+	        #{title},
+	        #{content},
+	        #{reg_date},
+	        COALESCE(#{status}, 'WAIT'),
+	        #{type},
+	        #{prod_uid}
+	    )
+ 	
  	</insert>
  	
  	<!-- 상품문의 업데이트 -->

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
-import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 
@@ -66,7 +65,12 @@ public class YangController {
 		model.addAttribute("inquiries", inquiries);
 		return "inquiry";
 	}
-
+	
+	
+	
+	
+	
+	
 	// 문의사항 상세페이지조회
 	@RequestMapping("/board/inquiry/detail/{uid}")
 	public String getInquiryDetail(@PathVariable Long uid, Model model) {
@@ -74,34 +78,40 @@ public class YangController {
 		model.addAttribute("inquiries", inquiries);
 		return "board_inquiry";
 	}
-
+	
+	
+	
+	
+	
+	
+	// 문의게시글 작성
 	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
 	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
-		// Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = authentication.getName();
-	    
-		// 문의사항에 따른 TYPE값 설정
-		if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-			inquiryDTO.setType("PRODUCT");
-		} else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-			inquiryDTO.setType("DELIVERY");
-		} else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-			inquiryDTO.setType("DELIVERY_C");
-		}
+	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUserName = authentication.getName();
 
-		// 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
-	    inquiryDTO.setName(currentUserName);
+	    // 문의사항에 따른 TYPE값 설정
+	    if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("PRODUCT");
+	    } else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("DELIVERY");
+	    } else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
+	        inquiryDTO.setType("DELIVERY_C");
+	    }
 
-		// reg_date 설정(현재 시간)
-		inquiryDTO.setReg_date(new Date());
+	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
+	    inquiryDTO.setWriter_id(currentUserName);
 
-		// DAO로 전달
-		boardService.insertInquiry(inquiryDTO);
+	    // reg_date 설정(현재 시간)
+	    inquiryDTO.setReg_date(new Date());
 
-		// 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
-		return "redirect:/app/board/inquiry";
+	    // DAO로 전달
+	    boardService.insertInquiry(inquiryDTO);
+
+	    // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
+	    return "redirect:/app/board/inquiry";
 	}
 
 	// 문의게시글 삭제 작성
@@ -144,62 +154,6 @@ public class YangController {
 	}
 	
 	
-	
-	
-	// 문의사항 수정 페이지
-//    @RequestMapping("/board/inquiry/detail/update/{uid}")
-//    public String getInquiryEdit(@PathVariable Long uid, Model model) {
-//        // InquiryDTO를 가져와 모델에 추가
-//        InquiryDTO inquiries = boardService.getInquiryDetail(uid);
-//        model.addAttribute("inquiries", inquiries);
-//        return "board_update"; // 수정 페이지로 이동
-//    }
-//    
-//    // 문의게시글 수정 작성
-//    // 게시물 수정 처리
-//    @PostMapping("/board/inquiry/detail/update/{uid}")
-//    public String submitUpdatedInquiry(@PathVariable Long uid, @ModelAttribute InquiryDTO updatedInquiry) {
-//        // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUserId = authentication.getName();
-//
-//        // 기존 게시물 정보 조회
-//        InquiryDTO existingInquiry = boardService.getInquiryDetail(uid);
-//
-//        // 현재 로그인한 사용자의 ID를 writer_id로 설정
-//        updatedInquiry.setWriter_id(currentUserId);
-//
-//        // 수정된 내용으로 기존 게시물 업데이트
-//        existingInquiry.setContent(updatedInquiry.getContent());
-//        existingInquiry.setStatus(updatedInquiry.getStatus());
-//
-//        // DAO로 전달하여 수정 처리
-//        boardService.updateInquiry(existingInquiry);
-//
-//        // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
-//        return "redirect:/app/board/inquiry/detail/" + uid;
-//    }
-
-    
-//    @PostMapping("/board/inquiry/detail/update/{uid}")
-//    public String updateInquiry(@PathVariable("uid") Long uid, @ModelAttribute InquiryDTO updatedInquiry) {
-//        // 기존 게시물 정보 조회
-//        InquiryDTO existingInquiry = boardService.getInquiryDetail(uid);
-//
-//        // 수정된 내용으로 기존 게시물 업데이트
-//        existingInquiry.setContent(updatedInquiry.getContent());
-//        existingInquiry.setStatus(updatedInquiry.getStatus());
-//        
-//        // 게시물 업데이트
-//        boardService.updateInquiry(existingInquiry);
-//
-//        // 수정 후 상세 페이지로 리디렉션
-//        return "redirect:/app/board/inquiry/detail/" + uid;
-//    }
-	
-	
-	
-	
 	// 자주묻는질문
 	@RequestMapping("/board/faq")
 	public String getBoardFaqList(
@@ -227,12 +181,11 @@ public class YangController {
 		}
 
 		model.addAttribute("faqs", faqs);
-//        model.addAttribute("boardUsers", boardService.getBoardUserList());
 
 		return "faq";
 	}
 
-	// 게시글 작성
+	// 게시글 작성 페이지
 	@GetMapping(value = "/board/write")
 	public String getBoardWriteForm() {
 		return "board_write";

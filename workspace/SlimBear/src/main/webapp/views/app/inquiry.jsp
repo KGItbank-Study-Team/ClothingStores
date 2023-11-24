@@ -107,6 +107,22 @@
 						            <td>${board.writer_id}</td>
 						            <td>${board.reg_date}</td>
 						        </tr>
+						        
+						        <!-- 현재 문의에 대한 답변 표시 -->
+        <c:forEach var="answer" items="${inquiry.answers}">
+            <tr style="background-color: #EFEFEF; color: #555555;" class="xans-record-">
+                <td></td>
+                <td class="displaynone"></td>
+                <td class="subject left txtBreak">
+                    <strong>
+                        <span class="txtEm">답변:</span> ${answer.answerContent}
+                    </strong>
+                </td>
+                <td>${answer.answerWriter}</td>
+                <td>${answer.answerRegDate}</td>
+            </tr>
+        </c:forEach>
+						        
 						    </c:forEach>
 						</tbody>
 						
