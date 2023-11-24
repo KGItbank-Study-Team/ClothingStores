@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
+import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.MemberCartVO;
 
 
@@ -27,6 +29,9 @@ public class OstController {
 	
 	@Autowired
 	private OstSerivceImpl ostService;
+	
+	@Autowired
+	private SangyhyukServiceImpl sanghService;
 	
 	@RequestMapping("cart")
 	public String cartPage(Authentication authentication ,Model model) {
@@ -46,10 +51,32 @@ public class OstController {
 			model.addAttribute("cartList",cartlist);
 			model.addAttribute("totalprice",totalPrice);
 		}
-
+		
 		return "cart"; 
 	}
+	
+	@PostMapping("/addToCart")
+	@ResponseBody
+	public ResponseEntity<String> addToCart(@RequestParam long memUid,
+	                                       @RequestParam String prodCode,
+	                                       @RequestParam int quantity,
+	                                       @RequestParam String selectedColor,
+	                                       @RequestParam String selectedSize) {
+	    // 여기에서 cartService를 사용하여 카트에 상품을 추가하는 로직을 작성
+	    // 새로운 색상과 크기 정보를 이용하여 새로운 제품 코드를 생성하는 로직이 필요
+	    String newProdCode = generateNewProductCode(prodCode, selectedColor, selectedSize);
 
+	    // 나머지 로직은 기존 addToCart와 동일
+	    ostService.addToCart(memUid, newProdCode, quantity);
+
+	    return ResponseEntity.ok("Success");
+	}
+
+	private String generateNewProductCode(String prodCode, String color, String size) {
+	    // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성
+	    String originalProdCode = ostService.getOriginalProductCode(prodCode);
+	    return SlimBearUtil.updateProductCode(originalProdCode, color, size);
+	}
 	@RequestMapping(value = "/updateQuantity", method = { RequestMethod.GET, RequestMethod.POST })
 	public String updateQuantity(@RequestParam long productId, @RequestParam int newQuantity, Model model, Authentication authentication) {
 	    if (authentication != null) {
@@ -105,10 +132,10 @@ public class OstController {
     }
 	@PostMapping("/updateCartItemOptions")
     @ResponseBody
-    public ResponseEntity<String> updateCartItemOptions(@RequestParam long uid,
+    public ResponseEntity<String> updateCartItemOptions(@RequestParam long cartUid,@RequestParam long productUid,
             @RequestParam String color, @RequestParam String size) {
         // 여기에 옵션 업데이트 로직을 추가하고 성공 또는 실패에 따라 응답을 보냄
-        ostService.updateCartItemOptions(uid, color, size);
+        ostService.updateCartItemOptions(cartUid, productUid,color, size);
         return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK);
     }
 	/*
