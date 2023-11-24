@@ -32,7 +32,7 @@
 	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.js"></script>
 <script type="text/javascript"
 	src="https://login2.cafe24ssl.com/crypt/AuthSSLManager.plugin.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <title>비밀번호찾기-슬림베어</title>
 </head>
@@ -53,10 +53,7 @@
 				<form id="findPasswordForm" name="findPasswordForm"
 					action="/app/findPassword" method="post">
 					<div
-						class="xans-element- xans-member xans-member-findid ec-base-box typeThin ">
-						<!--
-        $returnURL = /member/id/find_id_result.html
-     -->
+						class="xans-element- xans-member xans-member-findid ec-base-box typeThin">
 						<div class="findId">
 							<div class="titleArea">
 								<h2>FIND PASSWORD</h2>
@@ -65,8 +62,9 @@
 									<li>이메일, 전화번호 또는 주민등록번호 중 찾을 방법을 선택한 후,<br />이름과 정보를 입력해
 										주세요.
 									</li>
-									<li>(주의)비밀번호 찾기 진행시 기존 비밀번호는 삭제되며,<br/>
-												새로운 임시 비밀번호가 발급됩니다.</li>
+									<li>(주의)비밀번호 찾기 진행시 기존 비밀번호는 삭제되며,<br />새로운 임시 비밀번호가
+										발급됩니다.
+									</li>
 								</ul>
 							</div>
 							<fieldset>
@@ -77,47 +75,129 @@
 										for="check_method1">이메일</label> <input id="check_method2"
 										name="check_method" value="2" type="radio"
 										onclick="toggleFields('2')" checked="checked" /> <label
-										for="check_method2">휴대폰 번호</label> <input id="check_method3"
-										name="check_method" value="3" type="radio"
-										onclick="toggleFields('3')" /> <label for="check_method3">주민등록번호</label>
-									<p id="name_view" class="name">
-										<strong>이름</strong> <input id="name" name="name" fw-filter=""
-											fw-label="이름" fw-msg="" class="lostInput" placeholder="이름"
-											value="" type="text" />
-									</p>
-									<p id="id_view" class="id">
-										<strong>아이디</strong> <input id="id" name="id" fw-filter=""
-											fw-label="아이디" fw-msg="" class="lostInput" placeholder="아이디"
-											value="" type="text" />
-									</p>
+										for="check_method2">휴대폰 번호</label>
+								</p>
+								<p id="name_view" class="name">
+									<strong>이름</strong> <input id="name" name="name" fw-filter=""
+										fw-label="이름" fw-msg="" class="lostInput" placeholder="이름"
+										value="" type="text" />
+								</p>
+								<p id="id_view" class="id">
+									<strong>아이디</strong> <input id="id" name="id" fw-filter=""
+										fw-label="아이디" fw-msg="" class="lostInput" placeholder="아이디"
+										value="" type="text" />
+								</p>
 								<p id="email_view" class="email" style="display: none;">
 									<strong>이메일로 찾기</strong> <input id="email" name="email"
 										fw-filter="isEmail" fw-label="이메일" fw-msg="" class="lostInput"
 										placeholder="이메일" value="" type="text" />
+									<button type="button" onclick="sendVerificationCode()">인증번호
+										받기</button>
 								</p>
 								<p id="mobile_view" class="phone" style="display: block;">
 									<strong>휴대폰 번호로 찾기</strong> <input id="phone" name="phone"
-										fw-filter="" fw-label="휴대전화 번호"
-										fw-msg="" class="phone" placeholder="-없이 전화번호를 적어주세요" maxlength="11"
-										value="" type="text" />
-								</p>
-								<p id="ssn_view" class="ssn_no" style="display: none;">
-									<strong>주민등록번호로 찾기</strong> <input id="ssn1" name="ssn1"
-										fw-filter="isMin[6]&isMax[6]&isNumber" fw-label="주민등록번호"
-										fw-msg="" class="lostInput" placeholder="000000" maxlength="6"
-										value="" type="text" /> - <input id="ssn2" name="ssn2"
-										fw-filter="isMin[7]&isMax[7]&isNumber" fw-label="주민등록번호"
-										fw-msg="" class="lostInput" placeholder="0000000"
-										maxlength="7" value="" type="password" />
+										fw-filter="" fw-label="휴대전화 번호" fw-msg="" class="phone"
+										placeholder="-없이 전화번호를 적어주세요" maxlength="11" value=""
+										type="text" />
+									<button type="button" onclick="sendVerificationCode()">인증번호
+										받기</button>
+									<p id="verification_code_view" style="display: none;">
+										<strong>인증번호</strong> <input id="verificationCode"
+											name="verificationCode" fw-filter="" fw-label="인증번호"
+											fw-msg="" class="lostInput" placeholder="인증번호" value=""
+											type="text" />
+										<button type="button" onclick="verifyCode()">인증번호 확인</button>
+									</p>
 								</p>
 								<div class="ec-base-button gColumn">
-										<button type="submit" class="btnLogin2">확인</button>
-									</div>
+									<button type="submit" class="btnLogin2">확인</button>
+								</div>
 							</fieldset>
 						</div>
 					</div>
 				</form>
 			</div>
+
+			<script>
+				function sendVerificationCode() {
+					var method = document
+							.querySelector('input[name="check_method"]:checked').value;
+					var target = method === '1' ? 'email' : 'phone';
+
+					var inputValue = document.getElementById(target).value;
+					if (!inputValue) {
+						alert('Please enter '
+								+ (method === '1' ? 'email' : 'phone')
+								+ ' first.');
+						return;
+					}
+
+					// 추가된 부분: target이 null 또는 비어 있을 경우 처리
+					if (!target || !inputValue.trim()) {
+						alert('Invalid ' + target
+								+ '. Please enter a valid value.');
+						return;
+					}
+
+					// Assuming you have a servlet or controller method to handle the verification code sending
+					// AJAX request to send verification code
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '/app/sendVerificationCode', true);
+					xhr.setRequestHeader('Content-Type',
+							'application/x-www-form-urlencoded');
+
+					// Handling response
+					xhr.onload = function() {
+						if (xhr.status === 200) {
+							alert('Verification code sent successfully.');
+							// Show the verification code input field
+							document.getElementById('verification_code_view').style.display = 'block';
+						} else {
+							alert('Failed to send verification code.');
+						}
+					};
+
+					// Sending data
+					var params = 'method=' + method + '&target=' + inputValue;
+					xhr.send(params);
+				}
+				function verifyCode() {
+				    var verificationCode = document.getElementById('verificationCode').value;
+
+				    // AJAX를 이용한 서버와의 통신
+				    var xhr = new XMLHttpRequest();
+				    xhr.open('POST', '/app/verifyCode', true);
+				    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+				    // sendVerificationCode에서 전달한 method와 target 값을 가져와서 전송
+				    var method = document.querySelector('input[name="check_method"]:checked').value;
+				    var target = method === '1' ? 'email' : 'phone';
+
+				    xhr.onload = function () {
+				        if (xhr.status === 200) {
+				            // 서버에서의 응답 처리
+				            var response = JSON.parse(xhr.responseText);
+
+				            if (response.success) {
+				                alert('Verification code verified successfully.');
+
+				                // 여기에 인증번호 확인 후의 추가 작업을 수행
+				                // 예: 다음 단계의 입력 항목 표시, 임시 비밀번호 생성 등
+				            } else {
+				                alert('Verification code verification failed. Please check the code.');
+				            }
+				        } else {
+				            alert('Failed to verify the verification code. Please try again.');
+				        }
+				    };
+
+				    // 보낼 데이터 설정
+				    var params = 'enteredCode=' + verificationCode + '&method=' + method + '&target=' + target;
+				    xhr.send(params);
+				}
+
+			</script>
+
 
 			<jsp:include page="footer/footer.jsp" flush="true" />
 
