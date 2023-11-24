@@ -45,7 +45,16 @@ public class CartDAO {
 		cart.setUid(uid);
 		template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
-	
+	public void addToCart(long memUid, String prodCode, int quantity) {
+        HashMap<String, Object> info = new HashMap<>();
+        info.put("memUid", memUid);
+        info.put("prodCode", prodCode);
+        info.put("quantity", quantity);
+        template.insert("com.slimbear.mapper.Member.INSERT_CART_INFO", info);
+    }
+	public String getOriginalProductCode(String prodCode) {
+        return template.selectOne("com.slimbear.mapper.Member.SELECT_ORIGINAL_PRODUCT_CODE", prodCode);
+    }
 	public int updateAddress(CartDTO cart) { // 이거 adress>> cart로 바꿔줭
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART", cart);
 	}

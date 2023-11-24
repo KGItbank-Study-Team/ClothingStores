@@ -52,7 +52,8 @@ public class OstSerivceImpl {
 			vo.setPrice(product.getPrice() * i.getCnt());
 		
 			/* vo.setPrice(product.getPrice()); */
-			vo.setDesc(product.getDesc());
+			vo.setDesc(product.getDesc());			
+			vo.setProductUid(product.getUid());
 			vo.setName(product.getName());
 			vo.setMaker(product.getMaker());
 			vo.setMain_image(product.getMain_image());
@@ -72,22 +73,27 @@ public class OstSerivceImpl {
 
 		return list;
 	}
-	public void updateCartItemOptions(long uid, String color, String size) {
-        // 여기에 실제 업데이트 로직을 추가하세요.
-        // 새로운 prod_code 생성 및 업데이트
-		String updatedProdCode = SlimBearUtil.appendProductCode(uid, color, size);
-        cartDAO.updateCartItemOptions(uid, updatedProdCode);
+	 public String getOriginalProductCode(String prodCode) {
+	        return cartDAO.getOriginalProductCode(prodCode);
+	    }
+	public void addToCart(long memUid, String prodCode, int quantity) {
+        // 기존 제품 코드를 가져오는 로직 (실제 데이터베이스 조회 필요)
+        String originalProdCode = cartDAO.getOriginalProductCode(prodCode);
+
+        // 새로운 제품 코드 생성
+        String newProdCode = SlimBearUtil.generateNewProductCode(originalProdCode, "newColor", "newSize");
+
+        // 나머지 로직은 기존 addToCart와 동일
+        cartDAO.addToCart(memUid, newProdCode, quantity);
     }
-	/*
-	 * public void updateCartItemOptions(long uid, String color, String size) { //
-	 * 여기에 실제 업데이트 로직을 추가하세요. cartDAO.updateCartItemOptions(uid, color, size); }
-	 */
 
-
-
-	
-
-
+	public void updateCartItemOptions(long cartUid, long productUid ,String color, String size) {
+        
+        // 이부분 시발 
+            String updatedProdCode = SlimBearUtil.appendProductCode(productUid, color, size);
+            cartDAO.updateCartItemOptions(cartUid, updatedProdCode);
+       
+    }
 	public int calculateTotalPrice(List<MemberCartVO> cartList) {
 		int totalPrice = 0;
 		for (MemberCartVO cartItem : cartList) {
