@@ -22,7 +22,6 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SocialService;
-
 @Controller
 public class RSYController {
 	@Autowired
@@ -201,16 +200,18 @@ public class RSYController {
 			if ("1".equals(method)) {
 				// 이메일로 발급
 				try {
-					SocialService.sendEmail(target, "슬림베어 임시 비밀번호 발급 : ", temporaryPassword);
+					SocialService.sendEmail(target, "슬림베어 임시 비밀번호 발급", temporaryPassword);
 					 response.put("success", true);
 					return response; // 비밀번호 찾기 완료 페이지로 이동
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			} else if ("2".equals(method)) {
 				// 휴대폰으로 발급
 				SocialService.sendTemporaryPassword(target, temporaryPassword);
+				
 				 response.put("success", true);
 				return response; // 비밀번호 찾기 완료 페이지로 이동
 			}

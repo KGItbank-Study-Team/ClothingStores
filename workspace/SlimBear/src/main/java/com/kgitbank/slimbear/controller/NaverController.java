@@ -72,8 +72,11 @@ public class NaverController {
 	        JSONObject responseObject = new JSONObject(response.getBody());
 	        String token = responseObject.getString("access_token");
 
-	        System.out.println(token);
-	        getUserInfo(token);
+	        System.out.println("token : "+token);
+	        getNaverUserInfo(token);
+
+            String NaverEmail = getNaverUserInfo(token);
+            System.out.println("네이버이메일 : "+NaverEmail);
 	    } else {
 	        // 오류 처리
 	        System.out.println("Token request failed with status code: " + response.getStatusCode());
@@ -83,7 +86,7 @@ public class NaverController {
 	}
 
 	
-	public void getUserInfo(String accessToken) {
+	public String getNaverUserInfo(String accessToken) {
 	    // 사용자 정보 요청하기
 	    String apiUrl = "https://openapi.naver.com/v1/nid/me";
 
@@ -103,11 +106,16 @@ public class NaverController {
 	        JSONObject responseObject = new JSONObject(responseEntity.getBody());
 	        JSONObject response = responseObject.getJSONObject("response");
 	        String name = response.getString("name");
+	        String naverEmail = response.getString("email");
 
-	        System.out.println("User Name: " + name);
+	        System.out.println("NAVERUser Name: " + name);
+	        System.out.println("NAVERUser Email: " + naverEmail);
+	        
+	        return naverEmail;
 	    } else {
 	        // 오류 처리
 	        System.out.println("User info request failed with status code: " + responseEntity.getStatusCode());
 	    }
+	    return null;
 	}
 }

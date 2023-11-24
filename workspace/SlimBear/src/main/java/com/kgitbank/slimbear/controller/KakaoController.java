@@ -71,8 +71,11 @@ public class KakaoController {
             JSONObject responseObject = new JSONObject(response.getBody());
             String token = responseObject.getString("access_token");
 
-            System.out.println(token);
-            getUserInfo(token);
+            System.out.println("token : "+token);
+            getKakaoUserInfo(token);
+            
+            String kakaoEmail = getKakaoUserInfo(token);
+            System.out.println("카카오이메일 : "+kakaoEmail);
         } else {
             // 오류 처리
             System.out.println("Token request failed with status code: " + response.getStatusCode());
@@ -81,7 +84,7 @@ public class KakaoController {
         return "redirect:/";
     }
 
-    public void getUserInfo(String accessToken) {
+    public String getKakaoUserInfo(String accessToken) {
         // 사용자 정보 요청하기
         String apiUrl = "https://kapi.kakao.com/v2/user/me";
 
@@ -97,14 +100,18 @@ public class KakaoController {
         ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, requestEntity, String.class);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            // 응답에서 원하는 정보 추출
+        
+        	 // 응답에서 원하는 정보 추출
             JSONObject responseObject = new JSONObject(responseEntity.getBody());
-//            String nickname = responseObject.getJSONObject("kakao_account").getString("profile").getString("nickname");
-//
-//            System.out.println("User Nickname: " + nickname);
+            String kakaoEmail = responseObject.getJSONObject("kakao_account").getString("email");
+
+            // 여기서 userEmail을 사용하면 됩니다.
+            System.out.println("KAKAO User Email: " + kakaoEmail);
+            return kakaoEmail;
         } else {
             // 오류 처리
             System.out.println("User info request failed with status code: " + responseEntity.getStatusCode());
         }
+        return null;
     }
 }

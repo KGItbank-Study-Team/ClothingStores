@@ -47,4 +47,9 @@ public class MemberDAO{
 	public int insertMemberMileageRecord(MemberMileageRecordDTO record) {
 		return  template.update("com.slimbear.mapper.Member.INSERT_MILEAGERECORD", record);
 	}
+	
+	// 비밀번호 찾기 시 비밀번호 수정(승연)
+	public int updateTemporaryPassword(MemberDTO member) {
+		return template.update("com.slimbear.mapper.Member.UPDATE_TEMP_MEM", member);
+	}
 }
