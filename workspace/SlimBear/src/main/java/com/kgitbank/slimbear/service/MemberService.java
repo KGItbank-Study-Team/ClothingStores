@@ -9,5 +9,6 @@ public interface MemberService {
 	boolean join(MemberDTO member);
 
 	MemberDTO getMemberById(String id);
+	MemberDTO getMemberByUID(Long uid);
 	List<MemberDTO> getMemberList();
 }

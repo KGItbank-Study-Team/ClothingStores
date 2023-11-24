@@ -39,4 +39,8 @@ public class MemberServiceImpl implements MemberService {
 		return memDAO.getMemberList();
 	}
 
+	@Override
+	public MemberDTO getMemberByUID(Long uid) {
+		return memDAO.getMemberByUID(uid);
+	}
 }

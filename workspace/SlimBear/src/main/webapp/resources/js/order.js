@@ -87,19 +87,5 @@ function sample6_execDaumPostcode() {
             return true; // 폼 제출을 허용
         }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var orderbutton = document.getElementById('orderbutton');
-
-    var orderButtonHandler = function() {
-        // 주문하기 버튼을 클릭할 때, onbeforeunload 이벤트를 제거
-        window.onbeforeunload = null;
-
-        // 폼 서버로 제출
-        var form = document.querySelector('form');
-        form.submit();
-    };
-
-    orderbutton.addEventListener('click', orderButtonHandler);
-});
 
 
