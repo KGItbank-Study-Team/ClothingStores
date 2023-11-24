@@ -112,7 +112,7 @@
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="/app/order/product" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
+						<a href="javascript:buyClick(${product.uid})" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
 							<span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
 						</a> 
 						<a href="javascript:addCart(${product.uid})" id="cartBtn" class="btnOption" style="background: #eae5dd;">

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,15 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.CategoryDTO;
-import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
-import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
 
@@ -103,7 +101,9 @@ public class SanghyukController {
 			String color = options.get("color").toString();
 			String size = options.get("size").toString();
 			String cntValue = options.get("cnt").toString();
+			System.out.println("cntValue: " + cntValue);
 			int cnt = Integer.parseInt(cntValue);
+			System.out.println("cnt: " + cnt);
 			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
 			
 			CartDTO cartDTO = new CartDTO();
@@ -123,7 +123,83 @@ public class SanghyukController {
 		return "add_success"; 
 	}
 	
-	/* 결제하기 */
+	/* 결제버튼 클릭 시 cart에도 추가 */
+	@RequestMapping(value="insert/payCart/{uid}", method=RequestMethod.POST )
+	@ResponseBody
+	public Map<String, Object> insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		System.out.println("결제 버튼 메서드");
+		Map<String, Object> result = new HashMap<>();
+		
+		SecurityUser user = (SecurityUser)authentication.getPrincipal();
+		long mem_uid = user.getUid();
+		System.out.println("mem_uid: " + mem_uid);
+		System.out.println("data: " + data);
+
+		String prod_code = null;
+		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
+		System.out.println("selectOptionList = " + selectOptionList);
+		
+		for(HashMap<String, Object> options : selectOptionList) {
+			String color = options.get("color").toString();
+			String size = options.get("size").toString();
+			String cntValue = options.get("cnt").toString();
+			int cnt = Integer.valueOf(cntValue);
+			System.out.println("cnt: " + cnt);
+			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+			
+			CartDTO cartDTO = new CartDTO();
+			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
+			cartDTO.setProd_code(prod_code); // 상품 코드 설정
+			cartDTO.setCnt(cnt);
+			System.out.println("cartDTO: " + cartDTO);
+			
+			int isAreadyExited = sanghService.findCartProducts(cartDTO);
+			System.out.println("isAreadyExited: " + isAreadyExited);
+			
+			if(isAreadyExited>=1) {
+				// 장바구니에 이미 해당 상품이 존재할 경우
+				int cartCnt = sanghService.equalProdCnt(cartDTO); // 카트에 있는 해당 상품의 개수를 가져옴.
+				System.out.println("cartCnt: " + cartCnt);
+				result.put("status", "already_existed");
+			} else {
+				// 장바구니에 해당 상품이 없는 경우
+				sanghService.insertInCart(cartDTO);
+				result.put("status", "add_success");
+			}
+		}
+		return result;
+	}
+	
+	/* 동일상품 개수 조회 */
+//	@RequestMapping(value="equalProd/cnt/{uid}", method=RequestMethod.POST)
+//	@ResponseBody
+//	public int equalProdCnt(@PathVariable("uid") long uid, long mem_uid) {
+//		
+//		String prod_code = null;
+//		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
+//		
+//		for(HashMap<String, Object> options : selectOptionList) {
+//			String color = options.get("color").toString();
+//			String size = options.get("size").toString();
+//			String cntValue = options.get("cnt").toString();
+//			int cnt = Integer.parseInt(cntValue);
+//			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+//			
+//			CartDTO cartDTO = new CartDTO();
+//			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
+//			cartDTO.setProd_code(prod_code); // 상품 코드 설정
+//			cartDTO.setCnt(cnt);
+//			
+//			int isAreadyExited = sanghService.findCartProducts(cartDTO);
+//			System.out.println("isAreadyExited: " + isAreadyExited);
+//			if(isAreadyExited>=1) {
+//				
+//				return "already_existed";
+//			} else {
+//				sanghService.insertInCart(cartDTO);
+//			}
+//		}
+//	}
 	
 	
 	/* 위시리스트 추가 */

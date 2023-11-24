@@ -13,7 +13,6 @@ import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
@@ -103,6 +102,11 @@ public class SangyhyukServiceImpl {
 	/* 동일상품 체크 */
 	public int findCartProducts(CartDTO cart) {
 		return cartDAO.selectCountInCart(cart);
+	}
+	
+	/* 동일상품 갯수 */ 
+	public int equalProdCnt(CartDTO cart) {
+		return cartDAO.equalProdCnt(cart);
 	}
 	
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {

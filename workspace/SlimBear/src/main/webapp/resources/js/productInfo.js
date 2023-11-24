@@ -52,41 +52,6 @@ $(function () {
 
         $(".choiceOption").append(newRow);
     }
-
-
-
-    $("#buyBtn").click(function(){
-        for (var i = 0; i < selectOptionList.length; i++) {
-            var optionList = selectOptionList[i];
-            console.log("optionList: " + optionList);
-            var colorInput = document.createElement("input");
-            colorInput.type = "hidden";
-            colorInput.id = "color" + i;
-            colorInput.name = "optionsList[" + i + "].color";
-            colorInput.value = optionList.color;
-
-            var sizeInput = document.createElement("input");
-            sizeInput.type = "hidden";
-            sizeInput.id = "size" + i;
-            sizeInput.name = "optionsList[" + i + "].size";
-            sizeInput.value = optionList.size;
-
-            var cntInput = document.createElement("input");
-            cntInput.type = "hidden";
-            cntInput.id = "cnt" + i;
-            cntInput.name = "optionsList[" + i + "].cnt";
-            cntInput.value = optionList.cnt;
-
-            document.body.appendChild(colorInput);
-            document.body.appendChild(sizeInput);
-            document.body.appendChild(cntInput);
-            
-        }
-        $("#buyForm").submit();       
-        console.log("optionList: " + optionList);
-        //window.location.href = "/order/product";
-    });
-
     function updateSelection(color, size) {
         beforeColor = selectedColor;
         beforesize = selectedSize;
@@ -109,8 +74,38 @@ $(function () {
         }
     }
 });
+// 옵션 리스트 결제페이지로 슝~
+function addInput() {
+    for (var i = 0; i < selectOptionList.length; i++) {
+        var optionList = selectOptionList[i];
+        console.log("optionList: " + optionList);
+        var colorInput = document.createElement("input");
+        colorInput.type = "hidden";
+        colorInput.id = "color" + i;
+        colorInput.name = "optionsList[" + i + "].color";
+        colorInput.value = optionList.color;
 
+        var sizeInput = document.createElement("input");
+        sizeInput.type = "hidden";
+        sizeInput.id = "size" + i;
+        sizeInput.name = "optionsList[" + i + "].size";
+        sizeInput.value = optionList.size;
 
+        var cntInput = document.createElement("input");
+        cntInput.type = "hidden";
+        cntInput.id = "cnt" + i;
+        cntInput.name = "optionsList[" + i + "].cnt";
+        cntInput.value = optionList.cnt;
+
+        document.body.appendChild(colorInput);
+        document.body.appendChild(sizeInput);
+        document.body.appendChild(cntInput);
+
+    }
+    $("#buyForm").submit();
+    console.log("optionList: " + optionList);
+    //window.location.href = "/order/product";
+};
 function makeProductElementID(color, size) {
     return "product_" + color + "_" + size;
 }
@@ -170,43 +165,21 @@ function downProductCount(color, size) {
     selectOptionList[index].cnt -= 1;
     productElement.find(".inputBox").val(selectOptionList[index].cnt);
 }
-
-// function () {
-//     document.getElementById("hiddenInput").value = JSON.stringify(selectOptionList);
-//     document.getElementById("buyForm").submit();
-// }
-
 // 현재 페이지의 URL을 가져온다.
 var currentUrl = window.location.href;
 // URL에서 "p" 파라미터값을 추가한다.
 var urlParams = new URLSearchParams(currentUrl.search);
 var prod_code = urlParams.get("p");
-
-// 테스트 출력
-console.log(selectedColor, selectedSize);
 // 장바구니 추가 기능
 function addCart(uid) {
-    // 테스트 출력
-    console.log(selectOptionList);
+    console.log(selectOptionList); // 테스트 출력
     console.log("prod_code", uid);
-
-    // 컨트롤러로 보내는 데이터
-    // prod_code, selectOptionList(옵션값을 저장한 배열)
     $.ajax({
         url: "/app/insert/cart/" + uid,
         type: "POST",
         data: { selectOptionList: selectOptionList },
         success: function (result) {
             if (result.trim() === "add_success") {
-                //alert("장바구니에 추가되었습니다.");
-                // var addToCart = "장바구니에 추가되었습니다.";
-                // var moveToCart = "장바구니로 이동하시겠습니까?";
-                // var choice = confirm(addToCart + "\n\n" + moveToCart);
-
-                // if(choice) {
-                //     window.location.href="/app/cart";
-                // }
-
                 $('.popUp').css('display', 'block');
 
             } else {
@@ -224,34 +197,71 @@ function addCart(uid) {
         }
     });
 };
-
-// var buyProduct = { uid: uid, color: selectedColor, size: selectedSize, cnt: 1 };
-
-// 구매 버튼 클릭 시 카트로 전달
+// 장바구니에 있는 동일상품의 개수 가져오기
+// function getCartItemCount(uid, color, size) {
+//     return $.ajax({
+//         url: 
+//     });
+// }
+// 구매 버튼 클릭 시 장바구니에 자동 추가
 function buyClick(uid) {
     $.ajax({
-        url: "/app/insert/cart" + uid,
+        url: "/app/insert/payCart/" + uid,
         type: "POST",
-        data: { buyProduct: buyProduct },
+        data: { selectOptionList: selectOptionList },
         success: function (result) {
-            if (result.trim() === "add_success") {
+            if (result.status === "add_success") {                
+                alert("앙 성공띠!");
+                addInput();
                 window.location.href = "/app/order/product"
-            } else {
-                alert("error")
+            } else if(result.status === "already_existed") {
+
+                var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
+                
+                if(userConfirm) {
+                    // '확인' 클릭시 장바구니에 있던 동일 상품의 개수를 합쳐서 결제 페이지로 보내주는 센스~
+                    // !!! 상품의 uid 추가해서 보내야함 !!!
+                    // for(var i=0; i<selectOptionList.length; i++) {
+                    // selectOptionList[i].cnt += parseInt(result.cartCnt);  // 현재 선택한 상품의 개수와 카트에 있는 동일상품의 개수까지 더해줌
+                    // console.log("selectOption[" + i + "] = " + selectOptionList[i]);
+                    // }
+                    console.log('result.cartCnt: ' + result.cartCnt);
+                    for(var i=0; i<selectOptionList.length; i++) {
+                        console.log("selectOptionList입니다.[" + i + "]: " + JSON.stringify(selectOptionList[i]));
+                    }
+                    $.ajax({
+                        url: "/app/insert/cart/" + uid,
+                        type: "POST",
+                        data: { selectOptionList: selectOptionList },
+                        success: function (result) {
+                            alert('아싸! 성공이다~!');
+                            if (result.trim() === "add_success") {
+                                addInput();
+                                window.location.href = "/app/order"
+                            }
+                        },
+                        error: function (request, status, error) {
+                            console.log("request:", request);
+                            console.log("status:", status);
+                            console.log("error:", error);
+                            alert('!!!Error!!!');
+                        }
+                    });
+                } else {
+                    // '취소' 클릭시 현재 선택한 개수만 결제 페이지로 보내주는고양~
+
+
+                }
             }
         },
         error: function (request, status, error) {
             console.log("request:", request);
             console.log("status:", status);
             console.log("error:", error);
-            alert("error")
+            alert("Error");
         }
-    })
-
+    });
 }
-
-
-
 // 장바구니 추가 관련 팝업창
 $(function () {
     $(".keepShop").on("click", function () {
@@ -279,24 +289,6 @@ function addWish(uid) {
         }
     });
 };
-
-// 리뷰점수를 별모양으로 표시
-// window.onload = function() {
-//     const reviewScore = document.getElementById('reviewList').value;
-//     console.log('reviewScore: ' + reviewScore);
-
-//     function showScoreByStars(reviewScore) {
-//         const starRating = Math.ceil(reviewScore / 10);
-//         const stars ='⭐'.repeat(starRating);
-//         console.log('stars: ' + stars);
-//         console.log('reviewScore: ' + reviewScore);
-//         document.getElementById('review-score').innerHTML = '<div id="review-score">' + stars + '(' + reviewScore+ ')' +  '</div>';
-
-//     }
-
-//     showScoreByStars(reviewScore);
-// }
-
 // GUIDE 정보 펼치고 접기
 $(document).ready(function () {
     $("h2").click(function () {
@@ -311,7 +303,6 @@ $(document).ready(function () {
         // $(this).next("div").toggleClass("guideText");
     });
 });
-
 // 문의제목 클릭 -> 문의 내용 출력
 $(document).ready(function () {
     $(".clickTitle").click(function () {
@@ -325,7 +316,6 @@ $(document).ready(function () {
     });
 
 });
-
 // 리뷰점수를 별모양으로 표시
 window.onload = function () {
     const reviewScore = document.getElementById('reviewList').value;
