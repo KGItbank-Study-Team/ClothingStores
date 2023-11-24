@@ -27,7 +27,7 @@
 					</div>
 					<div class="titleArea">
 						<h2>
-							<font color="333333">상품문의</font>
+							<font color="333333">문의 작성</font>
 						</h2>
 						<p></p>
 					</div>
@@ -46,7 +46,7 @@
 					<input id="isExceptBoardUseFroalaImg" name="isExceptBoardUseFroalaImg" 
 						value="" type="hidden" /> 
 					<input id="isGalleryBoard" name="isGalleryBoard" value="" type="hidden" />
-					<input id="type" name="type" value="" type="hidden" />
+<!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 
 				    <input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
 				           value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
@@ -100,7 +100,7 @@
 						type="hidden" />
 					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />
 					
-					<input id="type" name="type" value="" type="hidden" />
+<!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 				    <input id="reg_date" name="reg_date" type="hidden" />
 				    <input id="writer_id" name="writer_id" type="hidden" />
 					
@@ -149,15 +149,15 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-									<select id="subject" name="title" th:field="*{title}">
-										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
-										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option>
-										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
-									</select>
-<!-- 									<textarea style="width: 30%;" name="title" id="subject" class="ec-fr-never-be-duplicated"></textarea> -->
-
+										<select id="subject" name="type" th:field="*{type}">
+											<option value="PRODUCT">상품 문의</option>
+											<option value="DELIVERY">배송 문의</option>
+											<option value="DELIVERY_C">기타 문의</option>
+										</select>
+										<textarea style="width: 30%;" name=title id=inquiryTitle class="ec-fr-never-be-duplicated" th:field="*{title}"></textarea>
 									</td>
 								</tr>
+								
 								<tr class="displaynone">
 									<th scope="row">NAME</th>
 									<td></td>
@@ -254,8 +254,16 @@
                         </span>
 					</div>
 				</div>
+				
+<script>
+//     document.getElementById('subject').addEventListener('change', function() {
+//         var selectedValue = this.value;
+//         // 선택된 값에서 ','를 제거
+//         selectedValue = selectedValue.replace(/,/g, '');
+//         document.getElementById('subject').value = selectedValue;
+//     });
+</script>
 			</form>
-			
 		</div>
 	</div>
 	<jsp:include page="footer/footer.jsp" />

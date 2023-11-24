@@ -84,16 +84,7 @@ public class YangController {
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUserName = authentication.getName();
-	    
-	    // 문의사항에 따른 TYPE값 설정
-	    if ("상품 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-	        inquiryDTO.setType("PRODUCT");
-	    } else if ("배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-	        inquiryDTO.setType("DELIVERY");
-	    } else if ("불량/오배송 문의합니다 ♡".equals(inquiryDTO.getTitle())) {
-	        inquiryDTO.setType("DELIVERY_C");
-	    }
-	    
+
 	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
 	    inquiryDTO.setWriter_id(currentUserName);
 	    
@@ -106,6 +97,33 @@ public class YangController {
 	    // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
 	    return "redirect:/app/board/inquiry";
 	}
+	
+//	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
+//	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
+//	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	    String currentUserName = authentication.getName();
+//	    
+//	    // 문의사항에 따른 TYPE값 설정
+//	    if ("상품 문의".equals(inquiryDTO.getTitle())) {
+//	        inquiryDTO.setType("PRODUCT");
+//	    } else if ("배송 문의".equals(inquiryDTO.getTitle())) {
+//	        inquiryDTO.setType("DELIVERY");
+//	    } else if ("기타 문의".equals(inquiryDTO.getTitle())) {
+//	        inquiryDTO.setType("DELIVERY_C");
+//	    } 
+//	    
+//	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
+//	    inquiryDTO.setWriter_id(currentUserName);
+//	    
+//	    // reg_date 설정(현재 시간)
+//	    inquiryDTO.setReg_date(new Date());
+//	    
+//	    // DAO로 전달
+//	    boardService.insertInquiry(inquiryDTO);
+//	    
+//	    // 다른 처리나 페이지로 리다이렉트 등을 수행할 수 있음
+//	    return "redirect:/app/board/inquiry";
+//	}
 	
 
 	// 문의게시글 삭제 작성
@@ -178,17 +196,38 @@ public class YangController {
 
 		return "faq";
 	}
-
+	
+	
 	// 게시글 작성 페이지
 	@GetMapping(value = "/board/write")
 	public String getBoardWriteForm() {
 		return "board_write";
 	}
-
 	@RequestMapping(value = "/board/write", method = RequestMethod.POST)
 	public String postBoardWrite(@ModelAttribute InquiryDTO inquiryDTO) {
 		boardService.insertInquiry(inquiryDTO);
 		return "redirect:/board/inquiry";
 	}
 
+	
+	// 게시글 검색
+//	@GetMapping("/board/qa/6")
+//    public String searchBoard(
+//            @RequestParam(name = "board_no", defaultValue = "6") int boardNo,
+//            @RequestParam(name = "page", defaultValue = "1") int page,
+//            @RequestParam(name = "search_date", defaultValue = "all") String searchDate,
+//            @RequestParam(name = "search_key", defaultValue = "subject") String searchKey,
+//            @RequestParam(name = "searchs", defaultValue = "") String searchKeyword,
+//            Model model) {
+//        // 검색 조건을 이용하여 게시물 목록을 조회하는 서비스 메서드 호출
+//        List<InquiryDTO> searchResults = boardService.searchInquiry(boardNo, page, searchDate, searchKey, searchKeyword);
+//
+//        // 조회 결과를 모델에 담아 뷰로 전달
+//        model.addAttribute("searchResults", searchResults);
+//
+//        return "boardList"; // 적절한 뷰 이름을 반환해주세요
+//    }
+	
+	
+	
 }

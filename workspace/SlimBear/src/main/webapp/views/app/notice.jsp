@@ -113,6 +113,17 @@
 						            <td>${board.reg_date}</td>
 						        </tr>
 						        
+						         <script>
+								     var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
+								     var currentDateMillis = new Date().getTime();
+								     var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
+								     var imageId = "newImage${loop.index}";
+								
+								     if (currentDateMillis - regDateMillis > oneWeekInMillis) {
+								         document.getElementById(imageId).style.display = 'none';
+								     }
+							    </script>
+						        
 						    </c:forEach>
 						</tbody>
 						
@@ -178,17 +189,6 @@
 		<jsp:include page="footer/footer.jsp" />
 	</div>
 </div>
-
-<script>
-							        var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
-							        var currentDateMillis = new Date().getTime();
-							        var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
-							        var imageId = "newImage${loop.index}";
-							
-							        if (currentDateMillis - regDateMillis > oneWeekInMillis) {
-							            document.getElementById(imageId).style.display = 'none';
-							        }
-							    </script>
 
 </body>
 </html>

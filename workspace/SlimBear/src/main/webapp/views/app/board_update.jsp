@@ -33,7 +33,6 @@
 					</div>
 				</div>
 				
-<!-- 				<form id="boardWriteForm" name="boardWriteForm" action="/board/write" method="post" target="_self" enctype="multipart/form-data"> -->
 				<form id="boardWriteForm" action="/app/board/inquiry/detail/update/${inquiries.uid}" method="post" enctype="multipart/form-data">
 					
 					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />

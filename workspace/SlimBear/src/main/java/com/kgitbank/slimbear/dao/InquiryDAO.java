@@ -45,11 +45,9 @@ public class InquiryDAO {
 		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRY", inquiry);
 	}
 	
-//	// 상품문의 데이터 삭제
-//	public int deleteInquiry(long uid) {
-//		InquiryDTO inquiry = new InquiryDTO();
-//		inquiry.setUid(uid);
-//		return template.delete("com.slimbear.mapper.Board.DELETE_INQUIRY", inquiry);
-//	}
+	
+	// 게시글 검색
+	
+	
 	
 }

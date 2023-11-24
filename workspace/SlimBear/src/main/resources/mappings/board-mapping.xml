@@ -104,10 +104,6 @@
  	</select>
  	<!-- 상품문의 데이터 삽입 -->
  	<insert id="INSERT_INQUIRY">
-<!--  		INSERT INTO inquiry -->
-<!--  		(writer_id, title, content, reg_date, status, type, prod_uid) -->
-<!-- 		VALUES(#{writer_id}, #{title}, #{content}, #{reg_date}, COALESCE(#{status}, 'WAIT'), #{type}, #{prod_uid}) -->
-
 		<!-- id 대신 name 가져오기 -->
 	 	INSERT INTO inquiry
 	    (writer_id, title, content, reg_date, status, type, prod_uid, secure)
@@ -121,7 +117,6 @@
 	        #{prod_uid},
 	        #{secure}
 	    )
- 	
  	</insert>
  	
  	<!-- 상품문의 업데이트 -->
@@ -136,6 +131,21 @@
  		DELETE FROM inquiry WHERE uid = #{uid}
  	</delete>
  	
+ 	<!-- 게시글 검색 -->
+ 	<select id="SEARCH_INQUIRY" resultType="com.kgitbank.slimbear.dto.InquiryDTO" parameterType="java.util.Map">
+        SELECT * FROM inquiry
+        WHERE
+        <if test="board_no != null">
+            board_no = #{board_no} AND
+        </if>
+        <if test="page != null">
+            page = #{page} AND
+        </if>
+        <if test="search_key != null and searchs != null">
+            ${search_key} LIKE CONCAT('%', #{searchs}, '%') AND
+        </if>
+        1=1
+    </select>
  	
  	
  	
