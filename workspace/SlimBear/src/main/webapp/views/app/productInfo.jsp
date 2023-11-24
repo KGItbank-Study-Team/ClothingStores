@@ -106,14 +106,13 @@
 								<col>
 							</colgroup>
 							<tbody>
-								<input type="hidden"  id="hiddenInput" name="optionsList"  value="" />
 							</tbody>
 						</table>
 					</div>
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="javascript:buyClick()" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
+						<a href="/app/order/product" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
 							<span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
 						</a> 
 						<a href="javascript:addCart(${product.uid})" id="cartBtn" class="btnOption" style="background: #eae5dd;">
@@ -469,14 +468,15 @@
 					</div>
 					<!-- <hr /> -->
 				</c:forEach>
-				<div class="paging">
+				<!-- <div class="paging">
 					<span class="prev"> <a href="#">< 이전</a>
 					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
 					</span> <span class="next"> <a href="#">다음 ></a>
 					</span>
-				</div>
+				</div> -->
 			</section>
 		</div>
+		
 		<!-- QnA -->
 		<a name="QnA"></a>
 		<div class="inquirySection">

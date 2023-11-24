@@ -104,7 +104,7 @@ public class SanghyukController {
 			String size = options.get("size").toString();
 			String cntValue = options.get("cnt").toString();
 			int cnt = Integer.parseInt(cntValue);
-			prod_code = SlimBearUtil.appendProductCode(mem_uid, color, size);
+			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
 			
 			CartDTO cartDTO = new CartDTO();
 			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
@@ -122,6 +122,9 @@ public class SanghyukController {
 		}
 		return "add_success"; 
 	}
+	
+	/* 결제하기 */
+	
 	
 	/* 위시리스트 추가 */
 	@RequestMapping(value="insert/wish/{uid}", method=RequestMethod.POST)

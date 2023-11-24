@@ -53,6 +53,40 @@ $(function () {
         $(".choiceOption").append(newRow);
     }
 
+
+
+    $("#buyBtn").click(function(){
+        for (var i = 0; i < selectOptionList.length; i++) {
+            var optionList = selectOptionList[i];
+            console.log("optionList: " + optionList);
+            var colorInput = document.createElement("input");
+            colorInput.type = "hidden";
+            colorInput.id = "color" + i;
+            colorInput.name = "optionsList[" + i + "].color";
+            colorInput.value = optionList.color;
+
+            var sizeInput = document.createElement("input");
+            sizeInput.type = "hidden";
+            sizeInput.id = "size" + i;
+            sizeInput.name = "optionsList[" + i + "].size";
+            sizeInput.value = optionList.size;
+
+            var cntInput = document.createElement("input");
+            cntInput.type = "hidden";
+            cntInput.id = "cnt" + i;
+            cntInput.name = "optionsList[" + i + "].cnt";
+            cntInput.value = optionList.cnt;
+
+            document.body.appendChild(colorInput);
+            document.body.appendChild(sizeInput);
+            document.body.appendChild(cntInput);
+            
+        }
+        $("#buyForm").submit();       
+        console.log("optionList: " + optionList);
+        //window.location.href = "/order/product";
+    });
+
     function updateSelection(color, size) {
         beforeColor = selectedColor;
         beforesize = selectedSize;
@@ -137,10 +171,10 @@ function downProductCount(color, size) {
     productElement.find(".inputBox").val(selectOptionList[index].cnt);
 }
 
-function buyClick() {
-    document.getElementById("hiddenInput").value = JSON.stringify(selectOptionList);
-    document.getElementById("buyForm").submit();
-}
+// function () {
+//     document.getElementById("hiddenInput").value = JSON.stringify(selectOptionList);
+//     document.getElementById("buyForm").submit();
+// }
 
 // 현재 페이지의 URL을 가져온다.
 var currentUrl = window.location.href;
@@ -161,7 +195,7 @@ function addCart(uid) {
     $.ajax({
         url: "/app/insert/cart/" + uid,
         type: "POST",
-        data: { selectOptionList : selectOptionList },
+        data: { selectOptionList: selectOptionList },
         success: function (result) {
             if (result.trim() === "add_success") {
                 //alert("장바구니에 추가되었습니다.");
@@ -184,14 +218,43 @@ function addCart(uid) {
             console.log("status:", status);
             console.log("error:", error);
             alert('로그인 후 이용 가능합니다.');
-            setTimeout(function() {
-                window.location.href="/app/login"
+            setTimeout(function () {
+                window.location.href = "/app/login"
             })
         }
     });
 };
-$(function(){
-    $(".keepShop").on("click", function(){
+
+// var buyProduct = { uid: uid, color: selectedColor, size: selectedSize, cnt: 1 };
+
+// 구매 버튼 클릭 시 카트로 전달
+function buyClick(uid) {
+    $.ajax({
+        url: "/app/insert/cart" + uid,
+        type: "POST",
+        data: { buyProduct: buyProduct },
+        success: function (result) {
+            if (result.trim() === "add_success") {
+                window.location.href = "/app/order/product"
+            } else {
+                alert("error")
+            }
+        },
+        error: function (request, status, error) {
+            console.log("request:", request);
+            console.log("status:", status);
+            console.log("error:", error);
+            alert("error")
+        }
+    })
+
+}
+
+
+
+// 장바구니 추가 관련 팝업창
+$(function () {
+    $(".keepShop").on("click", function () {
         $('.popUp').css('display', 'none');
     })
 })
@@ -201,8 +264,8 @@ function addWish(uid) {
         url: "/app/insert/wish/" + uid,
         type: "POST",
         data: uid,
-        success: function(result) {
-            if(result.trim() === "add_success") {
+        success: function (result) {
+            if (result.trim() === "add_success") {
                 alert("위시리스트에 추가되었습니다.");
             } else {
                 alert("이미 추가된 상품입니다.")
@@ -250,11 +313,11 @@ $(document).ready(function () {
 });
 
 // 문의제목 클릭 -> 문의 내용 출력
-$(document).ready(function(){
-    $(".clickTitle").click(function(){
+$(document).ready(function () {
+    $(".clickTitle").click(function () {
         var content = $(this).closest("tbody").find(".inquiryContent");
 
-        if(content.is(":visible")) {
+        if (content.is(":visible")) {
             content.slideUp();
         } else {
             content.slideDown();
@@ -264,23 +327,23 @@ $(document).ready(function(){
 });
 
 // 리뷰점수를 별모양으로 표시
-window.onload = function() {
+window.onload = function () {
     const reviewScore = document.getElementById('reviewList').value;
     console.log('reviewScore: ' + reviewScore);
-    
-    function showScoreByStars(reviewScore){
-    
+
+    function showScoreByStars(reviewScore) {
+
         const Score = Math.round(reviewScore);
         const reviewScoreElement = document.getElementById('review-score');
         const stars = reviewScoreElement.getElementsByTagName('i');
-    
+
         // 기존 클래스 초기화
-        for(let i=0; i<stars.length; i++){
+        for (let i = 0; i < stars.length; i++) {
             stars[i].classList.remove('fas');
         }
-    
+
         // fas 클래스 적용
-        for(let i=0; i<Score/10; i++) {
+        for (let i = 0; i < Score / 10; i++) {
             stars[i].classList.add('fas');
         }
     }
