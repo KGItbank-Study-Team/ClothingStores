@@ -72,9 +72,9 @@
 								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
+								<th scope="col">VIEW</th>
 								<th scope="col" class="">DATE</th>
 								<th scope="col" class="displaynone">HIT</th>
-								<th scope="col" class="displaynone">VOTE</th>
 								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
@@ -110,6 +110,7 @@
 						                </strong>
 						            </td>
 						            <td>${board.writer}</td>
+						            <td>${board.view_cnt}</td>
 						            <td>${board.reg_date}</td>
 						        </tr>
 						        

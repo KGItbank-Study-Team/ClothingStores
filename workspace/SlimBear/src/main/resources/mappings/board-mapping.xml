@@ -223,6 +223,13 @@
  		SELECT * FROM notice WHERE uid=#{uid}
  	</select>
  	
+ 	<!-- notice 게시글 조회수 증가 -->
+	<update id="INCREASE_NOTICE_VIEW_COUNT">
+	    UPDATE notice
+	    SET view_cnt = view_cnt + 1
+	    WHERE uid=#{uid}
+	</update>
+ 	
  	<!-- notice 데이터 삽입 -->
  	<insert id="INSERT_NOTICE">
  		INSERT INTO notice
