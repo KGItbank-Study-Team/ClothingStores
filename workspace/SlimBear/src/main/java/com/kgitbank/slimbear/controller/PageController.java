@@ -53,7 +53,7 @@ public class PageController {
 	}
 	
 	@RequestMapping("slimbear/login")
-	public String slimbearLogin(String id, String pwd, HttpServletRequest request) {
+	public String slimbearLogin(String id, String pwd, Model model) {
 	
 		MemberDTO member = memberService.getMemberById(id);
 		if(member == null) {
@@ -63,8 +63,8 @@ public class PageController {
 		
 		if(member.getLogin_type().equals(MEMBER_TYPE.SLIMBEAR.toString())) {
     		// 로그인
-			request.setAttribute("id", id);
-			request.setAttribute("pwd", pwd);
+			model.addAttribute("id", id);
+			model.addAttribute("pwd", pwd);
 			
 			return "redirect:/app/login";
     	}else {
