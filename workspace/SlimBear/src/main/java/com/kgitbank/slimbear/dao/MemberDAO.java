@@ -26,6 +26,11 @@ public class MemberDAO{
 		info.setId(id);
 		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_ID", info);
 	}
+	
+
+	public MemberDTO getMemberByEmail(String email) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_EMAIL", email);
+	}
 
 	public List<MemberDTO> getMemberList() {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_MEM_LIST");
@@ -52,4 +57,5 @@ public class MemberDAO{
 	public int updateTemporaryPassword(MemberDTO member) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_TEMP_MEM", member);
 	}
+
 }

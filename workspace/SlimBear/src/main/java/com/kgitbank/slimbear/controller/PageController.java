@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
+import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.service.PageConfigServiceImpl;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
 
@@ -21,6 +24,9 @@ public class PageController {
 
 	@Autowired
 	private ProductServiceImpl productService;
+	
+	@Autowired 
+	private MemberService memberService;
 
 	@RequestMapping("main")
 	public String mainePage(Model model) {
@@ -32,13 +38,39 @@ public class PageController {
 	}
 
 	@RequestMapping("login")
-	public String loginPage(@RequestParam(required = false) String error, HttpServletRequest request) {
+	public String loginPage(@RequestParam(required = false) String id, @RequestParam(required = false) String pwd, @RequestParam(required = false) String error, HttpServletRequest request) {
 
 		if (error != null) {
 			request.setAttribute("error", "error");
 		}
-
+		
+		if(id != null && pwd != null) {
+			request.setAttribute("id", id);
+			request.setAttribute("pwd", pwd);
+		}
+		
 		return "login";
+	}
+	
+	@RequestMapping("slimbear/login")
+	public String slimbearLogin(String id, String pwd, HttpServletRequest request) {
+	
+		MemberDTO member = memberService.getMemberById(id);
+		if(member == null) {
+			// 회원아님
+			return "redirect:/app/login";
+		}
+		
+		if(member.getLogin_type().equals(MEMBER_TYPE.SLIMBEAR.toString())) {
+    		// 로그인
+			request.setAttribute("id", id);
+			request.setAttribute("pwd", pwd);
+			
+			return "redirect:/app/login";
+    	}else {
+    		// 다른 로그인타입으로 사용중
+    		return "redirect:/app/login";
+    	}
 	}
 
 	@RequestMapping("login/success")

@@ -20,4 +20,15 @@ public class SlimBearEnum {
 		CANCEL,		 // 결제취소
 		RETURN		 // 환불
 	}
+	
+	public enum MEMBER_TYPE{
+		SLIMBEAR,
+		KAKAO,
+		NAVER
+	}
+	
+	public enum MEMBER_STATUS{
+		ACTIVE,
+		WITHDRAWAL
+	}
 }

@@ -17,5 +17,5 @@ public class OrderPaymentDTO {
 	private String type;
 	private String satus;
 	private int price;
-	
+	private String pay_pg;
 }

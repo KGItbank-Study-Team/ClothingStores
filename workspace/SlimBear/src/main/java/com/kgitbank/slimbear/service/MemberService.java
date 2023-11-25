@@ -10,5 +10,9 @@ public interface MemberService {
 
 	MemberDTO getMemberById(String id);
 	MemberDTO getMemberByUID(Long uid);
+	MemberDTO getMemberByEmail(String email);
+	
 	List<MemberDTO> getMemberList();
+
+	
 }

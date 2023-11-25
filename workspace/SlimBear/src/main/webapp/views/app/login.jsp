@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header/header.jsp"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype HTML>
 <html>
 <head>
@@ -10,22 +12,33 @@
 <link rel="stylesheet" href="/resources/css/login.css">
 <script src="https://kit.fontawesome.com/51db22a717.js"
 	crossorigin="anonymous"></script>
-<script src="login.js"></script>
+<script src="/resources/js/login.js"></script>
 </head>
 <body>
+	<c:if test="${id != null && pwd != null}">
+		<form action="/app/member/login" method="post">
+			<input type="hidden" name="username" value="${id}">
+			<input type="hidden" name="password" value="${pwd}">
+		</form>
+		<script>
+			$('form').submit();
+		</script>
+	</c:if>
+
+
 	<div id="header-container"></div>
 	<div class="main-container">
 		<div class="main-wrap">
 			<div class="logo-wrap">
 				<img src="../../images/SlimBear-Logo01.png">
 			</div>
-			<form action="/app/member/login" method="post">
+			<form action="/app/slimbear/login" method="post">
 				<section class="login-input-section-wrap">
 					<div class="login-input-wrap">
-						<input name="username" placeholder="Username" type="text"></input>
+						<input name="id" placeholder="Username" type="text"></input>
 					</div>
 					<div class="login-input-wrap password-wrap">
-						<input name="password" placeholder="Password" type="password"></input>
+						<input name="pwd" placeholder="Password" type="password"></input>
 					</div>
 					<div class="login-button-wrap">
 						<button type="submit">로그인</button>
