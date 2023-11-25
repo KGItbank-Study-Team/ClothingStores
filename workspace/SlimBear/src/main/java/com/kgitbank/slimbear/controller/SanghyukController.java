@@ -2,6 +2,7 @@ package com.kgitbank.slimbear.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +89,7 @@ public class SanghyukController {
 	@RequestMapping(value="insert/cart/{uid}", method=RequestMethod.POST)
 	@ResponseBody
 	public String insertInCart(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		System.out.println("========장바구니 추가메서드=========");
 		SecurityUser user = (SecurityUser)authentication.getPrincipal(); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		long mem_uid = user.getUid();
 		// 테스트 코드
@@ -106,18 +108,24 @@ public class SanghyukController {
 			System.out.println("cnt: " + cnt);
 			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
 			
+			
 			CartDTO cartDTO = new CartDTO();
 			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
 			cartDTO.setProd_code(prod_code); // 상품 코드 설정
 			cartDTO.setCnt(cnt);
 			
+			System.out.println("cartDTO: " + cartDTO);
+			
 			int isAreadyExited = sanghService.findCartProducts(cartDTO);
+			
 			System.out.println("isAreadyExited: " + isAreadyExited);
+			
 			if(isAreadyExited>=1) {
 				return "already_existed";
 			} else {
 				sanghService.insertInCart(cartDTO);
-				
+				System.out.println("cartDTO" + cartDTO);
+				return "addCart";
 			}
 		}
 		return "add_success"; 
@@ -126,14 +134,13 @@ public class SanghyukController {
 	/* 결제버튼 클릭 시 cart에도 추가 */
 	@RequestMapping(value="insert/payCart/{uid}", method=RequestMethod.POST )
 	@ResponseBody
-	public Map<String, Object> insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
-		System.out.println("결제 버튼 메서드");
-		Map<String, Object> result = new HashMap<>();
+	public int insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		System.out.println("=========결제 버튼 메서드=========");
 		
+		int result = 0;
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		long mem_uid = user.getUid();
 		System.out.println("mem_uid: " + mem_uid);
-		System.out.println("data: " + data);
 
 		String prod_code = null;
 		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
@@ -144,27 +151,30 @@ public class SanghyukController {
 			String size = options.get("size").toString();
 			String cntValue = options.get("cnt").toString();
 			int cnt = Integer.valueOf(cntValue);
-			System.out.println("cnt: " + cnt);
+			System.out.println("cnt(현재선택한개수): " + cnt);
+			
 			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+			System.out.println("pord_code: " + prod_code);
 			
 			CartDTO cartDTO = new CartDTO();
 			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
 			cartDTO.setProd_code(prod_code); // 상품 코드 설정
 			cartDTO.setCnt(cnt);
+			cartDTO.setUid(uid);
+			cartDTO.setReg_date(new Date(System.currentTimeMillis()));
 			System.out.println("cartDTO: " + cartDTO);
 			
-			int isAreadyExited = sanghService.findCartProducts(cartDTO);
-			System.out.println("isAreadyExited: " + isAreadyExited);
+			int isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
+			System.out.println("isAreadyExited: " + isAreadyExited); 
 			
-			if(isAreadyExited>=1) {
-				// 장바구니에 이미 해당 상품이 존재할 경우
-				int cartCnt = sanghService.equalProdCnt(cartDTO); // 카트에 있는 해당 상품의 개수를 가져옴.
-				System.out.println("cartCnt: " + cartCnt);
-				result.put("status", "already_existed");
+			if(isAreadyExited > 0) {
+				// 장바구니에 이미 해당 상품이 존재할 경우 -> 카트 전체 리스트 조회x
+				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까
+				result = cnt + isAreadyExited;
+				System.out.println("result: " + result);
 			} else {
 				// 장바구니에 해당 상품이 없는 경우
 				sanghService.insertInCart(cartDTO);
-				result.put("status", "add_success");
 			}
 		}
 		return result;

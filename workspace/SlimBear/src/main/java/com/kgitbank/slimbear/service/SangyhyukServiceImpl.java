@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.exceptions.TemplateAssertionException;
 
 import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
@@ -14,6 +15,7 @@ import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -110,6 +112,8 @@ public class SangyhyukServiceImpl {
 	}
 	
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {
+		MemberDTO info = new MemberDTO();
+		info.setUid(memberUid);
 		return cartDAO.getCartListByMemberUID(memberUid);
 	}
 	

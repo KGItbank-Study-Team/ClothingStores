@@ -150,7 +150,7 @@
 	<insert id="INSERT_CART">
 		INSERT INTO cart
 		(mem_uid, prod_code, cnt, reg_date)
-		VALUES(#{mem_uid}, #{prod_code}, #{cnt},NOW())
+		VALUES(#{mem_uid}, #{prod_code}, #{cnt}, #{reg_date})
 	</insert>
 	<!-- 장바구니 수정 -->
 	<update id="UPDATE_CART">
