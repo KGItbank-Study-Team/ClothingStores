@@ -18,14 +18,19 @@
 		SELECT * FROM member WHERE id=#{id}
 	</select>
 
+	<select id="SELECT_MEM_BY_EMAIL" resultType="member"
+		parameterType="member">
+		SELECT * FROM member WHERE email=#{email}
+	</select>
+
 	<select id="SELECT_MEM_LIST" resultType="member">
 		SELECT * FROM member
 	</select>
 
 	<insert id="INSERT_MEM">
 		INSERT INTO member
-		(id, password, email, name, address, sex, reg_date)
-		VALUES(#{id},#{password},#{email},#{name},#{address},#{sex},#{reg_date})
+		(id, password, email, name, address, sex, reg_date, login_type, status, phone)
+		VALUES(#{id},#{password},#{email},#{name},#{address},#{sex},#{reg_date},#{login_type}, #{status}, #{phone})
 	</insert>
 
 	<update id="UPDATE_MEM">

@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +22,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
+import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.service.MemberService;
+
 @Controller
 @RequestMapping("/login/kakao")
 public class KakaoController {
+	
+	@Autowired
+	private MemberService memberSerivce;
 
     @GetMapping("/oauth")
     public String 카카오연동() {
@@ -41,7 +50,7 @@ public class KakaoController {
     }
 
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")
-    public String 카카오로그인(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state) {
+    public String 카카오로그인(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model) {
 
         // 카카오에 요청 보내기
         String clientId = "0b83e6e79ced6252c01ebae15f43a21c";
@@ -72,19 +81,41 @@ public class KakaoController {
             String token = responseObject.getString("access_token");
 
             System.out.println("token : "+token);
-            getKakaoUserInfo(token);
             
-            String kakaoEmail = getKakaoUserInfo(token);
-            System.out.println("카카오이메일 : "+kakaoEmail);
+            MemberDTO kakaoMember = makeKakaoMember(token);
+            
+            MemberDTO member = memberSerivce.getMemberByEmail(kakaoMember.getEmail());
+           
+            if(member == null) {
+            	// 회원가입처리
+            	memberSerivce.join(kakaoMember);
+            	
+            	model.addAttribute("id", kakaoMember.getId());
+            	model.addAttribute("pwd", kakaoMember.getId());
+            
+            	return "redirect:/app/login";
+            }else {
+            	if(member.getLogin_type().equals(kakaoMember.getLogin_type())) {
+            		// 로그인
+            		model.addAttribute("id", kakaoMember.getId());
+            		model.addAttribute("pwd", kakaoMember.getId());
+     
+            		return "redirect:/app/login";
+            	}else {
+            		// 다른 로그인타입으로 사용중
+            		return "redirect:/app/login";
+            	}
+            	
+            }
         } else {
             // 오류 처리
             System.out.println("Token request failed with status code: " + response.getStatusCode());
+            
+            return "redirect:/app/login";
         }
-
-        return "redirect:/";
     }
 
-    public String getKakaoUserInfo(String accessToken) {
+    public MemberDTO makeKakaoMember(String accessToken) {
         // 사용자 정보 요청하기
         String apiUrl = "https://kapi.kakao.com/v2/user/me";
 
@@ -103,11 +134,22 @@ public class KakaoController {
         
         	 // 응답에서 원하는 정보 추출
             JSONObject responseObject = new JSONObject(responseEntity.getBody());
+            String id = responseObject.get("id").toString();
             String kakaoEmail = responseObject.getJSONObject("kakao_account").getString("email");
 
             // 여기서 userEmail을 사용하면 됩니다.
             System.out.println("KAKAO User Email: " + kakaoEmail);
-            return kakaoEmail;
+            
+            MemberDTO member = new MemberDTO();
+        	member.setId("kao" + id);
+        	member.setPassword("kao" + id);
+        	member.setEmail(kakaoEmail);
+        	member.setName("구해야됨");
+        	member.setAddress("asdf|asdf|asdf");
+        	member.setPhone("000-0000-0000");
+        	member.setLogin_type(MEMBER_TYPE.KAKAO.toString());
+        	
+        	return member;
         } else {
             // 오류 처리
             System.out.println("User info request failed with status code: " + responseEntity.getStatusCode());

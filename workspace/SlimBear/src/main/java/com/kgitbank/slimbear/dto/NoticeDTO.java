@@ -17,4 +17,5 @@ public class NoticeDTO {
 	private int priority;
 	private String type;
 	private String writer;
+	private String view_cnt;
 }
