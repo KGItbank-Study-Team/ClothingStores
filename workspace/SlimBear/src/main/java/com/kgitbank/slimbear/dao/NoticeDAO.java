@@ -22,9 +22,20 @@ public class NoticeDAO {
 		}
 		
 		// Notice 게시글 상세페이지조회
-		public NoticeDTO getNoticeDetail(Long id) {
-		    return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", id);
-		}
+		public NoticeDTO getNoticeDetail(Long uid) {// 조회수 증가 쿼리 실행
+//	        template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
+//		    return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
+			 // 조회수 증가 쿼리 실행
+	        int updatedRows = template.update("com.slimbear.mapper.Board.INCREASE_NOTICE_VIEW_COUNT", uid);
+
+	        if (updatedRows > 0) {
+	            // 조회수가 증가한 경우에만 상세 조회 수행
+	            return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
+	        } else {
+	            // 조회수 증가에 실패한 경우 예외 또는 적절한 처리를 수행
+	            throw new RuntimeException("Failed to increase view count for notice with uid: " + uid);
+	        }
+	    }
 		
 		
 		/*

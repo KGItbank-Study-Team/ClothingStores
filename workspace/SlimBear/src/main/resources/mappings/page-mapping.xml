@@ -9,4 +9,8 @@
 		SELECT * FROM productBannerTop
 	</select>
 	
+	<select id="SELECT_STORECONFIG">
+		SELECT * FROM storeConfig
+	</select>
+	
 </mapper>

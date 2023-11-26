@@ -13,4 +13,5 @@ public class OrderDetailDTO {
 	private String prod_code;
 	private int cnt;
 	private Integer review_uid; 
+	private long total_price;
 }

@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
+import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.service.MemberService;
+
 @Controller
 @RequestMapping("/login/naver")
 public class NaverController {
+	
+	@Autowired
+	private MemberService memberSerivce;
 
 	@GetMapping("/oauth")
 	public String naverConnect() {
@@ -42,12 +51,11 @@ public class NaverController {
 
 	
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")
-	public String naverLogin(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state) {
+	public String naverLogin(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model) {
 
 	    // 네이버에 요청 보내기
 	    String clientId = "CmBjci1LKbhWOqc5OBNQ";
 	    String clientSecret = "yUdE63eteV";
-	    String redirectUri = "http://localhost:8080/app/login/naver/callback";
 
 	    RestTemplate restTemplate = new RestTemplate();
 
@@ -72,18 +80,41 @@ public class NaverController {
 	        JSONObject responseObject = new JSONObject(response.getBody());
 	        String token = responseObject.getString("access_token");
 
-	        System.out.println(token);
-	        getUserInfo(token);
+	        System.out.println("token : "+token);
+	     
+	        MemberDTO naverMember = makeNaverMember(token);
+            
+            MemberDTO member = memberSerivce.getMemberByEmail(naverMember.getEmail());
+            
+            if(member == null) {
+            	// 회원가입처리
+            	memberSerivce.join(naverMember);
+            	
+        		model.addAttribute("id", naverMember.getId());
+        		model.addAttribute("pwd", naverMember.getId());
+        		return "redirect:/app/login";
+            }else {
+            	if(member.getLogin_type().equals(naverMember.getLogin_type())) {
+            		// 로그인
+            		model.addAttribute("id", naverMember.getId());
+            		model.addAttribute("pwd", naverMember.getId());
+            		return "redirect:/app/login";
+            	}else {
+            		// 다른 로그인타입으로 사용중
+            		return "redirect:/app/login";
+            	}
+            	
+            }
 	    } else {
 	        // 오류 처리
 	        System.out.println("Token request failed with status code: " + response.getStatusCode());
 	    }
 
-	    return "redirect:/";
+	    return "redirect:/app/login";
 	}
 
 	
-	public void getUserInfo(String accessToken) {
+	public MemberDTO makeNaverMember(String accessToken) {
 	    // 사용자 정보 요청하기
 	    String apiUrl = "https://openapi.naver.com/v1/nid/me";
 
@@ -102,12 +133,28 @@ public class NaverController {
 	        // 응답에서 원하는 정보 추출
 	        JSONObject responseObject = new JSONObject(responseEntity.getBody());
 	        JSONObject response = responseObject.getJSONObject("response");
+	       
 	        String name = response.getString("name");
+	        String naverEmail = response.getString("email");
 
-	        System.out.println("User Name: " + name);
+	  
+	        System.out.println("NAVERUser Name: " + name);
+	        System.out.println("NAVERUser Email: " + naverEmail);
+	        
+	        MemberDTO member = new MemberDTO();
+        	member.setId("nav_" + naverEmail.split("@")[0]);
+        	member.setPassword("nav_" + naverEmail.split("@")[0]);
+        	member.setEmail(naverEmail);
+        	member.setName(name);
+        	member.setAddress("asdf|asdf|asdf");
+        	member.setPhone("000-0000-0000");
+        	member.setLogin_type(MEMBER_TYPE.NAVER.toString());
+        	
+        	return member;
 	    } else {
 	        // 오류 처리
 	        System.out.println("User info request failed with status code: " + responseEntity.getStatusCode());
 	    }
+	    return null;
 	}
 }

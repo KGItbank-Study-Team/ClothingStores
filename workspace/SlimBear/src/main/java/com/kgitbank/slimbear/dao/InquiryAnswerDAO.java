@@ -18,7 +18,7 @@ public class InquiryAnswerDAO {
 	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid) { 
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST"); // 패키지풀네임.id
 	}
-
+	
 	// InquiryAnswer 데이터 삽입
 	public int insertInquiryAnswer(InquiryAnswerDTO InquiryAnswer) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRYANSWER", InquiryAnswer);

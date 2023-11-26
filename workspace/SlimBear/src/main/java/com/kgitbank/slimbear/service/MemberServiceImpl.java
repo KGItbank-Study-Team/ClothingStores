@@ -1,11 +1,13 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_STATUS;
 import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 
@@ -21,6 +23,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean join(MemberDTO member) {
 		
+		member.setReg_date(new Date(System.currentTimeMillis()));
+		member.setStatus(MEMBER_STATUS.ACTIVE.toString());
 		member.setPassword(pwdEncoder.encode(member.getPassword()));
 		
 		if (memDAO.addMember(member) > 0)
@@ -39,4 +43,13 @@ public class MemberServiceImpl implements MemberService {
 		return memDAO.getMemberList();
 	}
 
+	@Override
+	public MemberDTO getMemberByUID(Long uid) {
+		return memDAO.getMemberByUID(uid);
+	}
+
+	@Override
+	public MemberDTO getMemberByEmail(String email) {
+		return memDAO.getMemberByEmail(email);
+	}
 }

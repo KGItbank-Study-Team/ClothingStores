@@ -17,7 +17,15 @@ public class SlimBearUtil {
 	public static String[] splitProductDetail(String code) {
 		return code.split(":");
 	}
-
+	public static String updateProductCode(String originalProdCode, String color, String size) {
+        // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성하는 로직을 추가
+        
+        return originalProdCode + color + size;
+    }
+	public static String generateNewProductCode(String originalProdCode, String newColor, String newSize) {
+	    // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성
+	    return updateProductCode(originalProdCode, newColor, newSize);
+	}
 	// 주소
 	public static String appendAddress(String number, String address1, String address2) {
 		StringBuffer address = new StringBuffer();

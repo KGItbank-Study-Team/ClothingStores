@@ -100,12 +100,12 @@
 				</div>
 				<div class="userArea">
 					<ul>
-						<li>
+						<!--<li>
 							<div class="search">
 								<input type="text" value="search" style="color: rgb(0, 0, 0);"
 									class="inputArea"> <i class="fas fa-search"></i>
 							</div>
-						</li>
+						</li>  -->
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication var="user" property="principal" />
 							<li>${user.username} 님 안녕하세요</li>

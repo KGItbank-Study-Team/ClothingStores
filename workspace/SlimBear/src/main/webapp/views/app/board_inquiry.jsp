@@ -1,22 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-// 	request.setAttribute("title", "문의사항");
-// 	request.setAttribute("boardTitle", "[공지]배송 후 교환/반품 게시판 이용 종료 안내");
-// 	request.setAttribute("name", "슬림베어_CR");
-// 	request.setAttribute("regDate", "9999-99-99");
-// 	request.setAttribute("boardContent", "안녕하세요 슬림베어입니다.");
-%>
-<%
-	// 게시물의 작성자 정보를 어딘가에서 가져오고, 현재 로그인한 사용자 정보를 세션에서 가져옵니다
-// 	String postAuthor = "작성자_정보_얻어오기"; // 예: 게시물의 작성자 이름
-// 	String loggedInUser = (String) session.getAttribute("loggedInUser"); // 세션에서 로그인한 사용자 정보 가져오기
-	
-// 	// 작성자와 로그인한 사용자를 비교하여, 둘이 일치하는 경우에만 링크를 표시합니다
-// 	boolean isAuthor = postAuthor.equals(loggedInUser);
-%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -25,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <title>BOARD INQUIRY</title>
@@ -85,7 +72,8 @@
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td>${inquiries.reg_date}</td>
+<%--                                     <td>${inquiries.reg_date}</td> --%>
+                                    <td><fmt:formatDate value="${inquiries.reg_date}" pattern="yyyy-MM-dd"/></td>
                                 </tr>
                                 <!-- <tr class="displaynone">
                                     <th scope="row">POINT</th>
@@ -112,7 +100,7 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${inquiries.content}</strong>
+                                                	${inquiries.content}
                                                 </p>
                                                 <p><br></p>
                                             </div>
@@ -150,8 +138,8 @@
                         <c:set var="isAuthor" value="true" /> <!-- 임시로 delete, edit 을 보이게 함 -->
 						    <c:choose>
 						        <c:when test="${isAuthor}">
-						            <a href="#" onclick="BOARD_READ.article_delete('BoardDelForm','1');" class="btnNormalFix sizeS">DELETE</a>
-						            <a href="#" class="btnEmFix sizeS">EDIT</a>
+						            <a href="/app/board/inquiry/detail/delete/${inquiries.uid}" onclick="return confirm('게시글을 삭제하시겠습니까?');" class="btnNormalFix sizeS">DELETE</a>
+            						<a href="/app/board/inquiry/detail/update/${inquiries.uid}" class="btnEmFix sizeS">EDIT</a>
 						        </c:when>
 						        <c:otherwise>
 						            <!-- 작성자가 아니면 표시하지 않음 -->
@@ -165,6 +153,47 @@
                                 class="btnEmFix sizeS displaynone">EDIT</a>
                             <a href="/board/free/reply.html" class="btnSubmitFix sizeS displaynone">REPLY</a>
                         </span> -->
+                        
+                        <script>
+// function deleteInquiry(uid) {
+//     $.ajax({
+//         type: 'POST',
+//         url: '/app/board/inquiry/delete',
+//         data: { uid: uid },
+//         success: function(response) {
+//             console.log('AJAX Success: ' + response);
+//             if (response === 'Success') {
+//                 alert('게시물이 성공적으로 삭제되었습니다.');
+//             } else {
+//                 alert('게시물 삭제 중 오류가 발생했습니다.');
+//             }
+//          	// 성공하든 실패하든 최종적으로 /app/board/inquiry로 이동
+//             window.location.href = '/app/board/inquiry';
+//         },
+//         error: function(error) {
+//             console.error('AJAX Error: ' + error);
+//             alert('게시물 삭제 중 오류가 발생했습니다.');
+//         }
+//     });
+// }
+</script>
+           <script>
+           function deleteInquiry(uid) {
+               $.ajax({
+                   type: "GET",
+                   url: "/app/board/inquiry/detail/" + uid,
+                   success: function () {
+                       // 삭제가 성공하면 화면을 새로고침
+                       location.reload();
+                   },
+                   error: function () {
+                       alert("문의 삭제에 실패했습니다.");
+                   }
+               });
+           }
+</script>             
+                        
+                        
                     </div>
                	</div>
               </form>

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +58,7 @@
 					<a href="/app/board/inquiry?board_no=3&amp;category_no=1" class="qna02">
 						<span>배송문의</span></a>
 					<a href="/app/board/inquiry?board_no=3&amp;category_no=2" class="qna03">
-						<span>배송 전 변경/취소</span></a>
+						<span>기타문의</span></a>
 				</div>
 				
 				<div class="boardSort">
@@ -99,13 +100,17 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>	
-											<img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                    <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${board.title}</a>
+						                    <!-- 비밀글인 경우에만 아이콘 표시 -->
+						                    <c:if test="${board.secure eq '1'}">
+						                        <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+						                    </c:if>
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
 						            <td>${board.writer_id}</td>
-						            <td>${board.reg_date}</td>
+<%-- 						            <td>${board.reg_date}</td> --%>
+						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
 						    </c:forEach>
 						</tbody>
@@ -124,6 +129,8 @@
 					</div>
 				</sec:authorize>
 			</div>
+			
+			
 			
 			<!-- 게시글 개수와 현재 페이지 설정 -->
 			<c:set var="totalPosts" value="50" />
@@ -172,8 +179,6 @@
 								<option value="subject">제목</option>
 								<option value="content">내용</option>
 								<option value="writer_name">글쓴이</option>
-								<option value="member_id">아이디</option>
-								<option value="nick_name">별명</option>
 								<option value="product">상품정보</option>
 							</select>
 							<input id="searchs" name="searchs" fw-filter="" fw-label=""
@@ -183,6 +188,9 @@
 						</p>
 					</fieldset>
 				</div>
+				
+				
+				
 			</form>
 		</div>
 	</div>

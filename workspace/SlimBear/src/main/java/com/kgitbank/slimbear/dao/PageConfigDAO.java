@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.dto.ProductBannerTopDTO;
+import com.kgitbank.slimbear.dto.StoreConfigDTO;
 
 @Repository
 public class PageConfigDAO {
@@ -17,4 +18,9 @@ public class PageConfigDAO {
 	public List<ProductBannerTopDTO> getProductBannerTopList(){
 		return template.selectList("com.slimbear.mapper.Page.SELECT_PRODUCTBANNERTOP_LIST");
 	}
+	
+	public StoreConfigDTO getStoreConfig(){
+		return template.selectOne("com.slimbear.mapper.Page.SELECT_STORECONFIG");
+	}
+	
 }

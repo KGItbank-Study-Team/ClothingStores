@@ -20,5 +20,8 @@ public class MemberDTO {
 	private String phone;
 	private char sex;				
 	private Date reg_date;
+	private int mileage;
+	private String login_type;
+	private String status;
 }
      

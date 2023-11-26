@@ -27,12 +27,12 @@ public class MemberCartVO {
 	private int baedalprice;
 	private int quantity;
 	private int productId;
-	
+	private long productUid;
 	private int cnt;
 	private String color;
 	private String size;
 	 private List<String> ColorOptions;
 	 private List<String> SizeOptions;
 	
-	
+	private String ProdCode;
 }

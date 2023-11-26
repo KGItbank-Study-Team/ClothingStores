@@ -12,13 +12,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class InquiryDTO {
-	private long uid;
+	private Long uid;
 	private String writer_id;
 	private String title;
 	private String content;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_date;
 	private String status;
 	private String type;
 	private Long prod_uid;
+    private int secure; // 비밀글 여부를 나타내는 필드
 }

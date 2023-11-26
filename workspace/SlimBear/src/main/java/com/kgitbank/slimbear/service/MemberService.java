@@ -9,5 +9,10 @@ public interface MemberService {
 	boolean join(MemberDTO member);
 
 	MemberDTO getMemberById(String id);
+	MemberDTO getMemberByUID(Long uid);
+	MemberDTO getMemberByEmail(String email);
+	
 	List<MemberDTO> getMemberList();
+
+	
 }

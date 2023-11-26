@@ -25,7 +25,7 @@
 
 	<!-- 설정 파일 불러오기 -->
 	<context:property-placeholder
-		location="classpath:application.properties" />
+		location="classpath:application.properties,classpath:secret.properties" />
 
 	<!-- DBCP DataSource -->
 	<bean id="dataSource"
@@ -73,5 +73,15 @@
 		<property name="maxUploadSize"  value="${file-upload.maxUploadSize}" ></property>
 		<property name="maxInMemorySize" value="${file-upload.maxInMemorySize}" ></property>
 	</bean>
+	
+	
+	<!-- iamport 결제대행 -->
+	<bean id="slimBearImportPayment"
+		class="com.kgitbank.slimbear.common.SlimBearImportPayment">
+			<constructor-arg name="apiKey" value="${imp.api.key}"></constructor-arg>
+			<constructor-arg name="apiSecret" value="${imp.api.secretkey}"></constructor-arg>
+	</bean>
+
+
 
 </beans>

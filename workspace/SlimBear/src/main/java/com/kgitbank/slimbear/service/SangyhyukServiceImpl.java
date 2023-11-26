@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.exceptions.TemplateAssertionException;
 
 import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
@@ -13,8 +14,8 @@ import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -64,6 +65,16 @@ public class SangyhyukServiceImpl {
 		return prodDetailDAO.getProductDetailList(uid);
 	}
 	
+	/* 상품 색상 옵션 조회 */
+	public List<String> getColorOptions(long productUID) {
+		return prodDetailDAO.getColorOptions(productUID);
+	}
+	
+	/* 상품 사이즈 옵션 조회 */
+	public List<String> getSizeOptions(long productUID) {
+		return prodDetailDAO.getSizeOptions(productUID);
+	}
+	
 	/* inquiry 데이터 받아오기 */
 	@Autowired
 	public InquiryDAO inquiryDAO;
@@ -76,9 +87,9 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private InquiryAnswerDAO inquiryAnswerDAO;
 	
-	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid){
-		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
-	}
+//	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid){
+//		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
+//	}
 	
 	
 	/* 상품 장바구니 */
@@ -95,7 +106,14 @@ public class SangyhyukServiceImpl {
 		return cartDAO.selectCountInCart(cart);
 	}
 	
+	/* 동일상품 갯수 */ 
+	public int equalProdCnt(CartDTO cart) {
+		return cartDAO.equalProdCnt(cart);
+	}
+	
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {
+		MemberDTO info = new MemberDTO();
+		info.setUid(memberUid);
 		return cartDAO.getCartListByMemberUID(memberUid);
 	}
 	

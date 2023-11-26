@@ -19,4 +19,6 @@ public class ProductDTO {
 	private String main_image;
 	private String order;
 	private Date reg_date;
+	private Integer sale_price;
+	private Integer addi_mileage;
 }

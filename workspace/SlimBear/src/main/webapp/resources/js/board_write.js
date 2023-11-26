@@ -14,7 +14,7 @@ var aInsertedImageList = [];
 var isBeforeImageRemove = false;
 
 (function() {
-	var d = "이곳은 문의를 위한 게시판입니다!<br />\nTITLE에서 문의하고 싶으신 내용의 성격에 맞게 골라주세요!<br />\n게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.<br />\n<br />\n배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.<br />\n불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.<br />\n<br />\n--------------------------------------------------------------<br />\n<br><br>";
+	var d = "";
 	try {
 		var o = {
 			"key" : "DUA2yF3G1E1A5A2A2pZGCTRSAPJWTLPLZHTQQe1JGZxC4B3A3E2B5A1E1E4I1C2==",
@@ -1016,4 +1016,14 @@ $(document).ready(function () {
         });
     });
 });
+
+
+// EDIT 버튼 클릭 시 폼 자동 제출
+document.getElementById("editForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기존의 폼 제출 동작을 막음
+    // 추가로 필요한 작업이 있으면 여기에서 처리
+    this.submit(); // 폼 제출
+});
+
+
 

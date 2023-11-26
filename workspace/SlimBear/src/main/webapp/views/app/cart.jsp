@@ -45,7 +45,7 @@
 				<c:forEach var="cart" items="${cartList}" varStatus="status">
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
-							value="${cart.uid }"></td>
+							value="${cart.uid}" data-productuid="${cart.productUid}" data-color=""${cart.color} data-size="${cart.size}" data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
 							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
 						<td><a href="#">${cart.maker}</a> <span
@@ -53,23 +53,24 @@
 							<p>${cart.name }</p></td>
 						<td class="cart__list__option">
 							<p>
-   ${cart.name}
-   <c:forEach var="color" items="${cart.colorOptions}">
-      <c:if test="${color eq cart.color}">
-         <c:out value="${color}" />
-      </c:if>
-   </c:forEach>
-   , 
-   
-   <c:forEach var="size" items="${cart.sizeOptions}">
-      <c:if test="${size eq cart.size}">
-         <c:out value="${size}" />
+								${cart.name}
+								<c:forEach var="color" items="${cart.colorOptions}">
+									<c:if test="${color eq cart.color}">
+										<c:out value="${color}" />
+									</c:if>
+								</c:forEach>
+								,
 
-      </c:if>
-     
-   </c:forEach>
-</p>
-	<div class="btn" onclick="toggleHiddenContent(this, ${status.index});">주문
+								<c:forEach var="size" items="${cart.sizeOptions}">
+									<c:if test="${size eq cart.size}">
+										<c:out value="${size}" />
+
+									</c:if>
+
+								</c:forEach>
+							</p>
+							<div class="btn"
+								onclick="toggleHiddenContent(this, ${status.index});">주문
 								추가/변경▽</div>
 							<div class="hiddenContent04">
 								<div class="option hidden"></div>
@@ -108,8 +109,9 @@
 											<td colspan="3">
 												<div class="cart__mainbtns">
 													<button class="cart__bigorderbtn left"
-														onclick="location.href ='/'">자세히 보러가기</button>
-													<button class="cart__bigorderbtn right" onclick="updateCartItemOptions(${status.index}, ${cart.uid});">Add/Change Order</button>
+														onclick="getMemUidAndAddToCart(1)">추가하기</button>
+													<button class="cart__bigorderbtn right"
+														onclick="updateCartItemOptions($(this), ${status.index}, ${cart.uid});">변경하기</button>
 												</div>
 											</td>
 										</tr>
@@ -174,10 +176,10 @@
 			</tr>
 		</table>
 		<div class="cart__mainbtns">
-			<button class="cart__bigorderbtn left" onclick="location.href ='/'">쇼핑
+		<input type="hidden"  id="hiddenInput" name="optionsList[0].color"  value="" />
+			<button class="cart__bigorderbtn left" onclick="history.back()">쇼핑
 				계속하기</button>
-			<button class="cart__bigorderbtn right"
-				onclick="submitForm('/app/checkout')">주문하기</button>
+			<!-- <input type="button" class="cart__bigorderbtn right""> --><button class="cart__bigorderbtn right" >주문하기</button>
 		</div>
 		</form>
 		<form>

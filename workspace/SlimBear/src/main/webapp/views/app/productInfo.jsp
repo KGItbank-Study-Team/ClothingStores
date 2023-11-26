@@ -14,6 +14,21 @@
 </head>
 <body>
 	<%@ include file="header/header.jsp"%>
+	
+	<div class="popUp">
+        <div class="cartHeader">
+            <h3>장바구니 담기</h3>
+        </div>
+        <div class="content">
+            <p>장바구니에 상품이 정상적으로 담겼습니다.</p>
+        </div>
+        <div class="choiBtn">
+            <a href="/app/cart" class="goToCartBtn">장바구니 이동</a>
+            <a href="#" class="keepShop">쇼핑계속하기</a>
+        </div>
+        <a class="close" onclick="$('#confirmLayer').remove();"><img src="//img.echosting.cafe24.com/skin/base/common/btn_close.gif" alt="닫기"></a>
+    </div>
+    
 	<div id="container">
 		<div class="productInfo">
 			<div class="left">
@@ -39,6 +54,7 @@
 								<th scope="row" class="solid2"><span style="font-size: 12px; color: #555555;">PRICE</span></th>
 								<td class="solid"><span style="font-size: 12px; color: #555555;"> <strong>${product.price}</strong>
 								</span></td>
+								<input type="hidden" id="productPrice" value="${product.price}">
 							</tr>
 						</tbody>
 					</table>
@@ -51,8 +67,8 @@
 								<td>
 									<ul class="colorOptionPosition">
 										<!-- 색상 옵션 -->
-										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="colorBtn"><a href="#none"> <span class="colorOption">${detailList.color}</span>
+										<c:forEach var="colors" items="${colorList}">
+											<li class="colorBtn"><a href="#none"> <span class="colorOption">${colors}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -69,8 +85,8 @@
 								<td>
 									<ul class="sizeOptionPosition">
 										<!-- 사이즈 옵션 -->
-										<c:forEach var="detailList" items="${productDetailList}">
-											<li class="sizeBtn"><a href="#none"> <span class="sizeOption">${detailList.size}</span>
+										<c:forEach var="sizes" items="${sizeList}">
+											<li class="sizeBtn"><a href="#none"> <span class="sizeOption">${sizes}</span>
 											</a></li>
 										</c:forEach>
 									</ul>
@@ -80,8 +96,7 @@
 					</table>
 				</div>
 				<!-- 옵션 선택 시 화면에 출력 -->
-				<input type="hidden" id="productDetailList" value="${product.price}"/>
-				<form action="/app/order/product" method="post">
+				<form action="/app/order/product" method="post" id="buyForm">
 					<div class="tablePosition">
 						<table class="choiceOption">
 							<colgroup>
@@ -91,14 +106,13 @@
 								<col>
 							</colgroup>
 							<tbody>
-
 							</tbody>
 						</table>
 					</div>
 				</form>
 				<div class="btns">
 					<div class="btn1">
-						<a href="javascript:buyClick()" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
+						<a href="javascript:buyClick(${product.uid})" id="buyBtn" class="btnOption" style="margin-right: 12.5px !important; background: rgb(101, 83, 69);"> 
 							<span class="btnSpan" style="color: white !important;">BUY IT NOW</span>
 						</a> 
 						<a href="javascript:addCart(${product.uid})" id="cartBtn" class="btnOption" style="background: #eae5dd;">
@@ -454,14 +468,15 @@
 					</div>
 					<!-- <hr /> -->
 				</c:forEach>
-				<div class="paging">
+				<!-- <div class="paging">
 					<span class="prev"> <a href="#">< 이전</a>
 					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
 					</span> <span class="next"> <a href="#">다음 ></a>
 					</span>
-				</div>
+				</div> -->
 			</section>
 		</div>
+		
 		<!-- QnA -->
 		<a name="QnA"></a>
 		<div class="inquirySection">
@@ -503,7 +518,7 @@
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td>${inquiryAnswerList.title}</td>
+							<td><%-- ${inquiryAnswerList.title} --%></td>
 						</tr>
 					</tbody>
 				</c:forEach>

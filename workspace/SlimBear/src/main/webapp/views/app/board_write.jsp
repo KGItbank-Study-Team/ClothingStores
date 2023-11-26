@@ -27,7 +27,7 @@
 					</div>
 					<div class="titleArea">
 						<h2>
-							<font color="333333">상품문의</font>
+							<font color="333333">문의 작성</font>
 						</h2>
 						<p></p>
 					</div>
@@ -46,7 +46,7 @@
 					<input id="isExceptBoardUseFroalaImg" name="isExceptBoardUseFroalaImg" 
 						value="" type="hidden" /> 
 					<input id="isGalleryBoard" name="isGalleryBoard" value="" type="hidden" />
-					<input id="type" name="type" value="" type="hidden" />
+<!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 
 				    <input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
 				           value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
@@ -98,15 +98,12 @@
 							&lt;br /&gt;
 							--------------------------------------------------------------"
 						type="hidden" />
-					<input id="fix_add_content"
-						name="fix_add_content" value="" type="hidden" />
-						
-					<input id="type" name="type" value="" type="hidden" />
+					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />
+					
+<!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 				    <input id="reg_date" name="reg_date" type="hidden" />
-<%-- 				    <input id="reg_date" name="reg_date" type="hidden" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %>" /> --%>
 				    <input id="writer_id" name="writer_id" type="hidden" />
-						
-						
+					
 					<div class="xans-element- xans-board xans-board-write-4 xans-board-write xans-board-4">
 					<div class="ec-base-box typeProduct displaynone ">
 						<p class="thumbnail">
@@ -152,14 +149,15 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-<!-- 									<select id="subject" name="subject" fw-filter="isFill" fw-label="제목" fw-msg=""> -->
-									<select id="subject" name="title" th:field="*{title}">
-										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option>
-										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option>
-										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option>
-									</select>
+										<select id="subject" name="type" th:field="*{type}">
+											<option value="PRODUCT">상품 문의</option>
+											<option value="DELIVERY">배송 문의</option>
+											<option value="DELIVERY_C">기타 문의</option>
+										</select>
+										<textarea style="width: 30%;" name=title id=inquiryTitle class="ec-fr-never-be-duplicated" th:field="*{title}"></textarea>
 									</td>
 								</tr>
+								
 								<tr class="displaynone">
 									<th scope="row">NAME</th>
 									<td></td>
@@ -180,7 +178,15 @@
             							<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2311171259">
 										
 										<!-- HTML --> 
-										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated"></textarea> 
+										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated">
+										이곳은 문의 게시판입니다!&lt;br /&gt;
+										게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
+										&lt;br /&gt;
+										배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.&lt;br /&gt;
+										불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
+										&lt;br /&gt;
+										--------------------------------------------------------------&lt;br /&gt;
+										</textarea> 
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
 										
 										<!-- JavaScript --> 
@@ -192,11 +198,6 @@
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
 										
 									</td>
-								</tr>
-								<tr class="ucc">
-									<th scope="row">UCC</th>
-									<td><input id="ucc" name="ucc" size="35" fw-filter=""
-										fw-label="UCC URL" value="" type="text" /></td>
 								</tr>
 							</tbody>
 							<tbody class="">
@@ -221,37 +222,21 @@
 									<td><input name="attach_file[]" type="file" /></td>
 								</tr>
 							</tbody>
+							
 							<tbody>
 								<tr class="">
-									<th scope="row">PASSWORD</th>
-									<td><input id="password" name="password" fw-filter=""
-											fw-label="비밀번호" fw-msg="" value="" type="password" />
-										<span class="displaynone">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
-									</td>
-								</tr>
-								<tr class="">
 									<th scope="row">SECRET</th>
-									<td><input id="secure0" name="secure" fw-filter="isFill"
-										fw-label="비밀글설정" fw-msg="" value="F" type="radio"
-										checked="checked" />
-									<label for="secure0">공개글</label>
-									<input id="secure1" name="secure" fw-filter="isFill"
-										fw-label="비밀글설정" fw-msg="" value="T" type="radio" />
-									<label for="secure1">비밀글</label></td>
-								</tr>
-								<tr class="captcha displaynone">
-									<th scope="row">보안문자</th>
 									<td>
-										<p class="gBlank5">
-											<span class="ec-base-help txtInfo">
-											영문, 숫자 조합을 공백없이 입력하세요(대소문자구분)</span>
-										</p>
+										<input id="secure0" name="secure" fw-filter="isFill"
+											fw-label="비밀글설정" fw-msg="" value="0" type="radio" checked="checked" />
+										<label for="secure0">공개글</label>
+										
+										<input id="secure1" name="secure" fw-filter="isFill"
+											fw-label="비밀글설정" fw-msg="" value="1" type="radio" />
+										<label for="secure1">비밀글</label>
 									</td>
 								</tr>
-								<tr class="agree displaynone">
-									<th scope="row">개인정보 수집 및 <br/>이용 동의</th>
-									<td><br/> 개인정보 수집 및 이용에 동의하십니까?</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -263,16 +248,21 @@
 							</span>
 						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
-						<!-- <span class="gRight">
-							<a href="#" class="btnSubmitFix sizeS" onclick="BOARD_WRITE.form_submit('boardWriteForm');">OK</a>
-							<a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
-						</span> -->
 						<span class="gRight">
                             <button type="submit" class="btnSubmitFix sizeS">OK</button>
                             <a href="/app/board/inquiry/" class="btnBasicFix sizeS">CANCEL</a>
                         </span>
 					</div>
 				</div>
+				
+<script>
+//     document.getElementById('subject').addEventListener('change', function() {
+//         var selectedValue = this.value;
+//         // 선택된 값에서 ','를 제거
+//         selectedValue = selectedValue.replace(/,/g, '');
+//         document.getElementById('subject').value = selectedValue;
+//     });
+</script>
 			</form>
 		</div>
 	</div>

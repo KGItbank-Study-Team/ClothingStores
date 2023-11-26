@@ -92,8 +92,18 @@ public class RSYServiceImpl {
 		}
 		return null;
 	}
-
 	
+	//기존 비밀번호를 임시 비밀번호로 암호화해서 등록
+	
+	public MemberDTO replacePassword(String id, String temporaryPassword) {
+		MemberDTO member = memDAO.getMemberById(id);
+		member.setPassword(temporaryPassword);
+		
+		
+	/*	member
+	}*/
 
+	return null;
+	}
 	
 }

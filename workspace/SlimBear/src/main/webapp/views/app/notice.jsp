@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- VO, DAO import -->
 <!-- 세션에 저장한 게시글 정보를 추출 ex) BoardVO board = (BoardVO) session.getAttribute("board"); -->
@@ -72,9 +73,9 @@
 								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
+								<th scope="col">VIEW</th>
 								<th scope="col" class="">DATE</th>
 								<th scope="col" class="displaynone">HIT</th>
-								<th scope="col" class="displaynone">VOTE</th>
 								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
@@ -97,7 +98,7 @@
 						                        ${sequenceNumber - loop.index}
 						                    </c:when>
 						                    <c:otherwise>
-						                        <!-- handle other cases if needed -->
+						                        <!-- 필요한 경우 다른 처리를 수행합니다. -->
 						                    </c:otherwise>
 						                </c:choose>
 						            </td>
@@ -105,45 +106,31 @@
 						            <td class="subject left txtBreak">
 						                <strong>
 						                    <a href="/app/board/notice/detail/${board.uid}" style="color: #555555;">${board.title}</a>
-						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image new-image" data-regdate="${board.reg_date}"/>
+						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image new-image" id="newImage${loop.index}" />
 						                    <span class="txtEm"></span>
 						                </strong>
 						            </td>
 						            <td>${board.writer}</td>
-						            <td>${board.reg_date}</td>
-<%-- 						            <td>${board.content}</td> --%>
+						            <td>${board.view_cnt}</td>
+<%-- 						            <td>${board.reg_date}</td> --%>
+						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
+						        
+						         <script>
+								     var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
+								     var currentDateMillis = new Date().getTime();
+								     var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
+								     var imageId = "newImage${loop.index}";
+								
+								     if (currentDateMillis - regDateMillis > oneWeekInMillis) {
+								         document.getElementById(imageId).style.display = 'none';
+								     }
+							    </script>
+						        
 						    </c:forEach>
 						</tbody>
 						
-						<script>
-    // 현재 날짜를 가져오는 함수
-    function getCurrentDate() {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        return yyyy + '-' + mm + '-' + dd;
-    }
-
-    // 페이지 로드 시 이미지 처리 함수 호출
-    window.onload = function () {
-        var images = document.querySelectorAll('.new-image');
-
-        images.forEach(function (image) {
-            var regDate = new Date(image.getAttribute('data-regdate'));
-            var oneWeekAgo = new Date();
-            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-
-            // 현재 날짜와 등록 날짜를 비교
-            if (regDate > oneWeekAgo && regDate <= new Date(getCurrentDate())) {
-                image.style.display = 'inline-block'; // 이미지를 보임
-            } else {
-                image.style.display = 'none'; // 이미지를 숨김
-            }
-        });
-    };
-</script>
+						
 						
 						
 					</table>
@@ -205,5 +192,6 @@
 		<jsp:include page="footer/footer.jsp" />
 	</div>
 </div>
+
 </body>
 </html>

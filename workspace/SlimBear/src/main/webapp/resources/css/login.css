@@ -204,7 +204,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
 }
 
 .naver-login-button {
@@ -214,7 +213,7 @@ body {
 }
 
 .naver-login-button img {
-    width: 300px; /* 이미지의 크기를 조절하세요 */
-    height: 65px;
+    width: 250px; /* 이미지의 크기를 조절하세요 */
+    height: 38px;
     border: 0;
 }

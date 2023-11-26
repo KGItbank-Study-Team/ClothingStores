@@ -2,6 +2,7 @@ package com.kgitbank.slimbear.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,13 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
+import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
+import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
 
@@ -51,25 +53,35 @@ public class SanghyukController {
 		List<ReviewDTO> reviewList = sanghService.getReviewList();
 		System.out.println("reviewList: " + reviewList);
 		
-		// 제품의 옵션 가져오기
+		// 제품 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
+		System.out.println("productDetailList: " + productDetailList);
+		
+		// 제품 색상 옵션 가져오기
+		List<String> colorList = sanghService.getColorOptions(productUid);
+		System.out.println("colorList: " + colorList);
+		
+		// 제품 사이즈 옵션 가져오기
+		List<String> sizeList = sanghService.getSizeOptions(productUid);
+		System.out.println("sizeList: " + sizeList);
 		
 		// inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
 		System.out.println("inquiryList: " + inquiryList);
-		InquiryDTO Uid = inquiryList.get(0);
-		long inquiryUid = Uid.getUid();
-		System.out.println("inquiryUid: " + inquiryUid);
-		
+		long inqr_uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
+		System.out.println("inqr_uid: " + inqr_uid);
+
 		// inquiryAnswer 가져오기
-		List<InquiryAnswerDTO> inquiryAnswerList = sanghService.getInquiryAnswerList(inquiryUid);
-		System.out.println("inquiryAnswerList: " + inquiryAnswerList);
+		//public InquiryAnswerDTO inquiryAnswer = sanghService.getInquiryAnswerList(inqr_uid);
+		//System.out.println("inquiryAnswerList: " + inquiryAnswer);
 		
 		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
 		model.addAttribute("reviewList", reviewList); // 리뷰리스트
-		model.addAttribute("productDetailList", productDetailList); // 상품옵션리스트
+		model.addAttribute("colorList", colorList); // color 옵션리스트
+		model.addAttribute("sizeList", sizeList); // size 옵션리스트
 		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
+		//model.addAttribute("inquiryAnswerList", inquiryAnswerList);
 
 		return "productInfo"; // .jsp 생략 
 	}
@@ -78,6 +90,7 @@ public class SanghyukController {
 	@RequestMapping(value="insert/cart/{uid}", method=RequestMethod.POST)
 	@ResponseBody
 	public String insertInCart(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		System.out.println("========장바구니 추가메서드=========");
 		SecurityUser user = (SecurityUser)authentication.getPrincipal(); // 현재 로그인 되어 있는 사용자의 uid를 불러옴
 		long mem_uid = user.getUid();
 		// 테스트 코드
@@ -91,25 +104,80 @@ public class SanghyukController {
 			String color = options.get("color").toString();
 			String size = options.get("size").toString();
 			String cntValue = options.get("cnt").toString();
+			System.out.println("cntValue: " + cntValue);
 			int cnt = Integer.parseInt(cntValue);
-			prod_code = SlimBearUtil.appendProductCode(mem_uid, color, size);
+			System.out.println("cnt: " + cnt);
+			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+			
 			
 			CartDTO cartDTO = new CartDTO();
 			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
 			cartDTO.setProd_code(prod_code); // 상품 코드 설정
 			cartDTO.setCnt(cnt);
 			
+			System.out.println("cartDTO: " + cartDTO);
+			
 			int isAreadyExited = sanghService.findCartProducts(cartDTO);
+			
 			System.out.println("isAreadyExited: " + isAreadyExited);
+			
 			if(isAreadyExited>=1) {
 				return "already_existed";
 			} else {
 				sanghService.insertInCart(cartDTO);
-				
+				System.out.println("cartDTO" + cartDTO);
+				return "addCart";
 			}
 		}
 		return "add_success"; 
 	}
+	
+	/* 결제버튼 클릭 시 cart에도 추가 */
+	@RequestMapping(value="insert/payCart/{uid}", method=RequestMethod.POST )
+	@ResponseBody
+	public int insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		System.out.println("=========결제 버튼 메서드=========");
+		
+		int result = 0;
+		SecurityUser user = (SecurityUser)authentication.getPrincipal();
+		long mem_uid = user.getUid();
+		System.out.println("mem_uid: " + mem_uid);
+
+		String prod_code = null;
+		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
+		System.out.println("selectOptionList = " + selectOptionList);
+		
+		for(HashMap<String, Object> options : selectOptionList) {
+			String color = options.get("color").toString();
+			String size = options.get("size").toString();
+			String cntValue = options.get("cnt").toString();
+			int cnt = Integer.valueOf(cntValue);
+			System.out.println("cnt(현재선택한개수): " + cnt);
+			
+			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+			System.out.println("pord_code: " + prod_code);
+			
+			CartDTO cartDTO = new CartDTO();
+			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
+			cartDTO.setProd_code(prod_code); // 상품 코드 설정
+			cartDTO.setCnt(cnt);
+			cartDTO.setUid(uid);
+			cartDTO.setReg_date(new Date(System.currentTimeMillis()));
+			System.out.println("cartDTO: " + cartDTO);
+			
+			Integer isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
+			System.out.println("isAreadyExited: " + isAreadyExited); 
+			if(isAreadyExited > 0) {
+				// 장바구니에 이미 해당 상품이 존재할 경우 -> 카트 전체 리스트 조회x
+				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까
+				result = cnt + isAreadyExited;
+				System.out.println("result: " + result);
+			} else {
+				isAreadyExited = 0;
+			}
+		}
+		return result;
+	}	
 	
 	/* 위시리스트 추가 */
 	@RequestMapping(value="insert/wish/{uid}", method=RequestMethod.POST)
@@ -133,4 +201,45 @@ public class SanghyukController {
 		}
 		return "add_success";
 	}
+	
+	/* 메인 화면 상품들 */
+//	@Autowired
+//	private RSYServiceImpl RSYService;	
+//
+//	@RequestMapping("main") // 상품 목록
+//	public String categoryPage02(@RequestParam long category,
+//			@RequestParam(name = "order", required = false) String order,
+//			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
+//			Integer pageSize, Model model) {
+//
+//		if (offset == null) {
+//			offset = 0;
+//		}
+//		pageSize = 12; // 페이지 당 아이템 수
+//
+//		// 페이징에 관련된 정보 추가
+//		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
+//		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+//
+//		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
+//				pageSize);
+//
+//		model.addAttribute("order", order);
+//		model.addAttribute("currentPage", currentPage);
+//		model.addAttribute("totalPages", totalPages);
+//		model.addAttribute("productList", productList);
+//		model.addAttribute("totalItems", totalItems);
+//
+//		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
+//
+//		model.addAttribute("categoryList", categoryList);
+//
+//		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
+//		model.addAttribute("category", topCategory);
+//
+//		System.out.println(categoryList);
+//		return "main";
+//	}
+	
+	
 }
