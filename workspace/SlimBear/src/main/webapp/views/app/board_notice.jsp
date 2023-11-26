@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -74,9 +72,9 @@
                                     <td><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="displaynone">
                                     <th scope="row">DATE</th>
-                                    <td><fmt:formatDate value="${notices.reg_date}" pattern="yyyy-MM-dd"/></td>
+                                    <td>${notices.reg_date}</td>
                                 </tr>
                                 <tr class="displaynone">
                                     <th scope="row">VOTE</th>
@@ -89,8 +87,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">VIEW</th>
-                                    <td>${notices.view_cnt}</td>
+                                    <th scope="row">HIT</th>
+                                    <td>2852</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="bon">

@@ -16,7 +16,7 @@ public class InquiryDTO {
 	private String writer_id;
 	private String title;
 	private String content;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date reg_date;
 	private String status;
 	private String type;
