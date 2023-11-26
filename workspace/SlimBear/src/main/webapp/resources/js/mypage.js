@@ -56,3 +56,33 @@ function subMit() {
         // 폼 제출
         document.getElementById("myForm").submit();
     }
+    
+    //주소삭제
+function deleteSelectedAddresses() {
+        var selectedAddresses = [];
+        $("input[name='wish_idx']:checked").each(function () {
+            selectedAddresses.push($(this).val());
+        });
+
+        if (selectedAddresses.length === 0) {
+            alert('선택된 주소가 없습니다.');
+            return;
+        }
+
+        if (confirm('선택한 주소를 삭제하시겠습니까?')) {
+            // AJAX를 이용하여 선택한 주소들을 삭제하는 요청
+            $.ajax({
+                type: 'POST',
+                url: '/app/member/myPage/addr',
+                data: { selectedAddresses: selectedAddresses },
+                success: function (data) {
+                    // 삭제 성공 시, 페이지를 리로드 또는 다른 작업 수행
+                    location.reload(); // 예시로 페이지 리로드
+                },
+                error: function () {
+                    alert('주소 삭제에 실패했습니다.');
+                }
+            });
+        }
+    }
+

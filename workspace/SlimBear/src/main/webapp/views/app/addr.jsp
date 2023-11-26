@@ -111,7 +111,7 @@
                         <div class="ec-base-button">
                             <span class="gLeft ">
                                 <a href="#none" class="btnNormal sizeS"
-                                    onclick="myshopAddr.deleteAddress(); return false;">선택 주소록 삭제</a>
+                                    onclick="deleteSelectedAddresses(); return false;">선택 주소록 삭제</a>
                             </span>
                             <span class="gRight">
                                 <a href="/app/member/myPage/addr/register" class="btnSubmitFix sizeS">배송지등록</a>
