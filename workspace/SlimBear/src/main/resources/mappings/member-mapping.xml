@@ -143,7 +143,7 @@
 	
 	<!-- 동일 상품 개수 조회 -->
 	<select id="SELECT_CNT_EQUALS_PROD" resultType="int">
-		SELECT cnt FROM cart
+		SELECT COALESCE(cnt, 0) AS cnt FROM cart
 		WHERE prod_code = #{prod_code} AND mem_uid = #{mem_uid}
 	</select>
 	<!-- 장바구니에 추가 -->

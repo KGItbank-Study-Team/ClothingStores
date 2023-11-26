@@ -224,6 +224,7 @@ function addCart(uid) {
                     
                     if(userConfirm) {
                         // '확인' 클릭시 장바구니에 있던 동일 상품의 개수를 합쳐서 결제 페이지로
+                        alert('result: ' + result);
                         selectOptionList[0].cnt = result;
                         alert('selectOptionList' + JSON.stringify(selectOptionList));
                         addInput();

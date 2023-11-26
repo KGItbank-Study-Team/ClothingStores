@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,12 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
+import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
+import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
 
@@ -164,53 +165,19 @@ public class SanghyukController {
 			cartDTO.setReg_date(new Date(System.currentTimeMillis()));
 			System.out.println("cartDTO: " + cartDTO);
 			
-			int isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
+			Integer isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
 			System.out.println("isAreadyExited: " + isAreadyExited); 
-			
 			if(isAreadyExited > 0) {
 				// 장바구니에 이미 해당 상품이 존재할 경우 -> 카트 전체 리스트 조회x
 				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까
 				result = cnt + isAreadyExited;
 				System.out.println("result: " + result);
 			} else {
-				// 장바구니에 해당 상품이 없는 경우
-				sanghService.insertInCart(cartDTO);
+				isAreadyExited = 0;
 			}
 		}
 		return result;
-	}
-	
-	/* 동일상품 개수 조회 */
-//	@RequestMapping(value="equalProd/cnt/{uid}", method=RequestMethod.POST)
-//	@ResponseBody
-//	public int equalProdCnt(@PathVariable("uid") long uid, long mem_uid) {
-//		
-//		String prod_code = null;
-//		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
-//		
-//		for(HashMap<String, Object> options : selectOptionList) {
-//			String color = options.get("color").toString();
-//			String size = options.get("size").toString();
-//			String cntValue = options.get("cnt").toString();
-//			int cnt = Integer.parseInt(cntValue);
-//			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
-//			
-//			CartDTO cartDTO = new CartDTO();
-//			cartDTO.setMem_uid(mem_uid); // Cart 테이블의 mem_uid == Member 테이블의 uid와 매칭 cartDTO 객체에 현재 로그인되어 있는 사용자의 정보 담기
-//			cartDTO.setProd_code(prod_code); // 상품 코드 설정
-//			cartDTO.setCnt(cnt);
-//			
-//			int isAreadyExited = sanghService.findCartProducts(cartDTO);
-//			System.out.println("isAreadyExited: " + isAreadyExited);
-//			if(isAreadyExited>=1) {
-//				
-//				return "already_existed";
-//			} else {
-//				sanghService.insertInCart(cartDTO);
-//			}
-//		}
-//	}
-	
+	}	
 	
 	/* 위시리스트 추가 */
 	@RequestMapping(value="insert/wish/{uid}", method=RequestMethod.POST)
@@ -234,5 +201,45 @@ public class SanghyukController {
 		}
 		return "add_success";
 	}
+	
+	/* 메인 화면 상품들 */
+	@Autowired
+	private RSYServiceImpl RSYService;	
+
+	@RequestMapping("main") // 상품 목록
+	public String categoryPage02(@RequestParam long category,
+			@RequestParam(name = "order", required = false) String order,
+			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
+			Integer pageSize, Model model) {
+
+		if (offset == null) {
+			offset = 0;
+		}
+		pageSize = 12; // 페이지 당 아이템 수
+
+		// 페이징에 관련된 정보 추가
+		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+
+		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
+				pageSize);
+
+		model.addAttribute("order", order);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("productList", productList);
+		model.addAttribute("totalItems", totalItems);
+
+		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
+
+		model.addAttribute("categoryList", categoryList);
+
+		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
+		model.addAttribute("category", topCategory);
+
+		System.out.println(categoryList);
+		return "main";
+	}
+	
 	
 }
