@@ -133,16 +133,17 @@ public class NaverController {
 	        // 응답에서 원하는 정보 추출
 	        JSONObject responseObject = new JSONObject(responseEntity.getBody());
 	        JSONObject response = responseObject.getJSONObject("response");
-	        String id = response.getString("id");
+	       
 	        String name = response.getString("name");
 	        String naverEmail = response.getString("email");
 
+	  
 	        System.out.println("NAVERUser Name: " + name);
 	        System.out.println("NAVERUser Email: " + naverEmail);
 	        
 	        MemberDTO member = new MemberDTO();
-        	member.setId("nav" + id);
-        	member.setPassword("nav" + id);
+        	member.setId("nav_" + naverEmail.split("@")[0]);
+        	member.setPassword("nav_" + naverEmail.split("@")[0]);
         	member.setEmail(naverEmail);
         	member.setName(name);
         	member.setAddress("asdf|asdf|asdf");
