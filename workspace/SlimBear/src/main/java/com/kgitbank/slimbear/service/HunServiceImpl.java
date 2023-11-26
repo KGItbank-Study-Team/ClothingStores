@@ -13,13 +13,14 @@ import com.kgitbank.slimbear.dao.MemberCouponDAO;
 import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
+import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
-import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
+import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
@@ -28,6 +29,7 @@ import com.kgitbank.slimbear.vo.MemberBoardVO;
 import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
+import com.kgitbank.slimbear.vo.OrderDetailVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
 import com.kgitbank.slimbear.vo.RefundVO;
 import com.kgitbank.slimbear.vo.WishListVO;
@@ -40,6 +42,9 @@ public class HunServiceImpl {
 
 	@Autowired
 	private OrderDAO orderDAO;
+	
+	@Autowired
+	private OrderDetailDAO detailDAO;
 
 	@Autowired
 	private CouponDAO couponDAO;
@@ -92,40 +97,30 @@ public class HunServiceImpl {
 			OrderListVO vo = new OrderListVO();
 
 			vo.setOrderDate(i.getOrder_date());
-			vo.setOrderNum(37859);
-			vo.setProductImage("이미지링크");
-			vo.setProductName("승택형이입는 빅사이즈옷");
-			vo.setProductOption("승택이형 특별 에디션");
-			vo.setOrderCount(1);
-			vo.setOrderAmount(i.getTotal_price());
 			vo.setOrderStatus(i.getStatus());
-			vo.setFluctuation("반품신청");
+			vo.setOrderImage("이미지링크");
+			vo.setOrderName("미친 특가상품 지렸다");
+			vo.setOrderAmount(i.getTotal_price()); // 개별가격인데 일단 total넣어놈
+			vo.setOrderCount(1);
 
 			list.add(vo);
 		}
 		return list;
 	}
-
-	public List<OrderListVO> getPastListInfo(long memberUID) {
-
-		ArrayList<OrderListVO> list = new ArrayList<>();
-		List<OrderDTO> pastlist = orderDAO.getOrderListByMemberUID(memberUID);
-
-		for (OrderDTO i : pastlist) {
-			OrderListVO vo = new OrderListVO();
-
-			vo.setOrderDate(i.getOrder_date());
-			vo.setOrderNum(50572);
-			vo.setProductImage("이미지링크");
-			vo.setProductName("승택형이입는 스몰사이즈옷");
-			vo.setProductOption("승택이형 도트 에디션");
-			vo.setOrderCount(2);
-			vo.setOrderAmount(i.getTotal_price());
-			vo.setOrderStatus(i.getStatus());
-			vo.setFluctuation("반품신청");
-
+	
+	public List<OrderDetailVO> getOrderDetailInfo(long memberUID) {
+		
+		ArrayList<OrderDetailVO> list = new ArrayList<>();
+		List<OrderDetailDTO> orderlist = detailDAO.getOrderListByMemberUID(memberUID);
+		
+		for (OrderDetailDTO i : orderlist) {
+			OrderDetailVO vo = new OrderDetailVO();
+			
+			vo.setOrderCount(0);
+			
 			list.add(vo);
 		}
+		
 		return list;
 	}
 
@@ -300,5 +295,27 @@ public class HunServiceImpl {
 	public void insertAddress(long memberUID, MemberOrderAddressDTO address) {
 		 addressDAO.insertAddress(address);
 	}
+	
+	public void deleteAddress(long addressUID) {
+        // 삭제할 주소의 상세 정보 조회
+        MemberOrderAddressDTO addressToDelete = addressDAO.getAddressByUID(addressUID);
+
+        // 주소가 존재하고 회원의 주소인지 확인
+        if (addressToDelete != null) {
+            // 실제 주소 삭제
+            int deletedRows = addressDAO.deleteAddress(addressToDelete);
+            
+            if (deletedRows > 0) {
+                // 주소 삭제 성공
+                System.out.println("주소가 성공적으로 삭제되었습니다.");
+            } else {
+                // 주소 삭제 실패
+                System.out.println("주소 삭제에 실패했습니다.");
+            }
+        } else {
+            // 주소가 존재하지 않는 경우
+            System.out.println("존재하지 않는 주소입니다.");
+        }
+    }
 
 }

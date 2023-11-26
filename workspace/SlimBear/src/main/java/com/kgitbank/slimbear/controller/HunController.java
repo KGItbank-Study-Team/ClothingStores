@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
@@ -52,23 +53,46 @@ public class HunController {
 
 		List<OrderListVO> vo = hunService.getOrderListInfo(user.getUid());
 		model.addAttribute("orderList", vo);
+		model.addAttribute("orderList2", vo);
 
 		return "order_list";
 	}
-
-	@RequestMapping("member/myPage/orderList/pastList")
-	public String pastList(Authentication authentication, Model model) {
-
+	
+	@RequestMapping("member/myPage/orderList/cancel")
+	public String orderCancel(Authentication authentication, Model model) {
+		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-
-		List<OrderListVO> vo = hunService.getPastListInfo(user.getUid());
-		model.addAttribute("pastorderList", vo);
-
-		return "pastlist";
+		
+		
+		
+		return "ordercancel";
 	}
-
+	
+	@RequestMapping("member/myPage/orderList/return")
+	public String orderReturn(Authentication authentication, Model model) {
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		System.out.println(user.getUid());
+		System.out.println(user.getUsername());
+		
+		
+		
+		return "orderreturn";
+	}
+	
+	@RequestMapping("member/myPage/orderList/detail")
+	public String orderDetail(Authentication authentication, Model model) {
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		System.out.println(user.getUid());
+		System.out.println(user.getUsername());
+		
+		
+		
+		return "orderdetail";
+	}
 	@RequestMapping("member/myPage/modify")
 	public String modify(Authentication authentication, Model model) {
 
@@ -278,10 +302,17 @@ public class HunController {
 		return "redirect:/app/member/myPage/addr";
 	}
 
-	
-	
-	
-	
+	@PostMapping("/app/member/myPage/addr")
+    @ResponseBody
+    public String deleteAddress(@RequestParam("addressUID") long addressUID) {
+        try {
+            hunService.deleteAddress(addressUID);
+            return "주소 삭제가 성공적으로 처리되었습니다.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "주소 삭제 중 오류가 발생했습니다.";
+        }
+    }
 	
 	
 }

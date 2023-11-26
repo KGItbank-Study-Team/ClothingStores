@@ -10,14 +10,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class OrderListVO {
+	
 	private Date orderDate;			//주문일자.
-	private int orderNum;			//주문번호.
-	private String productImage;	//상품이미지.
-	private String productName;		//상품정보.
-	private String productOption;	//상품옵션.
-	private int orderCount;			//주문수량.
-	private int orderAmount;		//주문금액.
 	private String orderStatus;		//주문처리상태.
-	private String fluctuation; 	//취소, 교환, 반품
+	private String orderImage;		//주문상품 사진
+	private String orderName;		//상품 정보(이름)
+	private int orderAmount;		//상품 가격
+	private int orderCount;			//상품 주문수량
+
 }
 	
