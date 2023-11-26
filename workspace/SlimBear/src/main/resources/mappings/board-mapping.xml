@@ -234,7 +234,7 @@
  	<insert id="INSERT_NOTICE">
  		INSERT INTO notice
  		(title, content, reg_date, priority, type, writer)
- 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer})
+ 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer}, 0)
  		WHERE uid=#{uid}
  	</insert>
  	

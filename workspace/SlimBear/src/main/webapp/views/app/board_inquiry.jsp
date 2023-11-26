@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -70,7 +72,8 @@
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td>${inquiries.reg_date}</td>
+<%--                                     <td>${inquiries.reg_date}</td> --%>
+                                    <td><fmt:formatDate value="${inquiries.reg_date}" pattern="yyyy-MM-dd"/></td>
                                 </tr>
                                 <!-- <tr class="displaynone">
                                     <th scope="row">POINT</th>

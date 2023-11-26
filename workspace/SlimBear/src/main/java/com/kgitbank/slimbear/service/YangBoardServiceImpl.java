@@ -1,8 +1,6 @@
 package com.kgitbank.slimbear.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -15,6 +13,7 @@ import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 
 @Service
@@ -24,6 +23,8 @@ public class YangBoardServiceImpl {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private InquiryDAO inquiryDAO;
+	@Autowired
+    private MemberService memberService;
 	@Autowired
 	private FaqDAO faqDAO;
 	
@@ -53,19 +54,71 @@ public class YangBoardServiceImpl {
 	}
 	
 	// 문의게시판 상세페이지조회
-    public InquiryDTO getInquiryDetail(Long id) {
-    	InquiryDTO inquiry = inquiryDAO.getInquiryDetail(id);
-        // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
-        if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
-        	throw new AccessDeniedException("안돼 돌아가"); // 또는 다른 방식으로 예외 처리를 할 수 있음
-        }
-        return inquiry;
+	public InquiryDTO getInquiryDetail(Long id) {
+	    try {
+	        InquiryDTO inquiry = inquiryDAO.getInquiryDetail(id);
+
+	        // 게시글이 null이면 경고창을 띄우고 실행 취소
+	        if (inquiry == null) {
+	            showAccessDeniedWarning();
+	            return null;
+	        }
+
+	        // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
+	        if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
+	            // 비밀글이면서 현재 사용자가 작성자가 아닌 경우 비밀글을 숨김
+	            showAccessDeniedWarning();
+	            inquiry.setContent("비밀글로 숨겨진 내용입니다.");
+	            // 다른 필요한 처리를 추가할 수 있음
+	        }
+
+	        return inquiry;
+	    } catch (AccessDeniedException e) {
+	        showAccessDeniedWarning();
+	        return null;
+	    }
+	}
+	
+	
+	
+	
+//	public InquiryDTO getInquiryDetail(Long id) {
+//        try {
+//            InquiryDTO inquiry = inquiryDAO.getInquiryDetail(id);
+//
+//            // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
+//            if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
+//                // 여기서 예외를 던지지 않고, 경고창을 띄우도록 처리
+//                showAccessDeniedWarning();
+//                // 또는 다른 방식으로 경고창을 띄우는 로직을 추가할 수 있음
+//                return null;  // 예외를 던지지 않았으므로 null을 반환하거나 다른 처리를 수행
+//            }
+//
+//            return inquiry;
+//        } catch (AccessDeniedException e) {
+//            showAccessDeniedWarning();
+//            return null;  // 예외를 던지지 않았으므로 null을 반환하거나 다른 처리를 수행
+//        }
+//    }
+	// 경고창을 띄우는 메서드
+    private void showAccessDeniedWarning() {
+        // 여기에 경고창을 띄우는 로직을 추가
+        // 예를 들어, 웹 페이지에서는 JavaScript를 사용하여 경고창을 띄울 수 있습니다.
+        // 또는 Spring MVC에서는 Model을 활용하여 경고 메시지를 전달할 수 있습니다.
     }
-    // 현재 로그인한 사용자가 작성자인지 확인하는 메서드
-    private boolean isCurrentUserAuthor(String writerId) {
+	 // 현재 로그인한 사용자가 작성자인지 확인하는 메서드
+    private boolean isCurrentUserAuthor(String writerName) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
-        return currentUserName.equals(writerId);
+        MemberDTO currentUser = memberService.getMemberById(currentUserName);
+
+        // 현재 사용자의 이름과 작성자의 이름을 비교
+        if (currentUser == null || !currentUser.getName().equals(writerName)) {
+            showAccessDeniedWarning();
+            return false;
+        }
+
+        return true;
     }
 	
     // 문의게시판 삭제
