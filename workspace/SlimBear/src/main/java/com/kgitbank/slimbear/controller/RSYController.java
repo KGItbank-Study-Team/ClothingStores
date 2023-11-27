@@ -34,6 +34,30 @@ public class RSYController {
 	@Autowired
 	private MemberDAO MemberDAO;
 
+//	@RequestMapping("product/category") // 상품 목록
+//	public String categoryPage01(@RequestParam long category,
+//			@RequestParam(name = "order", required = false) String order,
+//			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
+//			Integer pageSize, Model model) {
+//
+//		if (offset == null) {
+//			offset = 0;
+//		}
+//		pageSize = 12; // 페이지 당 아이템 수
+//
+//		// 페이징에 관련된 정보 추가
+//		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
+//		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+//
+//		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
+//				pageSize);
+//
+//		model.addAttribute("order", order);
+//		model.addAttribute("currentPage", currentPage);
+//		model.addAttribute("totalPages", totalPages);
+//		model.addAttribute("productList", productList);
+//		model.addAttribute("totalItems", totalItems);
+
 	@RequestMapping("product/category") // 상품 목록
 	public String categoryPage01(@RequestParam long category,
 			@RequestParam(name = "order", required = false) String order,
@@ -48,6 +72,14 @@ public class RSYController {
 		// 페이징에 관련된 정보 추가
 		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+		int pageBlockSize = 4; // 보여질 페이지 블록 크기
+
+		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
+		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
+		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+
+		// 다음 페이지 블록이 있는지 여부
+		boolean hasNextBlock = endPage < totalPages;
 
 		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
 				pageSize);
@@ -55,12 +87,19 @@ public class RSYController {
 		model.addAttribute("order", order);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("hasNextBlock", hasNextBlock);
 		model.addAttribute("productList", productList);
 		model.addAttribute("totalItems", totalItems);
 
 		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
 
 		model.addAttribute("categoryList", categoryList);
+
+		List<ProductDTO> bestProductList = RSYService.getBestProductListByCategory(category);
+
+		model.addAttribute("bestProductList", bestProductList);
 
 		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
 		model.addAttribute("category", topCategory);
@@ -219,7 +258,7 @@ public class RSYController {
 				// 휴대폰으로 발급
 				SocialService.sendTemporaryPassword(target, temporaryPassword);
 				RSYService.replacePasswordByPhone(target, passwordEncoder.encode(temporaryPassword));
-				
+
 				return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 			}
 			return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동

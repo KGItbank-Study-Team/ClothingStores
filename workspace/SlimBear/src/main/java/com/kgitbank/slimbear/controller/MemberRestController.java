@@ -87,18 +87,21 @@ public class MemberRestController {
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 	
-		MemberCouponDTO memCoupon =  memberService.getMemberCouponByCode(code);
+
 		CouponDTO Coupon =  memberService.getCoupon(code);
 		
 		if(Coupon == null) {
 			response.put("failed", "존재하지 않는 쿠폰 번호입니다.");
-		}else if(memCoupon != null) {
+			return response;
+		}
+		
+		MemberCouponDTO memCoupon =  memberService.getMemberCouponByUID(Coupon.getUid());
+		if(memCoupon != null) {
 			response.put("failed", "이미 사용한 쿠폰 번호입니다.");
 		}else {
 			
 			memCoupon = new MemberCouponDTO();
 			memCoupon.setCoup_uid(Coupon.getUid());
-			memCoupon.setCode(Coupon.getCode());
 			memCoupon.setMem_uid(user.getUid());
 			
 			Date expireDate = new Date(System.currentTimeMillis() + (Coupon.getExpi_days() * 86400000));

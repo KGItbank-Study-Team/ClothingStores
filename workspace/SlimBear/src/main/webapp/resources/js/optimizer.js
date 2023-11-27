@@ -12197,7 +12197,6 @@ CAFE24.PLUSAPP_BRIDGE = (function() {
     };
 })();
 
-var EC_PlusAppBridge = CAFE24.getDeprecatedNamespace('PLUSAPP_BRIDGE');
 
 CAFE24.UTIL = CAFE24.UTIL || {};
 
@@ -13698,57 +13697,8 @@ var $S = {
     /*
      * ganerate swipe multi dom
      */
-    generateMulti: function() {
-        // prepare
-        this.prepare();
+    
 
-        if (this.bGenerate === false) return;
-
-        // save li
-        this.$productList.each(function() { $S.aElement.push($(this).clone(true)); });
-
-        // delete li and grid2, gird3, grid4
-        this.resetGrid();
-
-        this.iProductTotal = this.aElement.length;
-        this.iTotalPage = Math.ceil(this.iProductTotal / this.iPageBlock);
-
-        // make li > ul > li
-        for (var i=0, k=1, j=0; i<this.iProductTotal; i++, k++)
-        {
-            // templete for li > ul
-            var $template = (j == 0) ? $("<li>", { html: $("<ul>", {'class': this.sGrid}) }) : $('<li>', { html: $("<ul>", {'class': this.sGrid}), css: {'display': 'none'} });
-
-            // add li > ul
-            if (k == 1)
-            {
-                this.$productModule.append($template);
-                // <  현재페이지 / 총페이지 >
-                if (this.sPagingType !== 'number') {
-                    this.makeButton(j);
-                }
-            }
-
-            // add li > ul > li
-            this.$product.children('ul').children('li').eq(j).children('ul').append(this.aElement[i]);
-
-            // see block
-            if (k == this.iPageBlock)
-            {
-                k = 0;
-                j++;
-            }
-        }
-
-        if (this.sPagingType === 'number') {
-            this.makeNumber();
-        }
-        // not necessary pagenate
-        if (i < (parseInt(this.iPageBlock) + 1)) return;
-
-        // call pagenate
-        this.makePagenate();
-    },
 
     makeButton: function(iCnt) {
         // ECQAINT-14112 롤링 및 넘버링 타입은 '모바일 환경설정'의 기본 사양에 따라 최대 갯수 5개로 설정
@@ -35480,54 +35430,7 @@ CAFE24.RECENTLIST = {
         }
         sessionStorage.setItem(sStorageKey , EC$.toJSON(aNewStorageDataList));
     },
-    setActBasket : function()
-    {
-        // 신규 스킨인 경우 이처리가 필요 없다.
-        if (EC$('.xans-product-mainoption').length === 0 && EC$('.xans-product-addoption').length === 0) {
-            return;
-        }
-        var iIndex = 0;
-
-        var sFindStr = 'CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommo';
-        if (EC_MOBILE_DEVICE === true || EC_MOBILE === true) {
-            EC$('.xans-product-listitem > li').each(function() {
-                var oPrdData = aWishlistProductData[iIndex];
-                var oActEvent = EC$(this).find('.ec-base-button').find('button');
-
-                if (oActEvent.length > 0) {
-                    if (oActEvent.eq(1).attr('onClick') && oActEvent.eq(1).attr('onClick').indexOf(sFindStr) !== -1) {
-                        oActEvent.eq(1).removeAttr('onClick');
-                        oActEvent.eq(1).attr('onClick', oPrdData.old_act_basket);
-                    }
-                    if (oActEvent.eq(2).attr('onClick') && oActEvent.eq(2).attr('onClick').indexOf(sFindStr) !== -1) {
-                        oActEvent.eq(2).removeAttr('onClick');
-                        oActEvent.eq(2).attr('onClick', oPrdData.old_act_order);
-                    }
-
-                    iIndex++;
-                }
-            });
-        } else {
-            EC$('.xans-product-listitem > tr').each(function() {
-                var oPrdData = aWishlistProductData[iIndex];
-                var oActEvent = EC$(this).find('td:eq(5)').find('a');
-
-                if (oActEvent.length > 0) {
-                    if (oActEvent.eq(0).attr('onClick') && oActEvent.eq(0).attr('onClick').indexOf(sFindStr) !== -1) {
-                        oActEvent.eq(0).removeAttr('onClick');
-                        oActEvent.eq(0).attr('onClick', oPrdData.old_act_basket);
-                    }
-                    if (oActEvent.eq(1).attr('onClick') && oActEvent.eq(1).attr('onClick').indexOf(sFindStr) !== -1) {
-                        oActEvent.eq(1).removeAttr('onClick');
-                        oActEvent.eq(1).attr('onClick', oPrdData.old_act_order);
-                    }
-                    iIndex++;
-                }
-            });
-        }
-
-
-    },
+    
 
     /**
      * 세션스토리지가 사용가능한지 확인
@@ -39854,68 +39757,7 @@ CAPP_ASYNC_METHODS.recent = {
             }
         }
 
-        function recentBntInit($target)
-        {
-            // 화면에 뿌려진 갯수
-            var iDisplayCount = 0;
-            // 보여지는 style
-            var sDisplay = '';
-            var iIdx = 0;
-            //
-            var iDisplayNoneIdx = 0;
-
-            var nodes = $target.find('.xans-record-').each(function()
-            {
-                sDisplay = EC$(this).css('display');
-                if (sDisplay != 'none') {
-                    iDisplayCount++;
-                } else {
-                    if (iDisplayNoneIdx == 0) {
-                        iDisplayNoneIdx = iIdx;
-                    }
-
-                }
-                iIdx++;
-            });
-
-            var iRecentCount = nodes.length;
-            var bBtnActive = iDisplayCount > 0;
-            EC$('.xans-layout-productrecent .prev').off('click').click(function()
-            {
-                if (bBtnActive !== true) return;
-                var iFirstNode = iDisplayNoneIdx - iDisplayCount;
-                if (iFirstNode == 0 || iDisplayCount == iRecentCount) {
-                    alert(__('최근 본 첫번째 상품입니다.'));
-                    return;
-                } else {
-                    iDisplayNoneIdx--;
-                    EC$(nodes[iDisplayNoneIdx]).hide();
-                    EC$(nodes[iFirstNode - 1]).removeClass('displaynone');
-                    EC$(nodes[iFirstNode - 1]).fadeIn('fast');
-
-                }
-            }).css(
-            {
-                cursor: 'pointer'
-            });
-
-            EC$('.xans-layout-productrecent .next').off('click').click(function()
-            {
-                if (bBtnActive !== true) return;
-                if ((iRecentCount) == iDisplayNoneIdx || iDisplayCount == iRecentCount) {
-                    alert(__('최근 본 마지막 상품입니다.'));
-                } else {
-                    EC$(nodes[iDisplayNoneIdx]).fadeIn('fast');
-                    EC$(nodes[iDisplayNoneIdx]).removeClass('displaynone');
-                    EC$(nodes[ (iDisplayNoneIdx - iDisplayCount)]).hide();
-                    iDisplayNoneIdx++;
-                }
-            }).css(
-            {
-                cursor: 'pointer'
-            });
-
-        }
+        
 
     }
 };

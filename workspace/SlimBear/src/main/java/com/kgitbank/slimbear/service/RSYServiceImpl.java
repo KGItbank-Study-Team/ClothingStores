@@ -45,10 +45,21 @@ public class RSYServiceImpl {
 			return prodDAO.getProductByCategoryOrderByPrice(paramMap);
 		case "PRICE_DESC":
 			return prodDAO.getProductByCategoryOrderByPriceDesc(paramMap);
+		case "REG_DATE":
+			return prodDAO.getProductByCategoryOrderByRegDate(paramMap);
 		default:
 			return prodDAO.getProductByCategory(paramMap);
 		}
 	}
+
+	public List<ProductDTO> getBestProductListByCategory(long category) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("ctg_uid", category);
+		System.out.println(paramMap);
+		return prodDAO.getBestProductByCategory(paramMap);
+	}
+
+
 
 	public int getTotalItems(long category) {
 		int prod = prodDAO.selectTotalItems(category);
@@ -101,13 +112,12 @@ public class RSYServiceImpl {
 		memDAO.updateTemporaryPassword(member);
 		return member;
 	}
-	
+
 	public MemberDTO replacePasswordByPhone(String phone, String temporaryPassword) {
 		MemberDTO member = memDAO.getMemberByPhone(phone);
 		member.setPassword(temporaryPassword);
 		memDAO.updateTemporaryPassword(member);
 		return member;
 	}
-	
 
 }
