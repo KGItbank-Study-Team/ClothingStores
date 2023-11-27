@@ -23,4 +23,7 @@ public class InquiryDTO {
 	private Long prod_uid;
     private int secure; // 비밀글 여부를 나타내는 필드
     
+    private String searchKey; // 검색 대상 (title, content, writer_id, prod_uid 등)
+    private String searchValue; // 검색어
+    
 }

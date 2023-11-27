@@ -132,7 +132,26 @@
  	</delete>
  	
  	<!-- 게시글 검색 -->
- 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" resultType="inquiry" parameterType="map">
+ 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="map" resultType="inquiry">
+    	SELECT * FROM inquiry 
+    <where>
+        <if test="searchKey == 'title'">
+            AND title LIKE '%' || #{searchs, jdbcType=VARCHAR} || '%'
+        </if>
+        <if test="searchKey == 'content'">
+            AND content LIKE '%' || #{searchs, jdbcType=VARCHAR} || '%'
+        </if>
+        <if test="searchKey == 'writer_id'">
+            AND writer_id LIKE '%' || #{searchs, jdbcType=VARCHAR} || '%'
+        </if>
+        <if test="searchKey == 'prod_uid'">
+            AND prod_uid = #{searchs, jdbcType=VARCHAR}
+        </if>
+    </where>
+	    ORDER BY reg_date DESC
+	</select>
+	
+ 	<!-- <select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="map" resultType="inquiry">
 	    SELECT * FROM inquiry 
 	    WHERE type=#{type} 
 	    AND 
@@ -149,8 +168,35 @@
 	        prod_uid = #{searchs}
 	    </if>
 	    ORDER BY reg_date DESC
-	</select>
+	</select> -->
 	
+	<!-- <select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="map" resultType="inquiry">
+    SELECT * FROM inquiry 
+    WHERE
+    <choose>
+        <when test="searchKey == 'title'">
+            title LIKE '%' || #{searchs} || '%'
+        </when>
+        <when test="searchKey == 'content'">
+            content LIKE '%' || #{searchs} || '%'
+        </when>
+        <when test="searchKey == 'writer_id'">
+            writer_id LIKE '%' || #{searchs} || '%'
+        </when>
+        <when test="searchKey == 'prod_uid'">
+            prod_uid = #{searchs}
+        </when>
+        다른 옵션이 추가될 경우에 여기에 추가 가능
+        <when test="searchKey == '다른_옵션'">
+            다른_컬럼 = #{searchs}
+        </when>
+        <otherwise>
+            기본적으로 아무런 조건이 없음
+            1=1
+        </otherwise>
+    </choose>
+    	ORDER BY reg_date DESC
+	</select> -->
  	
  	
  	

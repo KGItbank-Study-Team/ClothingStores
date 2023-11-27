@@ -1,6 +1,5 @@
 package com.kgitbank.slimbear.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,15 +116,18 @@ public class YangBoardServiceImpl {
     
     
     // 문의게시글 검색 기능 추가
-    public List<InquiryDTO> getInquiryListBySearch(String type, String searchKey, String searchs) {
-        Map<String, Object> searchMap = new HashMap<>();
-        searchMap.put("type", type);
-        searchMap.put("searchKey", searchKey);
-        searchMap.put("searchs", searchs);
-
-        return inquiryDAO.selectInquiryListBySearch(searchMap);
+//    public List<InquiryDTO> getInquiryListBySearch(String type, String searchKey, String searchs) {
+//        Map<String, Object> searchMap = new HashMap<>();
+//        searchMap.put("type", type);
+//        searchMap.put("searchKey", searchKey);
+//        searchMap.put("searchs", searchs);
+//
+//        return inquiryDAO.selectInquiryListBySearch(searchMap);
+//    }
+    // 문의게시글 검색 기능 추가
+    public List<InquiryDTO> getInquiryListBySearch(Map<String, Object> searchMap) {
+        return inquiryDAO.getInquiryListBySearch(searchMap);
     }
-    
     
 	
 	// FAQ
