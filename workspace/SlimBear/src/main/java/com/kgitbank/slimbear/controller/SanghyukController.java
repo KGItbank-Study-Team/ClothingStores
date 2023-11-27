@@ -170,9 +170,10 @@ public class SanghyukController {
 			if(isAreadyExited > 0) {
 				// 장바구니에 이미 해당 상품이 존재할 경우 -> 카트 전체 리스트 조회x
 				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까
-				result = cnt + isAreadyExited;
-				System.out.println("result: " + result);
+				result =  cnt + isAreadyExited;
+				System.out.println("선택 개수 + 카트 개수 : " + result);
 			} else {
+				sanghService.insertInCart(cartDTO);
 				isAreadyExited = 0;
 			}
 		}
@@ -201,45 +202,4 @@ public class SanghyukController {
 		}
 		return "add_success";
 	}
-	
-	/* 메인 화면 상품들 */
-//	@Autowired
-//	private RSYServiceImpl RSYService;	
-//
-//	@RequestMapping("main") // 상품 목록
-//	public String categoryPage02(@RequestParam long category,
-//			@RequestParam(name = "order", required = false) String order,
-//			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
-//			Integer pageSize, Model model) {
-//
-//		if (offset == null) {
-//			offset = 0;
-//		}
-//		pageSize = 12; // 페이지 당 아이템 수
-//
-//		// 페이징에 관련된 정보 추가
-//		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
-//		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
-//
-//		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
-//				pageSize);
-//
-//		model.addAttribute("order", order);
-//		model.addAttribute("currentPage", currentPage);
-//		model.addAttribute("totalPages", totalPages);
-//		model.addAttribute("productList", productList);
-//		model.addAttribute("totalItems", totalItems);
-//
-//		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
-//
-//		model.addAttribute("categoryList", categoryList);
-//
-//		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
-//		model.addAttribute("category", topCategory);
-//
-//		System.out.println(categoryList);
-//		return "main";
-//	}
-	
-	
 }

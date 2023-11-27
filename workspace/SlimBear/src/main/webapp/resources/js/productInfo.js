@@ -210,12 +210,11 @@ function addCart(uid) {
             type: "POST",
             data: { selectOptionList: selectOptionList },
             success: function (result) {
-                alert("Test");
+                alert("결제 ajax 성공");
                 console.log('result: ' + JSON.stringify(result));
                 
                 if (result === 0) { 
                     //동일상품,옵션 제품이 장바구니에 없음.            
-                    alert("앙 성공띠!");
                     addInput();
                     window.location.href = "/app/order/product"
                 } else if(result > 0) { 
@@ -224,14 +223,15 @@ function addCart(uid) {
                     
                     if(userConfirm) {
                         // '확인' 클릭시 장바구니에 있던 동일 상품의 개수를 합쳐서 결제 페이지로
-                        alert('result: ' + result);
-                        selectOptionList[0].cnt = result;
+                        for(var i=0; i<selectOptionList[i]; i++) {
+                            selectOptionList[i].cnt = result;
+                        }
                         alert('selectOptionList' + JSON.stringify(selectOptionList));
                         addInput();
                         window.location.href = "/app/order/product"
                     } else {
                         // '취소' 클릭시 현재 선택한 개수만 결제 페이지로 보내주는고양~
-                        alert('읭? 뭐지?');
+                        alert('취소 버튼을 눌렀습니다.');
                         addInput();
                         window.location.href = "/app/order/product"
 
@@ -242,7 +242,7 @@ function addCart(uid) {
                 console.log("request:", request);
                 console.log("status:", status);
                 console.log("error:", error);
-                alert("Error");
+                alert("결제 ajax 에러");
             }
         });
     }
@@ -251,7 +251,7 @@ function addCart(uid) {
         $(".keepShop").on("click", function () {
             $('.popUp').css('display', 'none');
         })
-})
+});
 // 위시 리스트 추가
 function addWish(uid) {
     $.ajax({
