@@ -72,7 +72,7 @@ public class RSYController {
 		// 페이징에 관련된 정보 추가
 		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
-		int pageBlockSize = 4; // 보여질 페이지 블록 크기
+		int pageBlockSize = 5; // 보여질 페이지 블록 크기
 
 		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
 		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;

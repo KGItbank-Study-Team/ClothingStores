@@ -263,43 +263,49 @@
 						</ul>
 					</div>
 				</div>
-				<div class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
-    <ol>
-        <!-- Previous Page Button -->
-        <li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
-            <a class="page-link"
-               href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}"
-               aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <!-- Page Number Buttons -->
-        <c:forEach begin="1" end="${totalPages}" var="pageNumber">
-            <li class="xans-record-"><c:choose>
-                    <c:when test="${pageNumber eq currentPage}">
-                        <!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
-                        <a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
-                           class="this">${pageNumber}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
-                        <a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
-                           class="other">${pageNumber}</a>
-                    </c:otherwise>
-                </c:choose></li>
-        </c:forEach>
-        <!-- Next Page Button -->
-        <li class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
-            <a class="page-link"
-               href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}"
-               aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ol>
-    <!-- 마지막 페이지 여부 확인 후 출력 -->
-    <c:if test="${currentPage eq totalPages && !hasNextBlock}">
-        <div class="page-item disabled"><span class="page-link">마지막 페이지입니다.</span></div>
-    </c:if>
-</div>
+				<div
+					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
+					<ol>
+						<!-- Previous Page Button -->
+						<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a>
+						</li>
+						<!-- Page Number Buttons -->
+						<c:forEach begin="${startPage }" end="${endPage}" var="pageNumber">
+							<li class="xans-record-"><c:choose>
+									<c:when test="${pageNumber eq currentPage}">
+										<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+										<a
+											href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+											class="this">${pageNumber}</a>
+									</c:when>
+									<c:otherwise>
+										<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+										<a
+											href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+											class="other">${pageNumber}</a>
+									</c:otherwise>
+								</c:choose></li>
+						</c:forEach>
+						<!-- Next Page Button -->
+						<li
+							class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+					</ol>
+					<!-- 마지막 페이지 여부 확인 후 출력 -->
+					<c:if test="${currentPage eq totalPages && !hasNextBlock}">
+						<li class="page-item disabled"><span class="page-link">마지막
+								페이지입니다.</span></li>
+
+					</c:if>
+				</div>
 
 
 
@@ -312,6 +318,33 @@
 		charset="utf-8"></script>
 	<script src="/resources/js/optimizer.js"></script>
 	<script src="/resources/js/optimizeruser.js"></script>
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = ${currentPage};
+        var totalPages = ${totalPages};
+        var hasNextBlock = ${hasNextBlock};
+
+        var prevPageButton = document.querySelector('.page-link[aria-label="Previous"]');
+        var nextPageButton = document.querySelector('.page-link[aria-label="Next"]');
+        var firstPageMessage = document.querySelector('.first-page-message');
+        var lastPageMessage = document.querySelector('.last-page-message');
+
+        prevPageButton.addEventListener('click', function (event) {
+            if (currentPage === 1) {
+                alert('첫 번째 페이지입니다.');
+                event.preventDefault(); // 이전 페이지로 이동하지 않도록 막음
+            }
+        });
+
+        nextPageButton.addEventListener('click', function (event) {
+            if (currentPage === totalPages && !hasNextBlock) {
+                alert('마지막 페이지입니다.');
+                event.preventDefault(); // 다음 페이지로 이동하지 않도록 막음
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>
