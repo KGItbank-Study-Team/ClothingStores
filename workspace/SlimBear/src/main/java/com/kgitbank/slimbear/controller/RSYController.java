@@ -163,48 +163,57 @@ public class RSYController {
 //	}
 
 	@PostMapping("/findPassword")
-	public String findPassword(@RequestParam String name, @RequestParam String id,
-			@RequestParam(name = "email", required = false) String email,
-			@RequestParam(name = "phone", required = false) String phone,
-			@RequestParam(name = "verificationCode", required = false) String enteredCode, Model model,
-			HttpSession httpSession) {
+	public ResponseEntity<String> findPassword(@RequestParam String name, @RequestParam String id,
+	        @RequestParam(name = "email", required = false) String email,
+	        @RequestParam(name = "phone", required = false) String phone,
+	        @RequestParam(name = "verificationCode", required = false) String enteredCode,
+	        Model model, HttpSession httpSession) {
+	    MemberDTO member = null;
+	    member = RSYService.findPassword(name, id, email, phone);
+	    System.out.println(member);
+	    if (member != null) {
+	        // 회원이 존재하면 인증코드를 발급하고 세션에 회원 정보를 저장
+	        String verificationCode;
 
-		String verificationCode;
+	        if (phone != null && !phone.isEmpty()) {
+	            verificationCode = SocialService.generateTemporaryVerificationCode();
+	            SocialService.sendVerificationCodeByPhone(phone, verificationCode, httpSession);
+	        } else if (email != null && !email.isEmpty()) {
+	            try {
+	                verificationCode = SocialService.generateTemporaryVerificationCode();
+	                SocialService.sendVerificationCodeByEmail(email, verificationCode, "슬림베어 비밀번호 찾기 인증 코드 발급",
+	                        "인증 코드: " + verificationCode, httpSession);
 
-		if (phone != null && !phone.isEmpty()) {
-			verificationCode = SocialService.generateTemporaryVerificationCode();
-			SocialService.sendVerificationCodeByPhone(phone, verificationCode, httpSession);
-		} else if (email != null && !email.isEmpty()) {
-			try {
-				verificationCode = SocialService.generateTemporaryVerificationCode();
-				SocialService.sendVerificationCodeByEmail(email, verificationCode, "슬림베어 비밀번호 찾기 인증 코드 발급",
-						"인증 코드: " + verificationCode, httpSession);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "error-pages/emailSendError";
-			}
-		} else {
-			model.addAttribute("error", "휴대폰 번호 또는 이메일을 입력하세요.");
-			return "/find_password";
-		}
+	                // Verification code를 성공적으로 발송했다고 응답
+	                return ResponseEntity.ok("success");
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send verification code.");
+	            }
+	        } else {
+	            model.addAttribute("error", "휴대폰 번호 또는 이메일을 입력하세요.");
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send verification code.");
+	        }
 
-		MemberDTO member = RSYService.findPassword(name, id, email, phone);
-		if (member != null) {
-			model.addAttribute("member", member);
-			model.addAttribute("verificationCode", verificationCode);
-			return "/verifyCode"; // 인증 코드 입력 페이지로 이동
-		} else {
-			model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
-			return "/find_password";
-		}
+	        // 찾은 회원 정보를 저장
+	        model.addAttribute("member", member);
+	        return ResponseEntity.ok("success"); // 인증 코드 입력 페이지로 이동
+	    } else {
+	        model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send verification code.");
+	    }
 	}
 
+
 	@PostMapping("/sendVerificationCode")
-	@ResponseBody
-	public ResponseEntity<String> sendVerificationCode(@RequestParam String method, @RequestParam String target,
-			HttpSession httpSession) {
-		try {
-			String verificationCode;
+    @ResponseBody
+    public ResponseEntity<String> sendVerificationCode(
+            @RequestParam String method,
+            @RequestParam String target,
+            HttpSession httpSession) {
+
+        try {
+            String verificationCode;
 
 			// 인증 코드 발급 로직
 			if ("1".equals(method)) {
@@ -230,8 +239,8 @@ public class RSYController {
 	}
 
 	@PostMapping("/verifyCode") // 인증 코드 확인
-	public String verifyCode(@RequestParam String method, @RequestParam String enteredCode, HttpSession httpSession,
-			Model model) {
+	public ResponseEntity<String> verifyCode(@RequestParam String method, @RequestParam String enteredCode,
+			HttpSession httpSession, Model model) {
 		// 세션에서 이메일과 인증 코드 가져오기
 		// 세션에서 이메일과 인증 코드 Map 가져오기
 		String verificationCode = (String) httpSession.getAttribute("verificationCode");
@@ -244,11 +253,9 @@ public class RSYController {
 			temporaryPassword = SocialService.generateTemporaryPassword();
 			if ("1".equals(method)) {
 				// 이메일로 발급
+				RSYService.replacePasswordByEmail(target, passwordEncoder.encode(temporaryPassword));
 				try {
 					SocialService.sendEmail(target, "슬림베어 임시 비밀번호 발급", temporaryPassword);
-
-					RSYService.replacePasswordByEmail(target, passwordEncoder.encode(temporaryPassword));
-					return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -258,13 +265,16 @@ public class RSYController {
 				// 휴대폰으로 발급
 				SocialService.sendTemporaryPassword(target, temporaryPassword);
 				RSYService.replacePasswordByPhone(target, passwordEncoder.encode(temporaryPassword));
-
-				return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 			}
-			return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
+			httpSession.removeAttribute(target);
+			httpSession.removeAttribute("emailAddress");
+			httpSession.removeAttribute(verificationCode);
+			httpSession.removeAttribute("verificationCode");
+			
+			return ResponseEntity.ok("success");
 		} else {
 			// 인증 코드 확인 실패 시 다시 입력 페이지로 이동
-			return "/find_password";
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Verification failed");
 		}
 	}
 

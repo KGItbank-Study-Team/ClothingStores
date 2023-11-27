@@ -204,54 +204,58 @@ function addCart(uid) {
 //     });
 // }
 // 결제 버튼 클릭 시 장바구니에 자동 추가
-    function buyClick(uid) {
-        $.ajax({
-            url: "/app/insert/payCart/" + uid,
-            type: "POST",
-            data: { selectOptionList: selectOptionList },
-            success: function (result) {
-                alert("Test");
-                console.log('result: ' + JSON.stringify(result));
-                
-                if (result === 0) { 
-                    //동일상품,옵션 제품이 장바구니에 없음.            
-                    alert("앙 성공띠!");
-                    addInput();
-                    window.location.href = "/app/order/product"
-                } else if(result > 0) { 
-                    //동일상품,옵션 제품이 장바구니에 있음.
+function buyClick(uid) {
+    $.ajax({
+        url: "/app/insert/payCart/" + uid,
+        type: "POST",
+        data: { selectOptionList: selectOptionList },
+        success: function (arr) {
+            var list = arr; // JSON.stringify를 사용하지 않음
+            alert("선택된 옵션 리스트: " + JSON.stringify(list));
+            for (var i = 0; i < selectOptionList.length; i++) {
+                console.log("color: " + list[i].color, "size: " + list[i].size + " cnt: " + list[i].cnt);
+
+                if (list[i].color === selectOptionList[i].color && list[i].size === selectOptionList[i].size) {
+                    // 동일옵션의 상품이 장바구니에 있음
                     var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
-                    
-                    if(userConfirm) {
-                        // '확인' 클릭시 장바구니에 있던 동일 상품의 개수를 합쳐서 결제 페이지로
-                        alert('result: ' + result);
-                        selectOptionList[0].cnt = result;
-                        alert('selectOptionList' + JSON.stringify(selectOptionList));
+                    if (userConfirm) {
+                        // '확인' 클릭
+                        for(var i=0; i<selectOptionList.length; i++) {
+                            selectOptionList[i].cnt = list[i].cnt;
+                        }
+                        alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
                         addInput();
                         window.location.href = "/app/order/product"
                     } else {
-                        // '취소' 클릭시 현재 선택한 개수만 결제 페이지로 보내주는고양~
-                        alert('읭? 뭐지?');
+                        // '취소' 클릭 
+                        alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
                         addInput();
+                        
                         window.location.href = "/app/order/product"
-
                     }
+
+                } else {
+                    // 동일옵션의 상품이 장바구니에 없음.
+                    alert("selectOptionList: " + JSON.stringify(selectOptionList));
+                    addInput();
+                    window.location.href = "/app/order/product";
                 }
-            },
-            error: function (request, status, error) {
-                console.log("request:", request);
-                console.log("status:", status);
-                console.log("error:", error);
-                alert("Error");
             }
-        });
-    }
-    // 장바구니 추가 관련 팝업창
-    $(function () {
-        $(".keepShop").on("click", function () {
-            $('.popUp').css('display', 'none');
-        })
-})
+        },
+        error: function (request, status, error) {
+            console.log("request:", request);
+            console.log("status:", status);
+            console.log("error:", error);
+            alert("결제 ajax 에러");
+        }
+    });
+}
+// 장바구니 추가 관련 팝업창
+$(function () {
+    $(".keepShop").on("click", function () {
+        $('.popUp').css('display', 'none');
+    })
+});
 // 위시 리스트 추가
 function addWish(uid) {
     $.ajax({
