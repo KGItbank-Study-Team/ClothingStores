@@ -47,6 +47,8 @@
 		reg_date DESC
 		LIMIT #{pageSize} OFFSET #{offset};
 	</select>
+	
+	
 
 	<select id="SELECT_BEST_PROD_BY_CATEGORY" resultType="product">
 		SELECT
@@ -153,5 +155,31 @@
 		size =
 		#{size}
 	</delete>
+	
+	<!-- 메인페이지 -->
+	<select id="SELECT_PROD_ORDER_BY_REG_DATE_DESC"
+		resultType="product">
+		SELECT * FROM product ORDER BY
+		reg_date DESC
+		LIMIT #{pageSize} OFFSET #{offset};
+	</select>
+	
+	<select id="SELECT_COUNT_PROD" resultType="int">
+		SELECT COUNT(*)
+		FROM product;
+	</select>
+	
+	<select id="SELECT_BEST_PROD" resultType="product">
+		SELECT
+		p.*,
+		od.cnt AS order_quantity
+		FROM
+		product p
+		JOIN
+		orderDetail od ON p.uid = od.prod_code
+		ORDER BY
+		od.cnt DESC
+		LIMIT #{pageSize} OFFSET #{offset};
+	</select>
 
 </mapper>

@@ -8,6 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/resources/css/main_page.css" />
 <link rel="stylesheet" href="/resources/css/swiper.css" />
+
+
+<link rel="stylesheet" href="/resources/css/optimizeruser.css" />
+
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/main_page.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
@@ -68,7 +73,7 @@
 								<h2>BEST ITEM</h2>
 							</div>
 							<ul class="prdList grid4 swiper-wrapper">
-								<c:forEach var="item" items="${productList}">
+								<c:forEach var="item" items="${bestProductList}">
 									<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
 										<div class="thumbnail">
 											<div class="salePer"></div>
@@ -116,15 +121,7 @@
 				<main>
 					<div class="xans-element- xans-product xans-product-menupackage ">
 						<div class="xans-element- xans-product xans-product-headcategory path ">
-							<span>현재 위치</span>
-							<ol>
-								<li><a href="/">1111</a></li>
-								<li class=""><a href="/category//">2222</a></li>
-								<li class="displaynone"><a href="#">3333</a></li>
-								<li class="displaynone"><a href="#">4444</a></li>
-								<li class="displaynone"><strong>5555 <a href="#"></a>
-								</strong></li>
-							</ol>
+							
 						</div>
 						<div class="xans-element- xans-product xans-product-headcategory titleArea ">
 							<h2>${category.name}</h2>
@@ -141,12 +138,12 @@
 						</div>
 						<div class="list_title">
 							<div class="left">
-								<ul class="menuCategory">
-									<c:forEach var="item" items="${categoryList}">
-										<li style="display:;" class="xans-element- xans-product xans-product-displaycategory  xans-record-"><a href="/app/product/category?category=${item.uid }"> ${item.name} <span class="count displaynone">()</span>
-										</a></li>
-									</c:forEach>
-								</ul>
+<!-- 								<ul class="menuCategory"> -->
+<%-- 									<c:forEach var="item" items="${categoryList}"> --%>
+<%-- 										<li style="display:;" class="xans-element- xans-product xans-product-displaycategory  xans-record-"><a href="/app/product/category?category=${item.uid }"> ${item.name} <span class="count displaynone">()</span> --%>
+<!-- 										</a></li> -->
+<%-- 									</c:forEach> --%>
+<!-- 								</ul> -->
 							</div>
 							<div class="right">
 								<div class="xans-element- xans-product xans-product-normalmenu ">
@@ -180,7 +177,7 @@
 				$basket_option = /product/basket_option.html
 			-->
 							<ul class="prdList grid4">
-								<c:forEach var="item" items="${productList}">
+								<c:forEach var="item" items="${newProductList}">
 									<li id="anchorBoxId_7902" class="xans-record-">
 										<div class="thumbnail">
 											<div class="salePer"></div>
@@ -228,34 +225,84 @@
 							</ul>
 						</div>
 					</div>
-					<div class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
-						<ol>
-							<!-- Previous Page Button -->
-							<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}"><a class="page-link" href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<!-- Page Number Buttons -->
-							<c:forEach begin="1" end="${totalPages}" var="pageNumber">
-								<li class="xans-record- "><c:choose>
-										<c:when test="${pageNumber eq currentPage}">
-											<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
-											<a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}" class="this">${pageNumber}</a>
-										</c:when>
-										<c:otherwise>
-											<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
-											<a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}" class="other">${pageNumber}</a>
-										</c:otherwise>
-									</c:choose></li>
-							</c:forEach>
-							<!-- Next Page Button -->
-							<li class="page-item ${currentPage eq totalPages ? 'disabled' : ''}"><a class="page-link" href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ol>
-					</div>
+					<div
+					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
+					<ol>
+						<!-- Previous Page Button -->
+						<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/main?currentPage=${currentPage - 1}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a>
+						</li>
+						<!-- Page Number Buttons -->
+						<c:forEach begin="${startPage }" end="${endPage}" var="pageNumber">
+							<li class="xans-record-"><c:choose>
+									<c:when test="${pageNumber eq currentPage}">
+										<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+										<a
+											href="/app/main?currentPage=${pageNumber}"
+											class="this">${pageNumber}</a>
+									</c:when>
+									<c:otherwise>
+										<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+										<a
+											href="/app/main?currentPage=${pageNumber}"
+											class="other">${pageNumber}</a>
+									</c:otherwise>
+								</c:choose></li>
+						</c:forEach>
+						<!-- Next Page Button -->
+						<li
+							class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+							<a class="page-link"
+							href="/app/main?currentPage=${currentPage + 1}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+					</ol>
+					<!-- 마지막 페이지 여부 확인 후 출력 -->
+					<c:if test="${currentPage eq totalPages && !hasNextBlock}">
+						<li class="page-item disabled"><span class="page-link">마지막
+								페이지입니다.</span></li>
+
+					</c:if>
+				</div>
 
 				</main>
 
 			</div>
 	</main>
 	<jsp:include page="footer/footer.jsp" />
+		<script type="text/javascript" src="/resources/js/ko.js"
+		charset="utf-8"></script>
+	<script src="/resources/js/optimizer.js"></script>
+	<script src="/resources/js/optimizeruser.js"></script>
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = ${currentPage};
+        var totalPages = ${totalPages};
+        var hasNextBlock = ${hasNextBlock};
+
+        var prevPageButton = document.querySelector('.page-link[aria-label="Previous"]');
+        var nextPageButton = document.querySelector('.page-link[aria-label="Next"]');
+        var firstPageMessage = document.querySelector('.first-page-message');
+        var lastPageMessage = document.querySelector('.last-page-message');
+
+        prevPageButton.addEventListener('click', function (event) {
+            if (currentPage === 1) {
+                alert('첫 번째 페이지입니다.');
+                event.preventDefault(); // 이전 페이지로 이동하지 않도록 막음
+            }
+        });
+
+        nextPageButton.addEventListener('click', function (event) {
+            if (currentPage === totalPages && !hasNextBlock) {
+                alert('마지막 페이지입니다.');
+                event.preventDefault(); // 다음 페이지로 이동하지 않도록 막음
+            }
+        });
+    });
+</script>
 </body>
 </html>
