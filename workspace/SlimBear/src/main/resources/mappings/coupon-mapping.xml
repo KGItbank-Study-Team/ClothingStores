@@ -14,6 +14,11 @@
 		SELECT * FROM coupon WHERE uid=#{uid}
 	</select>
 	
+	<select id="SELECT_COUPON_BY_CODE" resultType="coupon">
+		SELECT * FROM coupon WHERE code=#{code}
+	</select>
+	
+	
 	<insert id="INSERT_COUPON"> 
 		INSERT INTO coupon
 		(name, type, value, expi_days, min_price)

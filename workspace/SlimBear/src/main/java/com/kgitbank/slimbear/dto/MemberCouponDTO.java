@@ -1,6 +1,6 @@
 package com.kgitbank.slimbear.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +18,5 @@ public class MemberCouponDTO {
 	private long coup_uid;
 	private Date expi_date;
 	private Date use_date;
-	
+	private String code;
 }

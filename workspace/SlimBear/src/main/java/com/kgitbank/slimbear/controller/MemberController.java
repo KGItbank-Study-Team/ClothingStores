@@ -30,5 +30,5 @@ public class MemberController {
 			return "redirect:/app/join";
 		}
 	}
-
+	
 }

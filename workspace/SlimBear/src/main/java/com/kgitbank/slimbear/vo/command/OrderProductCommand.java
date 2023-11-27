@@ -14,5 +14,5 @@ import lombok.ToString;
 @Getter
 @ToString
 public class OrderProductCommand {
-	private ArrayList<OrderProductVO> productList;
+	private ArrayList<OrderProductVO> optionsList;
 }

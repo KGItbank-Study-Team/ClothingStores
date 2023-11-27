@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
@@ -22,6 +23,10 @@ public class MemberCouponDAO {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_MEMBER_UID", info);
 	}
 
+	public MemberCouponDTO getCouponByCode(String code) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_CODE",code);
+	}
+	
 	public int insertAddress(MemberCouponDTO coupon) {
 		return template.insert("com.slimbear.mapper.Member.INSERT_COUPON", coupon);
 	}

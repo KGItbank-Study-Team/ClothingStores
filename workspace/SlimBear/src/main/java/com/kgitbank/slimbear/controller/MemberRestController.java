@@ -1,15 +1,21 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
+import com.kgitbank.slimbear.dto.CouponDTO;
+import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.vo.AddrVO;
@@ -21,7 +27,7 @@ public class MemberRestController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
+@Autowired
 	private HunServiceImpl hunService;
 	
 	@PostMapping("id/duplicate")
@@ -68,6 +74,42 @@ public class MemberRestController {
 		}
 	
 		return  addressInfo;
+	}
+	
+
+	@PostMapping("register/coupon")
+	public HashMap<String, String> registerCoupon(Authentication authentication, @RequestParam String code) {
+		HashMap<String, String> response = new HashMap<String, String>();
+		if(authentication == null) {
+			response.put("failed", "사용자 정보가 없습니다");
+			return response;
+		}
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+	
+		MemberCouponDTO memCoupon =  memberService.getMemberCouponByCode(code);
+		CouponDTO Coupon =  memberService.getCoupon(code);
+		
+		if(Coupon == null) {
+			response.put("failed", "존재하지 않는 쿠폰 번호입니다.");
+		}else if(memCoupon != null) {
+			response.put("failed", "이미 사용한 쿠폰 번호입니다.");
+		}else {
+			
+			memCoupon = new MemberCouponDTO();
+			memCoupon.setCoup_uid(Coupon.getUid());
+			memCoupon.setCode(Coupon.getCode());
+			memCoupon.setMem_uid(user.getUid());
+			
+			Date expireDate = new Date(System.currentTimeMillis() + (Coupon.getExpi_days() * 86400000));
+			memCoupon.setExpi_date(expireDate);
+			memberService.registerCoupon(memCoupon);
+		
+			response.put("success", "쿠폰이 정상적으로 등록되었습니다.");
+		}
+		
+		return response;
+		
 	}
 
 }

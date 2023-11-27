@@ -8,7 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_STATUS;
+import com.kgitbank.slimbear.dao.CouponDAO;
+import com.kgitbank.slimbear.dao.MemberCouponDAO;
 import com.kgitbank.slimbear.dao.MemberDAO;
+import com.kgitbank.slimbear.dto.CouponDTO;
+import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 
 @Service
@@ -16,6 +20,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO memDAO;
+	
+	@Autowired
+	private CouponDAO couponDAO;
+	private MemberCouponDAO memCouponDAO;
 
 	@Autowired
 	private PasswordEncoder pwdEncoder;
@@ -51,5 +59,21 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO getMemberByEmail(String email) {
 		return memDAO.getMemberByEmail(email);
+	}
+
+	@Override
+	public CouponDTO getCoupon(String code) {
+		return couponDAO.getCouponByCode(code);
+	}
+
+	@Override
+	public MemberCouponDTO getMemberCouponByCode(String code) {
+		return memCouponDAO.getCouponByCode(code);
+	}
+
+	@Override
+	public void registerCoupon(MemberCouponDTO coupon) {
+		memCouponDAO.insertAddress(coupon);
+	
 	}
 }

@@ -35,4 +35,5 @@ public class MemberCartVO {
 	 private List<String> SizeOptions;
 	
 	private String ProdCode;
+	private int mileage;
 }

@@ -31,4 +31,9 @@ public class SlimBearEnum {
 		ACTIVE,
 		WITHDRAWAL
 	}
+	
+	public enum COUPONE_TYPE{
+		PRICE,
+		PERCENT
+	}
 }
