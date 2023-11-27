@@ -32,6 +32,11 @@ public class ReviewDAO {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_RECENT");
 	}
 	
+	// 특정 상품 uid 리뷰 조회
+	public List<ReviewDTO> getReviewListByUid(long uid) {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_BY_PRODCODE", uid);
+	}
+	
 	// 리뷰 데이터 삽입
 	public int insertReview(ReviewDTO review) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);

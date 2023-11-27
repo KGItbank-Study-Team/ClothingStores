@@ -50,8 +50,8 @@ public class SanghyukController {
 		}
 			
 		// 모든 제품 리뷰 가져오기
-		List<ReviewDTO> reviewList = sanghService.getReviewList();
-		System.out.println("reviewList: " + reviewList);
+		//List<ReviewDTO> reviewList = sanghService.getReviewList();
+		//System.out.println("reviewList: " + reviewList);
 		
 		// 제품 옵션 가져오기
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
@@ -77,13 +77,23 @@ public class SanghyukController {
 		
 		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
-		model.addAttribute("reviewList", reviewList); // 리뷰리스트
+		//model.addAttribute("reviewList", reviewList); // 리뷰리스트
 		model.addAttribute("colorList", colorList); // color 옵션리스트
 		model.addAttribute("sizeList", sizeList); // size 옵션리스트
 		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
 		//model.addAttribute("inquiryAnswerList", inquiryAnswerList);
 
 		return "productInfo"; // .jsp 생략 
+	}
+	
+	/* 리뷰 데이터 가져오기 */
+	@RequestMapping("product/getReview/{uid}")
+	@ResponseBody
+	public List<ReviewDTO> getReviews(@PathVariable("uid")long productUid, HttpSession session) {
+		System.out.println("productUid: " + productUid);
+		List<ReviewDTO> reviewList = sanghService.getReviewListByUid(productUid);
+		
+		return reviewList;
 	}
 
 	/* 장바구니 상품 추가 */

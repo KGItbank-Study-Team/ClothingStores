@@ -231,7 +231,7 @@ function buyClick(uid) {
                 } else {
                     // '취소' 클릭 시
                     // 해당 옵션의 cnt를 원래 값으로 복원
-                    selectOptionList[matchingIndex].cnt =  cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
+                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
                     console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
                     alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
                     addInput();
@@ -309,28 +309,94 @@ $(document).ready(function () {
     });
 
 });
-// 리뷰점수를 별모양으로 표시
-window.onload = function () {
-    const reviewScore = document.getElementById('reviewList').value;
-    console.log('reviewScore: ' + reviewScore);
 
-    function showScoreByStars(reviewScore) {
+// 리뷰 페이징
+$(document).ready(function () {
+    // 페이지 번호를 클릭할 때의 이벤트 처리
+    $('.num a').on('click', function (e) {
+        e.preventDefault(); // 기본 동작 방지
 
-        const Score = Math.round(reviewScore);
-        const reviewScoreElement = document.getElementById('review-score');
-        const stars = reviewScoreElement.getElementsByTagName('i');
+        var pageNumber = $(this).text(); // 클릭한 페이지 번호
+        loadReviews(pageNumber); // 해당 페이지의 리뷰를 불러오는 함수 호출
+    });
 
-        // 기존 클래스 초기화
-        for (let i = 0; i < stars.length; i++) {
-            stars[i].classList.remove('fas');
-        }
+    // 초기 페이지 로딩 시 첫 번째 페이지의 리뷰를 표시
+    loadReviews(1);
 
-        // fas 클래스 적용
-        for (let i = 0; i < Score / 10; i++) {
-            stars[i].classList.add('fas');
-        }
+    // 리뷰를 비동기적으로 불러오는 함수
+    function loadReviews(pageNumber) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get("p");
+        $.ajax({
+            type: 'GET',
+            url: '/app/product/getReview/' + uid, // 리뷰를 가져올 URL
+            data: { p: uid, page: pageNumber }, // 해당 페이지 번호를 서버에 전달
+            success: function (reviewList) {
+                alert('success');
+                console.log('reviewList: ' +JSON.stringify(reviewList));
+                for(var i=0; i<reviewList.length; i++) {
+                    console.log(reviewList[i].mem_id, reviewList[i].score, reviewList[i].reg_date, reviewList[i].content);
+                }
+                
+                // 서버로부터 받은 리뷰 데이터를 표시하는 부분의 id나 class에 따라 수정
+                var reviewsHtml = ''; // 리뷰를 담을 변수
+                var reviewsPerPage = 5; // 페이지당 표시될 리뷰 수
+
+                // 서버에서 받은 리뷰 데이터를 반복하여 HTML에 추가
+                for (var i = 0; i < Math.min(reviewList.length, reviewsPerPage); i++) {
+                    // 리뷰 하나의 HTML을 생성하여 변수에 추가
+                    reviewsHtml += '<div class="review-section">' +
+                        '<div class="info">' +
+                        '<div>' +
+                        '<span>' + reviewList[i].mem_id + '</span>' +
+                        '<div>' +
+                        '<p>' + reviewList[i].reg_date + '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="review-score">' +
+                        '<i class="far fa-star"></i>'.repeat(reviewList[i].score) +
+                        '</div>' +
+                        '<input type="hidden" id="reviewList" value="' + reviewList[i].score + '"/>' +
+                        '</div>' +
+                        '<div class="photo-review">' +
+                        // 이미지 표시 부분에 대한 코드를 추가
+                        '</div>' +
+                        '<div class="review-text">' +
+                        '<div>' + reviewList[i].content + '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+                // 리뷰를 표시하는 부분의 id나 class를 정확히 지정하여 수정
+                $('.review-sections').html(reviewsHtml);
+            },
+            error: function (error) {
+                alert(error + '에러가 났습니다.');
+            }
+        });
     }
-    showScoreByStars(reviewScore);
-}
+});
+// 리뷰점수를 별모양으로 표시
+// window.onload = function () {
+//     const reviewScore = document.getElementById('reviewList').value;
+//     console.log('reviewScore: ' + reviewScore);
 
+//     function showScoreByStars(reviewScore) {
+
+//         const Score = Math.round(reviewScore);
+//         const reviewScoreElement = document.getElementById('review-score');
+//         const stars = reviewScoreElement.getElementsByTagName('i');
+
+//         // 기존 클래스 초기화
+//         for (let i = 0; i < stars.length; i++) {
+//             stars[i].classList.remove('fas');
+//         }
+
+//         // fas 클래스 적용
+//         for (let i = 0; i < Score / 10; i++) {
+//             stars[i].classList.add('fas');
+//         }
+//     }
+//     showScoreByStars(reviewScore);
+// }
 
