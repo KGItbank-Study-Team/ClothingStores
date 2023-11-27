@@ -1,8 +1,6 @@
 package com.kgitbank.slimbear.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
@@ -10,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,17 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SocialService;
+
 @Controller
 public class RSYController {
 	@Autowired
 	private RSYServiceImpl RSYService;
 	@Autowired
 	private SocialService SocialService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private MemberDAO MemberDAO;
 
 	@RequestMapping("product/category") // 상품 목록
 	public String categoryPage01(@RequestParam long category,
@@ -122,7 +127,8 @@ public class RSYController {
 	public String findPassword(@RequestParam String name, @RequestParam String id,
 			@RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "phone", required = false) String phone,
-			@RequestParam(name = "verificationCode", required = false) String enteredCode, Model model, HttpSession httpSession) {
+			@RequestParam(name = "verificationCode", required = false) String enteredCode, Model model,
+			HttpSession httpSession) {
 
 		String verificationCode;
 
@@ -147,7 +153,7 @@ public class RSYController {
 		if (member != null) {
 			model.addAttribute("member", member);
 			model.addAttribute("verificationCode", verificationCode);
-			return "/verify_code"; // 인증 코드 입력 페이지로 이동
+			return "/verifyCode"; // 인증 코드 입력 페이지로 이동
 		} else {
 			model.addAttribute("error", "회원정보를 찾을 수 없습니다. 다시 입력해주세요.");
 			return "/find_password";
@@ -156,7 +162,8 @@ public class RSYController {
 
 	@PostMapping("/sendVerificationCode")
 	@ResponseBody
-	public ResponseEntity<String> sendVerificationCode(@RequestParam String method, @RequestParam String target,HttpSession httpSession) {
+	public ResponseEntity<String> sendVerificationCode(@RequestParam String method, @RequestParam String target,
+			HttpSession httpSession) {
 		try {
 			String verificationCode;
 
@@ -165,7 +172,7 @@ public class RSYController {
 				// 이메일로 발급
 				verificationCode = SocialService.generateTemporaryVerificationCode();
 				SocialService.sendVerificationCodeByEmail(target, verificationCode, "슬림베어 비밀번호 찾기 인증 코드 발급",
-						"인증 코드: " + verificationCode , httpSession);
+						"인증 코드: " + verificationCode, httpSession);
 			} else if ("2".equals(method)) {
 				// 휴대폰으로 발급
 				verificationCode = SocialService.generateTemporaryVerificationCode();
@@ -184,16 +191,15 @@ public class RSYController {
 	}
 
 	@PostMapping("/verifyCode") // 인증 코드 확인
-	public Map<String, Object> verifyCode(@RequestParam String method, @RequestParam String enteredCode,
-	        HttpSession httpSession) {
-		Map<String, Object> response = new HashMap<>();
-	    // 세션에서 이메일과 인증 코드 가져오기
+	public String verifyCode(@RequestParam String method, @RequestParam String enteredCode, HttpSession httpSession,
+			Model model) {
+		// 세션에서 이메일과 인증 코드 가져오기
 		// 세션에서 이메일과 인증 코드 Map 가져오기
-	    String verificationCode = (String) httpSession.getAttribute("verificationCode");
-	    String target = (String)httpSession.getAttribute("emailAddress");
-	    System.out.println(target);
-	 // 이메일과 인증 코드 가져오기
-	    String temporaryPassword;
+		String verificationCode = (String) httpSession.getAttribute("verificationCode");
+		String target = (String) httpSession.getAttribute("emailAddress");
+		System.out.println(target);
+		// 이메일과 인증 코드 가져오기
+		String temporaryPassword;
 		if (verificationCode != null && verificationCode.equals(enteredCode)) {
 			// 임시 비밀번호 발급 로직
 			temporaryPassword = SocialService.generateTemporaryPassword();
@@ -201,26 +207,25 @@ public class RSYController {
 				// 이메일로 발급
 				try {
 					SocialService.sendEmail(target, "슬림베어 임시 비밀번호 발급", temporaryPassword);
-					 response.put("success", true);
-					return response; // 비밀번호 찾기 완료 페이지로 이동
+
+					RSYService.replacePasswordByEmail(target, passwordEncoder.encode(temporaryPassword));
+					return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			} else if ("2".equals(method)) {
 				// 휴대폰으로 발급
 				SocialService.sendTemporaryPassword(target, temporaryPassword);
+				RSYService.replacePasswordByPhone(target, passwordEncoder.encode(temporaryPassword));
 				
-				 response.put("success", true);
-				return response; // 비밀번호 찾기 완료 페이지로 이동
+				return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 			}
-			 response.put("success", false);
-			return response; // 비밀번호 찾기 완료 페이지로 이동
+			return "/find_password_result"; // 비밀번호 찾기 완료 페이지로 이동
 		} else {
 			// 인증 코드 확인 실패 시 다시 입력 페이지로 이동
-			response.put("success", false);
-			return response;
+			return "/find_password";
 		}
 	}
 

@@ -77,33 +77,37 @@ public class RSYServiceImpl {
 	}
 
 	// 비밀번호찾기
-	public MemberDTO findPassword(String name, String id, String email , String phone) {
+	public MemberDTO findPassword(String name, String id, String email, String phone) {
 		List<MemberDTO> memberList = memDAO.getMemberList();
 		for (MemberDTO member : memberList) {
 			if (member.getName().equals(name) && member.getId().equals(id)) {
 				if (email != null && member.getEmail().equals(email)) {
 					return member;
 				}
-				if(member.getPhone().equals(phone)) {					
+				if (member.getPhone().equals(phone)) {
 					return member;
 				}
-				
+
 			}
 		}
 		return null;
 	}
-	
-	//기존 비밀번호를 임시 비밀번호로 암호화해서 등록
-	
-	public MemberDTO replacePassword(String id, String temporaryPassword) {
-		MemberDTO member = memDAO.getMemberById(id);
-		member.setPassword(temporaryPassword);
-		
-		
-	/*	member
-	}*/
 
-	return null;
+	// 기존 비밀번호를 임시 비밀번호로 암호화해서 등록
+
+	public MemberDTO replacePasswordByEmail(String email, String temporaryPassword) {
+		MemberDTO member = memDAO.getMemberByEmail(email);
+		member.setPassword(temporaryPassword);
+		memDAO.updateTemporaryPassword(member);
+		return member;
 	}
 	
+	public MemberDTO replacePasswordByPhone(String phone, String temporaryPassword) {
+		MemberDTO member = memDAO.getMemberByPhone(phone);
+		member.setPassword(temporaryPassword);
+		memDAO.updateTemporaryPassword(member);
+		return member;
+	}
+	
+
 }
