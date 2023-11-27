@@ -197,12 +197,6 @@ function addCart(uid) {
         }
     });
 };
-// 장바구니에 있는 동일상품의 개수 가져오기
-// function getCartItemCount(uid, color, size) {
-//     return $.ajax({
-//         url: 
-//     });
-// }
 // 결제 버튼 클릭 시 장바구니에 자동 추가
 function buyClick(uid) {
     $.ajax({
@@ -210,36 +204,44 @@ function buyClick(uid) {
         type: "POST",
         data: { selectOptionList: selectOptionList },
         success: function (arr) {
-            var list = arr; // JSON.stringify를 사용하지 않음
-            alert("선택된 옵션 리스트: " + JSON.stringify(list));
+            var cartList = arr; // JSON.stringify를 사용하지 않음
+            alert("선택된 옵션 리스트: " + JSON.stringify(selectOptionList));
+            var matchingOptions = 0; // 동일한 옵션이 장바구니에 몇 개 있는지 추적하는 변수
+            var matchingIndex = -1; // 일치하는 옵션의 인덱스를 추적하는 변수
+
             for (var i = 0; i < selectOptionList.length; i++) {
-                console.log("color: " + list[i].color, "size: " + list[i].size + " cnt: " + list[i].cnt);
+                console.log("color: " + cartList[i].color, "size: " + cartList[i].size + " cnt: " + cartList[i].cnt);
 
-                if (list[i].color === selectOptionList[i].color && list[i].size === selectOptionList[i].size) {
+                if (cartList[i].color === selectOptionList[i].color && cartList[i].size === selectOptionList[i].size) {
                     // 동일옵션의 상품이 장바구니에 있음
-                    var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
-                    if (userConfirm) {
-                        // '확인' 클릭
-                        for(var i=0; i<selectOptionList.length; i++) {
-                            selectOptionList[i].cnt = list[i].cnt;
-                        }
-                        alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
-                        addInput();
-                        window.location.href = "/app/order/product"
-                    } else {
-                        // '취소' 클릭 
-                        alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
-                        addInput();
-                        
-                        window.location.href = "/app/order/product"
-                    }
+                    matchingOptions++;
+                    matchingIndex = i;
+                }
+            }
 
+            if (matchingOptions > 0) {
+                // 동일한 옵션의 상품이 하나 이상 있는 경우
+                var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
+                if (userConfirm) {
+                    // '확인' 클릭 시
+                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt;
+                    alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
+                    addInput();
+                    window.location.href = "/app/order/product";
                 } else {
-                    // 동일옵션의 상품이 장바구니에 없음.
-                    alert("selectOptionList: " + JSON.stringify(selectOptionList));
+                    // '취소' 클릭 시
+                    // 해당 옵션의 cnt를 원래 값으로 복원
+                    selectOptionList[matchingIndex].cnt =  cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
+                    console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
+                    alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
                     addInput();
                     window.location.href = "/app/order/product";
                 }
+            } else {
+                // 동일한 옵션의 상품이 없는 경우
+                alert("동일 옵션 없음: " + JSON.stringify(selectOptionList));
+                addInput();
+                window.location.href = "/app/order/product";
             }
         },
         error: function (request, status, error) {
@@ -250,6 +252,9 @@ function buyClick(uid) {
         }
     });
 }
+
+
+
 // 장바구니 추가 관련 팝업창
 $(function () {
     $(".keepShop").on("click", function () {
