@@ -86,3 +86,29 @@ function deleteSelectedAddresses() {
         }
     }
 
+//쿠폰등록
+function coupon_code_submit() {
+    // 입력 필드에서 쿠폰 코드 가져오기
+    var couponCode = document.getElementById('coupon_code').value;
+
+    // AJAX를 사용하여 서버에 쿠폰 코드 전송
+    $.ajax({
+        type: "POST",
+        url: "/app/member/register/coupon",
+        data: { code: couponCode },
+        success: function(response) {
+            // 서버에서 받은 응답 처리
+            if (response.success) {
+                alert(response.success);
+                // 성공적으로 쿠폰이 등록된 경우 추가 작업 수행
+            } else {
+                alert(response.failed);
+                // 쿠폰 등록에 실패한 경우 사용자에게 알림
+            }
+        },
+        error: function() {
+            // AJAX 요청 실패 시 처리
+            alert("쿠폰 등록 중 오류가 발생했습니다. 슈발");
+        }
+    });
+}

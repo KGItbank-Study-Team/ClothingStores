@@ -60,19 +60,15 @@
                         <colgroup>
                             <col style="width:120px">
                             <col style="width:auto">
-                            <col style="width:130px">
-                            <col style="width:130px">
-                            <col style="width:130px" class="">
-                            <col style="width:130px">
-                            <col style="width:170px">
+                            <col style="width:150px">
+                            <col style="width:150px">
+                            <col style="width:200px">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th scope="col">번호</th>
                                 <th scope="col">쿠폰명</th>
-                                <th scope="col">쿠폰적용 상품</th>
                                 <th scope="col">최소 구매금액</th>
-                                <th scope="col" class="">결제수단</th>
                                 <th scope="col">쿠폰 혜택</th>
                                 <th scope="col">사용가능 기간</th>
                             </tr>
@@ -83,9 +79,7 @@
                             <tr class="">
                                 <td>${item.couponNumber}</td>
                                 <td><strong>${item.couponName}</strong></td>
-                                <td>${item.couponProduct}</td>
                                 <td>${item.minimumAmount}</td>
-                                <td>${item.payMethod}</td>
                                 <td>${item.couponBenefit}</td>
                                 <td>${item.couponPeriod}</td>
                             </tr>
@@ -99,9 +93,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- 여기에 useCoupon 만들기 -->
-                <p class="ec-base-button"><span class="gRight"><a href="#none" class="btnSubmitFix sizeM"
-                            onclick="COUPON.useCoupon()">사용하기</a></span></p>
             </div>
 
             <form id="frmSerialCoupon" name="" action="/exec/front/myshop/couponSerial" method="post" target="_self"
@@ -113,7 +104,7 @@
                             <!-- 여기에 Couponcode 만들기 -->
                             <input id="coupon_code" name="coupon_code" fw-filter="" fw-label="쿠폰인증번호" fw-msg=""
                                 class="inputTypeText" placeholder="" maxlength="35" value="" type="text"> <a
-                                href="#none" class="btnSubmit sizeM" onclick="coupon_code_submit();">쿠폰번호인증</a>
+                                href="#none" class="btnSubmit sizeM" onclick="coupon_code_submit();">쿠폰등록</a>
                             <p>반드시 쇼핑몰에서 발행한 쿠폰번호만 입력해주세요. (10~35자 일련번호 "-" 제외)</p>
                         </fieldset>
                     </div>

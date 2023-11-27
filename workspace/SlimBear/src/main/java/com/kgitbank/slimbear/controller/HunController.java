@@ -16,7 +16,6 @@ import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
-import com.kgitbank.slimbear.vo.DepositsVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
 import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
@@ -141,19 +140,6 @@ public class HunController {
 		return "mileage";
 	}
 
-	@RequestMapping("member/myPage/deposits")
-	public String deposits(Authentication authentication, Model model) {
-
-		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-
-		DepositsVO vo = hunService.getDepositsInfo(user.getUid());
-		model.addAttribute("depo", vo);
-
-		return "deposits";
-	}
-
 	@RequestMapping("member/myPage/coupon")
 	public String coupon(Authentication authentication, Model model) {
 
@@ -197,6 +183,18 @@ public class HunController {
 		
 		model.addAttribute("boardList", vo);
 		return "board_list";
+	}
+	
+	@RequestMapping("member/myPage/reviewList")
+	public String reviewList(String type, Authentication authentication, Model model) {
+
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		System.out.println(user.getUid());
+		System.out.println(user.getUsername());
+
+		
+		
+		return "review_list";
 	}
 
 	@RequestMapping("member/myPage/addr")

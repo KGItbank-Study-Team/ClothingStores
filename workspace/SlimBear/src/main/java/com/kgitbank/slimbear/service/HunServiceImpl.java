@@ -15,6 +15,7 @@ import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
+import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
@@ -24,7 +25,6 @@ import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
-import com.kgitbank.slimbear.vo.DepositsVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
 import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
@@ -164,22 +164,11 @@ public class HunServiceImpl {
 
 	public MileageVO getMileageInfo(long uid) {
 		MileageVO vo = new MileageVO();
+		
 
 		vo.setTotalReserve(5000);
 		vo.setReserve(2000);
 		vo.setUseReserve(3000);
-		vo.setUnReserve(0);
-
-		return vo;
-	}
-
-	public DepositsVO getDepositsInfo(long uid) {
-		DepositsVO vo = new DepositsVO();
-
-		vo.setAccrueDeposit(70000);
-		vo.setUseDeposit(20000);
-		vo.setDeposit(50000);
-		vo.setRefundDeposit(0);
 
 		return vo;
 	}
@@ -189,15 +178,24 @@ public class HunServiceImpl {
 		ArrayList<CouponVO> list = new ArrayList<>();
 		List<MemberCouponDTO> membercouponlist = membercouponDAO.getCouponListByMemberUID(memberUID);
 
+		int index = 1;
 		for (MemberCouponDTO i : membercouponlist) {
 			CouponVO vo = new CouponVO();
+			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
 
-			vo.setCouponNumber(1);
-			vo.setCouponName("개쩌는쿠폰");
-			vo.setCouponProduct("4XL 이상 상품");
-			vo.setMinimumAmount(99000);
-			vo.setPayMethod("계좌이체");
-			vo.setCouponBenefit("15% 할인");
+			
+			
+			vo.setCouponNumber(index++);
+			vo.setCouponName(c.getName());
+			vo.setMinimumAmount(c.getMin_price());
+//			vo.setCouponBenefit(c.getValue() + c.getType());
+			if ("PRICE".equals(c.getType())) {
+			    vo.setCouponBenefit(c.getValue() + "원 할인");
+			} else if ("PERCENT".equals(c.getType())) {
+			    vo.setCouponBenefit(c.getValue() + "% 할인");
+			} else {
+			    // 다른 타입에 대한 처리
+			}
 			vo.setCouponPeriod(i.getExpi_date());
 
 			list.add(vo);

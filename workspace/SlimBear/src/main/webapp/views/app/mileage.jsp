@@ -6,14 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<%
-
-/* 확인용 임시데이터 */
-request.setAttribute("orderDate", "2023-11-05"); 
-request.setAttribute("addReserve", "1000"); 
-request.setAttribute("relatedOrder", ""); 
-request.setAttribute("substance", "신규회원 적립금"); 
-%>
 
 <html lang="ko">
 <%@ include file="header/header.jsp" %>
@@ -80,10 +72,6 @@ request.setAttribute("substance", "신규회원 적립금");
                             <li class="">
                                 <strong class="title">사용된 적립금</strong> <span class="data"><span
                                         id="xans_myshop_summary_used_mileage">${mile.useReserve}</span>&nbsp;</span>
-                            </li>
-                            <li class="">
-                                <strong class="title">미가용 적립금</strong> <span class="data"><span
-                                        id="xans_myshop_summary_unavail_mileage">${mile.unReserve}</span>&nbsp;</span>
                             </li>
                         </ul>
                     </div>
