@@ -31,6 +31,10 @@ public class MemberDAO{
 	public MemberDTO getMemberByEmail(String email) {
 		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_EMAIL", email);
 	}
+	
+	public MemberDTO getMemberByPhone(String phone) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_MEM_BY_PHONE", phone);
+	}
 
 	public List<MemberDTO> getMemberList() {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_MEM_LIST");

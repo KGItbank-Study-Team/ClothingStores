@@ -234,7 +234,7 @@ public class SocialService {
 	private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	private static final int PASSWORD_LENGTH = 10;
 
-	public static String generateTemporaryPassword() {
+	public String generateTemporaryPassword() {
 		StringBuilder password = new StringBuilder();
 		Random random = new SecureRandom();
 
