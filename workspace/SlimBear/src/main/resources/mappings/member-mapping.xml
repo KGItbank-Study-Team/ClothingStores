@@ -79,6 +79,10 @@
 		SELECT * FROM memberCoupon
 		WHERE mem_uid=#{uid}
 	</select>
+	
+	<select id="SELECT_COUPON_LIST_BY_CODE" resultType="coupon">
+		SELECT * FROM memberCoupon WHERE code=#{code}
+	</select>
 
 	<insert id="INSERT_COUPON">
 		INSERT INTO memberCoupon
