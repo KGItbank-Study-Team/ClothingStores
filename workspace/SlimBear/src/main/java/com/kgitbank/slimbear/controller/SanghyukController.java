@@ -135,10 +135,11 @@ public class SanghyukController {
 	/* 결제버튼 클릭 시 cart에도 추가 */
 	@RequestMapping(value="insert/payCart/{uid}", method=RequestMethod.POST )
 	@ResponseBody
-	public int insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+	public ArrayList<HashMap<String, Object>> insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
 		System.out.println("=========결제 버튼 메서드=========");
-		
-		int result = 0;
+		HashMap<String, Object> returnList = new HashMap<>();
+		ArrayList<HashMap<String, Object>> arr = new ArrayList<>();
+		int totalCnt = 0;
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		long mem_uid = user.getUid();
 		System.out.println("mem_uid: " + mem_uid);
@@ -168,16 +169,20 @@ public class SanghyukController {
 			Integer isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
 			System.out.println("isAreadyExited: " + isAreadyExited); 
 			if(isAreadyExited > 0) {
-				// 장바구니에 이미 해당 상품이 존재할 경우 -> 카트 전체 리스트 조회x
-				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까
-				result =  cnt + isAreadyExited;
-				System.out.println("선택 개수 + 카트 개수 : " + result);
+				// 장바구니에 이미 해당 상품이 존재할 경우
+				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까(삭제 메서드 구현해야함)
+				totalCnt =  cnt + isAreadyExited;
+				returnList.put("color", color);
+				returnList.put("size", size);
+				returnList.put("cnt", totalCnt);
+				arr.add(returnList);
+				System.out.println("returnList: " + arr);
+				
 			} else {
 				sanghService.insertInCart(cartDTO);
-				isAreadyExited = 0;
 			}
 		}
-		return result;
+		return arr;
 	}	
 	
 	/* 위시리스트 추가 */
