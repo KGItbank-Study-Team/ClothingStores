@@ -182,10 +182,12 @@ public class HunServiceImpl {
 		for (MemberCouponDTO i : membercouponlist) {
 			CouponVO vo = new CouponVO();
 			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
+			MemberCouponDTO v = membercouponDAO.getCouponByUID(i.getCoup_uid());
 			
-			vo.setCoup_uid(c.getUid());
+			vo.setCoup_uid(v.getCoup_uid());
 			vo.setType(c.getType());
 			vo.setValue(c.getValue());
+			
 			vo.setCouponNumber(index++);
 			vo.setCouponName(c.getName());
 			vo.setMinimumAmount(c.getMin_price());
