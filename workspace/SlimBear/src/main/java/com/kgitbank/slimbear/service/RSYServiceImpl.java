@@ -89,19 +89,20 @@ public class RSYServiceImpl {
 
 	// 비밀번호찾기
 	public MemberDTO findPassword(String name, String id, String email, String phone) {
-		List<MemberDTO> memberList = memDAO.getMemberList();
-		for (MemberDTO member : memberList) {
-			if (member.getName().equals(name) && member.getId().equals(id)) {
-				if (email != null && member.getEmail().equals(email)) {
-					return member;
-				}
-				if (member.getPhone().equals(phone)) {
-					return member;
-				}
-
-			}
-		}
-		return null;
+	    List<MemberDTO> memberList = memDAO.getMemberList();
+	    for (MemberDTO member : memberList) {
+	        if (member.getName().equals(name) && member.getId().equals(id)) {
+	            if (email != null && member.getEmail().equals(email)) {
+	            	member = memDAO.getMemberByEmail(email);
+	                return member;
+	            }
+	            if (phone != null && member.getPhone().equals(phone)) {
+	            	member = memDAO.getMemberByPhone(phone);
+	                return member;
+	            }
+	        }
+	    }
+	    return null;
 	}
 
 	// 기존 비밀번호를 임시 비밀번호로 암호화해서 등록

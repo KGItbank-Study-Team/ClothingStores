@@ -120,82 +120,108 @@
 
 			<script>
 				function sendVerificationCode() {
+					// 선택된 방법 (이메일 또는 휴대폰) 가져오기
+					var method = document
+							.querySelector('input[name="check_method"]:checked').value;
+
+					// 선택된 방법에 따라 이메일 또는 휴대폰 번호 가져오기
+					var target = method === '1' ? 'email' : 'phone';
+					var inputValue = document.getElementById(target).value;
+
+					// 값이 비어 있으면 경고 메시지 표시 후 함수 종료
+					if (!inputValue.trim()) {
+						alert('유효하지 않은 ' + target + '입니다. 유효한 값을 입력하세요.');
+						return;
+					}
+
+					// AJAX를 이용해 서버로 인증번호 전송
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '/app/findPassword', true);
+					xhr.setRequestHeader('Content-Type',
+							'application/x-www-form-urlencoded');
+
+					// 서버 응답 처리
+					xhr.onload = function() {
+						if (xhr.status === 200) {
+							var response = xhr.responseText;
+
+							if (response === "success") {
+								alert('인증코드 전송에 성공했습니다.');
+								// 인증번호 입력 필드 표시
+								document
+										.getElementById('verification_code_view').style.display = 'block';
+							} else {
+								alert('인증코드 전송에 실패했습니다.');
+							}
+						} else {
+							alert('인증코드 전송에 실패했습니다.');
+						}
+					};
+
+					// 전송할 데이터 설정
+					var params = 'method='
+							+ method
+							+ '&target='
+							+ inputValue
+							+ '&name='
+							+ encodeURIComponent(document
+									.getElementById('name').value)
+							+ '&id='
+							+ encodeURIComponent(document.getElementById('id').value)
+							+ '&email='
+							+ encodeURIComponent(document
+									.getElementById('email').value)
+							+ '&phone='
+							+ encodeURIComponent(document
+									.getElementById('phone').value);
+
+					xhr.send(params);
+				}
+
+				function verifyCode() {
+					var verificationCode = document
+							.getElementById('verificationCode').value;
+
+					// AJAX를 이용한 서버와의 통신
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '/app/verifyCode', true);
+					xhr.setRequestHeader('Content-Type',
+							'application/x-www-form-urlencoded');
+
+					// sendVerificationCode에서 전달한 method와 target 값을 가져와서 전송
 					var method = document
 							.querySelector('input[name="check_method"]:checked').value;
 					var target = method === '1' ? 'email' : 'phone';
 
-					var inputValue = document.getElementById(target).value;
-					if (!inputValue) {
-						alert('Please enter '
-								+ (method === '1' ? 'email' : 'phone')
-								+ ' first.');
-						return;
-					}
-
-					// 추가된 부분: target이 null 또는 비어 있을 경우 처리
-					if (!target || !inputValue.trim()) {
-						alert('Invalid ' + target
-								+ '. Please enter a valid value.');
-						return;
-					}
-
-					// Assuming you have a servlet or controller method to handle the verification code sending
-					// AJAX request to send verification code
-					var xhr = new XMLHttpRequest();
-					xhr.open('POST', '/app/sendVerificationCode', true);
-					xhr.setRequestHeader('Content-Type',
-							'application/x-www-form-urlencoded');
-
-					// Handling response
 					xhr.onload = function() {
 						if (xhr.status === 200) {
-							alert('Verification code sent successfully.');
-							// Show the verification code input field
-							document.getElementById('verification_code_view').style.display = 'block';
+							// 서버에서의 응답 처리
+							var response = xhr.responseText; // 수정된 부분
+
+							if (response === "success") { // 수정된 부분
+								alert('인증에 성공했습니다. 발급받은 임시 비밀번호로 로그인 해주세요.');
+								// 응답을 받은 후에 페이지 이동
+								console.log('페이지 이동: /find_password_result'); // 로그 추가
+								window.location.href = '/views/app/find_password_result.jsp';
+							} else {
+								alert('인증에 실패했습니다. 인증코드를 다시 확인해주세요.');
+								// 응답을 받은 후에 페이지 이동
+								console.log('페이지 이동: /app/find_password'); // 로그 추가
+								window.location.href = '/views/app/find_password.jsp';
+							}
 						} else {
-							alert('Failed to send verification code.');
+							alert('인증에 실패했습니다. 인증코드를 다시 확인해주세요.');
+							// 응답을 받은 후에 페이지 이동
+							console.log('페이지 이동: /app/find_password'); // 로그 추가
+							window.location.href = '/views/app/find_password.jsp';
 						}
 					};
 
-					// Sending data
-					var params = 'method=' + method + '&target=' + inputValue;
+					// 보낼 데이터 설정
+					var params = 'enteredCode=' + verificationCode + '&method='
+							+ method + '&target=' + target;
 					xhr.send(params);
 				}
-				function verifyCode() {
-				    var verificationCode = document.getElementById('verificationCode').value;
-
-				    // AJAX를 이용한 서버와의 통신
-				    var xhr = new XMLHttpRequest();
-				    xhr.open('POST', '/app/verifyCode', true);
-				    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-				    // sendVerificationCode에서 전달한 method와 target 값을 가져와서 전송
-				    var method = document.querySelector('input[name="check_method"]:checked').value;
-				    var target = method === '1' ? 'email' : 'phone';
-
-				    xhr.onload = function () {
-				        if (xhr.status === 200) {
-				            // 서버에서의 응답 처리
-				            var response = JSON.parse(xhr.responseText);
-
-				            if (response.success) {
-				                alert('Verification code verified successfully.');
-
-				                // 여기에 인증번호 확인 후의 추가 작업을 수행
-				                // 예: 다음 단계의 입력 항목 표시, 임시 비밀번호 생성 등
-				            } else {
-				                alert('Verification code verification failed. Please check the code.');
-				            }
-				        } else {
-				            alert('Failed to verify the verification code. Please try again.');
-				        }
-				    };
-
-				    // 보낼 데이터 설정
-				    var params = 'enteredCode=' + verificationCode + '&method=' + method + '&target=' + target;
-				    xhr.send(params);
-				}
-
 			</script>
 
 

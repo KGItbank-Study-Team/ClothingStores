@@ -71,11 +71,11 @@
 										id="passwd_method_type1" name="passwd_method_type"
 										fw-filter="isFill" fw-label="임시 비밀번호" fw-msg="" value="mobile"
 										type="radio" /><label for="passwd_method_type1">휴대폰</label></span></li>
-								<li id="passwd_method_email_info"><strong class="term">이메일</strong><span
+								<li id="passwd_method_email_info"><strong class="term">${foundMember.email }</strong><span
 									class="desc"><strong class="txtEm"><span
-											class="authssl_c_email">${member.email }</span></strong></span></li>
+											class="authssl_c_email">이메일</span></strong></span></li>
 								<li id="passwd_method_mobile_info"><strong class="term">휴대폰
-										번호</strong><span class="desc">${member.phone}<strong class="txtEm number"></strong></span>
+										번호</strong><span class="desc">${foundMember.phone }<strong class="txtEm number"></strong></span>
 								</li>
 							</ul>
 							<div class="ec-base-button gColumn">
