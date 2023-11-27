@@ -67,7 +67,8 @@
 				<input id="mode" name="mode" value="" type="hidden"> <input
 					id="term" name="term" value="" type="hidden">
 
-
+				
+				<c:forEach var="item" items="${orderDetail}">
 				<div class="hunn">
 					<table class="sc-gnmni8-1 eSpcfO">
 						<colgroup>
@@ -127,6 +128,7 @@
 						</tbody>
 					</table>
 				</div>
+				</c:forEach>
 
 				<p class="message displaynone">주문 내역이 없습니다.</p>
 			</div>

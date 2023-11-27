@@ -44,9 +44,6 @@ request.setAttribute("substance", "신규회원 적립금");
                         <li class="mileage">
                             <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
-                        <li class="deposits ">
-                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
-                        </li>
                         <li class="coupon ">
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
@@ -54,7 +51,10 @@ request.setAttribute("substance", "신규회원 적립금");
                             <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>문의 관리</span></a>
+                        </li>
+                        <li class="board">
+                            <a href="/app/member/myPage/reviewList"><span>리뷰 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>

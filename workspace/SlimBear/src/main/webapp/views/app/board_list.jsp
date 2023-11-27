@@ -27,9 +27,6 @@
                         <li class="mileage">
                             <a href="/app/member/myPage/mileage"><span>적립금</span></a>
                         </li>
-                        <li class="deposits ">
-                            <a href="/app/member/myPage/deposits"><span>예치금</span></a>
-                        </li>
                         <li class="coupon ">
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
@@ -37,7 +34,10 @@
                             <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
                         </li>
                         <li class="board">
-                            <a href="/app/member/myPage/boardList"><span>게시글 관리</span></a>
+                            <a href="/app/member/myPage/boardList"><span>문의 관리</span></a>
+                        </li>
+                        <li class="board">
+                            <a href="/app/member/myPage/reviewList"><span>리뷰 관리</span></a>
                         </li>
                         <li class="board">
                             <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
@@ -133,14 +133,7 @@
                         </fieldset>
                     </div>
                 </form>
-                <!-- 리뷰 작성 목록 -->
-                <!-- <div class="crema-reviews crema-applied" data-widget-id="27" data-installation-id="9"
-                    data-type="managing-reviews" style="margin-left: 31px;"><iframe id="crema-my-reviews-1" height="0"
-                        src="https://review5.cre.ma/slowand.com/my/managing_reviews?iframe_id=crema-my-reviews-1&amp;app=0&amp;parent_url=https%3A%2F%2Fwww.slowand.com%2Fmyshop%2Fboard_list.html&amp;secure_username=V21b7961f44d891c02b7f7866f3609a62b&amp;secure_user_name=V29c512a84ee01a08fd1698da2353e4c7b&amp;secure_device_token=V27bcab9a5e5d22ec767027c71e2de2d08adc38a7df127f4c254e3cf9653f09780f85e128143042c0a7cadb96a8f5fd9f0&amp;iframe=1"
-                        width="100%" scrolling="no" allowtransparency="true" frameborder="0"
-                        name="crema-my-reviews-1-1698727196713"
-                        style="display: block; visibility: visible; height: 158px;"></iframe>
-                </div> -->
+                
             </div>
         </div>
     </div>
