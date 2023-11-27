@@ -18,5 +18,4 @@ public class MemberCouponDTO {
 	private long coup_uid;
 	private Date expi_date;
 	private Date use_date;
-	private String code;
 }

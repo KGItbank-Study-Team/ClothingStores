@@ -22,11 +22,12 @@ public class MemberCouponDAO {
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_MEMBER_UID", info);
 	}
-
-	public MemberCouponDTO getCouponByCode(String code) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_CODE",code);
-	}
 	
+	public MemberCouponDTO getCouponByUID(long uid) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_UID", uid);
+	
+	}
+
 	public int insertAddress(MemberCouponDTO coupon) {
 		return template.insert("com.slimbear.mapper.Member.INSERT_COUPON", coupon);
 	}
@@ -34,4 +35,6 @@ public class MemberCouponDAO {
 	public int updateAddress(MemberCouponDTO coupon) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_COUPON", coupon);
 	}
+
+	
 }

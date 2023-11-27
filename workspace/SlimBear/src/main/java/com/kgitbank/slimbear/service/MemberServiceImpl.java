@@ -67,8 +67,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberCouponDTO getMemberCouponByCode(String code) {
-		return memCouponDAO.getCouponByCode(code);
+	public MemberCouponDTO getMemberCouponByUID(long uid) {
+		return memCouponDAO.getCouponByUID(uid);
 	}
 
 	@Override

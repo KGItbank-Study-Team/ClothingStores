@@ -99,8 +99,8 @@
 		WHERE mem_uid=#{uid}
 	</select>
 	
-	<select id="SELECT_COUPON_LIST_BY_CODE" resultType="coupon">
-		SELECT * FROM memberCoupon WHERE code=#{code}
+	<select id="SELECT_COUPON_LIST_BY_UID" resultType="coupon">
+		SELECT * FROM memberCoupon WHERE coup_uid=#{uid}
 	</select>
 
 	<insert id="INSERT_COUPON">
