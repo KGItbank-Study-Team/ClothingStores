@@ -1,6 +1,8 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -79,34 +81,12 @@ public class YangBoardServiceImpl {
 	    }
 	}
 	
-	
-	
-	
-//	public InquiryDTO getInquiryDetail(Long id) {
-//        try {
-//            InquiryDTO inquiry = inquiryDAO.getInquiryDetail(id);
-//
-//            // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
-//            if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
-//                // 여기서 예외를 던지지 않고, 경고창을 띄우도록 처리
-//                showAccessDeniedWarning();
-//                // 또는 다른 방식으로 경고창을 띄우는 로직을 추가할 수 있음
-//                return null;  // 예외를 던지지 않았으므로 null을 반환하거나 다른 처리를 수행
-//            }
-//
-//            return inquiry;
-//        } catch (AccessDeniedException e) {
-//            showAccessDeniedWarning();
-//            return null;  // 예외를 던지지 않았으므로 null을 반환하거나 다른 처리를 수행
-//        }
-//    }
 	// 경고창을 띄우는 메서드
     private void showAccessDeniedWarning() {
-        // 여기에 경고창을 띄우는 로직을 추가
-        // 예를 들어, 웹 페이지에서는 JavaScript를 사용하여 경고창을 띄울 수 있습니다.
-        // 또는 Spring MVC에서는 Model을 활용하여 경고 메시지를 전달할 수 있습니다.
+    	System.out.println("경고");
     }
-	 // 현재 로그인한 사용자가 작성자인지 확인하는 메서드
+    
+	// 현재 로그인한 사용자가 작성자인지 확인하는 메서드
     private boolean isCurrentUserAuthor(String writerName) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
@@ -134,6 +114,18 @@ public class YangBoardServiceImpl {
     public void updateInquiry(InquiryDTO inquiry) {
     	inquiryDAO.updateInquiry(inquiry);
     }
+    
+    
+    // 문의게시글 검색 기능 추가
+    public List<InquiryDTO> getInquiryListBySearch(String type, String searchKey, String searchs) {
+        Map<String, Object> searchMap = new HashMap<>();
+        searchMap.put("type", type);
+        searchMap.put("searchKey", searchKey);
+        searchMap.put("searchs", searchs);
+
+        return inquiryDAO.selectInquiryListBySearch(searchMap);
+    }
+    
     
 	
 	// FAQ

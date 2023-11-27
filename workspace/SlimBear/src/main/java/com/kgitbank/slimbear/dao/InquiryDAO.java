@@ -1,6 +1,7 @@
 package com.kgitbank.slimbear.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,10 @@ public class InquiryDAO {
 	}
 	
 	
-	// 게시글 검색
-	
+	// 게시글 검색 기능 DAO 추가
+    public List<InquiryDTO> selectInquiryListBySearch(Map<String, Object> searchMap) {
+        return template.selectList("SELECT_INQUIRY_LIST_BY_SEARCH", searchMap);
+    }
 	
 	
 }

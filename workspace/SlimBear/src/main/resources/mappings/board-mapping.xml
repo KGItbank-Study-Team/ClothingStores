@@ -132,21 +132,25 @@
  	</delete>
  	
  	<!-- 게시글 검색 -->
- 	<select id="SEARCH_INQUIRY" resultType="com.kgitbank.slimbear.dto.InquiryDTO" parameterType="java.util.Map">
-        SELECT * FROM inquiry
-        WHERE
-        <if test="board_no != null">
-            board_no = #{board_no} AND
-        </if>
-        <if test="page != null">
-            page = #{page} AND
-        </if>
-        <if test="search_key != null and searchs != null">
-            ${search_key} LIKE CONCAT('%', #{searchs}, '%') AND
-        </if>
-        1=1
-    </select>
- 	
+ 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" resultType="inquiry" parameterType="map">
+	    SELECT * FROM inquiry 
+	    WHERE type=#{type} 
+	    AND 
+	    <if test="searchKey == 'title'">
+	        title LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'content'">
+	        content LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'writer_id'">
+	        writer_id LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'prod_uid'">
+	        prod_uid = #{searchs}
+	    </if>
+	    ORDER BY reg_date DESC
+	</select>
+	
  	
  	
  	

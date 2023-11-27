@@ -20,5 +20,6 @@ public class NoticeDTO {
 	private int priority;
 	private String type;
 	private String writer;
-	private String view_cnt;
+	private int view_cnt;
+	private String main_image;
 }
