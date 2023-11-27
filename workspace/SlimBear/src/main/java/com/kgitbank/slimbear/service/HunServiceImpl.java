@@ -182,13 +182,13 @@ public class HunServiceImpl {
 		for (MemberCouponDTO i : membercouponlist) {
 			CouponVO vo = new CouponVO();
 			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
-
 			
-			
+			vo.setCoup_uid(c.getUid());
+			vo.setType(c.getType());
+			vo.setValue(c.getValue());
 			vo.setCouponNumber(index++);
 			vo.setCouponName(c.getName());
 			vo.setMinimumAmount(c.getMin_price());
-//			vo.setCouponBenefit(c.getValue() + c.getType());
 			if ("PRICE".equals(c.getType())) {
 			    vo.setCouponBenefit(c.getValue() + "원 할인");
 			} else if ("PERCENT".equals(c.getType())) {
