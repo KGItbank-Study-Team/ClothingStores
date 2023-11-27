@@ -40,7 +40,7 @@
 							<h2>BEST ITEM</h2>
 						</div>
 						<ul class="prdList grid4 swiper-wrapper">
-							<c:forEach var="item" items="${productList}">
+							<c:forEach var="item" items="${bestProductList}">
 								<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
 									<div class="thumbnail">
 										<div class="salePer"></div>
@@ -49,9 +49,7 @@
 												name="anchorBoxName_4777"> <img
 												src="/resources/images/${item.main_image}"
 												id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
-											</a> <span class="chk"> <input type="checkbox"
-												class="ProductCompareClass xECPCNO_4777 displaynone" />
-											</span>
+											</a>
 										</div>
 										<!-- .prdImg -->
 									</div> <!-- .thumbnail -->
@@ -120,14 +118,6 @@
 					<div
 						class="xans-element- xans-product xans-product-headcategory path ">
 						<span>현재 위치</span>
-						<ol>
-							<li><a href="/">1111</a></li>
-							<li class=""><a href="/category//">2222</a></li>
-							<li class="displaynone"><a href="#">3333</a></li>
-							<li class="displaynone"><a href="#">4444</a></li>
-							<li class="displaynone"><strong>5555 <a href="#"></a>
-							</strong></li>
-						</ol>
 					</div>
 					<div
 						class="xans-element- xans-product xans-product-headcategory titleArea ">
@@ -167,17 +157,14 @@
 
 									<ul id="type"
 										class="xans-element- xans-product xans-product-orderby">
-										<li class="xans-record-"><a href="#출시일로 정렬">신상품</a></li>
+										<li class="xans-record-"><a
+											href="/app/product/category/?category=${category.uid }&order=REG_DATE">신상품</a></li>
 										<li class="xans-record-"><a
 											href="/app/product/category/?category=${category.uid }&order=PRICE_ASC">낮은가격</a></li>
 										<li class="xans-record-"><a
 											href="/app/product/category/?category=${category.uid }&order=PRICE_DESC">높은가격</a></li>
 										<li class="xans-record-"><a href="#리뷰페이지">사용후기</a></li>
 									</ul>
-									<span class="compare displaynone"> <a href="#none"
-										class="btnCompare"
-										onclick="EC_ListAction.setProductCompare();">상품비교</a>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -276,43 +263,45 @@
 						</ul>
 					</div>
 				</div>
-				<div
-					class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
-					<ol>
-						<!-- Previous Page Button -->
-						<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
-							<a class="page-link"
-							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a>
-						</li>
-						<!-- Page Number Buttons -->
-						<c:forEach begin="1" end="${totalPages}" var="pageNumber">
-							<li class="xans-record- "><c:choose>
-									<c:when test="${pageNumber eq currentPage}">
-										<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
-										<a
-											href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
-											class="this">${pageNumber}</a>
-									</c:when>
-									<c:otherwise>
-										<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
-										<a
-											href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
-											class="other">${pageNumber}</a>
-									</c:otherwise>
-								</c:choose></li>
-						</c:forEach>
-						<!-- Next Page Button -->
-						<li
-							class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
-							<a class="page-link"
-							href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a>
-						</li>
-					</ol>
-				</div>
+				<div class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
+    <ol>
+        <!-- Previous Page Button -->
+        <li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+            <a class="page-link"
+               href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage - 1}"
+               aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <!-- Page Number Buttons -->
+        <c:forEach begin="1" end="${totalPages}" var="pageNumber">
+            <li class="xans-record-"><c:choose>
+                    <c:when test="${pageNumber eq currentPage}">
+                        <!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+                        <a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+                           class="this">${pageNumber}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+                        <a href="/app/product/category?category=${category.uid }&order=${order }&currentPage=${pageNumber}"
+                           class="other">${pageNumber}</a>
+                    </c:otherwise>
+                </c:choose></li>
+        </c:forEach>
+        <!-- Next Page Button -->
+        <li class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+            <a class="page-link"
+               href="/app/product/category?category=${category.uid }&order=${order}&currentPage=${currentPage + 1}"
+               aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ol>
+    <!-- 마지막 페이지 여부 확인 후 출력 -->
+    <c:if test="${currentPage eq totalPages && !hasNextBlock}">
+        <div class="page-item disabled"><span class="page-link">마지막 페이지입니다.</span></div>
+    </c:if>
+</div>
+
+
 
 			</main>
 

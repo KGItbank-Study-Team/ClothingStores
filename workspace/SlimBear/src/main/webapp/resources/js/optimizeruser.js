@@ -394,19 +394,7 @@ $(".ec-base-product .spec > li").each(function(){
 });
 
 
-$('.ec-base-product').not("[class*='relation']").find('.spec').each(function(){
-	if ($(this).parent().find('.priceLine .listPrice').length == 0){
-		$('.ec-base-product .spec li .color').parent('li').addClass('colorchip');
-		$(this).before('<div class=priceLine><ul></ul></div>');
-		$(this).find($('.listSalePrice,.listPrice,.listCustomPrice')).prependTo($(this).parent().find('.priceLine > ul'));	
-		$(this).find('.listSubname').after($(this).parent().find('.priceLine'));
-		$(this).find('.priceLine').after($(this).find('.colorchip .color'));
-		if ($(this).parent().find('.icon img').length > 0){
-			$(this).parent().find('.icon').show();
-		}
-	}
 	
-});	
 
 },200);
 
@@ -434,20 +422,7 @@ function loop() {
 loop();
 
 
-$('header .search').click(function(){
-	$('#one_right').toggleClass('active');
-	$('body').toggleClass('mask');
-	$('#one_mask').click(function(){
-		$('#one_right').removeClass('active');
-		$('body').removeClass('mask');
-	});	
-});
 
-$('header .search1').click(function(){
-	$('header #one_search').addClass('active');
-	$('.hotkeyRoll').hide();
-	$('header #one_search input').focus();
-});
 
 // footer toggle
 $('#footer .hidden .more').click(function(){
