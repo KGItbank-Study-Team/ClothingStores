@@ -33,6 +33,11 @@ public class SangyhyukServiceImpl {
 		return reviewDAO.getReviewList();
 	}
 	
+	// 특정 상품 uid의 리뷰 조회
+	public List<ReviewDTO> getReviewListByUid(long uid) {
+		return reviewDAO.getReviewListByUid(uid);
+	}
+	
 	// 최신순으로 리뷰 리스트 받아오기
 	public List<ReviewDTO> getReviewListRecent() {
 		return reviewDAO.getReviewListRecent();

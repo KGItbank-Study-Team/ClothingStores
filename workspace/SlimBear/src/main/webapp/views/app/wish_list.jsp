@@ -60,7 +60,6 @@
                             <col style="width:92px">
                             <col style="width:auto">
                             <col style="width:120px">
-                            <col style="width:120px">
                         </colgroup>
                         <thead>
                             <tr>
@@ -69,7 +68,6 @@
                                 <th scope="col">이미지</th>
                                 <th scope="col">상품정보</th>
                                 <th scope="col">판매가</th>
-                                <th scope="col">선택</th>
                             </tr>
                         </thead>
                         <tbody class="xans-element- xans-myshop xans-myshop-wishlistitem center">
@@ -96,15 +94,6 @@
                                 <td class="price">
                                     <strong class="strike">${item.orderAmount}원<br></strong><br><strong class="">${item.orderDiscount}원</strong>
                                 </td>
-                                <!-- 선택 -->
-                                <td class="button">
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">주문하기</a>
-                                    <a href="#none"
-                                        onclick="CAPP_SHOP_NEW_PRODUCT_OPTIONSELECT.selectOptionCommon(7910,  24, 'wishlist', '')"
-                                        class="btnNormal ">장바구니</a>
-                                </td>
                             </tr>
                             </c:forEach>
                             
@@ -116,13 +105,7 @@
 
                 <div class="xans-element- xans-myshop xans-myshop-wishlistbutton ec-base-button xans-record-"><span
                         class="gLeft">
-                        <strong class="text">선택상품을</strong>
                         <a href="#none" class="btnEm" onclick="NewWishlist.deleteSelect();">삭제하기</a>
-                        <a href="#none" class="btnNormal" onclick="NewWishlist.basket();">장바구니 담기</a>
-                    </span>
-                    <span class="gRight">
-                        <a href="#none" class="btnSubmit sizeM" onclick="NewWishlist.orderAll();">전체상품주문</a>
-                        <a href="#none" class="btnEmFix sizeM" onclick="NewWishlist.deleteAll();">관심상품 비우기</a>
                     </span>
                 </div>
 

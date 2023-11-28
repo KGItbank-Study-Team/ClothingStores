@@ -14,6 +14,7 @@ import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
+import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
@@ -22,6 +23,7 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
+import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
@@ -54,6 +56,9 @@ public class HunServiceImpl {
 
 	@Autowired
 	private WishDAO wishDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 
 	@Autowired
 	private InquiryDAO inquiryDAO;
@@ -164,9 +169,9 @@ public class HunServiceImpl {
 
 	public MileageVO getMileageInfo(long uid) {
 		MileageVO vo = new MileageVO();
+		int i = memDAO.getMemberMileageRecordListByMemberUID(uid);
 		
-
-		vo.setTotalReserve(5000);
+		vo.setTotalReserve(i);
 		vo.setReserve(2000);
 		vo.setUseReserve(3000);
 
@@ -182,9 +187,8 @@ public class HunServiceImpl {
 		for (MemberCouponDTO i : membercouponlist) {
 			CouponVO vo = new CouponVO();
 			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
-			MemberCouponDTO v = membercouponDAO.getCouponByUID(i.getCoup_uid());
 			
-			vo.setCoup_uid(v.getCoup_uid());
+			vo.setCoup_uid(i.getUid());
 			vo.setType(c.getType());
 			vo.setValue(c.getValue());
 			
@@ -208,14 +212,15 @@ public class HunServiceImpl {
 	public List<WishListVO> getWishListInfo(long memberUID) {
 		ArrayList<WishListVO> list = new ArrayList<>();
 		List<WishDTO> wishlist = wishDAO.getWishListByMemberUID(memberUID);
-
+		ProductDTO p = productDAO.getProductByUid(memberUID);
+		
 		for (WishDTO i : wishlist) {
 			WishListVO vo = new WishListVO();
 			vo.setProductURL("http://localhost:9090/app/product?p=1");
-			vo.setProductImage("outerEx01.gif");
+			vo.setProductImage(p.getMain_image());
 			vo.setProductName(i.getProd_code());
-			vo.setOrderAmount(110000);
-			vo.setOrderDiscount(99000);
+			vo.setOrderAmount(p.getPrice());
+			vo.setOrderDiscount(p.getPrice()-p.getSale_price());
 
 			list.add(vo);
 		}

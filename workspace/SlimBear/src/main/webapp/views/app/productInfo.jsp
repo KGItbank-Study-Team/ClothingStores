@@ -438,7 +438,7 @@
 				</div>
 				<!-- <hr class="myHrTwo" /> -->
 				<c:forEach items="${reviewList}" var="reviewList">
-					<div class="review-section">
+<%-- 					<div class="review-section">
 						<div class="info">
 							<div>
 								<span>${reviewList.mem_id}</span>
@@ -446,7 +446,7 @@
 									<p>${reviewList.reg_date}</p>
 								</div>
 							</div>
-						    <div id="review-score">
+							<div class="review-score">
 						        <i class="far fa-star"></i>
 						        <i class="far fa-star"></i>
 						        <i class="far fa-star"></i>
@@ -465,15 +465,14 @@
 						<div class="review-text">
 							<div>${reviewList.content}</div>
 						</div>
-					</div>
-					<!-- <hr /> -->
+					</div> --%>
 				</c:forEach>
-				<!-- <div class="paging">
-					<span class="prev"> <a href="#">< 이전</a>
-					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
+				<div class="paging">
+				<!--<span class="prev"> <a href="#">< 이전</a>
+					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
 					</span> <span class="next"> <a href="#">다음 ></a>
-					</span>
-				</div> -->
+					</span> -->
+				</div>
 			</section>
 		</div>
 		

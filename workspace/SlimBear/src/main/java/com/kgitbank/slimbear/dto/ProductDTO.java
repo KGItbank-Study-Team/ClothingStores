@@ -21,4 +21,5 @@ public class ProductDTO {
 	private Date reg_date;
 	private Integer sale_price;
 	private Integer addi_mileage;
+	private String detail_image;
 }

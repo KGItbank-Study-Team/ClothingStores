@@ -12,6 +12,12 @@
  		SELECT * FROM productReview
  	</select>
  	
+ 	<!-- 특정 prodUid에 대한 리뷰 조회 -->
+ 	<select id="SELECT_BY_PRODCODE" resultType="review">
+ 		SELECT * FROM productReview
+ 		WHERE prod_code LIKE CONCAT(#{uid}, ':%')
+ 	</select>
+ 	
  	<!-- 리뷰 최신 순 조회 -->
  	<select id="SELECT_REVIEW_RECENT" resultType="review">
  		SELECT * FROM productReview ORDER BY reg_date DESC

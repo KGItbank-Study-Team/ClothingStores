@@ -75,6 +75,7 @@
                         </thead>
                         <tbody class="center">
                         
+                       	<tbody class="center" id="couponTableBody">
                         	<c:forEach var="item" items="${couponList}">	
                             <tr class="">
                                 <td>${item.couponNumber}</td>
@@ -84,6 +85,7 @@
                                 <td>${item.couponPeriod}</td>
                             </tr>
                             </c:forEach>
+                         </tbody>
                             
                         </tbody>
                         <tbody class="">
@@ -95,7 +97,7 @@
                 </div>
             </div>
 
-            <form id="frmSerialCoupon" name="" action="/exec/front/myshop/couponSerial" method="post" target="_self"
+            <form id="frmSerialCoupon" name="" action="/app/member/coupon" method="post" target="_self"
                 enctype="multipart/form-data">
                 <div class="xans-element- xans-myshop xans-myshop-couponserial  ">
                     <div class="ec-base-box typeThinBg couponSerial">
@@ -104,7 +106,7 @@
                             <!-- 여기에 Couponcode 만들기 -->
                             <input id="coupon_code" name="coupon_code" fw-filter="" fw-label="쿠폰인증번호" fw-msg=""
                                 class="inputTypeText" placeholder="" maxlength="35" value="" type="text"> <a
-                                href="#none" class="btnSubmit sizeM" onclick="coupon_code_submit();">쿠폰등록</a>
+                                href="" class="btnSubmit sizeM" onclick="registerCoupon();">쿠폰등록</a>
                             <p>반드시 쇼핑몰에서 발행한 쿠폰번호만 입력해주세요. (10~35자 일련번호 "-" 제외)</p>
                         </fieldset>
                     </div>
