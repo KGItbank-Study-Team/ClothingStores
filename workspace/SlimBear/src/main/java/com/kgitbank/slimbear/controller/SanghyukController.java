@@ -92,8 +92,7 @@ public class SanghyukController {
 	public List<ReviewDTO> getReviews(@PathVariable("uid")long productUid, HttpSession session) {
 		System.out.println("productUid: " + productUid);
 		List<ReviewDTO> reviewList = sanghService.getReviewListByUid(productUid);
-		
-		return reviewList;
+		return reviewList;	
 	}
 
 	/* 장바구니 상품 추가 */

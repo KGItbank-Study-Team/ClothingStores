@@ -436,43 +436,13 @@
 						<a href="#">최근등록순</a>
 					</div>
 				</div>
-				<!-- <hr class="myHrTwo" /> -->
-				<c:forEach items="${reviewList}" var="reviewList">
-<%-- 					<div class="review-section">
-						<div class="info">
-							<div>
-								<span>${reviewList.mem_id}</span>
-								<div>
-									<p>${reviewList.reg_date}</p>
-								</div>
-							</div>
-							<div class="review-score">
-						        <i class="far fa-star"></i>
-						        <i class="far fa-star"></i>
-						        <i class="far fa-star"></i>
-						        <i class="far fa-star"></i>
-						        <i class="far fa-star"></i>
-						    </div>
-							<input type="hidden" id="reviewList" value="${reviewList.score}"/>
-						</div>
-						<div class="photo-review">
-							<a><img alt="상품" src="/resources/images/review_images01.jpg"></a> 
-							<a><img alt="상품" src="/resources/images/review_images02.jpg"></a> 
-							<a><img alt="상품" src="/resources/images/review_images03.jpg"></a> 
-							<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>
-							<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>
-						</div>
-						<div class="review-text">
-							<div>${reviewList.content}</div>
-						</div>
-					</div> --%>
-				</c:forEach>
-				<div class="paging">
-				<!--<span class="prev"> <a href="#">< 이전</a>
-					</span> <span class="num"> <a href="#" class="on">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-					</span> <span class="next"> <a href="#">다음 ></a>
-					</span> -->
-				</div>
+					<!-- 리뷰데이터 표시할 부분 -->
+					<span id="displayCount"></span>
+					<div class="review-section">
+					</div>
+					<!-- 페이징 표시할 부분 -->
+					<ul id="pagingul">
+					</ul>
 			</section>
 		</div>
 		
