@@ -27,7 +27,7 @@ public class MemberRestController {
 	@Autowired
 	private MemberService memberService;
 	
-@Autowired
+	@Autowired
 	private HunServiceImpl hunService;
 	
 	@PostMapping("id/duplicate")

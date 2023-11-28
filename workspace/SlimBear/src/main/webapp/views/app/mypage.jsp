@@ -50,40 +50,11 @@
                     <h2>MY PAGE</h2>
                 </div>
 
-                <div class="xans-element- xans-myshop xans-myshop-asyncbenefit">
-                    <div class="ec-base-box typeMember gMessage ">
-                        <div class="information">
-                            <p class="thumbnail"><img
-                                    src="/resources/images/member.jpg" alt=""
-                                    onerror="this.src='images/member.jpg';"
-                                    class="myshop_benefit_group_image_tag"></p>
+
                             <div class="description">
-                                <span><strong class="txtEm"><span><span
-                                                class="xans-member-var-name">${info.username}</span></span></strong> 님은
-                                    <strong>[<span class=""><img
-                                                src="/resources/images/member_small.jpg"
-                                                alt="" class="myshop_benefit_group_icon_tag"></span><span
-                                            class="xans-member-var-group_name">${info.grade}</span><span
-                                            class="myshop_benefit_ship_free_message"></span>]</strong> 회원이십니다.</span>
-
-
-                                <div class=" gBlank5" id="sGradeAutoDisplayArea">
-                                    <p class=" sAutoGradeDisplay "><strong>[<span class="sNextGroupIconArea"><img
-                                                    src="/resources/images/family.jpg"
-                                                    alt="family[패밀리]"
-                                                    class="myshop_benefit_next_group_icon_tag"></span><span
-                                                class="xans-member-var-sNextGrade">${info.upgrade}</span>]</strong> 까지 남은
-                                        구매금액은 <strong><span
-                                                class="xans-member-var-sGradeIncreasePrice">${info.upgradeMoney}원</span></strong>
-                                        입니다. (최근 <span class="xans-member-var-sGradePeriod">12개월 동안</span> 구매금액 : <span
-                                            class="xans-member-var-sPeriodOrderPrice">${info.yearMoney}</span>)
-                                    </p>
-                                    <p class="txtInfo txt11">승급 기준에 따른 예상 금액이므로 총주문 금액과 다를 수 있습니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            	<strong>${info.username} 회원님</strong>
+                           	</div><br>
+                                    
 
                 <div class="xans-element- xans-myshop xans-myshop-asyncbankbook ec-base-box gHalf">
                     <ul>

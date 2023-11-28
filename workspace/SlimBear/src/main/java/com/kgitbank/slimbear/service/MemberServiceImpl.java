@@ -23,6 +23,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private CouponDAO couponDAO;
+	
+	@Autowired //철훈수정
 	private MemberCouponDAO memCouponDAO;
 
 	@Autowired
