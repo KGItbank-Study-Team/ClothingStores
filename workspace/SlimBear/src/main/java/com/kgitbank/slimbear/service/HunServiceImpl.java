@@ -33,7 +33,6 @@ import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderDetailVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
-import com.kgitbank.slimbear.vo.RefundVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 
 @Service
@@ -71,14 +70,9 @@ public class HunServiceImpl {
 		MemberDTO member = memDAO.getMemberByUID(uid);
 
 		vo.setUsername(member.getName());
-		vo.setGrade("member[멤버]");
-		vo.setUpgrade("family[패밀리]");
-		vo.setUpgradeMoney(300000);
-		vo.setYearMoney(30000);
 		vo.setReserve(12000);
 		vo.setTotalReserve(17000);
 		vo.setUseReserve(5000);
-		vo.setDeposit(50000);
 		vo.setTotalOrderM(980000);
 		vo.setTotalOrderN(13);
 		vo.setCoupon(1);
@@ -137,7 +131,6 @@ public class HunServiceImpl {
 		String[] phone = SlimBearUtil.splitPhoneNumber(member.getPhone());
 
 		vo.setUsername(member.getName());
-		vo.setGrade("member[멤버]");
 		vo.setUserID(member.getId());
 		vo.setPostcode(address[0]);
 		vo.setDefaultAddr(address[1]);
@@ -149,20 +142,6 @@ public class HunServiceImpl {
 		vo.setMobile1(phone[1]);
 		vo.setMobile2(phone[2]);
 		vo.setEmail(member.getEmail());
-		vo.setUserYear(1994);
-		vo.setUserMonth(9);
-		vo.setUserDay(11);
-		vo.setRefundAccount("[산적은행] 123-4567-890 / 예금주: 연해적");
-
-		return vo;
-	}
-
-	public RefundVO getRefundInfo(long uid) {
-		RefundVO vo = new RefundVO();
-		MemberDTO member = memDAO.getMemberByUID(uid);
-
-		vo.setUsername(member.getName());
-		vo.setBankNumber("94320200174653");
 
 		return vo;
 	}

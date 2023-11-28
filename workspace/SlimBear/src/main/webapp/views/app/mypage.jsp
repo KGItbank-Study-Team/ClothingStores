@@ -72,11 +72,6 @@
                             <strong class="title">사용적립금</strong>
                             <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${info.useReserve}원</span></strong>
                         </li>
-                        <li class="">
-                            <strong class="title">예치금</strong>
-                            <strong class="data use">&nbsp;<span id="xans_myshop_bankbook_deposit">${info.deposit}원</span></strong>
-                            <a href="/app/member/myPage/deposits" class="btnNormal">조회</a>
-                        </li>
                         <li>
                             <strong class="title">총주문</strong>
                             <strong class="data"><span id="xans_myshop_bankbook_order_price">${info.totalOrderM}원</span>(<span

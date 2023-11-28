@@ -21,7 +21,6 @@ import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
-import com.kgitbank.slimbear.vo.RefundVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 
 @Controller
@@ -103,19 +102,6 @@ public class HunController {
 		model.addAttribute("modi", vo);
 
 		return "modify";
-	}
-
-	@RequestMapping("member/myPage/modify/refund")
-	public String refund(Authentication authentication, Model model) {
-
-		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-
-		RefundVO vo = hunService.getRefundInfo(user.getUid());
-		model.addAttribute("info", vo);
-
-		return "refund";
 	}
 
 	@RequestMapping("member/myPage/modify/quit")

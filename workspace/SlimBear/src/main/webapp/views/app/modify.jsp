@@ -53,13 +53,9 @@
                 <div class="xans-element- xans-myshop xans-myshop-asyncbenefit">
                     <div class="ec-base-box typeMember gMessage ">
                         <div class="information">
-                            <p class="thumbnail"><img src="/resources/images/member.jpg" alt=""
-                                    onerror="this.src='images/member.jpg';" class="myshop_benefit_group_image_tag"></p>
                             <div class="description">
                                 <p>저희 쇼핑몰을 이용해 주셔서 감사합니다. <strong class="txtEm"><span><span
-                                                class="xans-member-var-name">${modi.username}</span></span></strong> 님은
-                                    <strong>[<span class="xans-member-var-group_name">${modi.grade}</span><span
-                                            class="myshop_benefit_ship_free_message"></span>]</strong> 회원이십니다.
+                                                class="xans-member-var-name">${modi.username} 회원님</span></span></strong>
                                 </p>
                             </div>
                         </div>
@@ -242,47 +238,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <h3 class=" ">추가정보</h3>
-                        <div class="ec-base-table typeWrite ">
-                            <table border="1" summary="">
-                                <caption>회원 추가정보</caption>
-                                <colgroup>
-                                    <col style="width:150px;">
-                                    <col style="width:auto;">
-                                </colgroup>
-                                <tbody>
-                                    <tr class="">
-                                        <th scope="row">생년월일</th>
-                                        <td><input id="birth_year" name="birth_year" fw-filter="" fw-label="생년월일"
-                                                fw-msg="" class="inputTypeText" placeholder="" maxlength="4"
-                                                value="${modi.userYear}" type="text"> 년 <input id="birth_month" name="birth_month"
-                                                fw-filter="" fw-label="생년월일" fw-msg="" class="inputTypeText"
-                                                placeholder="" maxlength="2" value="${modi.userMonth}" type="text"> 월 <input
-                                                id="birth_day" name="birth_day" fw-filter="" fw-label="생년월일" fw-msg=""
-                                                class="inputTypeText" placeholder="" maxlength="2" value="${modi.userDay}"
-                                                type="text">
-                                            일 <span class="gIndent20 "><input id="is_solar_calendar0"
-                                                    name="is_solar_calendar" fw-filter="" fw-label="생년월일" fw-msg=""
-                                                    value="T" type="radio" checked="checked"><label
-                                                    for="is_solar_calendar0">양력</label>
-                                                <input id="is_solar_calendar1" name="is_solar_calendar" fw-filter=""
-                                                    fw-label="생년월일" fw-msg="" value="F" type="radio"><label
-                                                    for="is_solar_calendar1">음력</label></span>
-                                        </td>
-                                    </tr>
-                                    <tr class="">
-                                        <th scope="row">환불계좌 <img src="/resources/images/ico_required_blue.gif" class="" alt="필수">
-                                        </th>
-                                        <td>
-                                            <span id="id_bank_info">${modi.refundAccount}</span> <a
-                                                href="#none" class="btnNormal gIndent10"
-                                                onclick="window.open('/app/member/myPage/modify/refund','bank_account','width=700,height=500');return false;"><span
-                                                    id="id_has_bank_img" class="">환불계좌변경</span></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        
                         <div class="ec-base-button justify">
                             <a href="/app/member/myPage/modify" class="btnSubmitFix sizeM" onclick="memberEditAction()">회원정보수정</a>
                             <a href="/app/member/myPage" class="btnEmFix sizeM">취소</a>
