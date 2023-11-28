@@ -64,7 +64,7 @@ public class YangBoardServiceImpl {
 	            showAccessDeniedWarning();
 	            return null;
 	        }
-
+	        
 	        // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
 	        if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
 	            // 비밀글이면서 현재 사용자가 작성자가 아닌 경우 비밀글을 숨김
@@ -87,16 +87,15 @@ public class YangBoardServiceImpl {
     
 	// 현재 로그인한 사용자가 작성자인지 확인하는 메서드
     private boolean isCurrentUserAuthor(String writerName) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
-        MemberDTO currentUser = memberService.getMemberById(currentUserName);
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	// 현재 인증된 사용자 정보 가져오기
+        String currentUserName = authentication.getName();									// 현재 사용자의 이름 가져오기
+        MemberDTO currentUser = memberService.getMemberById(currentUserName);				// 사용자 정보 가져오기, MemberDTO 형태로 반환
+        
         // 현재 사용자의 이름과 작성자의 이름을 비교
         if (currentUser == null || !currentUser.getName().equals(writerName)) {
             showAccessDeniedWarning();
             return false;
         }
-
         return true;
     }
 	
@@ -114,16 +113,6 @@ public class YangBoardServiceImpl {
     	inquiryDAO.updateInquiry(inquiry);
     }
     
-    
-    // 문의게시글 검색 기능 추가
-//    public List<InquiryDTO> getInquiryListBySearch(String type, String searchKey, String searchs) {
-//        Map<String, Object> searchMap = new HashMap<>();
-//        searchMap.put("type", type);
-//        searchMap.put("searchKey", searchKey);
-//        searchMap.put("searchs", searchs);
-//
-//        return inquiryDAO.selectInquiryListBySearch(searchMap);
-//    }
     // 문의게시글 검색 기능 추가
     public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
     	System.out.println(searchMap);
@@ -146,49 +135,6 @@ public class YangBoardServiceImpl {
 //	}
 	
 	
-	// 게시글 검색
-//	public List<InquiryDTO> searchInquiry(int boardNo, int page, String searchDate, String searchKey, String searchKeyword) {
-//        // 페이지당 게시물 수와 검색 시작 위치 계산
-//        int pageSize = 10; // 페이지당 게시물 수
-//        int start = (page - 1) * pageSize;
-//
-//        // 검색 조건에 따른 쿼리 생성
-//        String query = "SELECT * FROM inquiry WHERE board_no = #{boardNo}";
-//
-//        // 검색 날짜에 따라 쿼리에 조건 추가
-//        if (!"all".equals(searchDate)) {
-//            query += " AND DATE_SUB(NOW(), INTERVAL 1 " + searchDate.toUpperCase() + ") <= reg_date";
-//        }
-//
-//        // 검색 키워드에 따라 쿼리에 조건 추가
-//        if (searchKeyword != null && !searchKeyword.isEmpty()) {
-//            switch (searchKey) {
-//                case "subject":
-//                    query += " AND title LIKE CONCAT('%', #{searchKeyword}, '%')";
-//                    break;
-//                case "content":
-//                    query += " AND content LIKE CONCAT('%', #{searchKeyword}, '%')";
-//                    break;
-//                case "writer_name":
-//                    query += " AND writer_id LIKE CONCAT('%', #{searchKeyword}, '%')";
-//                    break;
-//                // 다른 검색 키에 따른 조건 추가
-//            }
-//        }
-//
-//        // 페이징 쿼리 추가
-//        query += " ORDER BY reg_date DESC LIMIT #{start}, #{pageSize}";
-//
-//        // MyBatis 매퍼에 전달할 파라미터 설정
-//        Map<String, Object> paramMap = new HashMap<>();
-//        paramMap.put("boardNo", boardNo);
-//        paramMap.put("start", start);
-//        paramMap.put("pageSize", pageSize);
-//        paramMap.put("searchKeyword", searchKeyword);
-//
-//        // 조회된 결과 반환
-//        return inquiryDAO.searchInquiry(paramMap);
-//    }
 	
 	
 }

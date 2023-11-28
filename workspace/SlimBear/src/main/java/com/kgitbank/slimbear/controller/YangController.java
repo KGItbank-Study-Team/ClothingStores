@@ -82,10 +82,10 @@ public class YangController {
 	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    String currentUserName = authentication.getName();
+	    String currentUserId = authentication.getName();
 	    
 	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
-	    inquiryDTO.setWriter_id(currentUserName);
+	    inquiryDTO.setWriter_id(currentUserId);
 	    inquiryDTO.setReg_date(new Date());
 
 	    // DAO로 전달
@@ -132,7 +132,6 @@ public class YangController {
 	    return "redirect:/app/board/inquiry/detail/" + uid;
 	}
 	
-	
 	// 문의게시글 검색
 	@GetMapping("/board/inquiryS")
 	public String searchInquiries(
@@ -157,10 +156,8 @@ public class YangController {
 	        model.addAttribute("inquiries", inquiries);
 	    }
 	    
-	    // 다른 필요한 속성 및 로직을 추가하세요.
-	    return "inquiry"; // 실제 뷰 이름으로 교체하세요.
+	    return "inquiry"; // 실제 뷰
 	}
-
 	
 	
 	// 자주묻는질문

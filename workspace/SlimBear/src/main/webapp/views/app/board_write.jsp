@@ -254,15 +254,6 @@
                         </span>
 					</div>
 				</div>
-				
-<script>
-//     document.getElementById('subject').addEventListener('change', function() {
-//         var selectedValue = this.value;
-//         // 선택된 값에서 ','를 제거
-//         selectedValue = selectedValue.replace(/,/g, '');
-//         document.getElementById('subject').value = selectedValue;
-//     });
-</script>
 			</form>
 		</div>
 	</div>
