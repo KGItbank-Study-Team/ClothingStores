@@ -48,8 +48,8 @@ public class InquiryDAO {
 	
 	
 	// 게시글 검색 기능 DAO 추가
-    public List<InquiryDTO> getInquiryListBySearch(Map<String, Object> searchMap) {
-        return template.selectList("SELECT_INQUIRY_LIST_BY_SEARCH", searchMap);
+    public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_BY_SEARCH", searchMap);
     }
 	
 	

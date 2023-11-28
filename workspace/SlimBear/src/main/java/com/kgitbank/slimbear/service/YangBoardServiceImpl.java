@@ -125,7 +125,8 @@ public class YangBoardServiceImpl {
 //        return inquiryDAO.selectInquiryListBySearch(searchMap);
 //    }
     // 문의게시글 검색 기능 추가
-    public List<InquiryDTO> getInquiryListBySearch(Map<String, Object> searchMap) {
+    public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
+    	System.out.println(searchMap);
         return inquiryDAO.getInquiryListBySearch(searchMap);
     }
     

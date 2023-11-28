@@ -138,22 +138,20 @@
  	</delete>
  	
  	<!-- 게시글 검색 -->
- 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="map" resultType="inquiry">
-	    SELECT * FROM inquiry
-	    <where>
-	        <if test="searchKey == 'title'">
-	            AND title LIKE '%' || #{searchs} || '%'
+ 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="java.util.Map" resultType="inquiry">
+	    SELECT * FROM inquiry WHERE
+	        <if test="searchKey eq 'title'">
+	            title LIKE CONCAT('%',#{searchs} , '%')
 	        </if>
 	        <if test="searchKey == 'content'">
-	            AND content LIKE '%' || #{searchs} || '%'
+	            content LIKE CONCAT('%',#{searchs} , '%')
 	        </if>
 	        <if test="searchKey == 'writer_id'">
-	            AND writer_id LIKE '%' || #{searchs} || '%'
+	            writer_id LIKE CONCAT('%',#{searchs} , '%')
 	        </if>
 	        <if test="searchKey == 'prod_uid'">
-	            AND prod_uid = #{searchs}
+	 			prod_uid = #{searchs}
 	        </if>
-	    </where>
 	    ORDER BY reg_date DESC
 	</select>
  	<!-- <select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="map" resultType="inquiry">

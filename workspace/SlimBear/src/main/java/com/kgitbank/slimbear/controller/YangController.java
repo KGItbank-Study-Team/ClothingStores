@@ -134,7 +134,7 @@ public class YangController {
 	
 	
 	// 문의게시글 검색
-	@GetMapping("/board/inquiry")
+	@GetMapping("/board/inquiryS")
 	public String searchInquiries(
 	        @RequestParam(name = "search_key", required = false) String searchKey,
 	        @RequestParam(name = "searchs", required = false) String searchs,
@@ -146,52 +146,21 @@ public class YangController {
 
 	    // null 체크 및 빈 문자열(trim) 체크
 	    if (searchKey != null && searchs != null && !searchs.trim().isEmpty()) {
-	        Map<String, Object> searchMap = new HashMap<>();
+	        Map<String, String> searchMap = new HashMap<>();
 	        searchMap.put("searchKey", searchKey);
 	        searchMap.put("searchs", searchs);
 	        List<InquiryDTO> inquiryList = boardService.getInquiryListBySearch(searchMap);
-	        model.addAttribute("inquiryList", inquiryList);
+	        model.addAttribute("inquiries", inquiryList);
 	    } else {
 	        // 검색 조건이 부족하면 모든 목록을 보여줍니다.
 	        List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
 	        model.addAttribute("inquiries", inquiries);
 	    }
-
+	    
 	    // 다른 필요한 속성 및 로직을 추가하세요.
 	    return "inquiry"; // 실제 뷰 이름으로 교체하세요.
 	}
 
-	// 문의게시글 검색
-//	@GetMapping("/board/inquiry")
-//	public String searchInquiries(
-//	        @RequestParam(name = "type", required = false) String type,
-//	        @RequestParam(name = "search_key", required = false) String searchKey,
-//	        @RequestParam(name = "searchs", required = false) String searchs,
-//	        Model model) {
-//
-//	    // 검색 조건이 부족하면 모든 목록을 보여줍니다.
-//	    if (type == null || type.trim().isEmpty()) {
-//	        List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
-//	        model.addAttribute("inquiries", inquiries);
-//	    } else {
-//	        // null 체크 및 빈 문자열(trim) 체크
-//	        if (searchKey != null && searchs != null && !searchs.trim().isEmpty()) {
-//	            Map<String, Object> searchMap = new HashMap<>();
-//	            searchMap.put("type", type);
-//	            searchMap.put("searchKey", searchKey);
-//	            searchMap.put("searchs", searchs);
-//	            List<InquiryDTO> inquiryList = boardService.getInquiryListBySearch(searchMap);
-//	            model.addAttribute("inquiryList", inquiryList);
-//	        } else {
-//	            // 검색 조건이 부족하면 모든 목록을 보여줍니다.
-//	            List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
-//	            model.addAttribute("inquiries", inquiries);
-//	        }
-//	    }
-//
-//	    // 다른 필요한 속성 및 로직을 추가하세요.
-//	    return "inquiry"; // 실제 뷰 이름으로 교체하세요.
-//	}
 	
 	
 	// 자주묻는질문
@@ -236,25 +205,6 @@ public class YangController {
 		boardService.insertInquiry(inquiryDTO);
 		return "redirect:/board/inquiry";
 	}
-
-	
-	// 게시글 검색
-//	@GetMapping("/board/qa/6")
-//    public String searchBoard(
-//            @RequestParam(name = "board_no", defaultValue = "6") int boardNo,
-//            @RequestParam(name = "page", defaultValue = "1") int page,
-//            @RequestParam(name = "search_date", defaultValue = "all") String searchDate,
-//            @RequestParam(name = "search_key", defaultValue = "subject") String searchKey,
-//            @RequestParam(name = "searchs", defaultValue = "") String searchKeyword,
-//            Model model) {
-//        // 검색 조건을 이용하여 게시물 목록을 조회하는 서비스 메서드 호출
-//        List<InquiryDTO> searchResults = boardService.searchInquiry(boardNo, page, searchDate, searchKey, searchKeyword);
-//
-//        // 조회 결과를 모델에 담아 뷰로 전달
-//        model.addAttribute("searchResults", searchResults);
-//
-//        return "boardList"; // 적절한 뷰 이름을 반환해주세요
-//    }
 	
 	
 	

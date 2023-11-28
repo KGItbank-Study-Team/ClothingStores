@@ -93,7 +93,6 @@
 						
 						
 						<!-- 1번째 tbody for문 -->
-						
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
@@ -158,38 +157,26 @@
 			</div>
 			
 			
-			<form id="boardSearchForm" name="" action="/app/board/inquiry" method="get" target="_top" enctype="multipart/form-data">
-				<input id="board_no" name="board_no" value="6" type="hidden" />
-				<input id="page" name="page" value="1" type="hidden" />
-				<input id="board_sort" name="board_sort" value="" type="hidden" />
+			<form id="boardSearchForm" name="" action="/app/board/inquiryS" method="get" target="_top" enctype="multipart/form-data">
+<!-- 				<input id="board_no" name="board_no" value="6" type="hidden" /> -->
+<!-- 				<input id="page" name="page" value="1" type="hidden" /> -->
+<!-- 				<input id="board_sort" name="board_sort" value="" type="hidden" /> -->
 				<div class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 ">
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p class="category displaynone"></p>
 						<p>
-							<!-- <select id="search_date" name="search_date" fw-filter=""
-								fw-label="" fw-msg="">
-								<option value="week">일주일</option>
-								<option value="month">한달</option>
-								<option value="month3">세달</option>
-								<option value="all">전체</option>
-							</select>  -->
-							<select id="search_key" name="search_key" fw-filter=""
-								fw-label="" fw-msg="">
+							<select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
 								<option value="title">제목</option>
 								<option value="content">내용</option>
 								<option value="writer_id">글쓴이</option>
 								<option value="prod_uid">상품정보</option>
 							</select>
 							<input id="searchs" name="searchs" fw-filter="" fw-label="" fw-msg="" class="searchs" placeholder="" value="" type="text" /> 
-							<button type="submit" class="btnEmFix">검색</button>
-<!-- 							<a href="#none" class="btnEmFix" onclick="BOARD.form_submit('boardSearchForm');">FIND</a> -->
+							<button type="submit" class="btnEmFix">FIND</button>
 						</p>
 					</fieldset>
 				</div>
-				
-				
-				
 			</form>
 		</div>
 	</div>
