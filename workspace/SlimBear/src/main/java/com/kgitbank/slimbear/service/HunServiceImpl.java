@@ -184,7 +184,7 @@ public class HunServiceImpl {
 			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
 			MemberCouponDTO v = membercouponDAO.getCouponByUID(i.getCoup_uid());
 			
-			vo.setCoup_uid(v.getCoup_uid());
+			vo.setCoup_uid(v.getUid());
 			vo.setType(c.getType());
 			vo.setValue(c.getValue());
 			
