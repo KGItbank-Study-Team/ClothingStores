@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
+import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.service.PageConfigServiceImpl;
 import com.kgitbank.slimbear.service.ProductServiceImpl;
+import com.kgitbank.slimbear.service.RSYServiceImpl;
 
 @Controller
 public class PageController {
@@ -28,12 +33,64 @@ public class PageController {
 	@Autowired 
 	private MemberService memberService;
 
+	@Autowired
+	private RSYServiceImpl RSYService;
+	
 	@RequestMapping("main")
-	public String mainePage(Model model) {
+	public String mainePage(@RequestParam(name = "category", required = false)Long category,
+			@RequestParam(name = "order", required = false) String order,
+			@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset,
+			Integer pageSize, Model model) {
 
+		if (offset == null) {
+			offset = 0;
+		}
+		pageSize = 12; // 페이지 당 아이템 수
+
+		// 페이징에 관련된 정보 추가
+//		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
+		int totalItems = RSYService.getTotalItems(); //전체 상품 개수 
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+		int pageBlockSize = 5; // 보여질 페이지 블록 크기
+
+		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
+		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
+		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+
+		// 다음 페이지 블록이 있는지 여부
+		boolean hasNextBlock = endPage < totalPages;
+
+//		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
+//				pageSize);
+
+		model.addAttribute("order", order);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("hasNextBlock", hasNextBlock);
+//		model.addAttribute("productList", productList);
+		model.addAttribute("totalItems", totalItems);
+		
 		model.addAttribute("productBannerTop", pageConfigService.getProductBannerTop());
 		model.addAttribute("hotProductList", productService.getHotProductList());
 
+//		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
+
+//		model.addAttribute("categoryList", categoryList);
+
+		List<ProductDTO> bestProductList = RSYService.getBestProductList(order, currentPage, offset, pageSize);
+
+		model.addAttribute("bestProductList", bestProductList);
+
+//		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
+//		model.addAttribute("category", topCategory);
+		
+		List<ProductDTO> newProductList = RSYService.getProductListOrderByRegDate(order, currentPage, offset,
+				pageSize);
+		model.addAttribute("newProductList",newProductList);
+
+//		System.out.println(categoryList);
 		return "main";
 	}
 

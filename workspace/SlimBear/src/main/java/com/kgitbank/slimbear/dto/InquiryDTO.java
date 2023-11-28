@@ -22,4 +22,5 @@ public class InquiryDTO {
 	private String type;
 	private Long prod_uid;
     private int secure; // 비밀글 여부를 나타내는 필드
+    
 }

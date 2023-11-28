@@ -42,7 +42,7 @@ public class ProductDAO {
 		   return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_BY_CATEGORY_ORDER_BY_REG_DATE_DESC", paramMap);
 	}
 	
-	public int selectTotalItems(long category) {
+	public int selectTotalItems(Long category) {
 		ProductDTO info = new ProductDTO();
 		info.setCtg_uid(category);
 		return template.selectOne("com.slimbear.mapper.Product.SELECT_COUNT_PROD_BY_UID", info);
@@ -63,5 +63,16 @@ public class ProductDAO {
 	
 	public int updateProduct(ProductDTO product) {
 		return template.update("com.slimbear.mapper.Product.UPDATE_PRODUCT", product);
+	}
+	
+	//메인페이지
+	public int selectTotalItems() {
+		return template.selectOne("com.slimbear.mapper.Product.SELECT_COUNT_PROD");
+	}
+	public List<ProductDTO> getProductOrderByRegDate(Map<String, Object> paramMap) {
+		   return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_ORDER_BY_REG_DATE_DESC", paramMap);
+	}
+	public List<ProductDTO> getBestProductList(Map<String, Object> paramMap) {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_BEST_PROD", paramMap);
 	}
 }

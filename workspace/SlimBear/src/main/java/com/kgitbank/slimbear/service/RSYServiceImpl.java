@@ -59,11 +59,42 @@ public class RSYServiceImpl {
 		return prodDAO.getBestProductByCategory(paramMap);
 	}
 
+	public List<ProductDTO> getBestProductList(String order, int currentPage, Integer offset, Integer pageSize) {
+		if (order == null) {
+			order = "";
+		}
+		offset = (currentPage - 1) * pageSize;
 
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("order", order);
+		paramMap.put("offset", offset);
+		paramMap.put("pageSize", pageSize);
+		return prodDAO.getBestProductList(paramMap);
+	}
 
 	public int getTotalItems(long category) {
 		int prod = prodDAO.selectTotalItems(category);
 		return prod; // 카테고리 내 총 상품 수
+	}
+
+	public int getTotalItems() {
+		int prod = prodDAO.selectTotalItems();
+		return prod; // 메인페이지 전체 상품 수
+	}
+
+	public List<ProductDTO> getProductListOrderByRegDate(String order, int currentPage, Integer offset,
+			Integer pageSize) {
+		if (order == null) {
+			order = "";
+		}
+		offset = (currentPage - 1) * pageSize;
+
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("order", order);
+		paramMap.put("offset", offset);
+		paramMap.put("pageSize", pageSize);
+
+		return prodDAO.getProductOrderByRegDate(paramMap);
 	}
 
 	public CategoryDTO getCategoryByUid(long category) {
@@ -89,20 +120,20 @@ public class RSYServiceImpl {
 
 	// 비밀번호찾기
 	public MemberDTO findPassword(String name, String id, String email, String phone) {
-	    List<MemberDTO> memberList = memDAO.getMemberList();
-	    for (MemberDTO member : memberList) {
-	        if (member.getName().equals(name) && member.getId().equals(id)) {
-	            if (email != null && member.getEmail().equals(email)) {
-	            	member = memDAO.getMemberByEmail(email);
-	                return member;
-	            }
-	            if (phone != null && member.getPhone().equals(phone)) {
-	            	member = memDAO.getMemberByPhone(phone);
-	                return member;
-	            }
-	        }
-	    }
-	    return null;
+		List<MemberDTO> memberList = memDAO.getMemberList();
+		for (MemberDTO member : memberList) {
+			if (member.getName().equals(name) && member.getId().equals(id)) {
+				if (email != null && member.getEmail().equals(email)) {
+					member = memDAO.getMemberByEmail(email);
+					return member;
+				}
+				if (phone != null && member.getPhone().equals(phone)) {
+					member = memDAO.getMemberByPhone(phone);
+					return member;
+				}
+			}
+		}
+		return null;
 	}
 
 	// 기존 비밀번호를 임시 비밀번호로 암호화해서 등록

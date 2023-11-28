@@ -134,4 +134,22 @@ $(document).ready(function() {
 });
 
 
+function searchInquiries() {
+    var searchForm = $('#boardSearchForm');
+    $.ajax({
+        type: searchForm.attr('method'),
+        url: searchForm.attr('action'),
+        data: searchForm.serialize(),
+        success: function (data) {
+            $('#searchResult').html(data); // 검색 결과를 동적으로 추가
+        }
+    });
+    return false; // 폼의 기본 동작 중지
+}
+
+
+
+function searchInquiries() {
+    document.getElementById('boardSearchForm').submit();
+}
 

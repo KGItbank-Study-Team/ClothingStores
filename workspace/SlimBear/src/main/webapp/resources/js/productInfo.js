@@ -197,12 +197,6 @@ function addCart(uid) {
         }
     });
 };
-// 장바구니에 있는 동일상품의 개수 가져오기
-// function getCartItemCount(uid, color, size) {
-//     return $.ajax({
-//         url: 
-//     });
-// }
 // 결제 버튼 클릭 시 장바구니에 자동 추가
 function buyClick(uid) {
     $.ajax({
@@ -210,36 +204,44 @@ function buyClick(uid) {
         type: "POST",
         data: { selectOptionList: selectOptionList },
         success: function (arr) {
-            var list = arr; // JSON.stringify를 사용하지 않음
-            alert("선택된 옵션 리스트: " + JSON.stringify(list));
+            var cartList = arr; // JSON.stringify를 사용하지 않음
+            alert("선택된 옵션 리스트: " + JSON.stringify(selectOptionList));
+            var matchingOptions = 0; // 동일한 옵션이 장바구니에 몇 개 있는지 추적하는 변수
+            var matchingIndex = -1; // 일치하는 옵션의 인덱스를 추적하는 변수
+
             for (var i = 0; i < selectOptionList.length; i++) {
-                console.log("color: " + list[i].color, "size: " + list[i].size + " cnt: " + list[i].cnt);
+                console.log("color: " + cartList[i].color, "size: " + cartList[i].size + " cnt: " + cartList[i].cnt);
 
-                if (list[i].color === selectOptionList[i].color && list[i].size === selectOptionList[i].size) {
+                if (cartList[i].color === selectOptionList[i].color && cartList[i].size === selectOptionList[i].size) {
                     // 동일옵션의 상품이 장바구니에 있음
-                    var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
-                    if (userConfirm) {
-                        // '확인' 클릭
-                        for(var i=0; i<selectOptionList.length; i++) {
-                            selectOptionList[i].cnt = list[i].cnt;
-                        }
-                        alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
-                        addInput();
-                        window.location.href = "/app/order/product"
-                    } else {
-                        // '취소' 클릭 
-                        alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
-                        addInput();
-                        
-                        window.location.href = "/app/order/product"
-                    }
+                    matchingOptions++;
+                    matchingIndex = i;
+                }
+            }
 
+            if (matchingOptions > 0) {
+                // 동일한 옵션의 상품이 하나 이상 있는 경우
+                var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
+                if (userConfirm) {
+                    // '확인' 클릭 시
+                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt;
+                    alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
+                    addInput();
+                    window.location.href = "/app/order/product";
                 } else {
-                    // 동일옵션의 상품이 장바구니에 없음.
-                    alert("selectOptionList: " + JSON.stringify(selectOptionList));
+                    // '취소' 클릭 시
+                    // 해당 옵션의 cnt를 원래 값으로 복원
+                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
+                    console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
+                    alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
                     addInput();
                     window.location.href = "/app/order/product";
                 }
+            } else {
+                // 동일한 옵션의 상품이 없는 경우
+                alert("동일 옵션 없음: " + JSON.stringify(selectOptionList));
+                addInput();
+                window.location.href = "/app/order/product";
             }
         },
         error: function (request, status, error) {
@@ -250,6 +252,9 @@ function buyClick(uid) {
         }
     });
 }
+
+
+
 // 장바구니 추가 관련 팝업창
 $(function () {
     $(".keepShop").on("click", function () {
@@ -304,28 +309,94 @@ $(document).ready(function () {
     });
 
 });
-// 리뷰점수를 별모양으로 표시
-window.onload = function () {
-    const reviewScore = document.getElementById('reviewList').value;
-    console.log('reviewScore: ' + reviewScore);
 
-    function showScoreByStars(reviewScore) {
+// 리뷰 페이징
+$(document).ready(function () {
+    // 페이지 번호를 클릭할 때의 이벤트 처리
+    $('.num a').on('click', function (e) {
+        e.preventDefault(); // 기본 동작 방지
 
-        const Score = Math.round(reviewScore);
-        const reviewScoreElement = document.getElementById('review-score');
-        const stars = reviewScoreElement.getElementsByTagName('i');
+        var pageNumber = $(this).text(); // 클릭한 페이지 번호
+        loadReviews(pageNumber); // 해당 페이지의 리뷰를 불러오는 함수 호출
+    });
 
-        // 기존 클래스 초기화
-        for (let i = 0; i < stars.length; i++) {
-            stars[i].classList.remove('fas');
-        }
+    // 초기 페이지 로딩 시 첫 번째 페이지의 리뷰를 표시
+    loadReviews(1);
 
-        // fas 클래스 적용
-        for (let i = 0; i < Score / 10; i++) {
-            stars[i].classList.add('fas');
-        }
+    // 리뷰를 비동기적으로 불러오는 함수
+    function loadReviews(pageNumber) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get("p");
+        $.ajax({
+            type: 'GET',
+            url: '/app/product/getReview/' + uid, // 리뷰를 가져올 URL
+            data: { p: uid, page: pageNumber }, // 해당 페이지 번호를 서버에 전달
+            success: function (reviewList) {
+                alert('success');
+                console.log('reviewList: ' +JSON.stringify(reviewList));
+                for(var i=0; i<reviewList.length; i++) {
+                    console.log(reviewList[i].mem_id, reviewList[i].score, reviewList[i].reg_date, reviewList[i].content);
+                }
+                
+                // 서버로부터 받은 리뷰 데이터를 표시하는 부분의 id나 class에 따라 수정
+                var reviewsHtml = ''; // 리뷰를 담을 변수
+                var reviewsPerPage = 5; // 페이지당 표시될 리뷰 수
+
+                // 서버에서 받은 리뷰 데이터를 반복하여 HTML에 추가
+                for (var i = 0; i < Math.min(reviewList.length, reviewsPerPage); i++) {
+                    // 리뷰 하나의 HTML을 생성하여 변수에 추가
+                    reviewsHtml += '<div class="review-section">' +
+                        '<div class="info">' +
+                        '<div>' +
+                        '<span>' + reviewList[i].mem_id + '</span>' +
+                        '<div>' +
+                        '<p>' + reviewList[i].reg_date + '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="review-score">' +
+                        '<i class="far fa-star"></i>'.repeat(reviewList[i].score) +
+                        '</div>' +
+                        '<input type="hidden" id="reviewList" value="' + reviewList[i].score + '"/>' +
+                        '</div>' +
+                        '<div class="photo-review">' +
+                        // 이미지 표시 부분에 대한 코드를 추가
+                        '</div>' +
+                        '<div class="review-text">' +
+                        '<div>' + reviewList[i].content + '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+                // 리뷰를 표시하는 부분의 id나 class를 정확히 지정하여 수정
+                $('.review-sections').html(reviewsHtml);
+            },
+            error: function (error) {
+                alert(error + '에러가 났습니다.');
+            }
+        });
     }
-    showScoreByStars(reviewScore);
-}
+});
+// 리뷰점수를 별모양으로 표시
+// window.onload = function () {
+//     const reviewScore = document.getElementById('reviewList').value;
+//     console.log('reviewScore: ' + reviewScore);
 
+//     function showScoreByStars(reviewScore) {
+
+//         const Score = Math.round(reviewScore);
+//         const reviewScoreElement = document.getElementById('review-score');
+//         const stars = reviewScoreElement.getElementsByTagName('i');
+
+//         // 기존 클래스 초기화
+//         for (let i = 0; i < stars.length; i++) {
+//             stars[i].classList.remove('fas');
+//         }
+
+//         // fas 클래스 적용
+//         for (let i = 0; i < Score / 10; i++) {
+//             stars[i].classList.add('fas');
+//         }
+//     }
+//     showScoreByStars(reviewScore);
+// }
 

@@ -15,6 +15,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
 <title>INQUIRY</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="/resources/js/inquiry.js"></script>
 
 </head>
@@ -109,7 +110,6 @@
 						                </strong>
 						            </td>
 						            <td>${board.writer_id}</td>
-<%-- 						            <td>${board.reg_date}</td> --%>
 						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
 						    </c:forEach>
@@ -158,7 +158,7 @@
 			</div>
 			
 			
-			<form id="boardSearchForm" name="" action="/board/qa/6" method="get"
+			<form id="boardSearchForm" name="" action="/app/board/inquiry" method="get"
 				target="_top" enctype="multipart/form-data">
 				<input id="board_no" name="board_no" value="6" type="hidden" />
 				<input id="page" name="page" value="1" type="hidden" />
@@ -167,24 +167,26 @@
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p class="category displaynone"></p>
-						<p><select id="search_date" name="search_date" fw-filter=""
+						<p>
+							<!-- <select id="search_date" name="search_date" fw-filter=""
 								fw-label="" fw-msg="">
 								<option value="week">일주일</option>
 								<option value="month">한달</option>
 								<option value="month3">세달</option>
 								<option value="all">전체</option>
-							</select> 
+							</select>  -->
 							<select id="search_key" name="search_key" fw-filter=""
 								fw-label="" fw-msg="">
-								<option value="subject">제목</option>
+								<option value="title">제목</option>
 								<option value="content">내용</option>
-								<option value="writer_name">글쓴이</option>
-								<option value="product">상품정보</option>
+								<option value="writer_id">글쓴이</option>
+								<option value="prod_uid">상품정보</option>
 							</select>
 							<input id="searchs" name="searchs" fw-filter="" fw-label=""
 								fw-msg="" class="searchs" placeholder="" value=""
-								type="text" /> <a href="#none" class="btnEmFix"
-								onclick="BOARD.form_submit('boardSearchForm');">FIND</a>
+								type="text" /> 
+							<a href="#none" class="btnEmFix" onclick="searchInquiries();">FIND</a>
+<!-- 							<a href="#none" class="btnEmFix" onclick="BOARD.form_submit('boardSearchForm');">FIND</a> -->
 						</p>
 					</fieldset>
 				</div>

@@ -404,7 +404,7 @@ section > h1 {
 .info p {
 	font-size: 10px;
 }
-#review-score {
+.review-score {
 	color: brown;
 	font-size: 20px;
 	position: relative;

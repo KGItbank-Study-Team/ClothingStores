@@ -12,6 +12,12 @@
  		SELECT * FROM productReview
  	</select>
  	
+ 	<!-- 특정 prodUid에 대한 리뷰 조회 -->
+ 	<select id="SELECT_BY_PRODCODE" resultType="review">
+ 		SELECT * FROM productReview
+ 		WHERE prod_code LIKE CONCAT(#{uid}, ':%')
+ 	</select>
+ 	
  	<!-- 리뷰 최신 순 조회 -->
  	<select id="SELECT_REVIEW_RECENT" resultType="review">
  		SELECT * FROM productReview ORDER BY reg_date DESC
@@ -132,21 +138,25 @@
  	</delete>
  	
  	<!-- 게시글 검색 -->
- 	<select id="SEARCH_INQUIRY" resultType="com.kgitbank.slimbear.dto.InquiryDTO" parameterType="java.util.Map">
-        SELECT * FROM inquiry
-        WHERE
-        <if test="board_no != null">
-            board_no = #{board_no} AND
-        </if>
-        <if test="page != null">
-            page = #{page} AND
-        </if>
-        <if test="search_key != null and searchs != null">
-            ${search_key} LIKE CONCAT('%', #{searchs}, '%') AND
-        </if>
-        1=1
-    </select>
- 	
+ 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" resultType="inquiry" parameterType="map">
+	    SELECT * FROM inquiry 
+	    WHERE type=#{type} 
+	    AND 
+	    <if test="searchKey == 'title'">
+	        title LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'content'">
+	        content LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'writer_id'">
+	        writer_id LIKE '%' || #{searchs} || '%'
+	    </if>
+	    <if test="searchKey == 'prod_uid'">
+	        prod_uid = #{searchs}
+	    </if>
+	    ORDER BY reg_date DESC
+	</select>
+	
  	
  	
  	
