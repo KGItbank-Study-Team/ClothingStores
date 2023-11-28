@@ -1,7 +1,9 @@
 package com.kgitbank.slimbear.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -132,18 +134,64 @@ public class YangController {
 	
 	
 	// 문의게시글 검색
-	@GetMapping("/app/board/inquiry")
-    public String searchInquiries(@RequestParam("type") String type,
-                                  @RequestParam("search_key") String searchKey,
-                                  @RequestParam("searchs") String searchs,
-                                  Model model) {
-        List<InquiryDTO> inquiryList = boardService.getInquiryListBySearch(type, searchKey, searchs);
-        model.addAttribute("inquiryList", inquiryList);
+	@GetMapping("/board/inquiry")
+	public String searchInquiries(
+	        @RequestParam(name = "search_key", required = false) String searchKey,
+	        @RequestParam(name = "searchs", required = false) String searchs,
+	        Model model) {
+		
+		// 로그로 값 확인
+	    System.out.println("search_key: " + searchKey);
+	    System.out.println("searchs: " + searchs);
 
-        // 다른 필요한 속성 및 로직을 추가하세요.
+	    // null 체크 및 빈 문자열(trim) 체크
+	    if (searchKey != null && searchs != null && !searchs.trim().isEmpty()) {
+	        Map<String, Object> searchMap = new HashMap<>();
+	        searchMap.put("searchKey", searchKey);
+	        searchMap.put("searchs", searchs);
+	        List<InquiryDTO> inquiryList = boardService.getInquiryListBySearch(searchMap);
+	        model.addAttribute("inquiryList", inquiryList);
+	    } else {
+	        // 검색 조건이 부족하면 모든 목록을 보여줍니다.
+	        List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
+	        model.addAttribute("inquiries", inquiries);
+	    }
 
-        return "inquiry"; // 실제 뷰 이름으로 교체하세요.
-    }
+	    // 다른 필요한 속성 및 로직을 추가하세요.
+	    return "inquiry"; // 실제 뷰 이름으로 교체하세요.
+	}
+
+	// 문의게시글 검색
+//	@GetMapping("/board/inquiry")
+//	public String searchInquiries(
+//	        @RequestParam(name = "type", required = false) String type,
+//	        @RequestParam(name = "search_key", required = false) String searchKey,
+//	        @RequestParam(name = "searchs", required = false) String searchs,
+//	        Model model) {
+//
+//	    // 검색 조건이 부족하면 모든 목록을 보여줍니다.
+//	    if (type == null || type.trim().isEmpty()) {
+//	        List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
+//	        model.addAttribute("inquiries", inquiries);
+//	    } else {
+//	        // null 체크 및 빈 문자열(trim) 체크
+//	        if (searchKey != null && searchs != null && !searchs.trim().isEmpty()) {
+//	            Map<String, Object> searchMap = new HashMap<>();
+//	            searchMap.put("type", type);
+//	            searchMap.put("searchKey", searchKey);
+//	            searchMap.put("searchs", searchs);
+//	            List<InquiryDTO> inquiryList = boardService.getInquiryListBySearch(searchMap);
+//	            model.addAttribute("inquiryList", inquiryList);
+//	        } else {
+//	            // 검색 조건이 부족하면 모든 목록을 보여줍니다.
+//	            List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
+//	            model.addAttribute("inquiries", inquiries);
+//	        }
+//	    }
+//
+//	    // 다른 필요한 속성 및 로직을 추가하세요.
+//	    return "inquiry"; // 실제 뷰 이름으로 교체하세요.
+//	}
 	
 	
 	// 자주묻는질문

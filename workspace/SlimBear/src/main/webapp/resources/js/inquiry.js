@@ -150,6 +150,9 @@ function searchInquiries() {
 
 
 function searchInquiries() {
-    document.getElementById('boardSearchForm').submit();
+    var search_key = document.getElementById("search_key").value;
+    var searchs = document.getElementById("searchs").value;
+
+    // Ajax 또는 form submit 등을 이용하여 서버에 전달하고, 결과를 받아와서 적절히 처리
 }
 

@@ -48,7 +48,7 @@ public class InquiryDAO {
 	
 	
 	// 게시글 검색 기능 DAO 추가
-    public List<InquiryDTO> selectInquiryListBySearch(Map<String, Object> searchMap) {
+    public List<InquiryDTO> getInquiryListBySearch(Map<String, Object> searchMap) {
         return template.selectList("SELECT_INQUIRY_LIST_BY_SEARCH", searchMap);
     }
 	

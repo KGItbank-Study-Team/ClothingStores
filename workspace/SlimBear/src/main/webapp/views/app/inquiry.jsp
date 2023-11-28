@@ -158,8 +158,7 @@
 			</div>
 			
 			
-			<form id="boardSearchForm" name="" action="/app/board/inquiry" method="get"
-				target="_top" enctype="multipart/form-data">
+			<form id="boardSearchForm" name="" action="/app/board/inquiry" method="get" target="_top" enctype="multipart/form-data">
 				<input id="board_no" name="board_no" value="6" type="hidden" />
 				<input id="page" name="page" value="1" type="hidden" />
 				<input id="board_sort" name="board_sort" value="" type="hidden" />
@@ -182,10 +181,8 @@
 								<option value="writer_id">글쓴이</option>
 								<option value="prod_uid">상품정보</option>
 							</select>
-							<input id="searchs" name="searchs" fw-filter="" fw-label=""
-								fw-msg="" class="searchs" placeholder="" value=""
-								type="text" /> 
-							<a href="#none" class="btnEmFix" onclick="searchInquiries();">FIND</a>
+							<input id="searchs" name="searchs" fw-filter="" fw-label="" fw-msg="" class="searchs" placeholder="" value="" type="text" /> 
+							<button type="submit" class="btnEmFix">검색</button>
 <!-- 							<a href="#none" class="btnEmFix" onclick="BOARD.form_submit('boardSearchForm');">FIND</a> -->
 						</p>
 					</fieldset>

@@ -149,6 +149,11 @@
 		SET prod_code=#{prod_code}
 		WHERE uid=#{uid}
 	</update>
+	
+	<delete id="DELETE_WISH">
+		DELETE FROM wish
+		WHERE uid=#{uid}
+	</delete>
 
 
 
