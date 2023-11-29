@@ -227,7 +227,6 @@ function buyClick(uid) {
                     selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt;
                     alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
                     addInput();
-                    window.location.href = "/app/order/product";
                 } else {
                     // '취소' 클릭 시
                     // 해당 옵션의 cnt를 원래 값으로 복원
@@ -235,13 +234,11 @@ function buyClick(uid) {
                     console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
                     alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
                     addInput();
-                    window.location.href = "/app/order/product";
                 }
             } else {
                 // 동일한 옵션의 상품이 없는 경우
                 alert("동일 옵션 없음: " + JSON.stringify(selectOptionList));
                 addInput();
-                window.location.href = "/app/order/product";
             }
         },
         error: function (request, status, error) {
@@ -436,13 +433,13 @@ $(document).ready(function () {
 // 목록 표시 함수
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
 function displayData(currentPage, dataPerPage, dataList) {
-    alert('reviewList' + JSON.stringify(dataList));
+    alert('reviewList : ' + JSON.stringify(dataList));
     let reviewHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
     currentPage = Number(currentPage); //alert('currentPage = ' + currentPage);
     dataPerPage = Number(dataPerPage); //alert('dataPerPage = ' + dataPerPage);
 
-    
+
     for (var i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
         reviewHtml += '<div class="review-section">' +
             '<div class="info">' +
@@ -472,7 +469,7 @@ function displayData(currentPage, dataPerPage, dataList) {
     $('.review-section').html(reviewHtml);
 }
 // 페이징 표시 함수
-function paging(totalData, dataPerPage, pageCount, currentPage) {
+function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
     console.log('currentPage: ' + currentPage);
 
     totalPage = Math.ceil(totalData / dataPerPage); // 총 페이지 수
@@ -518,6 +515,8 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 
     // 페이징 번호 클릭 이벤트
     $("#pagingul li a ").click(function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var uid = urlParams.get("p");
         event.preventDefault(); // 기본 동작 중단
         alert('reviewList = ' + JSON.stringify(dataList));
         let $id = $(this).attr("id");
@@ -531,6 +530,6 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
         // 페이징 표시 재호출
         paging(totalData, dataPerPage, pageCount, selectedPage);
         // 글 목록 표시 재호출
-        displayData(selectedPage, dataPerPage);
+        displayData(selectedPage, dataPerPage, dataList);
     });
 }
