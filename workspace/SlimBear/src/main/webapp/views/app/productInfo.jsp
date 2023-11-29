@@ -440,10 +440,10 @@
 					<span id="displayCount"></span>
 					<div class="review-section">
 					</div>
+			</section>
 					<!-- 페이징 표시할 부분 -->
 					<ul id="pagingul">
 					</ul>
-			</section>
 		</div>
 		
 		<!-- QnA -->

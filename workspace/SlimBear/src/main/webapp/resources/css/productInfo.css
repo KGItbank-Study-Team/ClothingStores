@@ -419,10 +419,11 @@ section > h1 {
 /* 	padding-left: 5px; */
 }
 #pagingul {
-	text-align: center;
+	display: flex;
+	justify-content: center;
 }
 #paginul > li {
-	display: flex;	
+	margin-right: 10px;
 }
 
 
