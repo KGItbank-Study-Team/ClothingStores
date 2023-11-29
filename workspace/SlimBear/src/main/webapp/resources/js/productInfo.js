@@ -66,7 +66,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1});
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1 });
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -315,96 +315,6 @@ $(document).ready(function () {
     });
 
 });
-
-
-
-// 리뷰 페이징
-// $(document).ready(function () {
-//     // 리뷰를 비동기적으로 불러오는 함수
-//     function loadReviews(pageNumber) {
-//         var urlParams = new URLSearchParams(window.location.search);
-//         var uid = urlParams.get("p");
-//         $.ajax({
-//             type: 'GET',
-//             url: '/app/product/getReview/' + uid, // 리뷰를 가져올 URL
-//             data: { p: uid, page: pageNumber }, // 해당 페이지 번호를 서버에 전달
-//             success: function (reviewList) {
-//                 alert('success');
-//                 console.log('reviewList: ' + JSON.stringify(reviewList));
-//                 for (var i = 0; i < reviewList.length; i++) {
-//                     console.log(reviewList[i].mem_id, reviewList[i].score, reviewList[i].reg_date, reviewList[i].content);
-//                 }
-
-//                 // 서버로부터 받은 리뷰 데이터를 표시하는 부분의 id나 class에 따라 수정
-//                 var reviewsHtml = ''; // 리뷰를 담을 변수
-//                 var reviewsPerPage = 5; // 페이지당 표시될 리뷰 수
-
-//                 // 서버에서 받은 리뷰 데이터를 반복하여 HTML에 추가
-//                 for (var i = 0; i < Math.min(reviewList.length, reviewsPerPage); i++) {
-//                     // 리뷰 하나의 HTML을 생성하여 변수에 추가
-// reviewsHtml += '<div class="review-section">' +
-//     '<div class="info">' +
-//     '<div>' +
-//     '<span>' + reviewList[i].mem_id + '</span>' +
-//     '<div>' +
-//     '<p>' + reviewList[i].reg_date + '</p>' +
-//     '</div>' +
-//     '</div>' +
-//     '<div class="review-score">' +
-//     '<i class="far fa-star"></i>' + reviewList[i].score +
-//     '</div>' +
-//     '<input type="hidden" id="reviewList" value="' + reviewList[i].score + '"/>' +
-//     '</div>' +
-//     '<div class="photo-review">' +
-//     '<a><img alt="상품" src="/resources/images/review_images01.jpg"></a>' +
-//     '<a><img alt="상품" src="/resources/images/review_images02.jpg"></a>' +
-//     '<a><img alt="상품" src="/resources/images/review_images03.jpg"></a>' +
-//     '<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>' +
-//     '<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>' +
-//     '</div>' +
-//     '<div class="review-text">' +
-//     '<div>' + reviewList[i].content + '</div>' +
-//     '</div>' +
-//     '</div>';
-//                 }
-//                 // 리뷰를 표시하는 부분의 id나 class를 정확히 지정하여 수정
-//                 // 선택한 요소의 내용을 지정한 HTML로 설정
-//                 $('.review-section').html(reviewsHtml);
-//                 // 페이징을 동적으로 추가
-//                 addPaging(pageIndex, pageSize, totCnt);
-//                 console.log('addPaging: ' + JSON.stringify(reviewList.pageIndex), JSON.stringify(reviewList.pageSize), JSON.stringify(reviewList.totCnt));
-//             },
-//             error: function (error) {
-//                 alert(error + '에러가 났습니다.');
-//             }
-//         });
-//     }
-//     // 리뷰점수를 별모양으로 표시
-//     window.onload = function () {
-//         // showScoreByStars 함수에서 reviewScore 변수 사용
-//         function showScoreByStars() {
-//             const Score = Math.round(reviewScore);
-//             const reviewScoreElements = document.getElementsByClassName('review-score');
-
-//             // 각 리뷰에 대해 실행
-//             for (let j = 0; j < reviewScoreElements.length; j++) {
-//                 const stars = reviewScoreElements[j].getElementsByTagName('i');
-
-//                 // 기존 클래스 초기화l
-//                 for (let i = 0; i < stars.length; i++) {
-//                     stars[i].classList.remove('fas');
-//                 }
-
-//                 // fas 클래스 적용
-//                 for (let i = 0; i < Score / 10; i++) {
-//                     stars[i].classList.add('fas');
-//                 }
-//             }
-//         }
-//         // 초기 페이지 로딩 시 첫 번째 페이지의 리뷰를 표시
-//         loadReviews(1);
-//     };
-// });
 let totalData; // 총 데이터 수
 let dataPerPage = 5; // 한 페이지에 나타낼 글 수
 let pageCount = 5; // 페이징에 나타낼 페이지 수
@@ -457,9 +367,26 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<p>' + dataList[i].reg_date + '</p>' +
             '</div>' +
             '</div>' +
-            '<div class="review-score">' +
-            '<i class="far fa-star"></i>' + dataList[i].score +
-            '</div>' +
+            '<div class="review-score">';
+            // 리뷰 점수에 따라 별표 표시
+            for (var j = 1; j <= 5; j++) {
+                const filledStars = Math.floor(dataList[i].score / 10); // 채워진 별의 개수
+                const remainder = dataList[i].score % 10; // 남은 점수
+            
+                if (j <= filledStars) {
+                    reviewHtml += '<i class="fas fa-star"></i>'; // 채워진 별
+                } else {
+                    if (j === filledStars + 1 && remainder > 0) {
+                        // 남은 점수가 0보다 크면, 부분적으로 채워진 별을 추가
+                        const percentage = (remainder / 10) * 100;
+                        reviewHtml += `<i class="fas fa-star" style="width: ${percentage}%;"></i>`;
+                    } else {
+                        reviewHtml += '<i class="far fa-star"></i>'; // 빈 별
+                    }
+                }
+            }
+
+            reviewHtml += '</div>' +
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
             '</div>' +
             '<div class="photo-review">' +

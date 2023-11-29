@@ -389,13 +389,12 @@ section > h1 {
 	padding-right: 10px;
 }
 .review-section {
-	background: #cdbeab;
+	background: #efeae2;
 	border: solid 1px;
 	flot: left;
 }
 .info {
-
-	/* padding-left: 10px; */
+	padding-left: 10px;
 	padding-top: 8px;
 }
 .info span  {
