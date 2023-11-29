@@ -33,7 +33,6 @@
 					</div>
 				</div>
 				
-<!-- 				<form id="boardWriteForm" name="boardWriteForm" action="/board/write" method="post" target="_self" enctype="multipart/form-data"> -->
 				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data">
 					<input id="board_no" name="board_no" value="6" type="hidden" /> 
 					<input id="product_no" name="product_no" value="0" type="hidden" /> 
@@ -46,7 +45,6 @@
 					<input id="isExceptBoardUseFroalaImg" name="isExceptBoardUseFroalaImg" 
 						value="" type="hidden" /> 
 					<input id="isGalleryBoard" name="isGalleryBoard" value="" type="hidden" />
-<!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 
 				    <input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
 				           value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
@@ -203,7 +201,7 @@
 							<tbody class="">
 								<tr>
 									<th scope="row">FILE 1</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 2</th>

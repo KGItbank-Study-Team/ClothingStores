@@ -122,6 +122,9 @@
 						                        <strong>
 						                            <!-- 답변의 링크 형식은 필요에 따라 수정하세요 -->
 						                            <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${answer.title}</a>
+						                            <c:if test="${board.secure eq '1'}">
+								                        <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
+								                    </c:if>
 						                            <span class="txtEm"></span>
 						                        </strong>
 						                    </td>
