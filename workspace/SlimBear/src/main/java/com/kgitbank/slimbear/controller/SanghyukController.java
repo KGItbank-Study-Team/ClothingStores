@@ -10,9 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -215,5 +219,29 @@ public class SanghyukController {
 			sanghService.insertInWish(wishDTO);
 		}
 		return "add_success";
+	}
+	
+	// 문의게시글 작성
+	@PostMapping("/product/write/{uid}")
+	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO, @PathVariable("uid")long uid) {
+	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUserId = authentication.getName();
+	    
+	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
+	    inquiryDTO.setWriter_id(currentUserId);
+	    inquiryDTO.setReg_date(new Date());
+	    inquiryDTO.setProd_uid(uid);
+	    System.out.println("게시글의 상품 uid: " + uid);
+
+	    // DAO로 전달
+	    sanghService.insertInquiry(inquiryDTO);
+	    
+	    return "redirect:/app/board/inquiry";
+	}
+	// 게시글 작성 페이지
+	@GetMapping(value = "/product/write")
+	public String getBoardWriteForm() {
+		return "productWrite";
 	}
 }

@@ -493,7 +493,7 @@
 				</c:forEach>
 			</table>
 			<button class="qnaBtn">
-				<a href="/app/board/write" class="qnaBtnColor">문의하기</a>
+				<a href="/app/product/write?uid=${product.uid}" class="qnaBtnColor">문의하기</a>
 			</button>
 		</div>
 		<div class="footer">

@@ -80,6 +80,11 @@ public class SangyhyukServiceImpl {
 		return prodDetailDAO.getSizeOptions(productUID);
 	}
 	
+    // 문의게시판 등록
+	public void insertInquiry(InquiryDTO inquiryDTO) {
+		inquiryDAO.insertInquiry(inquiryDTO);
+	}
+	
 	/* inquiry 데이터 받아오기 */
 	@Autowired
 	public InquiryDAO inquiryDAO;

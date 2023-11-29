@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.dto.FaqDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
@@ -91,6 +92,14 @@ public class YangController {
 		InquiryDTO inquiries = boardService.getInquiryDetail(uid);
 		model.addAttribute("inquiries", inquiries);
 		return "board_inquiry";
+	}
+	
+	// 문의사항 답변게시글 상세페이지조회
+	@RequestMapping("/board/inquiry/answer/detail/{uid}")
+	public String getAnswerDetail(@PathVariable Long uid, Model model) {
+		InquiryAnswerDTO answer = boardService.getAnswerDetail(uid);
+		model.addAttribute("answer", answer);
+		return "board_answer";
 	}
 	
 	// 문의게시글 작성
