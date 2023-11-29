@@ -409,18 +409,17 @@ $(document).ready(function () {
         url: '/app/product/getReview/' + uid,
         data: uid,
         success: function (reviewList) {
-            alert('Ajax 실행 성공');
             // 총 리뷰수 구하기
             totalData = reviewList.length;
             dataList = reviewList;
-            alert('dataList === ' + JSON.stringify(dataList));
+            //alert('dataList === ' + JSON.stringify(dataList));
             console.log('totalData: ' + totalData);
 
             // 목록 표시 호출(테이블 생성)
             displayData(1, dataPerPage, dataList);
 
             // 페이징 표시 호출
-            paging(totalData, dataPerPage, pageCount, 1);
+            paging(totalData, dataPerPage, pageCount, 1, dataList);
         },
         error: function (request, status, error) {
             console.log("request:", request);
@@ -528,7 +527,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
         // 전역변수에 선택한 페이지 번호를 담는다.
         globalCurrentPage = selectedPage;
         // 페이징 표시 재호출
-        paging(totalData, dataPerPage, pageCount, selectedPage);
+        paging(totalData, dataPerPage, pageCount, selectedPage, dataList);
         // 글 목록 표시 재호출
         displayData(selectedPage, dataPerPage, dataList);
     });
