@@ -5,6 +5,8 @@ var selectedSize = null;
 var cnt = 1;
 var productPrice = document.getElementById('productPrice').value;
 var totalPrice = null;
+var urlParams = new URLSearchParams(window.location.search);
+var uid = urlParams.get("p");
 
 // 상품 색상, 사이즈 옵션 선택
 $(function () {
@@ -107,8 +109,6 @@ function addInput() {
         $("#buyForm").append(sizeInput);
         $("#buyForm").append(cntInput);
         $("#buyForm").append(prodUIdInput);
-
-
     }
     $("#buyForm").submit();
     console.log("optionList: " + optionList);
@@ -409,9 +409,9 @@ let dataPerPage = 5; // 한 페이지에 나타낼 글 수
 let pageCount = 5; // 페이징에 나타낼 페이지 수
 let globalCurrentPage = 1; // 현재 페이지
 let dataList; // 표시하려는 데이터 리스트 
+
 $(document).ready(function () {
-    var urlParams = new URLSearchParams(window.location.search);
-    var uid = urlParams.get("p");
+
     $.ajax({
         method: 'GET',
         url: '/app/product/getReview/' + uid,
