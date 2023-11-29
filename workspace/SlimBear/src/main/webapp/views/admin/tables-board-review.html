@@ -90,17 +90,17 @@
 							data-url="/admin/review/list">
 							<thead>
 								<tr>
-									<th data-field="uid" data-sortable="true" data-width="50">ReviewUID</th>
-									<th data-field="mem_id" data-sortable="true" data-width="100"
+									<th data-field="uid" data-sortable="true" data-width="23">ReviewUID</th>
+									<th data-field="mem_id" data-sortable="true" data-width="180"
 										data-formatter="ownerFormatter">아이디</th>
 									<th data-field="prod_code" data-sortable="true"
-										data-width="100">상품코드</th>
-									<th data-field="title" data-sortable="true">제목</th>
-									<th data-field="content" data-sortable="true" data-width="100">내용</th>
+										data-width="25">상품코드</th>
+									<th data-field="title" data-sortable="true" data-width="180">제목</th>
+									<th data-field="content" data-sortable="true" >내용</th>
 
-									<th data-field="score" data-sortable="true">평점</th>
-									<th data-field="reg_date" data-sortable="true" data-width="100"
-										data-formatter="dateFormatter">작성 일자</th>
+									<th data-field="score" data-sortable="true"data-width="10">평점</th>
+									<th data-field="reg_date" data-sortable="true"
+										data-formatter="dateFormatter" data-width="120">작성 일자</th>
 								</tr>
 							</thead>
 
@@ -156,6 +156,7 @@
 		<div id="detail-wrapper"></div>
 
 		<script>
+			var lastOpenedRow = null;
 			$(function() {
 				// 테이블 초기화
 				$('#table').bootstrapTable({
@@ -175,7 +176,11 @@
 
 				// 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
 				$('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
-				    $detail.html('상세 정보 불러오는 중....');
+					// 이전에 열린 답글 입력 창이 있다면 닫기
+		            if (lastOpenedRow != null && lastOpenedRow !== index) {
+		                $('#table').bootstrapTable('collapseRow', lastOpenedRow);
+		            }
+					$detail.html('상세 정보 불러오는 중....');
 				    $.ajax({
 				        url: "/admin/review/getComment?reviewUID=" + row['uid'],
 				        type: "GET",
@@ -194,6 +199,12 @@
 							 // 답글 작성 폼
 						    html.push('<div class="reply-form">');
 						    html.push('<form id="replyForm">');
+							html.push('<div class="mb-3">')
+						    html.push('<label for="mem_id" class="form-label">작성자 ID</label>')
+						    html.push('<input type="text" class="form-control dark-input" id="mem_id" value="' + row['mem_id'] + '" readonly>')
+						            
+						            
+						    html.push('</div>')
 						    html.push('<div class="mb-3">');
 						    html.push('<label for="commentTitle" class="form-label">제목</label>');
 						    html.push('<input type="text" class="form-control" id="commentTitle">');
@@ -202,9 +213,8 @@
 						    html.push('<label for="commentContent" class="form-label">내용</label>');
 						    html.push('<textarea class="form-control" id="commentContent" rows="3"></textarea>');
 						    html.push('</div>');
-						    html.push('<input type="text" id="mem_id" value="' + row['mem_id'] + '" readonly>');
-						    html.push('<button type="button" class="btn btn-primary" onclick="addOrUpdateComment('
-						            + row['uid'] + ')">답글 추가/수정</button>');
+						   
+						    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateComment(' + row['uid'] + ')">답글 추가/수정</button>');
 						    html.push('</form>');
 						    html.push('</div>');
 
@@ -215,6 +225,15 @@
     							$('#commentTitle').val(result.title);
     							$('#commentContent').val(result.content);
 							}
+						 // 현재 열린 행을 저장
+		                    lastOpenedRow = index;
+		                    
+		                    // 열린 행의 답글 작성 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
+		                    $('#table').on('collapse-row.bs.table', function (e, index) {
+		                        if (lastOpenedRow === index) {
+		                            lastOpenedRow = null;
+		                        }
+		                    });
 						},
 						error : function() {
 							alert("error");
