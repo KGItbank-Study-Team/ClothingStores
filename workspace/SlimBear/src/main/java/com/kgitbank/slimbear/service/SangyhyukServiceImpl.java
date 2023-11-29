@@ -14,6 +14,7 @@ import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
@@ -89,7 +90,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public InquiryDAO inquiryDAO;
 	
-	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
+	public List<Integer> getInquiryListByProdUid(Long prodUid) {
 		return inquiryDAO.getInquiryListByProdUid(prodUid);
 	}
 	
@@ -97,9 +98,13 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	private InquiryAnswerDAO inquiryAnswerDAO;
 	
-//	public InquiryAnswerDTO getInquiryAnswerList(long inquiryUid){
-//		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
-//	}
+	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid){
+		return inquiryAnswerDAO.getInquiryAnswerList(inquiryUid);
+	}
+	
+	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(long inquiryUid) {
+		return inquiryAnswerDAO.getInquiryAnswerByInqrUid(inquiryUid);
+	}
 	
 	
 	/* 상품 장바구니 */

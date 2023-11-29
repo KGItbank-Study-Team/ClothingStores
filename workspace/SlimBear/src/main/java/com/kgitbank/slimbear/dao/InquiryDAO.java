@@ -29,11 +29,13 @@ public class InquiryDAO {
             List<InquiryAnswerDTO> answers = getInquiryAnswers(inquiry.getUid());
             inquiry.setAnswers(answers);
         }
-
         return inquiries;
     }
 	
-	
+	// 문의 prod_uid 조회
+	public List<Integer> getInquiryListByProdUid(Long prodUid) {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
+	}
 	
 	// 회원 문의 게시글 조회
 	public List<InquiryDTO> getUserInquiryList(String writer) {

@@ -328,6 +328,7 @@ $(document).ready(function () {
         url: '/app/product/getReview/' + uid,
         data: uid,
         success: function (reviewList) {
+            console.log('리뷰 Ajax 성공');
             // 총 리뷰수 구하기
             totalData = reviewList.length;
             dataList = reviewList;
@@ -341,6 +342,7 @@ $(document).ready(function () {
             paging(totalData, dataPerPage, pageCount, 1, dataList);
         },
         error: function (request, status, error) {
+            console.log('리뷰 Ajax 실패');
             console.log("request:", request);
             console.log("status:", status);
             console.log("error:", error);
@@ -370,22 +372,12 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<div class="review-score">';
             // 리뷰 점수에 따라 별표 표시
             for (var j = 1; j <= 5; j++) {
-                const filledStars = Math.floor(dataList[i].score / 10); // 채워진 별의 개수
-                const remainder = dataList[i].score % 10; // 남은 점수
-            
-                if (j <= filledStars) {
+                if (j <= dataList[i].score) {
                     reviewHtml += '<i class="fas fa-star"></i>'; // 채워진 별
                 } else {
-                    if (j === filledStars + 1 && remainder > 0) {
-                        // 남은 점수가 0보다 크면, 부분적으로 채워진 별을 추가
-                        const percentage = (remainder / 10) * 100;
-                        reviewHtml += `<i class="fas fa-star" style="width: ${percentage}%;"></i>`;
-                    } else {
-                        reviewHtml += '<i class="far fa-star"></i>'; // 빈 별
-                    }
+                    reviewHtml += '<i class="far fa-star"></i>'; // 빈 별
                 }
             }
-
             reviewHtml += '</div>' +
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
             '</div>' +
@@ -466,5 +458,169 @@ function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
         paging(totalData, dataPerPage, pageCount, selectedPage, dataList);
         // 글 목록 표시 재호출
         displayData(selectedPage, dataPerPage, dataList);
+    });
+}
+
+// 문의글, 문의답변 Ajax
+let totalDataInq; // 총 데이터 수
+let dataPerPageInq = 5; // 한 페이지에 나타낼 글 수
+let pageCountInq = 5; // 페이징에 나타낼 페이지 수
+let globalCurrentPageInq = 1; // 현재 페이지
+let inqList; // 상품문의 데이터 리스트 
+let inqAnswerList; // 문의답변 리스트
+
+$(document).ready(function () {
+    $.ajax({
+        method: 'GET',
+        url: '/app/product/inquiry/' + uid,
+        data: uid,
+        success: function (uidList) {
+            console.log('inquiry Ajax 실행성공');
+            totalDataInq = uidList.length; // 총 데이터 수
+            inqList = uidList;
+            console.log('uidList : ' + JSON.stringify(uidList));
+            console.log('totalDataInq : ' + totalDataInq);
+
+            //var inqrUid = inquiryList.uid;
+            console.log('inqrUid : ' + JSON.stringify(inqrUid));
+
+            $.ajax({
+                method: 'POST',
+                url: '/app/product/answer',
+                data: uidList,
+                sucess: function(answerList) {
+                    console.log('inquiryAnswer Ajax 성공');
+
+                    inqAnswerList = answerList;
+                    console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
+                },
+                error: function (request, status, error) {
+                    console.log('answer Ajax 실행 오류');
+                    console.log("request:", request);
+                    console.log("status:", status);
+                    console.log("error:", error);
+                }
+            })
+                                                                                                                                                                                                                 
+
+            // 목록 표시 호출(테이블 생성)
+            displayDataInq(1, dataPerPageInq, inqList, inqAnswerList);
+
+            // 페이징 표시 호출
+            pagingInq(totalDataInq, dataPerPageInq, pageCountInq, 1, inqList);
+        },
+        error: function (request, status, error) {
+            console.log("request:", request);
+            console.log("status:", status);
+            console.log("error:", error);
+            alert('inquiry Ajax 실행 오류');
+        }
+    });
+});
+// 목록 표시 함수
+// 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
+function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
+
+    console.log('inqList : ' + JSON.stringify(inqList));
+    console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
+
+    let inquiryHtml = '';
+    // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
+    currentPage = Number(currentPage);  console.log('currentPage : ' + currentPage);
+    dataPerPageInq = Number(dataPerPageInq);    console.log('dataPerPageInq : ' + dataPerPageInq);
+
+
+    for (var i = (currentPage - 1) * dataPerPageInq; i < Math.min(currentPage * dataPerPageInq, inqList.length); i++) {
+        inquiryHtml += '<tbody class="inquiry">' +
+            '<tr>' +
+            '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
+            '<td>' +
+                '<div class="clickTitle ">' + inqList[i].title + '</div>'
+            '</td>' +
+            '<td>' + inqList[i].writer_id + '</td>' +
+            '<td>' + inqList[i].reg_date + '</td>' +
+            '</tr>' +
+            '<tr class="inquiryContent">' +
+            '<td>&nbsp;</td>' + 
+            '<td class="centerNo">' + 
+            '<div class="contentPadding">' + inqList[i].content + '</div>' +
+            '</td>' +
+            '<td>&nbsp;</td>' +
+            '<td>&nbsp;</td>'
+            '</tr>';
+            for(var j = 0; j < inqAnswerList.length; j++) {
+
+               inquiryHtml += 
+               '<tr>' + 
+               '<td>' + inqAnswerList[i].title; + '</td>'
+               '</tr>';
+            }
+            inquiryHtml += '</tbody>';
+    }
+    $('.inquiry').html(inquiryHtml);
+}
+// 페이징 표시 함수
+function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqList) {
+    console.log('currentPage: ' + currentPage);
+
+    totalDataInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
+
+    if (totalDataInq < pageCountInq) {
+        pageCountInq = totalPage;
+    }
+
+    let pageGroup = Math.ceil(currentPage / pageCountInq); // 페이지 그룹
+    let last = pageGroup * pageCountInq; // 화면에 보여질 마지막 페이지 번호
+
+    if (last > totalPage) {
+        last = totalPage;
+    }
+
+    let first = last - (pageCountInq - 1); // 화면에 보여질 첫번째 페이지 번호
+    let next = last + 1;
+    let prev = first - 1;
+
+    let pageHtml = "";
+
+    if (prev > 0) {
+        pageHtml += '<li><a href="#" id="prev"> 이전 </a></li>';
+    }
+
+    // 페이징 번호 표시
+    for (var i = first; i <= last; i++) {
+        if (currentPage == i) {
+            pageHtml += '<li><a href="#" id="' + i + '">' + i + '</a></li>';
+        } else {
+            pageHtml += '<li><a href="#" id="' + i + '">' + i + '</a></li>';
+        }
+    }
+
+    if (last < totalPage) {
+        pageHtml += '<li><a href="#" id="next"> 다음 </a></li>';
+    }
+
+    $("#pagingul").html(pageHtml);
+    let displayCount = "";
+    displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalDataInq + "건";
+    $("#displayCount").text(displayCount);
+
+    // 페이징 번호 클릭 이벤트
+    $("#pagingInq li a ").click(function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var uid = urlParams.get("p");
+        event.preventDefault(); // 기본 동작 중단
+        //alert('reviewList = ' + JSON.stringify(dataList));
+        let $id = $(this).attr("id");
+        selectedPage = $(this).text();
+
+        if ($id == "next") selectedPage = next;
+        if ($id == "prev") selectedPage = prev;
+
+        // 전역변수에 선택한 페이지 번호를 담는다.
+        globalCurrentPageInq = selectedPage;
+        // 페이징 표시 재호출
+        paging(totalDataInq, dataPerPageInq, pageCountInq, selectedPage, inqList);
+        // 글 목록 표시 재호출
+        displayData(selectedPage, dataPerPageInq, inqList);
     });
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
@@ -104,20 +106,43 @@ public class YangController {
 	
 	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
-	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO) {
+	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO/* , @RequestParam("imageFile") MultipartFile imageFile */) {
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUserId = authentication.getName();
 	    
-	    // 현재 로그인한 사용자의 ID를 MemberDTO의 name으로 설정
+	    // 이미지 추가해야함 inquiryDTO.set어쩌구();
 	    inquiryDTO.setWriter_id(currentUserId);
 	    inquiryDTO.setReg_date(new Date());
 
+	    // 실제 파일을 저장하고 파일 경로를 문자열로 변환하여 DTO에 설정
+//	    String imagePath = saveImage(imageFile);
+//	    inquiryDTO.setImageFile(imagePath);
+	    
 	    // DAO로 전달
 	    boardService.insertInquiry(inquiryDTO);
 	    
 	    return "redirect:/app/board/inquiry";
 	}
+	// 파일을 저장하고 저장된 경로를 반환하는 메서드
+//	private String saveImage(MultipartFile file) {
+//	    // 파일을 저장할 폴더 경로
+//	    String uploadDir = "/path/to/upload/directory/";
+//
+//	    // 파일 이름 생성 (UUID 사용)
+//	    String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+//
+//	    // 저장할 파일 경로
+//	    String filePath = uploadDir + fileName;
+//
+//	    // 파일 저장
+//	    // (실제로는 파일을 저장하는 코드를 작성해야 합니다.)
+//
+//	    // 저장된 파일의 경로를 반환
+//	    return filePath;
+//	}
+	
+	
 
 	// 문의게시글 삭제 작성
 	@RequestMapping(value = "/board/inquiry/detail/delete/{uid}", method = RequestMethod.GET)
