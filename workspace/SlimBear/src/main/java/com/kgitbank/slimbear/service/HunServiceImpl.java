@@ -1,6 +1,7 @@
 package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,6 @@ import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderDetailVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
-import com.kgitbank.slimbear.vo.RefundVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 
 @Service
@@ -71,14 +71,9 @@ public class HunServiceImpl {
 		MemberDTO member = memDAO.getMemberByUID(uid);
 
 		vo.setUsername(member.getName());
-		vo.setGrade("member[멤버]");
-		vo.setUpgrade("family[패밀리]");
-		vo.setUpgradeMoney(300000);
-		vo.setYearMoney(30000);
 		vo.setReserve(12000);
 		vo.setTotalReserve(17000);
 		vo.setUseReserve(5000);
-		vo.setDeposit(50000);
 		vo.setTotalOrderM(980000);
 		vo.setTotalOrderN(13);
 		vo.setCoupon(1);
@@ -137,7 +132,6 @@ public class HunServiceImpl {
 		String[] phone = SlimBearUtil.splitPhoneNumber(member.getPhone());
 
 		vo.setUsername(member.getName());
-		vo.setGrade("member[멤버]");
 		vo.setUserID(member.getId());
 		vo.setPostcode(address[0]);
 		vo.setDefaultAddr(address[1]);
@@ -149,20 +143,6 @@ public class HunServiceImpl {
 		vo.setMobile1(phone[1]);
 		vo.setMobile2(phone[2]);
 		vo.setEmail(member.getEmail());
-		vo.setUserYear(1994);
-		vo.setUserMonth(9);
-		vo.setUserDay(11);
-		vo.setRefundAccount("[산적은행] 123-4567-890 / 예금주: 연해적");
-
-		return vo;
-	}
-
-	public RefundVO getRefundInfo(long uid) {
-		RefundVO vo = new RefundVO();
-		MemberDTO member = memDAO.getMemberByUID(uid);
-
-		vo.setUsername(member.getName());
-		vo.setBankNumber("94320200174653");
 
 		return vo;
 	}
@@ -171,11 +151,35 @@ public class HunServiceImpl {
 		MileageVO vo = new MileageVO();
 		int i = memDAO.getMemberMileageRecordListByMemberUID(uid);
 		
-		vo.setTotalReserve(i);
+		vo.setTotalReserve(5000);
 		vo.setReserve(2000);
 		vo.setUseReserve(3000);
+		
+//		이거 임시 밑에 리스트있음
+		Date currentDate = new Date();
+        vo.setOrderDate(currentDate);
+		vo.setAddReserve(i);
+		vo.setRelatedOrder("x");
+		vo.setSubstance("신규회원 축하선물");
 
 		return vo;
+	}
+	
+	public List<MileageVO> getMileageListInfo(){
+		ArrayList<MileageVO> list = new ArrayList<>();
+//		List<MemberMileageRecordDTO> membermile = memDAO.getMemberMileageRecordListByMemberUID(0);
+		
+//		for(MemberMileageRecordDTO i : membermile) {
+//			MileageVO vo = new MileageVO();
+//			
+//			vo.setOrderDate(null);
+//			vo.setAddReserve(0);
+//			vo.setRelatedOrder(null);
+//			vo.setSubstance(null);
+//			
+//			list.add(vo);
+//		}
+		return list;
 	}
 
 	public List<CouponVO> getCouponListInfo(long memberUID) {
@@ -216,35 +220,45 @@ public class HunServiceImpl {
 		
 		for (WishDTO i : wishlist) {
 			WishListVO vo = new WishListVO();
-			vo.setProductURL("http://localhost:9090/app/product?p=1");
+			// 이거 링크가 다 같은거만 나오네? 해결해야함
+			vo.setProductURL("http://localhost:9090/app/product?p=" + p.getUid());
 			vo.setProductImage(p.getMain_image());
 			vo.setProductName(i.getProd_code());
 			vo.setOrderAmount(p.getPrice());
 			vo.setOrderDiscount(p.getPrice()-p.getSale_price());
+			
+			vo.setUid(i.getUid());
 
 			list.add(vo);
 		}
 		return list;
 	}
+	
+//	위시리스트 삭제
+	public void deleteWish(long uid) {
+	    wishDAO.deleteWish(uid);
+	}
 
-	public List<MemberBoardVO> getMemberBoardInfo(String type) {
+//  문의게시판
+	public List<MemberBoardVO> getMemberBoardInfo(String writer) {
 		ArrayList<MemberBoardVO> list = new ArrayList<>();
-		List<InquiryDTO> boardlist = inquiryDAO.getInquiryList(type);
+		List<InquiryDTO> boardlist = inquiryDAO.getUserInquiryList(writer);
 
 		for (InquiryDTO i : boardlist) {
 			MemberBoardVO vo = new MemberBoardVO();
-			vo.setBoardNumber(1);	//번호가 없넹
 			vo.setBoardGroup(i.getType());
 			vo.setBoardTitle(i.getTitle());
 			vo.setBoardWriter(i.getWriter_id()); //이름이 없넹
 			vo.setBoardDate(i.getReg_date());
-			vo.setBoardHits(4);
+			vo.setUid(i.getUid());
 
 			list.add(vo);
 		}
 		return list;
 	}
 
+	//리뷰게시판
+	
 	public List<AddrVO> getAddrInfo(long memberUID) {
 		ArrayList<AddrVO> list = new ArrayList<>();
 		List<MemberOrderAddressDTO> addrlist = addressDAO.getAddressListByMemberUID(memberUID);

@@ -50,24 +50,40 @@ public class YangController {
 	}
 	
 	// 문의사항 목록
+//	@RequestMapping("/board/inquiry")
+//	public String getBoardInquiryList(
+//			@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
+//		List<InquiryDTO> inquiries;
+//		switch (categoryNo) {
+//		case "1":
+//			inquiries = boardService.getInquiryList("DELIVERY");
+//			break;
+//		case "2":
+//			inquiries = boardService.getInquiryList("DELIVERY_C");
+//			break;
+//		default:
+//			inquiries = boardService.getInquiryList("PRODUCT");
+//		}
+//		model.addAttribute("inquiries", inquiries);
+//		return "inquiry";
+//	}
 	@RequestMapping("/board/inquiry")
-	public String getBoardInquiryList(
-			@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
-		List<InquiryDTO> inquiries;
-		switch (categoryNo) {
-		case "1":
-			inquiries = boardService.getInquiryList("DELIVERY");
-			break;
-		case "2":
-			inquiries = boardService.getInquiryList("DELIVERY_C");
-			break;
-		default:
-			inquiries = boardService.getInquiryList("PRODUCT");
-		}
-		model.addAttribute("inquiries", inquiries);
-		return "inquiry";
-	}
-	
+    public String getBoardInquiryList(
+            @RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
+        List<InquiryDTO> inquiries;
+        switch (categoryNo) {
+            case "1":
+                inquiries = boardService.getInquiryListWithAnswers("DELIVERY");
+                break;
+            case "2":
+                inquiries = boardService.getInquiryListWithAnswers("DELIVERY_C");
+                break;
+            default:
+                inquiries = boardService.getInquiryListWithAnswers("PRODUCT");
+        }
+        model.addAttribute("inquiries", inquiries);
+        return "inquiry";
+    }
 	
 	// 문의사항 상세페이지조회
 	@RequestMapping("/board/inquiry/detail/{uid}")

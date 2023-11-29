@@ -46,15 +46,15 @@
                 </div>
 
                 <div class="titleArea">
-                    <h2>게시글 관리</h2>
+                    <h2>문의 관리</h2>
                 </div>
 
                 <div class="xans-element- xans-myshop xans-myshop-boardpackage ">
                     <div class="xans-element- xans-myshop xans-myshop-boardlisthead ">
                         <p>분류 선택 <select id="board_sort" name="board_sort" fw-filter="" fw-label="" fw-msg=""
                                 onchange="BOARD.change_sort('boardSearchForm', this);">
-                                <option value="D">작성 일자별</option>
-                                <option value="C">분류별</option>
+                                <option value="D">PRODUCT</option>
+                                <option value="C">DELIVERY</option>
                             </select></p>
                     </div>
                     <div
@@ -68,7 +68,6 @@
                                 <col style="width:auto;">
                                 <col style="width:100px;">
                                 <col style="width:100px;">
-                                <col style="width:80px;">
                             </colgroup>
                             <thead>
                                 <tr>
@@ -77,24 +76,21 @@
                                     <th scope="col">제목</th>
                                     <th scope="col">작성자</th>
                                     <th scope="col">작성일</th>
-                                    <th scope="col">조회</th>
                                 </tr>
                             </thead>
                             <tbody class="center">
                             
-                            	<c:forEach var="item" items="${boardList}">
+                            	<c:forEach var="item" items="${boardList}" varStatus="loop">
                                 <tr class="xans-record-">
-                                    <td>${item.boardNumber}</td>
+                                    <td>${loop.index+1}</td>
                                     <td><a href="" class="txtEm"></a>${item.boardGroup}</td>
                                     <!-- class ="left subject" -->
                                     <td class="subject"><img src="/resources/images/icon_lock.png"
                                         alt="비밀글" class="ec-common-rwd-image"> <a
-                                        href="http://localhost:9090/views/app/read.jsp">${item.boardTitle}</a>
-                                    <img src="/resources/images/icon_lednew.gif" alt="NEW"
-                                        class="ec-common-rwd-image"></td>
+                                        href="http://localhost:9090/app/board/inquiry/detail/${item.uid}">${item.boardTitle}</a>
+                                    </td>
                                     <td>${item.boardWriter}</td>
                                     <td><span class="txtNum"></span>${item.boardDate}</td>
-                                    <td><span class="txtNum"></span>${item.boardHits}</td>
                                 </tr>
                                 </c:forEach>
                                
@@ -112,27 +108,6 @@
                     </ol>
                     <a href="#none"><img src="/resources/images/icon_next2.png"></a>
                 </div>
-
-                <form id="boardSearchForm" name="" action="/myshop/board_list.html" method="get" target=""
-                    enctype="multipart/form-data">
-                    <input id="board_no" name="board_no" value="" type="hidden">
-                    <input id="page" name="page" value="1" type="hidden">
-                    <input id="board_sort" name="board_sort" value="" type="hidden">
-                    <div class="xans-element- xans-myshop xans-myshop-boardlistsearch ">
-                        <fieldset class="boardSearch">
-                            <legend>게시물 검색</legend>
-                            <p><select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
-                                    <option value="subject">제목</option>
-                                    <option value="content">내용</option>
-                                    <option value="writer_name">글쓴이</option>
-                                    <option value="member_id">아이디</option>
-                                    <option value="nick_name">별명</option>
-                                </select> <input id="search" name="search" fw-filter="" fw-label="" fw-msg=""
-                                    class="inputTypeText" placeholder="" value="" type="text"> <a href="#none"
-                                    class="btnEmFix" onclick="BOARD.form_submit('boardSearchForm');">찾기</a></p>
-                        </fieldset>
-                    </div>
-                </form>
                 
             </div>
         </div>

@@ -13,6 +13,7 @@ import com.kgitbank.slimbear.dao.FaqDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
@@ -69,7 +70,7 @@ public class YangBoardServiceImpl {
 	        if (inquiry.getSecure() == 1 && !isCurrentUserAuthor(inquiry.getWriter_id())) {
 	            // 비밀글이면서 현재 사용자가 작성자가 아닌 경우 비밀글을 숨김
 	            showAccessDeniedWarning();
-	            inquiry.setContent("비밀글로 숨겨진 내용입니다.");
+	            inquiry.setContent("비밀글로 작성자 외엔 확인할 수 없는 내용입니다.");
 	            // 다른 필요한 처리를 추가할 수 있음
 	        }
 
@@ -119,7 +120,44 @@ public class YangBoardServiceImpl {
         return inquiryDAO.getInquiryListBySearch(searchMap);
     }
     
-	
+    
+    // 문의게시판 답변게시글
+    public List<InquiryDTO> getInquiryListWithAnswers(String type) {
+        List<InquiryDTO> inquiries = inquiryDAO.getInquiryList(type);
+        
+        for (InquiryDTO inquiry : inquiries) {
+            // 각 문의에 대한 답변 목록을 가져와서 설정
+            List<InquiryAnswerDTO> answers = inquiryDAO.getInquiryAnswers(inquiry.getUid());
+            inquiry.setAnswers(answers);
+        }
+        
+        return inquiries;
+    }
+    // 문의게시판 답변게시글 조회
+	public InquiryAnswerDTO getAnswerDetail(Long uid) {
+		try {
+			InquiryAnswerDTO inquiryAnswer = inquiryDAO.getAnswerDetail(uid);
+
+	        // 게시글이 null이면 경고창을 띄우고 실행 취소
+	        if (inquiryAnswer == null) {
+	            showAccessDeniedWarning();
+	            return null;
+	        }
+	        
+	        // 비밀글이고, 현재 로그인한 사용자와 게시물 작성자가 다를 경우
+	        if (inquiryAnswer.getSecure() == 1 && !isCurrentUserAuthor(inquiryAnswer.getMem_id())) {
+	            // 비밀글이면서 현재 사용자가 작성자가 아닌 경우 비밀글을 숨김
+	            showAccessDeniedWarning();
+	            inquiryAnswer.setContent("비밀글로 작성자 외엔 확인할 수 없는 내용입니다.");
+	            // 다른 필요한 처리를 추가할 수 있음
+	        }
+	        return inquiryAnswer;
+	    } catch (AccessDeniedException e) {
+	        showAccessDeniedWarning();
+	        return null;
+	    }
+	}
+    
 	// FAQ
 	public List<FaqDTO> getFaqList() {
         return faqDAO.getFaqList();
@@ -128,6 +166,7 @@ public class YangBoardServiceImpl {
 	public List<FaqDTO> getFaqListByType(String type) {
         return faqDAO.getFaqListByType(type);
 	}
+
 	
 //	public List<FaqDTO> getBoardFaqList() {
 //		List<FaqDTO> faqs = faqDAO.getFaqList();

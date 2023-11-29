@@ -68,8 +68,8 @@ public class SanghyukController {
 		// inquiry 가져오기
 		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
 		System.out.println("inquiryList: " + inquiryList);
-		long inqr_uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
-		System.out.println("inqr_uid: " + inqr_uid);
+		//long inqr_uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
+		//System.out.println("inqr_uid: " + inqr_uid);
 
 		// inquiryAnswer 가져오기
 		//public InquiryAnswerDTO inquiryAnswer = sanghService.getInquiryAnswerList(inqr_uid);
@@ -92,8 +92,7 @@ public class SanghyukController {
 	public List<ReviewDTO> getReviews(@PathVariable("uid")long productUid, HttpSession session) {
 		System.out.println("productUid: " + productUid);
 		List<ReviewDTO> reviewList = sanghService.getReviewListByUid(productUid);
-		
-		return reviewList;
+		return reviewList;	
 	}
 
 	/* 장바구니 상품 추가 */

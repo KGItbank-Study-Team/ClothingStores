@@ -87,9 +87,7 @@
 										<td class="subject"><img
 											src="/resources/images/icon_lock.png" alt="비밀글"
 											class="ec-common-rwd-image"> <a
-											href="http://localhost:9090/views/app/read.jsp">${item.boardTitle}</a>
-											<img src="/resources/images/icon_lednew.gif" alt="NEW"
-											class="ec-common-rwd-image"></td>
+											href="http://localhost:9090/views/app/read.jsp">${item.boardTitle}</a></td>
 										<td>${item.boardWriter}</td>
 										<td><span class="txtNum"></span>${item.boardDate}</td>
 										<td><span class="txtNum"></span>${item.boardHits}</td>

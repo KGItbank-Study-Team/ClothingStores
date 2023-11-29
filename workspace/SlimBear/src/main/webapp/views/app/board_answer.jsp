@@ -15,7 +15,7 @@
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <script defer src="/resources/js/boards.js"></script>
-<title>BOARD INQUIRY</title>
+<title>BOARD ANSWER</title>
 </head>
 
 <body>
@@ -35,13 +35,12 @@
                     </div>
                     <div class="titleArea">
                         <h2>
-                            <font color="#555555">INQUIRY</font>
+                            <font color="#555555">INQUIRY ANSWER</font>
                         </h2>
                         <p></p>
                     </div>
                 </div>
-                <form id="BoardDelForm" name="" action="/exec/front/Board/del/1" method="post" target="_self"
-                    enctype="multipart/form-data">
+                <form id="BoardDelForm" name="" action="/exec/front/Board/del/1" method="post" target="_self" enctype="multipart/form-data">
                     <input id="no" name="no" value="1724624" type="hidden" />
                     <!-- Add more input fields here if needed -->
                     <input id="bulletin_no" name="bulletin_no" value="900281" type="hidden" />
@@ -64,15 +63,15 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">TITLE</th>
-                                    <td>${inquiries.title}</td>
+                                    <td>${answer.title}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">NAME</th>
-                                    <td>${inquiries.writer_id}</td>
+                                    <td>${answer.mem_id}</td>
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-                                    <td><fmt:formatDate value="${inquiries.reg_date}" pattern="yyyy-MM-dd"/></td>
+                                    <td><fmt:formatDate value="${answer.reg_date}" pattern="yyyy-MM-dd"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="bon">
@@ -80,7 +79,7 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	${inquiries.content}
+                                                	${answer.content}
                                                 </p>
                                                 <p><br></p>
                                             </div>
@@ -104,16 +103,6 @@
                                 <a href="#" onclick="" class="btnNormalFix sizeS ">스팸해제</a>
                             </span>
                             <a href="/app/board/inquiry" class="btnNormalFix sizeS">LIST</a>
-                            <a href="#" id="toggleAnswer" class="btnNormalFix sizeS">ANSWER</a>
-                            <div id="answerContent" class="detail" style="display: none;">
-					            <div class="fr-view fr-view-article">
-					                <p><br></p>
-					                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-					                    ${answer.content}
-					                </p>
-					                <p><br></p>
-					            </div>
-					        </div>
                         </span>
                         
                         <span class="gRight">
@@ -198,16 +187,6 @@
                </ul>
            </div>
        </div>
-       
-       <script>
-  $(document).ready(function() {
-    $("#toggleAnswer").click(function() {
-      $("#answerContent").slideToggle();
-    });
-  });
-</script>
-       
-       
        <jsp:include page="footer/footer.jsp" />
    </div>
 </div>

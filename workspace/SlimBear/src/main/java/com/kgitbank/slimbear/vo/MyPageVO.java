@@ -8,16 +8,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MyPageVO {
-	private String username; 	//회원이름.
-	private String grade;		//회원등급.
-	private String upgrade;		//회원의 다음등급.
-	private int upgradeMoney;	//다음등급으로 승급하기위한 돈.
-	private int yearMoney;		//최근 12개월동안 구매금액.
+	private String username;	//사용자이름
 	
 	private int reserve;		//가용적립금.
 	private int totalReserve;	//총적립금.
 	private int useReserve;		//사용적립금.
-	private int deposit;		//예치금.
 	private int totalOrderM;	//총주문금액.
 	private int totalOrderN;	//총주문횟수.
 	private int coupon;			//쿠폰개수.
@@ -29,4 +24,5 @@ public class MyPageVO {
 	private int cancel;				//취소
 	private int exchange;			//교환
 	private int turn;				//반품
+	
 }

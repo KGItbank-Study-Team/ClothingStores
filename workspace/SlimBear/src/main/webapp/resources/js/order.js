@@ -1,3 +1,52 @@
+$(function(){
+    $('.select_coupon').on('change', function(){
+        var selectCouponUid = $(this).val();
+
+        $.ajax({
+            url : '/app/order/coupon/apply',
+            type : 'POST',
+            data : {
+                couponUID : selectCouponUid
+            },
+            success : function(res){
+                $('.payment-pay-amount').text(res.paymentAmount);
+                alert("쿠폰적용완료");
+            },
+            error : function(error){
+                alert("error");
+            }
+        });
+
+    });
+
+    $('.btn-mileage-apply').on('click', function(){
+        var mileage = $('.mileage-apply').val();
+
+        $.ajax({
+            url : '/app/order/mileage/apply',
+            type : 'POST',
+            data : {
+                mileage : mileage
+            },
+            success : function(res){
+                if(res.failed != undefined){
+                    alert(res.failed);
+                    $('.mileage-apply').val(0);
+                }
+                else{
+                    alert("마일리지 적용완료");
+                    $('.payment-pay-amount').text(res.paymentAmount);
+                }
+           },
+            error : function(error){
+                alert("error");
+            }
+        });
+
+    });
+
+});
+
 function toggleHiddenContent() {
     var hiddenContent = document.getElementById('hiddenContent03');
     var btn = document.querySelector('.btn');
