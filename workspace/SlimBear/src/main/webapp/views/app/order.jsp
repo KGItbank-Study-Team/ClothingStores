@@ -100,9 +100,7 @@
 			<!-- 주문상품 -->
 			<div style="border: 1px solid; padding: 5px;">
 			<h1>주문 상품</h1>
-			<c:if test="${1 gt 0}">
-				<b class="payment-product-name">제품이름 1번째 외 리스트길이-1</b>
-			</c:if>
+			<b class="payment-product-name">${order.productName}</b>
 			<table class="cart__list">
 				<thead>
 					<tr>
