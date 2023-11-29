@@ -105,7 +105,10 @@
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
-						                    <a href="/app/board/notice/detail/${board.uid}" style="color: #555555;">${board.title}</a>
+						                    <a href="/app/board/notice/detail/${board.uid}" 
+							                   style="color: #555555; ${board.priority eq 1 ? 'font-weight: 700;' : ''}${board.priority eq 2 ? 'font-weight: normal !important;' : ''}">
+							                    ${board.title}
+							                </a>
 						                    <img src="/resources/images/icon_new.gif" alt="NEW" class="ec-common-rwd-image new-image" id="newImage${loop.index}" />
 						                    <span class="txtEm"></span>
 						                </strong>
@@ -129,9 +132,6 @@
 						        
 						    </c:forEach>
 						</tbody>
-						
-						
-						
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
@@ -158,7 +158,7 @@
 			</div>
 			
 			
-			<form id="boardSearchForm" name="" action="/board/notice/1"
+			<!-- <form id="boardSearchForm" name="" action="/board/notice/1"
 				method="get" target="_top" enctype="multipart/form-data">
 				<input id="board_no" name="board_no" value="1" type="hidden" />
 				<input id="page" name="page" value="1" type="hidden" />
@@ -167,12 +167,6 @@
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p>
-						<select id="search_date" name="search_date">
-							<option value="week">일주일</option>
-							<option value="month">한달</option>
-							<option value="month3">세달</option>
-							<option value="all">전체</option>
-						</select> 
 						<select id="search_key" name="search_key">
 							<option value="subject">제목</option>
 							<option value="content">내용</option>
@@ -187,7 +181,8 @@
 						</p>
 					</fieldset>
 				</div>
-			</form>
+			</form> -->
+			
 		</div>
 		<jsp:include page="footer/footer.jsp" />
 	</div>

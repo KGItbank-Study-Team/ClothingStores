@@ -418,8 +418,12 @@ section > h1 {
 .review-text {
 /* 	padding-left: 5px; */
 }
-.paging {
-	text-align: center;
+#pagingul {
+	display: flex;
+	justify-content: center;
+}
+#paginul > li {
+	margin-right: 10px;
 }
 
 

@@ -14,6 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
+<script defer src="/resources/js/boards.js"></script>
 <title>BOARD INQUIRY</title>
 </head>
 
@@ -61,7 +62,6 @@
                                 <col style="width:auto;" />
                             </colgroup>
                             <tbody>
-                            
                                 <tr>
                                     <th scope="row">TITLE</th>
                                     <td>${inquiries.title}</td>
@@ -72,28 +72,8 @@
                                 </tr>
                                 <tr class="row">
                                     <th scope="row">DATE</th>
-<%--                                     <td>${inquiries.reg_date}</td> --%>
                                     <td><fmt:formatDate value="${inquiries.reg_date}" pattern="yyyy-MM-dd"/></td>
                                 </tr>
-                                <!-- <tr class="displaynone">
-                                    <th scope="row">POINT</th>
-                                    <td><img src="//img.echosting.cafe24.com/skin/base/board/ico_point0.gif" alt="0점" />
-                                    </td>
-                                </tr> -->
-                                <!-- <tr class="displaynone">
-                                    <th scope="row">VOTE</th>
-                                    <td><span class="txtNum"> 
-                                    		<a href="#none" class="btnNormal"
-                                    			onclick="BOARD_READ.article_vote('/exec/front/Board/vote/1?no=1724624&return_url=%2Farticle%2Fnotice%2F1%2F1724624%2F&f8448=afdaf2cdb1914f0c7068e19fcf16178d&board_no=1');">
-                                    			<img src="//img.echosting.cafe24.com/skin/base/common/btn_icon_recommend.gif" 
-                                    				alt="" /> 추천하기</a>
-                                    	</span>
-                                    </td>
-                                </tr>
-                                <tr class="displaynone">
-                                    <th scope="row">HIT</th>
-                                    <td>2852</td>
-                                </tr> -->
                                 <tr>
                                     <td colspan="2" class="bon">
                                         <div class="detail">
@@ -111,14 +91,6 @@
                                     <th scope="row">FILE</th>
                                     <td></td>
                                 </tr>
-                                <!-- <tr class="displaynone ">
-                                    <th scope="row">PASSWORD</th>
-                                    <td><input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg=""
-                                            onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
-                                            value="" type="password" /> <span class="ec-base-help txtInfo">
-                                            수정 및 삭제하려면 비밀번호를 입력하세요.</span>
-                                    </td>
-                                </tr> -->
                                 
                             </tbody>
                         </table>
@@ -135,64 +107,24 @@
                         </span>
                         
                         <span class="gRight">
-                        <c:set var="isAuthor" value="true" /> <!-- 임시로 delete, edit 을 보이게 함 -->
-						    <c:choose>
-						        <c:when test="${isAuthor}">
-						            <a href="/app/board/inquiry/detail/delete/${inquiries.uid}" onclick="return confirm('게시글을 삭제하시겠습니까?');" class="btnNormalFix sizeS">DELETE</a>
-            						<a href="/app/board/inquiry/detail/update/${inquiries.uid}" class="btnEmFix sizeS">EDIT</a>
-						        </c:when>
-						        <c:otherwise>
-						            <!-- 작성자가 아니면 표시하지 않음 -->
-						        </c:otherwise>
-						    </c:choose>
-						</span>
-                      <!-- <span class="gRight">
-                            <a href="#none" onclick="BOARD_READ.article_delete('BoardDelForm','1');"
-                                class="btnNormalFix sizeS displaynone">DELETE</a>
-                            <a href="/board/free/modify.html?board_act=edit&no=1724624&board_no=1"
-                                class="btnEmFix sizeS displaynone">EDIT</a>
-                            <a href="/board/free/reply.html" class="btnSubmitFix sizeS displaynone">REPLY</a>
-                        </span> -->
-                        
-                        <script>
-// function deleteInquiry(uid) {
-//     $.ajax({
-//         type: 'POST',
-//         url: '/app/board/inquiry/delete',
-//         data: { uid: uid },
-//         success: function(response) {
-//             console.log('AJAX Success: ' + response);
-//             if (response === 'Success') {
-//                 alert('게시물이 성공적으로 삭제되었습니다.');
-//             } else {
-//                 alert('게시물 삭제 중 오류가 발생했습니다.');
-//             }
-//          	// 성공하든 실패하든 최종적으로 /app/board/inquiry로 이동
-//             window.location.href = '/app/board/inquiry';
-//         },
-//         error: function(error) {
-//             console.error('AJAX Error: ' + error);
-//             alert('게시물 삭제 중 오류가 발생했습니다.');
-//         }
-//     });
-// }
-</script>
-           <script>
-           function deleteInquiry(uid) {
-               $.ajax({
-                   type: "GET",
-                   url: "/app/board/inquiry/detail/" + uid,
-                   success: function () {
-                       // 삭제가 성공하면 화면을 새로고침
-                       location.reload();
-                   },
-                   error: function () {
-                       alert("문의 삭제에 실패했습니다.");
-                   }
-               });
-           }
-</script>             
-                        
+    <c:set var="isAuthor" value="false" />
+
+    <c:if test="${pageContext.request.userPrincipal != null}">
+        <!-- 사용자가 인증되었는지 확인 -->
+        <c:set var="isAuthor" value="${inquiries.writer_id eq pageContext.request.userPrincipal.name}" />
+    </c:if>
+
+    <c:choose>
+        <c:when test="${isAuthor}">
+            <a href="/app/board/inquiry/detail/delete/${inquiries.uid}" onclick="return confirm('게시글을 삭제하시겠습니까?');" class="btnNormalFix sizeS">DELETE</a>
+            <a href="/app/board/inquiry/detail/update/${inquiries.uid}" class="btnEmFix sizeS">EDIT</a>
+        </c:when>
+        <c:otherwise>
+            <!-- 작성자가 아니면 아무것도 표시하지 않음 -->
+        </c:otherwise>
+    </c:choose>
+</span>
+
                         
                     </div>
                	</div>

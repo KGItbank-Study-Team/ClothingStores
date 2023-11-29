@@ -586,7 +586,7 @@ ul.xans-board-listheader li {
 }
 
 .ec-base-table.typeList .xans-board-notice td a {
-    font-weight: 700 !important;
+    font-weight: 700;
 }
 
 .xans-board-catemove {
