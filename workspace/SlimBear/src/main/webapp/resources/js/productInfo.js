@@ -6,7 +6,7 @@ var cnt = 1;
 var productPrice = document.getElementById('productPrice').value;
 var totalPrice = null;
 var urlParams = new URLSearchParams(window.location.search);
-var uid = urlParams.get("p");
+
 
 // 상품 색상, 사이즈 옵션 선택
 $(function () {
@@ -65,7 +65,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : prod_code });
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : uid });
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -77,7 +77,7 @@ $(function () {
     }
 });
 // 옵션 리스트 결제페이지로 슝~
-function addInput() {
+function addInput(uid) {
     for (var i = 0; i < selectOptionList.length; i++) {
         var optionList = selectOptionList[i];
         console.log("optionList: " + optionList);
@@ -103,7 +103,7 @@ function addInput() {
         cntInput.type = "hidden";
         cntInput.id = "prodUIdInput" + i;
         cntInput.name = "optionsList[" + i + "].prod_Uid";
-        cntInput.value = optionList.prod_Uid;
+        cntInput.value = uid;
 
         $("#buyForm").append(colorInput);
         $("#buyForm").append(sizeInput);
@@ -177,7 +177,7 @@ function downProductCount(color, size) {
 var currentUrl = window.location.href;
 // URL에서 "p" 파라미터값을 추가한다.
 var urlParams = new URLSearchParams(currentUrl.search);
-var prod_code = urlParams.get("p");
+
 // 장바구니 추가 기능
 function addCart(uid) {
     //console.log(selectOptionList); // 테스트 출력
@@ -234,19 +234,19 @@ function buyClick(uid) {
                     // '확인' 클릭 시
                     selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt;
                     alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
-                    addInput();
+                    addInput(uid);
                 } else {
                     // '취소' 클릭 시
                     // 해당 옵션의 cnt를 원래 값으로 복원
                     selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
                     console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
                     alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
-                    addInput();
+                    addInput(uid);
                 }
             } else {
                 // 동일한 옵션의 상품이 없는 경우
                 alert("동일 옵션 없음: " + JSON.stringify(selectOptionList));
-                addInput();
+                addInput(uid);
             }
         },
         error: function (request, status, error) {
@@ -447,7 +447,7 @@ function displayData(currentPage, dataPerPage, dataList) {
     dataPerPage = Number(dataPerPage); //alert('dataPerPage = ' + dataPerPage);
 
 
-    for (var i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
+    for (var i = (currentPage - 1) * dataPerPage; i < Math.min(currentPage * dataPerPage, dataList.length); i++) {
         reviewHtml += '<div class="review-section">' +
             '<div class="info">' +
             '<div>' +
