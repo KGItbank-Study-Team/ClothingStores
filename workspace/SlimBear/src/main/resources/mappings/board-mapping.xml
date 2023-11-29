@@ -3,8 +3,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
- 
+
  <mapper namespace="com.slimbear.mapper.Board">
  
  	<!-- REVIEW -->
@@ -109,15 +108,6 @@
  	<!-- 회원 문의 게시글 조회 -->
  	<select id="SELECT_INQUIRY_USER" resultType="inquiry">
  		SELECT * FROM inquiry WHERE	writer_id=#{writer_id}
-=======
-
-<mapper namespace="com.slimbear.mapper.Board">
-
-	<!-- 관리자 리뷰 -->
-	<select id="SELECT_COMMENT_BY_REVIEW_UID" resultType="comment">
-		SELECT *
-		FROM reviewComent WHERE review_uid=#{reviewUID}
->>>>>>> ee85ac69ac484b63763d9b0a57ffd161a21a3490
 	</select>
 	<select id="SELECT_REVIEW_BY_REVIEW_UID" resultType="review">
 		SELECT *
