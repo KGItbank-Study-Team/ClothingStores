@@ -10,11 +10,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MemberBoardVO {
-	private int boardNumber;
 	private String boardGroup;
 	private String boardTitle;
 	private String boardWriter;
 	private Date boardDate;
-	private int boardHits;
-	private String boardSubstance;
+	private long uid;
 }

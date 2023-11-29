@@ -13,4 +13,6 @@ public class WishListVO {
 	private String productName;
 	private int orderAmount;
 	private int orderDiscount;
+	
+	private long uid;
 }

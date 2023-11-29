@@ -95,14 +95,23 @@
                                 </thead>
                                 <tbody class="center">
                                 
+                                	<!-- 여기가 리스트 일단주석 -->
                                 	<%-- <c:forEach var="item" var="" items="${reserveList}">
                                     <tr class="xans-record-">
                                         <td>${item.orderDate}</td>
                                         <td class="right">${item.addReserve}</td>
-                                        <td>${item.reletedOrder}</td>
+                                        <td>${item.relatedOrder}</td>
                                         <td class="left">${item.substance}</td>
                                     </tr>
                                     </c:forEach> --%>
+                                    
+                                    <!-- 임시로 확인말할라고  -->
+                                    <tr class="xans-record-">
+                                        <td>${mile.orderDate}</td>
+                                        <td class="right">${mile.addReserve}</td>
+                                        <td>${mile.relatedOrder}</td>
+                                        <td class="left">${mile.substance}</td>
+                                    </tr>
                                     
                                 </tbody>
                             </table>

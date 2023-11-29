@@ -113,3 +113,25 @@ function registerCoupon() {
         }
     });
 }
+
+// 위시리스트에서 아이템 삭제를 위한 함수
+function deleteSelectedItems() {
+    var selectedItems = [];
+    $("input[name='wish_idx']:checked").each(function () {
+        selectedItems.push($(this).val());
+    });
+
+    if (selectedItems.length > 0) {
+        // 선택된 아이템을 form 데이터로 설정
+        $("#deleteWishForm").append('<input type="hidden" name="uids" value="' + selectedItems.join(',') + '">');
+        
+        // form을 서버로 전송
+        $("#deleteWishForm").submit();
+    } else {
+        alert('삭제할 아이템을 선택해주세요.');
+    }
+}
+
+
+
+

@@ -96,6 +96,11 @@
 <!-- 	        type = #{type} -->
  	</select>
  	
+ 	<!-- 회원 문의 게시글 조회 -->
+ 	<select id="SELECT_INQUIRY_USER" resultType="inquiry">
+ 		SELECT * FROM inquiry WHERE	writer_id=#{writer_id}
+	</select>
+ 	
  	<!-- 문의게시글 조회 -->
  	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
  		SELECT * FROM inquiry WHERE uid=#{uid}

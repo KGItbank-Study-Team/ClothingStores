@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 
 @Repository
@@ -29,6 +30,12 @@ public class WishDAO {
 	
 	public int updateWishList(WishDTO wish) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_WISH", wish);
+	}
+	
+	public int deleteWish(long uid) {
+		WishDTO wish = new WishDTO();
+		wish.setUid(uid);
+		return template.delete("com.slimbear.mapper.Member.DELETE_WISH", wish);
 	}
 	
 	public int selectCountInWish(WishDTO wish) {

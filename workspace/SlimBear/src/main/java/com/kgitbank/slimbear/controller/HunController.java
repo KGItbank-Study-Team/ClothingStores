@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
@@ -155,15 +158,35 @@ public class HunController {
 
 		return "wish_list";
 	}
+	
+	//위시리스트 삭제
+	@PostMapping("/app/member/myPage/wishList")
+	@ResponseBody
+	public String deleteWishItems(@RequestParam("uids") String uids) {
+	    try {
+	        // uids를 ',' 기준으로 분리하여 삭제
+	        String[] uidArray = uids.split(",");
+	        for (String uid : uidArray) {
+	            hunService.deleteWish(Long.parseLong(uid));
+	        }
+	        return "위시리스트에서 아이템이 성공적으로 삭제되었습니다.";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "위시리스트 아이템 삭제 중 오류가 발생했습니다.";
+	    }
+	}
 
+
+// 문의게시판 시발
 	@RequestMapping("member/myPage/boardList")
-	public String boardList(String type, Authentication authentication, Model model) {
+	public String boardList(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		String writerID = user.getUsername();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
 
-		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(type);
+		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(writerID);
 		
 		System.out.println(vo);
 		
