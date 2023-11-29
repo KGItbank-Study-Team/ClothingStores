@@ -6,6 +6,7 @@ var cnt = 1;
 var productPrice = document.getElementById('productPrice').value;
 var totalPrice = null;
 var urlParams = new URLSearchParams(window.location.search);
+var uid = urlParams.get("p");
 
 
 // 상품 색상, 사이즈 옵션 선택
@@ -65,7 +66,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : uid });
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1});
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -440,7 +441,7 @@ $(document).ready(function () {
 // 목록 표시 함수
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
 function displayData(currentPage, dataPerPage, dataList) {
-    alert('reviewList : ' + JSON.stringify(dataList));
+    console.log('reviewList : ' + JSON.stringify(dataList));
     let reviewHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
     currentPage = Number(currentPage); //alert('currentPage = ' + currentPage);
