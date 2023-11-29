@@ -22,6 +22,6 @@ public class OrderDetailDAO {
 	}
 	
 	public int insertOrder(OrderDetailDTO orderDetail) {
-		return template.insert("com.slimbear.mapper.Order.INSERT_ORDER", orderDetail);
+		return template.insert("com.slimbear.mapper.Order.INSERT_ORDERDETAIL", orderDetail);
 	}
 }

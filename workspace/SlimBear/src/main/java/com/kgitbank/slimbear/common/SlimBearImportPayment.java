@@ -11,6 +11,16 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -41,57 +51,39 @@ public class SlimBearImportPayment {
 	// merchant_uid : 주문번호
 	// reason : 사유
 	public void refundRequest(String merchant_uid, String reason) throws IOException, SlimBearException {
-        URL url = new URL("https://api.iamport.kr/payments/cancel");
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
- 
-        // 요청 방식을 POST로 설정
-        conn.setRequestMethod("POST");
- 
-        // 요청의 Content-Type, Accept, Authorization 헤더 설정
-        conn.setRequestProperty("Content-type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("Authorization", getToken());
- 
-        // 해당 연결을 출력 스트림(요청)으로 사용
-        conn.setDoOutput(true);
- 
-        // JSON 객체에 해당 API가 필요로하는 데이터 추가.
-        JsonObject json = new JsonObject();
-        json.addProperty("merchant_uid", merchant_uid);
-        json.addProperty("reason", reason);
+      
+		 RestTemplate restTemplate = new RestTemplate();
+		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("merchant_uid", merchant_uid);
+        params.add("reason", reason);
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-type", "application/json");
+        headers.add("Accept", "application/json");
+        headers.add("Authorization", getToken());
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
  
         // 출력 스트림으로 해당 conn에 요청
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-        bw.write(json.toString());
-        bw.flush();
-        bw.close();
- 
-        // 입력 스트림으로 conn 요청에 대한 응답 반환
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        br.close();
-        conn.disconnect();
-        
-        String responseJson = new BufferedReader(new InputStreamReader(conn.getInputStream()))
-                .lines()
-                .collect(Collectors.joining("\n"));
-         
-        System.out.println("응답 본문: " + responseJson);
-       
+        ResponseEntity<String> response = restTemplate.postForEntity("https://api.iamport.kr/payments/cancel", request, String.class);
 
-        JsonObject jsonResponse =  new JsonParser().parse(responseJson).getAsJsonObject();
-
-        String resultCode = jsonResponse.get("code").getAsString();
-        String resultMessage = jsonResponse.get("message").getAsString();
-         
-        if(resultCode != null) {
+        if (response.getStatusCode() == HttpStatus.OK) {
+        	System.out.println(response.getBody());
+        	JSONObject responseObject = new JSONObject(response.getBody());
+            Integer resultCode = responseObject.getInt("code");
+            
+            System.out.println("결과 코드 = " + resultCode);
+      
+            System.out.println("결제 취소 완료 : 주문 번호 -" + merchant_uid);
+            
+        }
+        else {
+            // 오류 처리
+            System.out.println("Token request failed with status code: " + response.getStatusCode());
         	throw new SlimBearException("결제 취소 실패");
         }
-        
-        System.out.println("결과 코드 = " + resultCode);
-        System.out.println("결과 메시지 = " + resultMessage);
- 
-        System.out.println("결제 취소 완료 : 주문 번호 -" + merchant_uid);
-    }
+   }
  
     private String getToken() throws IOException {
         URL url = new URL("https://api.iamport.kr/users/getToken");

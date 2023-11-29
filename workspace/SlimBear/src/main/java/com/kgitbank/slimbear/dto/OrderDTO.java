@@ -19,8 +19,8 @@ public class OrderDTO {
 	private int total_price;
 	private Integer deliv_price;
 	private Integer addisale_price;
-	private String order_request;
 	private Integer use_mileage;
+	private String order_request;
 	private String deliv_recipient;
 	private String deliv_address;
 	private String deliv_tel;

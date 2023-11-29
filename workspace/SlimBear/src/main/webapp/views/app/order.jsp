@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList"%>
-<%
-    request.setAttribute("choicephone", "");
-    request.setAttribute("phoneNum", "01035349767");
-    request.setAttribute("postNum", "08296");
-    request.setAttribute("addressOne", "서울시 구로구 공원로 6가길 8 비즈트위트오렌지");
-    request.setAttribute("addressTwo", "1821호");
-    request.setAttribute("injungnum", "");
-    request.setAttribute("newbasicaddr", "");
-    request.setAttribute("newjasaeaddr", "");
-    request.setAttribute("newphonenum", "");
-    request.setAttribute("nowpoint", "7200");
-    request.setAttribute("usepoint", "5000");
- 	
-%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,12 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>결제 페이지</title>
 
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/order.js"></script>
 
 
-<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <script src="/resources/js/slimbear-payment-imp.js"></script>
 
 <link rel="stylesheet" href="/resources/css/orderr.css">
@@ -47,15 +34,15 @@
 				<div class="delivery">
 					<!-- 2. 필드 -->
 					<div class="field">
-						<b>주문자</b><input class="payment-buyer-name"type="text" value="${name}" readonly>
+						<b>주문자</b><input class="payment-buyer-name"type="text" value="${order.name}" readonly>
 					</div>
 					<div class="field">
-						<b>이메일</b> <input class="payment-buyer-email" type="text" value="${email}" readonly>
+						<b>이메일</b> <input class="payment-buyer-email" type="text" value="${order.email}" readonly>
 						<!-- type이 password로 되어있어서 text로 바꿈 -->
 					</div>
 					<div class="field birth">
 						<b>휴대전화</b>
-						<input class="payment-buyer-tel" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${phone}" readonly>
+						<input class="payment-buyer-tel" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="${order.phone}" readonly>
 					</div>
 				</div>
 			</div>
@@ -68,9 +55,9 @@
 				<h1>수령인 정보</h1>
 				<div class="radioo">
 					<p>
-						<select id="select-address" onchange="reloadRecipient(${uid})">
+						<select id="select-address" onchange="reloadRecipient(${order.uid})">
 							<option value="0" selected>구매자와 동일</option>
-							<c:forEach var="item" items="${addressInfo}">
+							<c:forEach var="item" items="${order.addressInfo}">
 							 	<option value="${item.addr_uid}">${item.addrName}</option>
 							</c:forEach>
 						</select>
@@ -128,13 +115,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="product" items="${productList}">
+					<c:forEach var="product" items="${order.productList}">
 					<tr class="cart__list__detail">
 							<td><img width="100" src="/resources/images/${product.main_image}"></td>
 							<td >${product.name}</td>
 							<td >${product.color}/${product.size}</td>
 							<td >${product.cnt}</td>
-							<td >80</td>
+							<td >${product.mileage}</td>
 							<td class="value-product-price">${product.price}</td>
 							<td >${product.maybeprice}</td>
 					</tr>
@@ -157,9 +144,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td class="payment-amount-prodtotal" ></td>
-							<td class="payment-amount-delivery" ></td>
-							<td class="payment-pay-amount"></td>
+							<td class="payment-amount-prodtotal" >${order.totalProduct}</td>
+							<td class="payment-amount-delivery" >${order.deliveryPrice}</td>
+							<td class="payment-pay-amount">${order.paymonetAmount}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -168,19 +155,20 @@
 					
 					<div>
 						<h2>적립금</h2>
-						<p>현재 포인트 : <span>${nowpoint}</span>점</p>
-						<label> <input class="pointt" type="text" name="point"
-							placeholder="00,000점" value="${usepoint}"> <input
+						<p>현재 포인트 : <span>${order.mileage}</span>점</p>
+						<label> <input class="mileage-apply" type="text" name="point"
+							placeholder="00,000점" value="0"> <input class="btn-mileage-apply"
 							type="button" value="적용">
 						</label>
 					</div>
 					
 					<div>
 						<h2>쿠폰</h2>
-						<select>
-							<option>sadf</option>
-							<option>sadf</option>
-							<option>sadf</option>
+						<select class="select_coupon">
+							<option value="0" selected>쿠폰</option>
+						<c:forEach var="coupon" items="${order.couponeList}">
+							<option value="${coupon.coup_uid}">${coupon.couponName}</option>
+						</c:forEach>
 						</select>
 					</div>
 					

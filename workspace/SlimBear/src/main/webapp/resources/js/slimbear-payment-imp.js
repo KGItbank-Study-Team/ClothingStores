@@ -84,36 +84,33 @@ $(function(){
  	            }, function (rsp) { // callback
 					if (rsp.success) {
 						// 결제 성공
+						console.log(rsp);
 						$.ajax({
 							url: '/app/order/product/payment', // 결제 완료 후 처리
 							type: 'POST',
 							data: {
 								// Additional Datas
-								code : rsp.imp_uid,
-								pg: pg,
-								pay_method: payMethod,
-
-								order : {
-									total_price : 10000,
-									deliv_price : 1000,
-									addisale_price : 1000,
-									order_request : 1000,
-									use_mileage : 1000,
-									deliv_recipient : buyername,
-									deliv_address : buyerpostcode + '|' + buyeraddr1 + '|' + buyeraddr2,
-									deliv_tel : buyertel,
-									deliv_norm_tel : buyertel
-								}
+								imp_uid : rsp.imp_uid,
+								code : rsp.merchant_uid,
+								pay_pg: pg,
+								type: payMethod,
+								price : payamount,
+								deliv_recipient : $('.recipient-name').val(),
+								deliv_address : buyerpostcode + '|' + buyeraddr1 + '|' + buyeraddr2,
+								deliv_tel : $('.recipient-phone').val(),
+								deliv_norm_tel : $('.recipient-phone').val(),
+								order_request : orderrequest,
+							
 							}
 							,
-							success : function(data) {
+							success : function(res) {
+								console.log(res);
 								// 주문 완료
-								console.log(data);
-								//location = "/app/mypage/order/detail/" + data.order_code;
+								location = res.url;
 							 },
 							 error : function(error){
 								// 주문 실패
-								alert('주문 실패 : ' + error);
+								alert('주문 실패');
 							 }
 						 })
 					}else{
