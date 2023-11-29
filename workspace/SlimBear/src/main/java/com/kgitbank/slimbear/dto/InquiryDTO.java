@@ -1,6 +1,7 @@
 package com.kgitbank.slimbear.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,5 +26,8 @@ public class InquiryDTO {
     
     private String searchKey; // 검색 대상 (title, content, writer_id, prod_uid 등)
     private String searchValue; // 검색어
+    
+    // 답변 목록을 저장할 List
+    private List<InquiryAnswerDTO> answers;
     
 }

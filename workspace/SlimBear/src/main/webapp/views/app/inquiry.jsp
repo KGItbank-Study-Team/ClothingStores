@@ -111,6 +111,25 @@
 						            <td>${board.writer_id}</td>
 						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
+						        <!-- 답변 목록 출력 -->
+						        <c:if test="${not empty board.answers}">
+						            <c:forEach items="${board.answers}" var="answer">
+						                <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
+						                    <!-- 추가적인 답변 정보 출력 -->
+						                    <td></td>
+						                    <td class="displaynone"></td>
+						                    <td class="subject left txtBreak">
+						                        <strong>
+						                            <!-- 답변의 링크 형식은 필요에 따라 수정하세요 -->
+						                            <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${answer.title}</a>
+						                            <span class="txtEm"></span>
+						                        </strong>
+						                    </td>
+						                    <td>${answer.mem_id}</td>
+						                    <td><fmt:formatDate value="${answer.reg_date}" pattern="yyyy-MM-dd"/></td>
+						                </tr>
+						            </c:forEach>
+						        </c:if>
 						    </c:forEach>
 						</tbody>
 						
@@ -128,7 +147,6 @@
 					</div>
 				</sec:authorize>
 			</div>
-			
 			
 			
 			<!-- 게시글 개수와 현재 페이지 설정 -->

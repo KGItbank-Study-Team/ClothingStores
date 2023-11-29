@@ -17,6 +17,7 @@ public class OrderVO {
 	private int applyMileage;	
 	private int couponSaleAmount;
 	private long applyCouponUID;
+	private String productName;
 	
 	List<AddrVO> addressInfo;
 	List<MemberCartVO> productList;

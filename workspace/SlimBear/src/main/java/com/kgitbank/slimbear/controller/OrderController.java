@@ -1,7 +1,6 @@
 package com.kgitbank.slimbear.controller;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kgitbank.slimbear.common.SlimBearEnum;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
-import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.OrderPaymentDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
@@ -34,7 +32,6 @@ import com.kgitbank.slimbear.vo.MemberCartVO;
 import com.kgitbank.slimbear.vo.OrderProductVO;
 import com.kgitbank.slimbear.vo.OrderVO;
 import com.kgitbank.slimbear.vo.command.OrderProductCommand;
-import com.siot.IamportRestClient.exception.IamportResponseException;
 
 @Controller
 @RequestMapping("order")
@@ -65,11 +62,16 @@ public class OrderController {
 		int totalProduct = 0;
 		int deliveryPrice = 2500;
 		int paymonetAmount = 0;
+		OrderVO orderInfo = new OrderVO();
 
 		List<MemberCartVO> productList = new ArrayList<MemberCartVO>(); 
 		for(int i=0; i<orderProducts.getOptionsList().size(); ++i) {
 		    OrderProductVO orderProduct = orderProducts.getOptionsList().get(i);
 			ProductDTO product = prodService.getProductByUid(orderProduct.getProd_Uid());
+			
+			if(orderInfo.getProductName() == null) {
+				orderInfo.setProductName(product.getName() + " " + orderProduct.getColor() + "/" + orderProduct.getSize());
+			}
 			
 			MemberCartVO vo = new MemberCartVO();
 			vo.setProductUid(product.getUid());
@@ -87,12 +89,16 @@ public class OrderController {
 			totalProduct += vo.getMaybeprice() * vo.getCnt();
 		}
 		
+		if(orderProducts.getOptionsList().size() > 1 ) {
+			orderInfo.setProductName(orderInfo.getProductName().concat(" 외 " + (orderProducts.getOptionsList().size()-1) + "개의 상품"));
+		}
+		
 		if(totalProduct > 50000) {
 			deliveryPrice = 0;
 		}
 		paymonetAmount  = deliveryPrice + totalProduct;
 		
-		OrderVO orderInfo = new OrderVO();;
+		
 		
 		orderInfo.setUid(mem.getUid());
 		orderInfo.setName( mem.getName());

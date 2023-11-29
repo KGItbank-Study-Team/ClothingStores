@@ -14,3 +14,8 @@ function deleteInquiry(uid) {
     });
 }
 
+$(document).ready(function() {
+	$("#toggleAnswer").click(function() {
+		$("#answerContent").slideToggle();
+	});
+});
