@@ -118,7 +118,7 @@
 	        status,
 	        type,
 	        prod_uid AS priority,  
-	        null AS writer
+	        secure
 	    FROM 
 	        inquiry
 	    WHERE 
