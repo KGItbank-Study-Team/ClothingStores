@@ -44,6 +44,12 @@ public class InquiryDAO {
 	public InquiryDTO getInquiryDetail(Long id) {
 	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
 	}
+	// 질문에 대한 답변 목록 조회
+    public List<InquiryAnswerDTO> getInquiryAnswerList(Long id) {
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST", id);
+    }
+	
+	
 	
 	// 문의게시글 삭제
 	public int deleteInquiry(Long uid) {

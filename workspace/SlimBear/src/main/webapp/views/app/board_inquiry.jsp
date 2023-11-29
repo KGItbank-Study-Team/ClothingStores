@@ -105,14 +105,18 @@
                             </span>
                             <a href="/app/board/inquiry" class="btnNormalFix sizeS">LIST</a>
                             <a href="#" id="toggleAnswer" class="btnNormalFix sizeS">ANSWER</a>
-                            <div id="answerContent" class="detail" style="display: none;">
+						    <div id="answerContent" class="detail" style="display: none;">
+						        <c:forEach var="answer" items="${inquiries.answers}">
 					            <div class="fr-view fr-view-article">
 					                <p><br></p>
 					                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+					                <p><br></p>
+					                
 					                    ${answer.content}
 					                </p>
 					                <p><br></p>
 					            </div>
+					            </c:forEach>
 					        </div>
                         </span>
                         

@@ -73,6 +73,9 @@ public class YangBoardServiceImpl {
 	            inquiry.setContent("비밀글로 작성자 외엔 확인할 수 없는 내용입니다.");
 	            // 다른 필요한 처리를 추가할 수 있음
 	        }
+	        // 해당 문의에 대한 답변 검색
+            List<InquiryAnswerDTO> answers = inquiryDAO.getInquiryAnswerList(id);
+            inquiry.setAnswers(answers);
 
 	        return inquiry;
 	    } catch (AccessDeniedException e) {
@@ -121,7 +124,7 @@ public class YangBoardServiceImpl {
     }
     
     
-    // 문의게시판 답변게시글
+    // 문의게시판 답변게시글 목록
     public List<InquiryDTO> getInquiryListWithAnswers(String type) {
         List<InquiryDTO> inquiries = inquiryDAO.getInquiryList(type);
         
