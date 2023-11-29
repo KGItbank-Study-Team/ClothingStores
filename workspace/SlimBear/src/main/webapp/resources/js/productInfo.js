@@ -63,7 +63,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : prod_Uid });
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : prod_code });
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -100,7 +100,7 @@ function addInput() {
         var prodUIdInput = document.createElement("input");
         cntInput.type = "hidden";
         cntInput.name = "prod_Uid";
-        cntInput.value = uid;
+        cntInput.value = prod_code;
 
         $("#buyForm").append(colorInput);
         $("#buyForm").append(sizeInput);
