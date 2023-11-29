@@ -22,6 +22,11 @@ public class ReviewDAO {
 		return template.selectOne("");
 	}
 	
+	// 특정 회원이 작성한 리뷰 조회
+    public List<ReviewDTO> getReviewListByUserId(String userID) {
+        return template.selectList("com.slimbear.mapper.Board.SELECT_BY_USER_ID", userID);
+    }
+	
 	// 리뷰 리스트 조회
 	public List<ReviewDTO> getReviewList() { 
 		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST"); // 패키지풀네임.id

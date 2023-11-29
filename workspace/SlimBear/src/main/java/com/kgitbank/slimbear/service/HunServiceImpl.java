@@ -16,6 +16,7 @@ import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
+import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
 import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
@@ -25,6 +26,7 @@ import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
@@ -35,6 +37,7 @@ import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderDetailVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
 import com.kgitbank.slimbear.vo.WishListVO;
+import com.kgitbank.slimbear.vo.reviewListVO;
 
 @Service
 public class HunServiceImpl {
@@ -62,6 +65,9 @@ public class HunServiceImpl {
 
 	@Autowired
 	private InquiryDAO inquiryDAO;
+	
+	@Autowired
+	private ReviewDAO reviewDAO;
 
 	@Autowired
 	private MemberOrderAddressDAO addressDAO;
@@ -258,6 +264,24 @@ public class HunServiceImpl {
 	}
 
 	//리뷰게시판
+	public List<reviewListVO> getReviewListInfo(String userID){
+		ArrayList<reviewListVO> list = new ArrayList<>();
+		List<ReviewDTO> reviewlist = reviewDAO.getReviewListByUserId(userID);
+		
+		for(ReviewDTO i : reviewlist) {
+			reviewListVO vo = new reviewListVO();
+			
+			vo.setImage("대충사진");
+			vo.setTitle(i.getTitle());
+			vo.setContent(i.getContent());
+			vo.setScore(i.getScore());
+			vo.setReg_date(i.getReg_date());
+			
+			list.add(vo);
+		}
+		
+		return list;
+	}
 	
 	public List<AddrVO> getAddrInfo(long memberUID) {
 		ArrayList<AddrVO> list = new ArrayList<>();

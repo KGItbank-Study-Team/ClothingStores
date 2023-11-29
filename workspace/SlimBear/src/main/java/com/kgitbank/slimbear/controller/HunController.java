@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
@@ -25,6 +22,7 @@ import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderListVO;
 import com.kgitbank.slimbear.vo.WishListVO;
+import com.kgitbank.slimbear.vo.reviewListVO;
 
 @Controller
 public class HunController {
@@ -177,7 +175,7 @@ public class HunController {
 	}
 
 
-// 문의게시판 시발
+// 문의게시판 
 	@RequestMapping("member/myPage/boardList")
 	public String boardList(Authentication authentication, Model model) {
 
@@ -195,13 +193,17 @@ public class HunController {
 	}
 	
 	@RequestMapping("member/myPage/reviewList")
-	public String reviewList(String type, Authentication authentication, Model model) {
+	public String reviewList(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		String userID = user.getUsername();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-
 		
+		List<reviewListVO> vo = hunService.getReviewListInfo(userID);
+		
+		System.out.println(vo);
+		model.addAttribute("reviewList", vo);
 		
 		return "review_list";
 	}
@@ -214,7 +216,7 @@ public class HunController {
 		System.out.println(user.getUsername());
 
 		List<AddrVO> vo = hunService.getAddrInfo(user.getUid());
-		model.addAttribute("addrList", vo);
+		model.addAttribute("addrList", vo);	
 
 		return "addr";
 	}

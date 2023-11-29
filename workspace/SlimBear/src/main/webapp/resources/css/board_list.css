@@ -1,3 +1,16 @@
+/* 리뷰이미지 */
+.image-container {
+        max-width: 200px; /* 최대 너비 설정 */
+        max-height: 180px; /* 최대 높이 설정 */
+        overflow: hidden; /* 넘치는 부분 감춤 */
+    }
+    
+.resizable-image {
+        width: 100%; /* 부모 요소에 맞게 이미지 크기 조절 */
+        height: auto; /* 가로 세로 비율 유지 */
+    }
+/*end 리뷰이미지 */
+
 #contents select {
     width: 150px;
     padding-left: 10px;

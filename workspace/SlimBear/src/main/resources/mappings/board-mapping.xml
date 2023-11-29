@@ -12,6 +12,14 @@
  		SELECT * FROM productReview
  	</select>
  	
+ 	<!-- 특정 회원이 작성한 리뷰 조회 -->
+    <select id="SELECT_BY_USER_ID" parameterType="String" resultType="com.kgitbank.slimbear.dto.ReviewDTO">
+    SELECT *
+    FROM productReview
+    WHERE mem_id = #{userID}
+</select>
+
+ 	
  	<!-- 특정 prodUid에 대한 리뷰 조회 -->
  	<select id="SELECT_BY_PRODCODE" resultType="review">
  		SELECT * FROM productReview
