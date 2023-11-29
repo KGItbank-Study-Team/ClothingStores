@@ -126,6 +126,9 @@
         	AND prod_uid IS NULL
 	    ORDER BY reg_date DESC
  	</select>
+ 	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
+ 		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
+ 	</select>
 
  	<!-- 문의게시글 답변게시글 -->
  	<select id="SELECT_INQUIRY_ANSWERS" resultType="InquiryAnswer">
@@ -167,9 +170,9 @@
 	 	INSERT INTO inquiry
 	    (writer_id, title, content, reg_date, status, type, prod_uid, secure)
 	    VALUES(
-<!-- 	        COALESCE((SELECT name FROM member WHERE id = #{writer_id}), 'DefaultName'), -->
+		<!-- COALESCE((SELECT name FROM member WHERE id = #{writer_id}), 'DefaultName'), -->
 			#{writer_id},
-	        #{title},
+	        #{title},	
 	        #{content},
 	        #{reg_date},
 	        COALESCE(#{status}, 'WAIT'),
@@ -213,6 +216,16 @@
  	<!-- 질문답변 조회 -->
  	<select id="SELECT_INQUIRYANSWER_LIST" resultType="inquiryAnswer" parameterType="inquiry">
  		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{inqr_uid}
+ 	</select>
+ 	<select id="SELECT_INQUIRYANSWER_LIST_BY_PRODUID" resultType="inquiryAnswer">
+ 		SELECT * FROM inquiryAnswer
+ 	</select>
+ 	<select id="SELECT_ANSWER_BY_INQRUID" resultType="inquiryAnswer">
+		SELECT * FROM your_table WHERE inqr_uid IN
+		<foreach item="uid" collection="uids" open="(" separator=","
+			close=")">
+			#{uid}
+	    </foreach>
  	</select>
  	<!-- 질문답변 데이터 삽입 -->
  	<insert id="INSERT_INQUIRYANSWER">

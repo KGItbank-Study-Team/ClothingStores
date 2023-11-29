@@ -421,10 +421,16 @@ section > h1 {
 	display: flex;
 	justify-content: center;
 }
-#paginul > li {
+#paging ul > li {
 	margin-right: 10px;
 }
-
+#inquiry {
+	display: flex;
+	justify-content: center;
+}
+#inquiry ul > li{
+	margin-right: 10px;
+}
 
 
 
