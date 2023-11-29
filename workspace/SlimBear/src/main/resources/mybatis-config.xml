@@ -53,7 +53,7 @@
 		<!-- admin-mapping -->
 		<typeAlias alias="admin" type="com.kgitbank.slimbear.admin.dto.AdminDTO" />
 		<typeAlias alias="productTotalListItem" type="com.kgitbank.slimbear.admin.dto.ProductTotalListDTO" />
-		
+		<typeAlias alias="comment" type="com.kgitbank.slimbear.admin.dto.RSYAdminDTO" />
 		
 	</typeAliases>
 	
