@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 
 @Repository
@@ -15,11 +16,24 @@ public class InquiryDAO {
 	protected SqlSessionTemplate template;
 	
 	// 상품문의 리스트 조회
+//	public List<InquiryDTO> getInquiryList(String type) {
+//		InquiryDTO Inquiry = new InquiryDTO();
+//		Inquiry.setType(type);
+//		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
+//	}
 	public List<InquiryDTO> getInquiryList(String type) {
-		InquiryDTO Inquiry = new InquiryDTO();
-		Inquiry.setType(type);
-		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
-	}
+        List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", type);
+
+        // 각 문의게시글에 대한 답변목록 설정
+        for (InquiryDTO inquiry : inquiries) {
+            List<InquiryAnswerDTO> answers = getInquiryAnswers(inquiry.getUid());
+            inquiry.setAnswers(answers);
+        }
+
+        return inquiries;
+    }
+	
+	
 	
 	// 문의게시글 상세페이지조회
 	public InquiryDTO getInquiryDetail(Long id) {
@@ -35,7 +49,7 @@ public class InquiryDAO {
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
         return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
     }
-
+    
 	// 상품문의 데이터 삽입
 	public int insertInquiry(InquiryDTO inquiry) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_INQUIRY", inquiry);
@@ -46,11 +60,17 @@ public class InquiryDAO {
 		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRY", inquiry);
 	}
 	
-	
-	// 게시글 검색 기능 DAO 추가
+	// 게시글 검색 기능
     public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
         return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_BY_SEARCH", searchMap);
     }
 	
+    // 문의게시글 답변게시글
+    public List<InquiryAnswerDTO> getInquiryAnswers(Long inqr_uid) {
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_ANSWERS", inqr_uid);
+    }
+	public InquiryAnswerDTO getAnswerDetail(Long uid) {
+		return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_ANSWERS", uid);
+	}
 	
 }
