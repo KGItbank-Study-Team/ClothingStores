@@ -15,7 +15,7 @@ public class OrderPaymentDTO {
 	private long order_uid;
 	private Date pay_date;
 	private String type;
-	private String satus;
+	private String status;
 	private int price;
 	private String pay_pg;
 }

@@ -81,7 +81,7 @@ $(document).ready(function () {
         // 선택된 체크박스의 상품 정보 수집
         $('input[name="selectedItems"]:checked').each(function (index,me) {
     
-            var quantity = $(me).data('productuid');
+            var quantity = $(me).data('cnt');
             var productUid = $(me).data('productuid');
             var color  = $(me).data('color');
             var size = $(me).data('size');
@@ -111,7 +111,7 @@ $(document).ready(function () {
             form.append($("<input>")
                 .attr("type", "hidden")
                 .attr("name", "optionsList[" + index + "].prod_Uid")
-                .val(product.prodcode));
+                .val(product.prod_Uid));
 
             form.append($("<input>")
                 .attr("type", "hidden")

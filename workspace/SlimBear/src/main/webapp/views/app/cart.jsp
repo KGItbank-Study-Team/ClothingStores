@@ -45,7 +45,7 @@
 				<c:forEach var="cart" items="${cartList}" varStatus="status">
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
-							value="${cart.uid}" data-productuid="${cart.productUid}" data-color=""${cart.color} data-size="${cart.size}" data-cnt="${cart.cnt}"></td>
+							value="${cart.uid}" data-productuid="${cart.productUid}" data-color="${cart.color}" data-size="${cart.size}" data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
 							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
 						<td><a href="#">${cart.maker}</a> <span

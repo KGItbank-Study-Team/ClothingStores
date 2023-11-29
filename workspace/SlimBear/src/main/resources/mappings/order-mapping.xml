@@ -17,10 +17,10 @@
 			GROUP BY prod_uid;
 		</select>
 		
-		<insert id="INSERT_ORDER"> 
+		<insert id="INSERT_ORDER" useGeneratedKeys="true" keyProperty="uid"> 
 			INSERT INTO productOrder
-			(member_uid, order_date, status, total_price)
-			VALUES(#{member_uid},#{order_date},#{status},#{total_price})
+			(mem_uid, order_date, status, total_price, code, deliv_price, addisale_price, use_mileage, order_request, deliv_recipient, deliv_address, deliv_tel, deliv_norm_tel)
+			VALUES(#{mem_uid},#{order_date},#{status},#{total_price}, #{code}, #{deliv_price}, #{addisale_price}, #{use_mileage}, #{order_request}, #{deliv_recipient}, #{deliv_address}, #{deliv_tel}, #{deliv_norm_tel})
 		</insert>
 		
 		<update id="UPDATE_ORDER">
@@ -36,13 +36,13 @@
 
  		<!-- 주문상세(orderDetail) -->
 		<select id="SELECT_ORDERDETAIL_LIST_BY_ORDER_UID" resultType="orderDetail" parameterType="order">
-			SELECT * FROM productOrder WHERE order_uid=#{uid}
+			SELECT * FROM orderDetail WHERE order_uid=#{uid}
 		</select>
 		
 		<insert id="INSERT_ORDERDETAIL"> 
-			INSERT INTO productOrder
-			(order_uid, prod_code, cnt, review_uid)
-			VALUES(#{order_uid},#{prod_code},#{cnt},#{review_uid})
+			INSERT INTO orderDetail
+			(order_uid, prod_code, cnt, total_price)
+			VALUES(#{order_uid},#{prod_code},#{cnt},#{total_price})
 		</insert>
 
  		<!-- 주문결제(orderPayment) -->	
@@ -52,8 +52,8 @@
 		
 		<insert id="INSERT_PAYMENT"> 
 			INSERT INTO orderPayment
-			(order_uid, pay_date, type, status, price)
-			VALUES(#{order_uid},#{pay_date},#{type},#{status},#{price})
+			(order_uid, pay_date, type, status, price,pay_pg)
+			VALUES(#{order_uid},#{pay_date},#{type},#{status},#{price},#{pay_pg})
 		</insert>
 		
 		<update id="UPDATE_PAYMENT">

@@ -11,8 +11,5 @@ import lombok.ToString;
 @ToString
 public class OrderCommand{
 	private String code;
-	
 	private OrderDTO order;
-
-	
 }
