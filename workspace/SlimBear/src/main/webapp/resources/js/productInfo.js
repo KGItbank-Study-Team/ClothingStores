@@ -63,7 +63,7 @@ $(function () {
                 var index = findProductIndexByOption(color, size);
                 if (index == -1) {
                     // 이미 추가한 옵션이 아니면 새로 추가
-                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1 });
+                    selectOptionList.push({ color: selectedColor, size: selectedSize, cnt: 1, prod_Uid : prod_Uid });
                     addRowToTable(selectedColor, selectedSize, 1);
                 }
                 else {
@@ -97,9 +97,14 @@ function addInput() {
         cntInput.name = "optionsList[" + i + "].cnt";
         cntInput.value = optionList.cnt;
 
-        document.body.appendChild(colorInput);
-        document.body.appendChild(sizeInput);
-        document.body.appendChild(cntInput);
+        var prod_UidInput = document.createElement("input");
+        cntInput.type = "hidden";
+        cntInput.name = "prod_Uid";
+        cntInput.value = uid;
+
+        $("#buyForm").append(colorInput);
+        $("#buyForm").append(sizeInput);
+        $("#buyForm").append(cntInput);
 
     }
     $("#buyForm").submit();
@@ -172,7 +177,7 @@ var urlParams = new URLSearchParams(currentUrl.search);
 var prod_code = urlParams.get("p");
 // 장바구니 추가 기능
 function addCart(uid) {
-    console.log(selectOptionList); // 테스트 출력
+    //console.log(selectOptionList); // 테스트 출력
     console.log("prod_code", uid);
     $.ajax({
         url: "/app/insert/cart/" + uid,
@@ -517,7 +522,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
         var urlParams = new URLSearchParams(window.location.search);
         var uid = urlParams.get("p");
         event.preventDefault(); // 기본 동작 중단
-        alert('reviewList = ' + JSON.stringify(dataList));
+        //alert('reviewList = ' + JSON.stringify(dataList));
         let $id = $(this).attr("id");
         selectedPage = $(this).text();
 
