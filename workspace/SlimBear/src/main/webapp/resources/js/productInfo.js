@@ -101,10 +101,10 @@ function addInput(uid) {
         cntInput.value = optionList.cnt;
 
         var prodUIdInput = document.createElement("input");
-        cntInput.type = "hidden";
-        cntInput.id = "prodUIdInput" + i;
-        cntInput.name = "optionsList[" + i + "].prod_Uid";
-        cntInput.value = uid;
+        prodUIdInput.type = "hidden";
+        prodUIdInput.id = "prodUIdInput" + i;
+        prodUIdInput.name = "optionsList[" + i + "].prod_Uid";
+        prodUIdInput.value = uid;
 
         $("#buyForm").append(colorInput);
         $("#buyForm").append(sizeInput);
