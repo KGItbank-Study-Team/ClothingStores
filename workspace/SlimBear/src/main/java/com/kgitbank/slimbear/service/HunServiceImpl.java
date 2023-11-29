@@ -153,9 +153,9 @@ public class HunServiceImpl {
 		return vo;
 	}
 
-	public MileageVO getMileageInfo(long uid) {
+	public MileageVO getMileageInfo(long mem_uid) {
 		MileageVO vo = new MileageVO();
-		int i = memDAO.getMemberMileageRecordListByMemberUID(uid);
+		int i = memDAO.getMemberMileageRecordListByMemberUID(mem_uid);
 		
 		vo.setTotalReserve(5000);
 		vo.setReserve(2000);

@@ -17,9 +17,6 @@ public class CouponVO {
 	private Date couponPeriod;		//쿠폰사용기간
 	
 	private int value;
-	private String type;
+	private String type;			//퍼센트 할인 or xx원 할인
 	private long coup_uid;			//멤쿠
 }
-
-//쿠폰 uid가 제대로 안들어간다
-//type 하고 value 값도 넣을수있게
