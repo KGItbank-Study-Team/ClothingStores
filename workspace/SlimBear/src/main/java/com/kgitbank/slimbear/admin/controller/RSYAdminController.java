@@ -27,28 +27,29 @@ public class RSYAdminController {
 	@Autowired
 	private RSYAdminServiceImpl rsyAdminService;
 	
+	
+	//리뷰관리페이지
 	@RequestMapping("home/board/review")
 	public String boardReview(Model model) {
 		
 		model.addAttribute("reviewList", sanghService.getReviewList());
 		return "tables-board-review";
-	}
+	}	
 	@GetMapping("review/list")
 	@ResponseBody
 	public List<ReviewDTO> boardReviewList(){
 		
 		List<ReviewDTO> reviewList = sanghService.getReviewList();
-
+		
 		return reviewList;
-	}
+	}	
 	@RequestMapping("review/getComment")
 	@ResponseBody
 	public RSYAdminDTO boardReviewGetComment(@RequestParam(name="reviewUID" , required=false)Long reviewUID) {
 	
 		RSYAdminDTO comment = rsyAdminService.getComment(reviewUID);
 		return comment;
-	}
-	
+	}	
 //	@PostMapping("review/setComment")
 //	public String boardReviewSetComment()
 	
@@ -67,9 +68,7 @@ public class RSYAdminController {
 	    } else {
 	        return "redirect:home/board/review";
 	    }
-	}
-	
-	
+	}	
 	@RequestMapping("review/addOrUpdateComment")
 	@ResponseBody
 	public ResponseEntity<String> addOrUpdateComment(@RequestParam Long reviewUID, @RequestParam String commentTitle, @RequestParam String commentContent, @RequestParam String mem_id ) {
@@ -79,9 +78,12 @@ public class RSYAdminController {
             return ResponseEntity.ok("답글이 성공적으로 추가/수정되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("답글 추가/수정 중에 오류가 발생했습니다.");
-        }
-			      
+        }			      
 	}
+	
+	
+	//문의관리페이지
+	
 
 
 
