@@ -153,7 +153,34 @@
 													</div>
 												</td>
 											</tr> --%>
-											<c:if test="${not empty inquiries.answers}">
+											
+											<tr>
+    <td colspan="2" class="bon">
+        <div class="detail">
+            <div class="fr-view fr-view-article">
+                <p><br></p>
+                <c:choose>
+                    <c:when test="${inquiries.secure eq 1 and inquiries.writer_id ne pageContext.request.userPrincipal.name}">
+                        <!-- writer_id와 현재 로그인한 사용자의 ID가 다른 경우 -->
+                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+                            비밀글로 작성자 외엔 확인할 수 없는 내용입니다.
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- writer_id와 현재 로그인한 사용자의 ID가 같은 경우 -->
+                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+                            ${answer.content}
+                        </p>
+                    </c:otherwise>
+                </c:choose>
+                <p><br></p>
+            </div>
+        </div>
+    </td>
+</tr>
+											
+											
+											<%-- <c:if test="${not empty inquiries.answers}">
 										    <c:forEach var="answer" items="${inquiries.answers}">
 										        <c:choose>
 										            <c:when test="${inquiries.secure eq 0 or currentUser.id eq inquiries.writer_id}">
@@ -195,7 +222,7 @@
 										            </c:otherwise>
 										        </c:choose>
 										    </c:forEach>
-										</c:if>
+										</c:if> --%>
 
 											
 											<%-- <c:if test="${not empty inquiries.answers}">
