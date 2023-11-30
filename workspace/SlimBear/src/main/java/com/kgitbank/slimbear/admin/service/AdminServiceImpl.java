@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.admin.command.ProductUpdateCMD;
 import com.kgitbank.slimbear.admin.dao.AdminDAO;
+import com.kgitbank.slimbear.admin.dto.AdminDTO;
 import com.kgitbank.slimbear.admin.dto.OrderListDTO;
 import com.kgitbank.slimbear.admin.dto.ProductTotalListDTO;
 import com.kgitbank.slimbear.dao.ProductDAO;
@@ -34,6 +35,10 @@ public class AdminServiceImpl {
 	
 	@Autowired
 	private ProductDetailDAO productDtailDAO;
+	
+	public AdminDTO getAdminByID(String id) {
+		return adminDAO.getAdminById(id);
+	}
 
 	public List<ProductTotalListDTO> getProductTotalListDTO() {
 		return adminDAO.getProductTotalList();

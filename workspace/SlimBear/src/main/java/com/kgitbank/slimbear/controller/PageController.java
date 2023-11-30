@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kgitbank.slimbear.admin.dto.AdminDTO;
+import com.kgitbank.slimbear.admin.service.AdminServiceImpl;
 import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
 import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
@@ -32,6 +34,9 @@ public class PageController {
 	
 	@Autowired 
 	private MemberService memberService;
+	
+	@Autowired 
+	AdminServiceImpl adminService;
 
 	@Autowired
 	private RSYServiceImpl RSYService;
@@ -111,8 +116,17 @@ public class PageController {
 	
 	@RequestMapping("slimbear/login")
 	public String slimbearLogin(String id, String pwd, Model model) {
+		
+		AdminDTO admin = adminService.getAdminByID(id);
+		if(admin != null) {
+			model.addAttribute("id", id);
+			model.addAttribute("pwd", pwd);
+			
+			return "redirect:/app/login";
+		}
 	
 		MemberDTO member = memberService.getMemberById(id);
+		
 		if(member == null) {
 			// 회원아님
 			return "redirect:/app/login";
@@ -132,7 +146,6 @@ public class PageController {
 
 	@RequestMapping("login/success")
 	public String loginSuccessPage(Authentication authentication, HttpServletRequest request) {
-
 		if (authentication.getAuthorities().contains(AuthorityUtils.createAuthorityList("ADMIN").get(0))) {
 			return "redirect:/admin/home";
 		}else {

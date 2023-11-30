@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.CategoryDTO;
+import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
@@ -45,60 +46,72 @@ public class SanghyukController {
 	@RequestMapping("product")
 	public String productPage(@RequestParam("p")long productUid, HttpSession session, Model model)  {
 		
-		// 제품 상세 정보 가져오기
+		// 제품 상세 정보 조회
 		ProductDTO product = sanghService.getProductByUid(productUid);	
+		System.out.println("productUid: " + productUid);
 		System.out.println("product: " + product);
 		// 잘못된 UID일 경우 메인페이지로
 		if(product == null) {
 			return "redirct:/";
 		}
-			
-		// 모든 제품 리뷰 가져오기
-		//List<ReviewDTO> reviewList = sanghService.getReviewList();
-		//System.out.println("reviewList: " + reviewList);
 		
-		// 제품 옵션 가져오기
+		// 제품 옵션 조회
 		List<ProductDetailDTO> productDetailList = sanghService.getProductDetailList(productUid);
 		System.out.println("productDetailList: " + productDetailList);
 		
-		// 제품 색상 옵션 가져오기
+		// 제품 색상 옵션 조회
 		List<String> colorList = sanghService.getColorOptions(productUid);
 		System.out.println("colorList: " + colorList);
 		
-		// 제품 사이즈 옵션 가져오기
+		// 제품 사이즈 옵션 조회
 		List<String> sizeList = sanghService.getSizeOptions(productUid);
 		System.out.println("sizeList: " + sizeList);
 		
-		// inquiry 가져오기
-		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
-		System.out.println("inquiryList: " + inquiryList);
-		//long inqr_uid = inquiryList.get(0).getUid(); // inqr_uid 값 가져오기
-		//System.out.println("inqr_uid: " + inqr_uid);
-
-		// inquiryAnswer 가져오기
-		//public InquiryAnswerDTO inquiryAnswer = sanghService.getInquiryAnswerList(inqr_uid);
-		//System.out.println("inquiryAnswerList: " + inquiryAnswer);
-		
 		// Model에 데이터 추가
 		model.addAttribute("product", product); // 상품정보
-		//model.addAttribute("reviewList", reviewList); // 리뷰리스트
 		model.addAttribute("colorList", colorList); // color 옵션리스트
 		model.addAttribute("sizeList", sizeList); // size 옵션리스트
-		model.addAttribute("inquiryList", inquiryList); // 상품문의 리스트
-		//model.addAttribute("inquiryAnswerList", inquiryAnswerList);
 
 		return "productInfo"; // .jsp 생략 
 	}
 	
-	/* 리뷰 데이터 가져오기 */
+	/* 리뷰 데이터 조회 */
 	@RequestMapping("product/getReview/{uid}")
 	@ResponseBody
 	public List<ReviewDTO> getReviews(@PathVariable("uid")long productUid, HttpSession session) {
 		System.out.println("productUid: " + productUid);
 		List<ReviewDTO> reviewList = sanghService.getReviewListByUid(productUid);
+		System.out.println("reviewList : " + reviewList);
 		return reviewList;	
 	}
 
+	/* 상품 문의 데이터 조회 */
+	@RequestMapping("product/inquiry/{prod_uid}")
+	@ResponseBody
+	public List<Integer> getInquiryAnswerByInqrUid(@PathVariable("prod_uid")Long productUid) {
+		List<Integer> inquiryList = sanghService.getInquiryListByProdUid(productUid);
+		System.out.println("문의리스틔 uid : " + inquiryList);
+		return inquiryList;
+	}
+	
+	/* 문의 답변 데이터 조회 */
+	@RequestMapping("product/answer")
+	@ResponseBody
+	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(@RequestParam("uidList") List<Integer> uidList) {
+		System.out.println("uids: " + uidList);
+		
+		 List<InquiryAnswerDTO> answerList = new ArrayList<>();
+
+		    for (long uid : uidList) {
+		        // 각 uid에 대한 처리
+		    	List<InquiryAnswerDTO> answer = sanghService.getInquiryAnswerByInqrUid(uid);
+		        answerList.addAll(answer);
+		    }
+
+		    System.out.println("answerList: " + answerList);
+		    return answerList;
+	}
+	
 	/* 장바구니 상품 추가 */
 	@RequestMapping(value="insert/cart/{uid}", method=RequestMethod.POST)
 	@ResponseBody
@@ -224,7 +237,7 @@ public class SanghyukController {
 	// 문의게시글 작성
 	@PostMapping("/product/write/{uid}")
 	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO, @PathVariable("uid")long uid) {
-	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
+	    // Spring Security를 통해 현재 로그인한 사용자의 ID 조회
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUserId = authentication.getName();
 	    

@@ -466,35 +466,17 @@
 						<th scope="col" class="thCss">작성일</th>
 					</tr>
 				</thead>
-				<c:forEach items="${inquiryList}" var="inquirys">
-					<tbody>
-						<tr>
-							<td class="borderRemove">${inquirys.uid}</td>
-							<td>
-								<div class="clickTitle ">${inquirys.title}</div>
-							</td>
-							<td>${inquirys.writer_id}</td>
-							<td>${inquirys.reg_date}</td>
-						</tr>
-						<tr class="inquiryContent">
-							<td>&nbsp;</td>
-							<td class="centerNo">
-								<div class="contentPadding">
-									${inquirys.content}	
-								</div>
-							</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td><%-- ${inquiryAnswerList.title} --%></td>
-						</tr>
+					<tbody class="inquiry">
+						<!-- ajax로 문의글과 답변에 대한 동적 HTML 추가하는 부분 -->
 					</tbody>
-				</c:forEach>
 			</table>
+			<ul id="pagingInq">
+			</ul>
+			<sec:authorize access="isAuthenticated()">
 			<button class="qnaBtn">
 				<a href="/app/product/write?uid=${product.uid}" class="qnaBtnColor">문의하기</a>
 			</button>
+			</sec:authorize>
 		</div>
 		<div class="footer">
 			<%@ include file="footer/footer.jsp"%>

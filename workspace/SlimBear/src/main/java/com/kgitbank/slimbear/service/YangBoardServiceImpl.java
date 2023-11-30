@@ -89,14 +89,13 @@ public class YangBoardServiceImpl {
     	System.out.println("경고");
     }
     
-	// 현재 로그인한 사용자가 작성자인지 확인하는 메서드
-    private boolean isCurrentUserAuthor(String writerName) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	// 현재 인증된 사용자 정보 가져오기
-        String currentUserName = authentication.getName();									// 현재 사용자의 이름 가져오기
-        MemberDTO currentUser = memberService.getMemberById(currentUserName);				// 사용자 정보 가져오기, MemberDTO 형태로 반환
+    // 현재 로그인한 사용자가 작성자인지 확인하는 메서드
+    private boolean isCurrentUserAuthor(String writerId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();  // 현재 인증된 사용자 정보 가져오기
+        String currentUserId = authentication.getName();  // 현재 사용자의 ID 가져오기
         
-        // 현재 사용자의 이름과 작성자의 이름을 비교
-        if (currentUser == null || !currentUser.getName().equals(writerName)) {
+        // 현재 사용자의 ID와 작성자의 ID를 비교
+        if (currentUserId == null || !currentUserId.equals(writerId)) {
             showAccessDeniedWarning();
             return false;
         }

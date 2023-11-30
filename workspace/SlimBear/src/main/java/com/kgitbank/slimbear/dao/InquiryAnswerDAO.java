@@ -16,7 +16,7 @@ public class InquiryAnswerDAO {
 	
 	// InquiryAnswer 리스트 조회
 	public List<InquiryAnswerDTO> getInquiryAnswerList(long inquiryUid) { 
-		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST"); // 패키지풀네임.id
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST", inquiryUid); // 패키지풀네임.id
 	}
 	
 	// InquiryAnswer 데이터 삽입
@@ -36,8 +36,10 @@ public class InquiryAnswerDAO {
 		return template.update("com.slimbear.mapper.Board.UPDATE_INQUIRYANSWER", InquiryAnswer);
 	}
 	
-	
-	
+	// inqr_uid에 맞는 답변 조회
+	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(long inquiryUid) {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_ANSWER_BY_INQRUID", inquiryUid);
+	}
 	
 	
 }
