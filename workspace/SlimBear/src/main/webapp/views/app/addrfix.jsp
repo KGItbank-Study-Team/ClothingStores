@@ -174,14 +174,6 @@
                                             fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="${fix.mobile3}" type="text">
                                     </td>
                                 </tr>
-                                <tr class="right">
-                                    <td colspan="2"><input id="ma_main_flag0" name="ma_main_flag" fw-filter=""
-                                            fw-label="기본 배송지로 저장" fw-msg="" value="T" type="checkbox"
-                                            checked="checked">
-                                            <input type="hidden" name="addressUID" value="${fix.addr_uid}"><label for="ma_main_flag0">기본 배송지로 저장</label></td>
-                                            
-                                            
-                                </tr>
                             </tbody>
                         </table>
                         </form>

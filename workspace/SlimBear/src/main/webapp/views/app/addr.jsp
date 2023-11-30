@@ -18,6 +18,7 @@
     <div id="wrap">
         <div id="container">
             <div id="contents">
+            <form id="deleteAddressForm" action="/app/member/myPage/addr" method="post">
                 <div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
                     <ul>
                         <li class="order">
@@ -78,12 +79,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" center">
-                                
+                                	
                                 	<c:forEach var="item" items="${addrList}">
                                     <tr class="xans-record-">
                                         <!-- 체크박스 -->
                                         <td><input name="wish_idx" id="wish_idx_0" enable-order="" reserve-order="N"
-                                        	enable-purchase="1" class="" is-set-product="F" value="1771675" type="checkbox">
+                                        	enable-purchase="1" class="" is-set-product="F" value="${item.addr_uid}" type="checkbox">
                                         </td>
                                         
                                         <td>
@@ -108,6 +109,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                         <div class="ec-base-button">
                             <span class="gLeft ">
                                 <a href="#none" class="btnNormal sizeS"
@@ -130,6 +132,7 @@
                         </ol>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

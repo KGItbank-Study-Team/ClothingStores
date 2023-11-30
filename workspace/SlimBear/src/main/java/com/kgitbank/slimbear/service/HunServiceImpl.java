@@ -361,26 +361,9 @@ public class HunServiceImpl {
 	}
 	
 	//배송지 삭제
-	public void deleteOrderAddress(long addressUID) {
-	    MemberOrderAddressDTO addressToDelete = addressDAO.getAddressByUID(addressUID);
-
-	    if (addressToDelete != null) {
-	        int deletedRows = addressDAO.deleteAddress(addressToDelete);
-
-	        if (deletedRows > 0) {
-	            // 주소 삭제 성공
-	            System.out.println("주소가 성공적으로 삭제되었습니다.");
-	        } else {
-	            // 주소 삭제 실패
-	            System.out.println("주소 삭제에 실패했습니다.");
-	            throw new RuntimeException("주소 삭제에 실패했습니다.");
-	        }
-	    } else {
-	        // 주소가 존재하지 않는 경우
-	        System.out.println("존재하지 않는 주소입니다.");
-	        throw new IllegalArgumentException("존재하지 않는 주소입니다.");
-	    }
-	}
+	public void deleteAddress(long addressUID) {
+        addressDAO.deleteAddress(addressUID);
+    }
 
 
 }

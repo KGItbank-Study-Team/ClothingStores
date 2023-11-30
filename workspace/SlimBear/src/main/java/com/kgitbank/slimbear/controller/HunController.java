@@ -2,6 +2,8 @@ package com.kgitbank.slimbear.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -240,6 +242,7 @@ public class HunController {
 	public String fix(Authentication authentication,
 			@RequestParam("addressUID") long addressUID,
     		@RequestParam String name,
+    		@RequestParam("recipient") String ma_rcv_name,
             @RequestParam("address1") String addressZip1,
             @RequestParam("address2") String addressAddr1,
             @RequestParam("address3") String addressAddr2,
@@ -258,6 +261,7 @@ public class HunController {
         addr.setUid(addressUID);
         addr.setMem_uid(user.getUid());
         addr.setName(name);
+        addr.setRecipient(ma_rcv_name);
         addr.setAddress(addressZip1 + " | " + addressAddr1 + " | " + addressAddr2);
 		addr.setNomal_phone(nomal_phone1 + "-" + nomal_phone2 + "-" + nomal_phone3);
 		addr.setPhone(phone1 + "-" + phone2 + "-" + phone3);
@@ -285,6 +289,7 @@ public class HunController {
 	@PostMapping("member/myPage/addr/register")
 	public String register(Authentication authentication,
     		@RequestParam String name,
+    		@RequestParam("recipient") String ma_rcv_name,
             @RequestParam("address1") String addressZip1,
             @RequestParam("address2") String addressAddr1,
             @RequestParam("address3") String addressAddr2,
@@ -302,6 +307,7 @@ public class HunController {
         MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
         addr.setMem_uid(user.getUid());
         addr.setName(name);
+        addr.setRecipient(ma_rcv_name);
         addr.setAddress(addressZip1 + " | " + addressAddr1 + " | " + addressAddr2);
 		addr.setNomal_phone(nomal_phone1 + "-" + nomal_phone2 + "-" + nomal_phone3);
 		addr.setPhone(phone1 + "-" + phone2 + "-" + phone3);
@@ -311,27 +317,17 @@ public class HunController {
 		return "redirect:/app/member/myPage/addr";
 	}
 
-	@PostMapping("/app/member/myPage/addr")
-	@ResponseBody
-	public String handleAddressAction(@RequestParam("action") String action,
-			@RequestParam(value = "addressUID", required = false) Long addressUID) {
-	    try {
-	        if ("deleteSelectedAddresses".equals(action)) {
-	            // 주소 삭제 액션 처리
-	            if (addressUID != null) {
-	                hunService.deleteOrderAddress(addressUID);
-	                return "주소 삭제가 성공적으로 처리되었습니다.";
-	            } else {
-	                return "주소 삭제 중 오류가 발생했습니다. 주소 UID가 필요합니다.";
-	            }
-	        } else {
-	            return "알 수 없는 액션입니다.";
+	@PostMapping("/member/myPage/addr")
+	public String deleteSelectedAddresses(@RequestParam(name = "wish_idx", required = false) List<Long> addressUIDs) {
+	    if (addressUIDs != null && !addressUIDs.isEmpty()) {
+	        for (Long addressUID : addressUIDs) {
+	            hunService.deleteAddress(addressUID);
 	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "주소 처리 중 오류가 발생했습니다.";
 	    }
+	    return "redirect:/app/member/myPage/addr";
 	}
+
+
 
 	
 	

@@ -33,7 +33,8 @@ public class MemberOrderAddressDAO {
 		return template.update("com.slimbear.mapper.Member.UPDATE_ORDERADDRESS", address);
 	}
 	
-	public int deleteAddress(MemberOrderAddressDTO address) {
-		return template.delete("com.slimbear.mapper.Member.DELETE_ORDERADDRESS", address);
+	//철훈수정
+	public int deleteAddress(long addressUID) {
+		return template.delete("com.slimbear.mapper.Member.DELETE_ORDERADDRESS", addressUID);
 	}
 }

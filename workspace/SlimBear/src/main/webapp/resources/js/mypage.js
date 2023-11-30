@@ -57,41 +57,10 @@ function subMit() {
         document.getElementById("myForm").submit();
     }
     
-    //주소삭제
+//주소삭제
 function deleteSelectedAddresses() {
-    var selectedAddresses = [];
-
-    // 수집할 데이터를 직접 수집
-    $("input[name='wish_idx']:checked").each(function () {
-        selectedAddresses.push($(this).val());
-    });
-
-    if (selectedAddresses.length === 0) {
-        alert('선택된 주소가 없습니다.');
-        return;
-    }
-
-    if (confirm('선택한 주소를 삭제하시겠습니까?')) {
-        // AJAX 요청을 수정하여 데이터 직접 전송
-        $.ajax({
-            type: 'POST',
-            url: '/app/member/myPage/addr',  // 변경 필요한 부분
-            data: {
-                // 필요한 데이터를 직접 전송
-                action: 'deleteSelectedAddresses',
-                selectedAddresses: selectedAddresses
-            },
-            success: function (data) {
-                // 삭제 성공 시, 페이지를 리로드 또는 다른 작업 수행
-                location.reload(); // 예시로 페이지 리로드
-            },
-            error: function () {
-                alert('주소 삭제에 실패했습니다.');
-            }
-        });
-    }
+    document.getElementById("deleteAddressForm").submit();
 }
-
 
 //쿠폰등록
 function registerCoupon() {
