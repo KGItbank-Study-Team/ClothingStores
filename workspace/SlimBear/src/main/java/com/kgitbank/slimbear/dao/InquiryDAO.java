@@ -39,7 +39,7 @@ public class InquiryDAO {
 	
 	// 문의 prod_uid 조회
 	public List<InquiryDTO> getInquiryListByProdUid(Long prodUid) {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
 	}
 	
 	// 회원 문의 게시글 조회
