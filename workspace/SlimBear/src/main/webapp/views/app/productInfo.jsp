@@ -452,7 +452,7 @@
 			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
 			<table class="inquiryTable">
-<%-- 				<colgroup>
+		  <%-- <colgroup>
 					<col style="width: 100px;">
 					<col style="width: 1000px;">
 					<col style="width: 500px;">

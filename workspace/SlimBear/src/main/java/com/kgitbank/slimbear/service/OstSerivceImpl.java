@@ -79,10 +79,10 @@ public class OstSerivceImpl {
 	}
 	
 	
-	 public void addCartItem(Long cartUid, Long productUid, String color, String size) {
-	        // 여기에서 필요한 비즈니스 로직 수행 가능
-	        cartDAO.addCartItem(cartUid, productUid, color, size);
-	    }
+//	 public void addCartItem(Long cartUid, Long productUid, String color, String size) {
+//	        // 여기에서 필요한 비즈니스 로직 수행 가능
+//	        cartDAO.addCartItem(cartUid, productUid, color, size);
+//	    }
 
 	public void updateCartItemOptions(long cartUid, long productUid ,String color, String size) {
         

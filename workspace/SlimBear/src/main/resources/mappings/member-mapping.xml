@@ -22,7 +22,7 @@
 		parameterType="member">
 		SELECT * FROM member WHERE email=#{email}
 	</select>
-	
+
 	<select id="SELECT_MEM_BY_PHONE" resultType="member"
 		parameterType="member">
 		SELECT * FROM member WHERE phone=#{phone}
@@ -98,9 +98,10 @@
 		SELECT * FROM memberCoupon
 		WHERE mem_uid=#{uid}
 	</select>
-	
+
 	<select id="SELECT_COUPON_LIST_BY_UID" resultType="coupon">
-		SELECT * FROM memberCoupon WHERE coup_uid=#{uid}
+		SELECT * FROM
+		memberCoupon WHERE coup_uid=#{uid}
 	</select>
 
 	<insert id="INSERT_COUPON">
@@ -120,7 +121,8 @@
 	<update id="UPDATE_COUPON_USEDATE">
 		UPDATE memberCoupon
 		SET use_date=#{use_date}
-		WHERE uid=#{uid}
+		WHERE
+		uid=#{uid}
 	</update>
 
 	<!-- 찜(wish) -->
@@ -153,7 +155,7 @@
 		SET prod_code=#{prod_code}
 		WHERE uid=#{uid}
 	</update>
-	
+
 	<delete id="DELETE_WISH">
 		DELETE FROM wish
 		WHERE uid=#{uid}
@@ -166,7 +168,7 @@
 		parameterType="member">
 		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
-		<select id="SELECT_CART_LIST_BY_PRODCODE" resultType="cart"
+	<select id="SELECT_CART_LIST_BY_PRODCODE" resultType="cart"
 		parameterType="member">
 		SELECT * FROM cart WHERE prod_code=#{prod_code}
 	</select>
@@ -177,19 +179,15 @@
 		#{productUID}
 	</select>
 	<update id="ADD_CHANGED_OPTIONS">
-    UPDATE cart
-    SET prod_code = #{prodCode}
-    WHERE uid = #{uid}
-</update>
-<insert id="INSERT_CART_ITEM" parameterType="cart">
-    INSERT INTO cart (uid, prod_code, cnt)
-    VALUES (
-        #{cartUid},
-        CONCAT(#{productUid}, '_', #{color}, '_', #{size}),
-        1
-    )
-    ON DUPLICATE KEY UPDATE cnt = cnt + 1;
-</insert>
+		UPDATE cart
+		SET prod_code = #{prodCode}
+		WHERE uid = #{uid}
+	</update>
+	<insert id="INSERT_CART_ITEM" parameterType="cart">
+		INSERT INTO cart (mem_uid, prod_code, cnt)
+		VALUES(#{mem_uid}, #{prod_code}, #{cnt})
+		ON DUPLICATE KEY UPDATE cnt = cnt + 1;	
+	</insert>
 	<!-- 동일상품 체크 -->
 	<select id="SELECT_COUNT_IN_CART" resultType="int"
 		parameterType="cart">
@@ -207,7 +205,8 @@
 	<!-- 동일 상품 개수 조회 -->
 	<select id="SELECT_CNT_EQUALS_PROD" resultType="int">
 		SELECT
-		COUNT(*) FROM cart
+		COUNT(*)
+		FROM cart
 		WHERE prod_code = #{prod_code} AND
 		mem_uid = #{mem_uid}
 	</select>
@@ -227,7 +226,8 @@
 	</update>
 	<update id="UPDATE_CART_OPTIONS" parameterType="hashmap">
 		UPDATE cart
-		SET prod_code = #{prodCode}
+		SET
+		prod_code = #{prodCode}
 		WHERE uid = #{uid}
 	</update>
 
@@ -250,9 +250,10 @@
 		WHERE
 		mem_uid=#{mem_uid}
 	</select>
-	
+
 	<!-- 철 -->
-	<select id="SELECT_MILEAGERECORD_BY_MEM_UIDS" resultType="com.kgitbank.slimbear.dto.MemberMileageRecordDTO">
+	<select id="SELECT_MILEAGERECORD_BY_MEM_UIDS"
+		resultType="com.kgitbank.slimbear.dto.MemberMileageRecordDTO">
 		SELECT * FROM memberMileageRecord
 		WHERE
 		mem_uid=#{mem_uid}

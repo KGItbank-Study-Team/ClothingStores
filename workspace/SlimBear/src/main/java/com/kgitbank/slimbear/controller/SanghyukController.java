@@ -132,7 +132,7 @@ public class SanghyukController {
 			System.out.println("cntValue: " + cntValue);
 			int cnt = Integer.parseInt(cntValue);
 			System.out.println("cnt: " + cnt);
-			prod_code = SlimBearUtil.appendProductCode(uid, color, size);
+			prod_code = SlimBearUtil.appendProductCode(uid, color, size); //상품코드, 색상, 사이즈
 			
 			
 			CartDTO cartDTO = new CartDTO();
@@ -149,9 +149,9 @@ public class SanghyukController {
 			if(isAreadyExited>=1) {
 				return "already_existed";
 			} else {
-				sanghService.insertInCart(cartDTO);
+				sanghService.addCartItem(mem_uid, prod_code, cnt);
 				System.out.println("cartDTO" + cartDTO);
-				return "addCart";
+				return "add_success";
 			}
 		}
 		return "add_success"; 
@@ -161,19 +161,19 @@ public class SanghyukController {
 	@RequestMapping(value="insert/payCart/{uid}", method=RequestMethod.POST )
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> insertCartWhenPay(@PathVariable("uid") long uid, InsertCartVO data, Authentication authentication) throws Exception {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
 		System.out.println("=========결제 버튼 메서드=========");
-		HashMap<String, Object> returnList = new HashMap<>();
-		ArrayList<HashMap<String, Object>> arr = new ArrayList<>();
-		int totalCnt = 0;
 		SecurityUser user = (SecurityUser)authentication.getPrincipal();
 		long mem_uid = user.getUid();
 		System.out.println("mem_uid: " + mem_uid);
-
+		System.out.println("Ajax로 받은 옵션 리스트: " + data);
+		
 		String prod_code = null;
 		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
 		System.out.println("selectOptionList = " + selectOptionList);
 		
-		for(HashMap<String, Object> options : selectOptionList) {
+		for(HashMap<String, Object> options : selectOptionList) { // 옵션요소값을 받아 prod_code를 만듬
 			String color = options.get("color").toString();
 			String size = options.get("size").toString();
 			String cntValue = options.get("cnt").toString();
@@ -189,25 +189,22 @@ public class SanghyukController {
 			cartDTO.setCnt(cnt);
 			cartDTO.setUid(uid);
 			cartDTO.setReg_date(new Date(System.currentTimeMillis()));
-			System.out.println("cartDTO: " + cartDTO);
+			System.out.println("cartDTO: " + cartDTO);  
 			
-			Integer isAreadyExited = sanghService.equalProdCnt(cartDTO); // 선택한 옵션의 상품이 카트에 몇개 있는지 확인
-			System.out.println("isAreadyExited: " + isAreadyExited); 
-			if(isAreadyExited > 0) {
+			//선택한 옵션과 같은 옵션이 장바구니에 몇개 있는지 조회
+			CartDTO containCart = sanghService.getCartByProdCode(prod_code); 
+			System.out.println("containCart: " + containCart); 
+			
+			if(containCart != null) {
 				// 장바구니에 이미 해당 상품이 존재할 경우
 				// 장바구니에 있던 동일 상품은 삭제해주기 -> 이유: 같이 결제할 예정이니까(삭제 메서드 구현해야함)
-				totalCnt =  cnt + isAreadyExited;
-				returnList.put("color", color);
-				returnList.put("size", size);
-				returnList.put("cnt", totalCnt);
-				arr.add(returnList);
-				System.out.println("returnList: " + arr);
-				
-			} else {
-				sanghService.insertInCart(cartDTO);
-			}
+				options.put("containCnt", containCart.getCnt());
+			} 
+			
+			sanghService.addCartItem(mem_uid, prod_code, cnt);
 		}
-		return arr;
+		
+		return data.getSelectOptionList();
 	}	
 	
 	/* 위시리스트 추가 */
@@ -248,7 +245,6 @@ public class SanghyukController {
 
 	    // DAO로 전달
 	    sanghService.insertInquiry(inquiryDTO);
-	    
 	    return "redirect:/app/board/inquiry";
 	}
 	// 게시글 작성 페이지

@@ -39,6 +39,7 @@ $(function () {
             selectedSize = $('.sizeBtn').text();
             updateSelection(selectedColor, $(this).find(".sizeOption").text());
         }
+        console.log('선택한 옵션: ' + JSON.stringify(selectOptionList));
     });
 
 
@@ -79,6 +80,7 @@ $(function () {
 });
 // 옵션 리스트 결제페이지로 슝~
 function addInput(uid) {
+    console.log(selectOptionList);
     for (var i = 0; i < selectOptionList.length; i++) {
         var optionList = selectOptionList[i];
         console.log("optionList: " + optionList);
@@ -213,42 +215,40 @@ function buyClick(uid) {
         type: "POST",
         data: { selectOptionList: selectOptionList },
         success: function (arr) {
-            var cartList = arr; // JSON.stringify를 사용하지 않음
-            alert("선택된 옵션 리스트: " + JSON.stringify(selectOptionList));
-            var matchingOptions = 0; // 동일한 옵션이 장바구니에 몇 개 있는지 추적하는 변수
-            var matchingIndex = -1; // 일치하는 옵션의 인덱스를 추적하는 변수
+            console.log('1. 결제 버튼 ajax 실행 성공');
+            console.log("받아온 데이터 : " + JSON.stringify(arr)); //return;
+            console.log("2. 선택된 옵션 리스트 : " + JSON.stringify(selectOptionList));
 
-            for (var i = 0; i < selectOptionList.length; i++) {
-                console.log("color: " + cartList[i].color, "size: " + cartList[i].size + " cnt: " + cartList[i].cnt);
-
-                if (cartList[i].color === selectOptionList[i].color && cartList[i].size === selectOptionList[i].size) {
-                    // 동일옵션의 상품이 장바구니에 있음
-                    matchingOptions++;
-                    matchingIndex = i;
-                }
+            var containCart = false;
+            for(var i=0; i<arr.length; i++) {
+                if('containCnt' in arr[i]) { //containCnt값이 존재하는 경우
+                    containCart = true;
+                    break;
+                } 
             }
 
-            if (matchingOptions > 0) {
-                // 동일한 옵션의 상품이 하나 이상 있는 경우
-                var userConfirm = confirm("동일한 상품이 장바구니에 있습니다. 함께 구매하시겠습니까? \n\n '취소'를 누를 경우 현재 선택한 수량만 구매됩니다.");
-                if (userConfirm) {
-                    // '확인' 클릭 시
-                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt;
-                    alert("최종 옵션 리스트 : " + JSON.stringify(selectOptionList));
-                    addInput(uid);
+            if(containCart) { //containCnt값이 존재하는 경우
+                var msg = '동일한 상품이 장바구니에 있습니다. 같이 구매하시겠습니까? \n\n' + "'취소' 클릭 시 현재 개수만 구매합니다."
+                if(confirm(msg)) {
+                    //확인 클릭 시, selectOptionList의 cnt 업데이트
+                    for(var i=0; i<arr.length; i++) {
+                        if(selectOptionList[i].color === arr[i].color && selectOptionList[i].size === arr[i].size) {
+                            selectOptionList[i].cnt = selectOptionList[i].cnt + arr[i].containCnt; 
+                            console.log("3. containCnt 값 : " + JSON.stringify(arr[i].containCnt));
+                            console.log("4. 변경된 개수 : " + selectOptionList[i].cnt);
+                            addInput(uid);
+                        } 
+                    }
                 } else {
-                    // '취소' 클릭 시
-                    // 해당 옵션의 cnt를 원래 값으로 복원
-                    selectOptionList[matchingIndex].cnt = cartList[matchingIndex].cnt - selectOptionList[matchingIndex].cnt;
-                    console.log('selectOptionList: ' + JSON.stringify(selectOptionList));
-                    alert("취소 클릭 시 옵션 리스트: " + JSON.stringify(selectOptionList));
+                    //취소 클릭
+                    console.lgo("옵션 리스트 : " + JSON.stringify(selectOptionList));
                     addInput(uid);
+                    console.log('옵션리스트 : ' + selectOptionList);
                 }
-            } else {
-                // 동일한 옵션의 상품이 없는 경우
-                alert("동일 옵션 없음: " + JSON.stringify(selectOptionList));
+            } else { //containCnt값이 존재하지 않는 경우
                 addInput(uid);
-            }
+                console.log('containCnt가 존재하지 않습니다.');
+            } 
         },
         error: function (request, status, error) {
             console.log("request:", request);
@@ -600,10 +600,10 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqL
         pageHtml += '<li><a href="#" id="next"> 다음 </a></li>';
     }
 
-    $("#pagingul").html(pageHtml);
-    let displayCount = "";
-    displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalDataInq + "건";
-    $("#displayCount").text(displayCount);
+    // $("#pagingul").html(pageHtml);
+    // let displayCount = "";
+    // displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalDataInq + "건";
+    // $("#displayCount").text(displayCount);
 
     // 페이징 번호 클릭 이벤트
     $("#pagingInq li a ").click(function () {

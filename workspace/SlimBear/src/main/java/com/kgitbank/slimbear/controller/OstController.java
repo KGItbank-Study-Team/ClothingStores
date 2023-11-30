@@ -144,7 +144,7 @@ public class OstController {
 	       
 
 	        // 여기에서 memUid 값을 사용하여 로직을 처리
-	        ostService.addCartItem(cartUid, productUid, color, size);
+	        //ostService.addCartItem(cartUid, productUid, color, size);
 
 	        return new ResponseEntity<>("카트에 상품이 추가되었습니다.", HttpStatus.OK);
 	    } else {

@@ -49,7 +49,6 @@ public class SangyhyukServiceImpl {
 		reviewDAO.insertReview(review);
 	}
 	
-	
 	/* 상품 상세 데이터 SERVICE */
 	@Autowired
 	private ProductDAO prodDAO;
@@ -111,9 +110,9 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public CartDAO cartDAO;
 	
-	/* 장바구니에 상품 추가 */
-	public void insertInCart(CartDTO cart) {
-		cartDAO.insertInCart(cart);
+	// 장바구니에 상품 추가
+	public void addCartItem(long mem_uid, String prod_code, int cnt) {
+		cartDAO.addCartItem(mem_uid, prod_code, cnt);
 	}
 	
 	/* 동일상품 체크 */
@@ -126,6 +125,11 @@ public class SangyhyukServiceImpl {
 		return cartDAO.equalProdCnt(cart);
 	}
 	
+	public CartDTO getCartByProdCode(String code) {
+		return cartDAO.getCartByProdCode(code);
+	}
+	
+	// 장바구니 목록 조회
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {
 		MemberDTO info = new MemberDTO();
 		info.setUid(memberUid);
