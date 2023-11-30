@@ -15,7 +15,7 @@ function addQuantity(id, step) {
 }
 
 function outQuantity(id, step) {
- 
+    
 }
 
 
@@ -70,7 +70,32 @@ function updateServer(productId, newQuantity) {
         console.log('서버에서 수량을 업데이트하는 중 오류 발생:', error);
     }
 });
+// 30일 이전 항목 삭제를 추가하는 부분
 
+function updateCartItemOptions(me, index, cartUid) {
+    var selectedColor = document.getElementById("color_" + index + "_" + cartUid).value;
+    var selectedSize = document.getElementById("size_" + index + "_" + cartUid).value;
+    var productUid = $(me).parents('tr.cart__list__detail').find("input[name=selectedItems]").data('productuid');
+   
+    $.ajax({
+        type: "POST",
+        url: "/app/updateCartItemOptions",
+        data: {
+            index: index,
+            cartUid: cartUid,
+            productUid: productUid,
+            color: selectedColor,
+            size: selectedSize
+        },
+        success: function (response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error("업데이트 실패: " + error);
+        }
+    });
+}
 }
 $(document).ready(function () {
     // 주문하기 버튼 클릭 이벤트 핸들러 추가
@@ -95,11 +120,6 @@ $(document).ready(function () {
             });
         });
 
-        // 선택된 상품이 없을 경우 알림 메시지 출력
-        if (selectedProducts.length === 0) {
-            alert("주문할 상품을 선택하세요.");
-            return;
-        }
 
         // 폼 동적 생성
         var form = $("<form>")
@@ -131,6 +151,29 @@ $(document).ready(function () {
         form.appendTo("body").submit();
     });
 });
+function addChangedOptions(me, index, cartUid) {
+    var selectedColor = document.getElementById("color_" + index + "_" + cartUid).value;
+    var selectedSize = document.getElementById("size_" + index + "_" + cartUid).value;
+    var productUid = $(me).parents('tr.cart__list__detail').find("input[name=selectedItems]").data('productuid');
+
+    $.ajax({
+        type: "POST",
+        url: "/app/addChangedOptions",
+        data: {
+            cartUid: cartUid,
+            productUid: productUid,
+            color: selectedColor,
+            size: selectedSize
+        },
+        success: function (response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error("추가 실패: " + error);
+        }
+    });
+}
 function updateCartItemOptions(me, index, cartUid) {
     var selectedColor = document.getElementById("color_" + index + "_" + cartUid).value;
     var selectedSize = document.getElementById("size_" + index + "_" + cartUid).value;
@@ -155,7 +198,29 @@ function updateCartItemOptions(me, index, cartUid) {
         }
     });
 }
-
+function addCartItem(mee, index, cartUid) {
+    var selectedColor = document.getElementById("color_" + index + "_" + cartUid).value;
+    var selectedSize = document.getElementById("size_" + index + "_" + cartUid).value;
+    var productUid = $(mee).parents('tr.cart__list__detail').find("input[name=selectedItems]").data('productuid');
+    console.log(mee)
+    $.ajax({
+        type: "POST",
+        url: "/app/addCartItem",
+        data: {
+            cartUid: cartUid,
+            productUid: productUid,
+            color: selectedColor,
+            size: selectedSize
+        },
+        success: function (response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error("추가 실패: " + error);
+        }
+    });
+}
 function deleteSelectedItems() {
     // 선택된 체크박스의 값을 가져오기
     var selectedItems = [];
@@ -185,7 +250,29 @@ function deleteSelectedItems() {
         }
     });
 }
+function deleteOldItems() {
+    // 현재 날짜
+    var currentDate = new Date();
 
+    // 30일 전 날짜 계산
+    var thirtyDaysAgo = new Date(currentDate);
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // 서버에 30일 이전 제품 삭제 요청 보내기
+    $.ajax({
+        type: "POST",
+        url: "/app/deleteOldItems",
+        data: { deleteBefore: thirtyDaysAgo.toISOString() },
+        success: function (response) {
+            console.log(response);
+            // 삭제 성공 시 페이지 새로고침 또는 장바구니 업데이트 로직 추가
+            location.reload();
+        },
+        error: function (error) {
+            console.error('30일 이전 제품 삭제 중 오류 발생:', error);
+        }
+    });
+}
 function updateQuantity(productId, action) {
     var quantityInput = document.getElementById("quantity_" + productId);
     var currentQuantity = parseInt(quantityInput.value);
