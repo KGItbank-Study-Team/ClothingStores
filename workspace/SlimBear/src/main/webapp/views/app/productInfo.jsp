@@ -452,15 +452,15 @@
 			<h1 style="font-size: 16px !important;">Q&A</h1>
 			<hr class="myHr" />
 			<table class="inquiryTable">
-		  <%-- <colgroup>
+				<colgroup>
 					<col style="width: 100px;">
 					<col style="width: 1000px;">
 					<col style="width: 500px;">
 					<col style="width: 500px;">
-				</colgroup> --%>
+				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col" class="thCss thCssOne">번호</th>
+						<th scope="col" class="thCss">번호</th>
 						<th scope="col" class="thCss">제목</th>
 						<th scope="col" class="thCss">작성자</th>
 						<th scope="col" class="thCss">작성일</th>
