@@ -129,7 +129,7 @@
  	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
 	    SELECT 
 	        uid,
-	        CONCAT(SUBSTRING(writer_id, 1, 2), REPEAT('*', LENGTH(writer_id) - 2)) AS writer_id,
+	        writer_id,
 	        title,
 	        content,
 	        reg_date,
@@ -139,7 +139,6 @@
 	        secure
 	    FROM 
 	        inquiry
-	 
  	</select>
  	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
  		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
