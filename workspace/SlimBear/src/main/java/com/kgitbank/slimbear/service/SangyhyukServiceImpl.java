@@ -90,7 +90,7 @@ public class SangyhyukServiceImpl {
 	@Autowired
 	public InquiryDAO inquiryDAO;
 	
-	public List<Integer> getInquiryListByProdUid(Long prodUid) {
+	public List<InquiryDTO> getInquiryListByProdUid(Long prodUid) {
 		return inquiryDAO.getInquiryListByProdUid(prodUid);
 	}
 	

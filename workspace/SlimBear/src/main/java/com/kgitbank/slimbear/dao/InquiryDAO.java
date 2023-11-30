@@ -33,7 +33,7 @@ public class InquiryDAO {
     }
 	
 	// 문의 prod_uid 조회
-	public List<Integer> getInquiryListByProdUid(Long prodUid) {
+	public List<InquiryDTO> getInquiryListByProdUid(Long prodUid) {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
 	}
 	
@@ -60,7 +60,7 @@ public class InquiryDAO {
 	
 	// 특정 prod_uid 상품문의 조회
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
-        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
     }
     
 	// 상품문의 데이터 삽입
