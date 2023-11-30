@@ -109,13 +109,12 @@
 					</div>
 				</div>
 
+				<!-- 추가: 페이징 부분 -->
 				<div
 					class="xans-element- xans-myshop xans-myshop-boardlistpaging ec-base-paginate">
 					<c:if test="${not empty reviewList}">
-						<c:if test="${currentPage > 1}">
-							<a href="?page=${currentPage - 1}&perPage=${perPage}"><img
-								src="/resources/images/icon_prev2.png"></a>
-						</c:if>
+						<a href="?page=${currentPage - 1}&perPage=${perPage}"><img
+							src="/resources/images/icon_prev2.png"></a>
 						<ol>
 							<c:forEach begin="1" end="${totalPages}" var="pageNum">
 								<li class="xans-record-"><c:if
@@ -127,12 +126,11 @@
 									</c:if></li>
 							</c:forEach>
 						</ol>
-						<c:if test="${currentPage < totalPages}">
-							<a href="?page=${currentPage + 1}&perPage=${perPage}"><img
-								src="/resources/images/icon_next2.png"></a>
-						</c:if>
+						<a href="?page=${currentPage + 1}&perPage=${perPage}"><img
+							src="/resources/images/icon_next2.png"></a>
 					</c:if>
 				</div>
+
 			</div>
 		</div>
 	</div>
