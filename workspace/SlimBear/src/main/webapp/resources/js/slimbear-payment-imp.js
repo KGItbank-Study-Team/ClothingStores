@@ -22,8 +22,6 @@
 $(function(){
     		 let pg = null;
     	     let payMethod = null;
-				 // 세션에 주문정보 저ㅓ장할까???하는중
-			 console.log(sessionStorage.getItem('test'));
       
     	     $('.btn-payment-select-html5_inicis').on('click', () => {
 				 pg = "html5_inicis";

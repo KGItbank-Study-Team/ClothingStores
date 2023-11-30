@@ -25,7 +25,6 @@ public class MemberCouponDAO {
 	
 	public MemberCouponDTO getCouponByUID(long uid) {
 		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_UID", uid);
-	
 	}
 
 	public int insertAddress(MemberCouponDTO coupon) {
@@ -35,6 +34,8 @@ public class MemberCouponDAO {
 	public int updateAddress(MemberCouponDTO coupon) {
 		return template.update("com.slimbear.mapper.Member.UPDATE_COUPON", coupon);
 	}
-
 	
+	public int updateUseDate(MemberCouponDTO coupon) {
+		return template.update("com.slimbear.mapper.Member.UPDATE_COUPON_USEDATE", coupon);
+	}
 }

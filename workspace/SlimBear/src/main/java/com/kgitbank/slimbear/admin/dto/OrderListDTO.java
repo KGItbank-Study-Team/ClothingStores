@@ -17,6 +17,8 @@ public class OrderListDTO extends OrderDTO {
 	private String owner_id;
 	private String pay_status;
 	private String pay_type;
+	private String pay_pg;
+	private String pay_amount;
 	
 	private List<HashMap<Object, Object>> productDetails;
 }

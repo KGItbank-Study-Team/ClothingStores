@@ -1,6 +1,6 @@
 package com.kgitbank.slimbear.service;
 
-import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +9,19 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.slimbear.common.SlimBearImportPayment;
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dao.CartDAO;
+import com.kgitbank.slimbear.dao.MemberCouponDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.OrderPaymentDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
+import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.OrderPaymentDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.exception.SlimBearException;
 import com.kgitbank.slimbear.vo.MemberCartVO;
-import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
@@ -40,9 +41,11 @@ public class OrderServiceImpl implements OrderService {
 	private ProductDetailDAO productDetailDAO;
 	@Autowired
 	private CartDAO cartDAO;
+	@Autowired
+	private MemberCouponDAO memCouponDAO;
 
 	@Override
-	public void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts) {
+	public void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts, long applyCouponUID) {
 		try {
 			IamportResponse<Payment> realPayment = slimBearImportPayment.getPaymentRecord(imp_uid);
 
@@ -52,6 +55,12 @@ public class OrderServiceImpl implements OrderService {
 				orderDAO.insertOrder(order);
 				payment.setOrder_uid(order.getUid());
 				paymentDAO.insertOrder(payment);
+				
+				// 쿠폰 사용처리
+				MemberCouponDTO memCoupon = new MemberCouponDTO();
+				memCoupon.setUid(applyCouponUID);
+				memCoupon.setUse_date(new Date(System.currentTimeMillis()));
+				memCouponDAO.updateUseDate(memCoupon);
 
 				// 제품 확인 및 재고 수정
 				for (int i = 0; i < carts.size(); ++i) {
@@ -78,8 +87,7 @@ public class OrderServiceImpl implements OrderService {
 					orderDetailDAO.insertOrder(orderDetail);
 
 					// 카트수정
-					CartDTO cart = cartDAO.getCartByProdCode(SlimBearUtil.appendProductCode(
-							carts.get(i).getProductUid(), carts.get(i).getColor(), carts.get(i).getSize()));
+					CartDTO cart = cartDAO.getCartByProdCode(SlimBearUtil.appendProductCode(carts.get(i).getProductUid(), carts.get(i).getColor(), carts.get(i).getSize()));
 					if (cart != null) {
 						if (cart.getCnt() <= productDetail.getCnt()) {
 							cartDAO.deleteCartItem(cart.getUid());

@@ -35,7 +35,9 @@
 <!-- Custom scripts for all pages-->
 <script src="/admin/js/sb-admin-2.min.js"></script>
 
-<link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<link
+	href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css"
+	rel="stylesheet">
 
 <script
 	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
@@ -56,6 +58,7 @@
 <script
 	src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
 
+
 </head>
 
 <body id="page-top">
@@ -71,30 +74,34 @@
 			<div id="content">
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<select id="filter-selector" class="form-select" aria-label="Default select example">
-						  <option value='field-all' selected>전체</option>
-						  <option value="code">주문코드</option>
-						  <option value="owner_id">아이디</option>
-						</select>
-						<input class="form-control" id="filter" type="text" placeholder="검색">
+						<h6 class="m-0 font-weight-bold text-primary"></h6>
 					</div>
 					<div class="card-body">
-						<table id="table" class="table table-bordered">
-							<thead class="bg-gray-300" align="center">
+
+						<div id="toolbar"></div>
+
+						<table id="table" data-locale="ko-KR" data-search="true"
+							data-advanced-search="true" data-id-table="advancedTable"
+							data-detail-view="true" data-pagination="true"
+							data-show-export="true" 
+							data-show-columns-toggle-all="true"
+							data-page-list="[10, 25, 50, 100, all]" data-url="/admin/order/list">
+							<thead>
 								<tr>
-									<th scope="col" data-field="code">주문번호</th>
-									<th scope="col" data-field="owner_id">아이디</th>
-									<th scope="col" data-field="pay_status">주문 상태</th>
-									<th scope="col" data-field="order_date">주문일</th>
-									<th scope="col" data-field="pay_status">결제 상태</th>
-									<th scope="col" data-field="pay_type">결제 방법</th>
-									<th scope="col" data-field="pay_pg">PG</th>
-									<th scope="col" data-field="pay_amount">결제금</th>
+									<th data-field="code" data-sortable="true" data-width="50">주문번호</th>
+									<th data-field="owner_id" data-sortable="true" data-width="100"
+										data-formatter="ownerFormatter">아이디</th>
+									<th data-field="status" data-sortable="true" data-width="100"
+										data-formatter="typeFormatter">주문 상태</th>
+									<th data-field="order_date" data-sortable="true" data-width="100"
+										data-formatter="dateFormatter">주문일</th>
+									<th data-field="pay_status" data-sortable="true" data-width="100"
+										data-formatter="payStatusFormatter">결제 상태</th>
+									<th data-field="pay_type" data-sortable="true" data-width="100" >결제 방법</th>
+									<th data-field="pay_pg" data-sortable="true" data-width="100" >PG</th>
+									<th data-field="pay_amount" data-sortable="true">결제금</th>
 								</tr>
 							</thead>
-							<tbody align="center">
-								
-							</tbody>
 						</table>
 					</div>
 				</div>
@@ -111,10 +118,10 @@
 
 		<!-- End of Main Content -->
 
-
+		
 	</div>
 	<!-- End of Footer -->
-
+	</div>
 	<!-- End of Content Wrapper -->
 
 	<!-- Scroll to Top Button-->
@@ -122,74 +129,47 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to
+					end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
+
 <script>
-
-	function ajaxInitTable(){
-		$.ajax({
-			url : '/admin/order/list',
-			type : "GET",
-			success : function(data){
-				InitTable(data);
-			},
-			error : function(error){
-				console.log(error);
-			}
-		});
-	}
-	
-	function InitTable(datas){
-		var table = $('#table');
-		var tbody = table.find('tbody');
-		var ths = table.find('th');
-		for(var i=0; i<datas.length; ++i){
-			var tr = $('<tr></tr>');
-			tbody.append(tr);
-			var tbodyHtml = [];
-			var dataItem = datas[i];
-			tr.data('rowData', dataItem);
-		
-			ths.each(function(index, item){
-				var field = $(item).data('field');
-				if(field != null){
-					
-					tbodyHtml.push('<td data-field='+ field +'>')
-					tbodyHtml.push(dataItem[field]);
-					tbodyHtml.push('</td>')
-				}
-			});
-			tr.html(tbodyHtml.join(''));
-		}
-	}
-
 	$(function() {
-		// 테이블 최초 초기화
-		ajaxInitTable();
-		
-		// 필터
-		$("#filter").on("keyup", function() {
-		    var value = $(this).val().toLowerCase();
-		    var curFiled = $('#filter-selector').val();
-		    $("#table").find('tbody tr').filter(function() {
-		    	if(curFiled=='field-all'){
-		    		$(this).find('td').each(function(index, td){
-		    			var toggle = $(this).text().toLowerCase().indexOf(value) > -1;
-		    			$(this).parents('tr').toggle(toggle);
-		    			if(toggle){
-		    				return false;
-		    			}
-		    		});
-		    	}else{
-		    		$(this).find('td').each(function(index, td){
-		    			if($(this).data('field') == curFiled){
-		    				$(this).parents('tr').toggle($(this).text().toLowerCase().indexOf(value) > -1);
-		    				return false;
-		    			}
-		    		});
-		    	}
-		    });
-		  });
+		$('#table').bootstrapTable({
+			formatSearch : function() {
+				return '모든 항목 검색'
+			},  
+			exportDataType: 'all',
+	        exportTypes: ['json', 'xml', 'csv', 'pdf'],
+	        exportOptions: {
+	            fileName: function () {
+	               var cd = new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '');
+	               return 'OrderTable_' + cd;
+	            }
+	        }
+	 
+		})
+	
 		
 		$('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
 		    $detail.html('상세 정보 불러오는 중....');

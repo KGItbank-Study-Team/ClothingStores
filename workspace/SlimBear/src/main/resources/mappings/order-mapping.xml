@@ -28,11 +28,6 @@
 			SET member_uid=#{member_uid}, order_date=#{order_date}, status=#{status}, total_price=#{total_price}
 			WHERE uid=#{uid}
 		</update>
-		
-		<delete id="DELETE_ORDER">
-			DELETE FROM productOrder WHERE uid=#{uid}
-		</delete>
- 	
 
  		<!-- 주문상세(orderDetail) -->
 		<select id="SELECT_ORDERDETAIL_LIST_BY_ORDER_UID" resultType="orderDetail" parameterType="order">

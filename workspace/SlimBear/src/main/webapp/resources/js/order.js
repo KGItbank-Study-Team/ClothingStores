@@ -9,8 +9,16 @@ $(function(){
                 couponUID : selectCouponUid
             },
             success : function(res){
-                $('.payment-pay-amount').text(res.paymentAmount);
-                alert("쿠폰적용완료");
+                if(res.paymentAmount != null){
+                    $('.payment-pay-amount').text(res.paymentAmount);
+                    if(res.default == null){
+                        alert("쿠폰적용완료");
+                    }
+                  
+                }else if(res.failed){
+                    alert(res.failed);
+                }
+            
             },
             error : function(error){
                 alert("error");
