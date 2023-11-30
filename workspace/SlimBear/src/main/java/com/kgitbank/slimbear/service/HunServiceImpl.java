@@ -164,13 +164,6 @@ public class HunServiceImpl {
 		vo.setTotalReserve(5000);
 		vo.setReserve(2000);
 		vo.setUseReserve(3000);
-		
-//		이거 임시 밑에 리스트있음
-//		Date currentDate = new Date();
-//        vo.setOrderDate(currentDate);
-//		vo.setAddReserve(i);
-//		vo.setRelatedOrder("x");
-//		vo.setSubstance("신규회원 축하선물");
 
 		return vo;
 	}
