@@ -53,38 +53,49 @@ public class YangController {
 	}
 	
 	// 문의사항 목록
-//	@RequestMapping("/board/inquiry")
-//	public String getBoardInquiryList(
-//			@RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
-//		List<InquiryDTO> inquiries;
-//		switch (categoryNo) {
-//		case "1":
-//			inquiries = boardService.getInquiryList("DELIVERY");
-//			break;
-//		case "2":
-//			inquiries = boardService.getInquiryList("DELIVERY_C");
-//			break;
-//		default:
-//			inquiries = boardService.getInquiryList("PRODUCT");
-//		}
-//		model.addAttribute("inquiries", inquiries);
-//		return "inquiry";
-//	}
 	@RequestMapping("/board/inquiry")
     public String getBoardInquiryList(
-            @RequestParam(name = "category_no", required = false, defaultValue = "0") String categoryNo, Model model) {
-        List<InquiryDTO> inquiries;
-        switch (categoryNo) {
-            case "1":
-                inquiries = boardService.getInquiryListWithAnswers("DELIVERY");
-                break;
-            case "2":
-                inquiries = boardService.getInquiryListWithAnswers("DELIVERY_C");
-                break;
-            default:
-                inquiries = boardService.getInquiryListWithAnswers("PRODUCT");
-        }
+    		@RequestParam(name = "category_no", required = false, defaultValue = "PRODUCT") String categoryNo, 
+    		@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset, Integer pageSize, Model model) {
+		
+		
+		if (offset == null) {
+			offset = 0;
+		}
+		pageSize = 5; // 페이지 당 아이템 수
+		
+		// 페이징에 관련된 정보 추가
+		int totalItems = boardService.getTotalInquiry(categoryNo); // 전체아이템 수
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+		int pageBlockSize = 5; // 보여질 페이지 블록 크기
+
+		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
+		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
+		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+
+		// 다음 페이지 블록이 있는지 여부
+		boolean hasNextBlock = endPage < totalPages;
+		
+		 List<InquiryDTO> inquiries;
+		switch (categoryNo) {
+        case "DELIVERY":
+            inquiries = boardService.getInquiryList("DELIVERY", offset, pageSize, currentPage);
+            break;
+        case "DELIVERY_C":
+            inquiries = boardService.getInquiryList("DELIVERY_C", offset, pageSize, currentPage);
+            break;
+        default:
+            inquiries = boardService.getInquiryList("PRODUCT", offset, pageSize, currentPage);
+		}
+		
         model.addAttribute("inquiries", inquiries);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("hasNextBlock", hasNextBlock);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("categoryNo", categoryNo); // 카테고리 정보도 전달
         return "inquiry";
     }
 	
@@ -202,16 +213,12 @@ public class YangController {
 	        model.addAttribute("inquiries", inquiryList);
 	    } else {
 	        // 검색 조건이 부족하면 모든 목록을 보여줍니다.
-	        List<InquiryDTO> inquiries = boardService.getInquiryList("PRODUCT");
+	        List<InquiryDTO> inquiries = boardService.getInquiryListAll();
 	        model.addAttribute("inquiries", inquiries);
 	    }
 	    
 	    return "inquiry"; // 실제 뷰
 	}
-	
-	// 페이징처리
-	
-	
 	
 	
 	// 자주묻는질문

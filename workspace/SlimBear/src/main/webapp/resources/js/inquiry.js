@@ -127,7 +127,7 @@ $(document).ready(function() {
         // 클릭된 링크의 인덱스를 가져오기
         var index = $(".qnaLink").index(this);
         // 상품문의 링크에 해당하는 type 값 설정
-        var type = ["PRODUCT", "DELIVERY", "DELIVERY_R"][index];
+        var type = ["PRODUCT", "DELIVERY", "DELIVERY_C"][index];
         // 새로운 URL로 리다이렉트
         window.location.href = "/app/board/inquiry?type=" + type;
     });
@@ -152,9 +152,10 @@ function searchInquiries() {
 function searchInquiries() {
     var search_key = document.getElementById("search_key").value;
     var searchs = document.getElementById("searchs").value;
-
+	
     // Ajax 또는 form submit 등을 이용하여 서버에 전달하고, 결과를 받아와서 적절히 처리
 }
+
 
 
 

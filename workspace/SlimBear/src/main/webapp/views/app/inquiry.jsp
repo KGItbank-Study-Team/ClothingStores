@@ -17,7 +17,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="/resources/js/inquiry.js"></script>
+<%
+    String categoryNoParam = request.getParameter("category_no");
+    String categoryNo = (categoryNoParam != null) ? categoryNoParam : "PRODUCT";
+%>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        // 현재 카테고리에 해당하는 메뉴 활성화
+        $(".subnavi a.qna01").removeClass("on");
+        $(".subnavi a.qna02").removeClass("on");
+        $(".subnavi a.qna03").removeClass("on");
+
+        var categoryNo = "<%= categoryNo %>";
+        if (categoryNo === "DELIVERY") {
+            $(".subnavi a.qna02").addClass("on");
+        } else if (categoryNo === "DELIVERY_C") {
+            $(".subnavi a.qna03").addClass("on");
+        } else {
+            $(".subnavi a.qna01").addClass("on");
+        }
+    });
+</script>
+<script>
+//     $(document).ready(function () {
+//         $(".page-link").on("click", function (e) {
+//             e.preventDefault();
+//             var currentPage = $(this).data("page");
+//             var categoryNo = $(this).data("category");
+//             window.location.href = "/board/inquiry?category_no=" + categoryNo + "&currentPage=" + currentPage;
+//         });
+//     });
+</script>
 </head>
 <body>
 <jsp:include page="header/header.jsp" />
@@ -55,10 +86,10 @@
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<div class="subnavi" style="display: block;">
 					<a href="/app/board/inquiry" class="qna01">
-						<span>상품문의</span></a> 
-					<a href="/app/board/inquiry?board_no=3&amp;category_no=1" class="qna02">
+						<span>상품문의</span></a>
+					<a href="/app/board/inquiry?category_no=DELIVERY" class="qna02">
 						<span>배송문의</span></a>
-					<a href="/app/board/inquiry?board_no=3&amp;category_no=2" class="qna03">
+					<a href="/app/board/inquiry?category_no=DELIVERY_C" class="qna03" >
 						<span>기타문의</span></a>
 				</div>
 				
@@ -149,28 +180,45 @@
 			
 			
 			<!-- 페이지 수 계산 -->
-			<c:set var="totalPosts" value="${inquiries.size()}" />
-		    <c:set var="postsPerPage" value="5" />
-		    <c:set var="currentPage" value="${param.page eq null ? 1 : param.page}" />
-			<c:set var="totalPages" value="${(totalPosts / postsPerPage) + (totalPosts % postsPerPage > 0 ? 1 : 0)}" />
-			
-			<!-- 페이징 -->
-			<div class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
-			    <a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
-			    <ol>
-			        <c:forEach begin="1" end="${totalPages}" var="page">
-			            <c:choose>
-			                <c:when test="${page == currentPage}">
-			                    <li class="xans-record-"><a href="?board_no=6&page=${page}" class="this">${page}</a></li>
-			                </c:when>
-			                <c:otherwise>
-			                    <li class="xans-record-"><a href="?board_no=6&page=${page}" class="other">${page}</a></li>
-			                </c:otherwise>
-			            </c:choose>
-			        </c:forEach>
-			    </ol>
-			    <a href="?board_no=6&page=${currentPage + 1}"><img src="/resources/images/icon_next2.png" /></a>
+			<div class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
+				<ol>
+					<!-- Previous Page Button -->
+					<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+						<a class="page-link" href="/app/board/inquiry?category_no=${categoryNo}&currentPage=${currentPage - 1}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a>
+					</li>
+					<!-- Page Number Buttons -->
+					<c:forEach begin="${startPage}" end="${endPage}" var="pageNumber">
+					    <li class="xans-record-">
+					        <c:choose>
+					            <c:when test="${pageNumber eq currentPage}">
+					                <!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+					                <a href="/app/board/inquiry?category_no=${categoryNo}&currentPage=${pageNumber}" class="this">${pageNumber}</a>
+					            </c:when>
+					            <c:otherwise>
+					                <!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+					                <a href="/app/board/inquiry?category_no=${categoryNo}&currentPage=${pageNumber}" class="other">${pageNumber}</a>
+					            </c:otherwise>
+					        </c:choose>
+					    </li>
+					</c:forEach>
+
+					<!-- Next Page Button -->
+					<li class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+						<a class="page-link"
+						href="/app/board/inquiry?category_no=${categoryNo}&currentPage=${currentPage + 1}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a>
+					</li>
+				</ol>
+				<!-- 마지막 페이지 여부 확인 후 출력 -->
+				<c:if test="${currentPage eq totalPages && !hasNextBlock}">
+					<li class="page-item disabled">
+					<span class="page-link">마지막 페이지입니다.</span></li>
+				</c:if>
 			</div>
+			
 			
 			
 			<!-- 검색기능 -->
@@ -179,8 +227,7 @@
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
 						<p class="category displaynone"></p>
-						<p>
-							<select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
+						<p><select id="search_key" name="search_key" fw-filter="" fw-label="" fw-msg="">
 								<option value="title">제목</option>
 								<option value="content">내용</option>
 								<option value="writer_id">글쓴이</option>
@@ -196,5 +243,33 @@
 	</div>
 	<jsp:include page="footer/footer.jsp" />
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = ${currentPage};
+        var totalPages = ${totalPages};
+        var hasNextBlock = ${hasNextBlock};
+
+        var prevPageButton = document.querySelector('.page-link[aria-label="Previous"]');
+        var nextPageButton = document.querySelector('.page-link[aria-label="Next"]');
+        var firstPageMessage = document.querySelector('.first-page-message');
+        var lastPageMessage = document.querySelector('.last-page-message');
+
+        prevPageButton.addEventListener('click', function (event) {
+            if (currentPage === 1) {
+                alert('첫 번째 페이지입니다.');
+                event.preventDefault(); // 이전 페이지로 이동하지 않도록 막음
+            }
+        });
+
+        nextPageButton.addEventListener('click', function (event) {
+            if (currentPage === totalPages && !hasNextBlock) {
+                alert('마지막 페이지입니다.');
+                event.preventDefault(); // 다음 페이지로 이동하지 않도록 막음
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

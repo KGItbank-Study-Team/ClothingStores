@@ -258,5 +258,20 @@
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // 폼 제출 시 이벤트 핸들러
+        $("#inquiryForm").submit(function (event) {
+            // title 필드 값 확인
+            var titleValue = $("#inquiryTitle").val();
+            
+            // title이 비어있을 경우
+            if (!titleValue.trim()) {
+                alert("제목을 입력해주세요.");
+                event.preventDefault(); // 폼 제출 방지
+            }
+        });
+    });
+</script>
 </body>
 </html>

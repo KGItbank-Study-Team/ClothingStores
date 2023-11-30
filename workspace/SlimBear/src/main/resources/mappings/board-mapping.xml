@@ -132,6 +132,7 @@
 	        type = #{type}
         	AND prod_uid IS NULL
 	    ORDER BY reg_date DESC
+	    LIMIT #{pageSize} OFFSET #{offset};
  	</select>
 
  	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
@@ -148,10 +149,16 @@
 	    FROM 
 	        inquiry
  	</select>
+ 	
+ 	<select id="SELECT_CNT_INQUIRY_LIST" resultType="int">
+		SELECT COUNT(*)
+		FROM inquiry WHERE type=#{type} AND prod_uid IS NULL; 
+	</select>
+ 	
  	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
  		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
  	</select>
-
+	
  	<!-- 문의게시글 답변게시글 -->
  	<select id="SELECT_INQUIRY_ANSWERS" resultType="InquiryAnswer">
 	    SELECT
