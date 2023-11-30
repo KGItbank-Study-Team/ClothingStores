@@ -220,25 +220,25 @@ function buyClick(uid) {
             console.log("2. 선택된 옵션 리스트 : " + JSON.stringify(selectOptionList));
 
             var containCart = false;
-            for(var i=0; i<arr.length; i++) {
-                if('containCnt' in arr[i]) { //containCnt값이 존재하는 경우
+            for (var i = 0; i < arr.length; i++) {
+                if ('containCnt' in arr[i]) { //containCnt값이 존재하는 경우
                     containCart = true;
                     break;
-                } 
+                }
             }
 
-            if(containCart) { //containCnt값이 존재하는 경우
+            if (containCart) { //containCnt값이 존재하는 경우
                 var msg = '동일한 상품이 장바구니에 있습니다. 같이 구매하시겠습니까? \n\n' + "'취소' 클릭 시 현재 개수만 구매합니다."
-                if(confirm(msg)) {
+                if (confirm(msg)) {
                     //확인 클릭 시, selectOptionList의 cnt 업데이트
-                    for(var i=0; i<arr.length; i++) {
-                        if(selectOptionList[i].color === arr[i].color && selectOptionList[i].size === arr[i].size) {
-                            selectOptionList[i].cnt = selectOptionList[i].cnt + arr[i].containCnt; 
+                    for (var i = 0; i < arr.length; i++) {
+                        if (selectOptionList[i].color === arr[i].color && selectOptionList[i].size === arr[i].size) {
+                            selectOptionList[i].cnt = selectOptionList[i].cnt + arr[i].containCnt;
                             console.log("3. containCnt 값 : " + JSON.stringify(arr[i].containCnt));
                             console.log("4. 변경된 개수 : " + selectOptionList[i].cnt);
-                            addInput(uid);
-                        } 
+                        }
                     }
+                    addInput(uid);
                 } else {
                     //취소 클릭
                     console.lgo("옵션 리스트 : " + JSON.stringify(selectOptionList));
@@ -248,7 +248,7 @@ function buyClick(uid) {
             } else { //containCnt값이 존재하지 않는 경우
                 addInput(uid);
                 console.log('containCnt가 존재하지 않습니다.');
-            } 
+            }
         },
         error: function (request, status, error) {
             console.log("request:", request);
@@ -533,14 +533,29 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
 
 
     for (var i = (currentPage - 1) * dataPerPageInq; i < Math.min(currentPage * dataPerPageInq, inqList.length); i++) {
-        inquiryHtml += '<tbody class="inquiry">' +
+        inquiryHtml += '<table class="inquiryTable">' +
+            '<colgroup>' +
+            '<col style="width: 100px;">' +
+            '<col style="width: 1000px;">' +
+            '<col style="width: 500px;">' +
+            '<col style="width: 500px;">' +
+            '</colgroup>' +
+            '<thead>' +
             '<tr>' +
-            '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
-            '<td style="width: 1000px;>' +
+            '<th scope="col" class="thCss">번호</th>' +
+            '<th scope="col" class="thCss">제목</th>' +
+            '<th scope="col" class="thCss">작성자</th>' +
+            '<th scope="col" class="thCss">작성일</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody class="inquiry">' +
+            '<tr>' +
+            '<td class="borderRemove" style="width: 100px;">' + inqList[i].uid + '</td>' + //inquiry_uid
+            '<td style="width: 1000px;">' +
             '<div class="clickTitle ">' + inqList[i].title + '</div>' +
             '</td>' +
-            '<td>' + inqList[i].writer_id + '</td>' +
-            '<td>' + inqList[i].reg_date + '</td>' +
+            '<td style="width: 500px;">' + inqList[i].writer_id + '</td>' +
+            '<td style="width: 500px;">' + inqList[i].reg_date + '</td>' +
             '</tr>' +
             '<tr class="inquiryContent">' +
             '<td>&nbsp;</td>' +
@@ -558,7 +573,7 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
         }
         inquiryHtml += '</tbody>';
     }
-    $('.inquiry').html(inquiryHtml);
+    $('.inquiryTable').html(inquiryHtml);
 }
 // 페이징 표시 함수
 function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqList) {
