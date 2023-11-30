@@ -4838,3 +4838,32 @@ i {
     content: "\e928"
 }
 
+
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+#subject {
+    margin-right: 10px; /* 여백을 조절해주세요 */
+}
+
+.text_box input {
+    width: 150%;
+    padding: 6px;
+}
+
+.text_box .count {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #555;
+}
+
+.text_box .count.overlimit {
+    color: red;
+}
+
+
+

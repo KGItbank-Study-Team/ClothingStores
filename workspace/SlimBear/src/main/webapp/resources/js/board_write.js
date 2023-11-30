@@ -1026,4 +1026,25 @@ document.getElementById("editForm").addEventListener("submit", function(event) {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+        var inputField = document.getElementById('inquiryTitle');
+        var countSpan = document.querySelector('.text_box .count span');
+
+        inputField.addEventListener('input', function() {
+            var content = this.value;
+            var maxLength = parseInt(this.getAttribute('maxlength'));
+            var currentLength = content.length;
+
+            countSpan.innerHTML = currentLength;
+
+            if (currentLength > maxLength) {
+                document.querySelector('.text_box .count').classList.add('overlimit');
+                alert('최대 30자까지 입력 가능합니다.');
+                this.value = content.substring(0, maxLength);
+                countSpan.innerHTML = maxLength;
+            } else {
+                document.querySelector('.text_box .count').classList.remove('overlimit');
+            }
+        });
+    });
 
