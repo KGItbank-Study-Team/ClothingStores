@@ -195,7 +195,7 @@
 				            if (result) {
 				                var answer = result;
 				                html.push('<tr>');
-				                html.push('<td>' + (answer.status ? '답변완료' : '답변 미등록') + '</td>');
+				                html.push('<td>' + (result.status === 'SUCCESS' ? '답변완료' : '미등록') + '</td>');
 
 				               
 				                html.push('</tr>');
@@ -207,8 +207,8 @@
 						    html.push('<div class="reply-form">');
 						    html.push('<form id="replyForm">');
 							html.push('<div class="mb-3">')
-						    html.push('<label for="writer_id" class="form-label">작성자 ID</label>')
-						    html.push('<input type="text" class="form-control dark-input" id="writer_id" value="' + row['writer_id'] + '" readonly>')
+						    html.push('<label for="writer_id" class="form-label">관리자ID</label>')
+						    html.push('<input type="text" class="form-control dark-input" id="writer_id" value="' + row['mem_id'] + '" readonly>')
 						            
 						            
 						    html.push('</div>')
@@ -290,12 +290,13 @@
 				'<a class="btn btn-primary" href="/admin/home/member?memberID=',value,'">',value,'</a>'
 			].join('')
 	}
-	function commentsFormatter(value, row, index) {
-        if (value) {
-            return '<span class="badge badge-success">답변완료</span>';
-        } else {
-            return '<span class="badge badge-secondary">답변 미등록</span>';
-        }
-    }
+	// 답변 여부를 표시하는 함수
+	  function commentsFormatter(value, row, index) {
+	    if (value === 'SUCCESS') {
+	      return '<span class="badge badge-success">답변완료</span>';
+	    } else {
+	      return '<span class="badge badge-secondary">답변 미등록</span>';
+	    }
+	  }
 </script>
 </html>

@@ -16,9 +16,9 @@ import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.admin.service.RSYAdminServiceImpl;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
-import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
+import com.kgitbank.slimbear.vo.ReviewVO;
 
 @Controller
 public class RSYAdminController {
@@ -41,8 +41,8 @@ public class RSYAdminController {
 
 	@GetMapping("review/list")
 	@ResponseBody
-	public List<ReviewDTO> boardReviewList() {
-		List<ReviewDTO> reviewList = sanghService.getReviewList();
+	public List<ReviewVO> boardReviewList() {
+		List<ReviewVO> reviewList = rsyAdminService.getReviewList();
 		return reviewList;
 	}
 
@@ -90,10 +90,6 @@ public class RSYAdminController {
 	public ResponseEntity<String> addOrUpdateAnswer(@RequestParam Long inqr_uid, @RequestParam String answerTitle,
 			@RequestParam String answerContent, @RequestParam String mem_id) {
 		try {
-			System.out.println(inqr_uid);
-			System.out.println(answerTitle);
-			System.out.println(answerContent);
-			System.out.println(mem_id);
 			rsyAdminService.addOrUpdateAnswer(inqr_uid, answerTitle, answerContent, mem_id);
 			return ResponseEntity.ok("답글이 성공적으로 추가/수정되었습니다.");
 		} catch (Exception e) {
