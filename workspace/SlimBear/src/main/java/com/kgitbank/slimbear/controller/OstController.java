@@ -1,8 +1,12 @@
 package com.kgitbank.slimbear.controller;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.common.SlimBearUtil;
+
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.OstSerivceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
@@ -55,28 +59,8 @@ public class OstController {
 		return "cart"; 
 	}
 	
-	@PostMapping("/addToCart")
-	@ResponseBody
-	public ResponseEntity<String> addToCart(@RequestParam long memUid,
-	                                       @RequestParam String prodCode,
-	                                       @RequestParam int quantity,
-	                                       @RequestParam String selectedColor,
-	                                       @RequestParam String selectedSize) {
-	    // 여기에서 cartService를 사용하여 카트에 상품을 추가하는 로직을 작성
-	    // 새로운 색상과 크기 정보를 이용하여 새로운 제품 코드를 생성하는 로직이 필요
-	    String newProdCode = generateNewProductCode(prodCode, selectedColor, selectedSize);
 
-	    // 나머지 로직은 기존 addToCart와 동일
-	    ostService.addToCart(memUid, newProdCode, quantity);
-
-	    return ResponseEntity.ok("Success");
-	}
-
-	private String generateNewProductCode(String prodCode, String color, String size) {
-	    // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성
-	    String originalProdCode = ostService.getOriginalProductCode(prodCode);
-	    return SlimBearUtil.updateProductCode(originalProdCode, color, size);
-	}
+	
 	@RequestMapping(value = "/updateQuantity", method = { RequestMethod.GET, RequestMethod.POST })
 	public String updateQuantity(@RequestParam long productId, @RequestParam int newQuantity, Model model, Authentication authentication) {
 	    if (authentication != null) {
@@ -138,16 +122,50 @@ public class OstController {
         ostService.updateCartItemOptions(cartUid, productUid,color, size);
         return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK);
     }
-	/*
-	 * @PostMapping("/updateCartItemOptions")
-	 * 
-	 * @ResponseBody public ResponseEntity<String>
-	 * updateCartItemOptions(@RequestParam int index, @RequestParam long
-	 * uid, @RequestParam String color, @RequestParam String size) { // 여기에 옵션 업데이트
-	 * 로직을 추가하고 성공 또는 실패에 따라 응답을 보냄 ostService.updateCartItemOptions(uid, color,
-	 * size); return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK); }
-	 */
+	@PostMapping("/addChangedOptions")
+	@ResponseBody
+	public ResponseEntity<String> addChangedOptions(@RequestParam long cartUid, @RequestParam long productUid,
+	        @RequestParam String color, @RequestParam String size) {
+	    // 추가적인 로직을 여기에 추가하고 성공 또는 실패에 따른 응답을 반환합니다.
+	    ostService.addChangedOptions(cartUid, productUid, color, size);
+	    return new ResponseEntity<>("변경된 옵션이 추가되었습니다.", HttpStatus.OK);
+	}
+	@PostMapping("/addCartItem")
+	@ResponseBody
+	public ResponseEntity<String> addCartItem(
+	        @RequestParam long cartUid,
+	        @RequestParam long productUid,
+	        @RequestParam String color,
+	        @RequestParam String size,
+	        Authentication authentication) {
 
+	    if (authentication != null) {
+	        SecurityUser user = (SecurityUser) authentication.getPrincipal();
+	       
+
+	        // 여기에서 memUid 값을 사용하여 로직을 처리
+	        ostService.addCartItem(cartUid, productUid, color, size);
+
+	        return new ResponseEntity<>("카트에 상품이 추가되었습니다.", HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+	    }
+	}
+	@PostMapping("/deleteOldItems")
+	public ResponseEntity<?> deleteOldItems(@RequestParam("deleteBefore") String deleteBefore) {
+	    try {
+	        // deleteBefore 문자열을 Date로 변환
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	        Date deleteBeforeDate = dateFormat.parse(deleteBefore);
+
+	        // 30일 이전 제품 삭제 로직 추가
+	        // 예를 들어, CartDAO에서 해당 날짜 이전의 장바구니 아이템을 삭제하는 메서드를 호출하는 등
+
+	        return ResponseEntity.ok("Success");
+	    } catch (ParseException e) {
+	        return ResponseEntity.badRequest().body("Invalid date format");
+	    }
+	}
 
 }
 

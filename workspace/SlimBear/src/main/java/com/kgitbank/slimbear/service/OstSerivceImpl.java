@@ -73,19 +73,16 @@ public class OstSerivceImpl {
 
 		return list;
 	}
-	 public String getOriginalProductCode(String prodCode) {
-	        return cartDAO.getOriginalProductCode(prodCode);
+	public void addChangedOptions(long cartUid, long productUid, String color, String size) {
+	    String updatedProdCode = SlimBearUtil.appendProductCode(productUid, color, size);
+	    cartDAO.addChangedOptions(cartUid, updatedProdCode);
+	}
+	
+	
+	 public void addCartItem(Long cartUid, Long productUid, String color, String size) {
+	        // 여기에서 필요한 비즈니스 로직 수행 가능
+	        cartDAO.addCartItem(cartUid, productUid, color, size);
 	    }
-	public void addToCart(long memUid, String prodCode, int quantity) {
-        // 기존 제품 코드를 가져오는 로직 (실제 데이터베이스 조회 필요)
-        String originalProdCode = cartDAO.getOriginalProductCode(prodCode);
-
-        // 새로운 제품 코드 생성
-        String newProdCode = SlimBearUtil.generateNewProductCode(originalProdCode, "newColor", "newSize");
-
-        // 나머지 로직은 기존 addToCart와 동일
-        cartDAO.addToCart(memUid, newProdCode, quantity);
-    }
 
 	public void updateCartItemOptions(long cartUid, long productUid ,String color, String size) {
         
@@ -141,5 +138,8 @@ public class OstSerivceImpl {
         // 아래는 가상의 코드이며, 실제로는 데이터를 어떻게 가져올지에 따라 수정해야 합니다.
         return Arrays.asList(); // 가상의 리스트를 반환하고 있습니다.
     }
-    
+    public void deleteOldItems(String deleteBefore) {
+        // 비즈니스 로직 구현
+        // ...
+    }
 }

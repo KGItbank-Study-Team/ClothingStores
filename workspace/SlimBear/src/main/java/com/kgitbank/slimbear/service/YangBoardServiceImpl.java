@@ -44,7 +44,10 @@ public class YangBoardServiceImpl {
     public List<InquiryDTO> getInquiryList(String type) {
         return inquiryDAO.getInquiryList(type);
     }
-    
+ // 문의게시판 전체목록
+    public List<InquiryDTO> getInquiryListAll() {
+        return inquiryDAO.getInquiryListAll();
+    }
     // 문의게시판 답변
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
         return inquiryDAO.getInquiryListByProdUid(prodUid);

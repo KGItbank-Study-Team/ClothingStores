@@ -61,6 +61,8 @@
 								<col style="width: 130px;" />
 								<col style="width: auto;" />
 							</colgroup>
+							
+							<!-- 문의게시글 -->
 							<tbody>
 								<tr>
 									<th scope="row">TITLE</th>
@@ -139,132 +141,31 @@
 												<td><fmt:formatDate value="${answer.reg_date}" pattern="yyyy-MM-dd" /></td>
 											</tr>
 											
-											<%-- <tr>
-												<td colspan="2" class="bon">
-													<div class="detail">
-														<div class="fr-view fr-view-article">
-															<p><br></p>
-															<p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-																${answer.content}</p>
-															<p>
-																<br>
-															</p>
-														</div>
-													</div>
-												</td>
-											</tr> --%>
-											
+											<!-- 게시글 답변 글 -->
 											<tr>
-    <td colspan="2" class="bon">
-        <div class="detail">
-            <div class="fr-view fr-view-article">
-                <p><br></p>
-                <c:choose>
-                    <c:when test="${inquiries.secure eq 1 and inquiries.writer_id ne pageContext.request.userPrincipal.name}">
-                        <!-- writer_id와 현재 로그인한 사용자의 ID가 다른 경우 -->
-                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                            비밀글로 작성자 외엔 확인할 수 없는 내용입니다.
-                        </p>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- writer_id와 현재 로그인한 사용자의 ID가 같은 경우 -->
-                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                            ${answer.content}
-                        </p>
-                    </c:otherwise>
-                </c:choose>
-                <p><br></p>
-            </div>
-        </div>
-    </td>
-</tr>
-											
-											
-											<%-- <c:if test="${not empty inquiries.answers}">
-										    <c:forEach var="answer" items="${inquiries.answers}">
-										        <c:choose>
-										            <c:when test="${inquiries.secure eq 0 or currentUser.id eq inquiries.writer_id}">
-										                <!-- 
-										                    inquiries의 secure가 0이거나
-										                    answer의 작성자와 현재 사용자의 ID가 같은 경우에만 보여줌 
-										                -->
-										                <tr>
-										                    <td colspan="2" class="bon">
-										                        <div class="detail">
-										                            <div class="fr-view fr-view-article">
-										                                <p><br></p>
-										                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-										                                    ${answer.content}
-										                                </p>
-										                                <p>
-										                                    <br>
-										                                </p>
-										                            </div>
-										                        </div>
-										                    </td>
-										                </tr>
-										            </c:when>
-										            <c:otherwise>
-										                <!-- 그 외의 경우에는 inquiries의 content를 보여줌 -->
-										                <tr>
-										                    <td colspan="2" class="bon">
-										                        <div class="detail">
-										                            <div class="fr-view fr-view-article">
-										                                <p><br></p>
-										                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-										                                    ${inquiries.content}
-										                                </p>
-										                                <p><br></p>
-										                            </div>
-										                        </div>
-										                    </td>
-										                </tr>
-										            </c:otherwise>
-										        </c:choose>
-										    </c:forEach>
-										</c:if> --%>
-
-											
-											<%-- <c:if test="${not empty inquiries.answers}">
-										    <c:forEach var="answer" items="${inquiries.answers}">
-										        <c:choose>
-										            <c:when test="${inquiries.secure ne 1}">
-										                <!-- inquiries의 secure가 1이 아닌 경우에만 보여줌 -->
-										                <tr>
-										                    <td colspan="2" class="bon">
-										                        <div class="detail">
-										                            <div class="fr-view fr-view-article">
-										                                <p><br></p>
-										                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-										                                    ${answer.content}</p>
-										                                <p>
-										                                    <br>
-										                                </p>
-										                            </div>
-										                        </div>
-										                    </td>
-										                </tr>
-										            </c:when>
-										            <c:otherwise>
-										                <!-- inquiries의 secure가 1인 경우에는 안 보여줌 -->
-										                <tr>
-										                    <td colspan="2" class="bon">
-										                        <div class="detail">
-										                            <div class="fr-view fr-view-article">
-										                                <p><br></p>
-										               					 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-										                                    ${inquiries.content}</p>
-										                                <p><br></p>
-										                            </div>
-										                        </div>
-										                    </td>
-										                </tr>
-										            </c:otherwise>
-										        </c:choose>
-										    </c:forEach>
-											</c:if> --%>
-											
-											
+											    <td colspan="2" class="bon">
+											        <div class="detail">
+											            <div class="fr-view fr-view-article">
+											                <p><br></p>
+											                <c:choose>
+											                    <c:when test="${inquiries.secure eq 1 and inquiries.writer_id ne pageContext.request.userPrincipal.name}">
+											                        <!-- writer_id와 현재 로그인한 사용자의 ID가 다른 경우 -->
+											                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+											                            비밀글로 작성자 외엔 확인할 수 없는 내용입니다.
+											                        </p>
+											                    </c:when>
+											                    <c:otherwise>
+											                        <!-- writer_id와 현재 로그인한 사용자의 ID가 같은 경우 -->
+											                        <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+											                            ${answer.content}
+											                        </p>
+											                    </c:otherwise>
+											                </c:choose>
+											                <p><br></p>
+											            </div>
+											        </div>
+											    </td>
+											</tr>
 											
 											<tr class="attach displaynone">
 												<th scope="row">FILE</th>
