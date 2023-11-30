@@ -389,8 +389,6 @@ section > h1 {
 	padding-right: 10px;
 }
 .review-section {
-	background: #efeae2;
-	border: solid 1px;
 	flot: left;
 }
 .info {
@@ -404,7 +402,7 @@ section > h1 {
 	font-size: 10px;
 }
 .review-score {
-	color: brown;
+	color: gold;
 	font-size: 20px;
 	position: relative;
 	top: -15px;
@@ -414,8 +412,9 @@ section > h1 {
 	height: 87px;
 	padding-left: 5px;
 }
-.review-text {
-/* 	padding-left: 5px; */
+.reviewContent {
+	padding-left: 5px;
+	border-bottom: 1px solid;
 }
 #pagingul {
 	display: flex;
@@ -449,18 +448,17 @@ section > h1 {
 	text-align: center;
 } */
 .inquirySection > table {
-	/* border: 1px solid gray; */
 	border-collapse: collapse; 
 }
 .inquirySection > table  td {
 	padding: 10px 0;
 	text-align: center;
-	border: 1px solid
+	border: 1px solid;
 	border-right: none;
 	border-left: none;
 }
 .thCss {
-	text-align: center;
+	/* text-align: center; */
 }
 /* .borderRemove {
 	border-right: none;

@@ -388,8 +388,8 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>' +
             '<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>' +
             '</div>' +
-            '<div class="review-text">' +
-            '<div>' + dataList[i].content + '</div>' +
+            '<div>' +
+            '<div class="reviewContent">' + dataList[i].content + '</div>' +
             '</div>' +
             '</div>';
     }
@@ -533,29 +533,14 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
 
 
     for (var i = (currentPage - 1) * dataPerPageInq; i < Math.min(currentPage * dataPerPageInq, inqList.length); i++) {
-        inquiryHtml += '<table class="inquiryTable">' +
-            '<colgroup>' +
-            '<col style="width: 100px;">' +
-            '<col style="width: 1000px;">' +
-            '<col style="width: 500px;">' +
-            '<col style="width: 500px;">' +
-            '</colgroup>' +
-            '<thead>' +
+        inquiryHtml += 
             '<tr>' +
-            '<th scope="col" class="thCss">번호</th>' +
-            '<th scope="col" class="thCss">제목</th>' +
-            '<th scope="col" class="thCss">작성자</th>' +
-            '<th scope="col" class="thCss">작성일</th>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody class="inquiry">' +
-            '<tr>' +
-            '<td class="borderRemove" style="width: 100px;">' + inqList[i].uid + '</td>' + //inquiry_uid
-            '<td style="width: 1000px;">' +
-            '<div class="clickTitle ">' + inqList[i].title + '</div>' +
+            '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
+            '<td>' +
+            '<div class="clickTitle">' + inqList[i].title + '</div>' +
             '</td>' +
-            '<td style="width: 500px;">' + inqList[i].writer_id + '</td>' +
-            '<td style="width: 500px;">' + inqList[i].reg_date + '</td>' +
+            '<td>' + inqList[i].writer_id + '</td>' +
+            '<td>' + inqList[i].reg_date + '</td>' +
             '</tr>' +
             '<tr class="inquiryContent">' +
             '<td>&nbsp;</td>' +
@@ -568,12 +553,16 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
         // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
         if (inqAnswerList[i]) {
             inquiryHtml += '<tr>' +
-                '<td>' + inqAnswerList[i].title + '</td>' +
+                '<td>&nbsp;</td>' +
+                '<td>' +
+                '<div class="clickTitle">' + inqAnswerList[i].title + 
+                '</div>' +
+                '</td>' +
                 '</tr>';
         }
-        inquiryHtml += '</tbody>';
+        
     }
-    $('.inquiryTable').html(inquiryHtml);
+    $('.inquiry').html(inquiryHtml);
 }
 // 페이징 표시 함수
 function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqList) {
