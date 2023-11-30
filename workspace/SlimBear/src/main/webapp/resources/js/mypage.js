@@ -76,8 +76,10 @@ function registerCoupon() {
             if (response.success) {
                 // 쿠폰 등록 성공 시 원하는 동작 수행
                 alert('쿠폰이 정상적으로 등록되었습니다.');
-                
-                
+
+                // 서버 응답을 받은 후 페이지 리로드
+                location.reload();
+
             } else {
                 // 쿠폰 등록 실패 시 원하는 동작 수행
                 alert('쿠폰 등록에 실패했습니다. 이유: ' + response.failed);
@@ -89,6 +91,8 @@ function registerCoupon() {
         }
     });
 }
+
+
 
 // 위시리스트에서 아이템 삭제를 위한 함수
 function deleteSelectedItems() {

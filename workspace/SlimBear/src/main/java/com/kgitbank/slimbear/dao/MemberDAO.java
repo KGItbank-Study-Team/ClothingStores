@@ -53,6 +53,11 @@ public class MemberDAO{
 		return  template.update("com.slimbear.mapper.Member.SELECT_MILEAGERECORD_BY_MEM_UID", mem_uid);
 	}
 	
+	//마일리지 리스트(철)
+	public List<MemberMileageRecordDTO> getMemberMileageRecordListByMemUID(long memberUID){
+		return  template.selectList("com.slimbear.mapper.Member.SELECT_MILEAGERECORD_BY_MEM_UIDS", memberUID);
+	}
+	
 	public int insertMemberMileageRecord(MemberMileageRecordDTO record) {
 		return  template.update("com.slimbear.mapper.Member.INSERT_MILEAGERECORD", record);
 	}

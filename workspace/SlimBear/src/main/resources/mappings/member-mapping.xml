@@ -250,6 +250,13 @@
 		WHERE
 		mem_uid=#{mem_uid}
 	</select>
+	
+	<!-- 철 -->
+	<select id="SELECT_MILEAGERECORD_BY_MEM_UIDS" resultType="com.kgitbank.slimbear.dto.MemberMileageRecordDTO">
+		SELECT * FROM memberMileageRecord
+		WHERE
+		mem_uid=#{mem_uid}
+	</select>
 
 	<insert id="INSERT_MILEAGERECORD">
 		INSERT INTO cart
