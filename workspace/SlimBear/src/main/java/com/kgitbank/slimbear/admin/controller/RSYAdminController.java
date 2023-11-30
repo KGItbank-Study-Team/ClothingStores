@@ -85,4 +85,19 @@ public class RSYAdminController {
 		InquiryAnswerDTO annswer = yangService.getAnswerDetail(uid);
 		return annswer;
 	}
+	@RequestMapping("inquiry/addOrUpdateAnswer")
+	@ResponseBody
+	public ResponseEntity<String> addOrUpdateAnswer(@RequestParam Long inqr_uid, @RequestParam String answerTitle,
+			@RequestParam String answerContent, @RequestParam String mem_id) {
+		try {
+			System.out.println(inqr_uid);
+			System.out.println(answerTitle);
+			System.out.println(answerContent);
+			System.out.println(mem_id);
+			rsyAdminService.addOrUpdateAnswer(inqr_uid, answerTitle, answerContent, mem_id);
+			return ResponseEntity.ok("답글이 성공적으로 추가/수정되었습니다.");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("답글 추가/수정 중에 오류가 발생했습니다.");
+		}
+	}
 }
