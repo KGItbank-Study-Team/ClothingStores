@@ -357,5 +357,20 @@
 	<delete id="DELETE_NOTICE">
 		DELETE FROM notice WHERE uid=#{uid}
 	</delete>
+	
+	<!-- 특정 사용자가 작성한 리뷰를 페이징하여 가져오는 쿼리 -->
+	<select id="SELECT_BY_USER_ID_PAGING" parameterType="map" resultType="com.kgitbank.slimbear.dto.ReviewDTO">
+	    SELECT *
+	    FROM productReview
+	    WHERE mem_id = #{userID}
+	    LIMIT #{start}, #{end}
+	</select>
+	
+	<!-- 특정 사용자가 작성한 총 리뷰 수를 가져오는 쿼리 -->
+	<select id="COUNT_TOTAL_REVIEWS" parameterType="String" resultType="int">
+	    SELECT COUNT(*)
+	    FROM productReview
+	    WHERE mem_id = #{userID}
+	</select>
 
 </mapper>

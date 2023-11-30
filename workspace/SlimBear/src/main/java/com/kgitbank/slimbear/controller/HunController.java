@@ -2,8 +2,6 @@ package com.kgitbank.slimbear.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.dto.MemberMileageRecordDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
@@ -199,19 +196,29 @@ public class HunController {
 	}
 	
 	@RequestMapping("member/myPage/reviewList")
-	public String reviewList(Authentication authentication, Model model) {
+	public String reviewList(
+	    @RequestParam(value = "page", defaultValue = "1") int page,
+	    @RequestParam(value = "perPage", defaultValue = "10") int perPage,
+	    Authentication authentication, Model model) {
+	    
+	    SecurityUser user = (SecurityUser) authentication.getPrincipal();
+	    String userID = user.getUsername();
 
-		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		String userID = user.getUsername();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		
-		List<reviewListVO> vo = hunService.getReviewListInfo(userID);
-		
-		System.out.println(vo);
-		model.addAttribute("reviewList", vo);
-		
-		return "review_list";
+	    int start = (page - 1) * perPage;
+	    int end = perPage;
+
+	    List<reviewListVO> vo = hunService.getReviewListInfoPaging(userID, start, end);
+
+	    model.addAttribute("reviewList", vo);
+
+	    // 추가: 현재 페이지와 총 페이지 수를 모델에 추가
+	    int totalReviews = hunService.getTotalReviewCount(userID);
+	    int totalPages = (int) Math.ceil((double) totalReviews / perPage);
+
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+
+	    return "review_list";
 	}
 
 	@RequestMapping("member/myPage/addr")

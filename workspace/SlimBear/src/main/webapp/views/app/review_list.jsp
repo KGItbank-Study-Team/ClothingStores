@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -110,17 +111,33 @@
 
 				<div
 					class="xans-element- xans-myshop xans-myshop-boardlistpaging ec-base-paginate">
-					<a href="#none"><img src="/resources/images/icon_prev2.png"></a>
-					<ol>
-						<li class="xans-record-"><a href="#none" class="this"
-							style="padding-right: 0px;">1</a></li>
-					</ol>
-					<a href="#none"><img src="/resources/images/icon_next2.png"></a>
+					<c:if test="${not empty reviewList}">
+						<c:if test="${currentPage > 1}">
+							<a href="?page=${currentPage - 1}&perPage=${perPage}"><img
+								src="/resources/images/icon_prev2.png"></a>
+						</c:if>
+						<ol>
+							<c:forEach begin="1" end="${totalPages}" var="pageNum">
+								<li class="xans-record-"><c:if
+										test="${pageNum eq currentPage}">
+										<a href="?page=${pageNum}&perPage=${perPage}" class="this"
+											style="padding-right: 0px;">${pageNum}</a>
+									</c:if> <c:if test="${pageNum ne currentPage}">
+										<a href="?page=${pageNum}&perPage=${perPage}">${pageNum}</a>
+									</c:if></li>
+							</c:forEach>
+						</ol>
+						<c:if test="${currentPage < totalPages}">
+							<a href="?page=${currentPage + 1}&perPage=${perPage}"><img
+								src="/resources/images/icon_next2.png"></a>
+						</c:if>
+					</c:if>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<%@ include file="footer/footer.jsp"%>
+	<%@ include file="footer/footer.jsp"%>
 </body>
 
 </html>

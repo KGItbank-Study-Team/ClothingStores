@@ -112,6 +112,39 @@ function deleteSelectedItems() {
     }
 }
 
+//문의게시판 분류
+function filterRows() {
+      var selectedOption = document.getElementById("board_sort").value;
+      var rows = document.querySelectorAll('.center tr');
 
+      rows.forEach(function(row) {
+        var boardGroup = row.querySelector('td:nth-child(2)').textContent.trim();
 
+        if (selectedOption === '전체보기' || boardGroup === selectedOption) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+//리뷰관리 페이징
+function changePage(page) {
+    // 페이지 변경 로직 구현
+    // 페이지 변경 시 필요한 데이터를 컨트롤러로 전송하고, 필요한 처리를 수행
+    // 예: window.location.href = "/app/member/myPage/reviewList?page=" + page;
+    
+    // 이 예시에서는 alert를 사용하여 페이지 변경 여부 확인
+    alert("Change to page: " + page);
+    
+    // 페이지 변경 시 현재 페이지의 클래스 변경
+    var currentPageElements = document.getElementsByClassName('this');
+    for (var i = 0; i < currentPageElements.length; i++) {
+        currentPageElements[i].classList.remove('this');
+    }
+    
+    // 선택된 페이지에 'this' 클래스 추가
+    var selectedPageElement = document.querySelector('.xans-record-:nth-child(' + page + ') a');
+    selectedPageElement.classList.add('this');
+}
 

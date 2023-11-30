@@ -264,7 +264,16 @@ public class HunServiceImpl {
 
 		for (InquiryDTO i : boardlist) {
 			MemberBoardVO vo = new MemberBoardVO();
-			vo.setBoardGroup(i.getType());
+			if("PRODUCT".equals(i.getType())) {
+				vo.setBoardGroup("상품문의");
+			} else if("DELIVERY".equals(i.getType())) {
+				vo.setBoardGroup("배송문의");
+			} else if("DELIVERY_C".equals(i.getType())) {
+				vo.setBoardGroup("기타문의");
+			} else {
+				vo.setBoardGroup("오류다 초비상!");
+			}
+			
 			vo.setBoardTitle(i.getTitle());
 			vo.setBoardWriter(i.getWriter_id()); //이름이 없넹
 			vo.setBoardDate(i.getReg_date());
@@ -276,24 +285,31 @@ public class HunServiceImpl {
 	}
 
 	//리뷰게시판
-	public List<reviewListVO> getReviewListInfo(String userID){
-		ArrayList<reviewListVO> list = new ArrayList<>();
-		List<ReviewDTO> reviewlist = reviewDAO.getReviewListByUserId(userID);
-		
-		for(ReviewDTO i : reviewlist) {
-			reviewListVO vo = new reviewListVO();
-			
-			vo.setImage("대충사진");
-			vo.setTitle(i.getTitle());
-			vo.setContent(i.getContent());
-			vo.setScore(i.getScore());
-			vo.setReg_date(i.getReg_date());
-			
-			list.add(vo);
-		}
-		
-		return list;
+	public List<reviewListVO> getReviewListInfoPaging(String userID, int start, int end) {
+	    List<ReviewDTO> reviewList = reviewDAO.getReviewListByUserIdPaging(userID, start, end);
+	    List<reviewListVO> list = new ArrayList<>();
+
+	    for (ReviewDTO i : reviewList) {
+	        reviewListVO vo = new reviewListVO();
+	        vo.setImage("대충사진");
+	        vo.setTitle(i.getTitle());
+	        vo.setContent(i.getContent());
+	        vo.setScore(i.getScore());
+	        vo.setReg_date(i.getReg_date());
+	        list.add(vo);
+	    }
+
+	    return list;
 	}
+
+	// 추가: 총 리뷰 수를 반환하는 메서드
+	public int getTotalReviewCount(String userID) {
+	    return reviewDAO.getTotalReviewCount(userID);
+	}
+
+
+
+
 	
 	//배송지
 	public List<AddrVO> getAddrInfo(long memberUID) {
