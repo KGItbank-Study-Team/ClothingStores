@@ -28,7 +28,7 @@
 		VALUES (#{review_uid}, #{title}, #{content}, #{mem_id})
 		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
 	</insert>
-	<select id="SELECT_REVIEW_LIST_ADMIN" resultType="reviewVO">
+	<select id="SELECT_REVIEW_LIST_ADMIN" resultType="com.kgitbank.slimbear.vo.ReviewVO">
 		SELECT * FROM
 		productReview
 	</select>
