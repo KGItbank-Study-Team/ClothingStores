@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.dto.MemberMileageRecordDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
@@ -124,7 +125,10 @@ public class HunController {
 		System.out.println(user.getUsername());
 
 		MileageVO vo = hunService.getMileageInfo(user.getUid());
+		List<MileageVO> v = hunService.getMileageListInfo(user.getUid());
+		
 		model.addAttribute("mile", vo);
+		model.addAttribute("reserveList", v);
 
 		return "mileage";
 	}

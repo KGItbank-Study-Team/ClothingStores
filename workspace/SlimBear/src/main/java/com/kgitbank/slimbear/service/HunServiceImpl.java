@@ -22,6 +22,7 @@ import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.dto.MemberMileageRecordDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
@@ -165,30 +166,30 @@ public class HunServiceImpl {
 		vo.setUseReserve(3000);
 		
 //		이거 임시 밑에 리스트있음
-		Date currentDate = new Date();
-        vo.setOrderDate(currentDate);
-		vo.setAddReserve(i);
-		vo.setRelatedOrder("x");
-		vo.setSubstance("신규회원 축하선물");
+//		Date currentDate = new Date();
+//        vo.setOrderDate(currentDate);
+//		vo.setAddReserve(i);
+//		vo.setRelatedOrder("x");
+//		vo.setSubstance("신규회원 축하선물");
 
 		return vo;
 	}
 	
 	//적립금 리스트
-	public List<MileageVO> getMileageListInfo(){
+	public List<MileageVO> getMileageListInfo(long memberUID){
 		ArrayList<MileageVO> list = new ArrayList<>();
-//		List<MemberMileageRecordDTO> membermile = memDAO.getMemberMileageRecordListByMemberUID(0);
+		List<MemberMileageRecordDTO> membermile = memDAO.getMemberMileageRecordListByMemUID(memberUID);
 		
-//		for(MemberMileageRecordDTO i : membermile) {
-//			MileageVO vo = new MileageVO();
-//			
-//			vo.setOrderDate(null);
-//			vo.setAddReserve(0);
-//			vo.setRelatedOrder(null);
-//			vo.setSubstance(null);
-//			
-//			list.add(vo);
-//		}
+		for(MemberMileageRecordDTO i : membermile) {
+			MileageVO vo = new MileageVO();
+			
+			vo.setOrderDate(i.getDate());
+			vo.setAddReserve(i.getMileage());
+			vo.setRelatedOrder(i.getOrder_code());
+			vo.setSubstance(i.getType());
+			
+			list.add(vo);
+		}
 		return list;
 	}
 
@@ -236,7 +237,7 @@ public class HunServiceImpl {
 	    return validCoupons;
 	}
 
-	//찜 리스트
+	//위시리스트
 	public List<WishListVO> getWishListInfo(long memberUID) {
 		ArrayList<WishListVO> list = new ArrayList<>();
 		List<WishDTO> wishlist = wishDAO.getWishListByMemberUID(memberUID);

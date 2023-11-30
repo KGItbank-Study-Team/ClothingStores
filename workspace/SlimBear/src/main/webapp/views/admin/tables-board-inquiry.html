@@ -221,7 +221,7 @@
 						    html.push('<textarea class="form-control" id="answerContent" rows="8"></textarea>');
 						    html.push('</div>');
 						   
-						    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateComment(' + row['uid'] + ')">답글 추가/수정</button>');
+						    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateAnswer(' + row['uid'] + ')">답글 추가/수정</button>');
 						    html.push('</form>');
 						    html.push('</div>');
 
@@ -256,18 +256,18 @@
 	}
 
 	// 리뷰 답글을 추가 또는 수정하는 함수
-	function addOrUpdateComment(uid) {
-		var commentTitle = $('#commentTitle').val();
-		var commentContent = $('#commentContent').val();
-		var mem_id = $('#mem_id').val();
+	function addOrUpdateAnswer(uid) {
+		var answerTitle = $('#answerTitle').val();
+		var answerContent = $('#answerContent').val();
+		var mem_id = $('#writer_id').val();
 		// 서버로 답글 데이터를 전송하고 저장하는 AJAX 요청
 		$.ajax({
-			url : '/admin/review/addOrUpdateComment',
+			url : '/admin/inquiry/addOrUpdateAnswer',
 			type : 'POST',
 			data : {
-				reviewUID : uid,
-				commentTitle : commentTitle,
-				commentContent : commentContent,
+				inqr_uid : uid,
+				answerTitle : answerTitle,
+				answerContent : answerContent,
 				mem_id : mem_id
 			},
 			success : function(result) {
