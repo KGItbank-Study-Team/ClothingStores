@@ -22,7 +22,6 @@ public class MyPageVO {
 	private int transit;			//배송준인 주문.
 	private int delivered;			//배송완료된 주문.
 	private int cancel;				//취소
-	private int exchange;			//교환
 	private int turn;				//반품
 	
 }

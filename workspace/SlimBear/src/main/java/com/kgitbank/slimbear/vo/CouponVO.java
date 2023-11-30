@@ -19,4 +19,5 @@ public class CouponVO {
 	private int value;
 	private String type;			//퍼센트 할인 or xx원 할인
 	private long coup_uid;			//멤쿠
+	private Date use_date;			//사용날짜 이걸로 썻다안썻다 구분
 }

@@ -88,12 +88,12 @@ public class HunServiceImpl {
 		vo.setTransit(3);
 		vo.setDelivered(4);
 		vo.setCancel(5);
-		vo.setExchange(6);
 		vo.setTurn(7);
 
 		return vo;
 	}
 
+	//주문내역
 	public List<OrderListVO> getOrderListInfo(long memberUID) {
 
 		ArrayList<OrderListVO> list = new ArrayList<>();
@@ -114,6 +114,7 @@ public class HunServiceImpl {
 		return list;
 	}
 	
+	//주문상세내역
 	public List<OrderDetailVO> getOrderDetailInfo(long memberUID) {
 		
 		ArrayList<OrderDetailVO> list = new ArrayList<>();
@@ -130,6 +131,7 @@ public class HunServiceImpl {
 		return list;
 	}
 
+	//프로필
 	public ModifyVO getModifyInfo(long uid) {
 		ModifyVO vo = new ModifyVO();
 		MemberDTO member = memDAO.getMemberByUID(uid);
@@ -153,6 +155,7 @@ public class HunServiceImpl {
 		return vo;
 	}
 
+	//적립금
 	public MileageVO getMileageInfo(long mem_uid) {
 		MileageVO vo = new MileageVO();
 		int i = memDAO.getMemberMileageRecordListByMemberUID(mem_uid);
@@ -171,6 +174,7 @@ public class HunServiceImpl {
 		return vo;
 	}
 	
+	//적립금 리스트
 	public List<MileageVO> getMileageListInfo(){
 		ArrayList<MileageVO> list = new ArrayList<>();
 //		List<MemberMileageRecordDTO> membermile = memDAO.getMemberMileageRecordListByMemberUID(0);
@@ -188,37 +192,51 @@ public class HunServiceImpl {
 		return list;
 	}
 
+	//쿠폰리스트
 	public List<CouponVO> getCouponListInfo(long memberUID) {
+	    ArrayList<CouponVO> list = new ArrayList<>();
+	    List<MemberCouponDTO> membercouponlist = membercouponDAO.getCouponListByMemberUID(memberUID);
 
-		ArrayList<CouponVO> list = new ArrayList<>();
-		List<MemberCouponDTO> membercouponlist = membercouponDAO.getCouponListByMemberUID(memberUID);
+	    int index = 1;
+	    for (MemberCouponDTO i : membercouponlist) {
+	        CouponVO vo = new CouponVO();
+	        CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
 
-		int index = 1;
-		for (MemberCouponDTO i : membercouponlist) {
-			CouponVO vo = new CouponVO();
-			CouponDTO c = couponDAO.getCouponByUID(i.getCoup_uid());
-			
-			vo.setCoup_uid(i.getUid());
-			vo.setType(c.getType());
-			vo.setValue(c.getValue());
-			
-			vo.setCouponNumber(index++);
-			vo.setCouponName(c.getName());
-			vo.setMinimumAmount(c.getMin_price());
-			if ("PRICE".equals(c.getType())) {
-			    vo.setCouponBenefit(c.getValue() + "원 할인");
-			} else if ("PERCENT".equals(c.getType())) {
-			    vo.setCouponBenefit(c.getValue() + "% 할인");
-			} else {
-			    // 다른 타입에 대한 처리
-			}
-			vo.setCouponPeriod(i.getExpi_date());
+	        vo.setCoup_uid(i.getUid());
+	        vo.setType(c.getType());
+	        vo.setValue(c.getValue());
 
-			list.add(vo);
-		}
-		return list;
+	        vo.setCouponNumber(index++);
+	        vo.setCouponName(c.getName());
+	        vo.setMinimumAmount(c.getMin_price());
+	        if ("PRICE".equals(c.getType())) {
+	            vo.setCouponBenefit(c.getValue() + "원 할인");
+	        } else if ("PERCENT".equals(c.getType())) {
+	            vo.setCouponBenefit(c.getValue() + "% 할인");
+	        } else {
+	            // 다른 타입에 대한 처리
+	        }
+	        vo.setCouponPeriod(i.getExpi_date());
+	        vo.setUse_date(i.getUse_date());
+
+	        // 사용날짜가 null인 경우에만 추가
+	        if (i.getUse_date() == null) {
+	            list.add(vo);
+	        }
+	    }
+
+	    // 새로운 리스트를 만들어 유효한 쿠폰만 추가
+	    List<CouponVO> validCoupons = new ArrayList<>();
+	    for (CouponVO vo : list) {
+	        if (vo.getUse_date() == null) {
+	            validCoupons.add(vo);
+	        }
+	    }
+
+	    return validCoupons;
 	}
 
+	//찜 리스트
 	public List<WishListVO> getWishListInfo(long memberUID) {
 		ArrayList<WishListVO> list = new ArrayList<>();
 		List<WishDTO> wishlist = wishDAO.getWishListByMemberUID(memberUID);
@@ -283,6 +301,7 @@ public class HunServiceImpl {
 		return list;
 	}
 	
+	//배송지
 	public List<AddrVO> getAddrInfo(long memberUID) {
 		ArrayList<AddrVO> list = new ArrayList<>();
 		List<MemberOrderAddressDTO> addrlist = addressDAO.getAddressListByMemberUID(memberUID);
@@ -305,6 +324,7 @@ public class HunServiceImpl {
 		return list;
 	}
 	
+	//배송지 수정
 	public AddrVO getAddrFixInfo(long addressUID) {
 		AddrVO vo = new AddrVO();
 		MemberOrderAddressDTO fix = addressDAO.getAddressByUID(addressUID);
@@ -331,6 +351,7 @@ public class HunServiceImpl {
 		return vo;
 	}
 	
+	
 	public void updateAddress(long memberUID, MemberOrderAddressDTO address) {
 		addressDAO.updateAddress(address);
 	}
@@ -339,26 +360,27 @@ public class HunServiceImpl {
 		 addressDAO.insertAddress(address);
 	}
 	
-	public void deleteAddress(long addressUID) {
-        // 삭제할 주소의 상세 정보 조회
-        MemberOrderAddressDTO addressToDelete = addressDAO.getAddressByUID(addressUID);
+	//배송지 삭제
+	public void deleteOrderAddress(long addressUID) {
+	    MemberOrderAddressDTO addressToDelete = addressDAO.getAddressByUID(addressUID);
 
-        // 주소가 존재하고 회원의 주소인지 확인
-        if (addressToDelete != null) {
-            // 실제 주소 삭제
-            int deletedRows = addressDAO.deleteAddress(addressToDelete);
-            
-            if (deletedRows > 0) {
-                // 주소 삭제 성공
-                System.out.println("주소가 성공적으로 삭제되었습니다.");
-            } else {
-                // 주소 삭제 실패
-                System.out.println("주소 삭제에 실패했습니다.");
-            }
-        } else {
-            // 주소가 존재하지 않는 경우
-            System.out.println("존재하지 않는 주소입니다.");
-        }
-    }
+	    if (addressToDelete != null) {
+	        int deletedRows = addressDAO.deleteAddress(addressToDelete);
+
+	        if (deletedRows > 0) {
+	            // 주소 삭제 성공
+	            System.out.println("주소가 성공적으로 삭제되었습니다.");
+	        } else {
+	            // 주소 삭제 실패
+	            System.out.println("주소 삭제에 실패했습니다.");
+	            throw new RuntimeException("주소 삭제에 실패했습니다.");
+	        }
+	    } else {
+	        // 주소가 존재하지 않는 경우
+	        System.out.println("존재하지 않는 주소입니다.");
+	        throw new IllegalArgumentException("존재하지 않는 주소입니다.");
+	    }
+	}
+
 
 }

@@ -123,12 +123,6 @@
                             </li>
                             <li>
                                 <span class="icoDot"></span>
-                                <strong>교환 : </strong>
-                                <a href="/app/member/myPage/orderList" class="count"><span
-                                        id="xans_myshop_orderstate_order_exchange_count">${info.exchange}</span></a>
-                            </li>
-                            <li>
-                                <span class="icoDot"></span>
                                 <strong>반품 : </strong>
                                 <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_order_return_count">${info.turn}</span></a>

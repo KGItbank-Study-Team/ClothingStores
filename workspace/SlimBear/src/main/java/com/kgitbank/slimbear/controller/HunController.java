@@ -175,7 +175,7 @@ public class HunController {
 	}
 
 
-// 문의게시판 
+	// 문의게시판 
 	@RequestMapping("member/myPage/boardList")
 	public String boardList(Authentication authentication, Model model) {
 
@@ -312,16 +312,27 @@ public class HunController {
 	}
 
 	@PostMapping("/app/member/myPage/addr")
-    @ResponseBody
-    public String deleteAddress(@RequestParam("addressUID") long addressUID) {
-        try {
-            hunService.deleteAddress(addressUID);
-            return "주소 삭제가 성공적으로 처리되었습니다.";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "주소 삭제 중 오류가 발생했습니다.";
-        }
-    }
+	@ResponseBody
+	public String handleAddressAction(@RequestParam("action") String action,
+			@RequestParam(value = "addressUID", required = false) Long addressUID) {
+	    try {
+	        if ("deleteSelectedAddresses".equals(action)) {
+	            // 주소 삭제 액션 처리
+	            if (addressUID != null) {
+	                hunService.deleteOrderAddress(addressUID);
+	                return "주소 삭제가 성공적으로 처리되었습니다.";
+	            } else {
+	                return "주소 삭제 중 오류가 발생했습니다. 주소 UID가 필요합니다.";
+	            }
+	        } else {
+	            return "알 수 없는 액션입니다.";
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "주소 처리 중 오류가 발생했습니다.";
+	    }
+	}
+
 	
 	
 }
