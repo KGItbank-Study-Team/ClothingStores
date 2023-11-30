@@ -75,7 +75,7 @@
 			<div id="content">
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">게시글관리 -> 리뷰관리</h6>
+						<h6 class="m-0 font-weight-bold text-primary">게시글관리 -> 문의관리</h6>
 					</div>
 					<div class="card-body">
 
@@ -87,21 +87,24 @@
 							data-show-export="true" data-show-columns="true"
 							data-show-columns-toggle-all="true"
 							data-page-list="[10, 25, 50, 100, all]"
-							data-url="/admin/review/list">
+							data-url="/admin/inquiry/list">
 							<thead>
 								<tr>
-									<th data-field="uid" data-sortable="true" data-width="23">ReviewUID</th>
-									<th data-field="mem_id" data-sortable="true" data-width="180"
+									<th data-field="uid" data-sortable="true" data-width="23">InquiryUID</th>
+									<th data-field="writer_id" data-sortable="true" data-width="180"
 										data-formatter="ownerFormatter">아이디</th>
-									<th data-field="prod_code" data-sortable="true"
-										data-width="25">상품코드</th>
+										
 									<th data-field="title" data-sortable="true" data-width="180">제목</th>
+									
 									<th data-field="content" data-sortable="true" >내용</th>
-									<th data-field="hasComments" data-width="50" data-formatter="commentsFormatter">답글</th>
-
-									<th data-field="score" data-sortable="true"data-width="10">평점</th>
+									<th data-field="prod_uid" data-sortable="true"
+										data-width="25">상품코드</th>
+										
 									<th data-field="reg_date" data-sortable="true"
 										data-formatter="dateFormatter" data-width="120">작성 일자</th>
+									<th data-field="status" data-width="50" data-formatter="commentsFormatter">답변여부</th>
+
+									<th data-field="type" data-sortable="true"data-width="10">분류</th>
 								</tr>
 							</thead>
 
@@ -183,16 +186,16 @@
 		            }
 					$detail.html('상세 정보 불러오는 중....');
 				    $.ajax({
-				        url: "/admin/review/getComment?reviewUID=" + row['uid'],
+				        url: "/admin/inquiry/getAnswer?uid=" + row['uid'],
 				        type: "GET",
 				        success: function (result) {
 				            var html = [];
 				            html.push('<tbody>');
 
 				            if (result) {
-				                var comment = result;
+				                var answer = result;
 				                html.push('<tr>');
-				                html.push('<td>' + (comment.content ? '답변완료' : '답변 미등록') + '</td>');
+				                html.push('<td>' + (answer.status ? '답변완료' : '답변 미등록') + '</td>');
 
 				               
 				                html.push('</tr>');
@@ -204,18 +207,18 @@
 						    html.push('<div class="reply-form">');
 						    html.push('<form id="replyForm">');
 							html.push('<div class="mb-3">')
-						    html.push('<label for="mem_id" class="form-label">작성자 ID</label>')
-						    html.push('<input type="text" class="form-control dark-input" id="mem_id" value="' + row['mem_id'] + '" readonly>')
+						    html.push('<label for="writer_id" class="form-label">작성자 ID</label>')
+						    html.push('<input type="text" class="form-control dark-input" id="writer_id" value="' + row['writer_id'] + '" readonly>')
 						            
 						            
 						    html.push('</div>')
 						    html.push('<div class="mb-3">');
-						    html.push('<label for="commentTitle" class="form-label">제목</label>');
-						    html.push('<input type="text" class="form-control" id="commentTitle">');
+						    html.push('<label for="answerTitle" class="form-label">제목</label>');
+						    html.push('<input type="text" class="form-control" id="answerTitle">');
 						    html.push('</div>');
 						    html.push('<div class="mb-3">');
-						    html.push('<label for="commentContent" class="form-label">내용</label>');
-						    html.push('<textarea class="form-control" id="commentContent" rows="3"></textarea>');
+						    html.push('<label for="answerContent" class="form-label">내용</label>');
+						    html.push('<textarea class="form-control" id="answerContent" rows="8"></textarea>');
 						    html.push('</div>');
 						   
 						    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateComment(' + row['uid'] + ')">답글 추가/수정</button>');
@@ -226,8 +229,8 @@
 
 							// 답글이 있는 경우, 답글 내용을 폼에 채워줌
 						    if (result) {
-    							$('#commentTitle').val(result.title);
-    							$('#commentContent').val(result.content);
+    							$('#answerTitle').val(result.title);
+    							$('#answerContent').val(result.content);
 							}
 						 // 현재 열린 행을 저장
 		                    lastOpenedRow = index;

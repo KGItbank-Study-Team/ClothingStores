@@ -117,7 +117,11 @@
 		WHERE uid=#{uid}
 	</update>
 
-
+	<update id="UPDATE_COUPON_USEDATE">
+		UPDATE memberCoupon
+		SET use_date=#{use_date}
+		WHERE uid=#{uid}
+	</update>
 
 	<!-- 찜(wish) -->
 	<select id="SELECT_WISH_LIST_BY_MEMBER_UID" resultType="wish"
@@ -172,6 +176,20 @@
 		SELECT color,size FROM productDetail WHERE prod_uid =
 		#{productUID}
 	</select>
+	<update id="ADD_CHANGED_OPTIONS">
+    UPDATE cart
+    SET prod_code = #{prodCode}
+    WHERE uid = #{uid}
+</update>
+<insert id="INSERT_CART_ITEM" parameterType="cart">
+    INSERT INTO cart (uid, prod_code, cnt)
+    VALUES (
+        #{cartUid},
+        CONCAT(#{productUid}, '_', #{color}, '_', #{size}),
+        1
+    )
+    ON DUPLICATE KEY UPDATE cnt = cnt + 1;
+</insert>
 	<!-- 동일상품 체크 -->
 	<select id="SELECT_COUNT_IN_CART" resultType="int"
 		parameterType="cart">

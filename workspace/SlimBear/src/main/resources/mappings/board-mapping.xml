@@ -126,8 +126,23 @@
         	AND prod_uid IS NULL
 	    ORDER BY reg_date DESC
  	</select>
- 	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="inquiry">
- 		SELECT * FROM inquiry WHERE prod_uid = #{prod_uid}
+
+ 	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
+	    SELECT 
+	        uid,
+	        writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        status,
+	        type,
+	        prod_uid AS priority,  
+	        secure
+	    FROM 
+	        inquiry
+ 	</select>
+ 	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
+ 		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
  	</select>
 
  	<!-- 문의게시글 답변게시글 -->
