@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,9 +42,26 @@ public class YangBoardServiceImpl {
     }
 	
 	// 문의게시판
-    public List<InquiryDTO> getInquiryList(String type) {
-        return inquiryDAO.getInquiryList(type);
+    public List<InquiryDTO> getInquiryList(String type, Integer offset, Integer pageSize, int currentPage) {
+    	
+		offset = (currentPage - 1) * pageSize;
+
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("type", type);
+		paramMap.put("currentPage", currentPage);
+		paramMap.put("offset", offset);
+		paramMap.put("pageSize", pageSize);
+
+		System.out.println(paramMap);
+        return inquiryDAO.getInquiryList(paramMap);
     }
+    public int getTotalInquiry(String type) {
+    	int total = inquiryDAO.getTotalInquiry(type);
+    	System.out.println(total);
+    	return total;
+    }
+    
  // 문의게시판 전체목록
     public List<InquiryDTO> getInquiryListAll() {
         return inquiryDAO.getInquiryListAll();
@@ -127,8 +145,19 @@ public class YangBoardServiceImpl {
     
     
     // 문의게시판 답변게시글 목록
-    public List<InquiryDTO> getInquiryListWithAnswers(String type) {
-        List<InquiryDTO> inquiries = inquiryDAO.getInquiryList(type);
+    public List<InquiryDTO> getInquiryListWithAnswers(String type, Integer offset, Integer pageSize, int currentPage) {
+    	offset = (currentPage - 1) * pageSize;
+
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("type", type);
+		paramMap.put("currentPage", currentPage);
+		paramMap.put("offset", offset);
+		paramMap.put("pageSize", pageSize);
+
+		System.out.println(paramMap);
+		
+        List<InquiryDTO> inquiries = inquiryDAO.getInquiryList(paramMap);
         
         for (InquiryDTO inquiry : inquiries) {
             // 각 문의에 대한 답변 목록을 가져와서 설정

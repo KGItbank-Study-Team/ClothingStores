@@ -155,27 +155,33 @@ public class OrderController {
 		if(couponUID == 0) {
 			orderInfo.setApplyCouponUID(0);
 			orderInfo.setCouponSaleAmount(0);
-			return response;
+			response.put("default","1");
 		}
 		else {
 			for(int i=0; i<orderInfo.getCouponeList().size(); ++i) {
 				CouponVO coupon = orderInfo.getCouponeList().get(i);
+	
+				System.out.println(coupon);
 				if(coupon.getCoup_uid() == couponUID) {
+					if(orderInfo.getPaymonetAmount() < coupon.getMinimumAmount()) {
+						response.put("failed", coupon.getMinimumAmount()  + "원 이상일경우 사용가능");
+						return response;
+					}
+					
 					orderInfo.setApplyCouponUID(couponUID);
 					if(coupon.getType().equals(SlimBearEnum.COUPONE_TYPE.PRICE.toString())) {
 						orderInfo.setCouponSaleAmount(coupon.getValue());
 					}
 					else {
-						orderInfo.setCouponSaleAmount((int)(orderInfo.getPaymonetAmount() * (coupon.getValue() * 0.01f)));
+						orderInfo.setCouponSaleAmount(Math.round((orderInfo.getPaymonetAmount() * (coupon.getValue() * 0.01f))));
 					}
-					return response;
+					break;
 				}
 			}
 		}
 		
 		response.put("paymentAmount", "" + (orderInfo.getPaymonetAmount() - orderInfo.getCouponSaleAmount() - orderInfo.getApplyMileage()));
 		session.setAttribute("order", orderInfo);
-		
 		return response;
 	}
 
@@ -197,7 +203,7 @@ public class OrderController {
 		payment.setPay_date(order.getOrder_date());
 		payment.setStatus(SlimBearEnum.PAYMENT_STATUS.DONE.toString());
 	
-		orderService.productOrder(user.getUid(), imp_uid, order, payment, orderInfo.getProductList());
+		orderService.productOrder(user.getUid(), imp_uid, order, payment, orderInfo.getProductList(), orderInfo.getApplyCouponUID());
 
 		HashMap<String, String> res = new HashMap<String, String>();
 		res.put("url", "/app/member/myPage/orderList");

@@ -48,7 +48,7 @@
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
 							value="${cart.uid}" data-productuid="${cart.productUid}"
-							data-color="" ${cart.color} data-size="${cart.size}"
+							data-color="${cart.color}"  data-size="${cart.size}"
 							data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
 							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>

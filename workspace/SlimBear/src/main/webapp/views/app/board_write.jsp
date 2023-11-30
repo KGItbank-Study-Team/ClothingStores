@@ -3,12 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>BOARD WRITE</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/board_write.js"></script>
+
 </head>
 <body id="main">
 <jsp:include page="header/header.jsp" />
@@ -147,12 +149,17 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-										<select id="subject" name="type" th:field="*{type}">
-											<option value="PRODUCT">상품 문의</option>
-											<option value="DELIVERY">배송 문의</option>
-											<option value="DELIVERY_C">기타 문의</option>
-										</select>
-										<textarea style="width: 30%;" name=title id=inquiryTitle class="ec-fr-never-be-duplicated" th:field="*{title}"></textarea>
+	                    				<div class="input-container">
+											<select id="subject" name="type" th:field="*{type}">
+												<option value="PRODUCT">상품 문의</option>
+												<option value="DELIVERY">배송 문의</option>
+												<option value="DELIVERY_C">기타 문의</option>
+											</select>
+											<div class="text_box">
+					                    		<input type="text" name="title" id="inquiryTitle" class="ec-fr-never-be-duplicated" maxlength="30" placeholder="최대 30자" required th:field="*{title}">
+					                   			<div class="count"><span></span></div>
+					                		</div>
+				                    	</div>
 									</td>
 								</tr>
 								
@@ -176,7 +183,7 @@
             							<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2311171259">
 										
 										<!-- HTML --> 
-										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated">
+										<textarea style="width: 100%;" name="content" id="content" maxlength="50" class="ec-fr-never-be-duplicated" oninput="checkCharacterCount()" required>
 										이곳은 문의 게시판입니다!&lt;br /&gt;
 										게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
 										&lt;br /&gt;
@@ -184,7 +191,8 @@
 										불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 										&lt;br /&gt;
 										--------------------------------------------------------------&lt;br /&gt;
-										</textarea> 
+										</textarea>
+										<div id="characterCountError" style="color: red;"></div>
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
 										
 										<!-- JavaScript --> 
@@ -258,5 +266,20 @@
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
+
+<script>
+function checkCharacterCount() {
+    var content = document.getElementById("content").value;
+    var errorDiv = document.getElementById("characterCountError");
+
+    if (content.length < 1) {
+        errorDiv.textContent = "내용을 입력하세요.";
+    } else if (content.length > 300) {
+        errorDiv.textContent = "최대 300자까지 입력 가능합니다.";
+    } else {
+        errorDiv.textContent = "";
+    }
+}
+</script>
 </body>
 </html>

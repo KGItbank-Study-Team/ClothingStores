@@ -120,8 +120,12 @@ $(document).ready(function () {
             });
         });
 
+        if (selectedProducts.length === 0) {
+            alert("주문하려는 제품을 선택하세요.");
+            return;
+        }
 
-        // 폼 동적 생성
+       // 폼 동적 생성
         var form = $("<form>")
             .attr("method", "post")
             .attr("action", "/app/order/product"); // 실제 주문 처리 엔드포인트로 수정
@@ -146,7 +150,7 @@ $(document).ready(function () {
                 .attr("name", "optionsList[" + index + "].cnt")
                 .val(product.cnt));
         });
-
+        
         // 폼을 body에 추가하고 submit
         form.appendTo("body").submit();
     });

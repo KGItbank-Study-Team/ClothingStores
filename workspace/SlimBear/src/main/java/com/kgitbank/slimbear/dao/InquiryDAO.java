@@ -21,9 +21,9 @@ public class InquiryDAO {
 //		Inquiry.setType(type);
 //		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
 //	}
-	public List<InquiryDTO> getInquiryList(String type) {
-        List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", type);
-
+	public List<InquiryDTO> getInquiryList(Map<String,Object>paramMap) {
+        List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", paramMap);
+        
         // 각 문의게시글에 대한 답변목록 설정
         for (InquiryDTO inquiry : inquiries) {
             List<InquiryAnswerDTO> answers = getInquiryAnswers(inquiry.getUid());
@@ -31,6 +31,11 @@ public class InquiryDAO {
         }
         return inquiries;
     }
+	public int getTotalInquiry(String type) {
+
+        int total = template.selectOne("com.slimbear.mapper.Board.SELECT_CNT_INQUIRY_LIST", type);
+        return total;
+	}
 	// 문의 전체 리스트
 	public List<InquiryDTO> getInquiryListAll() {
         List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_ALL");

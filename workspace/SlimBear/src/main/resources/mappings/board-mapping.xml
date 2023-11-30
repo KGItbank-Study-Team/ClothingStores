@@ -3,339 +3,359 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
- <mapper namespace="com.slimbear.mapper.Board">
- 
- 
-     <!-- 관리자 리뷰 -->
-    <select id="SELECT_COMMENT_BY_REVIEW_UID" resultType="comment">
-        SELECT *
-        FROM reviewComent WHERE review_uid=#{reviewUID}
-    </select>
-    <select id="SELECT_REVIEW_BY_REVIEW_UID" resultType="review">
-        SELECT *
-        FROM productReview
-        WHERE uid=#{reviewUID}
-    </select>
-    <insert id="INSERT_COMMENT">
-        INSERT INTO reviewComent
-        (review_uid, title, content,
-        mem_id)
-        VALUES(#{review_uid}, #{title}, #{content}, #{mem_id})
-    </insert>
-    <insert id="ADD_OR_UPDATE_COMMENT">
-        INSERT INTO reviewComent (review_uid, title, content, mem_id)
-        VALUES (#{review_uid}, #{title}, #{content}, #{mem_id})
-        ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
-    </insert>
-    
-    <!-- 관리자 리뷰 -->
-     <insert id="ADD_OR_UPDATE_ANSWER">
-        INSERT INTO inquiryAnswer (inqr_uid, title, content, mem_id)
-        VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id})
-        ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
-    </insert>
-    
- 	<!-- REVIEW -->
- 	<!-- 리뷰 전체 목록 조회 -->
- 	<select id="SELECT_REVIEW_LIST" resultType="review">
- 		SELECT * FROM productReview
- 	</select>
- 	
- 	<!-- 특정 회원이 작성한 리뷰 조회 -->
-    <select id="SELECT_BY_USER_ID" parameterType="String" resultType="com.kgitbank.slimbear.dto.ReviewDTO">
-    SELECT *
-    FROM productReview
-    WHERE mem_id = #{userID}
-	</select>
- 	
- 	<!-- 특정 prodUid에 대한 리뷰 조회 -->
- 	<select id="SELECT_BY_PRODCODE" resultType="review">
- 		SELECT * FROM productReview
- 		WHERE prod_code LIKE CONCAT(#{uid}, ':%')
- 	</select>
- 	
- 	<!-- 리뷰 최신 순 조회 -->
- 	<select id="SELECT_REVIEW_RECENT" resultType="review">
- 		SELECT * FROM productReview ORDER BY reg_date DESC
- 	</select>
- 	
- 	<!-- 데이터 삽입 -->
- 	<insert id="INSERT_REVIEW">
- 		INSERT INTO productReview
- 		(mem_id, prod_code, title, content, score, reg_date)
- 		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score}, #{reg_date})
- 	</insert>
- 	
- 	<!-- 리뷰 업데이트 -->
- 	<update id="UPDATE_REVIEW">
- 		UPDATE productReview
- 		SET title=#{title}, content=#{content}, score=#{score}
- 		WHERE uid=#{uid}
- 	</update>
- 	
- 	<!-- 리뷰 삭제 -->
- 	<delete id="DELETE_REVIEW">
- 		 DELETE FROM productReview WHERE uid=#{uid}
- 	</delete>
- 	
- 	
- 	
- 	
- 	
- 	<!-- REVIEWCOMMENT -->
- 	<!-- 리뷰 전체 목록 조회 -->
- 	<select id="SELECT_REVIEWCOMENT_LIST" resultType="review">
- 		SELECT * FROM reviewComent
- 	</select>
- 	
- 	<!-- 데이터 삽입 -->
- 	<insert id="INSERT_REVIEWCOMENT">
- 		INSERT INTO reviewComent
- 		(review_id, title, content, mem_id)
- 		VALUES(#{review_id}, #{title}, #{content}, #{mem_id})
- 	</insert>
- 	
- 	<!-- 리뷰 업데이트 -->
- 	<update id="UPDATE_REVIEWCOMENT">
- 		UPDATE reviewComent
- 		SET title=#{title}, content=#{content}, score=#{score}
- 		WHERE uid=#{uid}
- 	</update>
- 	
- 	<!-- 리뷰 삭제 -->
- 	<delete id="DELETE_REVIEWCOMENT">
- 		 DELETE FROM productReview WHERE uid=#{uid}
- 	</delete>
- 	
-	
- 	
- 	
- 	
- 	
- 	<!-- INQUIRY -->
- 	<!-- 상품문의 목록 조회 -->
- 	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
-	    SELECT 
-	        uid,
-	        CONCAT(SUBSTRING(writer_id, 1, 2), REPEAT('*', LENGTH(writer_id) - 2)) AS writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        status,
-	        type,
-	        prod_uid AS priority,  
-	        secure
-	    FROM 
-	        inquiry
-	    WHERE 
-	        type = #{type}
-        	AND prod_uid IS NULL
-	    ORDER BY reg_date DESC
- 	</select>
 
- 	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
-	    SELECT 
-	        uid,
-	        writer_id,
-	        title,
-	        content,
-	        reg_date,
-	        status,
-	        type,
-	        prod_uid AS priority,  
-	        secure
-	    FROM 
-	        inquiry
- 	</select>
- 	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
- 		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
- 	</select>
+<mapper namespace="com.slimbear.mapper.Board">
 
- 	<!-- 문의게시글 답변게시글 -->
- 	<select id="SELECT_INQUIRY_ANSWERS" resultType="InquiryAnswer">
-	    SELECT
-	        uid,
-	        inqr_uid,
-	        title,
-	        content,
-	        mem_id,
-	        reg_date
-	    FROM
-	        inquiryAnswer
-	    WHERE
-	        inqr_uid = #{inqr_uid}
-	</select>
- 	
 
- 	<!-- 회원 문의 게시글 조회 -->
- 	<select id="SELECT_INQUIRY_USER" resultType="inquiry">
- 		SELECT * FROM inquiry WHERE	writer_id=#{writer_id}
+	<!-- 관리자 리뷰 -->
+	<select id="SELECT_COMMENT_BY_REVIEW_UID" resultType="comment">
+		SELECT *
+		FROM reviewComent WHERE review_uid=#{reviewUID}
 	</select>
- 	
+	<select id="SELECT_REVIEW_BY_REVIEW_UID" resultType="review">
+		SELECT *
+		FROM productReview
+		WHERE uid=#{reviewUID}
+	</select>
+	<insert id="INSERT_COMMENT">
+		INSERT INTO reviewComent
+		(review_uid, title, content,
+		mem_id)
+		VALUES(#{review_uid}, #{title}, #{content}, #{mem_id})
+	</insert>
+	<insert id="ADD_OR_UPDATE_COMMENT">
+		INSERT INTO reviewComent (review_uid, title, content, mem_id)
+		VALUES (#{review_uid}, #{title}, #{content}, #{mem_id})
+		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
+	</insert>
+	<select id="SELECT_REVIEW_LIST_ADMIN" resultType="reviewVO">
+		SELECT * FROM
+		productReview
+	</select>
 
- 	<!-- 문의게시글 조회 -->
- 	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
- 		SELECT * FROM inquiry WHERE uid=#{uid}
+	<!-- 관리자 리뷰 -->
+	<insert id="ADD_OR_UPDATE_ANSWER">
+		INSERT INTO inquiryAnswer (inqr_uid, title, content, mem_id)
+		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id})
+		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
+	</insert>
+
+	<!-- REVIEW -->
+	<!-- 리뷰 전체 목록 조회 -->
+	<select id="SELECT_REVIEW_LIST" resultType="review">
+		SELECT * FROM productReview
 	</select>
-	
- 	<!-- 특정 prod_uid 상품문의 조회 -->
- 	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
- 		SELECT * FROM inquiry WHERE prod_uid=#{prod_uid}
- 	</select>
- 	<select id="SELECT_INQUIRYUID" resultType="long" parameterType="inquiry">
- 		SELECT uid FROM inquiry WHERE prod_code = #{prod_code}
- 	</select>
- 	<!-- 상품문의 데이터 삽입 -->
- 	<insert id="INSERT_INQUIRY">
+
+	<!-- 특정 회원이 작성한 리뷰 조회 -->
+	<select id="SELECT_BY_USER_ID" parameterType="String"
+		resultType="com.kgitbank.slimbear.dto.ReviewDTO">
+		SELECT *
+		FROM productReview
+		WHERE mem_id = #{userID}
+	</select>
+
+	<!-- 특정 prodUid에 대한 리뷰 조회 -->
+	<select id="SELECT_BY_PRODCODE" resultType="review">
+		SELECT * FROM productReview
+		WHERE prod_code LIKE CONCAT(#{uid}, ':%')
+	</select>
+
+	<!-- 리뷰 최신 순 조회 -->
+	<select id="SELECT_REVIEW_RECENT" resultType="review">
+		SELECT * FROM productReview ORDER BY reg_date DESC
+	</select>
+
+	<!-- 데이터 삽입 -->
+	<insert id="INSERT_REVIEW">
+		INSERT INTO productReview
+		(mem_id, prod_code, title, content, score, reg_date)
+		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score}, #{reg_date})
+	</insert>
+
+	<!-- 리뷰 업데이트 -->
+	<update id="UPDATE_REVIEW">
+		UPDATE productReview
+		SET title=#{title}, content=#{content}, score=#{score}
+		WHERE uid=#{uid}
+	</update>
+
+	<!-- 리뷰 삭제 -->
+	<delete id="DELETE_REVIEW">
+		DELETE FROM productReview WHERE uid=#{uid}
+	</delete>
+
+
+
+
+
+	<!-- REVIEWCOMMENT -->
+	<!-- 리뷰 전체 목록 조회 -->
+	<select id="SELECT_REVIEWCOMENT_LIST" resultType="review">
+		SELECT * FROM reviewComent
+	</select>
+
+	<!-- 데이터 삽입 -->
+	<insert id="INSERT_REVIEWCOMENT">
+		INSERT INTO reviewComent
+		(review_id, title, content, mem_id)
+		VALUES(#{review_id}, #{title}, #{content}, #{mem_id})
+	</insert>
+
+	<!-- 리뷰 업데이트 -->
+	<update id="UPDATE_REVIEWCOMENT">
+		UPDATE reviewComent
+		SET title=#{title}, content=#{content}, score=#{score}
+		WHERE uid=#{uid}
+	</update>
+
+	<!-- 리뷰 삭제 -->
+	<delete id="DELETE_REVIEWCOMENT">
+		DELETE FROM productReview WHERE uid=#{uid}
+	</delete>
+
+
+
+
+
+
+	<!-- INQUIRY -->
+	<!-- 상품문의 목록 조회 -->
+	<select id="SELECT_INQUIRY_LIST" resultType="inquiry">
+		SELECT
+		uid,
+		CONCAT(SUBSTRING(writer_id, 1, 2), REPEAT('*', LENGTH(writer_id) - 2)) AS writer_id,
+		title,
+		content,
+		reg_date,
+		status,
+		type,
+		prod_uid AS priority,
+		secure
+		FROM
+		inquiry
+		WHERE
+		type = #{type}
+		AND prod_uid IS NULL
+		ORDER BY reg_date DESC
+		LIMIT #{pageSize} OFFSET #{offset};
+	</select>
+
+	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
+		SELECT
+		uid,
+		writer_id,
+		title,
+		content,
+		reg_date,
+		status,
+		type,
+		prod_uid AS priority,
+		secure
+		FROM
+		inquiry
+	</select>
+
+	<select id="SELECT_CNT_INQUIRY_LIST" resultType="int">
+		SELECT COUNT(*)
+		FROM inquiry WHERE type=#{type} AND prod_uid IS NULL;
+	</select>
+
+	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
+		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
+	</select>
+
+	<!-- 문의게시글 답변게시글 -->
+	<select id="SELECT_INQUIRY_ANSWERS" resultType="InquiryAnswer">
+		SELECT
+		uid,
+		inqr_uid,
+		title,
+		content,
+		mem_id,
+		reg_date
+		FROM
+		inquiryAnswer
+		WHERE
+		inqr_uid = #{inqr_uid}
+	</select>
+
+
+	<!-- 회원 문의 게시글 조회 -->
+	<select id="SELECT_INQUIRY_USER" resultType="inquiry">
+		SELECT * FROM inquiry WHERE writer_id=#{writer_id}
+	</select>
+
+
+	<!-- 문의게시글 조회 -->
+	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
+		SELECT * FROM inquiry WHERE uid=#{uid}
+	</select>
+
+	<!-- 특정 prod_uid 상품문의 조회 -->
+	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
+		SELECT * FROM inquiry WHERE prod_uid=#{prod_uid}
+	</select>
+	<select id="SELECT_INQUIRYUID" resultType="long"
+		parameterType="inquiry">
+		SELECT uid FROM inquiry WHERE prod_code = #{prod_code}
+	</select>
+	<!-- 상품문의 데이터 삽입 -->
+	<insert id="INSERT_INQUIRY">
 		<!-- id 대신 name 가져오기 -->
-	 	INSERT INTO inquiry
-	    (writer_id, title, content, reg_date, status, type, prod_uid, secure)
-	    VALUES(
+		INSERT INTO inquiry
+		(writer_id, title, content, reg_date, status, type, prod_uid, secure)
+		VALUES(
 		<!-- COALESCE((SELECT name FROM member WHERE id = #{writer_id}), 'DefaultName'), -->
-			#{writer_id},
-	        #{title},	
-	        #{content},
-	        #{reg_date},
-	        COALESCE(#{status}, 'WAIT'),
-	        #{type},
-	        #{prod_uid},
-	        #{secure}
-	    )
- 	</insert>
- 	
- 	<!-- 상품문의 업데이트 -->
- 	<update id="UPDATE_INQUIRY">
- 		UPDATE inquiry
- 		SET content=#{content}, status=#{status}
- 		WHERE uid=#{uid}
- 	</update>
- 	
- 	<!-- 상품문의 목록 삭제 -->
- 	<delete id="DELETE_INQUIRY">
- 		DELETE FROM inquiry WHERE uid = #{uid}
- 	</delete>
- 	
- 	<!-- 게시글 검색 -->
- 	<select id="SELECT_INQUIRY_LIST_BY_SEARCH" parameterType="java.util.Map" resultType="inquiry">
-	    SELECT * FROM inquiry WHERE
-	        <if test="searchKey eq 'title'">
-	            title LIKE CONCAT('%',#{searchs} , '%')
-	        </if>
-	        <if test="searchKey == 'content'">
-	            content LIKE CONCAT('%',#{searchs} , '%')
-	        </if>
-	        <if test="searchKey == 'writer_id'">
-	            writer_id LIKE CONCAT('%',#{searchs} , '%')
-	        </if>
-	        <if test="searchKey == 'prod_uid'">
-	 			prod_uid = #{searchs}
-	        </if>
-	    ORDER BY reg_date DESC
+		#{writer_id},
+		#{title},
+		#{content},
+		#{reg_date},
+		COALESCE(#{status}, 'WAIT'),
+		#{type},
+		#{prod_uid},
+		#{secure}
+		)
+	</insert>
+
+	<!-- 상품문의 업데이트 -->
+	<update id="UPDATE_INQUIRY">
+		UPDATE inquiry
+		SET content=#{content}, status=#{status}
+		WHERE uid=#{uid}
+	</update>
+
+	<!-- 상품문의 목록 삭제 -->
+	<delete id="DELETE_INQUIRY">
+		DELETE FROM inquiry WHERE uid = #{uid}
+	</delete>
+
+	<!-- 게시글 검색 -->
+	<select id="SELECT_INQUIRY_LIST_BY_SEARCH"
+		parameterType="java.util.Map" resultType="inquiry">
+		SELECT * FROM inquiry WHERE
+		<if test="searchKey eq 'title'">
+			title LIKE CONCAT('%',#{searchs} , '%')
+		</if>
+		<if test="searchKey == 'content'">
+			content LIKE CONCAT('%',#{searchs} , '%')
+		</if>
+		<if test="searchKey == 'writer_id'">
+			writer_id LIKE CONCAT('%',#{searchs} , '%')
+		</if>
+		<if test="searchKey == 'prod_uid'">
+			prod_uid = #{searchs}
+		</if>
+		ORDER BY reg_date DESC
 	</select>
- 	
- 	<!-- inquiryAnswer -->
- 	<!-- 질문답변 조회 -->
- 	<select id="SELECT_INQUIRYANSWER_LIST" resultType="inquiryAnswer" parameterType="inquiry">
- 		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{inqr_uid}
- 	</select>
- 	
- 	<select id="SELECT_ANSWER_BY_INQRUID" resultType="inquiryAnswer">
-		SELECT * FROM inquiryAnswer WHERE inqr_uid = #{inqr_uid}
- 	</select>
- 	<!-- 질문답변 데이터 삽입 -->
- 	<insert id="INSERT_INQUIRYANSWER">
- 		INSERT INTO inquiry
- 		(inqr_uid, title, content, mem_id)
- 		VALUES(#{inqr_uid}, #{title}, #{content}, #{mem_id})
- 	</insert>
- 	
- 	<!-- 질문답변 업데이트 -->
- 	<update id="UPDATE_INQUIRYANSWER">
- 		UPDATE 
- 		SET title=#{title}, content=#{content}
- 		WHERE uid=#{uid}
- 	</update>
- 	
- 	<!-- 질문답변 삭제 -->
- 	<delete id="DELETE_INQUIRYANSWER">
- 		DELETE FROM inquiryAnswer WHERE inqr_uid = #{uid}
- 	</delete>                         
- 	
- 	
- 	
- 
- 	
- 	<!-- faq -->
- 	<!-- faq 목록 조회 -->
- 	<select id="SELECT_FAQ_LIST" resultType="faq">
- 		SELECT * FROM faq
- 	</select>
- 	
- 	<!-- 특정 type으로 필터링된 상품문의 목록 조회 -->
-	<select id="SELECT_FAQ_LIST_BY_TYPE" resultType="faq" parameterType="java.lang.String">
-	    SELECT * FROM faq WHERE type = #{type};
+
+	<!-- inquiryAnswer -->
+	<!-- 질문답변 조회 -->
+	<select id="SELECT_INQUIRYANSWER_LIST"
+		resultType="inquiryAnswer" parameterType="inquiry">
+		SELECT * FROM inquiryAnswer WHERE inqr_uid=#{inqr_uid}
 	</select>
-	
- 	<!-- faq 데이터 삽입 -->
- 	<insert id="INSERT_FAQ">
-	 	INSERT INTO faq
-	 	(question, answer, type)
-	 	VALUES(#{question}, #{answer}, #{type})
- 	</insert>
+
+	<select id="SELECT_ANSWER_BY_INQRUID" resultType="inquiryAnswer">
+		SELECT * FROM
+		inquiryAnswer WHERE inqr_uid = #{inqr_uid}
+	</select>
+	<!-- 질문답변 데이터 삽입 -->
+	<insert id="INSERT_INQUIRYANSWER">
+		INSERT INTO inquiry
+		(inqr_uid, title, content, mem_id)
+		VALUES(#{inqr_uid}, #{title}, #{content}, #{mem_id})
+	</insert>
+
+	<!-- 질문답변 업데이트 -->
+	<update id="UPDATE_INQUIRYANSWER">
+		UPDATE
+		SET title=#{title}, content=#{content}
+		WHERE uid=#{uid}
+	</update>
+
+	<!-- 질문답변 삭제 -->
+	<delete id="DELETE_INQUIRYANSWER">
+		DELETE FROM inquiryAnswer WHERE inqr_uid = #{uid}
+	</delete>
+
+
+
+
+
+	<!-- faq -->
+	<!-- faq 목록 조회 -->
+	<select id="SELECT_FAQ_LIST" resultType="faq">
+		SELECT * FROM faq
+	</select>
+
+	<!-- 특정 type으로 필터링된 상품문의 목록 조회 -->
+	<select id="SELECT_FAQ_LIST_BY_TYPE" resultType="faq"
+		parameterType="java.lang.String">
+		SELECT * FROM faq WHERE type = #{type};
+	</select>
+
+	<!-- faq 데이터 삽입 -->
+	<insert id="INSERT_FAQ">
+		INSERT INTO faq
+		(question, answer, type)
+		VALUES(#{question}, #{answer}, #{type})
+	</insert>
 
 	<!-- faq 업데이트 -->
 	<update id="UPDATE_FAQ">
 		UPDATE faq
-		SET question=#{question}, answer=#{answer}, type=#{type}
+		SET question=#{question}, answer=#{answer},
+		type=#{type}
 		WHERE uid=#{uid}
 	</update>
-	
+
 	<!-- faq 삭제 -->
 	<delete id="DELETE_FAQ">
 		DELETE FROM faq WHERE uid=#{uid}
 	</delete>
- 	
- 	
- 	
- 	
- 	
- 	<!-- notice -->
- 	<!-- notice 조회 -->
- 	<select id="SELECT_NOTICE_LIST" resultType="notice">
-<!--  		SELECT * FROM notice -->
-		SELECT * FROM notice WHERE priority != 0 ORDER BY FIELD(priority, 1, 2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
- 	</select>
- 	<!-- notice 게시글 조회 -->
- 	<select id="SELECT_NOTICE_DETAIL" resultType="notice">
- 		SELECT * FROM notice WHERE uid=#{uid}
- 	</select>
- 	
- 	<!-- notice 게시글 조회수 증가 -->
+
+
+
+
+
+	<!-- notice -->
+	<!-- notice 조회 -->
+	<select id="SELECT_NOTICE_LIST" resultType="notice">
+		<!-- SELECT * FROM notice -->
+		SELECT * FROM notice WHERE priority != 0 ORDER BY FIELD(priority, 1,
+		2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
+	</select>
+	<!-- notice 게시글 조회 -->
+	<select id="SELECT_NOTICE_DETAIL" resultType="notice">
+		SELECT * FROM notice WHERE uid=#{uid}
+	</select>
+
+	<!-- notice 게시글 조회수 증가 -->
 	<update id="INCREASE_NOTICE_VIEW_COUNT">
-	    UPDATE notice
-	    SET view_cnt = view_cnt + 1
-	    WHERE uid=#{uid}
-	</update>
- 	
- 	<!-- notice 데이터 삽입 -->
- 	<insert id="INSERT_NOTICE">
- 		INSERT INTO notice
- 		(title, content, reg_date, priority, type, writer)
- 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer}, 0)
- 		WHERE uid=#{uid}
- 	</insert>
- 	
- 	<!-- notice 업데이트 -->
-	<update id="UPDATE_NOTICE">
 		UPDATE notice
-		SET title=#{title}, priority=#{priority}, type=#{type}, writer=#{writer}
+		SET view_cnt = view_cnt + 1
 		WHERE uid=#{uid}
 	</update>
-	
+
+	<!-- notice 데이터 삽입 -->
+	<insert id="INSERT_NOTICE">
+		INSERT INTO notice
+		(title, content, reg_date, priority, type, writer)
+		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer}, 0)
+		WHERE uid=#{uid}
+	</insert>
+
+	<!-- notice 업데이트 -->
+	<update id="UPDATE_NOTICE">
+		UPDATE notice
+		SET title=#{title},
+		priority=#{priority}, type=#{type}, writer=#{writer}
+		WHERE uid=#{uid}
+	</update>
+
 	<!-- notice 삭제 -->
 	<delete id="DELETE_NOTICE">
 		DELETE FROM notice WHERE uid=#{uid}
 	</delete>
- 	
- </mapper>
+
+</mapper>
