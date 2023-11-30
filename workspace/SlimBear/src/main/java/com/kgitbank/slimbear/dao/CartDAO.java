@@ -24,6 +24,10 @@ public class CartDAO {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
 	}
 	
+	public CartDTO getCartByProdCode(String prod_code) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_PRODCODE", prod_code);
+	}
+	
 	/* 상품 번호의 개수를 조회 */
 	// 쿼리 결과가 1보다 크면 true, 그 외에는 false
 	public int selectCountInCart(CartDTO cart) {
