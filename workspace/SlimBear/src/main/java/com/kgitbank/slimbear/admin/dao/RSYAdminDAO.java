@@ -1,5 +1,7 @@
 package com.kgitbank.slimbear.admin.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,10 @@ public class RSYAdminDAO {
 	// 답글 조회
 	public RSYAdminDTO getComment(Long reviewUID) {
 		return template.selectOne("com.slimbear.mapper.Board.SELECT_COMMENT_BY_REVIEW_UID", reviewUID);
+	}
+	// 답글 리스트 조회
+	public List<RSYAdminDTO> getCommentList() {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEWCOMENT_LIST");
 	}
 
 	// 리뷰 하나만 꺼내쓰기

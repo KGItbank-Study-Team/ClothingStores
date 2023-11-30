@@ -1,3 +1,4 @@
+
 package com.kgitbank.slimbear.dao;
 
 import java.util.HashMap;
@@ -21,10 +22,6 @@ public class CartDAO {
 		MemberDTO info = new MemberDTO();
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
-	}
-	
-	public CartDTO getCartByProdCode(String prod_code) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_PRODCODE", prod_code);
 	}
 	
 	/* 상품 번호의 개수를 조회 */
@@ -56,9 +53,7 @@ public class CartDAO {
         info.put("quantity", quantity);
         template.insert("com.slimbear.mapper.Member.INSERT_CART_INFO", info);
     }
-	public String getOriginalProductCode(String prodCode) {
-        return template.selectOne("com.slimbear.mapper.Member.SELECT_ORIGINAL_PRODUCT_CODE", prodCode);
-    }
+	
 	public int updateAddress(CartDTO cart) { // 이거 adress>> cart로 바꿔줭
 		return template.update("com.slimbear.mapper.Member.UPDATE_CART", cart);
 	}
@@ -80,6 +75,21 @@ public class CartDAO {
 	        info.put("uid", String.valueOf(uid));
 	        info.put("prodCode", updatedProdCode);
 	        template.update("com.slimbear.mapper.Member.UPDATE_CART_OPTIONS", info);
+	    }
+	
+	 public void addChangedOptions(long uid, String updatedProdCode) {
+		    HashMap<String, String> info = new HashMap<>();
+		    info.put("uid", String.valueOf(uid));
+		    info.put("prodCode", updatedProdCode);
+		    template.update("com.slimbear.mapper.Member.ADD_CHANGED_OPTIONS", info);
+		}
+	 public void addCartItem(Long cartUid, Long productUid, String color, String size) {
+	        HashMap<String, Object> info = new HashMap<>();
+	        info.put("cartUid", cartUid);
+	        info.put("productUid", productUid);
+	        info.put("color", color);
+	        info.put("size", size);
+	        template.insert("com.slimbear.mapper.Member.INSERT_CART_ITEM", info);
 	    }
 	/*
 	 * public void updateCartItemOptions(long uid, String color, String size) {

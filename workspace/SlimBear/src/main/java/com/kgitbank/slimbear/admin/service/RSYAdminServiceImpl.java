@@ -1,11 +1,12 @@
 package com.kgitbank.slimbear.admin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
-import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 
 @Service
@@ -18,6 +19,12 @@ public class RSYAdminServiceImpl {
 
 		RSYAdminDTO comment = rsyAdminDAO.getComment(reviewUID);
 		return comment;
+	}
+	
+	public List<RSYAdminDTO> getCommentList() {
+
+		List<RSYAdminDTO> commentList = rsyAdminDAO.getCommentList();
+		return commentList;
 	}
 
 	public ReviewDTO getReviewByReviewUid(Long reviewUID) {

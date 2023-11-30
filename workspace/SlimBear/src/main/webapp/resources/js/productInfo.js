@@ -370,15 +370,15 @@ function displayData(currentPage, dataPerPage, dataList) {
             '</div>' +
             '</div>' +
             '<div class="review-score">';
-            // 리뷰 점수에 따라 별표 표시
-            for (var j = 1; j <= 5; j++) {
-                if (j <= dataList[i].score) {
-                    reviewHtml += '<i class="fas fa-star"></i>'; // 채워진 별
-                } else {
-                    reviewHtml += '<i class="far fa-star"></i>'; // 빈 별
-                }
+        // 리뷰 점수에 따라 별표 표시
+        for (var j = 1; j <= 5; j++) {
+            if (j <= dataList[i].score) {
+                reviewHtml += '<i class="fas fa-star"></i>'; // 채워진 별
+            } else {
+                reviewHtml += '<i class="far fa-star"></i>'; // 빈 별
             }
-            reviewHtml += '</div>' +
+        }
+        reviewHtml += '</div>' +
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
             '</div>' +
             '<div class="photo-review">' +
@@ -470,29 +470,36 @@ let inqList; // 상품문의 데이터 리스트
 let inqAnswerList; // 문의답변 리스트
 
 $(document).ready(function () {
+    // 상품문의데이터
     $.ajax({
         method: 'GET',
         url: '/app/product/inquiry/' + uid,
         data: uid,
-        success: function (uidList) {
+        success: function (inquiryList) {
             console.log('inquiry Ajax 실행성공');
-            totalDataInq = uidList.length; // 총 데이터 수
-            inqList = uidList;
-            console.log('uidList : ' + JSON.stringify(uidList));
-            console.log('totalDataInq : ' + totalDataInq);
+            totalDataInq = inquiryList.length; // 총 데이터 수
+            inqList = inquiryList;
+            console.log('1. 상품문의 목록 : ' + JSON.stringify(inquiryList));
+            console.log('2. 총데이터수 : ' + totalDataInq);
 
-            //var inqrUid = inquiryList.uid;
-            console.log('inqrUid : ' + JSON.stringify(inqrUid));
-
+            // 상품답변 데이터
             $.ajax({
                 method: 'POST',
                 url: '/app/product/answer',
-                data: uidList,
-                sucess: function(answerList) {
+                contentType: 'application/json',
+                data: JSON.stringify(inquiryList),
+                success: function (answerList) {
                     console.log('inquiryAnswer Ajax 성공');
 
                     inqAnswerList = answerList;
                     console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
+
+
+                    // 목록 표시 호출(테이블 생성)
+                    displayDataInq(1, dataPerPageInq, inqList, inqAnswerList);
+
+                    // 페이징 표시 호출
+                    pagingInq(totalDataInq, dataPerPageInq, pageCountInq, 1, inqList);
                 },
                 error: function (request, status, error) {
                     console.log('answer Ajax 실행 오류');
@@ -501,13 +508,8 @@ $(document).ready(function () {
                     console.log("error:", error);
                 }
             })
-                                                                                                                                                                                                                 
 
-            // 목록 표시 호출(테이블 생성)
-            displayDataInq(1, dataPerPageInq, inqList, inqAnswerList);
 
-            // 페이징 표시 호출
-            pagingInq(totalDataInq, dataPerPageInq, pageCountInq, 1, inqList);
         },
         error: function (request, status, error) {
             console.log("request:", request);
@@ -521,47 +523,46 @@ $(document).ready(function () {
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
 function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
 
-    console.log('inqList : ' + JSON.stringify(inqList));
-    console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
+    console.log('3. inqList : ' + JSON.stringify(inqList));
+    console.log('4. inqAnswerList : ' + JSON.stringify(inqAnswerList));
 
     let inquiryHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
-    currentPage = Number(currentPage);  console.log('currentPage : ' + currentPage);
-    dataPerPageInq = Number(dataPerPageInq);    console.log('dataPerPageInq : ' + dataPerPageInq);
+    currentPage = Number(currentPage); console.log('5. currentPage : ' + currentPage);
+    dataPerPageInq = Number(dataPerPageInq); console.log('6. dataPerPageInq : ' + dataPerPageInq);
 
 
     for (var i = (currentPage - 1) * dataPerPageInq; i < Math.min(currentPage * dataPerPageInq, inqList.length); i++) {
         inquiryHtml += '<tbody class="inquiry">' +
             '<tr>' +
             '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
-            '<td>' +
-                '<div class="clickTitle ">' + inqList[i].title + '</div>'
+            '<td style="width: 1000px;>' +
+            '<div class="clickTitle ">' + inqList[i].title + '</div>' +
             '</td>' +
             '<td>' + inqList[i].writer_id + '</td>' +
             '<td>' + inqList[i].reg_date + '</td>' +
             '</tr>' +
             '<tr class="inquiryContent">' +
-            '<td>&nbsp;</td>' + 
-            '<td class="centerNo">' + 
+            '<td>&nbsp;</td>' +
+            '<td class="centerNo">' +
             '<div class="contentPadding">' + inqList[i].content + '</div>' +
             '</td>' +
             '<td>&nbsp;</td>' +
-            '<td>&nbsp;</td>'
+            '<td>&nbsp;</td>' +
             '</tr>';
-            for(var j = 0; j < inqAnswerList.length; j++) {
-
-               inquiryHtml += 
-               '<tr>' + 
-               '<td>' + inqAnswerList[i].title; + '</td>'
-               '</tr>';
-            }
-            inquiryHtml += '</tbody>';
+        // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
+        if (inqAnswerList[i]) {
+            inquiryHtml += '<tr>' +
+                '<td>' + inqAnswerList[i].title + '</td>' +
+                '</tr>';
+        }
+        inquiryHtml += '</tbody>';
     }
     $('.inquiry').html(inquiryHtml);
 }
 // 페이징 표시 함수
 function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqList) {
-    console.log('currentPage: ' + currentPage);
+    console.log('7. currentPage: ' + currentPage);
 
     totalDataInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
 

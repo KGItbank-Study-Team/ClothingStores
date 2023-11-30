@@ -209,6 +209,10 @@ public class YangController {
 	    return "inquiry"; // 실제 뷰
 	}
 	
+	// 페이징처리
+	
+	
+	
 	
 	// 자주묻는질문
 	@RequestMapping("/board/faq")

@@ -31,9 +31,14 @@ public class InquiryDAO {
         }
         return inquiries;
     }
+	// 문의 전체 리스트
+	public List<InquiryDTO> getInquiryListAll() {
+        List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_ALL");
+        return inquiries;
+    }
 	
 	// 문의 prod_uid 조회
-	public List<Integer> getInquiryListByProdUid(Long prodUid) {
+	public List<InquiryDTO> getInquiryListByProdUid(Long prodUid) {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
 	}
 	
@@ -60,7 +65,7 @@ public class InquiryDAO {
 	
 	// 특정 prod_uid 상품문의 조회
     public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
-        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_PRODUID", prodUid);
+        return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_UID_BY_PRODUID", prodUid);
     }
     
 	// 상품문의 데이터 삽입
@@ -85,5 +90,7 @@ public class InquiryDAO {
 	public InquiryAnswerDTO getAnswerDetail(Long uid) {
 		return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_ANSWERS", uid);
 	}
+	
+	
 	
 }

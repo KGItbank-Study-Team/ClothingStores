@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
-import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
@@ -32,7 +32,6 @@ import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
-import com.kgitbank.slimbear.service.RSYServiceImpl;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
 
@@ -85,29 +84,29 @@ public class SanghyukController {
 		return reviewList;	
 	}
 
-	/* 상품 문의 데이터 조회 */
+	/* prod_uid에 대한 상품 문의 데이터 조회 */
 	@RequestMapping("product/inquiry/{prod_uid}")
 	@ResponseBody
-	public List<Integer> getInquiryAnswerByInqrUid(@PathVariable("prod_uid")Long productUid) {
-		List<Integer> inquiryList = sanghService.getInquiryListByProdUid(productUid);
-		System.out.println("문의리스틔 uid : " + inquiryList);
+	public List<InquiryDTO> getInquiryListByProdUid(@PathVariable("prod_uid")Long productUid) {
+		List<InquiryDTO> inquiryList = sanghService.getInquiryListByProdUid(productUid);
+		System.out.println("prod_uid에 대한 문의리스트 : " + inquiryList);
 		return inquiryList;
 	}
 	
 	/* 문의 답변 데이터 조회 */
-	@RequestMapping("product/answer")
-	@ResponseBody
-	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(@RequestParam("uidList") List<Integer> uidList) {
-		System.out.println("uids: " + uidList);
+	@RequestMapping(value = "product/answer", consumes = "application/json", method = RequestMethod.POST)
+	@ResponseBody	
+	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(@RequestBody List<InquiryDTO> inquiryList) {
+		System.out.println("문의 리스트: " + inquiryList);
 		
 		 List<InquiryAnswerDTO> answerList = new ArrayList<>();
 
-		    for (long uid : uidList) {
-		        // 각 uid에 대한 처리
+		    for (InquiryDTO inquiry : inquiryList) {
+		        long uid = inquiry.getUid();
 		    	List<InquiryAnswerDTO> answer = sanghService.getInquiryAnswerByInqrUid(uid);
 		        answerList.addAll(answer);
+		        System.out.println("uid값에 따른 답변목록 : " + answer);
 		    }
-
 		    System.out.println("answerList: " + answerList);
 		    return answerList;
 	}

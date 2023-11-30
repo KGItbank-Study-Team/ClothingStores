@@ -1,6 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 
 <!DOCTYPE html>
@@ -45,7 +47,9 @@
 				<c:forEach var="cart" items="${cartList}" varStatus="status">
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
-							value="${cart.uid}" data-productuid="${cart.productUid}" data-color="${cart.color}" data-size="${cart.size}" data-cnt="${cart.cnt}"></td>
+							value="${cart.uid}" data-productuid="${cart.productUid}"
+							data-color="" ${cart.color} data-size="${cart.size}"
+							data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
 							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
 						<td><a href="#">${cart.maker}</a> <span
@@ -108,10 +112,10 @@
 										<tr>
 											<td colspan="3">
 												<div class="cart__mainbtns">
-													<button class="cart__bigorderbtn left"
-														onclick="getMemUidAndAddToCart(1)">추가하기</button>
-													<button class="cart__bigorderbtn right"
-														onclick="updateCartItemOptions($(this), ${status.index}, ${cart.uid});">변경하기</button>
+												
+													<button class="cart__bigorderbtn left" onclick="addChangedOptions(this, ${status.index}, ${cart.uid});">변경하기</button>
+													<button class="cart_bigorderbtn right"
+														onclick="addCartItem($(this), ${status.index}, ${cart.uid});">추가하기</button>
 												</div>
 											</td>
 										</tr>
@@ -147,7 +151,7 @@
 						<button class="cart__list__optionbtn"
 							onclick="deleteSelectedItems()">선택상품 삭제</button>
 
-						<button class="cart__list__optionbtn">선택상품 찜</button> <!--   </form> -->
+						
 					</td>
 					<td></td>
 					<td></td>
@@ -176,10 +180,12 @@
 			</tr>
 		</table>
 		<div class="cart__mainbtns">
-		<input type="hidden"  id="hiddenInput" name="optionsList[0].color"  value="" />
+			<input type="hidden" id="hiddenInput" name="optionsList[0].color"
+				value="" />
 			<button class="cart__bigorderbtn left" onclick="history.back()">쇼핑
 				계속하기</button>
-			<!-- <input type="button" class="cart__bigorderbtn right""> --><button class="cart__bigorderbtn right" >주문하기</button>
+			<!-- <input type="button" class="cart__bigorderbtn right""> -->
+			<button class="cart__bigorderbtn right">주문하기</button>
 		</div>
 		</form>
 		<form>

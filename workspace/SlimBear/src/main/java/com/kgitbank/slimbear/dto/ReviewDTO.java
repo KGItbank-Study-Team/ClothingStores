@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ReviewDTO extends PageDTO {
+public class ReviewDTO {
 	
 	private long uid;
 	private String mem_id;

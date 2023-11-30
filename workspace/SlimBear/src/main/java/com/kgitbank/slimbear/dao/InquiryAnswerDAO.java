@@ -38,7 +38,7 @@ public class InquiryAnswerDAO {
 	
 	// inqr_uid에 맞는 답변 조회
 	public List<InquiryAnswerDTO> getInquiryAnswerByInqrUid(long inquiryUid) {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_ANSWER_BY_INQRUID", inquiryUid);
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST", inquiryUid);
 	}
 	
 	
