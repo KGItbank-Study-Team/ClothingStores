@@ -126,6 +126,21 @@
         	AND prod_uid IS NULL
 	    ORDER BY reg_date DESC
  	</select>
+ 	<select id="SELECT_INQUIRY_LIST_ALL" resultType="inquiry">
+	    SELECT 
+	        uid,
+	        CONCAT(SUBSTRING(writer_id, 1, 2), REPEAT('*', LENGTH(writer_id) - 2)) AS writer_id,
+	        title,
+	        content,
+	        reg_date,
+	        status,
+	        type,
+	        prod_uid AS priority,  
+	        secure
+	    FROM 
+	        inquiry
+	 
+ 	</select>
  	<select id="SELECT_INQUIRY_UID_BY_PRODUID" resultType="int">
  		SELECT uid FROM inquiry WHERE prod_uid = #{prod_uid}
  	</select>

@@ -92,7 +92,7 @@
 						</thead>
 						
 						
-						<!-- 1번째 tbody for문 -->
+						<!-- 문의게시글 목록 -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
@@ -115,12 +115,11 @@
 						        <c:if test="${not empty board.answers}">
 						            <c:forEach items="${board.answers}" var="answer">
 						                <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						                    <!-- 추가적인 답변 정보 출력 -->
 						                    <td></td>
 						                    <td class="displaynone"></td>
 						                    <td class="subject left txtBreak">
 						                        <strong>
-						                            <!-- 답변의 링크 형식은 필요에 따라 수정하세요 -->
+						                            <!-- 답변의 링크는 원래의 문의게시글 링크로 -->
 						                            <a href="/app/board/inquiry/detail/${board.uid}" style="color: #555555;">${answer.title}</a>
 						                            <c:if test="${board.secure eq '1'}">
 								                        <img src="/resources/images/icon_secret.png" alt="비밀글" class="ec-common-rwd-image"/>
@@ -135,9 +134,6 @@
 						        </c:if>
 						    </c:forEach>
 						</tbody>
-						
-						
-						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-4 xans-board-empty xans-board-4 message displaynone "></p>
 				</div>
@@ -152,14 +148,13 @@
 			</div>
 			
 			
-			<!-- 게시글 개수와 현재 페이지 설정 -->
-			<c:set var="totalPosts" value="50" />
-			<c:set var="postsPerPage" value="10" />
-			<c:set var="currentPage" value="1" />
-			
 			<!-- 페이지 수 계산 -->
-			<c:set var="totalPages" value="${totalPosts / postsPerPage + (totalPosts % postsPerPage > 0 ? 1 : 0)}" />
+			<c:set var="totalPosts" value="${inquiries.size()}" />
+		    <c:set var="postsPerPage" value="5" />
+		    <c:set var="currentPage" value="${param.page eq null ? 1 : param.page}" />
+			<c:set var="totalPages" value="${(totalPosts / postsPerPage) + (totalPosts % postsPerPage > 0 ? 1 : 0)}" />
 			
+			<!-- 페이징 -->
 			<div class="xans-element- xans-board xans-board-paging-4 xans-board-paging xans-board-4 ec-base-paginate">
 			    <a href="?board_no=6&page=1"><img src="/resources/images/icon_prev2.png" /></a>
 			    <ol>
@@ -178,10 +173,8 @@
 			</div>
 			
 			
+			<!-- 검색기능 -->
 			<form id="boardSearchForm" name="" action="/app/board/inquiryS" method="get" target="_top" enctype="multipart/form-data">
-<!-- 				<input id="board_no" name="board_no" value="6" type="hidden" /> -->
-<!-- 				<input id="page" name="page" value="1" type="hidden" /> -->
-<!-- 				<input id="board_sort" name="board_sort" value="" type="hidden" /> -->
 				<div class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 ">
 					<fieldset class="boardSearch">
 						<legend>게시물 검색</legend>
