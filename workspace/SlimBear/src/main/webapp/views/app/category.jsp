@@ -8,6 +8,7 @@
 <head>
 <script type="text/javascript">
 	window.CAFE24 = window.CAFE24 || {};
+	
 </script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/optimizer.css" />
@@ -41,6 +42,7 @@
 						</div>
 						<ul class="prdList grid4 swiper-wrapper">
 							<c:forEach var="item" items="${bestProductList}">
+							
 								<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
 									<div class="thumbnail">
 										<div class="salePer"></div>
@@ -82,15 +84,15 @@
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
 													style="font-size: 12px; color: #555555;">소비자가</span> :
-											</strong> <span
+											</strong> <span id="formattedPrice"
 												style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price}</span>
 											</li>
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
 													style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>
 													:
-											</strong> <span
-												style="font-size: 12px; color: #555555; font-weight: bold;">${item.price }</span>
+											</strong> <span id="formattedSalePrice"
+												style="font-size: 12px; color: #555555; font-weight: bold;">${item.sale_price }</span>
 												<span id="span_product_tax_type_text" style=""></span></li>
 										</ul>
 										<!-- .spec -->
@@ -221,23 +223,16 @@
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
 													style="font-size: 11px; color: #999999;">소비자가</span> :
-											</strong> <span
+											</strong> <span id="formattedPrice"
 												style="font-size: 11px; color: #999999; text-decoration: line-through;">${item.price}</span>
 											</li>
-											<li class=" xans-record-"><strong
-												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">판매가</span> :
-											</strong> <span
-												style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price }</span>
-												<span id="span_product_tax_type_text"
-												style="text-decoration: line-through;"></span></li>
+											
 											<li class=" xans-record-"><strong class="title ">
 													<span style="font-size: 12px; color: #555555;">할인판매가</span>
 													:
-											</strong> <span style="font-size: 12px; color: #555555;">
-													최종할인판매가 <span
-													style="font-size: 11px; color: #fa6767; font-weight: bold;">할인률DBDBDB
-														%</span>
+											</strong> <span id="formattedSalePrice" style="font-size: 12px; color: #555555;">
+													${item.sale_price } <span id="discountRate"
+													style="font-size: 11px; color: #fa6767; font-weight: bold;"></span>
 											</span></li>
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
@@ -343,6 +338,24 @@
             }
         });
     });
+    function formatCurrency(amount) {
+        // 숫자를 통화 형식으로 변환
+        var formattedAmount = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount);
+        return formattedAmount;
+    }
+
+    var item = {
+        price: ${price},
+        sale_price: ${sale_price}
+    };
+
+    // 판매가격 포맷팅 및 표시
+    var formattedPrice = formatCurrency(price);
+    document.getElementById('formattedPrice').innerText = formattedPrice;
+
+    // 할인판매가격 포맷팅 및 표시
+    var formattedSalePrice = formatCurrency(price);
+    document.getElementById('formattedSalePrice').innerText = formattedSalePrice;
 </script>
 
 

@@ -53,9 +53,7 @@
 										for="check_method1">이메일</label> <input id="check_method2"
 										name="check_method" value="2" type="radio"
 										onclick="toggleFields('2')" checked="checked" /> <label
-										for="check_method2">휴대폰 번호</label> <input id="check_method3"
-										name="check_method" value="3" type="radio"
-										onclick="toggleFields('3')" /> <label for="check_method3">주민등록번호</label>
+										for="check_method2">휴대폰 번호</label>
 									<p id="name_view" class="name">
 										<strong>이름</strong> <input id="name" name="name" fw-filter=""
 											fw-label="이름" fw-msg="" class="lostInput" placeholder="이름"
@@ -67,26 +65,12 @@
 											class="lostInput" placeholder="이메일" value="" type="text" />
 									</p>
 									<p id="mobile_view" class="mobile" style="display: block;">
-										<strong>휴대폰 번호로 찾기</strong> <input id="mobile1" name="mobile1"
-											fw-filter="isMin[3]&isMax[3]&isNumber" fw-label="휴대전화 번호"
-											fw-msg="" class="mobile1" placeholder="010" maxlength="3"
-											value="" type="text" /> - <input id="mobile2" name="mobile2"
-											fw-filter="isMin[3]&isMax[4]&isNumber" fw-label="휴대전화 번호"
-											fw-msg="" class="mobile2" placeholder="1234" maxlength="4"
-											value="" type="text" /> - <input id="mobile3" name="mobile3"
-											fw-filter="isMin[4]&isMax[4]&isNumber" fw-label="휴대전화 번호"
-											fw-msg="" class="mobile2" placeholder="5678" maxlength="4"
-											value="" type="text" />
+										<strong>휴대폰 번호로 찾기</strong> <input id="phone" name="phone"
+										fw-filter="" fw-label="휴대전화 번호" fw-msg="" class="phone"
+										placeholder="-없이 전화번호를 적어주세요" maxlength="11" value=""
+										type="text" />
 									</p>
-									<p id="ssn_view" class="ssn_no" style="display: none;">
-										<strong>주민등록번호로 찾기</strong> <input id="ssn1" name="ssn1"
-											fw-filter="isMin[6]&isMax[6]&isNumber" fw-label="주민등록번호"
-											fw-msg="" class="lostInput" placeholder="000000"
-											maxlength="6" value="" type="text" /> - <input id="ssn2"
-											name="ssn2" fw-filter="isMin[7]&isMax[7]&isNumber"
-											fw-label="주민등록번호" fw-msg="" class="lostInput"
-											placeholder="0000000" maxlength="7" value="" type="password" />
-									</p>
+									
 									<div class="ec-base-button gColumn">
 										<button type="submit" class="btnLogin2">확인</button>
 									</div>
