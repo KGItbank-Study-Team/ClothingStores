@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,12 +90,14 @@ public class RSYAdminController {
 	@ResponseBody
 	public ResponseEntity<String> addOrUpdateAnswer(@RequestParam Long inqr_uid, @RequestParam String answerTitle,
 			@RequestParam String answerContent, @RequestParam String mem_id) {
+		Date reg_date = new Date();
 		try {
 			System.out.println(inqr_uid);
 			System.out.println(answerTitle);
 			System.out.println(answerContent);
 			System.out.println(mem_id);
-			rsyAdminService.addOrUpdateAnswer(inqr_uid, answerTitle, answerContent, mem_id);
+			System.out.println(reg_date);
+			rsyAdminService.addOrUpdateAnswer(inqr_uid, answerTitle, answerContent, mem_id, reg_date);
 			return ResponseEntity.ok("답글이 성공적으로 추가/수정되었습니다.");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("답글 추가/수정 중에 오류가 발생했습니다.");

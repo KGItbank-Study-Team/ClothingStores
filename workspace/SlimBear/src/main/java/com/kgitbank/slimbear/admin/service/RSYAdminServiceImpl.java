@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.admin.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
-import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.vo.ReviewVO;
 
@@ -62,12 +62,13 @@ public class RSYAdminServiceImpl {
 	}
 
 	// 문의답글
-	public void addOrUpdateAnswer(Long inqr_uid, String title, String content, String mem_id) {
+	public void addOrUpdateAnswer(Long inqr_uid, String title, String content, String mem_id, Date reg_date) {
 		InquiryAnswerDTO answer = new InquiryAnswerDTO();
 		answer.setInqr_uid(inqr_uid);
 		answer.setTitle(title);
 		answer.setContent(content);
 		answer.setMem_id(mem_id);
+		answer.setReg_date(reg_date);
 
 		rsyAdminDAO.setAnswerStatus(inqr_uid);
 		rsyAdminDAO.addOrUpdateAnswer(answer);
