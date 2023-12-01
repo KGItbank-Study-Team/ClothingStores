@@ -192,29 +192,9 @@
 
 
 	<!-- 문의게시글 조회 -->
-	<!-- <select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
-		SELECT * FROM inquiry WHERE uid=#{uid}
-	</select> -->
 	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
-    SELECT
-        uid,
-        writer_id,
-        title,
-        content,
-        reg_date,
-        status,
-        type,
-        prod_uid,
-        secure,
-        attach_image1,
-        attach_image2,
-        attach_image3,
-        attach_image4
-    FROM
-        inquiry
-    WHERE
-        uid=#{uid}
-</select>
+		SELECT * FROM inquiry WHERE uid=#{uid}
+	</select>
 
 	<!-- 특정 prod_uid 상품문의 조회 -->
 	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">
@@ -238,7 +218,11 @@
 		COALESCE(#{status}, 'WAIT'),
 		#{type},
 		#{prod_uid},
-		#{secure}
+		#{secure},
+	    #{attach_image1},
+	    #{attach_image2},
+	    #{attach_image3},
+	    #{attach_image4}
 		)
 	</insert>
 

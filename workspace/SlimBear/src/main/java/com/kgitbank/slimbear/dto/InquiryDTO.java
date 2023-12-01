@@ -23,12 +23,14 @@ public class InquiryDTO {
 	private String type;
 	private Long prod_uid;
     private int secure; // 비밀글 여부를 나타내는 필드
-    
-//    private String imageFile;	// 나중에 이름 바꿀예정
     private String searchKey; // 검색 대상 (title, content, writer_id, prod_uid 등)
     private String searchValue; // 검색어
+    private String attach_image1;
+    private String attach_image2;
+    private String attach_image3;
+    private String attach_image4;
     
     // 답변 목록을 저장할 List
     private List<InquiryAnswerDTO> answers;
-    
+
 }
