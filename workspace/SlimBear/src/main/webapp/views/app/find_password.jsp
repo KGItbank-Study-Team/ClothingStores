@@ -91,23 +91,25 @@
 									<strong>이메일로 찾기</strong> <input id="email" name="email"
 										fw-filter="isEmail" fw-label="이메일" fw-msg="" class="lostInput"
 										placeholder="이메일" value="" type="text" />
-									<button type="button" onclick="sendVerificationCode()">인증번호
-										받기</button>
+								
 								</p>
 								<p id="mobile_view" class="phone" style="display: block;">
 									<strong>휴대폰 번호로 찾기</strong> <input id="phone" name="phone"
 										fw-filter="" fw-label="휴대전화 번호" fw-msg="" class="phone"
 										placeholder="-없이 전화번호를 적어주세요" maxlength="11" value=""
-										type="text" />
-									<button type="button" onclick="sendVerificationCode()">인증번호
-										받기</button>
-									<p id="verification_code_view" style="display: none;">
-										<strong>인증번호</strong> <input id="verificationCode"
-											name="verificationCode" fw-filter="" fw-label="인증번호"
-											fw-msg="" class="lostInput" placeholder="인증번호" value=""
-											type="text" />
-										<button type="button" onclick="verifyCode()">인증번호 확인</button>
-									</p>
+										type="text" /> <
+									<div class="ec-base-button gColumn">
+										<button type="button" class="btnLogin2" 
+											onclick="sendVerificationCode()">인증번호 받기</button>
+									</div>
+									
+								<p id="verification_code_view" style="display: none;">
+									<strong>인증번호</strong> <input id="verificationCode"
+										name="verificationCode" fw-filter="" fw-label="인증번호" fw-msg=""
+										class="lostInput" placeholder="인증번호" value="" type="text" />
+										<button id=type="button" class="btnLogin2" onclick="verifyCode()">인증번호
+											확인</button>
+									
 								</p>
 								<div class="ec-base-button gColumn">
 									<button type="submit" class="btnLogin2">확인</button>
@@ -121,6 +123,7 @@
 			<script>
 				function sendVerificationCode() {
 					// 선택된 방법 (이메일 또는 휴대폰) 가져오기
+					disableButton();
 					var method = document
 							.querySelector('input[name="check_method"]:checked').value;
 
@@ -222,6 +225,10 @@
 							+ method + '&target=' + target;
 					xhr.send(params);
 				}
+				function disableButton() {
+			        // 버튼 비활성화
+			        $('#email_view button').prop('disabled', true);
+			    }
 			</script>
 
 
