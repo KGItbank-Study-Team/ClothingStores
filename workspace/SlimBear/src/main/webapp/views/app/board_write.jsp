@@ -214,15 +214,15 @@
 								</tr>
 								<tr>
 									<th scope="row">FILE 2</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 3</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 4</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 5</th>

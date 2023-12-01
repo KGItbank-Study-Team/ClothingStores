@@ -16,11 +16,6 @@ public class InquiryDAO {
 	protected SqlSessionTemplate template;
 	
 	// 상품문의 리스트 조회
-//	public List<InquiryDTO> getInquiryList(String type) {
-//		InquiryDTO Inquiry = new InquiryDTO();
-//		Inquiry.setType(type);
-//		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", Inquiry); // 패키지풀네임.id
-//	}
 	public List<InquiryDTO> getInquiryList(Map<String,Object>paramMap) {
         List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST", paramMap);
         
@@ -36,6 +31,7 @@ public class InquiryDAO {
         int total = template.selectOne("com.slimbear.mapper.Board.SELECT_CNT_INQUIRY_LIST", type);
         return total;
 	}
+	
 	// 문의 전체 리스트
 	public List<InquiryDTO> getInquiryListAll() {
         List<InquiryDTO> inquiries = template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_ALL");
@@ -56,6 +52,10 @@ public class InquiryDAO {
 	public InquiryDTO getInquiryDetail(Long id) {
 	    return template.selectOne("com.slimbear.mapper.Board.SELECT_INQUIRY_DETAIL", id);
 	}
+	
+	
+	
+	
 	// 질문에 대한 답변 목록 조회
     public List<InquiryAnswerDTO> getInquiryAnswerList(Long id) {
         return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRYANSWER_LIST", id);

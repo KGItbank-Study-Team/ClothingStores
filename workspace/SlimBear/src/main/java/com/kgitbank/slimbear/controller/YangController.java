@@ -58,7 +58,6 @@ public class YangController {
     		@RequestParam(name = "category_no", required = false, defaultValue = "PRODUCT") String categoryNo, 
     		@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset, Integer pageSize, Model model) {
 		
-		
 		if (offset == null) {
 			offset = 0;
 		}

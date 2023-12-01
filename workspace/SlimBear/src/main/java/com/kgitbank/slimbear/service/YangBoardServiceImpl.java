@@ -16,7 +16,6 @@ import com.kgitbank.slimbear.dao.NoticeDAO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
-import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 
 @Service
@@ -62,7 +61,7 @@ public class YangBoardServiceImpl {
     	return total;
     }
     
- // 문의게시판 전체목록
+    // 문의게시판 전체목록
     public List<InquiryDTO> getInquiryListAll() {
         return inquiryDAO.getInquiryListAll();
     }
