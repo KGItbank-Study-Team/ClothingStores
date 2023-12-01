@@ -97,7 +97,7 @@
 									<strong>휴대폰 번호로 찾기</strong> <input id="phone" name="phone"
 										fw-filter="" fw-label="휴대전화 번호" fw-msg="" class="phone"
 										placeholder="-없이 전화번호를 적어주세요" maxlength="11" value=""
-										type="text" /> <
+										type="text" /> 
 									<div class="ec-base-button gColumn">
 										<button type="button" class="btnLogin2" 
 											onclick="sendVerificationCode()">인증번호 받기</button>
