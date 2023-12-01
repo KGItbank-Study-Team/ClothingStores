@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kgitbank.slimbear.dto.NoticeDTO;
 
@@ -22,9 +24,8 @@ public class NoticeDAO {
 		}
 		
 		// Notice 게시글 상세페이지조회
-		public NoticeDTO getNoticeDetail(Long uid) {// 조회수 증가 쿼리 실행
-//	        template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
-//		    return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
+		public NoticeDTO enterNoticeDetail(Long uid) {// 조회수 증가 쿼리 실행
+			System.out.println(uid);
 			 // 조회수 증가 쿼리 실행
 	        int updatedRows = template.update("com.slimbear.mapper.Board.INCREASE_NOTICE_VIEW_COUNT", uid);
 
@@ -37,13 +38,6 @@ public class NoticeDAO {
 	        }
 	    }
 		
-		
-		/*
-		 * // Inquiry 리스트에서 조회 public List<NoticeDTO> getInquiryNList(String type) {
-		 * NoticeDTO notice = new NoticeDTO(); notice.setType(type); return
-		 * template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST", notice);
-		 * // 패키지풀네임.id }
-		 */
 		
 
 		// Notice 데이터 삽입

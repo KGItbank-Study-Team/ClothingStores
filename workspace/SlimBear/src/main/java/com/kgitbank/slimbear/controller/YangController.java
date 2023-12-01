@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
@@ -41,7 +39,7 @@ public class YangController {
 	// 공지사항 상세페이지조회
 	@RequestMapping("/board/notice/detail/{uid}")
 	public String getNoticeDetail(@PathVariable Long uid, Model model) {
-		NoticeDTO notices = boardService.getNoticeDetail(uid);
+		NoticeDTO notices = boardService.enterNoticeDetail(uid);
 		model.addAttribute("notices", notices);
 		return "board_notice";
 	}

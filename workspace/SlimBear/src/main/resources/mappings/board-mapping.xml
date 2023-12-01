@@ -208,7 +208,7 @@
 	<insert id="INSERT_INQUIRY">
 		<!-- id 대신 name 가져오기 -->
 		INSERT INTO inquiry
-		(writer_id, title, content, reg_date, status, type, prod_uid, secure)
+		(writer_id, title, content, reg_date, status, type, prod_uid, secure, attach_image1, attach_image2, attach_image3, attach_image4)
 		VALUES(
 		<!-- COALESCE((SELECT name FROM member WHERE id = #{writer_id}), 'DefaultName'), -->
 		#{writer_id},
@@ -334,7 +334,8 @@
 		SELECT * FROM notice WHERE priority != 0 ORDER BY FIELD(priority, 1,
 		2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
 	</select>
-	<!-- notice 게시글 조회 -->
+	
+	<!-- notice 상세페이지 조회 -->
 	<select id="SELECT_NOTICE_DETAIL" resultType="notice">
 		SELECT * FROM notice WHERE uid=#{uid}
 	</select>

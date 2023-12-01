@@ -36,8 +36,8 @@ public class YangBoardServiceImpl {
 	}
 	
 	// 공지사항 상세페이지조회
-    public NoticeDTO getNoticeDetail(Long id) {
-        return noticeDAO.getNoticeDetail(id);
+    public NoticeDTO enterNoticeDetail(Long id) {
+        return noticeDAO.enterNoticeDetail(id);
     }
 	
 	// 문의게시판
