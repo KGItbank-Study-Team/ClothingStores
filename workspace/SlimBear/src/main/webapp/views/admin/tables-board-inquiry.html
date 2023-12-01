@@ -90,7 +90,7 @@
 							data-url="/admin/inquiry/list">
 							<thead>
 								<tr>
-									<th data-field="uid" data-sortable="true" data-width="23">InquiryUID</th>
+									<th data-field="uid" data-sortable="true" data-width="0">uid</th>
 									<th data-field="writer_id" data-sortable="true" data-width="180"
 										data-formatter="ownerFormatter">아이디</th>
 										
@@ -106,7 +106,7 @@
 
 									<th data-field="type" data-sortable="true"data-width="10">분류</th>
 									<th data-field="select" data-checkbox="true"></th>
-									<th data-field="actions" data-formatter="actionsFormatter" data-events="actionsEvents">수정/삭제</th>
+									<th data-field="actions" data-formatter="actionsFormatter" data-events="actionsEvents">숨김/삭제</th>
 									
 								</tr>
 							</thead>
@@ -304,7 +304,7 @@
 	  function actionsFormatter(value, row, index) {
 	        return [
 	            '<div class="btn-group" role="group">',
-	                '<button class="btn btn-primary btn-sm" onclick="editRow(' + index + ')">Edit</button>',
+	                '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
 	                '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
 	            '</div>'
 	        ].join('');
@@ -313,12 +313,75 @@
 	    function actionsEvents() {
 	        return {
 	            'click .btn-primary': function (e, value, row, index) {
-	                editRow(index);
+	                hideRow(index);
 	            },
 	            'click .btn-danger': function (e, value, row, index) {
 	                deleteRow(index);
 	            }
 	        };
 	    }
+	    function hideRow(index) {
+	        var rowData = $('#table').bootstrapTable('getData')[index];
+	        
+	        // 숨김 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 숨김 요청 전송
+	        if (confirm('숨기시겠습니까?')) {
+	            $.ajax({
+	                url: '/admin/inquiry/hideData',
+	                method: 'POST',
+	                contentType: 'application/json',
+	                data: JSON.stringify(rowData),
+	                success: function(response) {
+	                    // 성공적으로 처리된 경우
+	                    alert('숨김이 완료되었습니다.');
+	                    // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
+	                    $('#table').bootstrapTable('remove', {
+	                        field: 'uid',
+	                        values: [rowData.uid]
+	                    });
+	                },
+	                error: function(error) {
+	                    // 오류 발생 시
+	                    alert('숨김 중 오류가 발생했습니다.');
+	                }
+	            });
+	        }
+	    }
+
+	    function deleteRow(index) {
+	        var rowData = $('#table').bootstrapTable('getData')[index];
+	        // 확인을 위해 데이터 출력
+	        
+	        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
+	        if (confirm('삭제하시겠습니까?')) {
+	            $.ajax({
+	                url: '/admin/inquiry/deleteData',
+	                method: 'DELETE',
+	                contentType: 'application/json',
+	                data: JSON.stringify(rowData),
+	                success: function(response) {
+	                    // 성공적으로 처리된 경우
+	                    alert('삭제가 완료되었습니다.');
+	                    // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
+	                },
+	                error: function(error) {
+	                    // 오류 발생 시
+	                    alert('삭제 중 오류가 발생했습니다.');
+	                }
+	            });
+	        }
+	    }
+	    $(document).ready(function() {
+	        // 버튼 이벤트 등록
+	        $('.btn-hide').click(function() {
+	            var index = $(this).closest('tr').data('index');
+	            hideRow(index);
+	        });
+
+	        $('.btn-delete').click(function() {
+	            var index = $(this).closest('tr').data('index');
+	            deleteRow(index);
+	        });
+	    });
+
 </script>
 </html>
