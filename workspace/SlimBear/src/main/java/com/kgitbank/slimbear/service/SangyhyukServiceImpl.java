@@ -1,14 +1,15 @@
 package com.kgitbank.slimbear.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.exceptions.TemplateAssertionException;
 
 import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
+import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
@@ -17,10 +18,12 @@ import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
+import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
+import com.kgitbank.slimbear.vo.OrderListVO;
 
 @Service
 public class SangyhyukServiceImpl {
@@ -64,7 +67,7 @@ public class SangyhyukServiceImpl {
 	
 	/* 상품 옵션 데이터 받아오기 */
 	@Autowired
-	public ProductDetailDAO prodDetailDAO;
+	private ProductDetailDAO prodDetailDAO;
 	
 	public List<ProductDetailDTO> getProductDetailList(long uid) {
 		return prodDetailDAO.getProductDetailList(uid);
@@ -108,7 +111,7 @@ public class SangyhyukServiceImpl {
 	
 	/* 상품 장바구니 */
 	@Autowired
-	public CartDAO cartDAO;
+	private CartDAO cartDAO;
 	
 	// 장바구니에 상품 추가
 	public void addCartItem(long mem_uid, String prod_code, int cnt) {
@@ -138,7 +141,7 @@ public class SangyhyukServiceImpl {
 	
 	/* 위시리스트에 상품 추가 */
 	@Autowired
-	public WishDAO wishDAO;
+	private WishDAO wishDAO;
 	
 	public void insertInWish(WishDTO wish) {
 		wishDAO.insertInWish(wish);
@@ -152,5 +155,28 @@ public class SangyhyukServiceImpl {
 	/* 동일상품 체크 */
 	public int findWishProduct(WishDTO wish) {
 		return wishDAO.selectCountInWish(wish);
+	}
+	
+	//주문내역
+	private OrderDAO orderDAO;
+	
+	public List<OrderListVO> getOrderListInfo(long memberUid) {
+
+		ArrayList<OrderListVO> list = new ArrayList<>();
+		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUid);
+
+		for (OrderDTO i : orderlist) {
+			OrderListVO vo = new OrderListVO();
+
+			vo.setOrderDate(i.getOrder_date());
+			vo.setOrderStatus(i.getStatus());
+			vo.setOrderImage("이미지링크");
+			vo.setOrderName("미친 특가상품 지렸다");
+			vo.setOrderAmount(i.getTotal_price()); // 개별가격인데 일단 total넣어놈
+			vo.setOrderCount(1);
+
+			list.add(vo);
+		}
+		return list;
 	}
 }

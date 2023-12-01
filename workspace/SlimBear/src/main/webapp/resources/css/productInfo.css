@@ -3,7 +3,6 @@ body {
 	background-color: white !important;
 	width: 100%;
 }
-
 li {
 	list-style: none;
 }
@@ -47,7 +46,7 @@ a {
 }
 .goToCartBtn {
 	background: #655345;
-	color: #fff;
+	/* color: #fff; */
 	font-weight: lighter;
 	padding: 5px;
 }
@@ -65,7 +64,7 @@ a {
 	display: flex;
 	max-width: 1750px;
 	position: relative;
-	/* left: 15%; */
+	color: black !important;
 	width: fit-content;
 	margin: 0 auto;
 	text-align: center;
@@ -97,7 +96,7 @@ a {
 .subExplanation {
 	font-size: 14px;
 	font-weight: bold;
-	color: #555555;
+	/* color: #555555; */
 	padding-bottom: 30px;
 	text-align: left !important;
 }
@@ -206,7 +205,7 @@ input:focus {
 
 .tdOption {
 	font-size: 12px;
-	color: #555555;
+	/* color: #555555; */
 	font-weight: bold;
 	padding-right: 100px;
 }
@@ -417,20 +416,7 @@ section > h1 {
 	padding-left: 5px;
 	border-bottom: 1px solid;
 }
-#pagingul {
-	display: flex;
-	justify-content: center;
-}
-#paging ul > li {
-	margin-right: 10px;
-}
-#inquiry {
-	display: flex;
-	justify-content: center;
-}
-#inquiry ul > li{
-	margin-right: 10px;
-}
+
 
 
 
@@ -473,7 +459,7 @@ section > h1 {
 	border: none;
 }
 .qnaBtnColor {
-	color: white;
+	color: white !important;
 }
 .clickTitle {
 	cursor: pointer;
@@ -489,10 +475,25 @@ section > h1 {
 .inquirysContent .active {
 	display: block;
 }
-
-
-
-
-/* ========== */
-/* ========== */
-/* ========== */
+#pagingul a {
+	padding-right: 8px;
+}
+#pagingul {
+	display: flex;
+	justify-content: center;
+}
+#inquiry {
+	display: flex;
+	justify-content: center;
+}
+#pagingInq a {
+	padding-right: 8px;
+}
+#pagingInq {
+	display: flex;
+	justify-content: center;
+}
+#pagingInq {
+	display: flex;
+	justify-content: center;
+}

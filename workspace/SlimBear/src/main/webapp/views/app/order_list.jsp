@@ -17,8 +17,7 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="/resources/js/mypage.js"
-	charset="utf-8"></script>
+<script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/list.css">
 </head>

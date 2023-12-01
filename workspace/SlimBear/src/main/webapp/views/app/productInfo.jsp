@@ -8,7 +8,12 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/productInfo.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300&family=Open+Sans:wght@300&display=swap" rel="stylesheet"><script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
 </head>
@@ -33,8 +38,7 @@
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
-					<%-- <img alt="상품01" src="/resources/images/${product.main_image}"> --%>
-					<img alt="상품01" src="/resources/images/product07.gif"> 
+					<img alt="상품01" src="${product.main_image}">
 				</div>
 				<div></div>
 			</div>
@@ -261,40 +265,7 @@
 		<div class="DetailInfo">
 			<a name="productDetail"></a>
 			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo01.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo02.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo03.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo04.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo05.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo06.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo07.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo08.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo09.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo10.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo11.jpg">
-			</div>
-			<div>
-				<img alt="이미지" src="/resources/images/product_DetailInfo12.jpg">
+				<img alt="이미지" src="${product.detail_image}">
 			</div>
 		</div>
 		<!-- 클릭시 클릭한 영역으로 이동 -->
@@ -440,10 +411,12 @@
 					<!-- 리뷰데이터 표시할 부분 -->
 					<span id="displayCount"></span>
 					<div class="review-section">
+					
 					</div>
 			</section>
 					<!-- 페이징 표시할 부분 -->
 					<ul id="pagingul">
+					
 					</ul>
 		</div>
 		
@@ -472,6 +445,7 @@
 					</tbody>
 			</table>
 			<ul id="pagingInq">
+
 			</ul>
 			<sec:authorize access="isAuthenticated()">
 			<button class="qnaBtn">

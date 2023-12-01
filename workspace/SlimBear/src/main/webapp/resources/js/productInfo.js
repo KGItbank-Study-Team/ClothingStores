@@ -461,6 +461,8 @@ function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
     });
 }
 
+
+
 // 문의글, 문의답변 Ajax
 let totalDataInq; // 총 데이터 수
 let dataPerPageInq = 5; // 한 페이지에 나타낼 글 수
@@ -521,18 +523,18 @@ $(document).ready(function () {
 });
 // 목록 표시 함수
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
-function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
+function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) {
 
     console.log('3. inqList : ' + JSON.stringify(inqList));
     console.log('4. inqAnswerList : ' + JSON.stringify(inqAnswerList));
 
     let inquiryHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
-    currentPage = Number(currentPage); console.log('5. currentPage : ' + currentPage);
+    currentPageIng = Number(currentPageIng); console.log('5. currentPage : ' + currentPageIng);
     dataPerPageInq = Number(dataPerPageInq); console.log('6. dataPerPageInq : ' + dataPerPageInq);
 
 
-    for (var i = (currentPage - 1) * dataPerPageInq; i < Math.min(currentPage * dataPerPageInq, inqList.length); i++) {
+    for (var i = (currentPageIng - 1) * dataPerPageInq; i < Math.min(currentPageIng * dataPerPageInq, inqList.length); i++) {
         inquiryHtml += 
             '<tr>' +
             '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
@@ -551,6 +553,7 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
             '<td>&nbsp;</td>' +
             '</tr>';
         // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
+        console.log('inqAnswerList : ' + inqAnswerList);
         if (inqAnswerList[i]) {
             inquiryHtml += '<tr>' +
                 '<td>&nbsp;</td>' +
@@ -565,8 +568,8 @@ function displayDataInq(currentPage, dataPerPageInq, inqList, inqAnswerList) {
     $('.inquiry').html(inquiryHtml);
 }
 // 페이징 표시 함수
-function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqList) {
-    console.log('7. currentPage: ' + currentPage);
+function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, inqList) {
+    console.log('7. currentPage: ' + currentPageIng);
 
     totalDataInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
 
@@ -574,7 +577,7 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqL
         pageCountInq = totalPage;
     }
 
-    let pageGroup = Math.ceil(currentPage / pageCountInq); // 페이지 그룹
+    let pageGroup = Math.ceil(currentPageIng / pageCountInq); // 페이지 그룹
     let last = pageGroup * pageCountInq; // 화면에 보여질 마지막 페이지 번호
 
     if (last > totalPage) {
@@ -585,26 +588,29 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqL
     let next = last + 1;
     let prev = first - 1;
 
-    let pageHtml = "";
+    let inquiry2Html = "";
 
     if (prev > 0) {
         pageHtml += '<li><a href="#" id="prev"> 이전 </a></li>';
     }
 
     // 페이징 번호 표시
-    for (var i = first; i <= last; i++) {
-        if (currentPage == i) {
-            pageHtml += '<li><a href="#" id="' + i + '">' + i + '</a></li>';
+    for (var j = first; j <= last; j++) {
+        console.log('문의 currentPage : ' + currentPageIng);
+        if (currentPageIng == j) {
+            inquiry2Html += '<li><a href="#" id="P' + j + '">' + j + '</a></li>';
         } else {
-            pageHtml += '<li><a href="#" id="' + i + '">' + i + '</a></li>';
+            inquiry2Html += '<li><a href="#" id="P' + j + '">' + j + '</a></li>';
         }
     }
 
     if (last < totalPage) {
-        pageHtml += '<li><a href="#" id="next"> 다음 </a></li>';
+        inquiry2Html += '<li><a href="#" id="next"> 다음 </a></li>';
     }
 
-    // $("#pagingul").html(pageHtml);
+    $("#pagingInq").html(inquiry2Html);
+
+
     // let displayCount = "";
     // displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalDataInq + "건";
     // $("#displayCount").text(displayCount);
@@ -615,17 +621,17 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPage, inqL
         var uid = urlParams.get("p");
         event.preventDefault(); // 기본 동작 중단
         //alert('reviewList = ' + JSON.stringify(dataList));
-        let $id = $(this).attr("id");
+        let $id2 = $(this).attr("id2");
         selectedPage = $(this).text();
 
-        if ($id == "next") selectedPage = next;
-        if ($id == "prev") selectedPage = prev;
+        if ($id2 == "next") selectedPage = next;
+        if ($id2 == "prev") selectedPage = prev;
 
         // 전역변수에 선택한 페이지 번호를 담는다.
         globalCurrentPageInq = selectedPage;
         // 페이징 표시 재호출
-        paging(totalDataInq, dataPerPageInq, pageCountInq, selectedPage, inqList);
+        pagingInq(totalDataInq, dataPerPageInq, pageCountInq, selectedPage, inqList);
         // 글 목록 표시 재호출
-        displayData(selectedPage, dataPerPageInq, inqList);
+        displayDataInq(selectedPage, dataPerPageInq, inqList, inqAnswerList);
     });
 }

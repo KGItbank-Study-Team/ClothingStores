@@ -176,6 +176,8 @@ $(document).ready(function () {
 });
 
 
-
-
-
+// 리뷰 작성 창
+$('.fTrGbC').click(function(){
+    console.log('클릭');
+    window.open("/app/reviewWrite", "리뷰 쓰기", "width=400, height=300, top=50, left=50");
+})

@@ -34,6 +34,7 @@ import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
+import com.kgitbank.slimbear.vo.OrderListVO;
 
 @Controller
 public class SanghyukController {
@@ -48,7 +49,7 @@ public class SanghyukController {
 		// 제품 상세 정보 조회
 		ProductDTO product = sanghService.getProductByUid(productUid);	
 		System.out.println("productUid: " + productUid);
-		System.out.println("product: " + product);
+		System.out.println("상품 정보 : " + product);
 		// 잘못된 UID일 경우 메인페이지로
 		if(product == null) {
 			return "redirct:/";
@@ -251,5 +252,20 @@ public class SanghyukController {
 	@GetMapping(value = "/product/write")
 	public String getBoardWriteForm() {
 		return "productWrite";
+	}
+	
+	@RequestMapping("member/reviewWrite")
+	public String orderList(Authentication authentication, Model model) {
+		System.out.println("====오더리스트 조회 메서드 실행====");
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		long memberUid = user.getUid();
+		System.out.println(memberUid);
+		System.out.println(user.getUsername());
+
+		List<OrderListVO> vo = sanghService.getOrderListInfo(memberUid);
+		model.addAttribute("orderList", vo);
+		model.addAttribute("orderList2", vo);
+
+		return "reviewWrite";
 	}
 }
