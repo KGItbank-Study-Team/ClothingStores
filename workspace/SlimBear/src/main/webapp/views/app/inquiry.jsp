@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xicons@2.0.2/xicons.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
-<title>INQUIRY</title>
+<title>슬림베어</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script defer src="/resources/js/inquiry.js"></script>
@@ -21,7 +21,6 @@
     String categoryNoParam = request.getParameter("category_no");
     String categoryNo = (categoryNoParam != null) ? categoryNoParam : "PRODUCT";
 %>
-
 <script type="text/javascript">
     $(document).ready(function() {
         // 현재 카테고리에 해당하는 메뉴 활성화
@@ -38,16 +37,6 @@
             $(".subnavi a.qna01").addClass("on");
         }
     });
-</script>
-<script>
-//     $(document).ready(function () {
-//         $(".page-link").on("click", function (e) {
-//             e.preventDefault();
-//             var currentPage = $(this).data("page");
-//             var categoryNo = $(this).data("category");
-//             window.location.href = "/board/inquiry?category_no=" + categoryNo + "&currentPage=" + currentPage;
-//         });
-//     });
 </script>
 </head>
 <body>
@@ -121,7 +110,6 @@
 								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
-						
 						
 						<!-- 문의게시글 목록 -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">

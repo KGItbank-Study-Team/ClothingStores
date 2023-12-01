@@ -13,7 +13,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
-<title>BOARD NOTICE</title>
+<title>슬림베어</title>
 </head>
 
 <body>
@@ -98,6 +98,12 @@
                                             <div class="fr-view fr-view-article">
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
+												<c:if test="${not empty notices.main_image}">
+                                                	<img alt="상품01" src="${notices.main_image}">
+                                                </c:if>
+                                                </p>
+                                                <p><br></p>
+                                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
                                                 	<strong style="font-weight: bolder;">${notices.content}</strong>
                                                 </p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
@@ -109,115 +115,34 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="attach displaynone">
-                                    <th scope="row">FILE</th>
-                                    <td></td>
-                                </tr>
-                                <tr class="displaynone ">
-                                    <th scope="row">PASSWORD</th>
-                                    <td><input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg=""
-                                            onkeydown="if (event.keyCode == 13 || event.which == 13) { return false; }"
-                                            value="" type="password" /> 
-                                        <span class="ec-base-help txtInfo">수정 및 삭제하려면 비밀번호를 입력하세요.</span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
                     <div class="ec-base-button ">
-                        <span class="gLeft">
-                            <span class="displaynone">
-                                <a href="#none" onclick="" class="btnNormalFix sizeS admin displaynone"></a>
-                                <a href="#none" onclick="" class="btnNormalFix sizeS admin displaynone"></a>
-                                <a href="#none" onclick="" class="btnNormalFix sizeS ">스팸신고</a>
-                                <a href="#none" onclick="" class="btnNormalFix sizeS ">스팸해제</a>
-                            </span>
-                            <a href="/app/board/notice" class="btnNormalFix sizeS">LIST</a>
-                        </span>
+                    <span class="gLeft">
+                        <a href="/app/board/notice" class="btnNormalFix sizeS">LIST</a>
+                    </span>
                         
-                        <span class="gRight">
-                        <c:set var="isAuthor" value="true" /> <!-- 임시로 delete, edit 을 보이게 함 -->
-						    <c:choose>
-						        <c:when test="${isAuthor}">
-						            <a href="#none" onclick="BOARD_READ.article_delete('BoardDelForm','1');" class="btnNormalFix sizeS">DELETE</a>
-						            <a href="/board/free/modify.html?board_act=edit&no=1724624&board_no=1" class="btnEmFix sizeS">EDIT</a>
-						        </c:when>
-						        <c:otherwise>
-						            <!-- 작성자가 아니면 표시하지 않음 -->
-						        </c:otherwise>
-						    </c:choose>
-						</span>
-                      <!-- <span class="gRight">
-                            <a href="#none" onclick="BOARD_READ.article_delete('BoardDelForm','1');"
-                                class="btnNormalFix sizeS displaynone">DELETE</a>
-                            <a href="/board/free/modify.html?board_act=edit&no=1724624&board_no=1"
-                                class="btnEmFix sizeS displaynone">EDIT</a>
-                            <a href="/board/free/reply.html" class="btnSubmitFix sizeS displaynone">REPLY</a>
-                        </span> -->
+                    <span class="gRight">
+                    <c:set var="isAuthor" value="true" /> <!-- when에 a태그를 옮기면 delete, edit 보임 -->
+					<c:choose>
+						<c:when test="${isAuthor}">
+						</c:when>
+						<c:otherwise>
+							<!-- 작성자가 아니면 표시하지 않음 -->
+						    <a href="#none" onclick="BOARD_READ.article_delete('BoardDelForm','1');" class="btnNormalFix sizeS">DELETE</a>
+						    <a href="/board/free/modify.html?board_act=edit&no=1724624&board_no=1" class="btnEmFix sizeS">EDIT</a>
+					    </c:otherwise>
+					</c:choose>
+					</span>
                     </div>
-               	</div>
-              </form>
-           </div>
-           
-           <div class="xans-element- xans-board xans-board-commentpackage-1002 xans-board-commentpackage xans-board-1002">
-               <form id="commentForm" name="" action="/exec/front/Board/CommentUpdate/1" method="post" target="_self"
-                   enctype="multipart/form-data" style="display:none">
-	               <input id="board_no" name="board_no" value="1" type="hidden" />
-	               <input id="no" name="no" value="1724624" type="hidden" />
-	               <input id="comment_no" name="comment_no" value="" type="hidden" />
-	               <input id="member_id" name="member_id" value="" type="hidden" />
-                   
-                   <div class="xans-element- xans-board xans-board-commentform-1002 xans-board-commentform xans-board-1002">
-                       <fieldset>
-                        <legend>댓글 수정</legend>
-                        <p>비밀번호 : <input id="comment_password" name="comment_password" fw-filter="isFill"
-                                fw-label="댓글비밀번호" fw-msg="" value="" type="password" />
-                                <span class="secret displaynone"><label>비밀댓글</label></span></p>
-                        <div class="view">
-                            <textarea id="comment_modify" name="comment_modify" fw-filter="isFill" fw-label="댓글내용"
-                            		fw-msg=""></textarea>
-                            <span class="submit">
-                                <a href="#none" class="btnEm sizeL"
-                                    onclick="BOARD_COMMENT.comment_update_ok('commentForm');">EDIT</a>
-                                <a href="#none" class="btnNormal sizeL"
-                                    onclick="BOARD_COMMENT.comment_cancel_ok('commentForm');">CANCEL</a>
-                            </span>
-                        </div>
-                        <p class="displaynone"> / byte</p>
-                   	</fieldset>
-                   </div>
-               </form>
-               <form id="commentSecretForm" name="" action="/exec/front/Board/CommentSecret/1" method="post" target="_self"
-                   enctype="multipart/form-data" style="display:none">
-                   <input id="board_no" name="board_no" value="1" type="hidden" />
-                   <!-- Add more input fields here if needed -->
-                   <input id="comment_no" name="comment_no" value="" type="hidden" />
-               	<input id="pass_check" name="pass_check" value="F" type="hidden" />
-                   
-                   <div class="xans-element- xans-board xans-board-commentformsecret-1002 xans-board-commentformsecret xans-board-1002">
-                       <p>비밀번호 : <input id="secure_password" name="secure_password" fw-filter="isFill" fw-label="댓글비밀번호"
-                           fw-msg="" value="" type="password" /> <a href="#none" class="btnNormal"
-                           onclick="BOARD_COMMENT.show_secret_comment('commentSecretForm');">OK</a>
-                       <a href="#none" class="btnNormal"
-                           onclick="BOARD_COMMENT.hide_secret_comment_form('commentSecretForm');">CANCEL</a>
-                   		</p>
-                   </div>
-               </form>
-           </div>
-           
-           <div class="xans-element- xans-board xans-board-movement-1002 xans-board-movement xans-board-1002">
-               <ul>
-                   <li class="prev displaynone">
-                       <strong>이전글</strong><a href="/article/notice/1/$3/"></a>
-                   </li>
-                   <li class="next">
-                       <strong>다음글</strong><a href="/article/notice/1/1711077/">[하우스앤드] 11월의 쇼룸리스트</a>
-                   </li>
-               </ul>
-           </div>
-       </div>
-       <jsp:include page="footer/footer.jsp" />
-   </div>
+                </div>
+            </form>
+        </div>
+    </div>
+	<jsp:include page="footer/footer.jsp" />
+</div>
 </div>
 </body>
 </html>

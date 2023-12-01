@@ -31,9 +31,24 @@ public class YangBoardServiceImpl {
 	private FaqDAO faqDAO;
 	
 	// 공지사항
-	public List<NoticeDTO> getNoticeList(int priority) {
-		return noticeDAO.getNoticeList(priority);
+	public List<NoticeDTO> getNoticeList(Integer offset, Integer pageSize, int currentPage) {
+		offset = (currentPage - 1) * pageSize;
+
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("currentPage", currentPage);
+		paramMap.put("offset", offset);
+		paramMap.put("pageSize", pageSize);
+
+		System.out.println(paramMap);
+        return noticeDAO.getNoticeList(paramMap);
+//		return noticeDAO.getNoticeList(priority);
 	}
+	public int getTotalNotice() {
+    	int total = noticeDAO.getTotalNotice();
+    	System.out.println(total);
+    	return total;
+    }
 	
 	// 공지사항 상세페이지조회
     public NoticeDTO enterNoticeDetail(Long id) {

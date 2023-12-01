@@ -333,6 +333,12 @@
 		<!-- SELECT * FROM notice -->
 		SELECT * FROM notice WHERE priority != 0 ORDER BY FIELD(priority, 1,
 		2) ASC, CASE WHEN priority = 2 THEN reg_date END DESC
+		LIMIT #{pageSize} OFFSET #{offset};
+	</select>
+	
+	<select id="SELECT_CNT_NOTICE_LIST" resultType="int">
+		SELECT COUNT(*)
+		FROM notice;
 	</select>
 	
 	<!-- notice 상세페이지 조회 -->
@@ -351,7 +357,7 @@
 	<insert id="INSERT_NOTICE">
 		INSERT INTO notice
 		(title, content, reg_date, priority, type, writer)
-		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer}, 0)
+		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, #{writer}, 0, #{main_image})
 		WHERE uid=#{uid}
 	</insert>
 

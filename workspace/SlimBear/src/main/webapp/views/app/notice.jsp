@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/notice.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/xeicon.min.css"> -->
-<title>NOTICE</title>
+<title>슬림베어</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script defer src="/resources/js/notice.js"></script>
 </head>
@@ -36,8 +36,7 @@
 						</ol>
 					</div>
 					<div class="titleArea">
-						<h2><font color="#555555">NOTICE</font></h2>
-						<p><!-- 부제목 --></p>
+						<h2><font color="#555555">공지사항</font></h2>
 					</div>
 					<p class="imgArea"></p>
 				</div>
@@ -70,13 +69,10 @@
 							class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
 							<tr style="">
 								<th scope="col">NO</th>
-								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
 								<th scope="col">VIEW</th>
 								<th scope="col" class="">DATE</th>
-								<th scope="col" class="displaynone">HIT</th>
-								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
 						
@@ -115,20 +111,9 @@
 						            </td>
 						            <td>${board.writer}</td>
 						            <td>${board.view_cnt}</td>
-<%-- 						            <td>${board.reg_date}</td> --%>
 						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
 						        
-						         <script>
-								     var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
-								     var currentDateMillis = new Date().getTime();
-								     var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
-								     var imageId = "newImage${loop.index}";
-								
-								     if (currentDateMillis - regDateMillis > oneWeekInMillis) {
-								         document.getElementById(imageId).style.display = 'none';
-								     }
-							    </script>
 						        
 						    </c:forEach>
 						</tbody>
@@ -137,56 +122,99 @@
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
 				</div>
 				
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 					<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
 						<span class="gRight"> 
-<!-- 							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a> -->
+							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a>
 						</span>
 					</div>
-				</sec:authorize>
+				</sec:authorize> --%>
 			</div>
-				
-			<div class="xans-element- xans-board xans-board-paging-1002 xans-board-paging xans-board-1002 ec-base-paginate">
-				<a href="#"><img src="/resources/images/icon_prev2.png" /></a>
+			
+			<!-- 페이지 수 계산 -->
+			<div class="xans-element- xans-product xans-product-normalpaging ec-base-paginate">
 				<ol>
-					<li class="xans-record-">
-						<a href="#" class="this">1</a></li>
-					<!-- <li class="xans-record-">
-						<a href="#" class="other">2</a></li> -->
+					<!-- Previous Page Button -->
+					<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+						<a class="page-link"
+						href="/app/board/notice?board_no=${pageNumber}&currentPage=${currentPage - 1}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a>
+					</li>
+					<!-- Page Number Buttons -->
+					<c:forEach begin="${startPage }" end="${endPage}" var="pageNumber">
+						<li class="xans-record-"><c:choose>
+								<c:when test="${pageNumber eq currentPage}">
+									<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
+									<a
+										href="/app/board/notice?board_no=${pageNumber}&currentPage=${pageNumber}"
+										class="this">${pageNumber}</a>
+								</c:when>
+								<c:otherwise>
+									<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
+									<a
+										href="/app/board/notice?board_no=${pageNumber}&currentPage=${pageNumber}"
+										class="other">${pageNumber}</a>
+								</c:otherwise>
+							</c:choose></li>
+					</c:forEach>
+					<!-- Next Page Button -->
+					<li
+						class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+						<a class="page-link"
+						href="/app/board/notice?board_no=${pageNumber}&currentPage=${currentPage + 1}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a>
+					</li>
 				</ol>
-				<a href="?board_no=1&page=2"><img src="/resources/images/icon_next2.png" /></a>
+				<!-- 마지막 페이지 여부 확인 후 출력 -->
+				<c:if test="${currentPage eq totalPages && !hasNextBlock}">
+					<li class="page-item disabled"><span class="page-link">마지막
+							페이지입니다.</span></li>
+				</c:if>
 			</div>
-			
-			
-			<!-- <form id="boardSearchForm" name="" action="/board/notice/1"
-				method="get" target="_top" enctype="multipart/form-data">
-				<input id="board_no" name="board_no" value="1" type="hidden" />
-				<input id="page" name="page" value="1" type="hidden" />
-				<input id="board_sort" name="board_sort" value="" type="hidden" />
-				<div class="xans-element- xans-board xans-board-search-1002 xans-board-search xans-board-1002 ">
-					<fieldset class="boardSearch">
-						<legend>게시물 검색</legend>
-						<p>
-						<select id="search_key" name="search_key">
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<option value="writer_name">글쓴이</option>
-							<option value="member_id">아이디</option>
-							<option value="nick_name">별명</option>
-						</select>
-						<input id="searchs" name="searchs" class="searchs" placeholder="" 
-								value="" type="text" />
-						<a href="#" class="btnEmFix"
-							onclick="BOARD.form_submit('boardSearchForm');">FIND</a>
-						</p>
-					</fieldset>
-				</div>
-			</form> -->
 			
 		</div>
 		<jsp:include page="footer/footer.jsp" />
 	</div>
 </div>
+
+<script>
+	var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
+	var currentDateMillis = new Date().getTime();
+	var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
+	var imageId = "newImage${loop.index}";
+	
+	if (currentDateMillis - regDateMillis > oneWeekInMillis) {
+	    document.getElementById(imageId).style.display = 'none';
+	}
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = ${currentPage};
+        var totalPages = ${totalPages};
+        var hasNextBlock = ${hasNextBlock};
+
+        var prevPageButton = document.querySelector('.page-link[aria-label="Previous"]');
+        var nextPageButton = document.querySelector('.page-link[aria-label="Next"]');
+        var firstPageMessage = document.querySelector('.first-page-message');
+        var lastPageMessage = document.querySelector('.last-page-message');
+
+        prevPageButton.addEventListener('click', function (event) {
+            if (currentPage === 1) {
+                alert('첫 번째 페이지입니다.');
+                event.preventDefault(); // 이전 페이지로 이동하지 않도록 막음
+            }
+        });
+
+        nextPageButton.addEventListener('click', function (event) {
+            if (currentPage === totalPages && !hasNextBlock) {
+                alert('마지막 페이지입니다.');
+                event.preventDefault(); // 다음 페이지로 이동하지 않도록 막음
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

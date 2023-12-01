@@ -29,10 +29,40 @@ public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
 	
-	// 공지사항
+	// 공지사항목록
 	@RequestMapping("/board/notice")
-	public String getBoardNoticeList(Model model) {
-		model.addAttribute("notices", boardService.getNoticeList(0));
+	public String getBoardNoticeList(
+    		@RequestParam(name = "currentPage", defaultValue = "1", required = false) int currentPage, Integer offset, Integer pageSize, Model model) {
+		
+		if (offset == null) {
+			offset = 0;
+		}
+		pageSize = 15; // 페이지 당 아이템 수
+		
+		// 페이징에 관련된 정보 추가
+		int totalItems = boardService.getTotalNotice(); // 전체아이템 수
+		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
+		int pageBlockSize = 5; // 보여질 페이지 블록 크기
+
+		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
+		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
+		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+
+		// 다음 페이지 블록이 있는지 여부
+		boolean hasNextBlock = endPage < totalPages;
+		
+		// 서비스 메서드 호출 시에 offset과 pageSize를 전달
+	    List<NoticeDTO> notices = boardService.getNoticeList((currentPage - 1) * pageSize, pageSize, currentPage);
+		
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("hasNextBlock", hasNextBlock);
+        model.addAttribute("totalItems", totalItems);
+        // 'notices' 변수를 모델에 추가
+        model.addAttribute("notices", notices);
+//		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "notice";
 	}
 	
@@ -46,7 +76,7 @@ public class YangController {
 	
 	@RequestMapping("/article/notice")
 	public String getBoardNotice(Model model) {
-		model.addAttribute("notices", boardService.getNoticeList(0));
+		model.addAttribute("notices", boardService.getNoticeList(0, null, 0));
 		return "board_notice";
 	}
 	

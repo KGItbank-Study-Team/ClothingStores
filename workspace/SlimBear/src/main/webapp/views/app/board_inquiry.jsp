@@ -15,7 +15,7 @@
 <script defer src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <script defer src="/resources/js/boards.js"></script>
-<title>BOARD INQUIRY</title>
+<title>슬림베어</title>
 </head>
 
 <body>
