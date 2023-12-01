@@ -276,3 +276,7 @@ code {
 .text-slide > li {
 	font-weight: lighter;
 }
+
+#users-container {
+    background-color: white;
+}

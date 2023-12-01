@@ -793,7 +793,7 @@ html {
 body, code {
 	font: 13px 'Outfit', 'Noto Sans KR', Dotum, AppleGothic, sans-serif;
 	color: #3f3f3f;
-	background: #f6f4ee;
+	background: #ffffff;
 	letter-spacing: 0;
 	line-height: 1.7;
 }
@@ -3628,7 +3628,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background: #f6f4ee;
+	background: #ffffff;
 	min-width: 1400px;
 }
 
