@@ -10,6 +10,7 @@ import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.vo.ReviewVO;
 
@@ -74,16 +75,22 @@ public class RSYAdminServiceImpl {
 		rsyAdminDAO.setAnswerStatus(inqr_uid);
 		rsyAdminDAO.addOrUpdateAnswer(answer);
 	}
-	
+
 	// 문의숨김
 	// 문의삭제
 	public void deleteInquiry(InquiryDTO data) {
 		Long uid = data.getUid();
 		rsyAdminDAO.deleteInquiry(uid);
 	}
+
 	// 리뷰삭제
-		public void deleteReview(ReviewDTO data) {
-			Long uid = data.getUid();
-			rsyAdminDAO.deleteReview(uid);
-		}
+	public void deleteReview(ReviewDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteReview(uid);
+	}
+
+	// 공지사항
+	public List<NoticeDTO> getNoticeList() {
+		return rsyAdminDAO.getNoticeList();
+	}
 }

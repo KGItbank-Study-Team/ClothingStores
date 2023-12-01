@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
+import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.vo.ReviewVO;
 
@@ -20,6 +21,7 @@ public class RSYAdminDAO {
 	public RSYAdminDTO getComment(Long reviewUID) {
 		return template.selectOne("com.slimbear.mapper.Board.SELECT_COMMENT_BY_REVIEW_UID", reviewUID);
 	}
+
 	// 리뷰 리스트 조회
 	public List<ReviewVO> getReviewList() {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST_ADMIN");
@@ -49,23 +51,29 @@ public class RSYAdminDAO {
 	public int addOrUpdateAnswer(InquiryAnswerDTO answer) {
 		return template.insert("com.slimbear.mapper.Board.ADD_OR_UPDATE_ANSWER", answer);
 	}
-	
+
 	// 리뷰 답변 상태 수정
 	public void setAnswerStatus(Long inqr_uid) {
 		template.update("com.slimbear.mapper.Board.UPDATE_ANSWER_STATUS", inqr_uid);
 	}
-	
+
 	// 문의 답변 상태 수정
 	public void setCommentStatus(Long reviewUID) {
 		template.update("com.slimbear.mapper.Board.UPDATE_COMMENT_STATUS", reviewUID);
 	}
-	
+
 	// 문의 숨김
 	// 문의 삭제
 	public void deleteInquiry(Long uid) {
 		template.delete("com.slimbear.mapper.Board.DELETE_INQUIRY", uid);
 	}
+
 	public void deleteReview(Long uid) {
 		template.delete("com.slimbear.mapper.Board.DELETE_REVIEW", uid);
+	}
+
+	// Notice 리스트 조회
+	public List<NoticeDTO> getNoticeList() {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL"); 
 	}
 }

@@ -19,6 +19,7 @@ import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.admin.service.RSYAdminServiceImpl;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.service.YangBoardServiceImpl;
@@ -132,4 +133,18 @@ public class RSYAdminController {
     	rsyAdminService.deleteReview(data);
         return ResponseEntity.ok("삭제가 완료되었습니다.");
     }
+    
+    //공지사항관리
+    @RequestMapping("home/board/notice")
+	public String boardNotice(Model model) {
+
+		model.addAttribute("noticeList", rsyAdminService.getNoticeList());
+		return "tables-board-notice";
+	}
+    @GetMapping("notice/list")
+	@ResponseBody
+	public List<NoticeDTO> boardNoticeist() {
+		List<NoticeDTO> noticeList = rsyAdminService.getNoticeList();
+		return noticeList;
+	}
 }
