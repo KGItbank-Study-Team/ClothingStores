@@ -192,7 +192,7 @@
 				            if (result) {
 				                var comment = result;
 				                html.push('<tr>');
-				                html.push('<td>' + (comment.content ? '답변완료' : '답변 미등록') + '</td>');
+				                html.push('<td>' + (result.status === 'SUCCESS' ? '답변완료' : '미등록') + '</td>');
 
 				               
 				                html.push('</tr>');

@@ -32,6 +32,11 @@
 		SELECT * FROM
 		productReview
 	</select>
+	<update id="UPDATE_ANSWER_STATUS"> 
+		UPDATE inquiry
+		SET status = 'SUCCESS'
+		WHERE uid = #{inqr_uid};
+	 </update>
 
 	<!-- 관리자 리뷰 -->
 	<insert id="ADD_OR_UPDATE_ANSWER">
