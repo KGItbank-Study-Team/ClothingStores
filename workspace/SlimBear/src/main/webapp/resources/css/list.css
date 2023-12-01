@@ -1,3 +1,9 @@
+/* 달력인풋 사이즈 */
+.huan {
+  width: 100px;
+}
+/* 엔드달력인풋사이즈 */
+
 /* 주문상세! */
 .cpmwZc {
     color: rgb(17, 17, 17);
@@ -1176,7 +1182,7 @@ input[type=radio], input[type=checkbox] {
 }
 
 input[type=text], input[type=password] {
-	height: 42px;
+	height: 30px;
 	line-height: 40px;
 	padding: 0 15px 0;
 	background: transparent;

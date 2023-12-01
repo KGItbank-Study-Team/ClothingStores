@@ -57,10 +57,10 @@
 							<caption>게시물 관리 목록</caption>
 							<colgroup
 								class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
+								<col style="width: 30px;">
+								<col style="width: 350px;">
 								<col style="width: 100px;">
-								<col style="width: auto;">
-								<col style="width: 100px;">
-								<col style="width: auto;">
+								<col style="width: 150px;">
 								<col style="width: 125px;">
 								<col style="width: 150px;">
 							</colgroup>
@@ -113,7 +113,7 @@
 				<div
 					class="xans-element- xans-myshop xans-myshop-boardlistpaging ec-base-paginate">
 					<c:if test="${not empty reviewList}">
-						<a href="?page=${currentPage - 1}&perPage=${perPage}"><img
+						<a href="javascript:void(0);" onclick="prevPage();"><img
 							src="/resources/images/icon_prev2.png"></a>
 						<ol>
 							<c:forEach begin="1" end="${totalPages}" var="pageNum">
@@ -126,10 +126,24 @@
 									</c:if></li>
 							</c:forEach>
 						</ol>
-						<a href="?page=${currentPage + 1}&perPage=${perPage}"><img
+						<a href="javascript:void(0);" onclick="nextPage();"><img
 							src="/resources/images/icon_next2.png"></a>
 					</c:if>
 				</div>
+
+				<script>
+    function prevPage() {
+        if (${currentPage} > 1) {
+            window.location.href = "?page=" + (${currentPage} - 1) + "&perPage=${perPage}";
+        }
+    }
+
+    function nextPage() {
+        if (${currentPage} < ${totalPages}) {
+            window.location.href = "?page=" + (${currentPage} + 1) + "&perPage=${perPage}";
+        }
+    }
+</script>
 
 			</div>
 		</div>

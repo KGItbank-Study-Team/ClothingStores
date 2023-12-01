@@ -10,10 +10,17 @@
 <%@ include file="header/header.jsp"%>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="/resources/css/list.css">
+<title>주문내역</title>
+<!-- jQuery UI -->
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="/resources/js/mypage.js"
 	charset="utf-8"></script>
-<title>주문내역</title>
+
+<link rel="stylesheet" type="text/css" href="/resources/css/list.css">
 </head>
 
 <body>
@@ -22,30 +29,22 @@
 			<div id="contents">
 				<div id="myMenu" class="xans-element- xans-myshop xans-myshop-main ">
 					<ul>
-						<li class="order">
-                            <a href="/app/member/myPage/orderList"><span>주문내역</span></a>
-                        </li>
-                        <li class="wishlist">
-                            <a href="/app/member/myPage/modify"><span>프로필</span></a>
-                        </li>
-                        <li class="mileage">
-                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
-                        </li>
-                        <li class="coupon ">
-                            <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
-                        </li>
-                        <li class="wishlist">
-                            <a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
-                        </li>
-                        <li class="board">
-                            <a href="/app/member/myPage/boardList"><span>문의 관리</span></a>
-                        </li>
-                        <li class="board">
-                            <a href="/app/member/myPage/reviewList"><span>리뷰 관리</span></a>
-                        </li>
-                        <li class="board">
-                            <a href="/app/member/myPage/addr"><span>배송지 관리</span></a>
-                        </li>
+						<li class="order"><a href="/app/member/myPage/orderList"><span>주문내역</span></a>
+						</li>
+						<li class="wishlist"><a href="/app/member/myPage/modify"><span>프로필</span></a>
+						</li>
+						<li class="mileage"><a href="/app/member/myPage/mileage"><span>적립금</span></a>
+						</li>
+						<li class="coupon "><a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
+						</li>
+						<li class="wishlist"><a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
+						</li>
+						<li class="board"><a href="/app/member/myPage/boardList"><span>문의
+									관리</span></a></li>
+						<li class="board"><a href="/app/member/myPage/reviewList"><span>리뷰
+									관리</span></a></li>
+						<li class="board"><a href="/app/member/myPage/addr"><span>배송지
+									관리</span></a></li>
 					</ul>
 				</div>
 
@@ -58,8 +57,7 @@
 					<p>주문상세보기를 클릭 시 상품 상세내역을 확인하실 수 있습니다.</p>
 				</div>
 
-				<div
-					class="xans-element- xans-myshop xans-myshop-orderhistoryhead tyt">
+				<div class="xans-element- xans-myshop xans-myshop-orderhistoryhead tyt">
 					<fieldset class="ec-base-box">
 						<legend>검색기간설정</legend>
 						<div class="stateSelect ">
@@ -72,28 +70,19 @@
 								<option value="order_return">반품</option>
 							</select>
 						</div>
-						<span class="period"> <a href="#none" class="btnNormal"
-							days="00"><img src="/resources/images/btn_date1.gif"></a> <a
-							href="#none" class="btnNormal" days="07"><img
-								src="/resources/images/btn_date2.gif"></a> <a href="#none"
-							class="btnNormal" days="30"><img
-								src="/resources/images/btn_date3.gif"></a> <a href="#none"
-							class="btnNormal" days="90"><img
-								src="/resources/images/btn_date4.gif"></a> <a href="#none"
-							class="btnNormal" days="180"><img
-								src="/resources/images/btn_date5.gif"></a>
-						</span> <input id="history_start_date" name="history_start_date"
-							class="fText hasDatepicker" readonly="readonly" size="10"
-							value="2023-08-02" type="text">
-						<button type="button" class="ui-datepicker-trigger">
-							<img src="/resources/images/ico_cal.gif" alt="..." title="...">
+						<input id="start_date" name="start_date" readonly="readonly" size="10"
+							value="2023-08-02" type="text" class="huan">
+						<!-- 처음날짜 버튼 -->
+						<button type="button" id="start_date_button">
+							<img src="/resources/images/ico_cal.gif" alt="...">
 						</button>
-						~ <input id="history_end_date" name="history_end_date"
-							class="fText hasDatepicker" readonly="readonly" size="10"
-							value="2023-10-31" type="text">
-						<button type="button" class="ui-datepicker-trigger">
-							<img src="/resources/images/ico_cal.gif" alt="..." title="...">
+						~ <input id="end_date" name="end_date" readonly="readonly" size="10"
+							value="2023-10-31" type="text" class="huan">
+						<!-- 마지막날짜 버튼 -->
+						<button type="button" id="end_date_button">
+							<img src="/resources/images/ico_cal.gif" alt="...">
 						</button>
+						<!-- 조회버튼 -->
 						<input alt="조회" id="order_search_btn" type="image"
 							src="/resources/images/btn_search.gif">
 					</fieldset>
@@ -104,11 +93,6 @@
 				</div>
 
 				<br> <br>
-
-
-
-
-
 
 				<c:forEach var="item" items="${orderList}">
 					<div class="gKYVxm">
@@ -311,9 +295,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
 
 	<%@ include file="footer/footer.jsp"%>
 </body>

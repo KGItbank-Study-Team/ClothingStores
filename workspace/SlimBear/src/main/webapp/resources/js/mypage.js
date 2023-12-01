@@ -148,3 +148,34 @@ function changePage(page) {
     selectedPageElement.classList.add('this');
 }
 
+//주문내역 달력
+$(document).ready(function () {
+    function toggleDatePicker(inputId) {
+        var datePicker = $("#" + inputId);
+
+        if (datePicker.datepicker("widget").is(":visible")) {
+            datePicker.datepicker("hide");
+        } else {
+            datePicker.datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: false, //월 설정
+                changeYear: false,	//년도 설정
+                showAnim: 'slideDown', // 위아래로 슬라이드 효과
+                duration: 500 // 슬라이드 지속 시간 (밀리초)
+            }).datepicker("show");
+        }
+    }
+
+    $("#start_date_button").on("click", function () {
+        toggleDatePicker("start_date");
+    });
+
+    $("#end_date_button").on("click", function () {
+        toggleDatePicker("end_date");
+    });
+});
+
+
+
+
+

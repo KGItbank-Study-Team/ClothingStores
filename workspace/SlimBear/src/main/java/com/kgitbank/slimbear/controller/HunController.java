@@ -198,7 +198,7 @@ public class HunController {
 	@RequestMapping("member/myPage/reviewList")
 	public String reviewList(
 	    @RequestParam(value = "page", defaultValue = "1") int page,
-	    @RequestParam(value = "perPage", defaultValue = "10") int perPage,
+	    @RequestParam(value = "perPage", defaultValue = "5") int perPage,
 	    Authentication authentication, Model model) {
 	    
 	    SecurityUser user = (SecurityUser) authentication.getPrincipal();
