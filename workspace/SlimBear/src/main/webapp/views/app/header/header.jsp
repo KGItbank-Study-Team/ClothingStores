@@ -102,7 +102,7 @@
 					<ul>
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication var="user" property="principal" />
-							<li>${user.username} 님 안녕하세요! 😊</li>
+							<li class="menu-item">${user.username} 님 안녕하세요! 😊</li>
 							<li class="menu-item">
 								<a href="#">
 									<img src="/resources/images/icon_user.png" alt="user">
@@ -123,7 +123,7 @@
 								</ul>
 							</li>
 						</sec:authorize>
-						<li>
+						<li class="guraya">
 						<a href="/app/cart"><img class="cartPosi"
 							src="/resources/images/icon_cart.png" alt="cart"></a>
 						</li>

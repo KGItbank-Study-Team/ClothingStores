@@ -135,7 +135,7 @@ header {
 }
 .mainMenu {
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   align-items: center;
   top: 4%;

@@ -160,14 +160,6 @@ header {
     font: 13px 'Outfit', 'Noto Sans KR', Dotum, AppleGothic, sans-serif;
 }
 
-.mainMenu {
-    width: 100%;
-    position: fixed;
-    display: flex;
-    align-items: center;
-    top: 4%;
-}
-
 .menu-item {
     float: left;
     position: relative;
