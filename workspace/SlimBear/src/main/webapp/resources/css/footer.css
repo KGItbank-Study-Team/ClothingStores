@@ -1,27 +1,40 @@
 footer {
-    padding: 0px;
-    font-size: 10px;
-    color: #000;
-    overflow: hiddlen;
-    white-space: nowrap;
-    width: 100%;
-    margin: 150px auto 0;
-    background: #ede5dd; !important
+	padding: 0px;
+	font-size: 10px;
+	color: #000;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+	margin: 150px auto 0;
+	background: #ede5dd !important;
+	color: #2c2c2c;
+}
+.hidden {
+	display: none;
+}
+h2 {
+	font-size: medium !important;
+	padding-bottom: 20px;
 }
 
-h2 {
-    font-size: medium !important;
-    padding-bottom: 20px;
+#bottom_info {
+	text-align: center;
 }
 
 #bottom_info>div {
-    display: inline-block;
-    vertical-align: top;
-    margin: 30px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 30px;
 }
 
 #service_logo>img {
-    width: 50px;
-    height: auto;
-    margin-right: 15px;
+	width: 50px;
+	height: auto;
+	margin-right: 15px;
+}
+
+
+.fa-solid {
+	position: relative;
+	top: 0%;
 }

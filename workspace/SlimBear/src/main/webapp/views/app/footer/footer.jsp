@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/footer.css">
+<script type="text/javascript" defer src="/resources/js/footer.js"></script>
+<script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,13 +17,13 @@
             <div class="guide">
                 <h2>SLIMBEAR</h2>
                 <li> 
-                    <a href="/shopinfo/guide.html" style="color: black">Guide</a>
+                    <a href="/shopinfo/guide.html">Guide</a>
                 </li>
                 <li>
-                    <a href="/member/agreement.html" style="color: black">Agreement</a>
+                    <a href="/member/agreement.html">Agreement</a>
                 </li>
                 <li>
-                    <a href="/member/privacy.html" style="color: black">개인정보처리방침</a>
+                    <a href="/member/privacy.html">개인정보처리방침</a>
                 </li>
             </div>
             <div class="address">
@@ -28,8 +32,8 @@
                 대표자 : 오승택<br />
                 <li class="hidden">
                     <span>TEL 070-7777-7777</span>
-                    <a href="none" class="more">
-                        <i class="xi-angle-down"></i>
+                    <a href="javascript:void(0);" class="more">
+                       <i class="fa-solid fa-chevron-down"></i>
                     </a>
                     <div class="cons">
                         <br />
