@@ -62,7 +62,7 @@ public class YangController {
 		if (offset == null) {
 			offset = 0;
 		}
-		pageSize = 5; // 페이지 당 아이템 수
+		pageSize = 15; // 페이지 당 아이템 수
 		
 		// 페이징에 관련된 정보 추가
 		int totalItems = boardService.getTotalInquiry(categoryNo); // 전체아이템 수

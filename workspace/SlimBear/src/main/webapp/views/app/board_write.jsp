@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				
-				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data">
+				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data" onsubmit="return checkCharacterCount();">
 					<input id="board_no" name="board_no" value="6" type="hidden" /> 
 					<input id="product_no" name="product_no" value="0" type="hidden" /> 
 					<input id="move_write_after" name="move_write_after"
@@ -183,7 +183,7 @@
             							<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2311171259">
 										
 										<!-- HTML --> 
-										<textarea style="width: 100%;" name="content" id="content" maxlength="50" class="ec-fr-never-be-duplicated" oninput="checkCharacterCount()" required>
+										<textarea style="width: 100%;" name="content" id="content" maxlength="500" class="ec-fr-never-be-duplicated" oninput="checkCharacterCount()" required>
 										이곳은 문의 게시판입니다!&lt;br /&gt;
 										게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
 										&lt;br /&gt;
@@ -191,6 +191,7 @@
 										불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 										&lt;br /&gt;
 										--------------------------------------------------------------&lt;br /&gt;
+										&lt;글자 수는 최대 공백, 엔터키 포함 최대 500자까지&gt;
 										</textarea>
 										<div id="characterCountError" style="color: red;"></div>
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
@@ -266,20 +267,5 @@
 	<jsp:include page="footer/footer.jsp" />
 </div>
 </div>
-
-<script>
-function checkCharacterCount() {
-    var content = document.getElementById("content").value;
-    var errorDiv = document.getElementById("characterCountError");
-
-    if (content.length < 1) {
-        errorDiv.textContent = "내용을 입력하세요.";
-    } else if (content.length > 300) {
-        errorDiv.textContent = "최대 300자까지 입력 가능합니다.";
-    } else {
-        errorDiv.textContent = "";
-    }
-}
-</script>
 </body>
 </html>

@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				
-				<form id="boardWriteForm" action="/app/board/inquiry/detail/update/${inquiries.uid}" method="post" enctype="multipart/form-data">
+				<form id="boardWriteForm" action="/app/board/inquiry/detail/update/${inquiries.uid}" method="post" enctype="multipart/form-data" onsubmit="return checkCharacterCount();">
 					
 					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />
 					<input id="type" name="type" value="" type="hidden" />
@@ -86,12 +86,7 @@
 								<tr>
 									<th scope="row">TITLE</th>
 									<td>
-									${inquiries.title}
-<!-- 									<select id="subject" name="title" th:field="*{title}"> -->
-<!-- 										<option value="상품 문의합니다 ♡">상품 문의합니다 ♡</option> -->
-<!-- 										<option value="배송 문의합니다 ♡">배송 문의합니다 ♡</option> -->
-<!-- 										<option value="불량/오배송 문의합니다 ♡">불량/오배송 문의합니다 ♡</option> -->
-<!-- 									</select> -->
+										${inquiries.title}
 									</td>
 								</tr>
 								<tr class="displaynone">
@@ -114,9 +109,10 @@
             							<link rel="stylesheet" href="//img.echosting.cafe24.com/editors/froala/css/themes/ec_froala.css?vs=2311171259">
 										
 										<!-- HTML content--> 
-										<textarea style="width: 100%;" name="content" id="content" class="ec-fr-never-be-duplicated">
+										<textarea style="width: 100%;" name="content" id="content" maxlength="500" class="ec-fr-never-be-duplicated" oninput="checkCharacterCount()" required>
 										${inquiries.content}
 										</textarea> 
+										<div id="characterCountError" style="color: red;"></div>
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />
 										
 										<!-- JavaScript --> 
@@ -167,8 +163,6 @@
 						<span class="gRight">
 <!--                             <button type="submit" class="btnSubmitFix sizeS">OK</button> -->
                             <button type="submit" class="btnBasicFix sizeS">EDIT</button>
-                            
-                            
                             <a href="/app/board/inquiry/detail/${inquiries.uid}" class="btnBasicFix sizeS">CANCEL</a>
                         </span>
 					</div>
