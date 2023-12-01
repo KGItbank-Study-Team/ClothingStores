@@ -291,7 +291,7 @@ public class HunServiceImpl {
 
 	    for (ReviewDTO i : reviewList) {
 	        reviewListVO vo = new reviewListVO();
-	        vo.setImage("대충사진");
+	        vo.setImage("https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/%ED%8F%AC%ED%9A%A8%EA%B3%B0.jpg");
 	        vo.setTitle(i.getTitle());
 	        vo.setContent(i.getContent());
 	        vo.setScore(i.getScore());

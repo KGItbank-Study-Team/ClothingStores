@@ -81,7 +81,7 @@
 										<td>${loop.index+1}</td>
 										<td class="subject">
 											<div class="image-container">
-												<img src="/resources/images/product10.gif"
+												<img src="${item.image}"
 													class="resizable-image">
 											</div>
 										</td>

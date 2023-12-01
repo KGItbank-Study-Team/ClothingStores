@@ -276,11 +276,18 @@
 			<version>0.2.23</version>
 		</dependency>
 
-	<!-- Test -->
+		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- amazon s3 -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.12.581</version>
 		</dependency>
 
 
