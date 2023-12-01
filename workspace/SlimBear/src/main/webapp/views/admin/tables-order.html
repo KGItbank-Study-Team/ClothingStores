@@ -25,7 +25,7 @@
 <link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
 	rel="stylesheet">
 
-<!-- Bootstrap core JavaScript-->
+
 <script src="/admin/vendor/jquery/jquery.min.js"></script>
 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -42,19 +42,13 @@
 <script
 	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
 
-<!-- Export -->
-<script
-	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
-<script
-	src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+<!-- datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
-<!-- toolbar -->
-<script
-	src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+
+<!-- icon -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 </head>
 
@@ -69,33 +63,96 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
 			<div id="content">
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<select id="filter-selector" class="form-select" aria-label="Default select example">
-						  <option value='field-all' selected>전체</option>
-						  <option value="code">주문코드</option>
-						  <option value="owner_id">아이디</option>
-						</select>
-						<input class="form-control" id="filter" type="text" placeholder="검색">
-					</div>
+				<div class="card shadow" style="margin-top: 10px;
+											    margin-right: 40px;
+											    margin-bottom: 10px;
+											    margin-left: 40px">
 					<div class="card-body">
+						<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100">
+							<label class="input-group-text">
+									<b>주문일 </b>
+									<span class="material-symbols-outlined">calendar_month</span>
+									&nbsp;
+									<input type="text" id="dp_from" class="datepicker mr-2 filter-datapicker-from" style="border: 1px solid #d1d3e2; padding:6px"><br>
+									<b>~</b>&nbsp;&nbsp;
+									<input type="text" id="dp_to" class="datepicker mr-2 filter-datapicker-to" style="border: 1px solid #d1d3e2; padding:6px"><br>
+							</label>
+						</div>
+					
+						<div class="d-none d-sm-inline-block form-inline my-2 my-md-0 mw-100" style="float:right;margin-left: 10px">
+								<label class="input-group-text">
+										<button class="btn btn-primary sort-btn" data-sort="DESC" style="padding:2px;">
+											<span class="material-symbols-outlined">sort</span>
+										</button>
+										&nbsp;
+										<select id="sort-selector" class="form-control">
+										</select> 
+								</label>
+						</div>
+						<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100" style="float:right;">
+								<label class="input-group-text">
+									<span class="material-symbols-outlined">search</span>
+									&nbsp;
+									<select id="filter-selector" class="form-control">
+										<option value='field-all' selected>전체</option>
+									</select> 
+									&nbsp;
+									<input class="form-control" id="filter" type="text" placeholder="검색">
+								</label>
+						
+						</div>
+
+						<hr>
+						<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100" style="float:right;">
+							
+						</div>
+					</div>
+				</div>
+				<div >
+					<div id="table-div" class="card-body" style="margin-top: 10px;
+											    margin-right: 20px;
+											    margin-bottom: 10px;
+											    margin-left: 20px">
+						<div style="margin-bottom:10px">
+							<span>한페이지에&nbsp;</span>
+							<select id="selector-pageitem-count">
+								<option value='10'>10</option>
+								<option value='20'>20</option>
+								<option value='30' selected>30</option>
+								<option value='50'>50</option>
+								<option value='100'>100</option>
+							</select>
+							<span>&nbsp;개씩 보기</span>
+						</div>
 						<table id="table" class="table table-bordered">
 							<thead class="bg-gray-300" align="center">
 								<tr>
-									<th scope="col" data-field="code">주문번호</th>
-									<th scope="col" data-field="owner_id">아이디</th>
-									<th scope="col" data-field="pay_status">주문 상태</th>
-									<th scope="col" data-field="order_date">주문일</th>
-									<th scope="col" data-field="pay_status">결제 상태</th>
-									<th scope="col" data-field="pay_type">결제 방법</th>
-									<th scope="col" data-field="pay_pg">PG</th>
-									<th scope="col" data-field="pay_amount">결제금</th>
+									<th scope="col" data-field="code" data-sorting data-filter>주문번호</th>
+									<th scope="col" data-field="owner_id" data-sorting data-filter>아이디</th>
+									<th scope="col" data-field="status" data-field-type='enum' data-sorting data-filter>주문 상태</th>
+									<th scope="col" data-field="order_date" data-field-type="datetime" data-sorting="selected">주문일</th>
+									<th scope="col" data-field="pay_status" data-field-type='enum' data-sorting data-filter>결제 상태</th>
+									<th scope="col" data-field="pay_type" data-sorting data-filter>결제 방법</th>
+									<th scope="col" data-field="pay_pg" data-sorting data-filter>PG</th>
+									<th scope="col" data-field="pay_amount" data-sorting data-filter>결제금</th>
 								</tr>
 							</thead>
 							<tbody align="center">
-								
 							</tbody>
 						</table>
+						<div style="float:right">
+							<nav>
+							  <ul class="pagination">
+							    <li class="page-item pagination-prev"> <a class="page-link">Previous</a> </li>
+							     <li class="page-item pagination-page"><a class="page-link"></a></li>
+							     <li class="page-item pagination-page"><a class="page-link"></a></li>
+							    <li class="page-item pagination-page"><a class="page-link" ></a></li>
+							    <li class="page-item pagination-page"><a class="page-link" ></a></li>
+							    <li class="page-item pagination-page"><a class="page-link" ></a></li>
+								<li class="page-item pagination-next"> <a class="page-link">Next</a></li>
+							  </ul>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -124,8 +181,11 @@
 
 </body>
 
-<script>
 
+<script>
+	let currentPage = 1;
+	let pageItemCnt = 30;
+	
 	function ajaxInitTable(){
 		$.ajax({
 			url : '/admin/order/list',
@@ -139,28 +199,133 @@
 		});
 	}
 	
+	// 테이블 초기화
 	function InitTable(datas){
+		
 		var table = $('#table');
 		var tbody = table.find('tbody');
 		var ths = table.find('th');
+		var enumField = {
+			status : {
+					STAY : '주문대기',
+					PREPARING : '제품 준비',
+					STAY_DLV : '배송 대기',
+					DELIVERY : '배송',
+					DONE : '완료',
+					CANCEL : '취소',
+					
+					RETURN : '반품',		
+					IN_RETURN : '반품 진행중',
+					TRY_RETURN : '반품 신청',
+			},
+			pay_status : {
+				SATY : '미결제',
+				DONE : '완료',
+				CANCEL : '취소',
+				RETURN : '환불'
+			}
+		}
+		
+		var sortSelector = $('#sort-selector');
+		var filterSelector = $('#filter-selector');
+		
+		ths.each(function(index, item){
+			// 필터 선택 초기화
+			if($(item).attr('data-filter') != null){
+				var filterOption = $('<option></option>')
+				filterOption.val($(item).data('field'))
+				filterOption.text($(item).text());
+				filterSelector.append(filterOption);
+			}
+			
+			// 정렬 선택 초기화
+			if($(item).attr('data-sorting') != null){
+				var sortOption;
+				if($(item).data('sorting') == 'selected'){
+					sortOption = $('<option selected></option>')
+				}else{
+					sortOption = $('<option></option>')
+				}
+				sortOption.val($(item).data('field'))
+				sortOption.text($(item).text());
+				sortSelector.append(sortOption);
+			}
+		});
+
 		for(var i=0; i<datas.length; ++i){
 			var tr = $('<tr></tr>');
 			tbody.append(tr);
-			var tbodyHtml = [];
 			var dataItem = datas[i];
 			tr.data('rowData', dataItem);
 		
 			ths.each(function(index, item){
 				var field = $(item).data('field');
+				var fieldType = $(item).data('field-type');
 				if(field != null){
-					
-					tbodyHtml.push('<td data-field='+ field +'>')
-					tbodyHtml.push(dataItem[field]);
-					tbodyHtml.push('</td>')
+					var value = dataItem[field];
+					var td = $('<td style="vertical-align:middle"></td');
+					tr.append(td);
+					td.data('field', field);
+					td.data('value', value);
+					td.data('field-type', fieldType);
+					if(fieldType != null){
+						switch(fieldType){
+							case 'datetime':
+								var date = new Date(dataItem[field]);
+								var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
+								var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+								td.html(dateToString + '<br>' + timeToString);
+								break;
+							case 'enum':
+								td.html(enumField[field][value]);
+								break;
+						}
+					}else{
+						td.text(dataItem[field]);
+					}
 				}
 			});
-			tr.html(tbodyHtml.join(''));
 		}
+		
+		// 테스트용으로 데이터 늘리기 !!!!!!!!!!!!!!!!!!!
+		console.log("테스트용코드")
+		for(var i=0; i<datas.length; ++i){
+			var tr = $('<tr></tr>');
+			tbody.append(tr);
+			var dataItem = datas[i];
+			tr.data('rowData', dataItem);
+		
+			ths.each(function(index, item){
+				var field = $(item).data('field');
+				var fieldType = $(item).data('field-type');
+				if(field != null){
+					var value = dataItem[field];
+					var td = $('<td style="vertical-align:middle"></td');
+					tr.append(td);
+					td.data('field', field);
+					td.data('value', value);
+					td.data('field-type', fieldType);
+					if(fieldType != null){
+						switch(fieldType){
+							case 'datetime':
+								var date = new Date(dataItem[field]);
+								var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
+								var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+								td.html(dateToString + '<br>' + timeToString);
+								break;
+							case 'enum':
+								td.html(enumField[field][value]);
+								break;
+						}
+					}else{
+						td.text(dataItem[field]);
+					}
+				}
+			});
+		}
+		
+		// selected option으로 기본 정령
+		$('#sort-selector').trigger('change');
 	}
 
 	$(function() {
@@ -169,13 +334,21 @@
 		
 		// 필터
 		$("#filter").on("keyup", function() {
-		    var value = $(this).val().toLowerCase();
+			doFiltering();
+			currentPage = pagination(currentPage);
+		});
+		
+		function doFiltering(){
+			var dateFrom = $('.filter-datapicker-from').val() == "" ? null : new Date($('.filter-datapicker-from').val());
+			var dateTo = $('.filter-datapicker-to').val() == "" ? null : new Date($('.filter-datapicker-to').val());
+	
+			var value = $("#filter").val();
 		    var curFiled = $('#filter-selector').val();
 		    $("#table").find('tbody tr').filter(function() {
+		    	var toggle = true;
 		    	if(curFiled=='field-all'){
 		    		$(this).find('td').each(function(index, td){
-		    			var toggle = $(this).text().toLowerCase().indexOf(value) > -1;
-		    			$(this).parents('tr').toggle(toggle);
+		    			toggle = $(this).text().indexOf(value) > -1;
 		    			if(toggle){
 		    				return false;
 		    			}
@@ -183,66 +356,219 @@
 		    	}else{
 		    		$(this).find('td').each(function(index, td){
 		    			if($(this).data('field') == curFiled){
-		    				$(this).parents('tr').toggle($(this).text().toLowerCase().indexOf(value) > -1);
+		    				toggle = $(this).text().indexOf(value) > -1;
 		    				return false;
 		    			}
 		    		});
 		    	}
+		    	
+		    	// 날짜따로 확인
+		    	// 날짜 타입이 여러개면 원하는거랑 다르게나올수있음
+		    	$(this).find('td').each(function(index, td){
+			    	if($(this).data('field-type') == "date" || $(this).data('field-type') == "datetime"){
+	    				var datevalue = new Date($(this).data('value'));
+	    				datevalue = new Date((datevalue.getMonth()+1) +'/' + datevalue.getDate()  + '/' + datevalue.getFullYear())
+	    				if(datevalue != null){
+	    					if(datevalue < dateFrom){
+	    						toggle = false;
+	    					}
+	    				}
+	    		
+	    				if(dateTo != null){
+	    					if(datevalue > dateTo){
+	    						toggle = false;
+	    					}
+	    				}
+	    			}
+		    	});
+		    	
+		    	$(this).toggle(toggle);
 		    });
-		  });
+		}
 		
-		$('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
-		    $detail.html('상세 정보 불러오는 중....');
-		    $.ajax({
-				url : "/admin/order/detail?order_uid="+row['uid'],
-				type : "GET",
-				success : function(result){
-					var html = [];
-					html.push('<div><table style="width:100%;"><thead align="center"><tr>');
-					
-					html.push('<th style="background: #cbd1f9;">상품UID</th>')
-					html.push('<th style="background: #cbd1f9;">색상</th>')
-					html.push('<th style="background: #cbd1f9;">사이즈</th>')
-					html.push('<th style="background: #cbd1f9;">개수</th>')
-					html.push('<th style="background: #cbd1f9;">대표이미지</th>')
-					html.push('<th style="background: #cbd1f9;">리뷰</th>')
-					
-					html.push('</tr></thead><tbody class="searchable" align="center">');
-			
-						
-					for( var index in result.productDetails) {
-						var productDetail= result.productDetails[index];
-						html.push('<tr>');
-						html.push('<th>' + productDetail.prod_uid + '</th>');
-						html.push('<td>' + productDetail.color +'</td>');
-						html.push('<td>'+ productDetail.size+'</td>');
-						html.push('<td>'+ productDetail.cnt+'</td>');
-						html.push('<td><img src="/resources/images/'+ productDetail.main_image+'" class="img-thumbnail" width="150" height="auto"></td>');
-						if(productDetail.review_uid != null){
-							html.push('<td>'+ productDetail.review_uid+'</td>');
-						}
-						else{
-							html.push('<td>-</td>');
-						}
-					
-						html.push('</tr>');
-						
-					}
-		
-					
-					html.push('</tbody></table></div>');
-		
-					$detail.html(html.join(''));
-				},
-				error : function(){
-					alret("error");
-				}
-					
-			});
+		// filter selector
+		$('#filter-selector').on('change', function(){
+			$("#filter").val('');
+			$("#filter").trigger('keyup');
 		});
-	})
+		
+		// date picker
+		$('.filter-datapicker-from').datepicker().on('hide', function(){
+			var dateFrom = $('.filter-datapicker-from').val() == "" ? null : new Date($('.filter-datapicker-from').val());
+			var dateTo = $('.filter-datapicker-to').val() == "" ? null : new Date($('.filter-datapicker-to').val());
+			
+			if(dateFrom !=null && dateTo !=null && dateFrom > dateTo)
+				$('.filter-datapicker-from').val($('.filter-datapicker-to').val());
+			
+			$("#filter").trigger('keyup');
+		});
+		
+		$('.filter-datapicker-to').datepicker().on('hide', function(){
+			var dateFrom = $('.filter-datapicker-from').val() == "" ? null : new Date($('.filter-datapicker-from').val());
+			var dateTo = $('.filter-datapicker-to').val() == "" ? null : new Date($('.filter-datapicker-to').val());
+			
+			if(dateFrom !=null && dateTo !=null && dateTo < dateFrom)
+				$('.filter-datapicker-to').val($('.filter-datapicker-from').val());
+			
+			$("#filter").trigger('keyup');
+		});
+		
+		$('.datepicker').datepicker({
+		    format: 'yyyy-mm-dd',
+		    todayHighlight: true,
+		    toggleActive: true
+		});
+		
+		// sort     
+		$('.sort-btn').on('click', function(){
+			var sort = $(this).data('sort');
+			var field = $('#sort-selector').val();
+			if(sort == 'ASC'){
+				$(this).css('transform', '');
+				$(this).data('sort', 'DESC');
+				tableSort(field, false);
+			}else{
+				$(this).css('transform', 'rotate(180deg) scaleX(-1)');
+				$(this).data('sort', 'ASC');
+				tableSort(field, true);
+			}
+		});
+		
+		$('#sort-selector').on('change', function(){
+			var field = $('#sort-selector').val();
+			$('.sort-btn').css('transform', '');
+			$('.sort-btn').data('sort', 'DESC');
+			tableSort(field, false);
+		});
+		
+		function tableSort(field, asc){
+			$("#table").find('th').each(function(){
+				if($(this).data('field') == field){
+					 var rows;
+					 if (asc){rows = $("#table").find('tbody tr').toArray().sort(comparerASC($(this).index()));}
+					 else{rows = $("#table").find('tbody tr').toArray().sort(comparerDESC($(this).index()));}
+					 for (var i = 0; i < rows.length; i++){$("#table").find('tbody').append(rows[i])}
+					 return false;
+				}
+			});
+			$("#filter").trigger('keyup');
+		}
+		function comparerASC(index) {
+			return function(a, b) {
+		        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+		        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+		    }
+		}
+		function comparerDESC(index) {
+			return function(b, a) {
+		        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+		        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+		    }
+		}
+		function getCellValue(row, index){ return $(row).children('td').eq(index).data('value') }
 	
+		// pagination
+		$('.pagination').find('.pagination-prev').find('a').on('click', function(){
+			currentPage = $('.pagination').find('.pagination-prev').data('prev');
+			$("#filter").trigger('keyup');
+		});
+		
+		$('.pagination').find('.pagination-next').find('a').on('click', function(){
+			currentPage = $('.pagination').find('.pagination-next').data('next');
+			$("#filter").trigger('keyup');
+		});
+		
+		$('.pagination').find('.pagination-page').find('a').on('click', function(){
+			currentPage = $(this).parents('li').data('page');
+			$("#filter").trigger('keyup');
+		});
+		
+		$('#selector-pageitem-count').on('change', function(){
+			pageItemCnt = $(this).val();
+			$("#filter").trigger('keyup');
+		});
+	});
+	
+	
+	function pagination(showPage){
+		var maxPageCnt = $('.pagination').find('.pagination-page').length;
+		
+		// 보이는 row만 적용한다
+		var items = $("#table").find('tbody tr').filter(function(){
+			return $(this).css('display') != 'none'
+		});
+		
+		var totalPage = parseInt(items.length / pageItemCnt) + (items.length%pageItemCnt > 0 ? 1 : 0);
+		if(totalPage <= 1){
+			$('.pagination').toggle(false);
+			return 1;
+		}else{
+			$('.pagination').toggle(true);
+		}
+		
+		if(showPage > totalPage){
+			showPage = totalPage;
+		}else if(showPage < 1){
+			showPage = 1;
+		}
+		
+		var startIndex = (showPage-1) * pageItemCnt;
+		var endIndex = showPage * pageItemCnt - 1;
+		
+		items.each(function(index){
+			if(startIndex <= index && endIndex >= index){
+				$(this).toggle(true);
+			}else{
+				$(this).toggle(false);
+			}
+		})
 
+		var totalGroupCnt = parseInt(((totalPage-1) / maxPageCnt) + 1);
+		var myPageGroup = parseInt(((showPage-1) / maxPageCnt) + 1);
+		var startPage = (myPageGroup - 1) * maxPageCnt + 1;
+		var endPage = (myPageGroup * maxPageCnt) > totalPage ? totalPage : (myPageGroup * maxPageCnt);
+		
+		var pageIndex = startPage;
+		$('.pagination').find('.pagination-page').each(function(index){
+			if(pageIndex > endPage){
+				$(this).toggle(false);
+			}else{
+				$(this).toggle(true);
+				$(this).find('a').text(pageIndex);
+				$(this).data('page', pageIndex);
+				if(showPage == pageIndex){
+					$(this).addClass('active');
+				}else{
+					$(this).removeClass('active');	
+				}
+			}
+			++pageIndex;
+		})
+		
+		if(myPageGroup == 1)
+			$('.pagination').find('.pagination-prev').addClass('disabled');
+		else{
+			var prevGroup = myPageGroup - 1;
+			$('.pagination').find('.pagination-prev').removeClass('disabled');
+			$('.pagination').find('.pagination-prev').data('prev', startPage - 1);
+		}
+			
+	
+		if(myPageGroup == totalGroupCnt)
+			$('.pagination').find('.pagination-next').addClass('disabled');
+		else{
+			var nextGroup = myPageGroup + 1;
+			$('.pagination').find('.pagination-next').removeClass('disabled');
+			$('.pagination').find('.pagination-next').data('next', endPage + 1);
+		}
+			
+		
+		return showPage;
+	}
+	
+	//=================================
+	
+	
 	function typeFormatter(value, row, index) {
 		
 	var html = [];
