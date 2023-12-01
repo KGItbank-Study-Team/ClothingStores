@@ -33,7 +33,8 @@
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
-					<img alt="상품01" src="/resources/images/${product.main_image}">
+					<%-- <img alt="상품01" src="/resources/images/${product.main_image}"> --%>
+					<img alt="상품01" src="/resources/images/product07.gif"> 
 				</div>
 				<div></div>
 			</div>
@@ -185,11 +186,11 @@
 					</div>
 					<!-- productGuide -->
 					<hr />
-					<div class="customMemo">
+					<%-- <div class="customMemo">
 						<p class="name">제품 설명</p>
 						<p>${product.desc}</p>
-					</div>
-					<hr />
+					</div> --%>
+					<!-- <hr /> -->
 					<div class="sizeGuide">
 						<p style="margin-bottom: 5px;">사이즈 정보</p>
 						<table border="1" class="tableSize" style="width: 540px; height: 200px;">

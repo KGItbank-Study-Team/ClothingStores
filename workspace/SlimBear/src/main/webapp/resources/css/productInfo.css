@@ -67,7 +67,7 @@ a {
 	position: relative;
 	/* left: 15%; */
 	width: fit-content;
-	margin: 0 500px 80px 500px;
+	margin: 0 auto;
 	text-align: center;
 }
 .prodName {
@@ -85,8 +85,8 @@ a {
 }
 
 .productImg img {
-	width: 460px;
-	height: 611.8px;
+	width: 400px;
+	height: 500px;
 }
 
 .productImg {

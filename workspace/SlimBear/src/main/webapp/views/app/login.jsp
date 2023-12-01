@@ -30,7 +30,7 @@
 	<div class="main-container">
 		<div class="main-wrap">
 			<div class="logo-wrap">
-				<img src="../../images/SlimBear-Logo01.png">
+				<img src="/resources/images/SlimBear-Logo01.png">
 			</div>
 			<form action="/app/slimbear/login" method="post">
 				<section class="login-input-section-wrap">
