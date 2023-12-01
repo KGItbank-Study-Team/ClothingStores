@@ -19,13 +19,13 @@
 	<div id="top_sentence">
 		<div id="oneTop1">
 			<ul class="text-slide">
-				<li class="slide-sentence"><a href="#none">♥핸드메이드 코트 10%
-						SALE♥ ~2023.10.31 23:59PM</a></li>
+				<li class="slide-sentence"><a href="#none">♥기간 한정 10%
+						SALE♥ ~2023.12.08 23:59PM</a></li>
 				<br />
-				<li class="slide-sentence"><a href="#none">쌀쌀해진 날씨, 슬로우앤드와
+				<li class="slide-sentence"><a href="#none">쌀쌀해진 날씨, 슬림베어와
 						함께 준비하기</a></li>
 				<br />
-				<li class="slide-sentence"><a href="#none">로그인 후 슬로우앤드의 다양한
+				<li class="slide-sentence"><a href="#none">로그인 후 슬림베어의 다양한
 						혜택을 만나보세요</a></li>
 				<br />
 			</ul>
@@ -128,7 +128,7 @@
 							</li>
 						</sec:authorize>
 						<li>
-						<a href="/app/cart"><img class="fuck"
+						<a href="/app/cart"><img class="cartPosi"
 							src="/resources/images/icon_cart.png" alt="cart"></a>
 						</li>
 					</ul>

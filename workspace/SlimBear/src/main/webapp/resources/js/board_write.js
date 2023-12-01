@@ -1048,3 +1048,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+
+    
+// 게시글 content 글자수 제한
+function checkCharacterCount() {
+        var content = document.getElementById("content").value;
+        var maxLength = 600;
+
+        if (content.length > maxLength) {
+            document.getElementById("characterCountError").innerText = "글자 수가 제한을 초과했습니다. 최대 500자";
+            // 글자 수 초과로 인한 예외 처리 및 실행 취소
+            return false;
+        } else {
+            document.getElementById("characterCountError").innerText = "";
+            return true;
+        }
+    }
+
+
