@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.admin.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,14 +63,27 @@ public class RSYAdminServiceImpl {
 	}
 
 	// 문의답글
-	public void addOrUpdateAnswer(Long inqr_uid, String title, String content, String mem_id) {
+	public void addOrUpdateAnswer(Long inqr_uid, String title, String content, String mem_id, Date reg_date) {
 		InquiryAnswerDTO answer = new InquiryAnswerDTO();
 		answer.setInqr_uid(inqr_uid);
 		answer.setTitle(title);
 		answer.setContent(content);
 		answer.setMem_id(mem_id);
+		answer.setReg_date(reg_date);
 
 		rsyAdminDAO.setAnswerStatus(inqr_uid);
 		rsyAdminDAO.addOrUpdateAnswer(answer);
 	}
+	
+	// 문의숨김
+	// 문의삭제
+	public void deleteInquiry(InquiryDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteInquiry(uid);
+	}
+	// 리뷰삭제
+		public void deleteReview(ReviewDTO data) {
+			Long uid = data.getUid();
+			rsyAdminDAO.deleteReview(uid);
+		}
 }

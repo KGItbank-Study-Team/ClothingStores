@@ -40,9 +40,9 @@
 
 	<!-- 관리자 리뷰 -->
 	<insert id="ADD_OR_UPDATE_ANSWER">
-		INSERT INTO inquiryAnswer (inqr_uid, title, content, mem_id)
-		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id})
-		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
+		INSERT INTO inquiryAnswer (inqr_uid, title, content, mem_id, reg_date)
+		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id}, #{reg_date})
+		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content), reg_date = VALUES(reg_date)
 	</insert>
 
 	<!-- REVIEW -->

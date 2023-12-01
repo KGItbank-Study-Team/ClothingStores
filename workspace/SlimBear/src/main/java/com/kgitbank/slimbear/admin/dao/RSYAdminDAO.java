@@ -59,4 +59,13 @@ public class RSYAdminDAO {
 	public void setCommentStatus(Long reviewUID) {
 		template.update("com.slimbear.mapper.Board.UPDATE_COMMENT_STATUS", reviewUID);
 	}
+	
+	// 문의 숨김
+	// 문의 삭제
+	public void deleteInquiry(Long uid) {
+		template.delete("com.slimbear.mapper.Board.DELETE_INQUIRY", uid);
+	}
+	public void deleteReview(Long uid) {
+		template.delete("com.slimbear.mapper.Board.DELETE_REVIEW", uid);
+	}
 }
