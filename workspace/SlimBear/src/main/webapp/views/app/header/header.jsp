@@ -100,22 +100,18 @@
 				</div>
 				<div class="userArea">
 					<ul>
-						<!--<li>
-							<div class="search">
-								<input type="text" value="search" style="color: rgb(0, 0, 0);"
-									class="inputArea"> <i class="fas fa-search"></i>
-							</div>
-						</li>  -->
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication var="user" property="principal" />
-							<li>${user.username} 님 안녕하세요</li>
-							<li class="menu-item"><a href="#"><img
-									src="/resources/images/icon_user.png" alt="user"></a>
+							<li>${user.username} 님 안녕하세요! 😊</li>
+							<li class="menu-item">
+								<a href="#">
+									<img src="/resources/images/icon_user.png" alt="user">
+								</a>
 								<ul class="dropdown-content">
 									<li><a href="/app/member/logout"><b>로그아웃</b></a></li>
 									<li><a href="/app/member/myPage"><b>회원정보</b></a></li>
-								</ul></li>
-							<li>
+								</ul>
+							</li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
 							<li class="menu-item"><a href="#"><img

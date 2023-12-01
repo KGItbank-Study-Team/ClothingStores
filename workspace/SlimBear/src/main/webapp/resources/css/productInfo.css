@@ -96,6 +96,7 @@ a {
 
 .subExplanation {
 	font-size: 14px;
+	font-weight: bold;
 	color: #555555;
 	padding-bottom: 30px;
 	text-align: left !important;
