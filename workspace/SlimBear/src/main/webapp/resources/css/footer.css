@@ -14,13 +14,13 @@ footer {
 h2 {
 	font-size: medium !important;
 	padding-bottom: 20px;
-	color: #3e3e3e !important;
 }
 
 #bottom_info {
 	/* text-align: center; */
 	height: 320px !important;
 	margin-top: 30px;
+	font-family: 'Noto Sans KR', sans-serif !important;
 }
 
 #bottom_info > div {
@@ -35,20 +35,28 @@ h2 {
 	height: auto;
 	margin-right: 15px;
 }
+#bottom_info p {
+	color: #050505!important;	
+}
 .call {
 	padding-left: 110px !important;
+	color: #2c2c2c!important;	
 }
 .address {
 	padding-left: 110px !important;	
+	color: #2c2c2c!important;	
 }
 .exchange {
 	padding-left: 110px !important;	
+	color: #2c2c2c!important;	
 }
 .service {
 	padding-left: 110px !important;	
+	color: #2c2c2c!important;	
 }
 .bank {
 	padding-left: 110px !important;	
+	color: #2c2c2c!important;	
 }
 .fa-solid {
 	position: relative;
