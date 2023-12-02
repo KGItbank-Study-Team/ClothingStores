@@ -16,6 +16,7 @@ public class OrderDAO {
 	protected SqlSessionTemplate template;
 	
 	public List<OrderDTO> getOrderListByMemberUID(long memberUID){
+		System.out.println("dao uid: " + memberUID);
 		MemberDTO info = new MemberDTO();
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Order.SELECT_ORDER_LIST_BY_MEMBER_UID", info);

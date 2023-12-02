@@ -258,11 +258,12 @@ public class SanghyukController {
 	public String orderList(Authentication authentication, Model model) {
 		System.out.println("====오더리스트 조회 메서드 실행====");
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		long memberUid = user.getUid();
-		System.out.println(memberUid);
-		System.out.println(user.getUsername());
+		long memberUID = user.getUid();
+		System.out.println("멤바uid: " + memberUID);
+		System.out.println("유자네임: " + user.getUsername());
 
-		List<OrderListVO> vo = sanghService.getOrderListInfo(memberUid);
+		List<OrderListVO> vo = sanghService.getOrderListInfo(memberUID);
+		System.out.println("상혁VO: " + vo);
 		model.addAttribute("orderList", vo);
 		model.addAttribute("orderList2", vo);
 

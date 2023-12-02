@@ -169,7 +169,7 @@
 											<td class="gbTJl">
 												<div class="bCQoer">
 													<button class="fUUUKW iiEWkt">배송조회</button>
-													<button class="fTrGbC kiiuoA">리뷰 작성하기</button>
+													<button class="fTrGbC kiiuoA" id="openWriteForm">리뷰 작성하기</button>
 												</div>
 											</td>
 										</tr>

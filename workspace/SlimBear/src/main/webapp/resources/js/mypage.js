@@ -177,7 +177,10 @@ $(document).ready(function () {
 
 
 // 리뷰 작성 창
-$('.fTrGbC').click(function(){
-    console.log('클릭');
-    window.open("/app/reviewWrite", "리뷰 쓰기", "width=400, height=300, top=50, left=50");
-})
+$(document).ready(function(){
+    $('#openWriteForm').click(function(){
+        var windowFeature = 'width=600, height=800, top=' + (screen.height / 2) + '.left=' + (screen.width / 2);
+
+        window.open('/app/member/reviewWrite', '후기 작성', windowFeature);
+    })
+});
