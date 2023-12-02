@@ -1,13 +1,12 @@
 footer {
 	padding: 0px;
 	font-size: 10px;
-	color: #000;
+	color: #333;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 100%;
-	margin: 150px auto 0;
-	background: #ede5dd !important;
-	color: #2c2c2c;
+	/* width: 100%; */
+	margin: 0px auto 0;
+	background: #eae5dd;!important;
 }
 .hidden {
 	display: none;
@@ -15,26 +14,46 @@ footer {
 h2 {
 	font-size: medium !important;
 	padding-bottom: 20px;
+	color: #3e3e3e !important;
 }
 
 #bottom_info {
-	text-align: center;
+	/* text-align: center; */
+	height: 320px !important;
+	margin-top: 30px;
 }
 
-#bottom_info>div {
+#bottom_info > div {
 	display: inline-block;
 	vertical-align: top;
-	margin: 30px;
+	margin-top: 50px;
+	margin-left: 50px;
 }
 
-#service_logo>img {
+#service_logo > img {
 	width: 50px;
 	height: auto;
 	margin-right: 15px;
 }
-
-
+.call {
+	padding-left: 110px !important;
+}
+.address {
+	padding-left: 110px !important;	
+}
+.exchange {
+	padding-left: 110px !important;	
+}
+.service {
+	padding-left: 110px !important;	
+}
+.bank {
+	padding-left: 110px !important;	
+}
 .fa-solid {
 	position: relative;
 	top: 0%;
+}
+.footer-container {
+	height: 500px !important;
 }

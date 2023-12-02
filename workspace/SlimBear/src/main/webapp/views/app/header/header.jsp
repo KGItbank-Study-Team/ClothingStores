@@ -15,7 +15,7 @@
 
 <title>슬림베어</title>
 </head>
-<header>
+<header class="header-container">
 	<div id="top_sentence">
 		<div id="oneTop1">
 			<ul class="text-slide">

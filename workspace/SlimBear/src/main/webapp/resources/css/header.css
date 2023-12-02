@@ -44,12 +44,8 @@ html {
   height: 100%;
 }
 
-body,
-code {
+.header-container {
   font: 13px 'Outfit','Noto Sans KR',Dotum,AppleGothic,sans-serif;
- /*  font-weight: bold; */
-  /* background: #faf9ef; */
-  background-color: #ffffff;
   letter-spacing: 0;
   line-height: 1.7;
 }
@@ -253,7 +249,7 @@ code {
 }
 
 #users-container {
-    background-color: white;
+    background-color: #f6f4ee;
 }
 
 .guraya {

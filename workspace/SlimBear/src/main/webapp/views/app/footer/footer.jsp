@@ -11,7 +11,7 @@
 
 <title>Insert title here</title>
 </head>
-<body>
+<body class="footer-container">
     <footer>
         <div id="bottom_info">
             <div class="guide">
