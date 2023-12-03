@@ -44,6 +44,12 @@
 		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id}, #{reg_date})
 		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content), reg_date = VALUES(reg_date)
 	</insert>
+	<!--  관리자 공지 -->
+	<select id="SELECT_NOTICE_LIST_ALL" resultType="notice">
+		SELECT * FROM notice
+	</select>
+	
+	
 
 	<!-- REVIEW -->
 	<!-- 리뷰 전체 목록 조회 -->
