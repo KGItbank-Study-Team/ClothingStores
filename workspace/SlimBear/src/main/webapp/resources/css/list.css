@@ -228,7 +228,7 @@ col {
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px
 		0px 1px 0px;
-	background-color: rgb(255, 255, 255);
+	background: #f5f4ef;
 	margin-bottom: 20px;
 	margin-left: 50px;
 	padding: 24px 24px 16px;
@@ -303,6 +303,7 @@ col {
 	height: 100%;
 	padding: 20px;
 	vertical-align: top;
+	background: #f8f7f1;
 }
 
 .bQVZKC {
@@ -464,6 +465,7 @@ img {
 	-webkit-box-pack: justify;
 	justify-content: space-between;
 	padding: 35px;
+	background: #f8f7f1;
 }
 
 .iiEWkt {
@@ -490,10 +492,10 @@ img {
 	width: 100%;
 	border-radius: 4px;
 	/* color: rgb(52, 106, 255); */
-	color: #757159;
+	color: white;
 	/* border: 1px solid rgb(52, 106, 255); */
 	border: 1px solid #757159;
-	background-color: rgb(255, 255, 255);
+	background-color: #655345;
 	-webkit-tap-highlight-color: rgba(52, 106, 255, 0.1);
 	font-size: 0.875rem;
 }
@@ -793,13 +795,13 @@ html {
 body, code {
 	font: 13px 'Outfit', 'Noto Sans KR', Dotum, AppleGothic, sans-serif;
 	color: #3f3f3f;
-	background: #ffffff;
+	background: #f6f4ee !important;
 	letter-spacing: 0;
 	line-height: 1.7;
 }
 
 body {
-	min-width: 900px;
+	min-width: 900px; 
 }
 
 body#popup {
