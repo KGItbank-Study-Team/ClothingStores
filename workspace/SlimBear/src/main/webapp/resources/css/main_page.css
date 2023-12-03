@@ -343,7 +343,7 @@ code {
 }
 .slider-scrollbar .scrollbar-thumb {
   position: absolute;
-  background: #000;
+  background: #9c9c9c;
   top: 0;
   bottom: 0;
   width: 50%;

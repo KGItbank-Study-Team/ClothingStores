@@ -67,6 +67,7 @@ a {
 	color: black !important;
 	width: fit-content;
 	margin: 0 auto;
+	padding-bottom: 40px;
 	text-align: center;
 }
 .prodName {

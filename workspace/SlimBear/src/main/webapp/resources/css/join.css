@@ -11,7 +11,7 @@
 body{
     font-family: 'Noto Sans KR', sans-serif;
     font-size:14px;
-    background-color: #D7D2C3;
+    background: #f6f4ee;
     line-height: 1.5em;
     color : #222;
     margin: 0;
@@ -57,7 +57,7 @@ a{
 
 .member input[type=button],
 .member input[type=submit]{
-background-color: #766346;
+background-color: #655345;
 color:#fff
 }
 

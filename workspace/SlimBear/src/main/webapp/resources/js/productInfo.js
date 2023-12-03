@@ -254,7 +254,7 @@ function buyClick(uid) {
             console.log("request:", request);
             console.log("status:", status);
             console.log("error:", error);
-            alert("결제 ajax 에러");
+            alert("로그인 후 이용해주세요.");
         }
     });
 }
