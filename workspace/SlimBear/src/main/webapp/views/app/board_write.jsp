@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -36,6 +39,7 @@
 				</div>
 				
 				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data" onsubmit="return checkCharacterCount();">
+
 					<input id="board_no" name="board_no" value="6" type="hidden" /> 
 					<input id="product_no" name="product_no" value="0" type="hidden" /> 
 					<input id="move_write_after" name="move_write_after"
@@ -210,23 +214,19 @@
 							<tbody class="">
 								<tr>
 									<th scope="row">FILE 1</th>
-									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
+									<td><input name="attach_image1" type="file" id="fileInput1" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 2</th>
-									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
+									<td><input name="attach_image2" type="file" id="fileInput2" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 3</th>
-									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
+									<td><input name="attach_image3" type="file" id="fileInput3" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 4</th>
-									<td><input name="imageFile" type="file" id="fileInput" onchange="handleFileChange()" /></td>
-								</tr>
-								<tr>
-									<th scope="row">FILE 5</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="attach_image4" type="file" id="fileInput4" onchange="handleFileChange()" /></td>
 								</tr>
 							</tbody>
 							

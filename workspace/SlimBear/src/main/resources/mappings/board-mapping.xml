@@ -219,10 +219,10 @@
 		#{type},
 		#{prod_uid},
 		#{secure},
-	    #{attach_image1},
-	    #{attach_image2},
-	    #{attach_image3},
-	    #{attach_image4}
+	    #{attach_image1.originalFilename},
+	    #{attach_image2.originalFilename},
+	    #{attach_image3.originalFilename},
+	    #{attach_image4.originalFilename} 
 		)
 	</insert>
 

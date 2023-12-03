@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,10 +26,11 @@ public class InquiryDTO {
     private int secure; // 비밀글 여부를 나타내는 필드
     private String searchKey; // 검색 대상 (title, content, writer_id, prod_uid 등)
     private String searchValue; // 검색어
-    private String attach_image1;
-    private String attach_image2;
-    private String attach_image3;
-    private String attach_image4;
+    private MultipartFile attach_image1;
+    private MultipartFile attach_image2;
+    private MultipartFile attach_image3;
+    private MultipartFile attach_image4;
+    
     
     // 답변 목록을 저장할 List
     private List<InquiryAnswerDTO> answers;
