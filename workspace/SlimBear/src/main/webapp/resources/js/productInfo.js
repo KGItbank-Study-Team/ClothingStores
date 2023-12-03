@@ -303,18 +303,19 @@ $(document).ready(function () {
     });
 });
 // 문의제목 클릭 -> 문의 내용 출력
-$(document).ready(function () {
-    $(".clickTitle").click(function () {
-        var content = $(this).closest("tbody").find(".inquiryContent");
+// $(document).ready(function () {
+//     $(".clickTitle").click(function () {
+//         var content = $(this).closest("tbody").find(".inquiryContent");
 
-        if (content.is(":visible")) {
-            content.slideUp();
-        } else {
-            content.slideDown();
-        }
-    });
+//         if (content.is(":visible")) {
+//             content.slideUp();
+//         } else {
+//             content.slideDown();
+//         }
+//     });
+// });
 
-});
+
 let totalData; // 총 데이터 수
 let dataPerPage = 5; // 한 페이지에 나타낼 글 수
 let pageCount = 5; // 페이징에 나타낼 페이지 수
@@ -328,12 +329,12 @@ $(document).ready(function () {
         url: '/app/product/getReview/' + uid,
         data: uid,
         success: function (reviewList) {
-            console.log('리뷰 Ajax 성공');
+            //console.log('리뷰 Ajax 성공');
             // 총 리뷰수 구하기
             totalData = reviewList.length;
             dataList = reviewList;
             //alert('dataList === ' + JSON.stringify(dataList));
-            console.log('totalData: ' + totalData);
+            //console.log('totalData: ' + totalData);
 
             // 목록 표시 호출(테이블 생성)
             displayData(1, dataPerPage, dataList);
@@ -353,7 +354,7 @@ $(document).ready(function () {
 // 목록 표시 함수
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
 function displayData(currentPage, dataPerPage, dataList) {
-    console.log('reviewList : ' + JSON.stringify(dataList));
+    //console.log('reviewList : ' + JSON.stringify(dataList));
     let reviewHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
     currentPage = Number(currentPage); //alert('currentPage = ' + currentPage);
@@ -397,7 +398,7 @@ function displayData(currentPage, dataPerPage, dataList) {
 }
 // 페이징 표시 함수
 function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {
-    console.log('currentPage: ' + currentPage);
+    //console.log('currentPage: ' + currentPage);
 
     totalPage = Math.ceil(totalData / dataPerPage); // 총 페이지 수
 
@@ -478,11 +479,11 @@ $(document).ready(function () {
         url: '/app/product/inquiry/' + uid,
         data: uid,
         success: function (inquiryList) {
-            console.log('inquiry Ajax 실행성공');
+            //console.log('inquiry Ajax 실행성공');
             totalDataInq = inquiryList.length; // 총 데이터 수
             inqList = inquiryList;
-            console.log('1. 상품문의 목록 : ' + JSON.stringify(inquiryList));
-            console.log('2. 총데이터수 : ' + totalDataInq);
+            //console.log('1. 상품문의 목록 : ' + JSON.stringify(inquiryList));
+            //console.log('2. 총데이터수 : ' + totalDataInq);
 
             // 상품답변 데이터
             $.ajax({
@@ -491,10 +492,10 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 data: JSON.stringify(inquiryList),
                 success: function (answerList) {
-                    console.log('inquiryAnswer Ajax 성공');
+                    //console.log('inquiryAnswer Ajax 성공');
 
                     inqAnswerList = answerList;
-                    console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
+                    //console.log('inqAnswerList : ' + JSON.stringify(inqAnswerList));
 
 
                     // 목록 표시 호출(테이블 생성)
@@ -525,13 +526,13 @@ $(document).ready(function () {
 // 현재 페이지(currentPage)와 페이지 당 글 개수(dataPerPage) 반영
 function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) {
 
-    console.log('3. inqList : ' + JSON.stringify(inqList));
-    console.log('4. inqAnswerList : ' + JSON.stringify(inqAnswerList));
+    //console.log('3. inqList : ' + JSON.stringify(inqList));
+    //console.log('4. inqAnswerList : ' + JSON.stringify(inqAnswerList));
 
     let inquiryHtml = '';
     // Number로 변환하지 않으면 + 할 경우  스트링 결합 되어버림
-    currentPageIng = Number(currentPageIng); console.log('5. currentPage : ' + currentPageIng);
-    dataPerPageInq = Number(dataPerPageInq); console.log('6. dataPerPageInq : ' + dataPerPageInq);
+    currentPageIng = Number(currentPageIng); //console.log('5. currentPage : ' + currentPageIng);
+    dataPerPageInq = Number(dataPerPageInq); //console.log('6. dataPerPageInq : ' + dataPerPageInq);
 
 
     for (var i = (currentPageIng - 1) * dataPerPageInq; i < Math.min(currentPageIng * dataPerPageInq, inqList.length); i++) {
@@ -553,14 +554,24 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
             '<td>&nbsp;</td>' +
             '</tr>';
         // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
-        console.log('inqAnswerList : ' + inqAnswerList);
+        //console.log('inqAnswerList : ' + inqAnswerList);
         if (inqAnswerList[i]) {
             inquiryHtml += '<tr>' +
                 '<td>&nbsp;</td>' +
                 '<td>' +
-                '<div class="clickTitle">' + inqAnswerList[i].title + 
+                '<div class="clickAnswer">' + inqAnswerList[i].title + 
                 '</div>' +
                 '</td>' +
+                '<td>&nbsp;</td>' +
+                '<td>&nbsp;</td>' +                
+                '</tr>' +
+                '<tr class="answerContent">' +
+                '<td>&nbsp;</td>' +
+                '<td class="centerNo">' +
+                '<div>' + inqAnswerList[i].content + '</div>'
+                '</td>'
+                '<td>&nbsp;</td>'
+                '<td>&nbsp;</td>'
                 '</tr>';
         }
         
@@ -569,7 +580,7 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
 }
 // 페이징 표시 함수
 function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, inqList) {
-    console.log('7. currentPage: ' + currentPageIng);
+    //console.log('7. currentPage: ' + currentPageIng);
 
     totalDataInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
 
@@ -596,7 +607,7 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, i
 
     // 페이징 번호 표시
     for (var j = first; j <= last; j++) {
-        console.log('문의 currentPage : ' + currentPageIng);
+        //console.log('문의 currentPage : ' + currentPageIng);
         if (currentPageIng == j) {
             inquiry2Html += '<li><a href="#" id="P' + j + '">' + j + '</a></li>';
         } else {
@@ -635,3 +646,19 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, i
         displayDataInq(selectedPage, dataPerPageInq, inqList, inqAnswerList);
     });
 }
+
+// 문의 제목 클릭 -> 내용 출력
+$(document).ready(function(){
+    $(document).on('click', '.clickTitle', function(){
+        console.log('클릭 실행');
+        $(this).closest('tr').next('.inquiryContent').slideToggle();
+    });
+});
+
+// 문의 답변 클릭 -> 문의 답변 출력
+$(document).ready(function(){
+    $(document).on('click', '.clickAnswer', function(){
+        console.log('클릭 실행');
+        $(this).closest('tr').next('.answerContent').slideToggle();
+    });
+});

@@ -1,6 +1,6 @@
 body {
 	/* background-color: #eae5dd; */
-	background-color: white !important;
+	background: #f6f4ee;
 	width: 100%;
 }
 li {
@@ -471,8 +471,21 @@ section > h1 {
 .inquiryContent {
 	display: none;
 	padding-top: 20px;
+	transition: max-height 0.8s ease-out; 
 }
 .inquirysContent .active {
+	display: block;
+}
+.clickAnswer {
+	cursor: pointer;
+	text-align: left !important;
+}
+.answerContent {
+	display: none;
+	padding-top: 20px;
+	transition: max-height 0.8s ease-out; 	
+}
+.answerContent .active {
 	display: block;
 }
 #pagingul a {

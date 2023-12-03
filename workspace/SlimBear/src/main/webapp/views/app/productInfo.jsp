@@ -453,9 +453,9 @@
 			</button>
 			</sec:authorize>
 		</div>
-		<div class="footer">
-			<%@ include file="footer/footer.jsp"%>
-		</div>
 	</div>
 </body>
+<div class="footer">
+	<%@ include file="footer/footer.jsp"%>
+</div>
 </html>
