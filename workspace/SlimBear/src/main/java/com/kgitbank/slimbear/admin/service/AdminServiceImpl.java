@@ -19,6 +19,7 @@ import com.kgitbank.slimbear.admin.dao.AdminDAO;
 import com.kgitbank.slimbear.admin.dto.AdminDTO;
 import com.kgitbank.slimbear.admin.dto.OrderListDTO;
 import com.kgitbank.slimbear.admin.dto.ProductTotalListDTO;
+import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dto.ProductDTO;
@@ -35,6 +36,9 @@ public class AdminServiceImpl {
 	
 	@Autowired
 	private ProductDetailDAO productDtailDAO;
+
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	public AdminDTO getAdminByID(String id) {
 		return adminDAO.getAdminById(id);
@@ -129,10 +133,12 @@ public class AdminServiceImpl {
 	}
 	
 	public OrderListDTO getOrderDetailInfos(long order_uid) {
-		OrderListDTO order = new OrderListDTO();
+		OrderListDTO order = adminDAO.getOrderDetailByUID(order_uid);
+		if(order != null) {
+			order.setBuyer(memberDAO.getMemberById(order.getOwner_id()));
+			order.setProductDetails(adminDAO.getOrderProductDetilsListByOrderUID(order_uid));;	
+		}
 		
-		order.setProductDetails(adminDAO.getOrderProductDetilsListByOrderUID(order_uid));;
-
 		return order;
 	}
 

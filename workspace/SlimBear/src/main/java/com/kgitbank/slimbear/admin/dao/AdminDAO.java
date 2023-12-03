@@ -31,6 +31,10 @@ public class AdminDAO {
 		return template.selectList("com.slimbear.mapper.Admin.SELECT_ORDER_LIST");
 	}
 	
+	public OrderListDTO getOrderDetailByUID(long order_uid) {
+		return template.selectOne("com.slimbear.mapper.Admin.SELECT_ORDER_DETAIL_BY_UID", order_uid);
+	}
+	
 	public List<HashMap<Object, Object>> getOrderProductDetilsListByOrderUID(long order_uid){
 		return template.selectList("com.slimbear.mapper.Admin.SELECT_ORDER_PRODUCTDETAIL_LIST_BY_ORDER_UID", order_uid);
 	}

@@ -3,6 +3,7 @@ package com.kgitbank.slimbear.admin.dto;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 
 import lombok.Getter;
@@ -19,6 +20,8 @@ public class OrderListDTO extends OrderDTO {
 	private String pay_type;
 	private String pay_pg;
 	private String pay_amount;
-	
+
+
+	private MemberDTO buyer;
 	private List<HashMap<Object, Object>> productDetails;
 }

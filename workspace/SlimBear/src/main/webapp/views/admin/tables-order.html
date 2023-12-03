@@ -36,11 +36,8 @@
 <script src="/admin/js/sb-admin-2.min.js"></script>
 
 <link href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css" rel="stylesheet">
-
-<script
-	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
-<script
-	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
 
 <!-- datepicker -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
@@ -50,17 +47,25 @@
 <!-- icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-</head>
+<!-- export -->
+<script type="text/javascript" src="/admin/js/jspdf.js"></script>
+<script type="text/javascript" src="/admin/js/auto_table.js"></script>
+<script type="text/javascript" src="/admin/js/gulim.js"></script>
+<!-- Sheet JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+<!--FileSaver savaAs 이용 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 
 <body id="page-top">
-
+	
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-
+	
 		<th:block th:include="common/leftSlider.html" />
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
+	
 			<!-- Main Content -->
 			<div id="content">
 				<div class="card shadow" style="margin-top: 10px;
@@ -103,8 +108,54 @@
 						</div>
 
 						<hr>
-						<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100" style="float:right;">
-							
+						<div class="" >
+							<div style="float:left;">
+								<input type="radio" class="btn-check" name="status" id="option1" checked>
+								<label class="btn-label" for="option1" >전체
+								<span style = "background-color: #00000085; color: white">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option2" data-target="STAY" >
+								<label class="btn-label" for="option2">주문대기
+								<span style = "background-color: #0044cc21; color: #0044cc">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option3" data-target="PREPARING">
+								<label class="btn-label" for="option3">상품준비
+								<span style = "background-color: #0044cc21; color: #0044cc">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option4" data-target="STAY_DLV">
+								<label class="btn-label" for="option4">배송대기
+								<span style = "background-color: #0044cc21; color: #0044cc">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option5" data-target="DELIVERY">
+								<label class="btn-label" for="option5">배송
+								<span style = "background-color: #0044cc21; color: #0044cc">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option6" data-target="DONE">
+								<label class="btn-label" for="option6">완료
+								<span style = "background-color: #1cc88a29; color: #1cc88a">1
+								</span>
+								</label>
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option7" data-target="CANCEL">
+								<label class="btn-label" for="option7">취소
+								<span style = "background-color: #ff000024; color: #e74a3b">1
+								</span>
+								</label> 
+							</div>
+							<div style="float:right;">
+								<button class="btn btn-primary export-pdf" >PDF 내보내기</button>
+								<button class="btn btn-primary export-xcel" >엑셀 내보내기</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -127,11 +178,11 @@
 						<table id="table" class="table table-bordered">
 							<thead class="bg-gray-300" align="center">
 								<tr>
+									<th scope="col" data-field="status" data-sorting data-filter>주문 상태</th>
 									<th scope="col" data-field="code" data-sorting data-filter>주문번호</th>
 									<th scope="col" data-field="owner_id" data-sorting data-filter>아이디</th>
-									<th scope="col" data-field="status" data-field-type='enum' data-sorting data-filter>주문 상태</th>
-									<th scope="col" data-field="order_date" data-field-type="datetime" data-sorting="selected">주문일</th>
-									<th scope="col" data-field="pay_status" data-field-type='enum' data-sorting data-filter>결제 상태</th>
+									<th scope="col" data-field="order_date" data-sorting="selected">주문일</th>
+									<th scope="col" data-field="pay_status" data-sorting data-filter>결제 상태</th>
 									<th scope="col" data-field="pay_type" data-sorting data-filter>결제 방법</th>
 									<th scope="col" data-field="pay_pg" data-sorting data-filter>PG</th>
 									<th scope="col" data-field="pay_amount" data-sorting data-filter>결제금</th>
@@ -165,13 +216,83 @@
 				</div>
 			</footer>
 		</div>
-
+		
 		<!-- End of Main Content -->
-
-
-	</div>
+		
+		<!-- Modal -->
+		</div>
+	
+			<div id="myModalOverlay" class="myModalOverlay" onclick="closeModal()"></div>
+			<div id="myModal" class="mymodal">
+				<header style="margin : 10px;height : 10%;">
+					<h2>주문내역 상세 </h2><label>주문번호 : <b class="data-code"></b></label>
+				</header>
+				<main class="card"  style="margin: 10px;height : 80%;overflow-y: auto;">
+					<div style="margin: 10px;">
+						<h5>구매자 정보</h5>
+						<div  class="card" >
+							<table class="table-information">
+								<tbody>
+									<tr>
+										<th style="text-align:center; width:100px">이름</th>
+										<td class="data-buyer-name" data-modal-field="deliv_recipient"></td>
+										<th style="text-align:center; width:100px">아이디</th>
+										<td class="data-buyer-id" data-modal-field="deliv_tel"></td>
+									</tr>
+									<tr>
+										<th style="text-align:center; width:100px">전화번호</th>
+										<td class="data-buyer-phone" data-modal-field="deliv_tel"></td>
+										<th style="text-align:center; width:100px">이메일</th>
+										<td class="data-buyer-email" data-modal-field="deliv_tel"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div style="margin: 10px;">
+						<h5>배송지 정보</h5>
+						<div  class="card" >
+							<table class="table-information">
+								<tbody>
+									<tr>
+										<th style="text-align:center; width:100px">이름</th>
+										<td class="data-recipient-name"></td>
+										<th style="text-align:center; width:100px">전화번호</th>
+										<td class="data-recipient-phone" ></td>
+									</tr>
+									<tr>
+										<th style="text-align:center;">우편번호</th>
+										<td class="data-recipient-zipcode" colspan="3"></td>
+									</tr>
+									<tr>
+										<th style="text-align:center;">행정 주소</th>
+										<td class="data-recipient-addr1" colspan="3"></td>
+									</tr>
+									<tr>
+										<th style="text-align:center;">상세 주소</th>
+										<td class="data-recipient-addr2" colspan="3"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div style="margin: 10px;">
+						<h5>상품 정보</h5>
+						<div id="product-table" class="card">
+							
+						</div>
+					</div>
+				</main>
+				<footer  style="margin: 10px;">
+					<button class="btn btn-primary" style="float:right" onclick="closeModal()">확인</button>
+				</footer>
+				
+				
+			</div>
 	<!-- End of Footer -->
-
+	
 	<!-- End of Content Wrapper -->
 
 	<!-- Scroll to Top Button-->
@@ -185,6 +306,7 @@
 <script>
 	let currentPage = 1;
 	let pageItemCnt = 30;
+	let field_filter = {};
 	
 	function ajaxInitTable(){
 		$.ajax({
@@ -251,84 +373,84 @@
 				sortSelector.append(sortOption);
 			}
 		});
+		
+		for(var i=0; i<datas.length; ++i){
+			var tr = $('<tr></tr>');
+			tbody.append(tr);
+			var dataItem = datas[i];
+			tr.data('rowData', dataItem);
 
-		for(var i=0; i<datas.length; ++i){
-			var tr = $('<tr></tr>');
-			tbody.append(tr);
-			var dataItem = datas[i];
-			tr.data('rowData', dataItem);
-		
 			ths.each(function(index, item){
 				var field = $(item).data('field');
-				var fieldType = $(item).data('field-type');
 				if(field != null){
 					var value = dataItem[field];
 					var td = $('<td style="vertical-align:middle"></td');
 					tr.append(td);
 					td.data('field', field);
 					td.data('value', value);
-					td.data('field-type', fieldType);
-					if(fieldType != null){
-						switch(fieldType){
-							case 'datetime':
-								var date = new Date(dataItem[field]);
-								var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
-								var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-								td.html(dateToString + '<br>' + timeToString);
-								break;
-							case 'enum':
-								td.html(enumField[field][value]);
-								break;
-						}
-					}else{
-						td.text(dataItem[field]);
+					
+					td.on('click', function(){
+						openModal($(this).parents('tr').data('rowData')['uid']);
+					});
+					
+					switch(field){
+						case 'order_date':
+							var date = new Date(dataItem[field]);
+							var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
+							var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+							td.html(dateToString + '<br>' + timeToString);
+							break;
+						case 'status':
+							var text = enumField[field][value];
+							if(field == 'status')
+								switch(value){
+									case 'CANCEL':
+										var span = $('<span></span>');
+										span.attr('style', "border-radius: 10px;background-color: #ff000024;padding: 3px;color: #e74a3b");
+										span.html(text)
+										td.html(span);
+										break;
+									case 'STAY':
+									case 'PREPARING':
+									case 'STAY_DLV':
+									case 'DELIVERY':
+										var span = $('<span></span>');
+										span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
+										span.html(text)
+										td.html(span);
+										break;
+									case 'DONE':
+										var span = $('<span></span>');
+										span.attr('style', "border-radius: 10px;background-color: #1cc88a29;padding: 3px;color: #1cc88a");
+										span.html(text)
+										td.html(span);
+										break;
+									default:
+										var span = $('<span></span>');
+										span.attr('style', "border-radius: 10px;background-color: #b7b9cc33;padding: 3px;color: #808080");
+										span.html(text)
+										td.html(span);
+										break;
+								}
+							break;
+						case 'pay_status':
+							td.html(enumField[field][value]);
+							break;
+						default:
+							td.html(dataItem[field]);
 					}
 				}
+			
+				
 			});
 		}
-		
-		// 테스트용으로 데이터 늘리기 !!!!!!!!!!!!!!!!!!!
-		console.log("테스트용코드")
-		for(var i=0; i<datas.length; ++i){
-			var tr = $('<tr></tr>');
-			tbody.append(tr);
-			var dataItem = datas[i];
-			tr.data('rowData', dataItem);
-		
-			ths.each(function(index, item){
-				var field = $(item).data('field');
-				var fieldType = $(item).data('field-type');
-				if(field != null){
-					var value = dataItem[field];
-					var td = $('<td style="vertical-align:middle"></td');
-					tr.append(td);
-					td.data('field', field);
-					td.data('value', value);
-					td.data('field-type', fieldType);
-					if(fieldType != null){
-						switch(fieldType){
-							case 'datetime':
-								var date = new Date(dataItem[field]);
-								var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
-								var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-								td.html(dateToString + '<br>' + timeToString);
-								break;
-							case 'enum':
-								td.html(enumField[field][value]);
-								break;
-						}
-					}else{
-						td.text(dataItem[field]);
-					}
-				}
-			});
-		}
-		
+	
 		// selected option으로 기본 정령
 		$('#sort-selector').trigger('change');
 	}
 
 	$(function() {
+	
 		// 테이블 최초 초기화
 		ajaxInitTable();
 		
@@ -344,6 +466,7 @@
 	
 			var value = $("#filter").val();
 		    var curFiled = $('#filter-selector').val();
+		    var field_filter_cnt = {};
 		    $("#table").find('tbody tr').filter(function() {
 		    	var toggle = true;
 		    	if(curFiled=='field-all'){
@@ -365,7 +488,7 @@
 		    	// 날짜따로 확인
 		    	// 날짜 타입이 여러개면 원하는거랑 다르게나올수있음
 		    	$(this).find('td').each(function(index, td){
-			    	if($(this).data('field-type') == "date" || $(this).data('field-type') == "datetime"){
+			    	if($(this).data('field') == "order_date"){
 	    				var datevalue = new Date($(this).data('value'));
 	    				datevalue = new Date((datevalue.getMonth()+1) +'/' + datevalue.getDate()  + '/' + datevalue.getFullYear())
 	    				if(datevalue != null){
@@ -382,7 +505,41 @@
 	    			}
 		    	});
 		    	
+		    	// toogle filter
+		    	$(this).find('td').each(function(index, td){
+		   			if(field_filter_cnt[$(this).data('field')] == null)
+	    				field_filter_cnt[$(this).data('field')] = {};
+	    			
+	    			if(field_filter_cnt[$(this).data('field')][$(this).data('value')] == null)
+	    				field_filter_cnt[$(this).data('field')][$(this).data('value')] = 0;
+	    			
+	    	 		if(field_filter_cnt[$(this).data('field')]['total'] == null)
+	    	 			field_filter_cnt[$(this).data('field')]['total'] = 0;
+	    	 		
+		    		if(toggle){
+		    			field_filter_cnt[$(this).data('field')][$(this).data('value')] += 1;
+		    			field_filter_cnt[$(this).data('field')]['total'] += 1;
+		    		}
+		    		
+		    		if(field_filter[$(this).data('field')] != null){
+		    			var target = field_filter[$(this).data('field')];
+		    			if(target != $(this).data('value')){
+		    				toggle = false;
+		    			}
+		    		}
+		    	});
+		    
 		    	$(this).toggle(toggle);
+		    });
+		    
+		    $('input[name=status]').each(function(){
+		    	if($(this).data('target') == null){
+		    		var cnt = field_filter_cnt['status']['total'];
+			    	$('label[for='+ $(this).attr('id') +']').find('span').text(cnt == null ? 0 : cnt);	
+		    	}else{
+			    	var cnt = field_filter_cnt['status'][$(this).data('target')];
+			    	$('label[for='+ $(this).attr('id') +']').find('span').text(cnt == null ? 0 : cnt);	
+		    	}
 		    });
 		}
 		
@@ -487,6 +644,60 @@
 			pageItemCnt = $(this).val();
 			$("#filter").trigger('keyup');
 		});
+		
+		// Modal
+		$('#myModalOverlay').on('animationend', function(e){
+			switch(e.originalEvent.animationName){
+			case 'fadeout':
+				$('#myModalOverlay').css('display', "none");
+				break;
+			}
+		})
+		
+		
+		// toggle filter
+		
+		$('input[name=status]').on('change',function(){
+			field_filter['status'] = $(this).data('target');
+			$("#filter").trigger('keyup');
+		});
+		
+		// export
+		$('.export-pdf').on('click', function(){
+			var doc = new jspdf.jsPDF("p", "mm", "a4");
+			doc.addFileToVFS('malgun.ttf', _fonts); 
+		    doc.addFont('malgun.ttf','malgun', 'normal');
+
+			doc.autoTable({
+			    headStyles:  { halign: 'center', valign: 'middle' }, 
+			    bodyStyles: { halign: 'center', valign: 'middle' },
+			    styles : { font : 'malgun', fontStyle :'normal'},
+			    html: '#table'
+			});
+			doc.save('주문.pdf');  
+		})
+		
+		$('.export-xcel').on('click', function(){
+			  var wb = XLSX.utils.book_new();
+
+			  // step 2. 시트 만들기 
+			  var newWorksheet = XLSX.utils.table_to_sheet(document.getElementById('table')); 
+
+			  // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
+			  XLSX.utils.book_append_sheet(wb, newWorksheet,'sheet');
+
+			  // step 4. 엑셀 파일 만들기 
+			  var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+
+			  // step 5. 엑셀 파일 내보내기 
+			  saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "주문.xlsx");
+		});
+		function s2ab(s) { 
+			  var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+			  var view = new Uint8Array(buf);  //create uint8array as viewer
+			  for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+			  return buf;    
+		}
 	});
 	
 	
@@ -566,67 +777,168 @@
 		return showPage;
 	}
 	
-	//=================================
-	
-	
-	function typeFormatter(value, row, index) {
+	// Modal
+	function openModal(order_uid) {
+	 // Add open class to make visible and trigger animation
+	  $('#myModal').addClass('open');
+	  $('#myModalOverlay').css('display', 'block');
+	  $('#myModalOverlay').removeClass('fadeout');
+	  $('#myModalOverlay').addClass('fadein');
+	  $.ajax({
+			url : "/admin/order/detail?order_uid=" + order_uid,
+			type : "GET",
+			success : function(result){
+				var html = [];
+				html.push('<div><table style="width:100%;"><thead align="center"><tr>');
+				
+				html.push('<th style="background: #cbd1f9;">상품UID</th>')
+				html.push('<th style="background: #cbd1f9;">색상</th>')
+				html.push('<th style="background: #cbd1f9;">사이즈</th>')
+				html.push('<th style="background: #cbd1f9;">개수</th>')
+				html.push('<th style="background: #cbd1f9;">대표이미지</th>')
+				html.push('<th style="background: #cbd1f9;">리뷰</th>')
+				
+				html.push('</tr></thead><tbody class="searchable" align="center">');
 		
-	var html = [];
+				for( var index in result.productDetails) {
+					var productDetail= result.productDetails[index];
+					html.push('<tr>');
+					html.push('<th>' + productDetail.prod_uid + '</th>');
+					html.push('<td>' + productDetail.color +'</td>');
+					html.push('<td>'+ productDetail.size+'</td>');
+					html.push('<td>'+ productDetail.cnt+'</td>');
+					html.push('<td><img src="/resources/images/'+ productDetail.main_image+'" class="img-thumbnail" width="150" height="auto"></td>');
+					if(productDetail.review_uid != null){
+						html.push('<td>'+ productDetail.review_uid+'</td>');
+					}
+					else{
+						html.push('<td>-</td>');
+					}
+				
+					html.push('</tr>');
+					
+				}
+				
+				html.push('</tbody></table></div>');
+	
+				$('#myModal').find('#product-table').html(html.join(''));
+				
+				
+				$('#myModal').find('.data-code').text(result.code);
+				
+				$('#myModal').find('.data-buyer-name').text(result.buyer.name);
+				$('#myModal').find('.data-buyer-id').text(result.buyer.id);
+				$('#myModal').find('.data-buyer-phone').text(result.buyer.phone);
+				$('#myModal').find('.data-buyer-email').text(result.buyer.email);
+				
+				$('#myModal').find('.data-recipient-name').text(result.deliv_recipient);
+				$('#myModal').find('.data-recipient-phone').text(result.deliv_tel);
+				
+				var address = result.deliv_address;
+				address = address.split('|');
+				$('#myModal').find('.data-recipient-zipcode').text(address[0]);
+				$('#myModal').find('.data-recipient-addr1').text(address[1]);
+				$('#myModal').find('.data-recipient-addr2').text(address[2]);
+			},
+			error : function(){
+				alret("error");
+			}
+				
+		});
+	
+	}
 
-		
-		if(value != "DONE" && value != "CANCEL"){
-			html.push('<select class="form-select">');
-			html.push( '<option value="STAY"' + (value=="STAY" ? ' selected' : '') + ' >대기중</option>');
-			html.push( '<option value="PREPARING"' + (value=="PREPARING" ? ' selected' : '') + ' >상품 준비 중</option>');
-			html.push( '<option value="STAY_DLV"' +( value=="STAY_DLV" ? ' selected' : '') + ' >배송 대기</option>');
-			html.push( '<option value="DELIVERY"' + (value=="DELIVERY" ? ' selected' : '') + ' >배송 중</option>');
-			html.push( '<option value="CANCEL">주문 취소</option>');
-			html.push( '<option value="DONE">완료</option>');
-			html.push('</select>');
-		}
-		else if(value == "CANCEL")
-			html.push('<b>주문 취소<b>');
-		
-		else if(value == "DONE")
-			html.push('<b>완료<b>');
-
-		return html.join('');
+	function closeModal() {
+	  // Remove open class to hide and trigger animation
+	  $('#myModal').removeClass('open');
+	  $('#myModalOverlay').removeClass('fadein');
+	  $('#myModalOverlay').addClass('fadeout');
 	}
 	
-	function payStatusFormatter(value, row, index) {
-		var html = [];
-		
-		switch(value){
-			case "SATY":
-				html.push('<b>결제 필요<b>');
-				break;
-			case "PREPARING":
-				html.push('<b>결제 중<b>');
-				break;
-			case "DONE":
-				html.push('<b>결제 완료<b>');
-				break;
-			default:
-				html.push('<b>결제 필요<b>');
-				break;
-		}
-		
-		return html.join('');
-	}
-	
-
-	function dateFormatter(value, row, index) {
-		return [ new Date(value).toLocaleDateString().replace(/\./g, '')
-				.replace(/\s/g, '-') ].join('')
-	}
-	
-	function ownerFormatter(value, row, index){
-		if(value == null)
-			return ['-'].join('');
-		else
-			return [ 
-				'<a class="btn btn-primary" href="/admin/home/member?memberID=',value,'">',value,'</a>'
-			].join('')
-	}
 </script>
+
+<style>
+.mymodal.open {
+  transform: translateX(0px);
+}
+
+.myModalOverlay.fadein{
+	animation: fadein 0.5s;
+}
+
+.myModalOverlay.fadeout{
+	animation: fadeout 0.5s;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+		
+	}
+}
+
+@keyframes fadeout {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.mymodal {
+  /* Update CSS with transition and transform rules */
+  transition: transform 0.1s linear;
+  transform: translateX(100%);
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  width: 600px;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(255 255 255)
+}
+
+
+.myModalOverlay{
+  display : none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color:  rgb(0 0 0 / 30%)
+}
+
+#table tbody td:hover{
+	cursor : pointer
+}
+
+#table tbody tr:hover{
+	background-color:  rgb(0 0 0 / 5%)
+}
+
+.table-information th{
+	background-color: rgb(0 0 0 / 5%)
+}
+
+.btn-check {
+	display : none;
+}
+
+.btn-check+label{
+	box-shadow: none;
+}
+
+.btn-check:checked+label{
+	box-shadow: inset 0 -2px #000;
+}
+
+</style>
 </html>

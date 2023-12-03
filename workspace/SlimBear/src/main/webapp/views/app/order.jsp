@@ -73,7 +73,7 @@
 						 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<input type="text" class='recipient-addr1 payment-buyer-addr1' placeholder="기본 주소" id="sample6_address"
-						value="" readonly> <input class="recipient-addr2" type="text" placeholder="상세 주소"
+						value="" readonly> <input class="recipient-addr2 payment-buyer-addr2" type="text" placeholder="상세 주소"
 						id="sample6_detailAddress" > <input type="hidden" id="sample6_extraAddress" placeholder="참고항목" value="">
 				</div>
 				<!--휴대전화-->

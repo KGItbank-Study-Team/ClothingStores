@@ -49,7 +49,6 @@ public class AdminRestController {
 		return 	order;
 	}
 	
-
 	@PostMapping("add/product/detail")
 	public String addProductDetail(ProductDetailDTO detail) {
 	

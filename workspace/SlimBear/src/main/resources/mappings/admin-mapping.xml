@@ -27,6 +27,14 @@
 		LEFT JOIN member m
 		ON(o.mem_uid=m.uid);
  	</select>
+ 	
+ 	<select id="SELECT_ORDER_DETAIL_BY_UID" resultType="com.kgitbank.slimbear.admin.dto.OrderListDTO">
+ 		SELECT m.id AS owner_id, o.*, p.status AS pay_status, p.pay_pg AS pay_pg, p.type AS pay_type, p.price AS pay_amount
+		FROM productOrder o LEFT JOIN orderPayment p 
+		ON(o.uid=p.order_uid)
+		LEFT JOIN member m
+		ON(o.mem_uid=m.uid) WHERE o.uid=#{order_uid};
+ 	</select>
  
  	
  	<select id="SELECT_ORDER_PRODUCTDETAIL_LIST_BY_ORDER_UID" resultType="java.util.HashMap">

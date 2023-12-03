@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
 				slimBearImportPayment.refundRequest(order.getCode(), "주문정보 저장실패");
 				throw new SlimBearException("주문정보 저장실패");
 			} catch (Exception e2) {
-				throw new SlimBearException("주문정보 저장실패");
+				throw new SlimBearException(e2.getMessage());
 			}
 		}
 	}
