@@ -7,12 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/resources/css/main_page.css" />
-<link rel="stylesheet" href="/resources/css/swiper.css" />
-
-
-<link rel="stylesheet" href="/resources/css/optimizeruser.css" />
-
-
+<!-- <link rel="stylesheet" href="/resources/css/swiper.css" /> -->
+<!-- <link rel="stylesheet" href="/resources/css/optimizeruser.css" /> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/main_page.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
@@ -30,7 +26,7 @@
 					</div>
 				</c:forEach>
 				<div class="slide_prev_button slide_button">◀</div>
-				<div class="slide_next_button slide_button">▶</div>
+				<div class="slide_next_button slide_button">▶</div>	
 				<ul class="slide_pagination"></ul>
 			</div>
 		</div>
@@ -50,11 +46,12 @@
 		<div class="product-container">
 			<div class="slider-wrapper">
 				<button id="prev-slide" class="slide-button material-symbols-rounded">&lsaquo;</button>
-				<ul class="image-list">
+				<div class="image-list"> 
 					<c:forEach var="item" items="${hotProductList}">
-						<img class="image-item" src="/resources/images/${item.main_image}" alt="img-1" />
+						<img class="image-item" src="${item.main_image}" alt="img-1" />
+						<%-- <div class="prod-name"><p>${item.name}</p></div> --%>
 					</c:forEach>
-				</ul>
+				</div>
 				<button id="next-slide" class="slide-button material-symbols-rounded">&rsaquo;</button>
 			</div>
 			<div class="slider-scrollbar">
@@ -78,7 +75,7 @@
 										<div class="thumbnail">
 											<div class="salePer"></div>
 											<div class="prdImg">
-												<a href="/app/product?p=${item.uid}" name="anchorBoxName_4777"> <img src="/resources/images/${item.main_image}" id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
+												<a href="/app/product?p=${item.uid}" name="anchorBoxName_4777"> <img src="${item.main_image}" id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
 												</a> <span class="chk"> <input type="checkbox" class="ProductCompareClass xECPCNO_4777 displaynone" />
 												</span>
 											</div>
@@ -182,15 +179,16 @@
 										<div class="thumbnail">
 											<div class="salePer"></div>
 											<div class="prdImg">
-												<a href="/app/product?p=${item.uid}" name="anchorBoxName_7902"> <img src="/resources/images/${item.main_image}" id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
+												<a href="/app/product?p=${item.uid}" name="anchorBoxName_7902"> <img src="${item.main_image}" id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
 												</a> <span class="chk"> <input type="checkbox" class="ProductCompareClass xECPCNO_7902 displaynone" />
 												</span>
 											</div>
 											<!-- .prdImg -->
 										</div> <!-- .thumbnail -->
 										<div class="description">
-											<strong class="name"> <a href="#" class=""> <span class="title displaynone"> <span style="font-size: 12px; color: #555555;">상품명</span> :
-												</span>${item.name}
+											<strong class="name">
+												 <a href="#" class=""> 
+												 	<span class="title displaynone"><span style="font-size: 25px; color: #555555;">상품명</span> :</span><span style="font-size: 20px;">${item.name}</span>
 											</a>
 											</strong>
 											<!-- .name -->
@@ -201,16 +199,16 @@
 														<span class="chips" title="#CFBCAE" style="background-color: #CFBCAE" color_no="" displayGroup="1"></span> <span class="chips" title="#845E22" style="background-color: #845E22" color_no="" displayGroup="1"></span>
 													</div></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 11px; color: #999999;">소비자가</span> :
-												</strong> <span style="font-size: 11px; color: #999999; text-decoration: line-through;">${item.price}</span></li>
+												</strong> <span style="font-size: 11px; color: #999999; text-decoration: line-through;">${item.price}원</span></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">판매가</span> :
-												</strong> <span style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price }</span> <span id="span_product_tax_type_text" style="text-decoration: line-through;"></span></li>
+												</strong> <span style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price }원</span> <span id="span_product_tax_type_text" style="text-decoration: line-through;"></span></li>
 												<li class=" xans-record-"><strong class="title "> <span style="font-size: 12px; color: #555555;">할인판매가</span> :
-												</strong> <span style="font-size: 12px; color: #555555;"> 최종할인판매가 <span style="font-size: 11px; color: #fa6767; font-weight: bold;">할인률DBDBDB %</span>
+												</strong> <span style="font-size: 12px; color: #555555;"> 최종할인판매가 <span style="font-size: 11px; color: #fa6767; font-weight: bold;">${item.sale_price}원</span>
 												</span></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">상품간략설명</span> :
 												</strong> <span style="font-size: 12px; color: #555555;">${item.desc }</span></li>
-												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #999999;">상품요약정보</span> :
-												</strong> <span style="font-size: 12px; color: #999999;">${item.desc }</span></li>
+												<!-- <li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #999999;">상품요약정보</span> :
+												</strong> <span style="font-size: 12px; color: #999999;">${item.desc }</span></li> -->
 											</ul>
 											<!-- .spec -->
 											<div class="icon">

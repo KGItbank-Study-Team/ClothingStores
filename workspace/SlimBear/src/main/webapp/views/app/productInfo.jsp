@@ -245,7 +245,8 @@
 			<!-- right -->
 		</div>
 		<!-- productInfo  -->
-		<hr />
+		<hr>
+		<!-- <img alt="" src="/resources/images/productInfoBanner.jpg"> -->
 		<br />
 		<!-- 보기 선택  -->
 		<div class="menuChoice">

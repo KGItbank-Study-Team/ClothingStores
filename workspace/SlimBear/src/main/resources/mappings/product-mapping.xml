@@ -14,6 +14,7 @@
 
 	<select id="SELECT_PROD_LIST" resultType="product">
 		SELECT * FROM product
+		LIMIT 8;
 	</select>
 
 	<select id="SELECT_PROD_BY_CATEGORY" resultType="product">
