@@ -57,20 +57,6 @@ public class HunController {
 		return "order_list";
 	}
 	
-	@RequestMapping("member/reviewWrite")
-	public String orderList2(Authentication authentication, Model model) {
-
-		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-
-		List<OrderListVO> vo = hunService.getOrderListInfo(user.getUid());
-		model.addAttribute("orderList", vo);
-		model.addAttribute("orderList2", vo);
-
-		return "reviewWrite";
-	}
-	
 	@RequestMapping("member/myPage/orderList/cancel")
 	public String orderCancel(Authentication authentication, Model model) {
 		

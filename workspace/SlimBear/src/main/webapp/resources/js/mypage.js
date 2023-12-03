@@ -179,7 +179,7 @@ $(document).ready(function () {
 // 리뷰 작성 창
 $(document).ready(function(){
     $('#openWriteForm').click(function(){
-        var windowFeature = 'width=600, height=800, top=' + (screen.height / 2) + '.left=' + (screen.width / 2);
+        var windowFeature = 'width=420, height=790, top=' + (screen.height / 2) + '.left=' + (screen.width / 2) + ', resizable=no';
 
         window.open('/app/member/reviewWrite', '후기 작성', windowFeature);
     })

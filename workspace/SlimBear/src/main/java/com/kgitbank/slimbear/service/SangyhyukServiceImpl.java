@@ -38,7 +38,19 @@ public class SangyhyukServiceImpl {
 	}
 	
 	// 특정 상품 uid의 리뷰 조회
-	public List<ReviewDTO> getReviewListByUid(long uid) {
+	public List<ReviewDTO> getReviewListByUid(Long uid) {
+		
+		ArrayList<ReviewDTO> review = new ArrayList<>();
+		
+		for(ReviewDTO i : review) {
+			ReviewDTO list = new ReviewDTO();
+			
+			list.setProd_code("1:blue:2XL");
+			list.setContent("리뷰 내용입니다.");
+			list.setScore(40);
+			list.setTitle("리뷰 제목 입니다.");
+		}
+		
 		return reviewDAO.getReviewListByUid(uid);
 	}
 	
