@@ -106,9 +106,9 @@
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
                                                 	<strong style="font-weight: bolder;">${notices.content}</strong>
                                                 </p>
-                                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	${notices.content}
-                                                </p>
+<!--                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;"> -->
+<%--                                                 	${notices.content} --%>
+<!--                                                 </p> -->
                                                 
                                                 <p><br></p>
                                             </div>

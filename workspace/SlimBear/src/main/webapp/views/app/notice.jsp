@@ -169,8 +169,7 @@
 				</ol>
 				<!-- 마지막 페이지 여부 확인 후 출력 -->
 				<c:if test="${currentPage eq totalPages && !hasNextBlock}">
-					<li class="page-item disabled"><span class="page-link">마지막
-							페이지입니다.</span></li>
+					<li class="page-item disabled"><span class="page-link">마지막 페이지입니다.</span></li>
 				</c:if>
 			</div>
 			
@@ -180,14 +179,20 @@
 </div>
 
 <script>
-	var regDateMillis = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
-	var currentDateMillis = new Date().getTime();
-	var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
-	var imageId = "newImage${loop.index}";
-	
-	if (currentDateMillis - regDateMillis > oneWeekInMillis) {
-	    document.getElementById(imageId).style.display = 'none';
-	}
+document.addEventListener('DOMContentLoaded', function () {
+    var currentDateMillis = new Date().getTime();
+    var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
+
+    // 반복문을 통해 각 이미지에 대한 처리 수행
+    <c:forEach var="board" items="${notices}" varStatus="loop">
+        var regDateMillis_${loop.index} = ${board.reg_date.time}; // reg_date가 Date 객체인 경우
+        var imageId_${loop.index} = "newImage${loop.index}";
+
+        if (currentDateMillis - regDateMillis_${loop.index} > oneWeekInMillis) {
+            document.getElementById(imageId_${loop.index}).style.display = 'none';
+        }
+    </c:forEach>
+});
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
