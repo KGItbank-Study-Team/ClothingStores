@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
+import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -74,6 +75,11 @@ public class RSYAdminDAO {
 
 	// Notice 리스트 조회
 	public List<NoticeDTO> getNoticeList() {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL"); 
+		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL");
+	}
+
+	// faq 리스트 조회
+	public List<FaqDTO> getFaqList() {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_FAQ_LIST");
 	}
 }

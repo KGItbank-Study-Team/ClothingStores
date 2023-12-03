@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.admin.service.RSYAdminServiceImpl;
+import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
@@ -84,12 +85,14 @@ public class RSYAdminController {
 		List<InquiryDTO> inquiryList = yangService.getInquiryListAll();
 		return inquiryList;
 	}
+
 	@RequestMapping("inquiry/getAnswer")
 	@ResponseBody
 	public InquiryAnswerDTO boardinquiryGetAnswer(@RequestParam(name = "uid", required = false) Long uid) {
 		InquiryAnswerDTO annswer = yangService.getAnswerDetail(uid);
 		return annswer;
 	}
+
 	@RequestMapping("inquiry/addOrUpdateAnswer")
 	@ResponseBody
 	public ResponseEntity<String> addOrUpdateAnswer(@RequestParam Long inqr_uid, @RequestParam String answerTitle,
@@ -107,7 +110,6 @@ public class RSYAdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("답글 추가/수정 중에 오류가 발생했습니다.");
 		}
 	}
-	
 
 //    @PostMapping("inquiry/hideData")
 //    @ResponseBody
@@ -117,34 +119,52 @@ public class RSYAdminController {
 //        return ResponseEntity.ok("숨김이 완료되었습니다.");
 //    }
 
-    @DeleteMapping("inquiry/deleteData")
-    @ResponseBody
-    public ResponseEntity<String> deleteData(@RequestBody InquiryDTO data) {
-        // 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
-    	System.out.println(data);
-    	rsyAdminService.deleteInquiry(data);
-        return ResponseEntity.ok("삭제가 완료되었습니다.");
-    }
-    @DeleteMapping("review/deleteData")
-    @ResponseBody
-    public ResponseEntity<String> deleteData(@RequestBody ReviewDTO data) {
-        // 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
-    	System.out.println(data);
-    	rsyAdminService.deleteReview(data);
-        return ResponseEntity.ok("삭제가 완료되었습니다.");
-    }
-    
-    //공지사항관리
-    @RequestMapping("home/board/notice")
+	@DeleteMapping("inquiry/deleteData")
+	@ResponseBody
+	public ResponseEntity<String> deleteData(@RequestBody InquiryDTO data) {
+		// 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
+		System.out.println(data);
+		rsyAdminService.deleteInquiry(data);
+		return ResponseEntity.ok("삭제가 완료되었습니다.");
+	}
+
+	@DeleteMapping("review/deleteData")
+	@ResponseBody
+	public ResponseEntity<String> deleteData(@RequestBody ReviewDTO data) {
+		// 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
+		System.out.println(data);
+		rsyAdminService.deleteReview(data);
+		return ResponseEntity.ok("삭제가 완료되었습니다.");
+	}
+
+	// 공지사항관리
+	@RequestMapping("home/board/notice")
 	public String boardNotice(Model model) {
 
 		model.addAttribute("noticeList", rsyAdminService.getNoticeList());
 		return "tables-board-notice";
 	}
-    @GetMapping("notice/list")
+
+	@GetMapping("notice/list")
 	@ResponseBody
-	public List<NoticeDTO> boardNoticeist() {
+	public List<NoticeDTO> boardNoticeList() {
 		List<NoticeDTO> noticeList = rsyAdminService.getNoticeList();
 		return noticeList;
 	}
+
+	// faq관리
+	@RequestMapping("home/board/faq")
+	public String boardFaq(Model model) {
+
+		model.addAttribute("faqList", rsyAdminService.getFaqList());
+		return "tables-board-faq";
+	}
+
+	@GetMapping("faq/list")
+	@ResponseBody
+	public List<FaqDTO> boardFaqList() {
+		List<FaqDTO> faqList = rsyAdminService.getFaqList();
+		return faqList;
+	}
+
 }

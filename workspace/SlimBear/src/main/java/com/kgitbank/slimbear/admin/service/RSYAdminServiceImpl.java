@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
+import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
@@ -92,5 +93,10 @@ public class RSYAdminServiceImpl {
 	// 공지사항
 	public List<NoticeDTO> getNoticeList() {
 		return rsyAdminDAO.getNoticeList();
+	}
+
+	// faq
+	public List<FaqDTO> getFaqList() {
+		return rsyAdminDAO.getFaqList();
 	}
 }
