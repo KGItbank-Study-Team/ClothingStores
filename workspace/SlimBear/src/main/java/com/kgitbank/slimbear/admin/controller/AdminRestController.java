@@ -3,6 +3,8 @@ package com.kgitbank.slimbear.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +28,6 @@ public class AdminRestController {
 
 	@PostMapping("category/childs")
 	public List<CategoryDTO> getCategory(@RequestParam("ctg") long ctg) {
-		
 		List<CategoryDTO> categoryList = rsyService.getSubCategoryListByTopCtgUid(ctg);
 		
 		return categoryList;
@@ -34,7 +35,6 @@ public class AdminRestController {
 	
 	@GetMapping("order/list")
 	public List<OrderListDTO> getOrderList(){
-		
 		List<OrderListDTO> orderList = adminService.getOrderInfos();
 
 		return orderList;

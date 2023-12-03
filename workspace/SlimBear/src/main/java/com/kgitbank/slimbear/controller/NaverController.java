@@ -3,8 +3,11 @@ package com.kgitbank.slimbear.controller;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -31,9 +34,15 @@ public class NaverController {
 	
 	@Autowired
 	private MemberService memberSerivce;
+	
+	@Value("${naver.client.id}")
+	private String clientId;
+	
+	@Value("${naver.client.secret}")
+	private String clientSecret;
 
 	@GetMapping("/oauth")
-	public String naverConnect() {
+	public String naverConnect(HttpServletRequest request) {
 		// state용 난수 생성
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString(32);
@@ -41,9 +50,9 @@ public class NaverController {
 		// redirect
 		StringBuffer url = new StringBuffer();
 		url.append("https://nid.naver.com" + "/oauth2.0/authorize?response_type=code");
-		url.append("&client_id=" + "CmBjci1LKbhWOqc5OBNQ");
+		url.append("&client_id=" + clientId);
 		//url.append("&response_type=code");
-		url.append("&redirect_uri=http://localhost:8080/app/login/naver/callback");
+		url.append("&redirect_uri=" + request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf(request.getRequestURI())) + "/app/login/naver/callback");
 		url.append("&state=" + state);
 
 		return "redirect:" + url;
@@ -54,10 +63,7 @@ public class NaverController {
 	public String naverLogin(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model) {
 
 	    // 네이버에 요청 보내기
-	    String clientId = "CmBjci1LKbhWOqc5OBNQ";
-	    String clientSecret = "yUdE63eteV";
-
-	    RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate();
 
 	    // 요청 파라미터 설정
 	    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -146,7 +152,7 @@ public class NaverController {
         	member.setPassword("nav_" + naverEmail.split("@")[0]);
         	member.setEmail(naverEmail);
         	member.setName(name);
-        	member.setAddress("asdf|asdf|asdf");
+        	member.setAddress("||");
         	member.setPhone("000-0000-0000");
         	member.setLogin_type(MEMBER_TYPE.NAVER.toString());
         	

@@ -99,7 +99,7 @@ public class AdminController {
 
 	@PostMapping("/home/product/add")
 	public String productAddPage(HttpServletRequest request, ProductUpdateCMD product) {
-		adminService.addProduct(product, request.getSession().getServletContext().getRealPath("/resources/images"));
+		adminService.addProduct(product);
 		return "product-add";
 	}
 
@@ -140,7 +140,7 @@ public class AdminController {
 	@PostMapping("/home/product/update")
 	public String producUpdate(HttpServletRequest request, ProductUpdateCMD product, Model model) {
 
-		adminService.updateProduct(product, request.getSession().getServletContext().getRealPath("/resources/images"));
+		adminService.updateProduct(product);
 
 		model.addAttribute("productUID", product.getUid());
 		return "redirect:/admin/home/product";

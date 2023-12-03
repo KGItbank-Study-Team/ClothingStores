@@ -4,8 +4,12 @@ package com.kgitbank.slimbear.controller;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.Spring;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,15 +30,22 @@ import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_TYPE;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.service.MemberService;
 
+
 @Controller
 @RequestMapping("/login/kakao")
 public class KakaoController {
 	
 	@Autowired
 	private MemberService memberSerivce;
+	
+	@Value("${kakao.client.id}")
+	private String clientId;
+	
+	@Value("${kakao.client.secret}")
+	private String clientSecret;
 
     @GetMapping("/oauth")
-    public String 카카오연동() {
+    public String 카카오연동(HttpServletRequest request) {
         // state용 난수 생성
         SecureRandom random = new SecureRandom();
         String state = new BigInteger(130, random).toString(32);
@@ -42,20 +53,18 @@ public class KakaoController {
         // redirect
         StringBuffer url = new StringBuffer();
         url.append("https://kauth.kakao.com/oauth/authorize?response_type=code");
-        url.append("&client_id=" + "0b83e6e79ced6252c01ebae15f43a21c");
-        url.append("&redirect_uri=http://localhost:8080/app/login/kakao/callback");
+        url.append("&client_id=" + clientId);
+        url.append("&redirect_uri=" + request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf(request.getRequestURI())) + "/app/login/kakao/callback");
         url.append("&state=" + state);
 
         return "redirect:" + url;
     }
 
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json")
-    public String 카카오로그인(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model) {
+    public String 카카오로그인(@RequestParam(value = "code") String code, @RequestParam(value = "state") String state, Model model, HttpServletRequest request) {
 
         // 카카오에 요청 보내기
-        String clientId = "0b83e6e79ced6252c01ebae15f43a21c";
-        String clientSecret = "ba603381e9ee2254a8e11799955b4fdf";
-        String redirectUri = "http://localhost:8080/app/login/kakao/callback";
+        String redirectUri = request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf(request.getRequestURI())) + "/app/login/kakao/callback";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -70,10 +79,10 @@ public class KakaoController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> requestBody = new HttpEntity<>(params, headers);
 
         // 카카오에 토큰 요청
-        ResponseEntity<String> response = restTemplate.postForEntity("https://kauth.kakao.com/oauth/token", request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("https://kauth.kakao.com/oauth/token", requestBody, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
             // 응답에서 토큰 추출
@@ -144,8 +153,8 @@ public class KakaoController {
         	member.setId("kao" + id);
         	member.setPassword("kao" + id);
         	member.setEmail(kakaoEmail);
-        	member.setName("구해야됨");
-        	member.setAddress("asdf|asdf|asdf");
+        	member.setName("");
+        	member.setAddress("||");
         	member.setPhone("000-0000-0000");
         	member.setLogin_type(MEMBER_TYPE.KAKAO.toString());
         	
