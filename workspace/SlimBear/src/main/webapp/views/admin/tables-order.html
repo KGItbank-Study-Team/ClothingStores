@@ -186,6 +186,7 @@
 									<th scope="col" data-field="pay_type" data-sorting data-filter>결제 방법</th>
 									<th scope="col" data-field="pay_pg" data-sorting data-filter>PG</th>
 									<th scope="col" data-field="pay_amount" data-sorting data-filter>결제금</th>
+									<th scope="col" class="export-ignore" data-field-more></th>
 								</tr>
 							</thead>
 							<tbody align="center">
@@ -382,10 +383,10 @@
 
 			ths.each(function(index, item){
 				var field = $(item).data('field');
+				var td = $('<td style="vertical-align:middle"></td');
+				tr.append(td);
 				if(field != null){
 					var value = dataItem[field];
-					var td = $('<td style="vertical-align:middle"></td');
-					tr.append(td);
 					td.data('field', field);
 					td.data('value', value);
 					
@@ -436,13 +437,16 @@
 						case 'pay_status':
 							td.html(enumField[field][value]);
 							break;
+						
 						default:
 							td.html(dataItem[field]);
 					}
 				}
-			
-				
+				else if($(item).attr('data-field-more') != null){
+					td.html('<button class="btn btn-primary">+</button>');
+				}
 			});
+			
 		}
 	
 		// selected option으로 기본 정령
@@ -668,21 +672,30 @@
 			doc.addFileToVFS('malgun.ttf', _fonts); 
 		    doc.addFont('malgun.ttf','malgun', 'normal');
 
+		    $('.export-ignore').hide();
 			doc.autoTable({
 			    headStyles:  { halign: 'center', valign: 'middle' }, 
 			    bodyStyles: { halign: 'center', valign: 'middle' },
 			    styles : { font : 'malgun', fontStyle :'normal'},
 			    html: '#table'
 			});
+		
 			doc.save('주문.pdf');  
+			$('.export-ignore').show();
 		})
 		
 		$('.export-xcel').on('click', function(){
 			  var wb = XLSX.utils.book_new();
 
-			  // step 2. 시트 만들기 
+			 // step 2. 시트 만들기 
 			  var newWorksheet = XLSX.utils.table_to_sheet(document.getElementById('table')); 
-
+			  
+			  newWorksheet['!cols'] = [];
+			  $('#table').find('thead th').each(function(index){
+				  if($(this).hasClass('export-ignore'))
+				 	 newWorksheet['!cols'][index] = { hidden : true};
+			  });
+		  
 			  // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
 			  XLSX.utils.book_append_sheet(wb, newWorksheet,'sheet');
 
