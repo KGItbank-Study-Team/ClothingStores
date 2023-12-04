@@ -43,8 +43,8 @@ public class ReviewDAO {
 	}
 
 	// 리뷰 데이터 삽입
-	public int insertReview(ReviewDTO review) {
-		return template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);
+	public void insertReview(ReviewDTO review) {
+		template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);
 	}
 
 	// 리뷰 업데이트

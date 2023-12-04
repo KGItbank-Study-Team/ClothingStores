@@ -41,4 +41,8 @@ public class OrderDAO {
 	public int deleteOrder(OrderDTO order) {
 		return template.delete("com.slimbear.mapper.Order.DELETE_ORDER", order);
 	}
+	
+	public List<OrderDTO> getOrderListByOrderUid(long orderUid) {
+		return template.selectList("com.slimbear.mapper.Order.SELECT_ORDER_BY_ORDER_UID");
+	}
 }

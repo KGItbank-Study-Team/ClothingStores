@@ -18,6 +18,10 @@ public class ReviewDTO {
 	private String content;
 	private int score;
 	private Date reg_date;
+	private String image1;
+	private String image2;
+	private String image3;
+	private String image4;
 	
 	// 생성자 추가
     public ReviewDTO(long uid, String mem_id, String prod_code, String title, String content, int score, Date reg_date) {

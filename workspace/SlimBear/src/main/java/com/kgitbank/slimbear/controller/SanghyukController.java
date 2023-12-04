@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
@@ -34,7 +37,6 @@ import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
 import com.kgitbank.slimbear.vo.InsertCartVO;
-import com.kgitbank.slimbear.vo.OrderListVO;
 
 @Controller
 public class SanghyukController {
@@ -259,11 +261,55 @@ public class SanghyukController {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
+        String prodCode = "1:blue:XL";
+        int cnt = 1;
+        String name = "캐시미어 3종 니트";
+        model.addAttribute("prodCode", prodCode);
+        model.addAttribute("cnt", cnt);
+        model.addAttribute("name", name);
 		
 		List<ReviewDTO> review = sanghService.getReviewListByUid(review_uid);
 		model.addAttribute("review", review);
 		
 		return "reviewWrite";
 	}
-
+	
+	@Autowired
+	private SlimBearS3 slimbearS3;
+	
+	@PostMapping("/review/upload")
+	public void fileUpload (
+			@ModelAttribute ReviewDTO review,
+			@RequestParam("file1")MultipartFile  file1,
+			@RequestParam("file2")MultipartFile  file2,
+			@RequestParam("file3")MultipartFile  file3,
+			@RequestParam("file4")MultipartFile  file4,
+			RedirectAttributes redirectAttributes) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserId = authentication.getName();
+		
+		review.setMem_id(currentUserId);
+		System.out.println(currentUserId);
+		review.setReg_date(new Date());
+		
+		if(!file1.isEmpty()) {
+			String filePath1 = slimbearS3.saveImage(file1);
+			review.setImage1(filePath1);
+		}
+		if(!file2.isEmpty()) {
+			String filePath2 = slimbearS3.saveImage(file2);
+			review.setImage2(filePath2);
+		}
+		if(!file3.isEmpty()) {
+			String filePath3 = slimbearS3.saveImage(file3);
+			review.setImage3(filePath3);
+		}
+		if(!file4.isEmpty()) {
+			String filePath4 = slimbearS3.saveImage(file4);
+			review.setImage4(filePath4);
+		}		
+		// DAO로 전달!
+		sanghService.insertReview(review);
+	}
 }

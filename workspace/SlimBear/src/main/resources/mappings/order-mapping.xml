@@ -21,6 +21,11 @@
 			GROUP BY prod_uid;
 		</select>
 		
+		<select id="SELECT_ORDER_BY_ORDER_UID" resultType="order">
+			SELECT * FROM productOrder WHERE order_uid = #{order_uid}
+		</select>
+			
+		
 		<insert id="INSERT_ORDER" useGeneratedKeys="true" keyProperty="uid"> 
 			INSERT INTO productOrder
 			(mem_uid, order_date, status, total_price, code, deliv_price, addisale_price, use_mileage, order_request, deliv_recipient, deliv_address, deliv_tel, deliv_norm_tel)

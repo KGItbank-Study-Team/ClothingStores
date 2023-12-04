@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.InquiryAnswerDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
+import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
@@ -19,6 +22,7 @@ import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
+import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -37,6 +41,11 @@ public class SangyhyukServiceImpl {
 		return reviewDAO.getReviewList();
 	}
 	
+	// 리뷰 넣기
+	public void insertReview(ReviewDTO review) {
+		reviewDAO.insertReview(review);
+	}
+	
 	// 특정 상품 uid의 리뷰 조회
 	public List<ReviewDTO> getReviewListByUid(Long uid) {
 		
@@ -46,8 +55,6 @@ public class SangyhyukServiceImpl {
 			ReviewDTO list = new ReviewDTO();
 			
 			list.setProd_code("1:blue:2XL");
-			list.setContent("리뷰 내용입니다.");
-			list.setScore(40);
 			list.setTitle("리뷰 제목 입니다.");
 		}
 		
@@ -58,10 +65,13 @@ public class SangyhyukServiceImpl {
 	public List<ReviewDTO> getReviewListRecent() {
 		return reviewDAO.getReviewListRecent();
 	}
+
+	// 주문 디테일 정보 (리뷰 쓰는데 필요함)
+	@Autowired
+	private OrderDetailDAO orderDetailDAO;
 	
-	// 리뷰 데이터 넣기
-	public void insertReview(ReviewDTO review) {
-		reviewDAO.insertReview(review);
+	public List<OrderDetailDTO> getOrderListByMemberUID(long orderUID) {
+		return orderDetailDAO.getOrderListByMemberUID(orderUID);
 	}
 	
 	/* 상품 상세 데이터 SERVICE */
@@ -170,6 +180,7 @@ public class SangyhyukServiceImpl {
 	}
 	
 	//주문내역
+	@Autowired
 	private OrderDAO orderDAO;
 	
 	public List<OrderListVO> getOrderListInfo(long memberUID) {
@@ -191,4 +202,5 @@ public class SangyhyukServiceImpl {
 		}
 		return list;
 	}
+
 }
