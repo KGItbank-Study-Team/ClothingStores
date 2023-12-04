@@ -12,18 +12,20 @@ public class OrderPaymentDAO {
 	@Autowired
 	protected SqlSessionTemplate template;
 	
-	public OrderPaymentDTO getOrderListByMemberUID(long orderUID){
-		OrderDTO info = new OrderDTO();
-		info.setUid(orderUID);
-		return template.selectOne("com.slimbear.mapper.Order.SELECT_PAYMENT_BY_ORDER_UID", info);
+	public OrderPaymentDTO getPaymentByOrderUID(long orderUID){
+		return template.selectOne("com.slimbear.mapper.Order.SELECT_PAYMENT_BY_ORDER_UID", orderUID);
 	}
 	
-	public int insertOrder(OrderPaymentDTO order) {
-		return template.insert("com.slimbear.mapper.Order.INSERT_PAYMENT", order);
+	public int insertOrder(OrderPaymentDTO payment) {
+		return template.insert("com.slimbear.mapper.Order.INSERT_PAYMENT", payment);
 	}
 	
-	public int updateOrder(OrderPaymentDTO order) {
-		return template.update("com.slimbear.mapper.Order.UPDATE_PAYMENT", order);
+	public int updateOrder(OrderPaymentDTO payment) {
+		return template.update("com.slimbear.mapper.Order.UPDATE_PAYMENT", payment);
+	}
+
+	public void updatePaymentStatus(OrderPaymentDTO payment) {
+		template.update("com.slimbear.mapper.Order.UPDATE_PAYMENT_STATUS", payment);
 	}
 
 }

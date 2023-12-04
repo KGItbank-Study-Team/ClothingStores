@@ -151,6 +151,12 @@
 								<span style = "background-color: #ff000024; color: #e74a3b">1
 								</span>
 								</label> 
+								&nbsp;&nbsp;
+								<input type="radio" class="btn-check" name="status" id="option8" data-target="RETURN">
+								<label class="btn-label" for="option8">반품
+								<span style = "background-color: #ffb7004d; color: #694b00">1
+								</span>
+								</label> 
 							</div>
 							<div style="float:right;">
 								<button class="btn btn-primary export-pdf" >PDF 내보내기</button>
@@ -175,7 +181,7 @@
 							</select>
 							<span>&nbsp;개씩 보기</span>
 						</div>
-						<table id="table" class="table table-bordered">
+						<table id="table" class="table table-bordered" >
 							<thead class="bg-gray-300" align="center">
 								<tr>
 									<th scope="col" data-field="status" data-sorting data-filter>주문 상태</th>
@@ -186,7 +192,7 @@
 									<th scope="col" data-field="pay_type" data-sorting data-filter>결제 방법</th>
 									<th scope="col" data-field="pay_pg" data-sorting data-filter>PG</th>
 									<th scope="col" data-field="pay_amount" data-sorting data-filter>결제금</th>
-									<th scope="col" class="export-ignore" data-field-more></th>
+									<th scope="col" class="export-ignore" data-field-more style="width: 180px;"></th>
 								</tr>
 							</thead>
 							<tbody align="center">
@@ -309,6 +315,25 @@
 	let pageItemCnt = 30;
 	let field_filter = {};
 	
+	let enumField = {
+			status : {
+					STAY : '주문대기',
+					PREPARING : '제품 준비',
+					STAY_DLV : '배송 대기',
+					DELIVERY : '배송',
+					DONE : '완료',
+					CANCEL : '취소',
+					
+					RETURN : '반품'
+			},
+			pay_status : {
+				SATY : '미결제',
+				DONE : '완료',
+				CANCEL : '취소',
+				RETURN : '환불'
+			}
+		}
+	
 	function ajaxInitTable(){
 		$.ajax({
 			url : '/admin/order/list',
@@ -328,26 +353,7 @@
 		var table = $('#table');
 		var tbody = table.find('tbody');
 		var ths = table.find('th');
-		var enumField = {
-			status : {
-					STAY : '주문대기',
-					PREPARING : '제품 준비',
-					STAY_DLV : '배송 대기',
-					DELIVERY : '배송',
-					DONE : '완료',
-					CANCEL : '취소',
-					
-					RETURN : '반품',		
-					IN_RETURN : '반품 진행중',
-					TRY_RETURN : '반품 신청',
-			},
-			pay_status : {
-				SATY : '미결제',
-				DONE : '완료',
-				CANCEL : '취소',
-				RETURN : '환불'
-			}
-		}
+		
 		
 		var sortSelector = $('#sort-selector');
 		var filterSelector = $('#filter-selector');
@@ -380,77 +386,213 @@
 			tbody.append(tr);
 			var dataItem = datas[i];
 			tr.data('rowData', dataItem);
-
-			ths.each(function(index, item){
-				var field = $(item).data('field');
-				var td = $('<td style="vertical-align:middle"></td');
-				tr.append(td);
-				if(field != null){
-					var value = dataItem[field];
-					td.data('field', field);
-					td.data('value', value);
-					
-					td.on('click', function(){
-						openModal($(this).parents('tr').data('rowData')['uid']);
-					});
-					
-					switch(field){
-						case 'order_date':
-							var date = new Date(dataItem[field]);
-							var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
-							var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-							td.html(dateToString + '<br>' + timeToString);
-							break;
-						case 'status':
-							var text = enumField[field][value];
-							if(field == 'status')
-								switch(value){
-									case 'CANCEL':
-										var span = $('<span></span>');
-										span.attr('style', "border-radius: 10px;background-color: #ff000024;padding: 3px;color: #e74a3b");
-										span.html(text)
-										td.html(span);
-										break;
-									case 'STAY':
-									case 'PREPARING':
-									case 'STAY_DLV':
-									case 'DELIVERY':
-										var span = $('<span></span>');
-										span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
-										span.html(text)
-										td.html(span);
-										break;
-									case 'DONE':
-										var span = $('<span></span>');
-										span.attr('style', "border-radius: 10px;background-color: #1cc88a29;padding: 3px;color: #1cc88a");
-										span.html(text)
-										td.html(span);
-										break;
-									default:
-										var span = $('<span></span>');
-										span.attr('style', "border-radius: 10px;background-color: #b7b9cc33;padding: 3px;color: #808080");
-										span.html(text)
-										td.html(span);
-										break;
-								}
-							break;
-						case 'pay_status':
-							td.html(enumField[field][value]);
-							break;
-						
-						default:
-							td.html(dataItem[field]);
-					}
-				}
-				else if($(item).attr('data-field-more') != null){
-					td.html('<button class="btn btn-primary">+</button>');
-				}
-			});
-			
+			rowUpdate(tr);
 		}
-	
 		// selected option으로 기본 정령
 		$('#sort-selector').trigger('change');
+	}
+	
+	function rowUpdate(tr){
+		
+		tr.html("");
+		dataItem = tr.data('rowData');
+		var ths = $('#table').find('th');
+		
+		var more = $('<td style="vertical-align:middle"></td');
+		ths.each(function(index, item){
+			var field = $(item).data('field');
+			if(field != null){
+				var td = $('<td style="vertical-align:middle"></td');
+				tr.append(td);
+				
+				var value = dataItem[field];
+				td.data('field', field);
+				td.data('value', value);
+				
+				td.on('click', function(){
+					openModal(tr.data('rowData')['uid']);
+				});
+				
+				switch(field){
+					case 'order_date':
+						var date = new Date(dataItem[field]);
+						var dateToString = date.getFullYear() + '-' + (date.getMonth()+1) +'-' + date.getDate();
+						var timeToString = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+						td.html(dateToString + '<br>' + timeToString);
+						break;
+					case 'status':
+						var text = enumField[field][value];
+						switch(value){
+							case 'CANCEL':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #ff000024;padding: 3px;color: #e74a3b");
+								span.html(text)
+								td.html(span);
+								break;
+							case 'RETURN':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #f6c23e6b;padding: 3px;color: #b58200");
+								span.html(text)
+								td.html(span);
+								break;
+							case 'STAY':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
+								span.html(text)
+								td.html(span);
+								addCancelButton(tr, more);
+								more.append('&nbsp;');
+								addNextActionButton(tr, more,'PREPARING');
+								break;
+							case 'PREPARING':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
+								span.html(text)
+								td.html(span);
+								addCancelButton(tr, more);
+								more.append('&nbsp;');
+								addNextActionButton(tr, more,'STAY_DLV')
+								break;
+							case 'STAY_DLV':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
+								span.html(text)
+								td.html(span);
+								addCancelButton(tr, more);
+								more.append('&nbsp;');
+								addNextActionButton(tr, more,'DELIVERY')
+								break;
+							case 'DELIVERY':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #0044cc21;padding: 3px;color: #0044cc");
+								span.html(text)
+								td.html(span);
+								addReturnButton(tr, more);
+								more.append('&nbsp;');
+								addNextActionButton(tr, more,'DONE')
+								break;
+							case 'DONE':
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #1cc88a29;padding: 3px;color: #1cc88a");
+								span.html(text)
+								td.html(span);
+								addReturnButton(tr, more);
+								break;
+							default:
+								var span = $('<span></span>');
+								span.attr('style', "border-radius: 10px;background-color: #b7b9cc33;padding: 3px;color: #808080");
+								span.html(text)
+								td.html(span);
+								break;
+						}
+						break;
+					case 'pay_status':
+						td.html(enumField[field][value]);
+						break;
+					default:
+						td.html(dataItem[field]);
+				}
+			}
+			else if($(item).attr('data-field-more') != null){
+				tr.append(more);
+			}
+		});
+		
+		function addCancelButton(tr, more){
+			var bnt = $('<button></button>');
+			bnt.text('취소');
+			bnt.addClass("btn btn-danger");
+			bnt.on('click', function(){
+				if(confirm("주문을 취소하시겠습니까?")){
+					$.ajax({
+						url : '/admin/order/cancel',
+						type : 'POST',
+						data : {
+							orderUID : tr.data('rowData')['uid'],
+							reason : "관리자 요청"
+						},
+						success : function(res){
+							if(res.success){
+								alert(res.success);
+								tr.data('rowData')['status'] = "CANCEL";
+								rowUpdate(tr);
+								$("#filter").trigger('keyup');
+							}else{
+								alert(res.failed);	
+							}
+						},
+						error : function(error){
+							alert("주문 취소 실패");	
+						}
+					});
+				}
+			});
+			more.append(bnt);
+		}
+		
+		function addReturnButton(tr, more){
+			var bnt = $('<button></button>');
+			bnt.text('반품');
+			bnt.addClass("btn btn-warning");
+			bnt.on('click', function(){
+				if(confirm("주문을 반품하시겠습니까?")){
+					$.ajax({
+						url : '/admin/order/return',
+						type : 'POST',
+						data : {
+							orderUID : tr.data('rowData')['uid'],
+							reason : "관리자 요청"
+						},
+						success : function(res){
+							if(res.success){
+								alert(res.success);
+								tr.data('rowData')['status'] = "RETURN";
+								rowUpdate(tr);
+								$("#filter").trigger('keyup');
+							}else{
+								alert(res.failed);	
+							}
+						},
+						error : function(error){
+							alert("반품 실패");	
+						}
+					});
+				}
+			});
+			more.append(bnt);
+		}
+	}
+	
+	function addNextActionButton(tr, more, nextValue){
+		var bnt = $('<button></button>');
+		bnt.text(enumField['status'][nextValue]);
+		bnt.addClass("btn btn-primary");
+		bnt.on('click', function(){
+			if(confirm('[' + enumField['status'][nextValue] + "] 상태로 변경하시겠습니까?")){
+				$.ajax({
+					url : '/admin/order/status',
+					type : 'POST',
+					data : {
+						orderUID : tr.data('rowData')['uid'],
+						status : nextValue
+					},
+					success : function(res){
+						if(res.success){
+							alert(res.success);
+							tr.data('rowData')['status'] = nextValue;
+							rowUpdate(tr);
+							$("#filter").trigger('keyup');
+						}else{
+							alert(res.failed);	
+						}
+					},
+					error : function(error){
+						alert("상태 변경 실패");	
+					}
+				});
+			}
+		});
+		more.append(bnt);
 	}
 
 	$(function() {
@@ -660,7 +802,6 @@
 		
 		
 		// toggle filter
-		
 		$('input[name=status]').on('change',function(){
 			field_filter['status'] = $(this).data('target');
 			$("#filter").trigger('keyup');
@@ -822,7 +963,7 @@
 					html.push('<td>'+ productDetail.cnt+'</td>');
 					html.push('<td><img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/'+ productDetail.main_image+'" class="img-thumbnail" width="150" height="auto"></td>');
 					if(productDetail.review_uid != null){
-						html.push('<td>'+ productDetail.review_uid+'</td>');
+						html.push('<td>리뷰있음['+ productDetail.review_uid+']</td>');
 					}
 					else{
 						html.push('<td>-</td>');
@@ -867,6 +1008,7 @@
 	  $('#myModalOverlay').removeClass('fadein');
 	  $('#myModalOverlay').addClass('fadeout');
 	}
+	
 	
 </script>
 
@@ -939,6 +1081,10 @@
 
 .table-information th{
 	background-color: rgb(0 0 0 / 5%)
+}
+
+.table td{
+	padding : 0;
 }
 
 .btn-check {

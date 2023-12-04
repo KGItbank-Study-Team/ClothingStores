@@ -8,10 +8,7 @@ public class SlimBearEnum {
 		DELIVERY,		// 배송 중
 		DONE,			// 완료
 		CANCEL,			// 취소
-		
-		RETURN,			// 반품
-		IN_RETURN,		// 반품 진행중
-		TRY_RETURN,		// 반품 신청
+		RETURN			// 반품
 	}
 	
 	public enum PAYMENT_STATUS{

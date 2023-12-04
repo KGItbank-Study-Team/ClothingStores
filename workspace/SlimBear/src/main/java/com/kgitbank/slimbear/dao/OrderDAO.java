@@ -22,12 +22,20 @@ public class OrderDAO {
 		return template.selectList("com.slimbear.mapper.Order.SELECT_ORDER_LIST_BY_MEMBER_UID", info);
 	}
 	
+	public OrderDTO getOrderByUID(long orderUID){
+		return template.selectOne("com.slimbear.mapper.Order.SELECT_ORDER_BY_UID", orderUID);
+	}
+	
 	public int insertOrder(OrderDTO order) {
 		return template.insert("com.slimbear.mapper.Order.INSERT_ORDER", order);
 	}
 	
 	public int updateOrder(OrderDTO order) {
 		return template.update("com.slimbear.mapper.Order.UPDATE_ORDER", order);
+	}
+	
+	public int updateOrderStatus(OrderDTO order) {
+		return template.update("com.slimbear.mapper.Order.UPDATE_ORDER_STATUS", order);
 	}
 	
 	public int deleteOrder(OrderDTO order) {

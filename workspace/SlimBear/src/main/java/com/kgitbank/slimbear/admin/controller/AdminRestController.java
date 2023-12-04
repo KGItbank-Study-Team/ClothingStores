@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kgitbank.slimbear.admin.dto.OrderListDTO;
 import com.kgitbank.slimbear.admin.service.AdminServiceImpl;
 import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
+import com.kgitbank.slimbear.exception.SlimBearException;
+import com.kgitbank.slimbear.service.OrderService;
 import com.kgitbank.slimbear.service.RSYServiceImpl;
 
 @RestController
@@ -25,6 +29,9 @@ public class AdminRestController {
 
 	@Autowired
 	private AdminServiceImpl adminService;
+	
+	@Autowired
+	private OrderService orderService;
 
 	@PostMapping("category/childs")
 	public List<CategoryDTO> getCategory(@RequestParam("ctg") long ctg) {
@@ -49,6 +56,55 @@ public class AdminRestController {
 		return 	order;
 	}
 	
+	
+	@PostMapping("order/cancel")
+	public HashMap<String, String> orderCancel(Long orderUID, String reason){
+		HashMap<String, String> res = new HashMap<String, String>();
+		
+		try {
+			orderService.orderCancel(orderUID, reason);
+			res.put("success", "취소 완료");
+		}catch(SlimBearException e) {
+			res.put("failed", "취소 실패");
+		}catch(Exception e) {
+			res.put("failed", "취소 실패");
+		}
+		
+		return res;
+	}
+	
+	@PostMapping("order/return")
+	public HashMap<String, String> orderReturn(Long orderUID, String reason){
+		HashMap<String, String> res = new HashMap<String, String>();
+		
+		try {
+			orderService.orderReturn(orderUID, reason);
+			res.put("success", "반품 완료");
+		}catch(SlimBearException e) {
+			res.put("failed", "반품 실패");
+		}catch(Exception e) {
+			res.put("failed", "반품 실패");
+		}
+		
+		return res;
+	}
+	
+	@PostMapping("order/status")
+	public HashMap<String, String> orderStatusChange(Long orderUID, String status){
+		HashMap<String, String> res = new HashMap<String, String>();
+		
+		try {
+			orderService.orderStatusChange(orderUID,status);
+			res.put("success", "상대 변경 완료");
+		}catch(SlimBearException e) {
+			res.put("failed", "상대 변경 실패");
+		}catch(Exception e) {
+			res.put("failed", "상대 변경 실패");
+		}
+		
+		return res;
+	}
+	
 	@PostMapping("add/product/detail")
 	public String addProductDetail(ProductDetailDTO detail) {
 	
@@ -68,6 +124,4 @@ public class AdminRestController {
 		adminService.deleteProductDetail(detail);
 		return "Success";
 	}
-	
-	
 }

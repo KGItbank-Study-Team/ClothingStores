@@ -10,6 +10,10 @@
 			SELECT * FROM productOrder WHERE mem_uid=#{uid}
 		</select>
 		
+		<select id="SELECT_ORDER_BY_UID" resultType="order">
+			SELECT * FROM productOrder WHERE uid=#{orderUID}
+		</select>
+		
 		<select id="SELECT_ORDER_TOTAL_CNTS_BY_LIST" resultType="java.util.HashMap">
 			SELECT SUBSTRING_INDEX(prod_code,':',1) as prod_uid, count(*) as toc, SUM(cnt) as tpc 
 			FROM orderDetail 
@@ -28,6 +32,12 @@
 			SET member_uid=#{member_uid}, order_date=#{order_date}, status=#{status}, total_price=#{total_price}
 			WHERE uid=#{uid}
 		</update>
+		
+		<update id="UPDATE_ORDER_STATUS">
+			UPDATE productOrder
+			SET status=#{status}
+			WHERE uid=#{uid}
+		</update>
 
  		<!-- 주문상세(orderDetail) -->
 		<select id="SELECT_ORDERDETAIL_LIST_BY_ORDER_UID" resultType="orderDetail" parameterType="order">
@@ -41,8 +51,8 @@
 		</insert>
 
  		<!-- 주문결제(orderPayment) -->	
- 		<select id="SELECT_PAYMENT_BY_ORDER_UID" resultType="orderPayment" parameterType="order">
-			SELECT * FROM orderPayment WHERE order_uid=#{uid}
+ 		<select id="SELECT_PAYMENT_BY_ORDER_UID" resultType="orderPayment">
+			SELECT * FROM orderPayment WHERE order_uid=#{orderUID}
 		</select>
 		
 		<insert id="INSERT_PAYMENT"> 
@@ -54,6 +64,12 @@
 		<update id="UPDATE_PAYMENT">
 			UPDATE orderPayment
 			SET pay_date=#{pay_date}, type=#{type}, status=#{status}, price=#{price}
+			WHERE order_uid=#{order_uid}
+		</update>
+		
+		<update id="UPDATE_PAYMENT_STATUS">
+			UPDATE orderPayment
+			SET status=#{status}
 			WHERE order_uid=#{order_uid}
 		</update>
 

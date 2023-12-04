@@ -21,6 +21,7 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderPaymentDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.exception.SlimBearException;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.service.MemberService;
@@ -209,5 +210,4 @@ public class OrderController {
 		res.put("url", "/app/member/myPage/orderList");
 		return res;
 	}
-
 }
