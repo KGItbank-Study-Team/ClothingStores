@@ -80,13 +80,13 @@
 	<select id="SELECT_REVIEW_RECENT" resultType="review">
 		SELECT * FROM productReview ORDER BY reg_date DESC
 	</select>
-	<insert id="INSERT_REVIEW">
+<!-- 	<insert id="INSERT_REVIEW">
 		INSERT INTO productReview
 		(mem_id, prod_code, title,
 		content, score, reg_date, image1, image2, image3, image4)
 		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score},
 		#{reg_date}, #{image1}, #{image2}, #{image3}, #{image4})
-	</insert>
+	</insert> -->
 	<!-- 데이터 삽입 -->
 	<insert id="INSERT_REVIEW">
 		INSERT INTO productReview
