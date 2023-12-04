@@ -181,8 +181,13 @@ var currentUrl = window.location.href;
 // URL에서 "p" 파라미터값을 추가한다.
 var urlParams = new URLSearchParams(currentUrl.search);
 
-// 장바구니 추가 기능
 function addCart(uid) {
+    // 선택한 옵션이 있는지 확인
+    if (selectOptionList.length === 0) {
+        alert("상품 옵션을 선택해주세요.");
+        return;
+    }
+
     //console.log(selectOptionList); // 테스트 출력
     console.log("prod_code", uid);
     $.ajax({
@@ -192,7 +197,6 @@ function addCart(uid) {
         success: function (result) {
             if (result.trim() === "add_success") {
                 $('.popUp').css('display', 'block');
-
             } else {
                 alert("동일한 상품이 장바구니에 있습니다.")
             }
@@ -383,12 +387,12 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
             '</div>' +
             '<div class="photo-review">';
-            for(var k =1; k <= 4; k++) {
-                reviewHtml +=  
+        for (var k = 1; k <= 4; k++) {
+            reviewHtml +=
                 '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>';
-            }
-            
-            reviewHtml += '</div>' +
+        }
+
+        reviewHtml += '</div>' +
             '<div>' +
             '<div class="reviewContent">' + dataList[i].content + '</div>' +
             '</div>' +
@@ -539,7 +543,7 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
         var regDate = new Date(inqList[i].reg_date);
         var formattedRegDate = regDate.toLocaleDateString();
 
-        inquiryHtml += 
+        inquiryHtml +=
             '<tr>' +
             '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
             '<td>' +
@@ -556,32 +560,32 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
             '<td>&nbsp;</td>' +
             '<td>&nbsp;</td>' +
             '</tr>';
-        // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
-        //console.log('inqAnswerList : ' + inqAnswerList);
-        if (inqAnswerList[i]) {
-            var answerRegDate = new Date(inqAnswerList[i].reg_date);
+        // 답변을 찾아서 출력
+        var matchingAnswers = inqAnswerList.filter(answer => answer.inqr_uid === inqList[i].uid);
+        for (var j = 0; j < matchingAnswers.length; j++) {
+            var answerRegDate = new Date(matchingAnswers[j].reg_date);
             var formattedAnswerRegDate = answerRegDate.toLocaleDateString();
 
             inquiryHtml += '<tr>' +
                 '<td>&nbsp;</td>' +
                 '<td>' +
-                '<div class="clickAnswer">' + inqAnswerList[i].title + 
+                '<div class="clickAnswer">' + matchingAnswers[j].title +
                 '</div>' +
                 '</td>' +
                 '<td>슬림베어🐻</td>' +
-                '<td>' + formattedAnswerRegDate + '</td>' +                
+                '<td>' + formattedAnswerRegDate + '</td>' +
                 '</tr>' +
                 '<tr class="answerContent">' +
                 '<td>&nbsp;</td>' +
                 '<td class="centerNo">' +
-                '<div>' + inqAnswerList[i].content + '</div>'
+                '<div>' + matchingAnswers[j].content + '</div>' +
                 '</td>' +
                 '<td>&nbsp;</td>' +
-                '<td>&nbsp;</td>' +     
+                '<td>&nbsp;</td>' +
                 '</tr>';
         }
-        
     }
+
     $('.inquiry').html(inquiryHtml);
 }
 // 페이징 표시 함수
@@ -654,16 +658,16 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, i
 }
 
 // 문의 제목 클릭 -> 내용 출력
-$(document).ready(function(){
-    $(document).on('click', '.clickTitle', function(){
+$(document).ready(function () {
+    $(document).on('click', '.clickTitle', function () {
         console.log('클릭 실행');
         $(this).closest('tr').next('.inquiryContent').slideToggle();
     });
 });
 
 // 문의 답변 클릭 -> 문의 답변 출력
-$(document).ready(function(){
-    $(document).on('click', '.clickAnswer', function(){
+$(document).ready(function () {
+    $(document).on('click', '.clickAnswer', function () {
         console.log('클릭 실행');
         $(this).closest('tr').next('.answerContent').slideToggle();
     });
