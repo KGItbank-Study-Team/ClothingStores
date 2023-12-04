@@ -78,8 +78,18 @@ public class RSYAdminDAO {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL");
 	}
 
+	// Notice 삭제
+	public void deleteNotice(Long uid) {
+		template.delete("com.slimbear.mapper.Board.DELETE_NOTICE", uid);
+	}
+
 	// faq 리스트 조회
 	public List<FaqDTO> getFaqList() {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_FAQ_LIST");
+	}
+
+	// Faq 삭제
+	public void deleteFaq(Long uid) {
+		template.delete("com.slimbear.mapper.Board.DELETE_FAQ", uid);
 	}
 }

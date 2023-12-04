@@ -95,8 +95,20 @@ public class RSYAdminServiceImpl {
 		return rsyAdminDAO.getNoticeList();
 	}
 
+	// 공지삭제
+	public void deleteNotice(NoticeDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteNotice(uid);
+	}
+
 	// faq
 	public List<FaqDTO> getFaqList() {
 		return rsyAdminDAO.getFaqList();
+	}
+
+	// faq삭제
+	public void deleteFaq(FaqDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteFaq(uid);
 	}
 }

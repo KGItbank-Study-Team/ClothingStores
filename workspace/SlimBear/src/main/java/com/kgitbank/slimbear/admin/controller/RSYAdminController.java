@@ -151,6 +151,15 @@ public class RSYAdminController {
 		List<NoticeDTO> noticeList = rsyAdminService.getNoticeList();
 		return noticeList;
 	}
+	
+	@DeleteMapping("notice/deleteData")
+	@ResponseBody
+	public ResponseEntity<String> deleteData(@RequestBody NoticeDTO data) {
+		// 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
+		System.out.println(data);
+		rsyAdminService.deleteNotice(data);
+		return ResponseEntity.ok("삭제가 완료되었습니다.");
+	}
 
 	// faq관리
 	@RequestMapping("home/board/faq")
@@ -165,6 +174,14 @@ public class RSYAdminController {
 	public List<FaqDTO> boardFaqList() {
 		List<FaqDTO> faqList = rsyAdminService.getFaqList();
 		return faqList;
+	}
+	@DeleteMapping("faq/deleteData")
+	@ResponseBody
+	public ResponseEntity<String> deleteData(@RequestBody FaqDTO data) {
+		// 클라이언트로부터 전달받은 데이터를 이용하여 삭제 수행
+		System.out.println(data);
+		rsyAdminService.deleteFaq(data);
+		return ResponseEntity.ok("삭제가 완료되었습니다.");
 	}
 
 }

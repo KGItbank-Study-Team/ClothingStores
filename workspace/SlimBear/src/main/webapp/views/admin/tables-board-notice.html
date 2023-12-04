@@ -169,6 +169,57 @@
 
 	<script>
     var lastOpenedRow = null;
+    
+    function showAddNoticeForm() {
+        var html = [];
+        html.push('<div class="add-notice-form">');
+        html.push('<div class="mb-3"><label for="addNoticeTitle" class="form-label">제목</label><input type="text" class="form-control" id="addNoticeTitle"></div>');
+        html.push('<div class="mb-3"><label for="addNoticeContent" class="form-label">내용</label><textarea class="form-control" id="addNoticeContent" rows="3"></textarea></div>');
+        html.push('<div class="mb-3"><label for="addNoticePriority" class="form-label">우선순위</label><input type="number" class="form-control" id="addNoticePriority"></div>');
+        html.push('<div class="mb-3"><label for="addNoticeType" class="form-label">타입</label><input type="text" class="form-control" id="addNoticeType"></div>');
+        html.push('<div class="mb-3"><label for="addNoticeMainImage" class="form-label">이미지 URL</label><input type="text" class="form-control" id="addNoticeMainImage"></div>');
+        html.push('<button type="button" class="btn btn-primary" onclick="addNotice()">등록</button>');
+        html.push('</div>');
+        $('#addNoticeFormContainer').html(html.join(''));
+    }
+    function addNotice() {
+        var title = $('#addNoticeTitle').val();
+        var content = $('#addNoticeContent').val();
+        var priority = $('#addNoticePriority').val();
+        var type = $('#addNoticeType').val();
+        var mainImage = $('#addNoticeMainImage').val();
+
+        // 데이터 유효성 검사 (필요에 따라 추가 검사 수행)
+        if (!title.trim() || !content.trim() || !priority || !type.trim() || !mainImage.trim()) {
+            alert('모든 필드를 입력하세요.');
+            return;
+        }
+
+        // Ajax 요청
+        $.ajax({
+            url: "/admin/notice/addNotice",
+            type: "POST",
+            data: {
+                title: title,
+                content: content,
+                priority: priority,
+                type: type,
+                mainImage: mainImage
+            },
+            success: function (result) {
+                if (result.status === 'SUCCESS') {
+                    alert('새 공지사항이 성공적으로 등록되었습니다.');
+                } else {
+                    alert('새 공지사항 등록에 실패했습니다.');
+                }
+
+                // TODO: 성공 또는 실패에 따른 추가적인 동작 수행
+            },
+            error: function () {
+                alert("서버 오류로 인해 새 공지사항을 등록할 수 없습니다.");
+            }
+        });
+    }
 
     $(function () {
         // 테이블 초기화
@@ -305,7 +356,7 @@
         // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/review/deleteData',
+                url: '/admin/notice/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
@@ -325,58 +376,10 @@
     $(document).ready(function () {
         // ...
         // 새 공지사항 등록 폼 표시
-        function showAddNoticeForm() {
-            var html = [];
-            html.push('<div class="add-notice-form">');
-            html.push('<div class="mb-3"><label for="addNoticeTitle" class="form-label">제목</label><input type="text" class="form-control" id="addNoticeTitle"></div>');
-            html.push('<div class="mb-3"><label for="addNoticeContent" class="form-label">내용</label><textarea class="form-control" id="addNoticeContent" rows="3"></textarea></div>');
-            html.push('<div class="mb-3"><label for="addNoticePriority" class="form-label">우선순위</label><input type="number" class="form-control" id="addNoticePriority"></div>');
-            html.push('<div class="mb-3"><label for="addNoticeType" class="form-label">타입</label><input type="text" class="form-control" id="addNoticeType"></div>');
-            html.push('<div class="mb-3"><label for="addNoticeMainImage" class="form-label">이미지 URL</label><input type="text" class="form-control" id="addNoticeMainImage"></div>');
-            html.push('<button type="button" class="btn btn-primary" onclick="addNotice()">등록</button>');
-            html.push('</div>');
-            $('#addNoticeFormContainer').html(html.join(''));
-        }
+        
 
         // 새 공지사항 등록 버튼 클릭 시 실행되는 함수
-        function addNotice() {
-            var title = $('#addNoticeTitle').val();
-            var content = $('#addNoticeContent').val();
-            var priority = $('#addNoticePriority').val();
-            var type = $('#addNoticeType').val();
-            var mainImage = $('#addNoticeMainImage').val();
-
-            // 데이터 유효성 검사 (필요에 따라 추가 검사 수행)
-            if (!title.trim() || !content.trim() || !priority || !type.trim() || !mainImage.trim()) {
-                alert('모든 필드를 입력하세요.');
-                return;
-            }
-
-            // Ajax 요청
-            $.ajax({
-                url: "/admin/notice/addNotice",
-                type: "POST",
-                data: {
-                    title: title,
-                    content: content,
-                    priority: priority,
-                    type: type,
-                    mainImage: mainImage
-                },
-                success: function (result) {
-                    if (result.status === 'SUCCESS') {
-                        alert('새 공지사항이 성공적으로 등록되었습니다.');
-                    } else {
-                        alert('새 공지사항 등록에 실패했습니다.');
-                    }
-
-                    // TODO: 성공 또는 실패에 따른 추가적인 동작 수행
-                },
-                error: function () {
-                    alert("서버 오류로 인해 새 공지사항을 등록할 수 없습니다.");
-                }
-            });
-        }
+        
         // ...
     });
 
