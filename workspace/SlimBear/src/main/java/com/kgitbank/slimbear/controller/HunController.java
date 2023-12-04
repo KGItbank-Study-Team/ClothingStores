@@ -121,10 +121,6 @@ public class HunController {
 
 	@RequestMapping("member/myPage/modify/quit")
 	public String quit(Authentication authentication) {
-
-		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
 		return "quit";
 	}
 

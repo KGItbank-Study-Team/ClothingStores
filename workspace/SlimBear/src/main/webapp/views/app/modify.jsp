@@ -193,10 +193,10 @@
                         
                         <div class="ec-base-button justify">
                             <a class="btnSubmitFix sizeM" onclick="memberEditAction()">회원정보수정</a>
-                            <span class="gRight">
-                            <!-- 아직 어찌할지 고민중 -->
+                          <!--   <span class="gRight">
+                            아직 어찌할지 고민중
                                 <a href="#none" class="btnNormal sizeS" onclick="window.open('/app/member/myPage/modify/quit','quit','width=900,height=500');return false;">회원탈퇴</a>
-                            </span>
+                            </span> -->
                         </div>
                         
                     </div>
