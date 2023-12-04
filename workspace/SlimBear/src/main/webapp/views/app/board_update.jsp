@@ -130,23 +130,19 @@
 							<tbody class="">
 								<tr>
 									<th scope="row">FILE 1</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="newAttachImage1" type="file" id="fileInput1" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 2</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="newAttachImage2" type="file" id="fileInput2" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 3</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="newAttachImage3" type="file" id="fileInput3" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 4</th>
-									<td><input name="attach_file[]" type="file" /></td>
-								</tr>
-								<tr>
-									<th scope="row">FILE 5</th>
-									<td><input name="attach_file[]" type="file" /></td>
+									<td><input name="newAttachImage4" type="file" id="fileInput4" onchange="handleFileChange()" /></td>
 								</tr>
 							</tbody>
 							
@@ -161,7 +157,6 @@
 						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
 						<span class="gRight">
-<!--                             <button type="submit" class="btnSubmitFix sizeS">OK</button> -->
                             <button type="submit" class="btnBasicFix sizeS">EDIT</button>
                             <a href="/app/board/inquiry/detail/${inquiries.uid}" class="btnBasicFix sizeS">CANCEL</a>
                         </span>

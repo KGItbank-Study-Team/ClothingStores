@@ -43,9 +43,9 @@
 					<div class="login-stay-sign-in" id="staySignedIn">
 						<input type="checkbox" class="save_id" id="saveId" name="checkId"><label for="saveId"><span>아이디 저장</span></label>
 						<div class="forgot-id-password">
-							<span><a href="/app/find_id">Forgotten ID</a></span>
+							<span><a href="/views/app/find_id.jsp">Forgotten ID</a></span>
 							<span>or</span>
-							<span><a href="/app/find_password">Password</a></span>
+							<span><a href="/views/app/find_password.jsp">Password</a></span>
 						</div>
 						<br/>
 					</div>

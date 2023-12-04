@@ -39,71 +39,6 @@
 				</div>
 				
 				<form id="boardWriteForm" action="/app/board/inquiry" method="post" enctype="multipart/form-data" onsubmit="return checkCharacterCount();">
-
-					<input id="board_no" name="board_no" value="6" type="hidden" /> 
-					<input id="product_no" name="product_no" value="0" type="hidden" /> 
-					<input id="move_write_after" name="move_write_after"
-						value="/board/product/list.html?board_no=6" type="hidden" /> 
-					<input id="cate_no" name="cate_no" value="" type="hidden" /> 
-					<input id="bUsePassword" name="bUsePassword" value="" type="hidden" /> 
-					<input id="order_id" name="order_id" value="" type="hidden" /> 
-					<input id="is_post_checked" name="is_post_checked" value="" type="hidden" />
-					<input id="isExceptBoardUseFroalaImg" name="isExceptBoardUseFroalaImg" 
-						value="" type="hidden" /> 
-					<input id="isGalleryBoard" name="isGalleryBoard" value="" type="hidden" />
-
-				    <input id="8c38aded9ea5c1d7aceb6746dbc" name="8c38aded9ea5c1d7aceb6746dbc"
-				           value="31229fd71b38048ee21b09cd695c0ed0" type="hidden" /> 
-							
-					<input id="fix_title_form_0" name="fix_title_form_0" value="상품 문의합니다 ♡"
-							type="hidden" /> 
-					<input id="fix_title_form_1" name="fix_title_form_1" value="불량/오배송 문의합니다 ♡" 
-							type="hidden" /> 
-					<input id="fix_title_form_2" name="fix_title_form_2" value=" 기타 문의합니다 ♡"
-							type="hidden" /> 
-					<input id="bulletin_type" name="bulletin_type" value="title" type="hidden" /> 
-					<input id="fix_content_0" name="fix_content_0"
-						value="이곳은 상품문의를 위한 게시판입니다!&lt;br /&gt;
-							게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
-							&lt;br /&gt;
-							배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.&lt;br /&gt;
-							불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
-							&lt;br /&gt;
-							--------------------------------------------------------------&lt;br /&gt;
-							"
-						type="hidden" /> 
-					<input id="fix_content_1" name="fix_content_1"
-						value="[문의글 등록 전 확인해 주세요♥]&lt;br /&gt;
-							지그재그 결제건은 게시판이 아닌 해당 어플에서&lt;br /&gt;
-							교환/반품 신청 부탁드립니다!&lt;br /&gt;
-							&lt;br /&gt;
-							*변심 교환/반품은 '실시간 문의'로 접수해주시면 &lt;br /&gt;
-							빠르게 처리 도와드리겠습니다.&lt;br /&gt;
-							&lt;br /&gt;
-							---------------------------------------------------------&lt;br /&gt;
-							*불량/오배송*&lt;br /&gt;
-							&lt;br /&gt;
-							▷불량사진&lt;br /&gt;
-							(필수 첨부 부탁드립니다!)&lt;br /&gt;
-							&lt;br /&gt;
-							주문번호 :&lt;br /&gt;
-							교환/반품(원하시는 처리 선택해주세요!) :&lt;br /&gt;
-							상품명(사이즈,컬러) :&lt;br /&gt;
-							불량/오배송 사유 :&lt;br /&gt;
-							검수번호(숫자나 알파벳) :&lt;br /&gt;
-							(상품 바코드 옆 검수자 숫자 한자리/두자리를 기재합니다.)"
-						type="hidden" />
-					<input id="fix_content_2" name="fix_content_2"
-						value="이곳은 기타문의를 위한 게시판입니다!&lt;br /&gt;
-							게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
-							&lt;br /&gt;
-							배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.&lt;br /&gt;
-							불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
-							&lt;br /&gt;
-							--------------------------------------------------------------"
-						type="hidden" />
-					<input id="fix_add_content" name="fix_add_content" value="" type="hidden" />
-					
 <!-- 					<input id="type" name="type" value="" type="hidden" /> -->
 				    <input id="reg_date" name="reg_date" type="hidden" />
 				    <input id="writer_id" name="writer_id" type="hidden" />
@@ -191,7 +126,7 @@
 										이곳은 문의 게시판입니다!&lt;br /&gt;
 										게시판 성격에 맞지 않는 내용을 문의하실 경우 처리가 불가할 수 있습니다.&lt;br /&gt;
 										&lt;br /&gt;
-										배송 후 변심 교환/반품의 경우 바로 홈페이지 [MY PAGE]-[ORDER LIST]에서 직접 접수가 가능합니다.&lt;br /&gt;
+										배송 후 변심 취소/반품 신청의 경우 바로 홈페이지 [회원정보]-[주문내역]에서 직접 접수가 가능합니다.&lt;br /&gt;
 										불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 										&lt;br /&gt;
 										--------------------------------------------------------------&lt;br /&gt;

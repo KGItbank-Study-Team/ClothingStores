@@ -42,17 +42,10 @@
 					<p></p>
 				</div>
 			</div>
-			<form id="BoardDelForm" name="" action="/exec/front/Board/del/1"
-				method="post" target="_self" enctype="multipart/form-data">
+			<form id="BoardDelForm" name="" action="/exec/front/Board/del/1" method="post" target="_self" enctype="multipart/form-data">
 				<input id="no" name="no" value="1724624" type="hidden" />
 				<!-- Add more input fields here if needed -->
-				<input id="bulletin_no" name="bulletin_no" value="900281" type="hidden" />
-				<input id="board_no" name="board_no" value="1" type="hidden" />
-					<input id="member_id" name="member_id" value="slowmastercr" type="hidden" />
-					<input id="list_url" name="list_url" value="/board/free/list.html?board_no=1" type="hidden" />
-					<input id="bdf_modify_url" name="bdf_modify_url" value="/board/free/modify.html?board_act=edit&amp;no=1724624&amp;board_no=1" type="hidden" />
-					<input id="bdf_del_url" name="bdf_del_url" value="/exec/front/Board/del/1" type="hidden" />
-					<input id="bdf_action_type" name="bdf_action_type" value="" type="hidden" />
+				
 				<div class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
 					<div class="ec-base-table typeWrite ">
 						<table border="1" summary="">
