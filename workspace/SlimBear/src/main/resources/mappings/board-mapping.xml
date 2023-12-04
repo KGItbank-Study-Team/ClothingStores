@@ -48,6 +48,11 @@
 	<select id="SELECT_NOTICE_LIST_ALL" resultType="notice">
 		SELECT * FROM notice
 	</select>
+	<insert id="INSERT_NOTICE_ADMIN">
+		INSERT INTO notice
+		(title, content, reg_date, priority, type, writer, view_cnt, main_image)
+		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, '관리자', 0, #{main_image})
+	</insert>
 	
 	
 

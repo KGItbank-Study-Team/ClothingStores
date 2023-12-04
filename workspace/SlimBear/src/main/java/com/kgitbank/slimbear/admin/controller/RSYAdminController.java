@@ -152,6 +152,25 @@ public class RSYAdminController {
 		return noticeList;
 	}
 	
+	@RequestMapping("notice/addNotice")
+	@ResponseBody
+	public ResponseEntity<String> addNotice(@RequestParam String title, @RequestParam String content,
+			@RequestParam int priority, @RequestParam String type, @RequestParam String mainImage) {
+
+		try {
+			System.out.println(title);
+			System.out.println(content);
+			System.out.println(priority);
+			System.out.println(type);
+			System.out.println(mainImage);
+			rsyAdminService.addNotice(title, content, priority, type, mainImage);
+			return ResponseEntity.ok("{\"status\": \"SUCCESS\", \"message\": \"답글이 성공적으로 추가되었습니다.\"}");
+
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("답글 추가 중에 오류가 발생했습니다.");
+		}
+	}
+	
 	@DeleteMapping("notice/deleteData")
 	@ResponseBody
 	public ResponseEntity<String> deleteData(@RequestBody NoticeDTO data) {

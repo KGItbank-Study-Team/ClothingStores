@@ -95,6 +95,21 @@ public class RSYAdminServiceImpl {
 		return rsyAdminDAO.getNoticeList();
 	}
 
+	// 공지추가
+	public void addNotice(String title, String content, int priority, String type, String main_image) {
+		NoticeDTO notice = new NoticeDTO();
+		Date date = new Date();
+		
+		notice.setTitle(title);
+		notice.setContent(content);
+		notice.setPriority(priority);
+		notice.setType(type);
+		notice.setMain_image(main_image);
+		notice.setReg_date(date);
+
+		rsyAdminDAO.addNotice(notice);
+	}
+
 	// 공지삭제
 	public void deleteNotice(NoticeDTO data) {
 		Long uid = data.getUid();
