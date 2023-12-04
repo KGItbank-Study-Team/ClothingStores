@@ -40,13 +40,13 @@ public class YangBoardServiceImpl {
 		paramMap.put("offset", offset);
 		paramMap.put("pageSize", pageSize);
 
-		System.out.println(paramMap);
+//		System.out.println(paramMap);
         return noticeDAO.getNoticeList(paramMap);
 //		return noticeDAO.getNoticeList(priority);
 	}
 	public int getTotalNotice() {
     	int total = noticeDAO.getTotalNotice();
-    	System.out.println(total);
+//    	System.out.println(total);
     	return total;
     }
 	
@@ -67,12 +67,12 @@ public class YangBoardServiceImpl {
 		paramMap.put("offset", offset);
 		paramMap.put("pageSize", pageSize);
 
-		System.out.println(paramMap);
+//		System.out.println(paramMap);
         return inquiryDAO.getInquiryList(paramMap);
     }
     public int getTotalInquiry(String type) {
     	int total = inquiryDAO.getTotalInquiry(type);
-    	System.out.println(total);
+//    	System.out.println(total);
     	return total;
     }
     

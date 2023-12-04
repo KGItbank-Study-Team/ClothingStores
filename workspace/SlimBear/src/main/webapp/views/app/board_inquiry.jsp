@@ -74,20 +74,19 @@
 										<div class="detail">
 											<div class="fr-view fr-view-article">
 												<p><br></p>
-<%-- 													<img src="/resources/images/${attach_image1.originalFilename}" alt="Image 1"> --%>
-<%-- 												    <img src="/resources/images/${attach_image2.originalFilename}" alt="Image 2"> --%>
-<%-- 												    <img src="/resources/images/${attach_image3.originalFilename}" alt="Image 3"> --%>
-<%-- 												    <img src="/resources/images/${attach_image4.originalFilename}" alt="Image 4"> --%>
-													
+												<p><br></p>
 													<c:if test="${not empty inquiries.attach_image1}">
 													    <img alt="상품01" src="/resources/images/${inquiries.attach_image1}">
 													</c:if>
+												<p></p>
 													<c:if test="${not empty inquiries.attach_image2}">
 													    <img alt="상품02" src="/resources/images/${inquiries.attach_image2}">
 													</c:if>
+												<p></p>
 													<c:if test="${not empty inquiries.attach_image3}">
 													    <img alt="상품03" src="/resources/images/${inquiries.attach_image3}">
 													</c:if>
+												<p></p>
 													<c:if test="${not empty inquiries.attach_image4}">
 													    <img alt="상품04" src="/resources/images/${inquiries.attach_image4}">
 													</c:if>

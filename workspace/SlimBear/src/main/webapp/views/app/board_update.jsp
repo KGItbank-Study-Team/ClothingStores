@@ -122,33 +122,12 @@
 											src="//img.echosting.cafe24.com/editors/froala/3.2.2/js/froala_editor.pkgd.min.js?vs=2310251253"></script>
 										<script type="text/javascript"
 											src="//img.echosting.cafe24.com/editors/froala/js/i18n/ko_KR.js?vs=2310251253"></script>
-										
 									</td>
 								</tr>
-								
 							</tbody>
-							<tbody class="">
-								<tr>
-									<th scope="row">FILE 1</th>
-									<td><input name="newAttachImage1" type="file" id="fileInput1" onchange="handleFileChange()" /></td>
-								</tr>
-								<tr>
-									<th scope="row">FILE 2</th>
-									<td><input name="newAttachImage2" type="file" id="fileInput2" onchange="handleFileChange()" /></td>
-								</tr>
-								<tr>
-									<th scope="row">FILE 3</th>
-									<td><input name="newAttachImage3" type="file" id="fileInput3" onchange="handleFileChange()" /></td>
-								</tr>
-								<tr>
-									<th scope="row">FILE 4</th>
-									<td><input name="newAttachImage4" type="file" id="fileInput4" onchange="handleFileChange()" /></td>
-								</tr>
-							</tbody>
-							
 						</table>
 					</div>
-					
+					<p><br></p>
 					<div class="ec-base-button ">
 						<span class="gLeft">
 							<span class="displaynone">
@@ -157,13 +136,15 @@
 						<a href="/app/board/inquiry/" class="btnNormalFix sizeS">LIST</a>
 						</span>
 						<span class="gRight">
+<!--                             <button type="submit" class="btnSubmitFix sizeS">OK</button> -->
                             <button type="submit" class="btnBasicFix sizeS">EDIT</button>
                             <a href="/app/board/inquiry/detail/${inquiries.uid}" class="btnBasicFix sizeS">CANCEL</a>
                         </span>
 					</div>
 				</div>
 			</form>
-			
+			<p><br></p>
+			<p><br></p>
 		</div>
 	</div>
 	<jsp:include page="footer/footer.jsp" />

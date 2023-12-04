@@ -130,7 +130,8 @@
 										불량 문의/오배송의 경우 사진과 함께 이곳에 원하시는 처리 방향 문의하시면 확인 후 안내 도와드리겠습니다.&lt;br /&gt;
 										&lt;br /&gt;
 										--------------------------------------------------------------&lt;br /&gt;
-										&lt;글자 수는 최대 공백, 엔터키 포함 최대 500자까지&gt;
+										&lt;글자 수는 최대 공백, 엔터키 포함 최대 500자까지&gt;&lt;br /&gt;
+										&lt;폰트 효과에 따라 쓸 수 있는 글자가 줄어들 수 있음&gt;
 										</textarea>
 										<div id="characterCountError" style="color: red;"></div>
 										<input type="hidden" id="content_hidden" fw-filter="isSimplexEditorFill" fw-label="내용" value="EC_FROALA_INSTANCE" />

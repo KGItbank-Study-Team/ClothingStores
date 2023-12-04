@@ -21,23 +21,6 @@
     String categoryNoParam = request.getParameter("category_no");
     String categoryNo = (categoryNoParam != null) ? categoryNoParam : "PRODUCT";
 %>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // 현재 카테고리에 해당하는 메뉴 활성화
-        $(".subnavi a.qna01").removeClass("on");
-        $(".subnavi a.qna02").removeClass("on");
-        $(".subnavi a.qna03").removeClass("on");
-
-        var categoryNo = "<%= categoryNo %>";
-        if (categoryNo === "DELIVERY") {
-            $(".subnavi a.qna02").addClass("on");
-        } else if (categoryNo === "DELIVERY_C") {
-            $(".subnavi a.qna03").addClass("on");
-        } else {
-            $(".subnavi a.qna01").addClass("on");
-        }
-    });
-</script>
 </head>
 <body>
 <jsp:include page="header/header.jsp" />
@@ -207,8 +190,6 @@
 				</c:if>
 			</div>
 			
-			
-			
 			<!-- 검색기능 -->
 			<form id="boardSearchForm" name="" action="/app/board/inquiryS" method="get" target="_top" enctype="multipart/form-data">
 				<div class="xans-element- xans-board xans-board-search-4 xans-board-search xans-board-4 ">
@@ -227,6 +208,10 @@
 					</fieldset>
 				</div>
 			</form>
+			<p><br></p>
+			<p><br></p>
+			<p><br></p>
+			<p><br></p>
 		</div>
 	</div>
 	<jsp:include page="footer/footer.jsp" />
@@ -258,6 +243,22 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        // 현재 카테고리에 해당하는 메뉴 활성화
+        $(".subnavi a.qna01").removeClass("on");
+        $(".subnavi a.qna02").removeClass("on");
+        $(".subnavi a.qna03").removeClass("on");
 
+        var categoryNo = "<%= categoryNo %>";
+        if (categoryNo === "DELIVERY") {
+            $(".subnavi a.qna02").addClass("on");
+        } else if (categoryNo === "DELIVERY_C") {
+            $(".subnavi a.qna03").addClass("on");
+        } else {
+            $(".subnavi a.qna01").addClass("on");
+        }
+    });
+</script>
 </body>
 </html>

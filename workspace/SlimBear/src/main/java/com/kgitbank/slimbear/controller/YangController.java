@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -154,8 +153,7 @@ public class YangController {
 			@RequestParam("attachImage1") MultipartFile attachImage1,
             @RequestParam("attachImage2") MultipartFile attachImage2,
             @RequestParam("attachImage3") MultipartFile attachImage3,
-            @RequestParam("attachImage4") MultipartFile attachImage4,
-            RedirectAttributes redirectAttributes) {
+            @RequestParam("attachImage4") MultipartFile attachImage4 ) {
 		
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
 	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -212,11 +210,7 @@ public class YangController {
 	
 	// 문의사항 수정처리
 	@PostMapping("/board/inquiry/detail/update/{uid}")
-	public String updateInquiry(@PathVariable Long uid, @ModelAttribute InquiryDTO updatedInquiry,
-								@RequestParam("newAttachImage1") MultipartFile newAttachImage1,
-						        @RequestParam("newAttachImage2") MultipartFile newAttachImage2,
-						        @RequestParam("newAttachImage3") MultipartFile newAttachImage3,
-						        @RequestParam("newAttachImage4") MultipartFile newAttachImage4) {
+	public String updateInquiry(@PathVariable Long uid, @ModelAttribute InquiryDTO updatedInquiry) {
 	    // 기존 게시물 정보를 가져오기
 	    InquiryDTO existingInquiry = boardService.getInquiryDetail(uid);
 
@@ -225,25 +219,11 @@ public class YangController {
 	    if (updatedInquiry.getStatus() != null) {
 	        existingInquiry.setStatus(updatedInquiry.getStatus());
 	    }
-	    // 새로운 이미지가 업로드되었는지 확인하고 업로드 후 경로 업데이트
-	    updateAttachImage(newAttachImage1, existingInquiry::setAttach_image1);
-	    updateAttachImage(newAttachImage2, existingInquiry::setAttach_image2);
-	    updateAttachImage(newAttachImage3, existingInquiry::setAttach_image3);
-	    updateAttachImage(newAttachImage4, existingInquiry::setAttach_image4);
-	    
-	    
 	    // 수정된 정보를 DAO를 통해 업데이트
 	    boardService.updateInquiry(existingInquiry);
 
 	    // 수정 완료 후 리다이렉트 등 필요한 처리 수행
 	    return "redirect:/app/board/inquiry/detail/" + uid;
-	}
-	private void updateAttachImage(MultipartFile newImage, Consumer<String> imagePathSetter) {
-	    if (!newImage.isEmpty()) {
-	        // 새로운 이미지 업로드 및 경로 설정
-	        String newImagePath = slimbearS3.saveImage(newImage);
-	        imagePathSetter.accept(newImagePath);
-	    }
 	}
 	
 	// 문의게시글 검색
