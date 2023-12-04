@@ -11,16 +11,16 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MemberDTO {
-	private long uid;
+	private Long uid;
 	private String id;
 	private String password;
 	private String email;
 	private String name;
 	private String address;
 	private String phone;
-	private char sex;				
+	private Character sex;				
 	private Date reg_date;
-	private int mileage;
+	private Integer mileage;
 	private String login_type;
 	private String status;
 }

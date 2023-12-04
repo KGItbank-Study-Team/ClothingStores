@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kgitbank.slimbear.common.SlimBearUtil;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
+import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
@@ -29,6 +32,7 @@ public class HunController {
 
 	@Autowired
 	private HunServiceImpl hunService;
+
 
 	@RequestMapping("member/myPage")
 	public String myPage(Authentication authentication, Model model) {
@@ -103,6 +107,16 @@ public class HunController {
 		model.addAttribute("modi", vo);
 
 		return "modify";
+	}
+	
+	@RequestMapping("member/myPage/modify/update")
+	public String modifyUpdate(ModifyVO modInfo, Authentication authentication, Model model) {
+
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+
+		hunService.updateMemberInfo(user.getUid(), modInfo);
+	
+		return "redirect:/app/member/myPage/modify";
 	}
 
 	@RequestMapping("member/myPage/modify/quit")

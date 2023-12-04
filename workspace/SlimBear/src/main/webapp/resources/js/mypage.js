@@ -184,3 +184,22 @@ $(document).ready(function(){
         window.open('/app/member/reviewWrite', '후기 작성', windowFeature);
     })
 });
+
+function memberEditAction(){
+
+    var password = $('#passwd').val();
+    if(password != null && password != ''){
+        if( $('#passwd').val() != $('#user_passwd_confirm').val()) {
+            alert('비밀번호 확인이 일치하지 않습니다.')
+            return;
+        }
+    }
+    
+    if(password != null && password != ''){
+        var passinput = $('<input type="hidden" name="password"></input>')
+        passinput.val(password);
+        $('#editForm').append(passinput);
+    }
+   
+    $('#editForm').submit();
+}

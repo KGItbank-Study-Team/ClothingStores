@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.slimbear.common.SlimBearUtil;
@@ -72,6 +73,12 @@ public class HunServiceImpl {
 
 	@Autowired
 	private MemberOrderAddressDAO addressDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
+	
+	@Autowired
+	private PasswordEncoder pwdEncoder;
 
 	public MyPageVO getMyPageInfo(long uid) {
 		MyPageVO vo = new MyPageVO();
@@ -374,6 +381,21 @@ public class HunServiceImpl {
 	public void deleteAddress(long addressUID) {
         addressDAO.deleteAddress(addressUID);
     }
+
+	public void updateMemberInfo(long memberUID, ModifyVO modInfo) {
+		
+		MemberDTO member = new MemberDTO();
+		
+		member.setUid(memberUID);
+		member.setName(modInfo.getUsername());
+		member.setAddress(SlimBearUtil.appendAddress(modInfo.getPostcode(), modInfo.getDefaultAddr(), modInfo.getRemainAddr()));
+		if(modInfo.getPassword() != null)
+			member.setPassword(pwdEncoder.encode(modInfo.getPassword()));
+		member.setPhone(SlimBearUtil.appendPhoneNumber(modInfo.getPhone0(), modInfo.getPhone1(), modInfo.getPhone2()));
+		member.setEmail(modInfo.getEmail());
+		
+		memberDAO.updateMember(member);
+	}
 
 
 }

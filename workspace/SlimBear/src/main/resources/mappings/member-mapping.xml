@@ -42,8 +42,15 @@
 
 	<update id="UPDATE_MEM">
 		UPDATE member
-		SET id=#{id}, password=#{password},
-		email=#{email}, name=#{name}, address=#{address}, sex=#{sex}
+		SET
+		<if test="password != null">password=#{password},</if>
+		<if test="email != null">email=#{email}, </if>
+		<if test="name != null">name=#{name}, </if>
+		<if test="address != null">address=#{address}, </if>
+		<if test="phone != null">phone=#{phone}, </if>
+		<if test="sex != null">sex=#{sex},</if>
+		<if test="mileage != null">mileage=#{mileage},</if>
+		id=id
 		WHERE
 		uid=#{uid}
 	</update>
@@ -54,8 +61,6 @@
 		WHERE
 		uid=#{uid}
 	</update>
-
-
 
 	<!-- 회원배송지(memberOrderAddress) -->
 	<select id="SELECT_ORDERADDRESS_LIST_BY_MEMBER_UID"

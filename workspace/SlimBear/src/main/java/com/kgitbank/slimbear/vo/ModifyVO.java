@@ -10,6 +10,7 @@ import lombok.ToString;
 public class ModifyVO {
 	private String username;	//회원이름
 	private String userID;		//회원 아이디
+	private String password;
 	private String postcode;	//우편번호
 	private String defaultAddr;	//기본주소
 	private String remainAddr;	//상세주소
