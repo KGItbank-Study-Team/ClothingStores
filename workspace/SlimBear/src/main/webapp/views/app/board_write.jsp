@@ -214,19 +214,19 @@
 							<tbody class="">
 								<tr>
 									<th scope="row">FILE 1</th>
-									<td><input name="attach_image1" type="file" id="fileInput1" onchange="handleFileChange()" /></td>
+									<td><input name="attachImage1" type="file" id="fileInput1" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 2</th>
-									<td><input name="attach_image2" type="file" id="fileInput2" onchange="handleFileChange()" /></td>
+									<td><input name="attachImage2" type="file" id="fileInput2" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 3</th>
-									<td><input name="attach_image3" type="file" id="fileInput3" onchange="handleFileChange()" /></td>
+									<td><input name="attachImage3" type="file" id="fileInput3" onchange="handleFileChange()" /></td>
 								</tr>
 								<tr>
 									<th scope="row">FILE 4</th>
-									<td><input name="attach_image4" type="file" id="fileInput4" onchange="handleFileChange()" /></td>
+									<td><input name="attachImage4" type="file" id="fileInput4" onchange="handleFileChange()" /></td>
 								</tr>
 							</tbody>
 							

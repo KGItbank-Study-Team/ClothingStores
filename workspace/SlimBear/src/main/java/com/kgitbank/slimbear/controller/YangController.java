@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
@@ -30,6 +31,8 @@ import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
+	@Autowired
+	private SlimBearS3 slimbearS3;
 	
 	// 공지사항목록
 	@RequestMapping("/board/notice")
@@ -146,11 +149,11 @@ public class YangController {
 	
 	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
-	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO , 
-			@RequestParam("attach_image1") MultipartFile attachImage1,
-            @RequestParam("attach_image2") MultipartFile attachImage2,
-            @RequestParam("attach_image3") MultipartFile attachImage3,
-            @RequestParam("attach_image4") MultipartFile attachImage4,
+	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO,
+			@RequestParam("attachImage1") MultipartFile attachImage1,
+            @RequestParam("attachImage2") MultipartFile attachImage2,
+            @RequestParam("attachImage3") MultipartFile attachImage3,
+            @RequestParam("attachImage4") MultipartFile attachImage4,
             RedirectAttributes redirectAttributes) {
 		
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
@@ -159,21 +162,26 @@ public class YangController {
 	    
 	    inquiryDTO.setWriter_id(currentUserId);
 	    inquiryDTO.setReg_date(new Date());
-	    // DTO에 파일 이름 설정
-	    inquiryDTO.setAttach_image1(attachImage1);
-	    inquiryDTO.setAttach_image2(attachImage2);
-	    inquiryDTO.setAttach_image3(attachImage3);
-	    inquiryDTO.setAttach_image4(attachImage4);
-//	    try {
-//	        // MultipartFile을 byte 배열로 변환하여 DTO에 설정
-//	        inquiryDTO.setAttach_image1(attachImage1.getBytes());
-//	        inquiryDTO.setAttach_image2(attachImage2.getBytes());
-//	        inquiryDTO.setAttach_image3(attachImage3.getBytes());
-//	        inquiryDTO.setAttach_image4(attachImage4.getBytes());
-//	    } catch (IOException e) {
-//	        e.printStackTrace(); // handle the exception according to your needs
-//	    }
-	    
+	 // 파일을 업로드하고 경로를 받아오는 로직 추가
+	    if (!attachImage1.isEmpty()) {
+	        String filePath1 = slimbearS3.saveImage(attachImage1);
+	        inquiryDTO.setAttach_image1(filePath1);
+	    }
+
+	    if (!attachImage2.isEmpty()) {
+	        String filePath2 = slimbearS3.saveImage(attachImage2);
+	        inquiryDTO.setAttach_image2(filePath2);
+	    }
+
+	    if (!attachImage3.isEmpty()) {
+	        String filePath3 = slimbearS3.saveImage(attachImage3);
+	        inquiryDTO.setAttach_image3(filePath3);
+	    }
+
+	    if (!attachImage4.isEmpty()) {
+	        String filePath4 = slimbearS3.saveImage(attachImage4);
+	        inquiryDTO.setAttach_image4(filePath4);
+	    }
 	    // DAO로 전달
 	    boardService.insertInquiry(inquiryDTO);
 	    
