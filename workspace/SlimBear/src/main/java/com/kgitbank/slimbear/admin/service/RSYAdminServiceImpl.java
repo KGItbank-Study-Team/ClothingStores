@@ -141,9 +141,36 @@ public class RSYAdminServiceImpl {
 		return rsyAdminDAO.getFaqList();
 	}
 
+	public FaqDTO getFaq(Long uid) {
+		return rsyAdminDAO.getFaq(uid);
+	}
+
 	// faq삭제
 	public void deleteFaq(FaqDTO data) {
 		Long uid = data.getUid();
 		rsyAdminDAO.deleteFaq(uid);
+	}
+
+	// 공지추가
+	public void addFaq(String question, String answer, String type) {
+		FaqDTO faq = new FaqDTO();
+
+		faq.setQuestion(question);
+		faq.setAnswer(answer);
+		faq.setType(type);
+
+		rsyAdminDAO.addFaq(faq);
+	}
+
+	// 공지수정
+	public void updateFaq(Long uid, String question, String answer, String type) {
+		FaqDTO faq = new FaqDTO();
+
+		faq.setUid(uid);
+		faq.setQuestion(question);
+		faq.setAnswer(answer);
+		faq.setType(type);
+
+		rsyAdminDAO.updateFaq(faq);
 	}
 }

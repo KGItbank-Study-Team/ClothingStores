@@ -241,5 +241,65 @@ public class RSYAdminController {
 		rsyAdminService.deleteFaq(data);
 		return ResponseEntity.ok("삭제가 완료되었습니다.");
 	}
+	
+	@RequestMapping("faq/getFaq")
+	@ResponseBody
+	public FaqDTO getFaq(Long uid) {
+		FaqDTO faq = rsyAdminService.getFaq(uid);
+		return faq;
+	}
+	
+	@RequestMapping("faq/addFaq")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> addFaq(@RequestParam String question, @RequestParam String answer, @RequestParam String type) {
+
+		try {
+			System.out.println(question);
+			System.out.println(answer);
+			System.out.println(type);
+
+	        rsyAdminService.addFaq(question, answer, type);
+
+	        // 성공일 경우
+	        Map<String, String> successResponse = new HashMap<>();
+	        successResponse.put("status", "SUCCESS");
+	        successResponse.put("message", "FAQ가 성공적으로 등록되었습니다.");
+	        return ResponseEntity.ok(successResponse);
+
+	    } catch (Exception e) {
+	        // 실패일 경우
+	        Map<String, String> errorResponse = new HashMap<>();
+	        errorResponse.put("status", "ERROR");
+	        errorResponse.put("message", "FAQ 등록 중에 오류가 발생했습니다.");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+	    }
+	}
+	
+	@RequestMapping("faq/editFaq")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> editFaq(@RequestParam Long uid, @RequestParam String question, @RequestParam String answer, @RequestParam String type) {
+		
+		 try {
+		        System.out.println(uid);
+				System.out.println(question);
+				System.out.println(answer);
+				System.out.println(type);
+
+		        rsyAdminService.updateFaq(uid, question, answer, type);
+
+		        // 성공일 경우
+		        Map<String, String> successResponse = new HashMap<>();
+		        successResponse.put("status", "SUCCESS");
+		        successResponse.put("message", "FAQ가 성공적으로 수정되었습니다.");
+		        return ResponseEntity.ok(successResponse);
+
+		    } catch (Exception e) {
+		        // 실패일 경우
+		        Map<String, String> errorResponse = new HashMap<>();
+		        errorResponse.put("status", "ERROR");
+		        errorResponse.put("message", "FAQ 수정 중에 오류가 발생했습니다.");
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		    }
+	}
 
 }

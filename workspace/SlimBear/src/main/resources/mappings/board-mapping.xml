@@ -59,7 +59,10 @@
 		priority=#{priority}, type=#{type}, main_image=#{main_image}
 		WHERE uid=#{uid}
 	</update>
-	
+	<!-- 관리자 FAQ -->
+	<select id="SELECT_FAQ_DETAIL_ADMIN" resultType="faq">
+		SELECT * FROM faq WHERE uid =#{uid};
+	</select>
 	
 
 	<!-- REVIEW -->

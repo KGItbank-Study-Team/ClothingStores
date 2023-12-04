@@ -77,9 +77,10 @@ public class RSYAdminDAO {
 	public List<NoticeDTO> getNoticeList() {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL");
 	}
+
 	// Notice 상세조회
 	public NoticeDTO getNotice(Long uid) {
-		return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL",uid);
+		return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL", uid);
 	}
 
 	// Notice 추가
@@ -100,6 +101,21 @@ public class RSYAdminDAO {
 	// faq 리스트 조회
 	public List<FaqDTO> getFaqList() {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_FAQ_LIST");
+	}
+
+	// Notice 상세조회
+	public FaqDTO getFaq(Long uid) {
+		return template.selectOne("com.slimbear.mapper.Board.SELECT_FAQ_DETAIL_ADMIN", uid);
+	}
+
+	// Notice 추가
+	public int addFaq(FaqDTO faq) {
+		return template.insert("com.slimbear.mapper.Board.INSERT_FAQ", faq);
+	}
+
+	// Notice 수정
+	public int updateFaq(FaqDTO faq) {
+		return template.update("com.slimbear.mapper.Board.UPDATE_FAQ", faq);
 	}
 
 	// Faq 삭제
