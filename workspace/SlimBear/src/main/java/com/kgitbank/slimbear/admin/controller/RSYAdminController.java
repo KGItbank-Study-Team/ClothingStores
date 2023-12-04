@@ -1,7 +1,9 @@
 package com.kgitbank.slimbear.admin.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -152,6 +154,13 @@ public class RSYAdminController {
 		return noticeList;
 	}
 	
+	@RequestMapping("notice/getNotice")
+	@ResponseBody
+	public NoticeDTO getNotice(Long uid) {
+		NoticeDTO notice = rsyAdminService.getNotice(uid);
+		return notice;
+	}
+	
 	@RequestMapping("notice/addNotice")
 	@ResponseBody
 	public ResponseEntity<String> addNotice(@RequestParam String title, @RequestParam String content,
@@ -178,6 +187,36 @@ public class RSYAdminController {
 		System.out.println(data);
 		rsyAdminService.deleteNotice(data);
 		return ResponseEntity.ok("삭제가 완료되었습니다.");
+	}
+	
+	@RequestMapping("notice/editNotice")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> editNotice(@RequestParam Long uid, @RequestParam String title,
+			@RequestParam String content, @RequestParam int priority, @RequestParam String type, @RequestParam String main_image) {
+		
+		 try {
+		        System.out.println(uid);
+		        System.out.println(title);
+		        System.out.println(content);
+		        System.out.println(priority);
+		        System.out.println(type);
+		        System.out.println(main_image);
+
+		        rsyAdminService.updateNotice(uid, title, content, priority, type, main_image);
+
+		        // 성공일 경우
+		        Map<String, String> successResponse = new HashMap<>();
+		        successResponse.put("status", "SUCCESS");
+		        successResponse.put("message", "공지사항이 성공적으로 수정되었습니다.");
+		        return ResponseEntity.ok(successResponse);
+
+		    } catch (Exception e) {
+		        // 실패일 경우
+		        Map<String, String> errorResponse = new HashMap<>();
+		        errorResponse.put("status", "ERROR");
+		        errorResponse.put("message", "공지사항 수정 중에 오류가 발생했습니다.");
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		    }
 	}
 
 	// faq관리

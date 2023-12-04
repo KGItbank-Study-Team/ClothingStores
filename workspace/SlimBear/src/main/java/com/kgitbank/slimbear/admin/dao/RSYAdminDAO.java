@@ -77,12 +77,21 @@ public class RSYAdminDAO {
 	public List<NoticeDTO> getNoticeList() {
 		return template.selectList("com.slimbear.mapper.Board.SELECT_NOTICE_LIST_ALL");
 	}
-	
-	//Notice 추가	
+	// Notice 상세조회
+	public NoticeDTO getNotice(Long uid) {
+		return template.selectOne("com.slimbear.mapper.Board.SELECT_NOTICE_DETAIL",uid);
+	}
+
+	// Notice 추가
 	public int addNotice(NoticeDTO notice) {
 		return template.insert("com.slimbear.mapper.Board.INSERT_NOTICE_ADMIN", notice);
 	}
-	
+
+	// Notice 수정
+	public int updateNotice(NoticeDTO notice) {
+		return template.update("com.slimbear.mapper.Board.UPDATE_NOTICE_ADMIN", notice);
+	}
+
 	// Notice 삭제
 	public void deleteNotice(Long uid) {
 		template.delete("com.slimbear.mapper.Board.DELETE_NOTICE", uid);

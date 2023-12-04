@@ -95,11 +95,15 @@ public class RSYAdminServiceImpl {
 		return rsyAdminDAO.getNoticeList();
 	}
 
+	public NoticeDTO getNotice(Long uid) {
+		return rsyAdminDAO.getNotice(uid);
+	}
+
 	// 공지추가
 	public void addNotice(String title, String content, int priority, String type, String main_image) {
 		NoticeDTO notice = new NoticeDTO();
 		Date date = new Date();
-		
+
 		notice.setTitle(title);
 		notice.setContent(content);
 		notice.setPriority(priority);
@@ -108,6 +112,22 @@ public class RSYAdminServiceImpl {
 		notice.setReg_date(date);
 
 		rsyAdminDAO.addNotice(notice);
+	}
+
+	// 공지수정
+	public void updateNotice(Long uid, String title, String content, int priority, String type, String main_image) {
+		NoticeDTO notice = new NoticeDTO();
+		Date date = new Date();
+
+		notice.setUid(uid);
+		notice.setTitle(title);
+		notice.setContent(content);
+		notice.setPriority(priority);
+		notice.setType(type);
+		notice.setMain_image(main_image);
+		notice.setReg_date(date);
+
+		rsyAdminDAO.updateNotice(notice);
 	}
 
 	// 공지삭제

@@ -10,7 +10,12 @@
 <meta name="author" content="">
 
 <title>기본 페이지 복사해서 써</title>
-
+<style>
+    .btn-group > .btn.active {
+        background-color: #336699 !important;
+        color: #fff;
+    }
+</style>
 <!-- Custom fonts for this template -->
 <link href="/admin/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -217,7 +222,8 @@
             }
         });
 
-        // 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
+     // 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
+     // 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
         $('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
             // 이전에 열린 답글 입력 창이 있다면 닫기
             if (lastOpenedRow != null && lastOpenedRow !== index) {
@@ -226,66 +232,76 @@
 
             $detail.html('상세 정보 불러오는 중....');
             $.ajax({
-                url: "/admin/notice/getComment?reviewUID=" + row['uid'],
+                url: "/admin/notice/getNotice?uid=" + row['uid'],
                 type: "GET",
                 success: function (result) {
                     var html = [];
                     html.push('<tbody>');
 
                     if (result) {
-                        var comment = result;
+                        var notice = result;
                         html.push('<tr>');
-                        html.push('<td>' + (result.status === 'SUCCESS' ? '답변완료' : '미등록') + '</td>');
+                        html.push('<td>제목: ' + notice.title + '</td>');
                         html.push('</tr>');
+                        html.push('<tr>');
+                        html.push('<td>내용: ' + notice.content + '</td>');
+                        html.push('</tr>');
+                        // 기타 필요한 정보들을 추가로 표시
                     }
 
                     html.push('</tbody></table></div>');
 
-                    // 답글 작성 폼
-                    html.push('<div class="reply-form">');
-                    html.push('<form id="replyForm">');
+                 // 수정 폼
+                    html.push('<div class="edit-notice-form">');
+                    html.push('<form id="editNoticeForm">');
                     html.push('<div class="mb-3">');
-                    html.push('<label for="mem_id" class="form-label">작성자 ID</label>');
-                    html.push('<input type="text" class="form-control dark-input" id="mem_id" value="' + row['mem_id'] + '" readonly>');
+                    html.push('<label for="editNoticeTitle" class="form-label">제목</label>');
+                    html.push('<input type="text" class="form-control" id="editNoticeTitle" value="' + notice.title + '">');
                     html.push('</div>');
                     html.push('<div class="mb-3">');
-                    html.push('<label for="commentTitle" class="form-label">제목</label>');
-                    html.push('<input type="text" class="form-control" id="commentTitle">');
-                    html.push('</div>');
-                    html.push('<div class="mb-3">');
-                    html.push('<label for="commentContent" class="form-label">내용</label>');
-                    html.push('<textarea class="form-control" id="commentContent" rows="3"></textarea>');
+                    html.push('<label for="editNoticeContent" class="form-label">내용</label>');
+                    html.push('<textarea class="form-control" id="editNoticeContent" rows="3">' + notice.content + '</textarea>');
                     html.push('</div>');
 
-                    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateComment(' + row['uid'] + ')">답글 추가/수정</button>');
+                    html.push('<div class="mb-3"><label for="editNoticePriority" class="form-label">우선순위</label>');
+                    html.push('<input type="text" class="form-control" id="editNoticePriority" value="' + notice.priority + '"></div>');
+
+                    html.push('<div class="mb-3"><label for="editNoticeType" class="form-label">타입</label>');
+                    html.push('<input type="text" class="form-control" id="editNoticeType" value="' + notice.type + '"></div>');
+
+                    html.push('<div class="mb-3">');
+                    html.push('<label for="editNoticeMainImage" class="form-label">이미지 URL</label>');
+                    html.push('<input type="text" class="form-control" id="editNoticeMainImage" value="' + notice.main_image + '">');
+                    html.push('</div>');
+
+                    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="submitEditNoticeForm(' + notice.uid + ')">수정</button>');
                     html.push('</form>');
                     html.push('</div>');
 
                     $detail.html(html);
 
-                    // 답글이 있는 경우, 답글 내용을 폼에 채워줌
-                    if (result) {
-                        $('#commentTitle').val(result.title);
-                        $('#commentContent').val(result.content);
-                    }
 
                     // 현재 열린 행을 저장
                     lastOpenedRow = index;
 
-                    // 열린 행의 답글 작성 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
+                    // 열린 행의 수정 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
                     $('#table').on('collapse-row.bs.table', function (e, index) {
                         if (lastOpenedRow === index) {
                             lastOpenedRow = null;
                         }
                     });
+
+                   
                 },
                 error: function () {
-                    alert("error");
+                    alert("에러 발생");
                 }
             });
         });
+
     });
 
+    
     // 리뷰 작성 일자를 포맷하는 함수
     function dateFormatter(value, row, index) {
         return [new Date(value).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-')].join('');
@@ -418,6 +434,54 @@
         // "새 공지사항 등록" 버튼을 다시 생성
         var addButtonHtml = '<button class="btn btn-primary" onclick="showAddNoticeForm()">새 공지사항 등록</button>';
         $('#addNoticeFormContainer').html(addButtonHtml);
+    }
+ 
+ // 수정 폼 닫기 함수
+    function closeEditNoticeForm() {
+        $('#table').bootstrapTable('collapseRow', lastOpenedRow);
+        lastOpenedRow = null;
+    }
+ 
+ // 수정 폼 제출 함수
+    function submitEditNoticeForm(uid) {
+        var title = $('#editNoticeTitle').val();
+        var content = $('#editNoticeContent').val();
+        var priority = $('#editNoticePriority').val();
+        var type = $('#editNoticeType').val();
+        var main_image = $('#editNoticeMainImage').val();
+
+        // 데이터 유효성 검사 (필요에 따라 추가 검사 수행)
+        if (!title.trim() || !content.trim() || !priority || !type.trim() || !main_image.trim()) {
+            alert('모든 필드를 입력하세요.');
+            return;
+        }
+
+        // Ajax 요청
+        $.ajax({
+            url: "/admin/notice/editNotice",
+            type: "POST",
+            data: {
+                uid: uid,
+                title: title,
+                content: content,
+                priority: priority,
+                type: type,
+                main_image: main_image
+                // 기타 필요한 수정 항목들을 추가
+            },
+            success: function (result) {
+                if (result.status === 'SUCCESS') {
+                    alert(result.message);
+                    closeEditNoticeForm();
+                    // TODO: 성공에 따른 추가적인 동작 수행
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("서버 오류로 인해 공지사항을 수정할 수 없습니다.");
+            }
+        });
     }
 </script>
 

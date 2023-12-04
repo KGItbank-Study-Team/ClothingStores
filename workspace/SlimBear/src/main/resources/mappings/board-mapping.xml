@@ -53,6 +53,12 @@
 		(title, content, reg_date, priority, type, writer, view_cnt, main_image)
 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, '관리자', 0, #{main_image})
 	</insert>
+	<update id="UPDATE_NOTICE_ADMIN">
+		UPDATE notice
+		SET title=#{title}, content=#{content}, reg_date=#{reg_date}, 
+		priority=#{priority}, type=#{type}, main_image=#{main_image}
+		WHERE uid=#{uid}
+	</update>
 	
 	
 
