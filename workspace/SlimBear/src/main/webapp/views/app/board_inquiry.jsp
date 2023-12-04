@@ -81,7 +81,6 @@
 										<div class="detail">
 											<div class="fr-view fr-view-article">
 												<p><br></p>
-													<img alt="상품01" src="/resources/images/icon_hit.gif">
 <%-- 													<img src="/resources/images/${attach_image1.originalFilename}" alt="Image 1"> --%>
 <%-- 												    <img src="/resources/images/${attach_image2.originalFilename}" alt="Image 2"> --%>
 <%-- 												    <img src="/resources/images/${attach_image3.originalFilename}" alt="Image 3"> --%>
@@ -90,18 +89,14 @@
 													<c:if test="${not empty inquiries.attach_image1}">
 													    <img alt="상품01" src="/resources/images/${inquiries.attach_image1}">
 													</c:if>
-													
-													<c:if test="${not empty inquiries.attach_image1}">
-													    <img alt="상품01" src="${inquiries.attach_image1}">
-													</c:if>
 													<c:if test="${not empty inquiries.attach_image2}">
-													    <img alt="상품02" src="${inquiries.attach_image2}">
+													    <img alt="상품02" src="/resources/images/${inquiries.attach_image2}">
 													</c:if>
 													<c:if test="${not empty inquiries.attach_image3}">
-													    <img alt="상품03" src="${inquiries.attach_image3}">
+													    <img alt="상품03" src="/resources/images/${inquiries.attach_image3}">
 													</c:if>
 													<c:if test="${not empty inquiries.attach_image4}">
-													    <img alt="상품04" src="${inquiries.attach_image4}">
+													    <img alt="상품04" src="/resources/images/${inquiries.attach_image4}">
 													</c:if>
 												<p><br></p>
 												<p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">

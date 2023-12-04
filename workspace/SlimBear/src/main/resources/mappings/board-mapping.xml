@@ -199,8 +199,25 @@
 
 	<!-- 문의게시글 조회 -->
 	<select id="SELECT_INQUIRY_DETAIL" resultType="inquiry">
-		SELECT * FROM inquiry WHERE uid=#{uid}
-	</select>
+    SELECT
+        uid,
+        writer_id,
+        title,
+        content,
+        reg_date,
+        status,
+        type,
+        prod_uid,
+        secure,
+		SUBSTRING(attach_image1, INSTR(attach_image1, '_') + 1) AS attach_image1,
+		SUBSTRING(attach_image2, INSTR(attach_image2, '_') + 1) AS attach_image2,
+		SUBSTRING(attach_image3, INSTR(attach_image3, '_') + 1) AS attach_image3,
+		SUBSTRING(attach_image4, INSTR(attach_image4, '_') + 1) AS attach_image4
+    FROM
+        inquiry
+    WHERE
+        uid = #{uid};
+</select>
 
 	<!-- 특정 prod_uid 상품문의 조회 -->
 	<select id="SELECT_INQUIRY_PRODUID" resultType="inquiry">

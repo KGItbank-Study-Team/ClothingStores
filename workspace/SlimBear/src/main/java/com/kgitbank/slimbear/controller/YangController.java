@@ -162,7 +162,7 @@ public class YangController {
 	    
 	    inquiryDTO.setWriter_id(currentUserId);
 	    inquiryDTO.setReg_date(new Date());
-	 // 파일을 업로드하고 경로를 받아오는 로직 추가
+	    // 파일을 업로드하고 경로를 받아오는 로직 추가
 	    if (!attachImage1.isEmpty()) {
 	        String filePath1 = slimbearS3.saveImage(attachImage1);
 	        inquiryDTO.setAttach_image1(filePath1);
