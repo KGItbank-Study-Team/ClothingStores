@@ -80,7 +80,7 @@
 					<div id="customToolbar"
 						style="padding-top: 20px; padding-left: 20px; padding-bottom: 20px;">
 						<button class="btn btn-primary" onclick="showAddNoticeForm()">새
-							공지사항 등록</button>
+							FAQ 등록</button>
 					</div>
 					<div class="card-body">
 
@@ -301,7 +301,7 @@
         // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/review/deleteData',
+                url: '/admin/faq/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),

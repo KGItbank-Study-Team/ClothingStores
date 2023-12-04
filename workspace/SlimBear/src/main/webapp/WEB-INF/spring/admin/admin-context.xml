@@ -19,7 +19,7 @@
 	
 	<!-- 설정 파일 불러오기 -->
 	<context:property-placeholder
-		location="classpath:application.properties" />
+		location="classpath:application.properties,classpath:secret.properties" />
 
 	<bean id="templateResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">

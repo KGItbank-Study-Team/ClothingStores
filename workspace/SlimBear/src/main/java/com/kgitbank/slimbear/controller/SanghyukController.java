@@ -254,17 +254,16 @@ public class SanghyukController {
 		return "productWrite";
 	}
 	
-	/*
-	 * @RequestMapping("") public String orderList(Authentication authentication,
-	 * Model model) { System.out.println("====오더리스트 조회 메서드 실행===="); SecurityUser
-	 * user = (SecurityUser) authentication.getPrincipal(); long memberUID =
-	 * user.getUid(); System.out.println("멤바uid: " + memberUID);
-	 * System.out.println("유자네임: " + user.getUsername());
-	 * 
-	 * List<OrderListVO> vo = sanghService.getOrderListInfo(memberUID);
-	 * System.out.println("상혁VO: " + vo); model.addAttribute("orderList", vo);
-	 * model.addAttribute("orderList2", vo);
-	 * 
-	 * return "reviewWrite"; }
-	 */
+	@RequestMapping("/member/reviewWrite")
+	public String getReviewListByUid(Long review_uid, Authentication authentication, Model model) {
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		System.out.println(user.getUid());
+		System.out.println(user.getUsername());
+		
+		List<ReviewDTO> review = sanghService.getReviewListByUid(review_uid);
+		model.addAttribute("review", review);
+		
+		return "reviewWrite";
+	}
+
 }

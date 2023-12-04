@@ -20,11 +20,10 @@
 	<div class="prodImg">
 		<img alt="상품이미지" src="/resources/images/knit01_1.webp">
 	</div>
-	<div class="line">&nbsp</div>
-	<div>
-		<p>소프트 워머 헤어리 니트 챠콜</p>
+	<div class="option-text">
+		<p>${orderProdList.orderName}</p>
 	</div>
-	<div><p>옵션1: blue, 2XL</p></div>
+	<div class="option-text2"><p>옵션1: blue, 2XL</p></div>
 	<div class="star_rating">
 		<span class="star on" value="1"> </span> 
 		<span class="star" value="2"> </span> 

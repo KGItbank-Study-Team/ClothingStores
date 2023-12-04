@@ -87,5 +87,13 @@
 			<constructor-arg name="apiKey" value="${imp.api.key}"></constructor-arg>
 			<constructor-arg name="apiSecret" value="${imp.api.secretkey}"></constructor-arg>
 	</bean>
+	
+	
+	<!-- AWS S3 -->
+	<bean id="slimbearAWSS3" class="com.kgitbank.slimbear.common.SlimBearS3">
+			<constructor-arg name="bucket" value="${aws.s3.bucket}"></constructor-arg>
+			<constructor-arg name="accessKey" value="${aws.s3.accesskey}"></constructor-arg>
+			<constructor-arg name="secretKey" value="${aws.s3.secretkey}"></constructor-arg>
+	</bean>
 
 </beans>

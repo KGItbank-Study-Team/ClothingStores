@@ -42,17 +42,10 @@
 					<p></p>
 				</div>
 			</div>
-			<form id="BoardDelForm" name="" action="/exec/front/Board/del/1"
-				method="post" target="_self" enctype="multipart/form-data">
+			<form id="BoardDelForm" name="" action="/exec/front/Board/del/1" method="post" target="_self" enctype="multipart/form-data">
 				<input id="no" name="no" value="1724624" type="hidden" />
 				<!-- Add more input fields here if needed -->
-				<input id="bulletin_no" name="bulletin_no" value="900281" type="hidden" />
-				<input id="board_no" name="board_no" value="1" type="hidden" />
-					<input id="member_id" name="member_id" value="slowmastercr" type="hidden" />
-					<input id="list_url" name="list_url" value="/board/free/list.html?board_no=1" type="hidden" />
-					<input id="bdf_modify_url" name="bdf_modify_url" value="/board/free/modify.html?board_act=edit&amp;no=1724624&amp;board_no=1" type="hidden" />
-					<input id="bdf_del_url" name="bdf_del_url" value="/exec/front/Board/del/1" type="hidden" />
-					<input id="bdf_action_type" name="bdf_action_type" value="" type="hidden" />
+				
 				<div class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
 					<div class="ec-base-table typeWrite ">
 						<table border="1" summary="">
@@ -81,7 +74,6 @@
 										<div class="detail">
 											<div class="fr-view fr-view-article">
 												<p><br></p>
-													<img alt="상품01" src="/resources/images/icon_hit.gif">
 <%-- 													<img src="/resources/images/${attach_image1.originalFilename}" alt="Image 1"> --%>
 <%-- 												    <img src="/resources/images/${attach_image2.originalFilename}" alt="Image 2"> --%>
 <%-- 												    <img src="/resources/images/${attach_image3.originalFilename}" alt="Image 3"> --%>
@@ -90,18 +82,14 @@
 													<c:if test="${not empty inquiries.attach_image1}">
 													    <img alt="상품01" src="/resources/images/${inquiries.attach_image1}">
 													</c:if>
-													
-													<c:if test="${not empty inquiries.attach_image1}">
-													    <img alt="상품01" src="${inquiries.attach_image1}">
-													</c:if>
 													<c:if test="${not empty inquiries.attach_image2}">
-													    <img alt="상품02" src="${inquiries.attach_image2}">
+													    <img alt="상품02" src="/resources/images/${inquiries.attach_image2}">
 													</c:if>
 													<c:if test="${not empty inquiries.attach_image3}">
-													    <img alt="상품03" src="${inquiries.attach_image3}">
+													    <img alt="상품03" src="/resources/images/${inquiries.attach_image3}">
 													</c:if>
 													<c:if test="${not empty inquiries.attach_image4}">
-													    <img alt="상품04" src="${inquiries.attach_image4}">
+													    <img alt="상품04" src="/resources/images/${inquiries.attach_image4}">
 													</c:if>
 												<p><br></p>
 												<p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
@@ -30,6 +32,8 @@ import com.kgitbank.slimbear.service.YangBoardServiceImpl;
 public class YangController {
 	@Autowired
 	private YangBoardServiceImpl boardService;
+	@Autowired
+	private SlimBearS3 slimbearS3;
 	
 	// 공지사항목록
 	@RequestMapping("/board/notice")
@@ -146,11 +150,11 @@ public class YangController {
 	
 	// 문의게시글 작성
 	@PostMapping("/board/inquiry")
-	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO , 
-			@RequestParam("attach_image1") MultipartFile attachImage1,
-            @RequestParam("attach_image2") MultipartFile attachImage2,
-            @RequestParam("attach_image3") MultipartFile attachImage3,
-            @RequestParam("attach_image4") MultipartFile attachImage4,
+	public String submitInquiry(@ModelAttribute InquiryDTO inquiryDTO,
+			@RequestParam("attachImage1") MultipartFile attachImage1,
+            @RequestParam("attachImage2") MultipartFile attachImage2,
+            @RequestParam("attachImage3") MultipartFile attachImage3,
+            @RequestParam("attachImage4") MultipartFile attachImage4,
             RedirectAttributes redirectAttributes) {
 		
 	    // Spring Security를 통해 현재 로그인한 사용자의 ID 가져오기
@@ -159,21 +163,26 @@ public class YangController {
 	    
 	    inquiryDTO.setWriter_id(currentUserId);
 	    inquiryDTO.setReg_date(new Date());
-	    // DTO에 파일 이름 설정
-	    inquiryDTO.setAttach_image1(attachImage1);
-	    inquiryDTO.setAttach_image2(attachImage2);
-	    inquiryDTO.setAttach_image3(attachImage3);
-	    inquiryDTO.setAttach_image4(attachImage4);
-//	    try {
-//	        // MultipartFile을 byte 배열로 변환하여 DTO에 설정
-//	        inquiryDTO.setAttach_image1(attachImage1.getBytes());
-//	        inquiryDTO.setAttach_image2(attachImage2.getBytes());
-//	        inquiryDTO.setAttach_image3(attachImage3.getBytes());
-//	        inquiryDTO.setAttach_image4(attachImage4.getBytes());
-//	    } catch (IOException e) {
-//	        e.printStackTrace(); // handle the exception according to your needs
-//	    }
-	    
+	    // 파일을 업로드하고 경로를 받아오는 로직 추가
+	    if (!attachImage1.isEmpty()) {
+	        String filePath1 = slimbearS3.saveImage(attachImage1);
+	        inquiryDTO.setAttach_image1(filePath1);
+	    }
+
+	    if (!attachImage2.isEmpty()) {
+	        String filePath2 = slimbearS3.saveImage(attachImage2);
+	        inquiryDTO.setAttach_image2(filePath2);
+	    }
+
+	    if (!attachImage3.isEmpty()) {
+	        String filePath3 = slimbearS3.saveImage(attachImage3);
+	        inquiryDTO.setAttach_image3(filePath3);
+	    }
+
+	    if (!attachImage4.isEmpty()) {
+	        String filePath4 = slimbearS3.saveImage(attachImage4);
+	        inquiryDTO.setAttach_image4(filePath4);
+	    }
 	    // DAO로 전달
 	    boardService.insertInquiry(inquiryDTO);
 	    
@@ -203,7 +212,11 @@ public class YangController {
 	
 	// 문의사항 수정처리
 	@PostMapping("/board/inquiry/detail/update/{uid}")
-	public String updateInquiry(@PathVariable Long uid, @ModelAttribute InquiryDTO updatedInquiry) {
+	public String updateInquiry(@PathVariable Long uid, @ModelAttribute InquiryDTO updatedInquiry,
+								@RequestParam("newAttachImage1") MultipartFile newAttachImage1,
+						        @RequestParam("newAttachImage2") MultipartFile newAttachImage2,
+						        @RequestParam("newAttachImage3") MultipartFile newAttachImage3,
+						        @RequestParam("newAttachImage4") MultipartFile newAttachImage4) {
 	    // 기존 게시물 정보를 가져오기
 	    InquiryDTO existingInquiry = boardService.getInquiryDetail(uid);
 
@@ -212,11 +225,25 @@ public class YangController {
 	    if (updatedInquiry.getStatus() != null) {
 	        existingInquiry.setStatus(updatedInquiry.getStatus());
 	    }
+	    // 새로운 이미지가 업로드되었는지 확인하고 업로드 후 경로 업데이트
+	    updateAttachImage(newAttachImage1, existingInquiry::setAttach_image1);
+	    updateAttachImage(newAttachImage2, existingInquiry::setAttach_image2);
+	    updateAttachImage(newAttachImage3, existingInquiry::setAttach_image3);
+	    updateAttachImage(newAttachImage4, existingInquiry::setAttach_image4);
+	    
+	    
 	    // 수정된 정보를 DAO를 통해 업데이트
 	    boardService.updateInquiry(existingInquiry);
 
 	    // 수정 완료 후 리다이렉트 등 필요한 처리 수행
 	    return "redirect:/app/board/inquiry/detail/" + uid;
+	}
+	private void updateAttachImage(MultipartFile newImage, Consumer<String> imagePathSetter) {
+	    if (!newImage.isEmpty()) {
+	        // 새로운 이미지 업로드 및 경로 설정
+	        String newImagePath = slimbearS3.saveImage(newImage);
+	        imagePathSetter.accept(newImagePath);
+	    }
 	}
 	
 	// 문의게시글 검색
