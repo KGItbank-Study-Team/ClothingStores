@@ -359,7 +359,10 @@ tbody img {
 /* ==================== */
 /* 가이드 영역 CSS */
 .guideSection {
-	margin-bottom: 100px;
+	margin: 0 auto;
+	width: 1000px;
+	padding-bottom: 100px;
+	padding-top: 100px;
 }
 .guideSection h2 {
 	cursor: pointer;
@@ -406,28 +409,35 @@ section > h1 {
 	color: gold;
 	font-size: 20px;
 	position: relative;
-	top: -15px;
+	top: -10px;
+	margin-top: 5px;
 }
 .photo-review  img {
 	width: 116px;
 	height: 87px;
 	padding-left: 5px;
+	display: inline-block;
+	margin: 10px 0;
 }
 .reviewContent {
 	padding-left: 5px;
 	border-bottom: 1px solid;
 }
-
-
-
-
+#wrapper {
+	width: 1000px; 
+	margin: 0 auto;
+}
+.reg_date {
+	margin-top: 5px;
+}
 
 /* ==================== */
 /* ==================== */
 /* Inquirys CSS */
 .inquirySection {
-	margin-top: 100px;
-	width: auto;
+	width: 1000px;
+	margin: 0 auto; 
+	padding-top: 150px;
 }
 /* .inquirySection > th {
 	text-align: center;

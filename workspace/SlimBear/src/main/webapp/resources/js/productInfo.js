@@ -284,7 +284,7 @@ function addWish(uid) {
             console.log("request:", request);
             console.log("status:", status);
             console.log("error:", error);
-            alert('!!Error!!');
+            alert('로그인 후 이용해주세요.');
         }
     });
 };
@@ -366,7 +366,7 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<div class="info">' +
             '<div>' +
             '<span>' + dataList[i].mem_id + '</span>' +
-            '<div>' +
+            '<div class="reg_date">' +
             '<p>' + dataList[i].reg_date + '</p>' +
             '</div>' +
             '</div>' +
@@ -381,13 +381,15 @@ function displayData(currentPage, dataPerPage, dataList) {
         }
         reviewHtml += '</div>' +
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
-            '</div>';
+            '</div>' +
+            '<div class="photo-review">';
             for(var k =1; k <= 4; k++) {
-                reviewHtml += '<div class="photo-review">' +
-                '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>' +
-                '</div>';
+                reviewHtml +=  
+                '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>';
             }
-            reviewHtml += '<div>' +
+            
+            reviewHtml += '</div>' +
+            '<div>' +
             '<div class="reviewContent">' + dataList[i].content + '</div>' +
             '</div>' +
             '</div>';
@@ -534,6 +536,9 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
 
 
     for (var i = (currentPageIng - 1) * dataPerPageInq; i < Math.min(currentPageIng * dataPerPageInq, inqList.length); i++) {
+        var regDate = new Date(inqList[i].reg_date);
+        var formattedRegDate = regDate.toLocaleDateString();
+
         inquiryHtml += 
             '<tr>' +
             '<td class="borderRemove">' + inqList[i].uid + '</td>' + //inquiry_uid
@@ -541,7 +546,7 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
             '<div class="clickTitle">' + inqList[i].title + '</div>' +
             '</td>' +
             '<td>' + inqList[i].writer_id + '</td>' +
-            '<td>' + inqList[i].reg_date + '</td>' +
+            '<td>' + formattedRegDate + '</td>' +
             '</tr>' +
             '<tr class="inquiryContent">' +
             '<td>&nbsp;</td>' +
@@ -554,22 +559,25 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
         // inqAnswerList에 값이 있을 때만 해당 HTML을 추가
         //console.log('inqAnswerList : ' + inqAnswerList);
         if (inqAnswerList[i]) {
+            var answerRegDate = new Date(inqAnswerList[i].reg_date);
+            var formattedAnswerRegDate = answerRegDate.toLocaleDateString();
+
             inquiryHtml += '<tr>' +
                 '<td>&nbsp;</td>' +
                 '<td>' +
                 '<div class="clickAnswer">' + inqAnswerList[i].title + 
                 '</div>' +
                 '</td>' +
-                '<td>&nbsp;</td>' +
-                '<td>&nbsp;</td>' +                
+                '<td>슬림베어🐻</td>' +
+                '<td>' + formattedAnswerRegDate + '</td>' +                
                 '</tr>' +
                 '<tr class="answerContent">' +
                 '<td>&nbsp;</td>' +
                 '<td class="centerNo">' +
                 '<div>' + inqAnswerList[i].content + '</div>'
-                '</td>'
-                '<td>&nbsp;</td>'
-                '<td>&nbsp;</td>'
+                '</td>' +
+                '<td>&nbsp;</td>' +
+                '<td>&nbsp;</td>' +     
                 '</tr>';
         }
         
@@ -580,17 +588,17 @@ function displayDataInq(currentPageIng, dataPerPageInq, inqList, inqAnswerList) 
 function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, inqList) {
     //console.log('7. currentPage: ' + currentPageIng);
 
-    totalDataInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
+    totalPageInq = Math.ceil(totalDataInq / dataPerPageInq); // 총 페이지 수
 
-    if (totalDataInq < pageCountInq) {
-        pageCountInq = totalPage;
+    if (totalPageInq < pageCountInq) {
+        pageCountInq = totalPageInq;
     }
 
     let pageGroup = Math.ceil(currentPageIng / pageCountInq); // 페이지 그룹
     let last = pageGroup * pageCountInq; // 화면에 보여질 마지막 페이지 번호
 
-    if (last > totalPage) {
-        last = totalPage;
+    if (last > totalPageInq) {
+        last = totalPageInq;
     }
 
     let first = last - (pageCountInq - 1); // 화면에 보여질 첫번째 페이지 번호
@@ -600,20 +608,20 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, i
     let inquiry2Html = "";
 
     if (prev > 0) {
-        pageHtml += '<li><a href="#" id="prev"> 이전 </a></li>';
+        inquiry2Html += '<li><a href="#" id="prev"> 이전 </a></li>';
     }
 
     // 페이징 번호 표시
     for (var j = first; j <= last; j++) {
         //console.log('문의 currentPage : ' + currentPageIng);
         if (currentPageIng == j) {
-            inquiry2Html += '<li><a href="#" id="P' + j + '">' + j + '</a></li>';
+            inquiry2Html += '<li><a href="#" id="' + j + '">' + j + '</a></li>';
         } else {
-            inquiry2Html += '<li><a href="#" id="P' + j + '">' + j + '</a></li>';
+            inquiry2Html += '<li><a href="#" id="' + j + '">' + j + '</a></li>';
         }
     }
 
-    if (last < totalPage) {
+    if (last < totalPageInq) {
         inquiry2Html += '<li><a href="#" id="next"> 다음 </a></li>';
     }
 
@@ -630,11 +638,11 @@ function pagingInq(totalDataInq, dataPerPageInq, pageCountInq, currentPageIng, i
         var uid = urlParams.get("p");
         event.preventDefault(); // 기본 동작 중단
         //alert('reviewList = ' + JSON.stringify(dataList));
-        let $id2 = $(this).attr("id2");
+        let $id = $(this).attr("id");
         selectedPage = $(this).text();
 
-        if ($id2 == "next") selectedPage = next;
-        if ($id2 == "prev") selectedPage = prev;
+        if ($id == "next") selectedPage = next;
+        if ($id == "prev") selectedPage = prev;
 
         // 전역변수에 선택한 페이지 번호를 담는다.
         globalCurrentPageInq = selectedPage;
