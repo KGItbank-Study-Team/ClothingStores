@@ -381,11 +381,13 @@ function displayData(currentPage, dataPerPage, dataList) {
         }
         reviewHtml += '</div>' +
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
-            '</div>' +
-            '<div class="photo-review">' +
-            '<a><img alt="상품" src="/resources/images/review_images01.jpg"></a>' +
-            '</div>' +
-            '<div>' +
+            '</div>';
+            for(var k =1; k <= 4; k++) {
+                reviewHtml += '<div class="photo-review">' +
+                '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>' +
+                '</div>';
+            }
+            reviewHtml += '<div>' +
             '<div class="reviewContent">' + dataList[i].content + '</div>' +
             '</div>' +
             '</div>';

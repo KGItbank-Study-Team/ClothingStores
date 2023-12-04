@@ -71,7 +71,7 @@
 			substring(image3, instr(image3, '_') + 1) as image3,
 			substring(image4, instr(image4, '_') + 1) as image4
 		from productReview
-		where prod_code = LIKE CONCAT(#{uid}, ':%');
+		where prod_code LIKE CONCAT(#{uid}, ':%');
 	</select>
 
 	<!-- 특정 회원이 작성한 리뷰 조회 -->

@@ -39,7 +39,7 @@ public class ReviewDAO {
 
 	// 특정 상품 uid 리뷰 조회
 	public List<ReviewDTO> getReviewListByUid(Long uid) {
-		return template.selectList("com.slimbear.mapper.Board.SELECT_BY_PRODCODE", uid);
+		return template.selectList("com.slimbear.mapper.Board.SELECT_REVIEW_LIST", uid);
 	}
 
 	// 리뷰 데이터 삽입
