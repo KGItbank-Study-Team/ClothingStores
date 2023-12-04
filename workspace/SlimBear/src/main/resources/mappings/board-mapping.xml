@@ -262,7 +262,7 @@
 	<!-- 상품문의 업데이트 -->
 	<update id="UPDATE_INQUIRY">
 		UPDATE inquiry
-		SET content=#{content}, status=#{status}, attach_image1=#{attach_image1}, attach_image2=#{attach_image2}, attach_image3=#{attach_image3}, attach_image4=#{attach_image4}
+		SET content=#{content}, status=#{status}
 		WHERE uid=#{uid}
 	</update>
 
