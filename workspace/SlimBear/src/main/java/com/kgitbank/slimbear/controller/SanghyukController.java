@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -284,7 +285,8 @@ public class SanghyukController {
 			@RequestParam("file2")MultipartFile  file2,
 			@RequestParam("file3")MultipartFile  file3,
 			@RequestParam("file4")MultipartFile  file4,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes,
+			HttpServletResponse response) {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserId = authentication.getName();
@@ -311,5 +313,7 @@ public class SanghyukController {
 		}		
 		// DAO로 전달!
 		sanghService.insertReview(review);
+		
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }

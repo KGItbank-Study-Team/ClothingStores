@@ -32,7 +32,7 @@
 			<span class="star" value="4"> </span> 
 			<span class="star" value="5"> </span>
 		</div>
-		 <input type="hidden" name="rating" id="rating" value="0">
+		 <input type="hidden" name="score" id="rating" value="0">
 		<input type="text" name="title" class="inputTitle" placeholder="제목을 입력해주세요.">
 		<textarea id="test" name="content" class="star_box" placeholder="리뷰 내용을 작성해주세요."></textarea>
 		<div id="test_cnt">(0 / 5000)</div>

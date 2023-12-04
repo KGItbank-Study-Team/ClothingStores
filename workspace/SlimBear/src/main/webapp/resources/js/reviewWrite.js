@@ -74,38 +74,76 @@ function closeWindow() {
 // });
 
 // form 태그 데이터 ajax로 보내기
-$(document).ready(function () {
-    $('#reviewForm').submit(function (event) {
-        // 폼 전송을 막기
+// $(document).ready(function () {
+//     $('#reviewForm').submit(function (event) {
+//         // 폼 전송을 막기
+//         event.preventDefault();
+
+//         // 폼 데이터를 직렬화
+//         var formData = new FormData($(this)[0]);
+
+//         // 선택된 별의 값 가져와서 formData에 추가
+//         var ratingValue = $('.star.on').data('value');
+//         formData.append('rating', ratingValue);
+
+//         // Ajax를 이용해 서버로 데이터 전송
+//         $.ajax({
+//             url: '/app/review/upload',  // 여기에 실제 서버 URL을 입력하세요.
+//             type: 'POST',
+//             data: formData,
+//             contentType: false,
+//             processData: false,
+//             success: function (response) {
+//                 // 성공 시 동작
+//                 console.log('리뷰가 성공적으로 등록되었습니다.');
+//                 // 추가로 필요한 동작 수행
+//             },
+//             error: function (error) {
+//                 // 실패 시 동작
+//                 console.error('리뷰 등록에 실패했습니다.');
+//                 console.error('에러 상태 코드:', error.status);
+//                 console.error('에러 응답 내용:', error.responseText);
+//                 // 추가로 필요한 동작 수행
+//             }
+//         });
+//     });
+// });
+$(document).ready(function() {
+    // 폼이 제출될 때의 이벤트 처리
+    $("#reviewForm").submit(function(event) {
+        // 폼 제출 기본 동작 막기
         event.preventDefault();
 
-        // 폼 데이터를 직렬화
-        var formData = new FormData($(this)[0]);
-
-        // 선택된 별의 값 가져와서 formData에 추가
-        var ratingValue = $('.star.on').data('value');
-        formData.append('rating', ratingValue);
-
-        // Ajax를 이용해 서버로 데이터 전송
+        // Ajax 호출 수행
         $.ajax({
-            url: '/app/review/upload',  // 여기에 실제 서버 URL을 입력하세요.
-            type: 'POST',
-            data: formData,
-            contentType: false,
+            type: "POST",
+            url: "/app/review/upload",  // 컨트롤러 URL
+            data: new FormData(this),
             processData: false,
-            success: function (response) {
-                // 성공 시 동작
-                console.log('리뷰가 성공적으로 등록되었습니다.');
-                // 추가로 필요한 동작 수행
+            contentType: false,
+            success: function(response) {
+                // 성공적으로 처리된 경우의 동작
+                console.log(response);
+                alert("리뷰가 등록 되었습니다.");
+                window.close();
+
             },
-            error: function (error) {
-                // 실패 시 동작
-                console.error('리뷰 등록에 실패했습니다.');
-                console.error('에러 상태 코드:', error.status);
-                console.error('에러 응답 내용:', error.responseText);
-                // 추가로 필요한 동작 수행
+            error: function(error) {
+                // 오류가 발생한 경우의 동작
+                console.log(error);
+                // 여기에 오류 처리 동작 추가
             }
         });
+    });
+
+    // 평점을 클릭할 때의 이벤트 처리
+    $('.star_rating > .star').click(function() {
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+
+        // 선택된 별의 값을 숨겨진 input에 설정
+        var value = $(this).attr("value");
+        $("#rating").val(value);
     });
 });
 
