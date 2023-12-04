@@ -384,10 +384,6 @@ function displayData(currentPage, dataPerPage, dataList) {
             '</div>' +
             '<div class="photo-review">' +
             '<a><img alt="상품" src="/resources/images/review_images01.jpg"></a>' +
-            '<a><img alt="상품" src="/resources/images/review_images02.jpg"></a>' +
-            '<a><img alt="상품" src="/resources/images/review_images03.jpg"></a>' +
-            '<a><img alt="상품" src="/resources/images/review_images04.jpg"></a>' +
-            '<a><img alt="상품" src="/resources/images/review_images05.jpg"></a>' +
             '</div>' +
             '<div>' +
             '<div class="reviewContent">' + dataList[i].content + '</div>' +

@@ -1,10 +1,10 @@
 package com.kgitbank.slimbear.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -125,7 +125,7 @@ public class SanghyukController {
 		// 테스트 코드
 		//System.out.println("mem_uid: " + mem_uid);
 		//System.out.println("data: " + data);
-
+ 
 		String prod_code = null;
 		ArrayList<HashMap<String, Object>> selectOptionList = data.getSelectOptionList();
 		System.out.println("selectOptionList = " + selectOptionList);
@@ -221,9 +221,11 @@ public class SanghyukController {
 		WishDTO wishDTO = new WishDTO();
 		wishDTO.setMem_uid(mem_uid);
 		wishDTO.setUid(uid);
-		wishDTO.setProd_code("Test3");
-		wishDTO.setReg_date(new Timestamp(System.currentTimeMillis()));
+		
+		wishDTO.setProd_code(String.valueOf(uid));
+		wishDTO.setReg_date(new Date());
 		System.out.println(wishDTO);
+		
 		int isAreadyExited = sanghService.findWishProduct(wishDTO);
 		System.out.println("isAreadyExited: " + isAreadyExited);
 		if(isAreadyExited>0) {
