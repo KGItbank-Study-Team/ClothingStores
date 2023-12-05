@@ -23,18 +23,24 @@ public class ReviewDTO {
 	private String image3;
 	private String image4;
 	
-	// 생성자 추가
-    public ReviewDTO(long uid, String mem_id, String prod_code, String title, String content, int score, Date reg_date) {
-        this.uid = uid;
-        this.mem_id = mem_id;
-        this.prod_code = prod_code;
-        this.title = title;
-        this.content = content;
-        this.score = score;
-        this.reg_date = reg_date;
-    }
 
 	public ReviewDTO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public ReviewDTO(long uid, String mem_id, String prod_code, String title, String content, int score, Date reg_date,
+			String image1, String image2, String image3, String image4) {
+		super();
+		this.uid = uid;
+		this.mem_id = mem_id;
+		this.prod_code = prod_code;
+		this.title = title;
+		this.content = content;
+		this.score = score;
+		this.reg_date = reg_date;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.image3 = image3;
+		this.image4 = image4;
 	}
 }

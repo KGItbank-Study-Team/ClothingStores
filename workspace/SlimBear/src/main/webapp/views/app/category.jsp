@@ -165,7 +165,6 @@
 											href="/app/product/category/?category=${category.uid }&order=PRICE_ASC">낮은가격</a></li>
 										<li class="xans-record-"><a
 											href="/app/product/category/?category=${category.uid }&order=PRICE_DESC">높은가격</a></li>
-										<li class="xans-record-"><a href="#리뷰페이지">사용후기</a></li>
 									</ul>
 								</div>
 							</div>

@@ -104,7 +104,7 @@
 									<th data-field="title" data-sortable="true" data-width="1">제목</th>
 									<th data-field="content" data-sortable="true">내용</th>
 
-									<th data-field="main_image" data-sortable="true" data-width="1">메인이미지?</th>
+									<th data-field="main_image" data-formatter="imageFormatter" data-width="1">사진</th>
 
 									<th data-field="priority" data-sortable="true" data-width="1">우선순위</th>
 
@@ -168,6 +168,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">큰 이미지</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="큰 이미지" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<!-- 리뷰 목록을 펼쳤을 때 표시되는 영역 -->
 	<div id="detail-wrapper"></div>
@@ -196,9 +211,23 @@
         html.push('<option value="DELIVERY_C">DELIVERY_C</option>');
         html.push('</select></div>');
 
-        html.push('<div class="mb-3"><label for="addNoticeMainImage" class="form-label">이미지 URL</label><input type="text" class="form-control" id="addNoticeMainImage"></div>');
-        html.push('<button type="button" class="btn btn-primary" onclick="submitAddNoticeForm()">등록</button>');
+        
+        html.push('<div class="mb-4 d-flex justify-content-left">');
+        html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 300px;" />');
+        html.push('</div>');
+
+
+        html.push('<div class="d-flex justify-content-left">');
+        html.push('    <div class="btn btn-primary btn-rounded">');
+        html.push('        <label class="form-label text-white m-1" for="customFile1">이미지추가</label>');
+        html.push('        <input type="file" class="form-control d-none" name="main_image" id="customFile1" onchange="displaySelectedImage(event, \'selectedImage\')" />');
+        html.push('    </div>');
+        html.push('</div >');
+        html.push('<div style="padding-top:10px;">' );
+        html.push('<button type="button" class="btn btn-primary"  onclick="submitAddNoticeForm()">등록</button>');
+
         html.push('<button type="button" class="btn btn-secondary" onclick="closeAddNoticeForm()">닫기</button>');
+        html.push('</div>');
         html.push('</div>');
         $('#addNoticeFormContainer').html(html.join(''));
     }
@@ -270,12 +299,32 @@
                     html.push('<input type="text" class="form-control" id="editNoticeType" value="' + notice.type + '"></div>');
 
                     html.push('<div class="mb-3">');
-                    html.push('<label for="editNoticeMainImage" class="form-label">이미지 URL</label>');
-                    html.push('<input type="text" class="form-control" id="editNoticeMainImage" value="' + notice.main_image + '">');
+                    html.push('<label for="editNoticeMainImage" class="form-label">기존 이미지</label>');
+                    html.push('<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="' + notice.main_image + '">' +
+                              '<img src="' + notice.main_image + '" alt="기존 이미지" style="width: 300px;"></a>');
                     html.push('</div>');
 
+
+                    
+                    html.push('<div class="mb-4 d-flex justify-content-left">');
+                    html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 300px;" />');
+                    html.push('</div>');
+
+
+                    html.push('<div class="d-flex justify-content-left" style="padding-top: 10px;">');
+                    html.push('    <div class="btn btn-primary rounded">');
+                    html.push('        <label class="form-label text-white m-1" for="customFile1">이미지추가</label>');
+                    html.push('        <input type="file" class="form-control d-none" name="main_image" id="customFile1" onchange="displaySelectedImage(event, \'selectedImage\')" />');
+                    html.push('    </div>');
+                    html.push('</div>');
+
+
+                    html.push('<div style="padding-top:10px">');
                     html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="submitEditNoticeForm(' + notice.uid + ')">수정</button>');
+
+                    html.push('</div>');
                     html.push('</form>');
+
                     html.push('</div>');
 
                     $detail.html(html);
@@ -330,6 +379,17 @@
             '</div>'
         ].join('');
     }
+    
+    function imageFormatter(value, row, index) {
+        // Assuming the image fields are named image1, image2, image3, and image4
+        return '<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '">' +
+               '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '" alt="사진" width="100" height="100"></a>';
+    }
+
+    $(document).on('click', '[data-toggle="modal"]', function() {
+        var imageUrl = $(this).data('image-url');
+        $('#imageModal').find('.modal-body img').attr('src', imageUrl);
+    });
 
     function actionsEvents() {
         return {
@@ -391,42 +451,42 @@
 
     // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
     function submitAddNoticeForm() {
-    	var title = $('#addNoticeTitle').val();
-        var content = $('#addNoticeContent').val();
-        var priority = $('#addNoticePriority').val();
-        var type = $('#addNoticeType').val();
-        var mainImage = $('#addNoticeMainImage').val();
+    var title = $('#addNoticeTitle').val();
+    var content = $('#addNoticeContent').val();
+    var priority = $('#addNoticePriority').val();
+    var type = $('#addNoticeType').val();
 
-        // 데이터 유효성 검사 (필요에 따라 추가 검사 수행)
-        if (!title.trim() || !content.trim() || !priority || !type.trim() || !mainImage.trim()) {
-            alert('모든 필드를 입력하세요.');
-            return;
-        }
+    // FormData 객체 생성
+    var formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('priority', priority);
+    formData.append('type', type);
 
-        // Ajax 요청
-        $.ajax({
-            url: "/admin/notice/addNotice",
-            type: "POST",
-            data: {
-                title: title,
-                content: content,
-                priority: priority,
-                type: type,
-                mainImage: mainImage
-            },
-            success: function (result) {
-                if (result.status === 'SUCCESS') {
-                    alert(result.message);
-                    closeAddNoticeForm();
-                } else {
-                    alert('새 공지사항 등록에 실패했습니다.');
-                }
-            },
-            error: function () {
-                alert("서버 오류로 인해 새 공지사항을 등록할 수 없습니다.");
+    // 파일 필드 추가
+    var mainImageInput = $('#customFile1')[0].files[0];
+    formData.append('mainImage', mainImageInput);
+
+    // Ajax 요청
+    $.ajax({
+        url: "/admin/notice/addNotice",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            if (result.status === 'SUCCESS') {
+                alert(result.message);
+                closeAddNoticeForm();
+            } else {
+                alert('새 공지사항 등록에 실패했습니다.');
             }
-        });
-    }
+        },
+        error: function () {
+            alert("서버 오류로 인해 새 공지사항을 등록할 수 없습니다.");
+        }
+    });
+}
  // "닫기" 버튼 클릭 시 폼 닫기
     function closeAddNoticeForm() {
         $('#addNoticeFormContainer').html(''); // 폼을 닫음
@@ -442,33 +502,32 @@
         lastOpenedRow = null;
     }
  
- // 수정 폼 제출 함수
+ // 공지 수정
     function submitEditNoticeForm(uid) {
         var title = $('#editNoticeTitle').val();
         var content = $('#editNoticeContent').val();
         var priority = $('#editNoticePriority').val();
         var type = $('#editNoticeType').val();
-        var main_image = $('#editNoticeMainImage').val();
 
-        // 데이터 유효성 검사 (필요에 따라 추가 검사 수행)
-        if (!title.trim() || !content.trim() || !priority || !type.trim() || !main_image.trim()) {
-            alert('모든 필드를 입력하세요.');
-            return;
-        }
+        // FormData 객체 생성
+        var formData = new FormData();
+        formData.append('uid', uid);
+        formData.append('title', title);
+        formData.append('content', content);
+        formData.append('priority', priority);
+        formData.append('type', type);
+
+        // 파일 필드 추가
+        var mainImageInput = $('#customFile1')[0].files[0];
+        formData.append('main_image', mainImageInput);
 
         // Ajax 요청
         $.ajax({
             url: "/admin/notice/editNotice",
             type: "POST",
-            data: {
-                uid: uid,
-                title: title,
-                content: content,
-                priority: priority,
-                type: type,
-                main_image: main_image
-                // 기타 필요한 수정 항목들을 추가
-            },
+            data: formData,
+            processData: false,
+            contentType: false,
             success: function (result) {
                 if (result.status === 'SUCCESS') {
                     alert(result.message);
@@ -482,6 +541,22 @@
                 alert("서버 오류로 인해 공지사항을 수정할 수 없습니다.");
             }
         });
+    }
+
+ 
+    function displaySelectedImage(event, elementId) {
+        const selectedImage = document.getElementById(elementId);
+        const fileInput = event.target;
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                selectedImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
     }
 </script>
 
