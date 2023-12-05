@@ -38,7 +38,7 @@
 		<div class="productInfo">
 			<div class="left">
 				<div class="productImg">
-					<img alt="상품01" src="${product.main_image}">
+					<img alt="상품01" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${product.main_image}">
 				</div>
 				<div></div>
 			</div>
@@ -266,7 +266,7 @@
 		<div class="DetailInfo">
 			<a name="productDetail"></a>
 			<div>
-				<img alt="이미지" src="${product.detail_image}">
+				<img alt="이미지" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${product.detail_image}">
 			</div>
 		</div>
 		<!-- 클릭시 클릭한 영역으로 이동 -->
