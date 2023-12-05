@@ -3,11 +3,12 @@ footer {
 	font-size: 10px;
 	overflow: hidden;
 	white-space: nowrap;
-	margin: 0px auto 0;
+	/* margin: 0px auto 0; */
 	background: #eae5dd;!important;
 }
 body, code {
 	text-align: left !important;
+	width: 100%;
 }
 .hidden {
 	/* display: none; */
@@ -20,7 +21,8 @@ h2 {
 #bottom_info2 {
 	/* text-align: center; */
 	height: 320px !important;
-	margin-top: 30px;
+	padding-top: 30px;
+	margin: 0 auto;
 	font-family: 'Noto Sans KR', sans-serif !important;
 }
 
@@ -40,23 +42,23 @@ h2 {
 	color: #050505!important;	
 }
 .call {
-	padding-left: 110px !important;
+	padding-left: 90px !important;
 	color: #2c2c2c!important;	
 }
 .address {
-	padding-left: 110px !important;	
+	padding-left: 90px !important;	
 	color: #2c2c2c!important;	
 }
 .exchange {
-	padding-left: 110px !important;	
+	padding-left: 90px !important;	
 /* 	color: #2c2c2c!important;	 */
 }
 .service {
-	padding-left: 110px !important;	
+	padding-left: 90px !important;	
 	color: #2c2c2c!important;	
 }
 .bank {
-	padding-left: 110px !important;	
+	padding-left: 90px !important;	
 	color: #2c2c2c!important;	
 }
 .fa-solid {

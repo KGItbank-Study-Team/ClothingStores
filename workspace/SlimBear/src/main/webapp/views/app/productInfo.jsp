@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300&family=Open+Sans:wght@300&display=swap" rel="stylesheet"><script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
 <script type="text/javascript" defer src="/resources/js/productInfo.js"></script>
 <title>상품상세정보</title>
 </head>

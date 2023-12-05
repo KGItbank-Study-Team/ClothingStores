@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/resources/css/main_page.css" />
-<!-- <link rel="stylesheet" href="/resources/css/swiper.css" /> -->
-<!-- <link rel="stylesheet" href="/resources/css/optimizeruser.css" /> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script defer src="/resources/js/main_page.js"></script>
 <script src="https://kit.fontawesome.com/09decccad8.js" crossorigin="anonymous"></script>
@@ -37,7 +38,7 @@
 			</p>
 		</div>
 		<div id="one-best">
-			<h3>기다리고 기다리던!</h3>
+			<h3  class="new-text">기다리고 기다리던!</h3>
 			<h1>NEW ITEM!</h1>
 		</div>
 		<div class="product-container">
@@ -45,8 +46,10 @@
 				<button id="prev-slide" class="slide-button material-symbols-rounded">&lsaquo;</button>
 				<div class="image-list"> 
 					<c:forEach var="item" items="${newMainProductList}">
+					<div>
 						<img class="image-item" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" alt="img-1" />
-						<%-- <div class="prod-name"><p>${item.name}</p></div> --%>
+						<div class="prod-name"><p>${item.name}</p></div>
+					</div>
 					</c:forEach>
 				</div>
 				<button id="next-slide" class="slide-button material-symbols-rounded">&rsaquo;</button>
@@ -84,7 +87,7 @@
 											</a>
 											</strong>
 											<!-- .name -->
-											<ul class="xans-element- xans-product xans-product-listitem spec">
+											<ul class="xans-element- xans-product xans-product-listitem spec" style="display: inline-block;">
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">상품색상</span> :
 												</strong>
 													<div class="color">
@@ -189,7 +192,7 @@
 											</a>
 											</strong>
 											<!-- .name -->
-											<ul class="xans-element- xans-product xans-product-listitem spec">
+											<ul class="xans-element- xans-product xans-product-listitem spec" style="display: inline-block">
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">상품색상</span> :
 												</strong>
 													<div class="color">
@@ -203,7 +206,7 @@
 												</strong> <span style="font-size: 12px; color: #555555;"> 최종할인판매가 <span style="font-size: 11px; color: #fa6767; font-weight: bold;">${item.sale_price}원</span>
 												</span></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">상품간략설명</span> :
-												</strong> <span style="font-size: 12px; color: #555555;">${item.desc }</span></li>
+												</strong> <div style="display: inline-block;"><span class="desc">${item.desc }</span></div></li>
 												<!-- <li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #999999;">상품요약정보</span> :
 												</strong> <span style="font-size: 12px; color: #999999;">${item.desc }</span></li> -->
 											</ul>
@@ -268,7 +271,7 @@
 
 			</div>
 	</main>
-	<jsp:include page="footer/footer.jsp" />
+
 		<script type="text/javascript" src="/resources/js/ko.js"
 		charset="utf-8"></script>
 	<script src="/resources/js/optimizer.js"></script>
@@ -299,5 +302,6 @@
         });
     });
 </script>
+		<jsp:include page="footer/footer.jsp" />
 </body>
 </html>
