@@ -39,7 +39,7 @@
 					<td>수량</td>
 					<td>적립금</td>
 					<td>상품금액</td>
-					<td>배송비</td>
+					
 
 				</tr>
 			</thead>
@@ -48,7 +48,7 @@
 					<tr class="cart__list__detail">
 						<td><input type="checkbox" name="selectedItems"
 							value="${cart.uid}" data-productuid="${cart.productUid}"
-							data-color="${cart.color}"  data-size="${cart.size}"
+							data-color="${cart.color}" data-size="${cart.size}"
 							data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
 							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
@@ -112,9 +112,10 @@
 										<tr>
 											<td colspan="3">
 												<div class="cart__mainbtns">
-												
-													<button class="cart__bigorderbtn left" onclick="addChangedOptions(this, ${status.index}, ${cart.uid});">변경하기</button>
-													<button class="cart_bigorderbtn right"
+
+													<button class="cart__bigorderbtn left"
+														onclick="addChangedOptions(this, ${status.index}, ${cart.uid});">변경하기</button>
+													<button class="cart__bigorderbtn right"
 														onclick="addCartItem($(this), ${status.index}, ${cart.uid});">추가하기</button>
 												</div>
 											</td>
@@ -127,17 +128,29 @@
 						<td><span class="quantity"> <input type="text"
 								class="inputBox" id="quantity_${cart.uid}" value="${cart.cnt}">
 								<button type="button"
-									onclick="updateQuantity(${cart.uid}, 'increase')">수량증가</button>
+									onclick="updateQuantity(${cart.uid}, 'increase')"
+									style="display: none;">
+									<img alt="Quantity Increase" class="countUp"
+										src="/resources/images/btn_count_up.gif">
+								</button> <img alt="Quantity Increase" class="countUp"
+								src="/resources/images/btn_count_up.gif"
+								onclick="updateQuantity(${cart.uid}, 'increase')">
 								<button type="button"
-									onclick="updateQuantity(${cart.uid}, 'decrease')">수량감소</button>
+									onclick="updateQuantity(${cart.uid}, 'decrease')" style="display: none;"> 
+									<img alt="Quantity decrease" class="countUp"
+										src="/resources/images/btn_count_down.gif">
+								</button> <img alt="Quantity decrease" class="countDown"
+								src="/resources/images/btn_count_down.gif"
+								onclick="updateQuantity(${cart.uid}, 'decrease')">
 						</span></td>
+
 						<td><p id="addPrice_${cart.uid }">
 								100
 								<%-- ${cart.addprice} --%>
 							</p></td>
 						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
 						</td>
-						<td>무료<%-- ${cart.baedalprice } --%></td>
+						
 					</tr>
 
 				</c:forEach>
@@ -151,11 +164,11 @@
 						<button class="cart__list__optionbtn"
 							onclick="deleteSelectedItems()">선택상품 삭제</button>
 
-						
+
 					</td>
 					<td></td>
 					<td></td>
-					<td></td>
+					
 				</tr>
 			</tfoot>
 
