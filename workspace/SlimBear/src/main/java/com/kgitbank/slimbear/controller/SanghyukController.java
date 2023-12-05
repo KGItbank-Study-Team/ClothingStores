@@ -251,7 +251,7 @@ public class SanghyukController {
 
 	    // DAO로 전달
 	    sanghService.insertInquiry(inquiryDTO);
-	    return "redirect:/app/board/inquiry";
+	    return "redirect:/app/product?p=" + uid;
 	}
 	// 게시글 작성 페이지
 	@GetMapping(value = "/product/write")
