@@ -246,7 +246,7 @@ i {
 main,
 code {
   color: #3f3f3f;
-  text-align: center;
+  /* text-align: center; */
 }
 
 #one-best {
@@ -255,7 +255,6 @@ code {
   text-align: center;
   /* position: absolute; */
 }
-
 .image-list>img {
   width: 370px;
   height: 492px;
@@ -270,8 +269,11 @@ code {
 .product-container {
   display: inline-block;
   max-width: 1200px;
-  justify-content: center;
+  /* justify-content: center; */
   width: 95%;
+/*   text-align: center; */
+	position: relative;
+	left: 18%;
 }
 .slider-wrapper {
   position: relative;
@@ -495,27 +497,6 @@ li {
   height: 300px;
   flex-shrink: 0;
   transition: left 0.15s;
-}
-footer {
-  padding: 80px 0px 15px 60px;
-  font-size: 10px;
-  color: #000;
-  overflow: hiddlen;
-  white-space: nowrap;
-}
-h2 {
-  font-size: medium !important;
-  padding-bottom: 20px;
-}
-#bottom_info > div {
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 120px;
-}
-#service_logo > img {
-  width: 50px;
-  height: auto;
-  margin-right: 15px;
 }
 
 

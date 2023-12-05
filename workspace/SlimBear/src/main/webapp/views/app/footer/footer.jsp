@@ -16,7 +16,7 @@
 </head>
 <body class="footer-container">
     <footer>
-        <div id="bottom_info">
+        <div id="bottom_info2">
             <div class="guide">
                 <h2>SLIMBEAR</h2>
                 <li> 

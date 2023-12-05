@@ -105,10 +105,10 @@
 					<div class="tablePosition">
 						<table class="choiceOption">
 							<colgroup>
-								<col>
-								<col>
-								<col>
-								<col>
+								<col style="width: 110px;">
+								<col style="width: 300px;">
+								<col style="width: 200px;">
+								<col style="width: 100px;">
 							</colgroup>
 							<tbody>
 							</tbody>

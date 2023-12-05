@@ -299,6 +299,7 @@ public class SanghyukController {
 		
 		if(!file1.isEmpty()) {
 			String filePath1 = slimbearS3.saveImage(file1);
+			System.out.println("path: " + filePath1);
 			review.setImage1(filePath1);
 		}
 		if(!file2.isEmpty()) {
