@@ -188,5 +188,20 @@
 		ORDER BY reg_date DESC
 		LIMIT 10;
 	</select>
+	<select id="SELECT_PROD_ORDER_BY_PRICE"
+		parameterType="product" resultType="product">
+		SELECT *
+		FROM product
+		ORDER BY price
+		LIMIT #{pageSize}
+		OFFSET #{offset}
+	</select>
+
+	<select id="SELECT_PROD_ORDER_BY_PRICE_DESC"
+		resultType="product">
+		SELECT * FROM product ORDER BY
+		price DESC
+		LIMIT #{pageSize} OFFSET #{offset};
+	</select>
 
 </mapper>

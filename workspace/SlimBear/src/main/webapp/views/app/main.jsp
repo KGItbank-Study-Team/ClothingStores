@@ -152,8 +152,8 @@
 
 										<ul id="type" class="xans-element- xans-product xans-product-orderby">
 											<li class="xans-record-"><a href="#출시일로 정렬">신상품</a></li>
-											<li class="xans-record-"><a href="/app/product/category/?category=${category.uid }&order=PRICE_ASC">낮은가격</a></li>
-											<li class="xans-record-"><a href="/app/product/category/?category=${category.uid }&order=PRICE_DESC">높은가격</a></li>
+											<li class="xans-record-"><a href="/app/main?order=PRICE_ASC">낮은가격</a></li>
+											<li class="xans-record-"><a href="/app/main?order=PRICE_DESC">높은가격</a></li>
 											<li class="xans-record-"><a href="#리뷰페이지">사용후기</a></li>
 										</ul>
 										<span class="compare displaynone"> <a href="#none" class="btnCompare" onclick="EC_ListAction.setProductCompare();">상품비교</a>
@@ -229,7 +229,7 @@
 						<!-- Previous Page Button -->
 						<li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
 							<a class="page-link"
-							href="/app/main?currentPage=${currentPage - 1}"
+							href="/app/main?currentPage=${currentPage - 1}&order=${order}"
 							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						</a>
 						</li>
@@ -239,13 +239,13 @@
 									<c:when test="${pageNumber eq currentPage}">
 										<!-- 현재 페이지인 경우 active-page 클래스를 추가하여 스타일을 적용 -->
 										<a
-											href="/app/main?currentPage=${pageNumber}"
+											href="/app/main?currentPage=${pageNumber}&order=${order}"
 											class="this">${pageNumber}</a>
 									</c:when>
 									<c:otherwise>
 										<!-- 현재 페이지가 아닌 경우 일반적인 스타일을 적용 -->
 										<a
-											href="/app/main?currentPage=${pageNumber}"
+											href="/app/main?currentPage=${pageNumber}&order=${order}"
 											class="other">${pageNumber}</a>
 									</c:otherwise>
 								</c:choose></li>
@@ -254,7 +254,7 @@
 						<li
 							class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
 							<a class="page-link"
-							href="/app/main?currentPage=${currentPage + 1}"
+							href="/app/main?currentPage=${currentPage + 1}&order=${order}"
 							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 						</a>
 						</li>

@@ -93,8 +93,17 @@ public class RSYServiceImpl {
 		paramMap.put("order", order);
 		paramMap.put("offset", offset);
 		paramMap.put("pageSize", pageSize);
-
-		return prodDAO.getProductOrderByRegDate(paramMap);
+		// 가격순 정렬
+		switch (order) {
+		case "PRICE_ASC":
+			return prodDAO.getProductOrderByPrice(paramMap);
+		case "PRICE_DESC":
+			return prodDAO.getProductOrderByPriceDesc(paramMap);
+		case "REG_DATE":
+			return prodDAO.getProductOrderByRegDate(paramMap);
+		default:
+			return prodDAO.getProductOrderByRegDate(paramMap);
+		}
 	}
 
 	public CategoryDTO getCategoryByUid(long category) {

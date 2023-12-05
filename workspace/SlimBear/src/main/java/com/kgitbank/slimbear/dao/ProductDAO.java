@@ -78,4 +78,10 @@ public class ProductDAO {
 	public List<ProductDTO> getNewProductList() {
 		return template.selectList("com.slimbear.mapper.Product.SELECT_NEW_PROD");
 	}
+	public List<ProductDTO> getProductOrderByPrice(Map<String, Object> paramMap) {
+		   return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_ORDER_BY_PRICE", paramMap);
+	}
+	public List<ProductDTO> getProductOrderByPriceDesc(Map<String, Object> paramMap) {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_PROD_ORDER_BY_PRICE_DESC", paramMap);
+	}
 }
