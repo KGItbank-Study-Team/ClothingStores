@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
@@ -127,5 +128,20 @@ public class RSYAdminDAO {
 	// Faq 삭제
 	public void deleteFaq(Long uid) {
 		template.delete("com.slimbear.mapper.Board.DELETE_FAQ", uid);
+	}
+
+	// BannerTop리스트가져오기
+	public List<BannerTopDTO> getBannerTopList() {
+		return template.selectList("com.slimbear.mapper.Page.SELECT_BANNER_TOP");
+	}
+
+	//  BannerTop 상세조회
+	public BannerTopDTO getBannerTop(Long uid) {
+		return template.selectOne("com.slimbear.mapper.Page.SELECT_BANNER_TOP_DETAIL", uid);
+	}
+
+	// BannerTop 수정
+	public int updateBannerTop(BannerTopDTO uid) {
+		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TOP", uid);
 	}
 }

@@ -4,13 +4,31 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.slimbear.mapper.Page"> 
-	<select id="SELECT_PRODUCTBANNERTOP_LIST" resultType="productBannerTop" >
+<mapper namespace="com.slimbear.mapper.Page">
+	<select id="SELECT_PRODUCTBANNERTOP_LIST"
+		resultType="productBannerTop">
 		SELECT * FROM productBannerTop
 	</select>
-	
+
 	<select id="SELECT_STORECONFIG">
 		SELECT * FROM storeConfig
 	</select>
-	
+	<select id="SELECT_BANNER_TEXT" resultType="String">
+		SELECT bannerText
+		FROM storeConfig WHERE uid=1;
+	</select>
+	<select id="SELECT_BANNER_TOP"
+		resultType="com.kgitbank.slimbear.admin.dto.BannerTopDTO">
+		SELECT * FROM productBannerTop;
+	</select>
+	<select id="SELECT_BANNER_TOP_DETAIL"
+		resultType="com.kgitbank.slimbear.admin.dto.BannerTopDTO">
+		SELECT * FROM productBannerTop
+		WHERE uid=#{uid};
+	</select>
+	<update id="UPDATE_BANNER_TOP">
+		UPDATE productBannerTop
+		SET image=#{image}, prod_uid=#{prod_uid}
+		WHERE uid=#{uid};
+	</update>
 </mapper>
