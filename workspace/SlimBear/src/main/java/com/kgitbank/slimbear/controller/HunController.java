@@ -171,8 +171,7 @@ public class HunController {
 	}
 	
 	//위시리스트 삭제
-	@PostMapping("/app/member/myPage/wishList")
-	@ResponseBody
+	@PostMapping("/member/myPage/wishList/delete")
 	public String deleteWishItems(@RequestParam("uids") String uids) {
 	    try {
 	        // uids를 ',' 기준으로 분리하여 삭제
@@ -180,10 +179,10 @@ public class HunController {
 	        for (String uid : uidArray) {
 	            hunService.deleteWish(Long.parseLong(uid));
 	        }
-	        return "위시리스트에서 아이템이 성공적으로 삭제되었습니다.";
+	        return "wish_list";
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return "위시리스트 아이템 삭제 중 오류가 발생했습니다.";
+	        return "wish_list";
 	    }
 	}
 

@@ -15,11 +15,9 @@ public interface MemberService {
 	MemberDTO getMemberByEmail(String email);
 	
 	CouponDTO getCoupon(String code);
-	MemberCouponDTO getMemberCouponByUID(long uid);
-	void registerCoupon(MemberCouponDTO coupon);
+	MemberCouponDTO getMemberCouponByUID(long memberUID, long uid);
+	int registerCoupon(MemberCouponDTO coupon);
 	
 	List<MemberDTO> getMemberList();
-
-
 
 }

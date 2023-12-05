@@ -25,9 +25,7 @@
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
-                        <li class="mileage">
-                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
-                        </li>
+                    
                         <li class="coupon ">
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
@@ -59,23 +57,9 @@
                 <div class="xans-element- xans-myshop xans-myshop-asyncbankbook ec-base-box gHalf">
                     <ul>
                         <li class=" ">
-                            <strong class="title">가용적립금</strong>
+                            <strong class="title">내 적립금</strong>
                             <strong class="data use">&nbsp;<span
                                     id="xans_myshop_bankbook_avail_mileage">${info.reserve}원</span></strong>
-                            <a href="/app/member/myPage/mileage" class="btnNormal">조회</a>
-                        </li>
-                        <li class="">
-                            <strong class="title">총적립금</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${info.totalReserve}원</span></strong>
-                        </li>
-                        <li class="">
-                            <strong class="title">사용적립금</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${info.useReserve}원</span></strong>
-                        </li>
-                        <li>
-                            <strong class="title">총주문</strong>
-                            <strong class="data"><span id="xans_myshop_bankbook_order_price">${info.totalOrderM}원</span>(<span
-                                    id="xans_myshop_bankbook_order_count">${info.totalOrderN}</span>회)</strong>
                         </li>
                         <li class="">
                             <strong class="title">쿠폰</strong>

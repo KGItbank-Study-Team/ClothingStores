@@ -69,13 +69,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberCouponDTO getMemberCouponByUID(long uid) {
-		return memCouponDAO.getCouponByUID(uid);
+	public MemberCouponDTO getMemberCouponByUID(long memberUID, long uid) {
+		return memCouponDAO.getCouponByUID(memberUID, uid);
 	}
 
 	@Override
-	public void registerCoupon(MemberCouponDTO coupon) {
-		memCouponDAO.insertAddress(coupon);
-	
+	public int registerCoupon(MemberCouponDTO coupon) {
+		return memCouponDAO.insertAddress(coupon);
 	}
 }

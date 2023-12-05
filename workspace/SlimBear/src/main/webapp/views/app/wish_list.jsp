@@ -24,8 +24,7 @@
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/modify"><span>프로필</span></a>
 						</li>
-						<li class="mileage"><a href="/app/member/myPage/mileage"><span>적립금</span></a>
-						</li>
+						
 						<li class="coupon "><a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
@@ -76,11 +75,11 @@
 										reserve-order="N" enable-purchase="1" class="wish-checkbox"
 										value="${item.uid}" type="checkbox"></td>
 									<!-- 이미지 -->
-									<td class="thumb"><a href="${item.productURL}"><img
-											src="/resources/images/${item.productImage}" alt=""></a></td>
+									<td class="thumb"><a href="/app/product?p=${item.productUID}"><img
+											src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.productImage}" alt=""></a></td>
 									<!-- 상품정보 -->
 									<td class=""><strong class="name"><a
-											href="${item.productURL}" class="ec-product-name">${item.productName}</a></strong>
+											href="/app/product?p=${item.productUID}" class="ec-product-name">${item.productName}</a></strong>
 									</td>
 									<!-- 판매가 -->
 									<td class="price"><strong class="strike">${item.orderAmount}원<br></strong><br>
@@ -94,7 +93,7 @@
 					<p class="message displaynone">관심상품 내역이 없습니다.</p>
 				</div>
 
-				<form id="deleteWishForm" action="/app/member/myPage/wishList"
+				<form id="deleteWishForm" action="/app/member/myPage/wishList/delete"
 					method="post">
 					<div class="xans-element- xans-myshop xans-myshop-wishlistbutton ec-base-button xans-record-">
 						<span class="gLeft">

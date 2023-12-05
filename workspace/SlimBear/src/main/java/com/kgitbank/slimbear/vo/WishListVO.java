@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class WishListVO {
-	private String productURL;
+	private Long productUID;
 	private String productImage;
 	private String productName;
 	private int orderAmount;

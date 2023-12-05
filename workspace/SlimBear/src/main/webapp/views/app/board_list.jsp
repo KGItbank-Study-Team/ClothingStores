@@ -25,8 +25,7 @@
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/modify"><span>프로필</span></a>
 						</li>
-						<li class="mileage"><a href="/app/member/myPage/mileage"><span>적립금</span></a>
-						</li>
+					
 						<li class="coupon "><a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
@@ -84,7 +83,7 @@
 										<td><a href="" class="txtEm"></a>${item.boardGroup}</td>
 										<!-- class ="left subject" -->
 										<td class="subject"><a
-											href="http://localhost:9090/app/board/inquiry/detail/${item.uid}">${item.boardTitle}</a>
+											href="/app/board/inquiry/detail/${item.uid}">${item.boardTitle}</a>
 										</td>
 										<td>${item.boardWriter}</td>
 										<td><span class="txtNum"></span> <fmt:formatDate

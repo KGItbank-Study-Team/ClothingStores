@@ -27,9 +27,7 @@
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
-                        <li class="mileage">
-                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
-                        </li>
+                 
                         <li class="coupon ">
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>

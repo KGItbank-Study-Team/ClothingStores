@@ -95,7 +95,7 @@ public class MemberRestController {
 			return response;
 		}
 		
-		MemberCouponDTO memCoupon =  memberService.getMemberCouponByUID(Coupon.getUid());
+		MemberCouponDTO memCoupon =  memberService.getMemberCouponByUID(user.getUid(), Coupon.getUid());
 		if(memCoupon != null) {
 			response.put("failed", "이미 사용한 쿠폰 번호입니다.");
 		}else {

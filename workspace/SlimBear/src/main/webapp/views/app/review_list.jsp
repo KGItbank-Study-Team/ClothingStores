@@ -29,8 +29,6 @@
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/modify"><span>프로필</span></a>
 						</li>
-						<li class="mileage"><a href="/app/member/myPage/mileage"><span>적립금</span></a>
-						</li>
 						<li class="coupon "><a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
 						</li>
 						<li class="wishlist"><a href="/app/member/myPage/wishList"><span>위시리스트</span></a>
@@ -77,12 +75,11 @@
 							<tbody class="center">
 
 								<c:forEach var="item" items="${reviewList}" varStatus="loop">
-									<tr class="xans-record-">
+									<tr class="xans-record-" >
 										<td>${loop.index+1}</td>
 										<td class="subject">
-											<div class="image-container">
-												<img src="${item.image}"
-													class="resizable-image">
+											<div>
+												<a href="/app/product?p=${item.prod_uid}"><img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.image}" style="height:100px"></a>
 											</div>
 										</td>
 										<td>${item.title}</td>

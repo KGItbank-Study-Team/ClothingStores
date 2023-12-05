@@ -31,6 +31,15 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/app/app-context.xml</param-value>
 		</init-param>
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		<init-param>
+			<param-name>detectAllHandlerMappings</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		</init-param>
+		
 		<load-on-startup>2</load-on-startup>
 
 	</servlet>
@@ -47,6 +56,14 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/admin/admin-context.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detectAllHandlerMappings</param-name>
+			<param-value>false</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

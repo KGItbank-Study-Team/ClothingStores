@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -29,9 +30,7 @@
                         <li class="wishlist">
                             <a href="/app/member/myPage/modify"><span>프로필</span></a>
                         </li>
-                        <li class="mileage">
-                            <a href="/app/member/myPage/mileage"><span>적립금</span></a>
-                        </li>
+                 
                         <li class="coupon ">
                             <a href="/app/member/myPage/coupon"><span>쿠폰</span></a>
                         </li>
@@ -82,7 +81,7 @@
                                 <td><strong>${item.couponName}</strong></td>
                                 <td>${item.minimumAmount}</td>
                                 <td>${item.couponBenefit}</td>
-                                <td>${item.couponPeriod}</td>
+                                <td><fmt:formatDate value="${item.couponPeriod}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             </tr>
                             </c:forEach>
                          </tbody>
@@ -106,7 +105,7 @@
                             <!-- 여기에 Couponcode 만들기 -->
                             <input id="coupon_code" name="coupon_code" fw-filter="" fw-label="쿠폰인증번호" fw-msg=""
                                 class="inputTypeText" placeholder="" maxlength="35" value="" type="text"> <a
-                                href="" class="btnSubmit sizeM" onclick="registerCoupon();">쿠폰등록</a>
+                                class="btnSubmit sizeM" onclick="registerCoupon();">쿠폰등록</a>
                             <p>반드시 쇼핑몰에서 발행한 쿠폰번호만 입력해주세요. (10~35자 일련번호 "-" 제외)</p>
                         </fieldset>
                     </div>

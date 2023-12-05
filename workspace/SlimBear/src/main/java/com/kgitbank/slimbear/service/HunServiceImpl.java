@@ -2,12 +2,14 @@ package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kgitbank.slimbear.common.SlimBearEnum;
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dao.CouponDAO;
 import com.kgitbank.slimbear.dao.InquiryDAO;
@@ -85,19 +87,39 @@ public class HunServiceImpl {
 		MemberDTO member = memDAO.getMemberByUID(uid);
 
 		vo.setUsername(member.getName());
-		vo.setReserve(12000);
-		vo.setTotalReserve(17000);
-		vo.setUseReserve(5000);
-		vo.setTotalOrderM(980000);
-		vo.setTotalOrderN(13);
-		vo.setCoupon(1);
-		vo.setBeforeDeposit(1);
-		vo.setPreparingDelivery(2);
-		vo.setTransit(3);
-		vo.setDelivered(4);
-		vo.setCancel(5);
-		vo.setTurn(7);
-
+		vo.setReserve(member.getMileage());
+		
+		List<MemberCouponDTO> couponList = membercouponDAO.getCouponListByMemberUID(uid);
+		for(MemberCouponDTO coupon : couponList) {
+			if(coupon.getExpi_date().getTime() < System.currentTimeMillis() && coupon.getUse_date() == null)
+				vo.setCoupon(vo.getCoupon() + 1);
+		}
+		
+		
+		List<OrderDTO> orderList = orderDAO.getOrderListByMemberUID(uid);
+		for(OrderDTO order : orderList) {
+			SlimBearEnum.ORDER_STATUS status = SlimBearEnum.ORDER_STATUS.valueOf(order.getStatus());
+			switch(status) {
+				case STAY:
+					vo.setBeforeDeposit(vo.getBeforeDeposit() + 1);
+					break;
+				case DELIVERY:
+					vo.setPreparingDelivery(vo.getPreparingDelivery() + 1);
+					break;
+				case STAY_DLV:
+					vo.setTransit(vo.getTransit() + 1);
+					break;
+				case DONE:
+					vo.setDelivered(vo.getDelivered() + 1);
+					break;
+				case CANCEL:
+					vo.setCancel(vo.getCancel() + 1);
+					break;
+				case RETURN:
+					vo.setTurn(vo.getTurn() + 1);
+					break;
+			}
+		}
 		return vo;
 	}
 
@@ -225,30 +247,22 @@ public class HunServiceImpl {
 	            list.add(vo);
 	        }
 	    }
-
-	    // 새로운 리스트를 만들어 유효한 쿠폰만 추가
-	    List<CouponVO> validCoupons = new ArrayList<>();
-	    for (CouponVO vo : list) {
-	        if (vo.getUse_date() == null) {
-	            validCoupons.add(vo);
-	        }
-	    }
-
-	    return validCoupons;
+	    
+	    return list;
 	}
 
 	//위시리스트
 	public List<WishListVO> getWishListInfo(long memberUID) {
 		ArrayList<WishListVO> list = new ArrayList<>();
 		List<WishDTO> wishlist = wishDAO.getWishListByMemberUID(memberUID);
-		ProductDTO p = productDAO.getProductByUid(memberUID);
 		
 		for (WishDTO i : wishlist) {
 			WishListVO vo = new WishListVO();
+			ProductDTO p = productDAO.getProductByUid(Long.valueOf(i.getProd_code()));
 			// 이거 링크가 다 같은거만 나오네? 해결해야함
-			vo.setProductURL("http://localhost:9090/app/product?p=" + p.getUid());
+			vo.setProductUID(p.getUid());
 			vo.setProductImage(p.getMain_image());
-			vo.setProductName(i.getProd_code());
+			vo.setProductName(p.getName());
 			vo.setOrderAmount(p.getPrice());
 			vo.setOrderDiscount(p.getPrice()-p.getSale_price());
 			
@@ -298,7 +312,15 @@ public class HunServiceImpl {
 
 	    for (ReviewDTO i : reviewList) {
 	        reviewListVO vo = new reviewListVO();
-	        vo.setImage("https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/%ED%8F%AC%ED%9A%A8%EA%B3%B0.jpg");
+	        
+	       vo.setProd_uid(Long.valueOf(SlimBearUtil.splitProductDetail( i.getProd_code())[0]));
+	       vo.setImage("%ED%8F%AC%ED%9A%A8%EA%B3%B0.jpg");
+	       if(i.getImage1() != null) vo.setImage(i.getImage1());
+	       else if(i.getImage2() != null) vo.setImage(i.getImage2());
+	       else if(i.getImage3() != null) vo.setImage(i.getImage3());
+	       else if(i.getImage4() != null) vo.setImage(i.getImage4());
+	       
+	       
 	        vo.setTitle(i.getTitle());
 	        vo.setContent(i.getContent());
 	        vo.setScore(i.getScore());

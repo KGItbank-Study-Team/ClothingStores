@@ -1,15 +1,14 @@
 package com.kgitbank.slimbear.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
-import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 
 @Repository
 public class MemberCouponDAO {
@@ -23,8 +22,11 @@ public class MemberCouponDAO {
 		return template.selectList("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_MEMBER_UID", info);
 	}
 	
-	public MemberCouponDTO getCouponByUID(long uid) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_LIST_BY_UID", uid);
+	public MemberCouponDTO getCouponByUID(long memberUID, long uid) {
+		HashMap<String, Long> info = new HashMap<String, Long>();
+		info.put("memberUID", memberUID);
+		info.put("uid", uid);
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_COUPON_BY_UID", info);
 	}
 
 	public int insertAddress(MemberCouponDTO coupon) {
