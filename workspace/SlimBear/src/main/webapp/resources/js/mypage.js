@@ -205,3 +205,28 @@ function memberEditAction(){
    
     $('#editForm').submit();
 }
+
+function submitOrderSearch(){
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
+
+    var searchType = $('#order_status').val() == 'all' ? null : $('#order_status').val();
+    var searchStartDate = null;
+    var searchendDate = null;
+    
+    if(start_date != null && start_date != ""){
+        searchStartDate = new Date(start_date);
+    }
+    if(end_date != null && end_date != ""){
+        searchendDate = new Date(end_date);
+    }
+
+}
+
+function openPopup(url, name, width, height){
+    var status = 'scrollbars=no,resizable=no,width=' + width + ',height=' + height + ',' + 'top=' + ((screen.height-height) / 2) + ', left=' + ((screen.width - width) / 2) +"'";
+    var popupWindow= window.open(url, name, status);
+	popupWindow.onresize = (_=>{
+	    popupWindow.resizeTo(width + 16, height + 73);
+	})
+}
