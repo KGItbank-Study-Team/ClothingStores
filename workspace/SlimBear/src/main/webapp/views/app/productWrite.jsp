@@ -250,7 +250,7 @@
 						</span>
 						<span class="gRight">
                             <button type="submit" class="btnSubmitFix sizeS">OK</button>
-                            <a href="/app/board/product?p=uid" class="btnBasicFix sizeS">CANCEL</a> <!-- 수정해야함 -->
+                            <a href="/app/product?p=" class="btnBasicFix sizeS" id="cancelButton">CANCEL</a> <!-- 수정해야함 -->
                         </span>
 					</div>
 				</div>
