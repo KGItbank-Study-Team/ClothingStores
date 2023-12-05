@@ -69,15 +69,15 @@ html {
   height: 100%;
 }
 
-body,
+/* /* body,
 code {
-  /* font: 13px 'Outfit','Noto Sans KR',Dotum,AppleGothic,sans-serif; */
+  font: 13px 'Outfit','Noto Sans KR',Dotum,AppleGothic,sans-serif;
   font-size: 13px;
   color: rgb(0, 0, 0);
   background: #ffffff;
   letter-spacing: 0;
   line-height: 1.7;
-}
+} */ */
 
 body {
   min-width: 100%;
@@ -240,13 +240,13 @@ i {
 }
 #one-text {
   position: relative;
-  padding-top: 50px;
+  padding-top: 120px;
   color: #000;
 }
 main,
 code {
   color: #3f3f3f;
-  /* text-align: center; */
+  text-align: center;
 }
 
 #one-best {
@@ -268,12 +268,11 @@ code {
 /* ================== NOW BEST! ================== */
 .product-container {
   display: inline-block;
-  max-width: 1200px;
-  /* justify-content: center; */
+  max-width: 1600px;
   width: 95%;
 /*   text-align: center; */
 	position: relative;
-	left: 18%;
+	/* left: 18%; */
 }
 .slider-wrapper {
   position: relative;
@@ -1246,13 +1245,13 @@ html {
 	height: 100%;
 }
 
-body, code {
+/* body, code {
 	font: 13px 'Outfit', 'Noto Sans KR', Dotum, AppleGothic, sans-serif;
 	color: #3f3f3f;
 	background: #f6f4ee;
 	letter-spacing: 0;
 	line-height: 1.7;
-}
+} */
 
 body {
 	min-width: 900px;

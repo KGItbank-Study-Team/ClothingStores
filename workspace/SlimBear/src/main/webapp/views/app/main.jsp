@@ -37,8 +37,8 @@
 			</p>
 		</div>
 		<div id="one-best">
-			<h3>실시간 인기 순위</h3>
-			<h1>NOW BEST!</h1>
+			<h3>기다리고 기다리던!</h3>
+			<h1>NEW ITEM!</h1>
 		</div>
 		<div class="product-container">
 			<div class="slider-wrapper">
