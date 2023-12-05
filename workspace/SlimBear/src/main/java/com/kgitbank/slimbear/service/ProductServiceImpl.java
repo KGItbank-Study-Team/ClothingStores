@@ -18,8 +18,8 @@ public class ProductServiceImpl {
 		return prodDAO.getProductList();
 	}
 	
-	public List<ProductDTO> getHotProductList(){
-		return prodDAO.getProductList();
+	public List<ProductDTO> getNewProductList(){
+		return prodDAO.getNewProductList();
 	}
 	
 	public ProductDTO getProductByUid(long uid) {

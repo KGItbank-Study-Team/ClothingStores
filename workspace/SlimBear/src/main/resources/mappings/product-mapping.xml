@@ -180,7 +180,13 @@
 		orderDetail od ON p.uid = od.prod_code
 		ORDER BY
 		od.cnt DESC
-		LIMIT #{pageSize} OFFSET #{offset};
+		LIMIT 8;
+	</select>
+	<select id="SELECT_NEW_PROD" resultType="product">
+		SELECT *
+		FROM product
+		ORDER BY reg_date DESC
+		LIMIT 10;
 	</select>
 
 </mapper>

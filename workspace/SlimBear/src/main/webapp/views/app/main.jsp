@@ -47,8 +47,8 @@
 			<div class="slider-wrapper">
 				<button id="prev-slide" class="slide-button material-symbols-rounded">&lsaquo;</button>
 				<div class="image-list"> 
-					<c:forEach var="item" items="${hotProductList}">
-						<img class="image-item" src="${item.main_image}" alt="img-1" />
+					<c:forEach var="item" items="${newMainProductList}">
+						<img class="image-item" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" alt="img-1" />
 						<%-- <div class="prod-name"><p>${item.name}</p></div> --%>
 					</c:forEach>
 				</div>
@@ -75,7 +75,7 @@
 										<div class="thumbnail">
 											<div class="salePer"></div>
 											<div class="prdImg">
-												<a href="/app/product?p=${item.uid}" name="anchorBoxName_4777"> <img src="${item.main_image}" id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
+												<a href="/app/product?p=${item.uid}" name="anchorBoxName_4777"> <img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
 												</a> <span class="chk"> <input type="checkbox" class="ProductCompareClass xECPCNO_4777 displaynone" />
 												</span>
 											</div>
@@ -179,7 +179,7 @@
 										<div class="thumbnail">
 											<div class="salePer"></div>
 											<div class="prdImg">
-												<a href="/app/product?p=${item.uid}" name="anchorBoxName_7902"> <img src="${item.main_image}" id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
+												<a href="/app/product?p=${item.uid}" name="anchorBoxName_7902"> <img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
 												</a> <span class="chk"> <input type="checkbox" class="ProductCompareClass xECPCNO_7902 displaynone" />
 												</span>
 											</div>

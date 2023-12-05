@@ -34,10 +34,10 @@
 		<div id="contents">
 			<div id="prdBest"
 				class="xans-element- xans-product xans-product-listrecommend">
-				<ul>
-					<div id="slide" class="ec-base-product swiper-container">
-						<div class="title">
-							<span>가장 많이 사랑받은 베스트</span>
+				<ul style="padding-top:50px;">
+					<div id="slide" class="ec-base-product swiper-container" >
+						<div class="title" >
+							<span >가장 많이 사랑받은 베스트</span>
 							<h2>BEST ITEM</h2>
 						</div>
 						<ul class="prdList grid4 swiper-wrapper">
@@ -49,7 +49,7 @@
 										<div class="prdImg">
 											<a href="/app/product?p=${item.uid}"
 												name="anchorBoxName_4777"> <img
-												src="/resources/images/${item.main_image}"
+												src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}"
 												id="eListPrdImage4777_2" alt="상품사진" class="thumgList" />
 											</a>
 										</div>
@@ -190,7 +190,7 @@
 										<div class="prdImg">
 											<a href="/app/product?p=${item.uid}"
 												name="anchorBoxName_7902"> <img
-												src="/resources/images/${item.main_image}"
+												src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}"
 												id="eListPrdImage7902_1" alt="상품사진" class="thumgList" />
 											</a> <span class="chk"> <input type="checkbox"
 												class="ProductCompareClass xECPCNO_7902 displaynone" />

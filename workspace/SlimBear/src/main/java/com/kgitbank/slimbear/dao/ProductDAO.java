@@ -75,4 +75,7 @@ public class ProductDAO {
 	public List<ProductDTO> getBestProductList(Map<String, Object> paramMap) {
 		return template.selectList("com.slimbear.mapper.Product.SELECT_BEST_PROD", paramMap);
 	}
+	public List<ProductDTO> getNewProductList() {
+		return template.selectList("com.slimbear.mapper.Product.SELECT_NEW_PROD");
+	}
 }
