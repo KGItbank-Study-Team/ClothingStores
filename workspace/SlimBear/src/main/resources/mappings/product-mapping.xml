@@ -61,7 +61,7 @@
 		orderDetail od ON p.uid = od.prod_code
 		ORDER BY
 		od.cnt DESC
-		LIMIT 10;
+		LIMIT 8;
 	</select>
 
 	<select id="SELECT_COUNT_PROD_BY_UID" resultType="int">
@@ -181,6 +181,7 @@
 		ORDER BY
 		od.cnt DESC
 		LIMIT 8;
+		
 	</select>
 	<select id="SELECT_NEW_PROD" resultType="product">
 		SELECT *

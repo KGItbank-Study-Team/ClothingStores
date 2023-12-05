@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgitbank.slimbear.admin.dto.BannerTextDTO;
 import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.FaqDTO;
@@ -135,7 +136,7 @@ public class RSYAdminDAO {
 		return template.selectList("com.slimbear.mapper.Page.SELECT_BANNER_TOP");
 	}
 
-	//  BannerTop 상세조회
+	// BannerTop 상세조회
 	public BannerTopDTO getBannerTop(Long uid) {
 		return template.selectOne("com.slimbear.mapper.Page.SELECT_BANNER_TOP_DETAIL", uid);
 	}
@@ -143,5 +144,20 @@ public class RSYAdminDAO {
 	// BannerTop 수정
 	public int updateBannerTop(BannerTopDTO uid) {
 		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TOP", uid);
+	}
+
+	// BannerText리스트가져오기
+	public List<BannerTextDTO> getBannerTextList() {
+		return template.selectList("com.slimbear.mapper.Page.SELECT_BANNER_TEXT_ADMIN");
+	}
+
+	// BannerText 상세조회
+	public BannerTextDTO getBannerText(Long uid) {
+		return template.selectOne("com.slimbear.mapper.Page.SELECT_BANNER_TEXT_DETAIL", uid);
+	}
+
+	// BannerText 수정
+	public int updateBannerText(BannerTextDTO uid) {
+		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TEXT", uid);
 	}
 }

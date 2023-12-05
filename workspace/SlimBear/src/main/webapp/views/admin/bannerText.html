@@ -1,10 +1,333 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-</body>
+<title>배너 텍스트 수정 페이지</title>
+<style>
+    .btn-group > .btn.active {
+        background-color: #336699 !important;
+        color: #fff;
+    }
+</style>
+<!-- Custom fonts for this template -->
+<link href="/admin/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/admin/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="/admin/vendor/jquery/jquery.min.js"></script>
+<script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/admin/js/sb-admin-2.min.js"></script>
+
+<link
+	href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css"
+	rel="stylesheet">
+
+<script
+	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+<script
+	src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+
+<!-- Export -->
+<script
+	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+<script
+	src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+<!-- toolbar -->
+<script
+	src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<th:block th:include="common/leftSlider.html" />
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">페이지관리 -> 배너텍스트관리</h6>
+					</div>
+					<div class="card-body">
+
+						<div id="toolbar"></div>
+
+						<table id="table" data-locale="ko-KR" data-search="true"
+							data-advanced-search="true" data-id-table="advancedTable"
+							data-detail-view="true" data-pagination="true"
+							data-show-export="true" data-show-columns="true"
+							data-show-columns-toggle-all="true"
+							data-page-list="[10, 25, 50, 100, all]"
+							data-url="/admin/bannerText/list">
+							<thead>
+								<tr>
+									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
+									<th data-field="bannerText" >text</th>
+
+
+
+									<th data-field="select" data-checkbox="true"></th>
+									<th data-field="actions" data-formatter="actionsFormatter"
+										data-width="1" data-events="actionsEvents">숨김/삭제</th>
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- End of Main Content -->
+		</div>
+
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- Footer -->
+	<div>
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; Your Website 2020</span>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- End of Footer -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 리뷰 목록을 펼쳤을 때 표시되는 영역 -->
+	<div id="detail-wrapper"></div>
+
+	<script>
+    var lastOpenedRow = null;
+
+
+    
+
+    $(function () {
+        // 테이블 초기화
+        $('#table').bootstrapTable({
+            formatSearch: function () {
+                return '모든 항목 검색'
+            },
+            exportDataType: 'all',
+            exportTypes: ['json', 'xml', 'csv', 'pdf'],
+            exportOptions: {
+                fileName: function () {
+                    var cd = new Date().toLocaleDateString().replace(/\./g, '').replace(/\s/g, '');
+                    return 'OrderTable_' + cd;
+                }
+            }
+        });
+
+     // 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
+     // 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
+        $('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
+            // 이전에 열린 답글 입력 창이 있다면 닫기
+            if (lastOpenedRow != null && lastOpenedRow !== index) {
+                $('#table').bootstrapTable('collapseRow', lastOpenedRow);
+            }
+
+            $detail.html('상세 정보 불러오는 중....');
+            $.ajax({
+                url: "/admin/bannerText/getBannerText?uid=" + row['uid'],
+                type: "GET",
+                success: function (result) {
+                    var html = [];
+                    html.push('<tbody>');
+
+                    html.push('</tbody></table></div>');
+
+                 // 수정 폼
+                    html.push('<div class="edit-bannerText-form">');
+                    html.push('<form id="editBannerTextForm">');
+
+				    html.push('<div class="mb-3">');
+				    html.push('<label for="bannerText" class="form-label">배너 텍스트</label>');
+				    html.push('<input type="text" class="form-control" id="bannerText">');
+				    html.push('</div>');
+
+                    html.push('<div style="padding-top:10px">');
+                    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="submitEditBannerTextForm(' + result.uid + ')">수정</button>');
+                    html.push('</div>');
+                    html.push('</form>');
+                    html.push('</div>');
+
+                    $detail.html(html);
+
+                 // 답글이 있는 경우, 답글 내용을 폼에 채워줌
+				    if (result) {
+						$('#bannerText').val(result.bannerText);
+					}
+                    // 현재 열린 행을 저장
+                    lastOpenedRow = index;
+
+                    // 열린 행의 수정 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
+                    $('#table').on('collapse-row.bs.table', function (e, index) {
+                        if (lastOpenedRow === index) {
+                            lastOpenedRow = null;
+                        }
+                    });
+
+                   
+                },
+                error: function () {
+                    alert("에러 발생");
+                }
+            });
+        });
+
+    });
+
+
+
+
+    function actionsFormatter(value, row, index) {
+        return [
+            '<div class="btn-group" role="group">',
+            '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
+            '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
+            '</div>'
+        ].join('');
+    }
+    
+
+    function actionsEvents() {
+        return {
+            'click .btn-primary': function (e, value, row, index) {
+                hideRow(index);
+            },
+            'click .btn-danger': function (e, value, row, index) {
+                deleteRow(index);
+            }
+        };
+    }
+
+    function deleteRow(index) {
+        var rowData = $('#table').bootstrapTable('getData')[index];
+
+        // 확인을 위해 데이터 출력
+        console.log('Data to be sent to the server:', rowData);
+        console.log('Index of the row:', index);
+
+        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
+        if (confirm('삭제하시겠습니까?')) {
+            $.ajax({
+                url: '/admin/notice/deleteData',
+                method: 'DELETE',
+                contentType: 'application/json',
+                data: JSON.stringify(rowData),
+                success: function (response) {
+                    // 성공적으로 처리된 경우
+                    alert('삭제가 완료되었습니다.');
+                    // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
+                },
+                error: function (error) {
+                    // 오류 발생 시
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    }
+    
+
+ // "닫기" 버튼 클릭 시 폼 닫기
+    function closeAddBannerTextForm() {
+        $('#addbannerTextFormContainer').html(''); // 폼을 닫음
+
+    }
+ 
+ // 수정 폼 닫기 함수
+    function closeEditBannerTextForm() {
+        $('#table').bootstrapTable('collapseRow', lastOpenedRow);
+        lastOpenedRow = null;
+    }
+ 
+ // 공지 수정
+    function submitEditBannerTextForm(uid) {
+        var bannerText = $('#bannerText').val();
+        // Ajax 요청
+        $.ajax({
+            url: "/admin/bannerText/editBannerText",
+            type: "POST",
+            data: {
+            	bannerText : bannerText,
+            	uid : uid
+            },
+            success: function (result) {
+                if (result.status === 'SUCCESS') {
+                    alert(result.message);
+                    closeEditbannerTextForm();
+                    // TODO: 성공에 따른 추가적인 동작 수행
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function () {
+                alert("서버 오류로 인해 공지사항을 수정할 수 없습니다.");
+            }
+        });
+    }
+</script>
+
 </html>

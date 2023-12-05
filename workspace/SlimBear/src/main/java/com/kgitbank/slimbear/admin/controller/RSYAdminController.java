@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kgitbank.slimbear.admin.dto.BannerTextDTO;
 import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.admin.service.RSYAdminServiceImpl;
@@ -65,21 +66,21 @@ public class RSYAdminController {
 
 	@RequestMapping("review/addOrUpdateComment")
 	@ResponseBody
-	public ResponseEntity<Map<String,String>> addOrUpdateComment(@RequestParam Long reviewUID, @RequestParam String commentTitle,
-			@RequestParam String commentContent, @RequestParam String mem_id) {
+	public ResponseEntity<Map<String, String>> addOrUpdateComment(@RequestParam Long reviewUID,
+			@RequestParam String commentTitle, @RequestParam String commentContent, @RequestParam String mem_id) {
 		try {
 			rsyAdminService.addOrUpdateComment(reviewUID, commentTitle, commentContent, mem_id);
 			// 성공일 경우
-	        Map<String, String> successResponse = new HashMap<>();
-	        successResponse.put("status", "SUCCESS");
-	        successResponse.put("message", "공지사항이 성공적으로 수정되었습니다.");
-	        return ResponseEntity.ok(successResponse);
+			Map<String, String> successResponse = new HashMap<>();
+			successResponse.put("status", "SUCCESS");
+			successResponse.put("message", "공지사항이 성공적으로 수정되었습니다.");
+			return ResponseEntity.ok(successResponse);
 		} catch (Exception e) {
-	        // 실패일 경우
-	        Map<String, String> errorResponse = new HashMap<>();
-	        errorResponse.put("status", "ERROR");
-	        errorResponse.put("message", "공지사항 수정 중에 오류가 발생했습니다.");
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+			// 실패일 경우
+			Map<String, String> errorResponse = new HashMap<>();
+			errorResponse.put("status", "ERROR");
+			errorResponse.put("message", "공지사항 수정 중에 오류가 발생했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
 	}
 
@@ -107,8 +108,8 @@ public class RSYAdminController {
 
 	@RequestMapping("inquiry/addOrUpdateAnswer")
 	@ResponseBody
-	public ResponseEntity<Map<String,String>> addOrUpdateAnswer(@RequestParam Long inqr_uid, @RequestParam String answerTitle,
-			@RequestParam String answerContent, @RequestParam String mem_id) {
+	public ResponseEntity<Map<String, String>> addOrUpdateAnswer(@RequestParam Long inqr_uid,
+			@RequestParam String answerTitle, @RequestParam String answerContent, @RequestParam String mem_id) {
 		Date reg_date = new Date();
 		try {
 			System.out.println(inqr_uid);
@@ -182,7 +183,8 @@ public class RSYAdminController {
 	@RequestMapping("notice/addNotice")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> addNotice(@RequestParam String title, @RequestParam String content,
-			@RequestParam int priority, @RequestParam String type, @RequestParam(name = "mainImage", required = false) MultipartFile mainImage) {
+			@RequestParam int priority, @RequestParam String type,
+			@RequestParam(name = "mainImage", required = false) MultipartFile mainImage) {
 
 		try {
 			System.out.println(title);
@@ -330,53 +332,101 @@ public class RSYAdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
 	}
-	
-	// 리뷰관리페이지
-		@RequestMapping("home/board/bannerTop")
-		public String boardBannerTop(Model model) {
 
-			model.addAttribute("bannerTopList", rsyAdminService.getBannerTopList());
-			return "bannerTop";
+	// 배너이미지관리페이지
+	@RequestMapping("home/board/bannerTop")
+	public String boardBannerTop(Model model) {
+
+		model.addAttribute("bannerTopList", rsyAdminService.getBannerTopList());
+		return "bannerTop";
+	}
+
+	@GetMapping("bannerTop/list")
+	@ResponseBody
+	public List<BannerTopDTO> boardBannerTopList() {
+		List<BannerTopDTO> bannerTopList = rsyAdminService.getBannerTopList();
+		return bannerTopList;
+	}
+
+	@RequestMapping("bannerTop/getBannerTop")
+	@ResponseBody
+	public BannerTopDTO getBannerTop(Long uid) {
+		BannerTopDTO bannerTop = rsyAdminService.getBannerTop(uid);
+		return bannerTop;
+	}
+
+	@RequestMapping("bannerTop/editBannerTop")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> editBannerTop(@RequestParam Long uid, @RequestParam MultipartFile image,
+			@RequestParam Long prod_uid) {
+
+		try {
+			System.out.println(uid);
+			System.out.println(image);
+			System.out.println(prod_uid);
+
+			rsyAdminService.updateBannerTop(uid, image, prod_uid);
+
+			// 성공일 경우
+			Map<String, String> successResponse = new HashMap<>();
+			successResponse.put("status", "SUCCESS");
+			successResponse.put("message", "배너 이미지가 성공적으로 수정되었습니다.");
+			return ResponseEntity.ok(successResponse);
+
+		} catch (Exception e) {
+			// 실패일 경우
+			Map<String, String> errorResponse = new HashMap<>();
+			errorResponse.put("status", "ERROR");
+			errorResponse.put("message", " 수정 중에 오류가 발생했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
+	}
 
-		@GetMapping("bannerTop/list")
-		@ResponseBody
-		public List<BannerTopDTO> boardBannerTopList() {
-			List<BannerTopDTO> bannerTopList = rsyAdminService.getBannerTopList();
-			return bannerTopList;
+	// 배너텍스트관리페이지
+	@RequestMapping("home/board/bannerText")
+	public String boardBannerText(Model model) {
+
+		model.addAttribute("bannerTextList", rsyAdminService.getBannerTextList());
+		return "bannerText";
+	}
+
+	@GetMapping("bannerText/list")
+	@ResponseBody
+	public List<BannerTextDTO> boardBannerTextList() {
+		List<BannerTextDTO> bannerTextList = rsyAdminService.getBannerTextList();
+		return bannerTextList;
+	}
+
+	@RequestMapping("bannerText/getBannerText")
+	@ResponseBody
+	public BannerTextDTO getBannerText(Long uid) {
+		BannerTextDTO bannerText = rsyAdminService.getBannerText(uid);
+		return bannerText;
+	}
+
+	@RequestMapping("bannerText/editBannerText")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> editBannerText(@RequestParam Long uid, @RequestParam String bannerText) {
+
+		try {
+			System.out.println(uid);
+			System.out.println(bannerText);
+
+			rsyAdminService.updateBannerText(uid, bannerText);
+
+			// 성공일 경우
+			Map<String, String> successResponse = new HashMap<>();
+			successResponse.put("status", "SUCCESS");
+			successResponse.put("message", "배너 이미지가 성공적으로 수정되었습니다.");
+			return ResponseEntity.ok(successResponse);
+
+		} catch (Exception e) {
+			// 실패일 경우
+			Map<String, String> errorResponse = new HashMap<>();
+			errorResponse.put("status", "ERROR");
+			errorResponse.put("message", " 수정 중에 오류가 발생했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
-		@RequestMapping("bannerTop/getBannerTop")
-		@ResponseBody
-		public BannerTopDTO getBannerTop(Long uid) {
-			BannerTopDTO bannerTop = rsyAdminService.getBannerTop(uid);
-			return bannerTop;
-		}
-		
-		@RequestMapping("bannerTop/editBannerTop")
-		@ResponseBody
-		public ResponseEntity<Map<String, String>> editFaq(@RequestParam Long uid, @RequestParam MultipartFile image,
-				@RequestParam Long prod_uid) {
-
-			try {
-				System.out.println(uid);
-				System.out.println(image);
-				System.out.println(prod_uid);
-
-				rsyAdminService.updateBannerTop(uid, image, prod_uid);
-
-				// 성공일 경우
-				Map<String, String> successResponse = new HashMap<>();
-				successResponse.put("status", "SUCCESS");
-				successResponse.put("message", "배너 이미지가 성공적으로 수정되었습니다.");
-				return ResponseEntity.ok(successResponse);
-
-			} catch (Exception e) {
-				// 실패일 경우
-				Map<String, String> errorResponse = new HashMap<>();
-				errorResponse.put("status", "ERROR");
-				errorResponse.put("message", " 수정 중에 오류가 발생했습니다.");
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-			}
-		}
+	}
 
 }

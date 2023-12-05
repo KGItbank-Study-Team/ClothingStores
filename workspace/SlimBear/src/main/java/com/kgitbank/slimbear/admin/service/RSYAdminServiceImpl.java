@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
+import com.kgitbank.slimbear.admin.dto.BannerTextDTO;
 import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.common.SlimBearS3;
@@ -124,7 +125,8 @@ public class RSYAdminServiceImpl {
 	}
 
 	// 공지수정
-	public void updateNotice(Long uid, String title, String content, int priority, String type, MultipartFile main_image) {
+	public void updateNotice(Long uid, String title, String content, int priority, String type,
+			MultipartFile main_image) {
 		NoticeDTO notice = new NoticeDTO();
 		Date date = new Date();
 
@@ -182,25 +184,49 @@ public class RSYAdminServiceImpl {
 
 		rsyAdminDAO.updateFaq(faq);
 	}
-	
-	//배너 탑 리스트 
+
+	// 배너 탑 리스트
 	public List<BannerTopDTO> getBannerTopList() {
 
 		List<BannerTopDTO> bannerTopList = rsyAdminDAO.getBannerTopList();
 		return bannerTopList;
 	}
+
 	// 배너 탑 개별
 	public BannerTopDTO getBannerTop(Long uid) {
 		return rsyAdminDAO.getBannerTop(uid);
 	}
+
 	// 배너 이미지 수정
-		public void updateBannerTop(Long uid, MultipartFile image, Long prod_uid) {
-			BannerTopDTO bannerTop = new BannerTopDTO();
+	public void updateBannerTop(Long uid, MultipartFile image, Long prod_uid) {
+		BannerTopDTO bannerTop = new BannerTopDTO();
 
-			bannerTop.setUid(uid);
-			bannerTop.setImage(s3.saveImage(image));
-			bannerTop.setProd_uid(prod_uid);
+		bannerTop.setUid(uid);
+		bannerTop.setImage(s3.saveImage(image));
+		bannerTop.setProd_uid(prod_uid);
 
-			rsyAdminDAO.updateBannerTop(bannerTop);
-		}
+		rsyAdminDAO.updateBannerTop(bannerTop);
+	}
+
+	// 배너 텍스트 리스트
+	public List<BannerTextDTO> getBannerTextList() {
+
+		List<BannerTextDTO> bannerTextList = rsyAdminDAO.getBannerTextList();
+		return bannerTextList;
+	}
+
+	// 배너 텍스트 개별
+	public BannerTextDTO getBannerText(Long uid) {
+		return rsyAdminDAO.getBannerText(uid);
+	}
+
+	// 배너 텍스트 수정
+	public void updateBannerText(Long uid, String banner_text) {
+		BannerTextDTO bannerText = new BannerTextDTO();
+
+		bannerText.setUid(uid);
+		bannerText.setBannerText(banner_text);
+
+		rsyAdminDAO.updateBannerText(bannerText);
+	}
 }
