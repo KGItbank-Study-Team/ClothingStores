@@ -26,8 +26,8 @@
 						<a href="/app/product?p=${item.prod_uid}"><img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.image}" alt=""></a>
 					</div>
 				</c:forEach>
-				<div class="slide_prev_button slide_button">◀</div>
-				<div class="slide_next_button slide_button">▶</div>	
+				<div class="slide_prev_button slide_button"><img alt="슬라이드" src="/resources/images/left-arrow.png"> </div>
+				<div class="slide_next_button slide_button"><img alt="슬라이드" src="/resources/images/right-arrow.png"></div>	
 				<ul class="slide_pagination"></ul>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 			<h3  class="new-text">기다리고 기다리던!</h3>
 			<h1>NEW ITEM!</h1>
 		</div>
-		<div class="product-container">
+		<div class="product-container"> 
 			<div class="slider-wrapper">
 				<button id="prev-slide" class="slide-button material-symbols-rounded">&lsaquo;</button>
 				<div class="image-list"> 
