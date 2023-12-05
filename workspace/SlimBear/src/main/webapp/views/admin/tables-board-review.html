@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>기본 페이지 복사해서 써</title>
+<title>리뷰관리페이지</title>
 
 <!-- Custom fonts for this template -->
 <link href="/admin/vendor/fontawesome-free/css/all.min.css"
@@ -93,15 +93,20 @@
 									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
 									<th data-field="mem_id" data-sortable="true" data-width="1"
 										data-formatter="ownerFormatter">아이디</th>
-									<th data-field="prod_uid" data-sortable="true"
-										data-width="25">상품코드</th>
+									<th data-field="prod_code" data-sortable="true"
+										data-width="1" data-formatter="prodFormatter">상품코드</th>
 									<th data-field="title" data-sortable="true" data-width="1">제목</th>
 									<th data-field="content" data-sortable="true" >내용</th>
-									<th data-field="status" data-width="50" data-sortable="true" data-formatter="commentsFormatter">답글여부</th>
+<!-- 									src=https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/  -->
+									<th data-field="image1" data-formatter="imageFormatter" data-width="1">사진</th>
+									<th data-field="image2" data-formatter="imageFormatter" data-width="1">사진</th>
+									<th data-field="image3" data-formatter="imageFormatter" data-width="1">사진</th>
+									<th data-field="image4" data-formatter="imageFormatter" data-width="1">사진</th>
+									<th data-field="status" data-width="1" data-sortable="true" data-formatter="commentsFormatter">답글여부</th>
 
 									<th data-field="score" data-sortable="true"data-width="1">평점</th>
 									<th data-field="reg_date" data-sortable="true"
-										data-formatter="dateFormatter" data-width="10">작성 일자</th>
+										data-formatter="dateFormatter" data-width="15">작성 일자</th>
 										
 									<th data-field="select" data-checkbox="true"></th>
 									<th data-field="actions" data-formatter="actionsFormatter" data-width="1" data-events="actionsEvents">숨김/삭제</th>
@@ -155,7 +160,21 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">큰 이미지</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="큰 이미지" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
 		<!-- 리뷰 목록을 펼쳤을 때 표시되는 영역 -->
 		<div id="detail-wrapper"></div>
 
@@ -290,6 +309,17 @@
 				'<a class="btn btn-primary" href="/admin/home/member?memberID=',value,'">',value,'</a>'
 			].join('')
 	}
+	function prodFormatter(value, row, index) {
+	    if (value == null) {
+	        return ['-'].join('');
+	    } else {
+	        // Assuming value is in the format "number:rest-of-the-string"
+	        var number = value.split(':')[0];
+	        return [
+	            '<a class="btn btn-primary" href="/admin/home/product?productUID=', number, '">', value, '</a>'
+	        ].join('');
+	    }
+	}
 	function commentsFormatter(value, row, index) {
         if (value === 'SUCCESS') {
             return '<span class="badge badge-success">답변완료</span>';
@@ -297,6 +327,16 @@
             return '<span class="badge badge-secondary">답변 미등록</span>';
         }
     }
+	function imageFormatter(value, row, index) {
+        // Assuming the image fields are named image1, image2, image3, and image4
+        return '<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '">' +
+               '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '" alt="사진" width="100" height="100"></a>';
+    }
+
+    $(document).on('click', '[data-toggle="modal"]', function() {
+        var imageUrl = $(this).data('image-url');
+        $('#imageModal').find('.modal-body img').attr('src', imageUrl);
+    });
 	function actionsFormatter(value, row, index) {
         return [
             '<div class="btn-group" role="group">',

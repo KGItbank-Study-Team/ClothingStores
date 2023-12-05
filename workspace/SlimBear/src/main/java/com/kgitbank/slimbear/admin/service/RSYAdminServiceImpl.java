@@ -1,13 +1,16 @@
 package com.kgitbank.slimbear.admin.service;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
+import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
@@ -20,6 +23,8 @@ public class RSYAdminServiceImpl {
 
 	@Autowired
 	private RSYAdminDAO rsyAdminDAO;
+	@Autowired
+	private SlimBearS3 s3;
 
 	public RSYAdminDTO getComment(Long reviewUID) {
 
@@ -77,7 +82,11 @@ public class RSYAdminServiceImpl {
 		rsyAdminDAO.addOrUpdateAnswer(answer);
 	}
 
-	// 문의숨김
+	// 문의 리스트
+	public List<InquiryDTO> getInquiryList() {
+		return rsyAdminDAO.getInquiryList();
+	}
+
 	// 문의삭제
 	public void deleteInquiry(InquiryDTO data) {
 		Long uid = data.getUid();
@@ -100,7 +109,7 @@ public class RSYAdminServiceImpl {
 	}
 
 	// 공지추가
-	public void addNotice(String title, String content, int priority, String type, String main_image) {
+	public void addNotice(String title, String content, int priority, String type, MultipartFile main_image) {
 		NoticeDTO notice = new NoticeDTO();
 		Date date = new Date();
 
@@ -108,14 +117,14 @@ public class RSYAdminServiceImpl {
 		notice.setContent(content);
 		notice.setPriority(priority);
 		notice.setType(type);
-		notice.setMain_image(main_image);
+		notice.setMain_image(s3.saveImage(main_image));
 		notice.setReg_date(date);
 
 		rsyAdminDAO.addNotice(notice);
 	}
 
 	// 공지수정
-	public void updateNotice(Long uid, String title, String content, int priority, String type, String main_image) {
+	public void updateNotice(Long uid, String title, String content, int priority, String type, MultipartFile main_image) {
 		NoticeDTO notice = new NoticeDTO();
 		Date date = new Date();
 
@@ -124,7 +133,7 @@ public class RSYAdminServiceImpl {
 		notice.setContent(content);
 		notice.setPriority(priority);
 		notice.setType(type);
-		notice.setMain_image(main_image);
+		notice.setMain_image(s3.saveImage(main_image));
 		notice.setReg_date(date);
 
 		rsyAdminDAO.updateNotice(notice);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.dto.FaqDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
+import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.vo.ReviewVO;
@@ -46,6 +47,11 @@ public class RSYAdminDAO {
 	// 리뷰 답글 수정/등록
 	public int addOrUpdateComment(RSYAdminDTO comment) {
 		return template.insert("com.slimbear.mapper.Board.ADD_OR_UPDATE_COMMENT", comment);
+	}
+
+	// 문의 리스트 조회
+	public List<InquiryDTO> getInquiryList() {
+		return template.selectList("com.slimbear.mapper.Board.SELECT_INQUIRY_LIST_ADMIN");
 	}
 
 	// 문의 답글 수정/등록

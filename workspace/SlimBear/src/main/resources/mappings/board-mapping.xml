@@ -38,12 +38,16 @@
 		WHERE uid = #{inqr_uid};
 	 </update>
 
-	<!-- 관리자 리뷰 -->
+	<!-- 관리자 문의 -->
 	<insert id="ADD_OR_UPDATE_ANSWER">
 		INSERT INTO inquiryAnswer (inqr_uid, title, content, mem_id, reg_date)
 		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id}, #{reg_date})
 		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content), reg_date = VALUES(reg_date)
 	</insert>
+	<select id="SELECT_INQUIRY_LIST_ADMIN" resultType="inquiry">
+		SELECT * FROM inquiry
+	</select>
+	
 	<!--  관리자 공지 -->
 	<select id="SELECT_NOTICE_LIST_ALL" resultType="notice">
 		SELECT * FROM notice
@@ -63,6 +67,7 @@
 	<select id="SELECT_FAQ_DETAIL_ADMIN" resultType="faq">
 		SELECT * FROM faq WHERE uid =#{uid};
 	</select>
+	
 	
 
 	<!-- REVIEW -->
