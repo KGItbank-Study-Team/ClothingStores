@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.admin.service.RSYAdminServiceImpl;
 import com.kgitbank.slimbear.dto.FaqDTO;
@@ -329,5 +330,53 @@ public class RSYAdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
 	}
+	
+	// 리뷰관리페이지
+		@RequestMapping("home/board/bannerTop")
+		public String boardBannerTop(Model model) {
+
+			model.addAttribute("bannerTopList", rsyAdminService.getBannerTopList());
+			return "bannerTop";
+		}
+
+		@GetMapping("bannerTop/list")
+		@ResponseBody
+		public List<BannerTopDTO> boardBannerTopList() {
+			List<BannerTopDTO> bannerTopList = rsyAdminService.getBannerTopList();
+			return bannerTopList;
+		}
+		@RequestMapping("bannerTop/getBannerTop")
+		@ResponseBody
+		public BannerTopDTO getBannerTop(Long uid) {
+			BannerTopDTO bannerTop = rsyAdminService.getBannerTop(uid);
+			return bannerTop;
+		}
+		
+		@RequestMapping("bannerTop/editBannerTop")
+		@ResponseBody
+		public ResponseEntity<Map<String, String>> editFaq(@RequestParam Long uid, @RequestParam MultipartFile image,
+				@RequestParam Long prod_uid) {
+
+			try {
+				System.out.println(uid);
+				System.out.println(image);
+				System.out.println(prod_uid);
+
+				rsyAdminService.updateBannerTop(uid, image, prod_uid);
+
+				// 성공일 경우
+				Map<String, String> successResponse = new HashMap<>();
+				successResponse.put("status", "SUCCESS");
+				successResponse.put("message", "배너 이미지가 성공적으로 수정되었습니다.");
+				return ResponseEntity.ok(successResponse);
+
+			} catch (Exception e) {
+				// 실패일 경우
+				Map<String, String> errorResponse = new HashMap<>();
+				errorResponse.put("status", "ERROR");
+				errorResponse.put("message", " 수정 중에 오류가 발생했습니다.");
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+			}
+		}
 
 }

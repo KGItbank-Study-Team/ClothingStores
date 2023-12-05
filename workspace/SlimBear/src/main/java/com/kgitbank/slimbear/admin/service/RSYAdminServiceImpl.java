@@ -1,6 +1,5 @@
 package com.kgitbank.slimbear.admin.service;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kgitbank.slimbear.admin.dao.RSYAdminDAO;
+import com.kgitbank.slimbear.admin.dto.BannerTopDTO;
 import com.kgitbank.slimbear.admin.dto.RSYAdminDTO;
 import com.kgitbank.slimbear.common.SlimBearS3;
 import com.kgitbank.slimbear.dto.FaqDTO;
@@ -182,4 +182,25 @@ public class RSYAdminServiceImpl {
 
 		rsyAdminDAO.updateFaq(faq);
 	}
+	
+	//배너 탑 리스트 
+	public List<BannerTopDTO> getBannerTopList() {
+
+		List<BannerTopDTO> bannerTopList = rsyAdminDAO.getBannerTopList();
+		return bannerTopList;
+	}
+	// 배너 탑 개별
+	public BannerTopDTO getBannerTop(Long uid) {
+		return rsyAdminDAO.getBannerTop(uid);
+	}
+	// 배너 이미지 수정
+		public void updateBannerTop(Long uid, MultipartFile image, Long prod_uid) {
+			BannerTopDTO bannerTop = new BannerTopDTO();
+
+			bannerTop.setUid(uid);
+			bannerTop.setImage(s3.saveImage(image));
+			bannerTop.setProd_uid(prod_uid);
+
+			rsyAdminDAO.updateBannerTop(bannerTop);
+		}
 }

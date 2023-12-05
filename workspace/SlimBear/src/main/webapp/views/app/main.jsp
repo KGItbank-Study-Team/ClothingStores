@@ -17,12 +17,12 @@
 <body>
 	<jsp:include page="header/header.jsp"></jsp:include>
 	<main>
-		<div class="banner-container">
+		<div class="banner-container" style="padding-top:100px;">
 			<!-- 상단 제품 스크롤배너 -->
 			<div class="slide slide_wrap">
 				<c:forEach var="item" items="${productBannerTop}">
 					<div class="slide_item">
-						<a href="/app/product?p=${item.prod_uid}"><img src="/resources/images/${item.image}" alt=""></a>
+						<a href="/app/product?p=${item.prod_uid}"><img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.image}" alt=""></a>
 					</div>
 				</c:forEach>
 				<div class="slide_prev_button slide_button">◀</div>
@@ -32,11 +32,8 @@
 		</div>
 		<div id="one-text">
 			<h2>SlimBear</h2>
-			<br />
-			<p>이것은 옷인가 이불인가</p>
-			<p>당신의 몸을 따뜻하고 편안하게 감싸줄 옷</p>
 			<p>
-				현명한 선택, 그것은 <b>SlimBear</b> 입니다.
+			${bannerText }
 			</p>
 		</div>
 		<div id="one-best">

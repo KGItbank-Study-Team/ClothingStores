@@ -80,12 +80,10 @@
 			<div id="content">
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">게시글관리 -> 공지관리</h6>
+						<h6 class="m-0 font-weight-bold text-primary">페이지관리 -> 배너이미지관리</h6>
 					</div>
 					<div id="addNoticeFormContainer"
 						style="padding-top: 20px; padding-left: 20px; padding-bottom: 20px;">
-						<button class="btn btn-primary" onclick="showAddNoticeForm()">새
-							공지사항 등록</button>
 					</div>
 					<div class="card-body">
 
@@ -97,20 +95,12 @@
 							data-show-export="true" data-show-columns="true"
 							data-show-columns-toggle-all="true"
 							data-page-list="[10, 25, 50, 100, all]"
-							data-url="/admin/notice/list">
+							data-url="/admin/bannerTop/list">
 							<thead>
 								<tr>
 									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
-									<th data-field="title" data-sortable="true" data-width="1">제목</th>
-									<th data-field="content" data-sortable="true">내용</th>
-
-									<th data-field="main_image" data-formatter="imageFormatter" data-width="1">사진</th>
-
-									<th data-field="priority" data-sortable="true" data-width="1">우선순위</th>
-
-									<th data-field="view_cnt" data-sortable="true" data-width="1">조회수</th>
-									<th data-field="reg_date" data-sortable="true"
-										data-formatter="dateFormatter" data-width="10">작성 일자</th>
+									<th data-field="image" data-formatter="imageFormatter" data-width="1">이미지</th>
+									<th data-field="prod_uid" data-sortable="true" data-formatter="prodFormatter">상품uid</th>
 
 
 
@@ -189,48 +179,6 @@
 
 	<script>
     var lastOpenedRow = null;
-    
-    function showAddNoticeForm() {
-        var html = [];
-        html.push('<div class="add-notice-form">');
-        html.push('<div class="mb-3"><label for="addNoticeTitle" class="form-label">제목</label><input type="text" class="form-control" id="addNoticeTitle"></div>');
-        html.push('<div class="mb-3"><label for="addNoticeContent" class="form-label">내용</label><textarea class="form-control" id="addNoticeContent" rows="3"></textarea></div>');
-
-        // 우선순위 드롭다운 메뉴
-        html.push('<div class="mb-3"><label for="addNoticePriority" class="form-label">우선순위</label>');
-        html.push('<select class="form-select" id="addNoticePriority">');
-        html.push('<option value="1">1</option>');
-        html.push('<option value="2">2</option>');
-        html.push('</select></div>');
-
-        // 타입 드롭다운 메뉴
-        html.push('<div class="mb-3"><label for="addNoticeType" class="form-label">타입</label>');
-        html.push('<select class="form-select" id="addNoticeType">');
-        html.push('<option value="PRODUCT">PRODUCT</option>');
-        html.push('<option value="DELIVERY">DELIVERY</option>');
-        html.push('<option value="DELIVERY_C">DELIVERY_C</option>');
-        html.push('</select></div>');
-
-        
-        html.push('<div class="mb-4 d-flex justify-content-left">');
-        html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 300px;" />');
-        html.push('</div>');
-
-
-        html.push('<div class="d-flex justify-content-left">');
-        html.push('    <div class="btn btn-primary btn-rounded">');
-        html.push('        <label class="form-label text-white m-1" for="customFile1">이미지추가</label>');
-        html.push('        <input type="file" class="form-control d-none" name="main_image" id="customFile1" onchange="displaySelectedImage(event, \'selectedImage\')" />');
-        html.push('    </div>');
-        html.push('</div >');
-        html.push('<div style="padding-top:10px;">' );
-        html.push('<button type="button" class="btn btn-primary"  onclick="submitAddNoticeForm()">등록</button>');
-
-        html.push('<button type="button" class="btn btn-secondary" onclick="closeAddNoticeForm()">닫기</button>');
-        html.push('</div>');
-        html.push('</div>');
-        $('#addNoticeFormContainer').html(html.join(''));
-    }
 
 
     
@@ -261,55 +209,26 @@
 
             $detail.html('상세 정보 불러오는 중....');
             $.ajax({
-                url: "/admin/notice/getNotice?uid=" + row['uid'],
+                url: "/admin/bannerTop/getBannerTop?uid=" + row['uid'],
                 type: "GET",
                 success: function (result) {
                     var html = [];
                     html.push('<tbody>');
 
-                    if (result) {
-                        var notice = result;
-                        html.push('<tr>');
-                        html.push('<td>제목: ' + notice.title + '</td>');
-                        html.push('</tr>');
-                        html.push('<tr>');
-                        html.push('<td>내용: ' + notice.content + '</td>');
-                        html.push('</tr>');
-                        // 기타 필요한 정보들을 추가로 표시
-                    }
-
                     html.push('</tbody></table></div>');
 
                  // 수정 폼
-                    html.push('<div class="edit-notice-form">');
-                    html.push('<form id="editNoticeForm">');
+                    html.push('<div class="edit-bannerTop-form">');
+                    html.push('<form id="editBannerTopForm">');
                     html.push('<div class="mb-3">');
-                    html.push('<label for="editNoticeTitle" class="form-label">제목</label>');
-                    html.push('<input type="text" class="form-control" id="editNoticeTitle" value="' + notice.title + '">');
-                    html.push('</div>');
-                    html.push('<div class="mb-3">');
-                    html.push('<label for="editNoticeContent" class="form-label">내용</label>');
-                    html.push('<textarea class="form-control" id="editNoticeContent" rows="3">' + notice.content + '</textarea>');
+                    html.push('<label for="editImage" class="form-label">기존 이미지</label>');
+                    html.push('<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + result.image + '">' +
+                              '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + result.image + '" alt="기존 이미지" style="width: 500px;"></a>');
                     html.push('</div>');
 
-                    html.push('<div class="mb-3"><label for="editNoticePriority" class="form-label">우선순위</label>');
-                    html.push('<input type="text" class="form-control" id="editNoticePriority" value="' + notice.priority + '"></div>');
-
-                    html.push('<div class="mb-3"><label for="editNoticeType" class="form-label">타입</label>');
-                    html.push('<input type="text" class="form-control" id="editNoticeType" value="' + notice.type + '"></div>');
-
-                    html.push('<div class="mb-3">');
-                    html.push('<label for="editNoticeMainImage" class="form-label">기존 이미지</label>');
-                    html.push('<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + notice.main_image + '">' +
-                              '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + notice.main_image + '" alt="기존 이미지" style="width: 300px;"></a>');
-                    html.push('</div>');
-
-
-                    
                     html.push('<div class="mb-4 d-flex justify-content-left">');
-                    html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 300px;" />');
+                    html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 500px;" />');
                     html.push('</div>');
-
 
                     html.push('<div class="d-flex justify-content-left" style="padding-top: 10px;">');
                     html.push('    <div class="btn btn-primary rounded">');
@@ -317,19 +236,25 @@
                     html.push('        <input type="file" class="form-control d-none" name="main_image" id="customFile1" onchange="displaySelectedImage(event, \'selectedImage\')" />');
                     html.push('    </div>');
                     html.push('</div>');
+                    
 
+				    html.push('<div class="mb-3">');
+				    html.push('<label for="prod_uid" class="form-label">상품uid</label>');
+				    html.push('<input type="text" class="form-control" id="prod_uid">');
+				    html.push('</div>');
 
                     html.push('<div style="padding-top:10px">');
-                    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="submitEditNoticeForm(' + notice.uid + ')">수정</button>');
-
+                    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="submitEditBannerTopForm(' + result.uid + ')">수정</button>');
                     html.push('</div>');
                     html.push('</form>');
-
                     html.push('</div>');
 
                     $detail.html(html);
 
-
+                 // 답글이 있는 경우, 답글 내용을 폼에 채워줌
+				    if (result) {
+						$('#prod_uid').val(result.prod_uid);
+					}
                     // 현재 열린 행을 저장
                     lastOpenedRow = index;
 
@@ -350,26 +275,8 @@
 
     });
 
-    
-    // 리뷰 작성 일자를 포맷하는 함수
-    function dateFormatter(value, row, index) {
-        return [new Date(value).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-')].join('');
-    }
 
-    function ownerFormatter(value, row, index) {
-        if (value == null)
-            return ['-'].join('');
-        else
-            return ['<a class="btn btn-primary" href="/admin/home/member?memberID=', value, '">', value, '</a>'].join('')
-    }
 
-    function commentsFormatter(value, row, index) {
-        if (value === 'SUCCESS') {
-            return '<span class="badge badge-success">답변완료</span>';
-        } else {
-            return '<span class="badge badge-secondary">답변 미등록</span>';
-        }
-    }
 
     function actionsFormatter(value, row, index) {
         return [
@@ -450,7 +357,7 @@
 //     });
 
     // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
-    function submitAddNoticeForm() {
+   function submitAddBannerTopForm() {
     var title = $('#addNoticeTitle').val();
     var content = $('#addNoticeContent').val();
     var priority = $('#addNoticePriority').val();
@@ -488,42 +395,33 @@
     });
 }
  // "닫기" 버튼 클릭 시 폼 닫기
-    function closeAddNoticeForm() {
-        $('#addNoticeFormContainer').html(''); // 폼을 닫음
+    function closeAddBannerTopForm() {
+        $('#addBannerTopFormContainer').html(''); // 폼을 닫음
 
-        // "새 공지사항 등록" 버튼을 다시 생성
-        var addButtonHtml = '<button class="btn btn-primary" onclick="showAddNoticeForm()">새 공지사항 등록</button>';
-        $('#addNoticeFormContainer').html(addButtonHtml);
     }
  
  // 수정 폼 닫기 함수
-    function closeEditNoticeForm() {
+    function closeEditBannerTopForm() {
         $('#table').bootstrapTable('collapseRow', lastOpenedRow);
         lastOpenedRow = null;
     }
  
  // 공지 수정
-    function submitEditNoticeForm(uid) {
-        var title = $('#editNoticeTitle').val();
-        var content = $('#editNoticeContent').val();
-        var priority = $('#editNoticePriority').val();
-        var type = $('#editNoticeType').val();
+    function submitEditBannerTopForm(uid) {
+        var prod_uid = $('#prod_uid').val();
 
         // FormData 객체 생성
         var formData = new FormData();
         formData.append('uid', uid);
-        formData.append('title', title);
-        formData.append('content', content);
-        formData.append('priority', priority);
-        formData.append('type', type);
+        formData.append('prod_uid', prod_uid);
 
         // 파일 필드 추가
         var mainImageInput = $('#customFile1')[0].files[0];
-        formData.append('main_image', mainImageInput);
+        formData.append('image', mainImageInput);
 
         // Ajax 요청
         $.ajax({
-            url: "/admin/notice/editNotice",
+            url: "/admin/bannerTop/editBannerTop",
             type: "POST",
             data: formData,
             processData: false,
@@ -531,7 +429,7 @@
             success: function (result) {
                 if (result.status === 'SUCCESS') {
                     alert(result.message);
-                    closeEditNoticeForm();
+                    closeEditBannerTopForm();
                     // TODO: 성공에 따른 추가적인 동작 수행
                 } else {
                     alert(result.message);
@@ -542,6 +440,14 @@
             }
         });
     }
+    function prodFormatter(value, row, index){
+		if(value == null)
+			return ['-'].join('');
+		else
+			return [ 
+				'<a class="btn btn-primary" href="/admin/home/product?productUID=',value,'">',value,'</a>'
+			].join('')
+	}
 
  
     function displaySelectedImage(event, elementId) {

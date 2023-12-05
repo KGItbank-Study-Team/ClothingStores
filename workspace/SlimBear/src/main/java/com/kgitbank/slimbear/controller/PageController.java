@@ -78,6 +78,7 @@ public class PageController {
 		model.addAttribute("totalItems", totalItems);
 		
 		model.addAttribute("productBannerTop", pageConfigService.getProductBannerTop());
+		model.addAttribute("bannerText", pageConfigService.getBannerText());
 		model.addAttribute("newMainProductList", productService.getNewProductList());
 
 //		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
