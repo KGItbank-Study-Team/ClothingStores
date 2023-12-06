@@ -10,15 +10,16 @@ function selectAll(selectAll)  {
 
 // 주소찾기
 function searchAddress() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                // 우편번호와 주소 정보를 가져온 후 폼에 채우기
-                $('#postcode1').val(data.zonecode);
-                $('#addr1').val(data.address);
-                $('#addr2').val("");
-            }
-        }).open();
-    }
+    new daum.Postcode({
+        oncomplete: function (data) {
+            // 우편번호와 주소 정보를 가져온 후 폼에 채우기
+            $('#address_zip1').val(data.zonecode);  // 수정된 부분
+            $('#address_addr1').val(data.address);
+            $('#addr2').val("");
+        }
+    }).open();
+}
+
     
 
 // submit 추가

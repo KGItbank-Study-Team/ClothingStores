@@ -7,7 +7,7 @@ footer {
 	background: #eae5dd;!important;
 }
 body, code {
-	text-align: left !important;
+	/* text-align: left !important; */
 	width: 100%;
 }
 .hidden {
