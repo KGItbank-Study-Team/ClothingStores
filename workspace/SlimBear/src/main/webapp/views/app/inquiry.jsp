@@ -96,9 +96,23 @@
 						
 						<!-- 문의게시글 목록 -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
+						    <c:set var="pageSize" value="10" />
+<c:set var="totalInquiries" value="${inquiries.size()}" />
+
+<c:choose>
+    <c:when test="${currentPage * pageSize > totalInquiries}">
+        <c:set var="startIndex" value="${totalInquiries}" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="startIndex" value="${currentPage * pageSize}" />
+    </c:otherwise>
+</c:choose>
+
+<c:set var="endIndex" value="${startIndex - pageSize + 1}" />
 						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
+						    <c:if test="${startIndex - loop.index > 0}">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
-						            <td>${inquiries.size() - loop.index}</td>
+						            <td>${startIndex - loop.index}</td>
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
@@ -133,6 +147,7 @@
 						                    <td><fmt:formatDate value="${answer.reg_date}" pattern="yyyy-MM-dd"/></td>
 						                </tr>
 						            </c:forEach>
+						        </c:if>
 						        </c:if>
 						    </c:forEach>
 						</tbody>
