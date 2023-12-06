@@ -51,7 +51,7 @@ $(function () {
         newRow.append($("<td></td>").html('<span class="quantity"><input type="text" name="pop_out" value="' + cnt + '" class="inputBox">'
             + '<a href="' + "javascript:upProductCount(" + makeColorAndSizeText(color, size) + ')"><img alt="수량증가" class="countUp" src="/resources/images/btn_count_up.gif"></a>'
             + '<a href="' + 'javascript:downProductCount(' + makeColorAndSizeText(color, size) + ')"><img alt="수량감소" class="countDown" src="/resources/images/btn_count_down.gif"></a>'
-            + '</span><a href="' + 'javascript:removeProduct(this,' + makeColorAndSizeText(color, size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" class="deleteImg"/></a>'));
+            + '</span><a href="' + 'javascript:removeProduct(' + makeColorAndSizeText(color, size) + ')" class="deleteBtn"><img alt="삭제" src="/resources/images/icon_delete.png" class="deleteImg"/></a>'));
         newRow.append($('<td><div class="tdCell">' + productPrice + '</div></td>'));
 
         $(".choiceOption").append(newRow);
@@ -96,14 +96,14 @@ function findProductIndexByOption(color, size) {
     return -1;
 }
 
-function removeProduct(row, color, size) {
+function removeProduct(color, size) {
     console.log('삭제 메서드 실행');
     var index = findProductIndexByOption(color, size);
     console.log('index:' + index);
     if (index < 0 || index >= selectOptionList.length)
         return;
 
-    var productElement = $(row);
+    var productElement = $('tr#' + $.escapeSelector(makeProductElementID(color, size)));
 
     selectOptionList.splice(index, 1);
     productElement.remove();
@@ -116,8 +116,8 @@ function upProductCount(color, size) {
 
     if (index < 0 || index >= selectOptionList.length)
         return;
-
-    var productElement = $('#' + makeProductElementID(color, size));
+    
+    var productElement = $('tr#' + $.escapeSelector(makeProductElementID(color, size)));
 
     // 데이터 변경 및 화면 값 변경
     selectOptionList[index].cnt += 1;
@@ -133,7 +133,7 @@ function downProductCount(color, size) {
         return;
 
 
-    var productElement = $('tr#' + makeProductElementID(color, size));
+    var productElement = $('tr#' + $.escapeSelector(makeProductElementID(color, size)));
 
     // 데이터 변경 및 화면 값 변경
     selectOptionList[index].cnt -= 1;
