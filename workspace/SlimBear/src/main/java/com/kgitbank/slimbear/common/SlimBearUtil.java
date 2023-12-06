@@ -1,9 +1,5 @@
 package com.kgitbank.slimbear.common;
 
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class SlimBearUtil {
 
 	// 제품코드
@@ -15,17 +11,30 @@ public class SlimBearUtil {
 	}
 
 	public static String[] splitProductDetail(String code) {
-		return code.split(":");
+		String[] returnStr = new String[3];
+		String[] splitStr = code.split(":");
+
+		try {
+			returnStr[0] = splitStr[0];
+		} catch (Exception e) {
+			returnStr[0] = "";
+		}
+
+		try {
+			returnStr[1] = splitStr[1];
+		} catch (Exception e) {
+			returnStr[1] = "";
+		}
+
+		try {
+			returnStr[2] = splitStr[2];
+		} catch (Exception e) {
+			returnStr[2] = "";
+		}
+
+		return returnStr;
 	}
-	public static String updateProductCode(String originalProdCode, String color, String size) {
-        // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성하는 로직을 추가
-        
-        return originalProdCode + color + size;
-    }
-	public static String generateNewProductCode(String originalProdCode, String newColor, String newSize) {
-	    // 기존 제품 코드에서 색상과 사이즈를 변경하여 새로운 제품 코드를 생성
-	    return updateProductCode(originalProdCode, newColor, newSize);
-	}
+
 	// 주소
 	public static String appendAddress(String number, String address1, String address2) {
 		StringBuffer address = new StringBuffer();
@@ -35,7 +44,28 @@ public class SlimBearUtil {
 	}
 
 	public static String[] splitAddress(String address) {
-		return address.split("\\|");
+		String[] returnStr = new String[3];
+		String[] splitStr = address.split("\\|");
+
+		try {
+			returnStr[0] = splitStr[0];
+		} catch (Exception e) {
+			returnStr[0] = "";
+		}
+
+		try {
+			returnStr[1] = splitStr[1];
+		} catch (Exception e) {
+			returnStr[1] = "";
+		}
+
+		try {
+			returnStr[2] = splitStr[2];
+		} catch (Exception e) {
+			returnStr[2] = "";
+		}
+
+		return returnStr;
 	}
 
 	// 전화번호
@@ -47,7 +77,28 @@ public class SlimBearUtil {
 	}
 
 	public static String[] splitPhoneNumber(String phoneNumber) {
-		return phoneNumber.split("-");
-	}	
+		String[] returnStr = new String[3];
+		String[] splitStr = phoneNumber.split("-");
+
+		try {
+			returnStr[0] = splitStr[0];
+		} catch (Exception e) {
+			returnStr[0] = "";
+		}
+
+		try {
+			returnStr[1] = splitStr[1];
+		} catch (Exception e) {
+			returnStr[1] = "";
+		}
+
+		try {
+			returnStr[2] = splitStr[2];
+		} catch (Exception e) {
+			returnStr[2] = "";
+		}
+
+		return returnStr;
+	}
 
 }

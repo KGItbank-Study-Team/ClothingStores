@@ -8,11 +8,12 @@ import com.kgitbank.slimbear.vo.MemberCartVO;
 
 public interface OrderService {
 
-	void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts, long applyCouponUID);
-
+	void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts,long applyCouponUID, int useMileage);
+	
 	void orderCancel(long order_uid, String reason);
 
 	void orderReturn(long order_uid, String reason);
 
 	void orderStatusChange(Long orderUID, String status);
+
 }

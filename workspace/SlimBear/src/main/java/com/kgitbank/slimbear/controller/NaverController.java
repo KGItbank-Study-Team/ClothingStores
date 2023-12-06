@@ -153,7 +153,7 @@ public class NaverController {
         	member.setEmail(naverEmail);
         	member.setName(name);
         	member.setAddress("||");
-        	member.setPhone("000-0000-0000");
+        	member.setPhone("--");
         	member.setLogin_type(MEMBER_TYPE.NAVER.toString());
         	
         	return member;

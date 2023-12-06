@@ -25,6 +25,12 @@
 
 </head>
 <body>
+	<c:if test="${not empty error}">
+		<script>
+			alert('${error}');
+			location = "/app/member/myPage/modify";
+		</script>
+	</c:if>
 	<form>
 		<div class="member">
 			<!-- 1. 로고 -->

@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.slimbear.common.SlimBearEnum;
+import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderPaymentDTO;
@@ -52,13 +54,30 @@ public class OrderController {
 
 	
 	@RequestMapping("product") 
-	public String orderPage(HttpSession session, OrderProductCommand orderProducts, Authentication authentication) 
+	public String orderPage(HttpSession session, OrderProductCommand orderProducts, Authentication authentication, Model model) 
 	{ 
 		System.out.println(orderProducts.getOptionsList());
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		
 		MemberDTO mem = memberService.getMemberById(user.getUsername());
 		List<AddrVO> addressInfo = hunService.getAddrInfo(mem.getUid());
+		
+		try {
+			String[] check = SlimBearUtil.splitAddress(mem.getAddress());
+			if(check[0] == "" || check[1] == "" || check[2] == "") {
+				throw new SlimBearException("주소정보 없습니다.");
+			}
+			check = SlimBearUtil.splitPhoneNumber(mem.getPhone());
+			if(check[0] == "" || check[1] == "" || check[2] == "") {
+				throw new SlimBearException("전화정보 없습니다.");
+			}
+			if(mem.getName().equals(""))
+				throw new SlimBearException("사용자정보가 없습니다.");
+			
+		}catch(Exception e) {
+			model.addAttribute("error", "회원님의 정보를 다시 확인해주세요.");
+			return "order";
+		}
 		
 		int totalProduct = 0;
 		int deliveryPrice = 2500;
@@ -204,7 +223,7 @@ public class OrderController {
 		payment.setPay_date(order.getOrder_date());
 		payment.setStatus(SlimBearEnum.PAYMENT_STATUS.DONE.toString());
 	
-		orderService.productOrder(user.getUid(), imp_uid, order, payment, orderInfo.getProductList(), orderInfo.getApplyCouponUID());
+		orderService.productOrder(user.getUid(), imp_uid, order, payment, orderInfo.getProductList(), orderInfo.getApplyCouponUID(), orderInfo.getApplyMileage());
 
 		HashMap<String, String> res = new HashMap<String, String>();
 		res.put("url", "/app/member/myPage/orderList");

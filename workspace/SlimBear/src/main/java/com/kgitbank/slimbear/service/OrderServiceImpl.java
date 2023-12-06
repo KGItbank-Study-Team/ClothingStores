@@ -11,15 +11,19 @@ import com.kgitbank.slimbear.common.SlimBearImportPayment;
 import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dao.CartDAO;
 import com.kgitbank.slimbear.dao.MemberCouponDAO;
+import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
 import com.kgitbank.slimbear.dao.OrderPaymentDAO;
+import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ProductDetailDAO;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
+import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.OrderPaymentDTO;
+import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.exception.SlimBearException;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -44,15 +48,22 @@ public class OrderServiceImpl implements OrderService {
 	private CartDAO cartDAO;
 	@Autowired
 	private MemberCouponDAO memCouponDAO;
+	@Autowired
+	private MemberDAO memberDAO;
+	@Autowired
+	private ProductDAO productDAO;
+
 
 	@Override
-	public void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts, long applyCouponUID) {
+	public void productOrder(long mem_uid, String imp_uid, OrderDTO order, OrderPaymentDTO payment, List<MemberCartVO> carts, long applyCouponUID, int useMileage) {
 		try {
 			IamportResponse<Payment> realPayment = slimBearImportPayment.getPaymentRecord(imp_uid);
 
 			// 주문정보과 결제정보 비교
 			if (realPayment.getResponse().getAmount().intValue() == payment.getPrice()) { // 주문정보 저장 실행
 
+				MemberDTO owner = memberDAO.getMemberByUID(mem_uid);
+				
 				orderDAO.insertOrder(order);
 				payment.setOrder_uid(order.getUid());
 				paymentDAO.insertOrder(payment);
@@ -62,6 +73,13 @@ public class OrderServiceImpl implements OrderService {
 				memCoupon.setUid(applyCouponUID);
 				memCoupon.setUse_date(new Date(System.currentTimeMillis()));
 				memCouponDAO.updateUseDate(memCoupon);
+				
+				
+				// 마일리지 처리
+				MemberDTO memberUpdate = new MemberDTO();
+				memberUpdate.setUid(mem_uid);
+				memberUpdate.setMileage(owner.getMileage() - useMileage);
+				memberDAO.updateMember(memberUpdate);
 
 				// 제품 확인 및 재고 수정
 				for (int i = 0; i < carts.size(); ++i) {
@@ -127,6 +145,13 @@ public class OrderServiceImpl implements OrderService {
 		
 		payment.setStatus(SlimBearEnum.PAYMENT_STATUS.CANCEL.toString());
 		
+		// 마일리지
+		MemberDTO owner = memberDAO.getMemberByUID(order.getMem_uid());
+		MemberDTO memberUpdate = new MemberDTO();
+		memberUpdate.setUid(owner.getUid());
+		memberUpdate.setMileage(owner.getMileage() + order.getUse_mileage());
+		memberDAO.updateMember(memberUpdate);
+		
 
 		// 물품 반환
 	    List<OrderDetailDTO> orderProducts =	orderDetailDAO.getOrderListByMemberUID(order_uid);
@@ -165,6 +190,13 @@ public class OrderServiceImpl implements OrderService {
 		
 		payment.setStatus(SlimBearEnum.PAYMENT_STATUS.RETURN.toString());
 		
+		// 마일리지
+		MemberDTO owner = memberDAO.getMemberByUID(order.getMem_uid());
+		MemberDTO memberUpdate = new MemberDTO();
+		memberUpdate.setUid(owner.getUid());
+		memberUpdate.setMileage(owner.getMileage() + order.getUse_mileage());
+		memberDAO.updateMember(memberUpdate);
+
 		// 물품 반환
 	    List<OrderDetailDTO> orderProducts =	orderDetailDAO.getOrderListByMemberUID(order_uid);
 	    for(OrderDetailDTO orderProduct : orderProducts) {
@@ -194,8 +226,29 @@ public class OrderServiceImpl implements OrderService {
 		if(order == null) 
 			throw new SlimBearException("잘못된 주문 정보");
 	
-		order.setStatus(status);
 		
+		if(status.equals(SlimBearEnum.ORDER_STATUS.DONE.toString())) {
+			
+			// 마일리지 추가
+			List<OrderDetailDTO> orderDetails = orderDetailDAO.getOrderListByMemberUID(orderUID);
+			int addMileage = 0;
+			for(OrderDetailDTO orderDetail : orderDetails) {
+				
+				Long ProductUID = Long.valueOf(SlimBearUtil.splitProductDetail(orderDetail.getProd_code())[0]) ;
+				ProductDTO product = productDAO.getProductByUid(ProductUID);
+				addMileage += product.getAddi_mileage();
+			}
+			
+			order.getUse_mileage();
+			MemberDTO owner = memberDAO.getMemberByUID(order.getMem_uid());
+			MemberDTO memberUpdate = new MemberDTO();
+			memberUpdate.setUid(owner.getUid());
+			memberUpdate.setMileage(owner.getMileage() - addMileage);
+			memberDAO.updateMember(memberUpdate);
+		}	
+		
+	
+		order.setStatus(status);
 		orderDAO.updateOrderStatus(order);
 	}
 }
