@@ -108,7 +108,11 @@ public class YangBoardServiceImpl {
 	            // 비밀글이면서 현재 사용자가 작성자가 아닌 경우 비밀글을 숨김
 	            showAccessDeniedWarning();
 	            inquiry.setContent("비밀글로 작성자 외엔 확인할 수 없는 내용입니다.");
-	            // 다른 필요한 처리를 추가할 수 있음
+	         // 이미지를 표시하지 않도록 비밀글일 때 attach_image1을 초기화
+	            inquiry.setAttach_image1(null);
+	            inquiry.setAttach_image2(null);
+	            inquiry.setAttach_image3(null);
+	            inquiry.setAttach_image4(null);
 	        }
 	        // 해당 문의에 대한 답변 검색
             List<InquiryAnswerDTO> answers = inquiryDAO.getInquiryAnswerList(id);

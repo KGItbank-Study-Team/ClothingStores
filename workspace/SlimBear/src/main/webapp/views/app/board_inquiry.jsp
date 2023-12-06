@@ -44,7 +44,6 @@
 			</div>
 			<form id="BoardDelForm" name="" action="/exec/front/Board/del/1" method="post" target="_self" enctype="multipart/form-data">
 				<input id="no" name="no" value="1724624" type="hidden" />
-				<!-- Add more input fields here if needed -->
 				
 				<div class="xans-element- xans-board xans-board-read-1002 xans-board-read xans-board-1002">
 					<div class="ec-base-table typeWrite ">
@@ -74,7 +73,6 @@
 										<div class="detail">
 											<div class="fr-view fr-view-article">
 												<p><br></p>
-												<p><br></p>
 													<c:if test="${not empty inquiries.attach_image1}">
 													    <img alt="상품01" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${inquiries.attach_image1}">
 													</c:if>
@@ -98,13 +96,10 @@
 										</div>
 									</td>
 								</tr>
-								<tr class="attach displaynone">
-									<th scope="row">FILE</th>
-									<td></td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
+					
 					<div class="ec-base-button ">
 						<span class="gLeft">
 							<a href="/app/board/inquiry" class="btnNormalFix sizeS">LIST</a>
