@@ -25,6 +25,10 @@ public class OrderDetailDAO {
 		return template.insert("com.slimbear.mapper.Order.INSERT_ORDERDETAIL", orderDetail);
 	}
 	
+	public int updateReviewUID(OrderDetailDTO orderDetail) {
+		return template.insert("com.slimbear.mapper.Order.UPDATE_ORDERDETAIL", orderDetail);
+	}
+	
 	public List<OrderDetailDTO> getOrderDetailByOrderUID(long orderUID) {
 		return template.selectList("com.slimbear.mapper.Order.SELECT_ORDERDETAIL_LIST_BY_ORDER_UID", orderUID);
 	}

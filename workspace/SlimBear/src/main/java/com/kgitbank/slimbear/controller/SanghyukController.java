@@ -264,8 +264,8 @@ public class SanghyukController {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-		System.out.println("prod_code : " + productCode);
-
+		System.out.println("prod_code: " + productCode);
+		System.out.println("order_uid: " + orderUID);
 		
 		String[] productCodeInfo = SlimBearUtil.splitProductDetail(productCode);
 		Long ProductUID = Long.valueOf(productCodeInfo[0]);
@@ -281,6 +281,7 @@ public class SanghyukController {
 		model.addAttribute("color", productColor);
 		model.addAttribute("size", productSize);
 		model.addAttribute("cnt", cnt);
+		model.addAttribute("order_uid", orderUID);
 		return "reviewWrite";
 	}
 	
@@ -291,6 +292,7 @@ public class SanghyukController {
 	public void reviewUpload (
 			@ModelAttribute ReviewDTO review,
 			@ModelAttribute OrderDetailDTO orderDetail,
+			@RequestParam("order_uid")long order_uid,
 			@RequestParam("file1")MultipartFile  file1,
 			@RequestParam("file2")MultipartFile  file2,
 			@RequestParam("file3")MultipartFile  file3,
@@ -299,7 +301,7 @@ public class SanghyukController {
 			HttpServletResponse response) {
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		
+		System.out.println("order_uid" + order_uid);
 		System.out.println(user.getUid());
 		
 		review.setReg_date(new Date());
@@ -323,10 +325,12 @@ public class SanghyukController {
 			review.setImage4(filePath4);
 		}		
 		// DAO로 전달!
-		int reviewUid = sanghService.insertReview(review);
-		orderDetail.setReview_uid(reviewUid);
+		Long reviewUid = sanghService.insertReview(review);
+		System.out.println("reviewUid" + reviewUid);
 		
-		sanghService.insertOrder(orderDetail);
+		orderDetail.setReview_uid(reviewUid.intValue());
+		orderDetail.setOrder_uid(order_uid);
+		sanghService.updateOrderDetail(orderDetail);
 		
 		response.setStatus(HttpServletResponse.SC_OK);
 	}

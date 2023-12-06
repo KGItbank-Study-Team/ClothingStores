@@ -26,7 +26,7 @@
 			<p>사이즈: ${size}</p>
 			<p>수량: ${cnt}</p>
 			<input type="hidden" name="prod_code" value="${prodCode}">
-			<input type="hidden" name="prod_code" value="${reviewUID}">
+			<input type="hidden" name=order_uid value="${order_uid}">
 		</div>
 		<div class="star_rating">
 			<span class="star on" value="1"> </span> 
@@ -34,6 +34,7 @@
 			<span class="star" value="3"> </span> 
 			<span class="star" value="4"> </span> 
 			<span class="star" value="5"> </span>
+			
 		</div>
 		 <input type="hidden" name="score" id="rating" value="0">
 		<input type="text" name="title" class="inputTitle" placeholder="제목을 입력해주세요.">

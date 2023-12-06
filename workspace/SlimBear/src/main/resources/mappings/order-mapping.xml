@@ -66,6 +66,11 @@
 			(order_uid, prod_code, cnt, review_uid, total_price)
 			VALUES(#{order_uid},#{prod_code},#{cnt}, #{review_uid}, #{total_price})
 		</insert>
+		
+		<update id="UPDATE_ORDERDETAIL">
+			UPDATE orderDetail SET review_uid=#{review_uid}
+			WHERE order_uid=#{order_uid} AND prod_code=#{prod_code}
+		</update>
 
  		<!-- 주문결제(orderPayment) -->	
  		<select id="SELECT_PAYMENT_BY_ORDER_UID" resultType="orderPayment">

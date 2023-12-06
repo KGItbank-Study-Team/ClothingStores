@@ -40,8 +40,9 @@ public class SangyhyukServiceImpl {
 	}
 	
 	// 리뷰 넣기
-	public int insertReview(ReviewDTO review) {
-		return reviewDAO.insertReview(review);
+	public Long insertReview(ReviewDTO review) {
+		reviewDAO.insertReview(review);
+		return review.getUid();
 	}
 	
 	// 특정 상품 uid의 리뷰 조회
@@ -187,5 +188,9 @@ public class SangyhyukServiceImpl {
 	// insertOrderDetail
 	public int insertOrder(OrderDetailDTO orderDetail) {
 		return orderDetailDAO.insertOrder(orderDetail);
+	}
+
+	public void updateOrderDetail(OrderDetailDTO orderDetail) {
+		orderDetailDAO.updateReviewUID(orderDetail);
 	}
 }
