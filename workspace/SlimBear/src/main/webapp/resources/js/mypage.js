@@ -324,7 +324,7 @@ function initOrderList(datas){
 
             html.push('</div>')
             html.push('<div class="kThsCL">');
-            html.push('<a href="/app/member/myPage/orderList/detail" class="gSIruC">주문 상세보기</a>');
+            html.push('<a href="/app/member/myPage/orderList/detail?orderUID=' + orderUID +'" class="gSIruC">주문 상세보기</a>');
             html.push('<svg width="16" height="16" focusable="false" viewBox="0 0 16 16" aria-hidden="true" role="presentation" style="fill: rgb(0, 0, 0); vertical-align: middle; height: 100%;">');
             html.push('<path fill="#346aff" fill-rule="nonzero" d="M11.057 8L5.53 13.529c-.26.26-.26.682 0 .942.26.26.682.26.942 0l6-6c.26-.26.26-.682 0-.942l-6-6c-.26-.26-.682-.26-.942 0-.26.26-.26.682 0 .942L11.057 8z"></path></svg></div></div>');
             

@@ -3,8 +3,11 @@ const idField = document.querySelector('.idd');
 const passwordField = document.querySelector('.userpw');
 const confirmPasswordField = document.querySelector('.userpw-confirm');
 const nameField = document.querySelector('.namee');
-const telNumberField = document.querySelector('.tel-number input[type="tel"]');
+
+const addressFieldPostCode = document.querySelector('#sample6_postcode');
 const addressField = document.querySelector('#sample6_address');
+const addressFieldDetail  = document.querySelector('#sample6_detailAddress');
+
 
 function focusOnField(field, isInvalid) {
     if (isInvalid) {
@@ -21,6 +24,7 @@ function sendDataToDatabase() {
 	// 함수를 사용하여 필드에 포커스를 주는 함수를 정의합니다.
 	 checkDuplicateMemberID();
 
+     
 
 // 아이디 필드 유효성 검사
 if (idField.value === '') {
@@ -35,6 +39,7 @@ if (idField.value === '') {
 if (passwordField.value === '') {
     errorMessages.push('비밀번호를 입력하세요.');
     focusOnField(passwordField, true); // 유효하지 않음
+    return;
 } else {
     focusOnField(passwordField, false); // 유효함
 }
@@ -43,6 +48,7 @@ if (passwordField.value === '') {
 if (confirmPasswordField.value === '') {
     errorMessages.push('비밀번호를 다시 확인하세요.');
     focusOnField(confirmPasswordField, true); // 유효하지 않음
+    return;
 } else if (passwordField.value !== confirmPasswordField.value) {
     errorMessages.push('비밀번호가 일치하지 않습니다.');
     focusOnField(confirmPasswordField, true); // 유효하지 않음
@@ -62,34 +68,39 @@ if (nameField.value === '') {
 
 // 주소 필드 유효성 검사
 if (addressField.value === '') {
-    errorMessages.push('주소를 입력하세요.');
+    errorMessages.push('우편번호를 입력하세요.');
     focusOnField(addressField, true); // 유효하지 않음
     return;
 } else {
     focusOnField(addressField, false); // 유효함
 }
 
-// 인증번호 입력 필드 유효성 검사
-if (telNumberField.value === '') {
-    errorMessages.push('인증번호를 입력하세요.');
-    focusOnField(telNumberField, true); // 유효하지 않음
+if (addressFieldPostCode.value === '') {
+    errorMessages.push('기본주소를 입력하세요.');
+    focusOnField(addressFieldPostCode, true); // 유효하지 않음
     return;
 } else {
-    focusOnField(telNumberField, false); // 유효함
+    focusOnField(addressFieldPostCode, false); // 유효함
 }
 
-
-    // 에러 메시지가 있으면 경고창을 띄우고 폼 제출을 막습니다.
-    if (errorMessages.length > 0) {
-        // 에러 메시지를 하나의 문자열로 결합합니다.
-        const errorMessage = errorMessages.join('\n');
-
-        // 경고 창을 띄웁니다.
-        alert(errorMessage);
-        
+if (addressFieldDetail.value === '') {
+    errorMessages.push('상세주소를 입력하세요.');
+    focusOnField(addressFieldDetail, true); // 유효하지 않음
+    return;
+} else {
+    focusOnField(addressFieldDetail, false); // 유효함
+}
+ 
+// 전화번호
+var telNumberField = $('input[name=telphone]');
+telNumberField.each(function(){
+    console.log($(this).val());
+    if($(this).val() === ""){
+        focusOnField($(this), true); // 유효하지 않음
         return;
     }
-   
+});
+
     // 사용자로부터 입력 받은 주소 정보를 가져옵니다.
     var postcode = document.getElementById('sample6_postcode').value;
     var address = document.getElementById('sample6_address').value;
@@ -102,25 +113,23 @@ if (telNumberField.value === '') {
     // hidden input 요소에 주소 문자열을 설정합니다.
     document.getElementById('realdata_address').value = fullAddress;
 
-   function combinePhoneNumber() {
-        var tel1 = document.getElementById('tel1').value;
+    var tel1 = document.getElementById('tel1').value;
         var tel2 = document.getElementById('tel2').value;
         var tel3 = document.getElementById('tel3').value;
 
         var fullPhoneNumber = tel1 + "-" + tel2 + "-" + tel3;
 
         document.getElementById('realdata_phone').value = fullPhoneNumber;
-    }
 
-    var year = document.querySelector('input[name="year"]').value;
-    var month = document.querySelector('select[name="month"]').value;
-    var day = document.querySelector('input[name="day"]').value;
+    // var year = document.querySelector('input[name="year"]').value;
+    // var month = document.querySelector('select[name="month"]').value;
+    // var day = document.querySelector('input[name="day"]').value;
 
-    // 생년월일을 "년-월-일" 형식으로 결합합니다.
-    var birthdate = year + "년 " + month + "월 " + day + "일";
+    // // 생년월일을 "년-월-일" 형식으로 결합합니다.
+    // var birthdate = year + "년 " + month + "월 " + day + "일";
 
-    // hidden input 요소에 생년월일 문자열을 설정합니다.
-    document.getElementById('realdata_birthdate').value = birthdate;
+    // // hidden input 요소에 생년월일 문자열을 설정합니다.
+    // document.getElementById('realdata_birthdate').value = birthdate;
 
     // 폼을 제출합니다.
     document.querySelector('form').submit();

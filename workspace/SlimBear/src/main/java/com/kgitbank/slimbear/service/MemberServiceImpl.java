@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kgitbank.slimbear.common.SlimBearEnum;
 import com.kgitbank.slimbear.common.SlimBearEnum.MEMBER_STATUS;
 import com.kgitbank.slimbear.dao.CouponDAO;
 import com.kgitbank.slimbear.dao.MemberCouponDAO;
@@ -32,6 +33,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean join(MemberDTO member) {
+		
+		if(member.getLogin_type() == null) {
+			member.setLogin_type(SlimBearEnum.MEMBER_TYPE.SLIMBEAR.toString());
+		}
 		
 		member.setReg_date(new Date(System.currentTimeMillis()));
 		member.setStatus(MEMBER_STATUS.ACTIVE.toString());
