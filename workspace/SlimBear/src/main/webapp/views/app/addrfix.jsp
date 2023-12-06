@@ -58,6 +58,7 @@
                 <div class="xans-element- xans-myshop xans-myshop-addrmodify ">
                     <div class="ec-base-table typeWrite">
                     <form id="myForm" action="/app/member/myPage/addr/fix" method="post">
+                    	<input type="hidden" value="${fix.addr_uid}" name="addressUID"/>
                         <table border="1" summary="">
                             <caption>배송 주소록 입력</caption>
                             <colgroup>
