@@ -55,9 +55,7 @@
 						<a href="/app/board/faq?board_no=3&amp;category_no=3" class="faq04">
 							<span>교환/반품관련</span></a> 
 						<a href="/app/board/faq?board_no=3&amp;category_no=4" class="faq05">
-							<span>기타관련</span></a> 
-						<a href="/app/board/faq?board_no=3&amp;category_no=5" class="faq06">
-							<span>쇼룸관련</span></a>
+							<span>기타관련</span></a>
 					</div>
 				</div>
 				

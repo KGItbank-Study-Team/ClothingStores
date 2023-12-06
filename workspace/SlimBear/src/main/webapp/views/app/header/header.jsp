@@ -93,9 +93,8 @@
 					<li class="menu-item"><a href="">COMMUNITY</a>
 						<ul class="dropdown-content">
 							<li><a href="/app/board/notice">공지사항</a></li>
-							<li><a href="/app/board/notice">REVIEW</a></li>
-							<li><a href="/app/board/notice">상품문의</a></li>
-							<li><a href="/app/board/notice">FAQ</a></li>
+							<li><a href="/app/board/inquiry">상품문의</a></li>
+							<li><a href="/app/board/faq">FAQ</a></li>
 						</ul></li>
 				</div>
 				<div class="userArea">
