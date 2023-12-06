@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>기본 페이지 복사해서 써</title>
+<title>배너 이미지 수정 페이지 </title>
 <style>
     .btn-group > .btn.active {
         background-color: #336699 !important;
@@ -319,7 +319,7 @@
         // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/notice/deleteData',
+                url: '/admin/bannerTop/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
@@ -335,33 +335,6 @@
             });
         }
     }
-    
- // "새로운 공지사항 등록" 버튼 클릭 시 동적으로 입력 폼 생성 및 표시
-//     $('#customToolbar').on('click', '.btn-primary', function () {
-//         // 생성할 폼의 HTML 코드
-//         var addNoticeFormHtml = `
-//             <div class="add-notice-form">
-//         	html.push('<div class="add-notice-form">');
-//             html.push('<div class="mb-3"><label for="addNoticeTitle" class="form-label">제목</label><input type="text" class="form-control" id="addNoticeTitle"></div>');
-//             html.push('<div class="mb-3"><label for="addNoticeContent" class="form-label">내용</label><textarea class="form-control" id="addNoticeContent" rows="3"></textarea></div>');
-//             html.push('<div class="mb-3"><label for="addNoticePriority" class="form-label">우선순위</label><input type="number" class="form-control" id="addNoticePriority"></div>');
-//             html.push('<div class="mb-3"><label for="addNoticeType" class="form-label">타입</label><input type="text" class="form-control" id="addNoticeType"></div>');
-//             html.push('<div class="mb-3"><label for="addNoticeMainImage" class="form-label">이미지 URL</label><input type="text" class="form-control" id="addNoticeMainImage"></div>');
-//                 <button type="button" class="btn btn-primary" onclick="submitAddNoticeForm()">등록</button>
-//                 <button type="button" class="btn btn-secondary" onclick="closeAddNoticeForm()">닫기</button>
-//             </div>
-//         `;
-
-//         // 생성한 폼을 컨테이너에 추가하고 표시
-//         $('#addNoticeFormContainer').html(addNoticeFormHtml);
-//     });
-
-    // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
-   function submitAddBannerTopForm() {
-    var title = $('#addNoticeTitle').val();
-    var content = $('#addNoticeContent').val();
-    var priority = $('#addNoticePriority').val();
-    var type = $('#addNoticeType').val();
 
     // FormData 객체 생성
     var formData = new FormData();

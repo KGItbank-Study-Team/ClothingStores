@@ -31,4 +31,18 @@
 		SET image=#{image}, prod_uid=#{prod_uid}
 		WHERE uid=#{uid};
 	</update>
+	<select id="SELECT_BANNER_TEXT_ADMIN"
+		resultType="com.kgitbank.slimbear.admin.dto.BannerTextDTO">
+		SELECT * FROM storeConfig;
+	</select>
+	<select id="SELECT_BANNER_TEXT_DETAIL"
+		resultType="com.kgitbank.slimbear.admin.dto.BannerTextDTO">
+		SELECT * FROM storeConfig
+		WHERE uid=#{uid};
+	</select>
+	<update id="UPDATE_BANNER_TEXT">
+		UPDATE storeConfig
+		SET bannerText=#{bannerText}
+		WHERE uid=#{uid};
+	</update>
 </mapper>
