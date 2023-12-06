@@ -170,6 +170,8 @@ public class HunServiceImpl {
 				orderProductVO.setCnt(orderDetail.getCnt());
 				orderProductVO.setReviewUID(orderDetail.getReview_uid());
 				
+				orderProductVO.setProdCode(orderDetail.getProd_code());
+				
 				productList.add(orderProductVO);
 			}
 			orderVO.setProductList(productList);
@@ -225,8 +227,10 @@ public class HunServiceImpl {
 			
 			orderProductVO.setCnt(orderDetail.getCnt());
 			orderProductVO.setReviewUID(orderDetail.getReview_uid());
+			orderProductVO.setProdCode(orderDetail.getProd_code());
 			
 			orderVO.setTotalProduct(productInfo.getPrice() - productInfo.getSale_price());
+			
 			
 			productList.add(orderProductVO);
 		}
