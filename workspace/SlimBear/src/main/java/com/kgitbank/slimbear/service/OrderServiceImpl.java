@@ -236,14 +236,14 @@ public class OrderServiceImpl implements OrderService {
 				
 				Long ProductUID = Long.valueOf(SlimBearUtil.splitProductDetail(orderDetail.getProd_code())[0]) ;
 				ProductDTO product = productDAO.getProductByUid(ProductUID);
-				addMileage += product.getAddi_mileage();
+				addMileage += product.getAddi_mileage() * orderDetail.getCnt();
 			}
 			
 			order.getUse_mileage();
 			MemberDTO owner = memberDAO.getMemberByUID(order.getMem_uid());
 			MemberDTO memberUpdate = new MemberDTO();
 			memberUpdate.setUid(owner.getUid());
-			memberUpdate.setMileage(owner.getMileage() - addMileage);
+			memberUpdate.setMileage(owner.getMileage() + addMileage);
 			memberDAO.updateMember(memberUpdate);
 		}	
 		
