@@ -39,21 +39,21 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input class="idd" type="text" name="id" value="sda"required ></span>
+            <span class="placehold-text"><input class="idd" type="text" name="id" value="id"required ></span>
         <span id="id_check" style="color: red;"></span>
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password"name="password" value="asdas">
+            <input class="userpw" type="password"name="password" value="********">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password"name="pwck" value="asdas">
+            <input class="userpw-confirm" type="password"name="pwck" value="********">
         	<span id="password-match-message" style="color: red;"></span>
         </div>
         <div class="field">
             <b>이름</b>
-            <input class="namee" type="text"name="name" value="assss">
+            <input class="namee" type="text"name="name" value="name">
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -84,7 +84,7 @@
 
       <div class="field">
             <b>본인 확인 이메일<small>(선택)</small></b>
-            <input type="email" placeholder="선택입력" value="ㅁㄴㅇㅁㄴㅇ@naver.com" name="email">
+            <input type="email" placeholder="선택입력" value="@naver.com" name="email">
         </div>
         
         <div class="field tel-number">
@@ -94,8 +94,8 @@
             </select>
             <div>
                 <input type="tel" placeholder="전화번호 입력"value="010" name="telphone" id="tel1"><p>-</p>
-                <input type="tel" placeholder=""value="1234" name="telphone" id="tel2"><p>-</p>
-                <input type="tel" placeholder=""value="5678" name="telphone" id="tel3">
+                <input type="tel" placeholder=""value="" name="telphone" id="tel2"><p>-</p>
+                <input type="tel" placeholder=""value="" name="telphone" id="tel3">
                 </div>
                 <input type="hidden" id="realdata_phone">
                 <div>
@@ -106,11 +106,11 @@
        <div class="field tel-number">
         <b>주소</b>
         <div>
-            <input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode" value="11223">
+            <input type="text" id="sample6_postcode" placeholder="우편번호" name="postcode" value="우편번호">
             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
         </div>
-        <input type="text" placeholder="기본 주소" id="sample6_address" name="pubilcaddress" value="동대문">
-        <input type="text" placeholder ="상세 주소" id="sample6_detailAddress" name="detailaddress" value="2층">
+        <input type="text" placeholder="기본 주소" id="sample6_address" name="pubilcaddress" value="일반주소">
+        <input type="text" placeholder ="상세 주소" id="sample6_detailAddress" name="detailaddress" value="상세주소">
         <input type="hidden" id="sample6_extraAddress" placeholder="참고항목" value="동대문구"> 
     </div>
         <!-- 6. 가입하기 버튼 -->

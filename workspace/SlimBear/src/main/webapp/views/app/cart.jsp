@@ -51,7 +51,7 @@
 							data-color="${cart.color}" data-size="${cart.size}"
 							data-cnt="${cart.cnt}"></td>
 						<td class="yout"><img
-							src="/resources/images/${cart.main_image}" alt="${cart.desc}"></td>
+							src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${cart.main_image}" alt="${cart.desc}"></td>
 						<td><a href="#">${cart.maker}</a> <span
 							class="cart__list__smartstore">${cart.maker}</span>
 							<p>${cart.name }</p></td>
