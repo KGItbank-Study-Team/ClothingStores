@@ -99,7 +99,7 @@
                                                 <p><br></p>
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
 												<c:if test="${not empty notices.main_image}">
-                                                	<img alt="상품01" src="${notices.main_image}">
+                                                	<img alt="상품01" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${notices.main_image}">
                                                 </c:if>
                                                 </p>
                                                 <p><br></p>
