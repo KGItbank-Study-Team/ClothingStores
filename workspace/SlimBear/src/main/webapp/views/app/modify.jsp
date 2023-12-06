@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/modify.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
     <title>프로필</title>
 </head>
@@ -109,7 +110,7 @@
                                         <th scope="row" id="">이름 <img src="/resources/images/ico_required_blue.gif" alt="필수"></th>
                                         <td><input id="name" name="username" fw-filter="isFill&amp;isMax[30]" fw-label="이름"
                                                 fw-msg="" class="ec-member-name" placeholder="" maxlength="30"
-                                                readonly="readonly" value="${modi.username}" type="text"></td>
+                                                value="${modi.username}" type="text"></td>
                                     </tr>
                                     <tr class="">
                                         <th scope="row">주소 <img src="/resources/images/ico_required_blue.gif" class="displaynone"
@@ -119,7 +120,7 @@
                                                 <li id="fmodify_zipcode_wrap" class="ec-address-zipcode">
                                                     <input id="postcode1" name="postcode" placeholder="우편번호"
                                                         fw-filter="" class="inputTypeText" type="text" maxlength="14"
-                                                        readonly="" fw-label="우편번호" value="${modi.postcode}"> <button id="postBtn"
+                                                        readonly="" fw-label="우편번호" value="${modi.postcode}"> <button id="postBtn" onclick="searchAddress()"
                                                         class="btnBasic" type="button"
                                                         style="cursor: pointer;">주소검색</button><span
                                                         class="ec-base-label">
@@ -142,7 +143,7 @@
                                         </th>
                                         <td>
                                             <select id="mobile1" name="phone0" fw-filter="isNumber&amp;isFill"
-                                                fw-label="휴대전화" fw-alone="N" fw-msg="">
+                                                fw-label="휴대전화" fw-alone="N" fw-msg="" >
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="016">016</option>
@@ -150,6 +151,9 @@
                                                 <option value="018">018</option>
                                                 <option value="019">019</option>
                                             </select>-
+                                            <script>
+                                            	$('#mobile1').val('${modi.mobile0}');
+                                            </script>
                                             <input id="mobile2" name="phone1" maxlength="4"
                                                 fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
                                                 placeholder="" value="${modi.mobile1}" type="text">-<input id="mobile3" name="phone2"

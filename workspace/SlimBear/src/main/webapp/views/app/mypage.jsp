@@ -59,7 +59,7 @@
                         <li class=" ">
                             <strong class="title">내 적립금</strong>
                             <strong class="data use">&nbsp;<span
-                                    id="xans_myshop_bankbook_avail_mileage">${info.reserve}원</span></strong>
+                                    id="xans_myshop_bankbook_avail_mileage">${info.reserve}점</span></strong>
                         </li>
                         <li class="">
                             <strong class="title">쿠폰</strong>
@@ -72,13 +72,13 @@
 
                 <div class="xans-element- xans-myshop xans-myshop-orderstate ">
                     <div class="title">
-                        <h3>나의 주문처리 현황 <span class="desc">(최근 <em>3개월</em> 기준)</span>
+                        <h3>나의 주문처리 현황 
                         </h3>
                     </div>
                     <div class="state">
                         <ul class="order">
                             <li>
-                                <strong>입금전</strong>
+                                <strong>주문대기중</strong>
                                 <a href="/app/member/myPage/orderList" class="count"><span
                                         id="xans_myshop_orderstate_shppied_before_count">${info.beforeDeposit}</span></a>
                             </li>

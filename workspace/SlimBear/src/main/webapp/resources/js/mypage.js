@@ -13,9 +13,9 @@ function searchAddress() {
         new daum.Postcode({
             oncomplete: function (data) {
                 // 우편번호와 주소 정보를 가져온 후 폼에 채우기
-                document.getElementById('address_zip1').value = data.zonecode;
-                document.getElementById('address_addr1').value = data.address;
-                document.getElementById('address_addr2').value = '';
+                $('#postcode1').val(data.zonecode);
+                $('#addr1').val(data.address);
+                $('#addr2').val("");
             }
         }).open();
     }
