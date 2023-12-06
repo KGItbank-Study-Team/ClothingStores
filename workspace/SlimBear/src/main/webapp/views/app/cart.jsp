@@ -39,8 +39,7 @@
 					<td>수량</td>
 					<td>적립금</td>
 					<td>상품금액</td>
-					
-
+					<td>결제금액</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -114,7 +113,7 @@
 												<div class="cart__mainbtns">
 
 													<button class="cart__bigorderbtn left"
-														onclick="addChangedOptions(this, ${status.index}, ${cart.uid});">변경하기</button>
+														onclick="addChangedOptions($(this), ${status.index}, ${cart.uid});">변경하기</button>
 													<button class="cart__bigorderbtn right"
 														onclick="addCartItem($(this), ${status.index}, ${cart.uid});">추가하기</button>
 												</div>
@@ -145,12 +144,13 @@
 						</span></td>
 
 						<td><p id="addPrice_${cart.uid }">
-								100
-								<%-- ${cart.addprice} --%>
+								${cart.mileage}
 							</p></td>
-						<td><span class="price" id="price_${cart.uid }">${cart.price}</span>
+						<td>
+						<span class="price" id="price_${cart.uid }" style="text-decoration:line-through;">${cart.price}</span>
+						<td>
+						<span class="price" id="maybe_${cart.uid }">${cart.maybeprice}</span>
 						</td>
-						
 					</tr>
 
 				</c:forEach>
@@ -186,10 +186,10 @@
 			</thead>
 			<tr>
 				<td></td>
-				<td colspan="2">${totalprice }</td>
+				<td colspan="2">${totalprice}</td>
 				<td></td>
-				<td>무료</td>
-				<td>${cart.maybeprice}</td>
+				<td>${deliveryPrice}</td>
+				<td>${paymentAmount}</td>
 			</tr>
 		</table>
 		<div class="cart__mainbtns">
@@ -198,7 +198,7 @@
 			<button class="cart__bigorderbtn left" onclick="history.back()">쇼핑
 				계속하기</button>
 			<!-- <input type="button" class="cart__bigorderbtn right""> -->
-			<button class="cart__bigorderbtn right">주문하기</button>
+			<button id="order_button" class="cart__bigorderbtn right">주문하기</button>
 		</div>
 		</form>
 		<form>

@@ -2,6 +2,7 @@ package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,8 @@ public class OstSerivceImpl {
 			vo.setMaker(product.getMaker());
 			vo.setMain_image(product.getMain_image());
 			
+			vo.setMileage(product.getAddi_mileage() * i.getCnt());
+			vo.setMaybeprice(product.getPrice() * i.getCnt() - product.getSale_price() * i.getCnt());
 			
 			// 상품의 색상 옵션 리스트 추가
 		    vo.setColorOptions(productdetailDAO.getColorOptions(productUID));
@@ -73,16 +76,43 @@ public class OstSerivceImpl {
 
 		return list;
 	}
-	public void addChangedOptions(long cartUid, long productUid, String color, String size) {
-	    String updatedProdCode = SlimBearUtil.appendProductCode(productUid, color, size);
-	    cartDAO.addChangedOptions(cartUid, updatedProdCode);
+	public void addChangedOptions(Long memberUID, long cartUID, long productUid, String color, String size) {
+		String updatedProdCode = SlimBearUtil.appendProductCode(productUid, color, size);
+		
+		CartDTO originCart = cartDAO.getCartByUID(cartUID);
+		CartDTO cart = cartDAO.getCartByProdCode(memberUID, updatedProdCode);
+		System.out.println(originCart);
+		System.out.println(cart);
+		if(cart != null) {
+			// 이미 카드있으면 합쳐
+			cart.setCnt(cart.getCnt() + originCart.getCnt());
+			cartDAO.deleteCartItem(originCart.getUid());
+			cartDAO.updateAddress(cart);
+		}else {
+			// 없으니깐 수정만해
+			originCart.setProd_code(updatedProdCode);
+			cartDAO.updateAddress(originCart);
+		}
 	}
 	
 	
-//	 public void addCartItem(Long cartUid, Long productUid, String color, String size) {
-//	        // 여기에서 필요한 비즈니스 로직 수행 가능
-//	        cartDAO.addCartItem(cartUid, productUid, color, size);
-//	    }
+	public void addCartItem(Long memberUID, Long cartUid, Long productUid, String color, String size) {
+		String updatedProdCode = SlimBearUtil.appendProductCode(productUid, color, size);
+		
+		CartDTO cart = cartDAO.getCartByProdCode(memberUID, updatedProdCode);
+		if(cart != null) {
+			// 있으면 수정
+			cart.setCnt(cart.getCnt() + 1);
+			cartDAO.updateAddress(cart);
+		}else {
+			CartDTO newCart = new CartDTO();
+			newCart.setCnt(1);
+			newCart.setMem_uid(memberUID);
+			newCart.setProd_code(updatedProdCode);
+			newCart.setReg_date(new Date(System.currentTimeMillis()));
+			cartDAO.insertInCart(newCart);
+		}
+	}
 
 	public void updateCartItemOptions(long cartUid, long productUid ,String color, String size) {
         
@@ -95,6 +125,14 @@ public class OstSerivceImpl {
 		int totalPrice = 0;
 		for (MemberCartVO cartItem : cartList) {
 			totalPrice += cartItem.getPrice();
+		}
+		return totalPrice;
+	}
+	
+	public int calculatePaymentAmount(List<MemberCartVO> cartList) {
+		int totalPrice = 0;
+		for (MemberCartVO cartItem : cartList) {
+			totalPrice += cartItem.getMaybeprice();
 		}
 		return totalPrice;
 	}

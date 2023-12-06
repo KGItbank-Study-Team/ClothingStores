@@ -121,7 +121,7 @@
 				<tbody>
 					<c:forEach var="product" items="${order.productList}">
 					<tr class="cart__list__detail">
-							<td><img width="100" src="/resources/images/${product.main_image}"></td>
+							<td><img width="100" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${product.main_image}"></td>
 							<td >${product.name}</td>
 							<td >${product.color}/${product.size}</td>
 							<td >${product.cnt}</td>

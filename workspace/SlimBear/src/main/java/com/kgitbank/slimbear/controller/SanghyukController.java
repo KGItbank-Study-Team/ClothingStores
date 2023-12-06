@@ -196,7 +196,7 @@ public class SanghyukController {
 			System.out.println("cartDTO: " + cartDTO);  
 			
 			//선택한 옵션과 같은 옵션이 장바구니에 몇개 있는지 조회
-			CartDTO containCart = sanghService.getCartByProdCode(prod_code); 
+            CartDTO containCart = sanghService.getCartByProdCode(mem_uid, prod_code); 
 			System.out.println("containCart: " + containCart); 
 			
 			if(containCart != null) {

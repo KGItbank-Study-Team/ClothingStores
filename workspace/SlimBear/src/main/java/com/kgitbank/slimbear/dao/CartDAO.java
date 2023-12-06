@@ -22,9 +22,17 @@ public class CartDAO {
 		info.setUid(memberUID);
 		return template.selectList("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_MEMBER_UID", info);
 	}
-
-	public CartDTO getCartByProdCode(String prod_code) {
-		return template.selectOne("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_PRODCODE", prod_code);
+	
+	public CartDTO getCartByUID(Long CartUID) {
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_CART_BY_UID", CartUID);
+	}
+	
+	public CartDTO getCartByProdCode(Long memberUID, String prod_code) {
+		
+		HashMap<String,Object> info = new HashMap<String, Object>();
+		info.put("memberUID", memberUID);
+		info.put("prod_code", prod_code);
+		return template.selectOne("com.slimbear.mapper.Member.SELECT_CART_LIST_BY_PRODCODE", info);
 	}
 
 	/* 상품 번호의 개수를 조회 */
@@ -39,16 +47,10 @@ public class CartDAO {
 		return template.selectOne("com.slimbear.mapper.Member.SELECT_CNT_EQUALS_PROD", cart);
 	}
 
-	private long selectMaxUid() {
-		long uid = template.selectOne("com.slimbear.mapper.Member.SELECT_MAX_UID_CART");
-		return uid;
-	}
 
 	/* 상품 추가 */
-	public void insertInCart(CartDTO cart) {
-		long uid = selectMaxUid();
-		cart.setUid(uid);
-		template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
+	public int insertInCart(CartDTO cart) {
+		return template.insert("com.slimbear.mapper.Member.INSERT_CART", cart);
 	}
 
 	public void addToCart(long memUid, String prodCode, int quantity) {

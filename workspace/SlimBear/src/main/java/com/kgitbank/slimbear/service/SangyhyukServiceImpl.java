@@ -138,9 +138,9 @@ public class SangyhyukServiceImpl {
 		return cartDAO.equalProdCnt(cart);
 	}
 	
-	public CartDTO getCartByProdCode(String code) {
-		return cartDAO.getCartByProdCode(code);
-	}
+    public CartDTO getCartByProdCode(Long memberUID, String code) {
+        return cartDAO.getCartByProdCode(memberUID, code);
+    }
 	
 	// 장바구니 목록 조회
 	public List<CartDTO> getCartListByMemberUID(long memberUid) {

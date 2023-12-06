@@ -99,7 +99,7 @@ function updateCartItemOptions(me, index, cartUid) {
 }
 $(document).ready(function () {
     // 주문하기 버튼 클릭 이벤트 핸들러 추가
-    $(".cart__bigorderbtn.right").on("click", function () {
+    $("#order_button").on("click", function () {
         // 선택된 상품들의 정보를 담을 배열
         var selectedProducts = [];
 
@@ -206,7 +206,7 @@ function addCartItem(mee, index, cartUid) {
     var selectedColor = document.getElementById("color_" + index + "_" + cartUid).value;
     var selectedSize = document.getElementById("size_" + index + "_" + cartUid).value;
     var productUid = $(mee).parents('tr.cart__list__detail').find("input[name=selectedItems]").data('productuid');
-    console.log(mee)
+
     $.ajax({
         type: "POST",
         url: "/app/addCartItem",

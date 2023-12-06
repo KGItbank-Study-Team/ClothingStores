@@ -44,16 +44,15 @@ public class OstController {
 		if(authentication != null) {
 			SecurityUser user = (SecurityUser)authentication.getPrincipal();
 			
-			
-			
 			List<MemberCartVO> cartlist = ostService.getCartList(user.getUid());
 			
-			 int totalPrice = ostService.calculateTotalPrice(cartlist);
-			 String formattedTotalPrice = ostService.formatPrice(totalPrice);
-			 
+			int totalPrice = ostService.calculateTotalPrice(cartlist);
+			int paymentAmount = ostService.calculatePaymentAmount(cartlist);
 			 
 			model.addAttribute("cartList",cartlist);
 			model.addAttribute("totalprice",totalPrice);
+			model.addAttribute("deliveryPrice",paymentAmount < 50000 ? 2500 : "무료");
+			model.addAttribute("paymentAmount",paymentAmount);
 		}
 		
 		return "cart"; 
@@ -124,10 +123,13 @@ public class OstController {
     }
 	@PostMapping("/addChangedOptions")
 	@ResponseBody
-	public ResponseEntity<String> addChangedOptions(@RequestParam long cartUid, @RequestParam long productUid,
+	public ResponseEntity<String> addChangedOptions(Authentication authentication, @RequestParam long cartUid, @RequestParam long productUid,
 	        @RequestParam String color, @RequestParam String size) {
+		
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+		
 	    // 추가적인 로직을 여기에 추가하고 성공 또는 실패에 따른 응답을 반환합니다.
-	    ostService.addChangedOptions(cartUid, productUid, color, size);
+	    ostService.addChangedOptions(user.getUid(), cartUid, productUid, color, size);
 	    return new ResponseEntity<>("변경된 옵션이 추가되었습니다.", HttpStatus.OK);
 	}
 	@PostMapping("/addCartItem")
@@ -142,9 +144,7 @@ public class OstController {
 	    if (authentication != null) {
 	        SecurityUser user = (SecurityUser) authentication.getPrincipal();
 	       
-
-	        // 여기에서 memUid 값을 사용하여 로직을 처리
-	        //ostService.addCartItem(cartUid, productUid, color, size);
+	        ostService.addCartItem(user.getUid(), cartUid, productUid, color, size);
 
 	        return new ResponseEntity<>("카트에 상품이 추가되었습니다.", HttpStatus.OK);
 	    } else {

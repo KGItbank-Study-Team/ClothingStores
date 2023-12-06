@@ -173,9 +173,11 @@
 		parameterType="member">
 		SELECT * FROM cart WHERE mem_uid=#{uid}
 	</select>
-	<select id="SELECT_CART_LIST_BY_PRODCODE" resultType="cart"
-		parameterType="member">
-		SELECT * FROM cart WHERE prod_code=#{prod_code}
+	<select id="SELECT_CART_BY_UID" resultType="cart">
+		SELECT * FROM cart WHERE uid=#{uid}
+	</select>
+	<select id="SELECT_CART_LIST_BY_PRODCODE" resultType="cart">
+		SELECT * FROM cart WHERE mem_uid=#{memberUID} AND prod_code=#{prod_code}
 	</select>
 	<!-- 색상,컬러(color,size) -->
 	<select id="SELECT_PRODUCTDETAIL_RECENT" resultType="cart"

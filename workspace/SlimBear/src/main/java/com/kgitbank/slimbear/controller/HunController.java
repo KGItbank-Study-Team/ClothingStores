@@ -182,10 +182,10 @@ public class HunController {
 	        for (String uid : uidArray) {
 	            hunService.deleteWish(Long.parseLong(uid));
 	        }
-	        return "wish_list";
+	        return "redirect:/app/member/myPage/wishList";
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return "wish_list";
+	        return "redirect:/app/member/myPage/wishList";
 	    }
 	}
 

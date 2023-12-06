@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
 					orderDetailDAO.insertOrder(orderDetail);
 
 					// 카트수정
-					CartDTO cart = cartDAO.getCartByProdCode(SlimBearUtil.appendProductCode(carts.get(i).getProductUid(), carts.get(i).getColor(), carts.get(i).getSize()));
+					CartDTO cart = cartDAO.getCartByProdCode(owner.getUid(), SlimBearUtil.appendProductCode(carts.get(i).getProductUid(), carts.get(i).getColor(), carts.get(i).getSize()));
 					if (cart != null) {
 						if (cart.getCnt() <= productDetail.getCnt()) {
 							cartDAO.deleteCartItem(cart.getUid());
