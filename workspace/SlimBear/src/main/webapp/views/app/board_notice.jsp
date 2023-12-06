@@ -78,16 +78,6 @@
                                     <th scope="row">DATE</th>
                                     <td><fmt:formatDate value="${notices.reg_date}" pattern="yyyy-MM-dd"/></td>
                                 </tr>
-                                <tr class="displaynone">
-                                    <th scope="row">VOTE</th>
-                                    <td><span class="txtNum"> 
-                                    		<a href="#none" class="btnNormal"
-                                    			onclick="BOARD_READ.article_vote('/exec/front/Board/vote/1?no=1724624&return_url=%2Farticle%2Fnotice%2F1%2F1724624%2F&f8448=afdaf2cdb1914f0c7068e19fcf16178d&board_no=1');">
-                                    			<img src="//img.echosting.cafe24.com/skin/base/common/btn_icon_recommend.gif" 
-                                    				alt="" /> 추천하기</a>
-                                    	</span>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <th scope="row">VIEW</th>
                                     <td>${notices.view_cnt}</td>
@@ -106,9 +96,6 @@
                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: left;">
                                                 	${notices.content}
                                                 </p>
-<!--                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;"> -->
-<%--                                                 	${notices.content} --%>
-<!--                                                 </p> -->
                                                 
                                                 <p><br></p>
                                             </div>
