@@ -17,6 +17,7 @@ import com.kgitbank.slimbear.dao.MemberDAO;
 import com.kgitbank.slimbear.dao.MemberOrderAddressDAO;
 import com.kgitbank.slimbear.dao.OrderDAO;
 import com.kgitbank.slimbear.dao.OrderDetailDAO;
+import com.kgitbank.slimbear.dao.OrderPaymentDAO;
 import com.kgitbank.slimbear.dao.ProductDAO;
 import com.kgitbank.slimbear.dao.ReviewDAO;
 import com.kgitbank.slimbear.dao.WishDAO;
@@ -28,10 +29,12 @@ import com.kgitbank.slimbear.dto.MemberMileageRecordDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
+import com.kgitbank.slimbear.dto.OrderPaymentDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
+import com.kgitbank.slimbear.exception.SlimbearExceptionHandler;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
@@ -44,6 +47,8 @@ import com.kgitbank.slimbear.vo.OrderVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 import com.kgitbank.slimbear.vo.reviewListVO;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 @Service
 public class HunServiceImpl {
 
@@ -55,6 +60,9 @@ public class HunServiceImpl {
 	
 	@Autowired
 	private OrderDetailDAO detailDAO;
+	
+	@Autowired
+	private OrderPaymentDAO paymentDAO;
 
 	@Autowired
 	private CouponDAO couponDAO;
@@ -172,20 +180,59 @@ public class HunServiceImpl {
 	}
 	
 	//주문상세내역
-	public List<OrderDetailVO> getOrderDetailInfo(long memberUID) {
+	public OrderVO getOrderDetailInfo(long orderUID) {
 		
-		ArrayList<OrderDetailVO> list = new ArrayList<>();
-		List<OrderDetailDTO> orderlist = detailDAO.getOrderListByMemberUID(memberUID);
+		OrderDTO order = orderDAO.getOrderByUID(orderUID);
 		
-		for (OrderDetailDTO i : orderlist) {
-			OrderDetailVO vo = new OrderDetailVO();
+		OrderVO orderVO = new OrderVO();
+		orderVO.setUid(order.getUid());
+		orderVO.setOrderDate(order.getOrder_date());
+		orderVO.setStatus(order.getStatus());
+		orderVO.setCode(order.getCode());
+		orderVO.setDeliveryPrice(order.getDeliv_price());
+		orderVO.setRecipient(order.getDeliv_recipient());
+		orderVO.setRecipient_tel(order.getDeliv_tel());
+		orderVO.setOrder_request(order.getOrder_request());
+		
+		String[] addressSplit = SlimBearUtil.splitAddress(order.getDeliv_address());
+		String address = "(" + addressSplit[0] + ")" + addressSplit[1] + " " + addressSplit[2];
+		orderVO.setRecipient_address(address);
+		
+		OrderPaymentDTO payment = paymentDAO.getPaymentByOrderUID(orderUID);
+		orderVO.setPaymonetAmount(payment.getPrice());
+		orderVO.setPayment_info(payment.getPay_pg() + " / " + payment.getType());
+		
+		List<OrderDetailDTO> orderProduct = detailDAO.getOrderListByMemberUID(order.getUid());
+		
+		ArrayList<MemberCartVO> productList = new ArrayList<MemberCartVO>();
+		for(OrderDetailDTO orderDetail : orderProduct) {
 			
-			vo.setOrderCount(0);
+			MemberCartVO orderProductVO = new MemberCartVO();
 			
-			list.add(vo);
+			String[] productCodeInfo = SlimBearUtil.splitProductDetail(orderDetail.getProd_code());
+
+			ProductDTO productInfo = productDAO.getProductByUid(Long.valueOf(productCodeInfo[0]));
+		
+			if(productInfo == null) {
+				continue;
+			}
+			
+			orderProductVO.setMain_image(productInfo.getMain_image());
+			orderProductVO.setName(productInfo.getName());
+			orderProductVO.setDesc(productCodeInfo[1] + "/" + productCodeInfo[2]);
+			orderProductVO.setPrice(productInfo.getPrice());
+			orderProductVO.setProductUid(productInfo.getUid());
+			
+			orderProductVO.setCnt(orderDetail.getCnt());
+			orderProductVO.setReviewUID(orderDetail.getReview_uid());
+			
+			orderVO.setTotalProduct(productInfo.getPrice() - productInfo.getSale_price());
+			
+			productList.add(orderProductVO);
 		}
+		orderVO.setProductList(productList);
 		
-		return list;
+		return orderVO;
 	}
 
 	//프로필

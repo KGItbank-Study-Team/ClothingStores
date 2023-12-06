@@ -21,6 +21,13 @@ public class OrderVO {
 	private String productName;
 	private Date orderDate;
 	private String status;
+	private String code;
+	
+	private String recipient;
+	private String recipient_tel;
+	private String recipient_address;
+	private String order_request;
+	private String payment_info;
 	
 	List<AddrVO> addressInfo;
 	List<MemberCartVO> productList;
