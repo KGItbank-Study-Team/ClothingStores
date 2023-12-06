@@ -12,26 +12,31 @@
 		SELECT *
 		FROM reviewComent WHERE review_uid=#{reviewUID}
 	</select>
+	
 	<select id="SELECT_REVIEW_BY_REVIEW_UID" resultType="review">
 		SELECT *
 		FROM productReview
 		WHERE uid=#{reviewUID}
 	</select>
+	
 	<insert id="INSERT_COMMENT">
 		INSERT INTO reviewComent
 		(review_uid, title, content,
 		mem_id)
 		VALUES(#{review_uid}, #{title}, #{content}, #{mem_id})
 	</insert>
+	
 	<insert id="ADD_OR_UPDATE_COMMENT">
 		INSERT INTO reviewComent (review_uid, title, content, mem_id)
 		VALUES (#{review_uid}, #{title}, #{content}, #{mem_id})
 		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content)
 	</insert>
+	
 	<select id="SELECT_REVIEW_LIST_ADMIN" resultType="com.kgitbank.slimbear.vo.ReviewVO">
 		SELECT * FROM
 		productReview
 	</select>
+	
 	<update id="UPDATE_ANSWER_STATUS"> 
 		UPDATE inquiry
 		SET status = 'SUCCESS'
@@ -44,6 +49,7 @@
 		VALUES (#{inqr_uid}, #{title}, #{content}, #{mem_id}, #{reg_date})
 		ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content), reg_date = VALUES(reg_date)
 	</insert>
+	
 	<select id="SELECT_INQUIRY_LIST_ADMIN" resultType="inquiry">
 		SELECT * FROM inquiry
 	</select>
@@ -52,17 +58,20 @@
 	<select id="SELECT_NOTICE_LIST_ALL" resultType="notice">
 		SELECT * FROM notice
 	</select>
+	
 	<insert id="INSERT_NOTICE_ADMIN">
 		INSERT INTO notice
 		(title, content, reg_date, priority, type, writer, view_cnt, main_image)
 		VALUES(#{title}, #{content}, #{reg_date}, #{priority}, #{type}, '관리자', 0, #{main_image})
 	</insert>
+	
 	<update id="UPDATE_NOTICE_ADMIN">
 		UPDATE notice
 		SET title=#{title}, content=#{content}, reg_date=#{reg_date}, 
 		priority=#{priority}, type=#{type}, main_image=#{main_image}
 		WHERE uid=#{uid}
 	</update>
+	
 	<!-- 관리자 FAQ -->
 	<select id="SELECT_FAQ_DETAIL_ADMIN" resultType="faq">
 		SELECT * FROM faq WHERE uid =#{uid};
@@ -100,18 +109,13 @@
 	<select id="SELECT_REVIEW_RECENT" resultType="review">
 		SELECT * FROM productReview ORDER BY reg_date DESC
 	</select>
-	<insert id="INSERT_REVIEW">
+	
+	<insert id="INSERT_REVIEW" useGeneratedKeys="true" keyProperty="uid">
 		INSERT INTO productReview
 		(mem_id, prod_code, title, content, score, reg_date, image1, image2, image3, image4)
 		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score},
 		#{reg_date}, #{image1}, #{image2}, #{image3}, #{image4})
 	</insert>
-	<!-- 데이터 삽입 -->
-<!-- 	<insert id="INSERT_REVIEW">
-		INSERT INTO productReview
-		(mem_id, prod_code, title, content, score, reg_date)
-		VALUES(#{mem_id}, #{prod_code}, #{title}, #{content}, #{score}, #{reg_date})
-	</insert> -->
 
 	<!-- 리뷰 업데이트 -->
 	<update id="UPDATE_REVIEW">

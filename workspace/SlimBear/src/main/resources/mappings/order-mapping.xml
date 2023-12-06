@@ -63,8 +63,8 @@
 		
 		<insert id="INSERT_ORDERDETAIL"> 
 			INSERT INTO orderDetail
-			(order_uid, prod_code, cnt, total_price)
-			VALUES(#{order_uid},#{prod_code},#{cnt},#{total_price})
+			(order_uid, prod_code, cnt, review_uid, total_price)
+			VALUES(#{order_uid},#{prod_code},#{cnt}, #{review_uid}, #{total_price})
 		</insert>
 
  		<!-- 주문결제(orderPayment) -->	

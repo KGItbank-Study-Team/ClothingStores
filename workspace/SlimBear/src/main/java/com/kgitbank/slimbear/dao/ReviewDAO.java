@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 
 @Repository
@@ -43,10 +44,10 @@ public class ReviewDAO {
 	}
 
 	// 리뷰 데이터 삽입
-	public void insertReview(ReviewDTO review) {
-		template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);
+	public int insertReview(ReviewDTO review) {
+		return template.insert("com.slimbear.mapper.Board.INSERT_REVIEW", review);
 	}
-
+	
 	// 리뷰 업데이트
 	public int updateReview(ReviewDTO review) {
 		return template.update("com.slimbear.mapper.Board.UPDATE_REVIEW", review);
@@ -76,7 +77,4 @@ public class ReviewDAO {
 	    String query = "com.slimbear.mapper.Board.COUNT_TOTAL_REVIEWS";
 	    return template.selectOne(query, userID);
 	}
-
-
-
 }

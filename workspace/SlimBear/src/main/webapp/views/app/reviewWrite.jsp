@@ -25,7 +25,8 @@
 			<p>색상: ${color}</p>
 			<p>사이즈: ${size}</p>
 			<p>수량: ${cnt}</p>
-			<%-- <input type="hidden" name="prod_code" value="${orderDetail.prod_code}"> --%>
+			<input type="hidden" name="prod_code" value="${prodCode}">
+			<input type="hidden" name="prod_code" value="${reviewUID}">
 		</div>
 		<div class="star_rating">
 			<span class="star on" value="1"> </span> 

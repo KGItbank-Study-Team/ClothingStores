@@ -260,7 +260,7 @@ public class SanghyukController {
 	}
 	
 	@RequestMapping("/member/reviewWrite/{orderUID}/{productCode}/{cnt}")
-	public String getOrderDetail(@PathVariable long orderUID, @PathVariable String productCode, @PathVariable int cnt, @PathVariable long reviewUID, Authentication authentication, Model model) {
+	public String getOrderDetail(@PathVariable long orderUID, @PathVariable String productCode, @PathVariable int cnt, Authentication authentication, Model model) {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
@@ -277,7 +277,6 @@ public class SanghyukController {
 		System.out.println("cnt: " + cnt);
 		
 		model.addAttribute("prodCode", productCode);
-		model.addAttribute("reviewUID", reviewUID);
 		model.addAttribute("product", product);
 		model.addAttribute("color", productColor);
 		model.addAttribute("size", productSize);
@@ -291,6 +290,7 @@ public class SanghyukController {
 	@PostMapping("/review/upload")
 	public void reviewUpload (
 			@ModelAttribute ReviewDTO review,
+			@ModelAttribute OrderDetailDTO orderDetail,
 			@RequestParam("file1")MultipartFile  file1,
 			@RequestParam("file2")MultipartFile  file2,
 			@RequestParam("file3")MultipartFile  file3,
@@ -323,7 +323,10 @@ public class SanghyukController {
 			review.setImage4(filePath4);
 		}		
 		// DAO로 전달!
-		sanghService.insertReview(review);
+		int reviewUid = sanghService.insertReview(review);
+		orderDetail.setReview_uid(reviewUid);
+		
+		sanghService.insertOrder(orderDetail);
 		
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
