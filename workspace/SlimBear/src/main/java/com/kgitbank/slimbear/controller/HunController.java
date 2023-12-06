@@ -65,7 +65,7 @@ public class HunController {
 		Date startDate = searchStartDate == null ? null : new Date(searchStartDate);
 		Date endDate = searchendDate == null ? null : new Date(searchendDate);
 		
-		if(searchType.equals("all")) {
+		if(searchType == null || searchType.equals("all")) {
 			searchType = null;
 		}
 		
