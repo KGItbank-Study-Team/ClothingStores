@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +30,7 @@ import com.kgitbank.slimbear.common.SlimBearUtil;
 import com.kgitbank.slimbear.dto.CartDTO;
 import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
+import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
@@ -259,21 +259,27 @@ public class SanghyukController {
 		return "productWrite";
 	}
 	
-	@RequestMapping("/member/reviewWrite")
-	public String getReviewListByUid(Long review_uid, Authentication authentication, Model model) {
+	@RequestMapping("/member/reviewWrite/{orderUID}/{productCode}/{cnt}")
+	public String getOrderDetail(@PathVariable long orderUID, @PathVariable String productCode, @PathVariable int cnt, Authentication authentication, Model model) {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
-        String prodCode = "1:blue:XL";
-        int cnt = 1;
-        String name = "캐시미어 3종 니트";
-        model.addAttribute("prodCode", prodCode);
-        model.addAttribute("cnt", cnt);
-        model.addAttribute("name", name);
+		System.out.println("prod_code : " + productCode);
+
 		
-		List<ReviewDTO> review = sanghService.getReviewListByUid(review_uid);
-		model.addAttribute("review", review);
+		String[] productCodeInfo = SlimBearUtil.splitProductDetail(productCode);
+		Long ProductUID = Long.valueOf(productCodeInfo[0]);
+		String productColor = productCodeInfo[1];
+		String productSize = productCodeInfo[2];
 		
+		ProductDTO product = sanghService.getProduct(ProductUID);
+		System.out.println("product: " + product);
+		System.out.println("cnt: " + cnt);
+
+		model.addAttribute("product", product);
+		model.addAttribute("color", productColor);
+		model.addAttribute("size", productSize);
+		model.addAttribute("cnt", cnt);
 		return "reviewWrite";
 	}
 	
@@ -281,20 +287,22 @@ public class SanghyukController {
 	private SlimBearS3 slimbearS3;
 	
 	@PostMapping("/review/upload")
-	public void fileUpload (
+	public void ReviewUpload (
 			@ModelAttribute ReviewDTO review,
 			@RequestParam("file1")MultipartFile  file1,
 			@RequestParam("file2")MultipartFile  file2,
 			@RequestParam("file3")MultipartFile  file3,
 			@RequestParam("file4")MultipartFile  file4,
-			RedirectAttributes redirectAttributes,
+			Authentication authentication,
 			HttpServletResponse response) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserId = authentication.getName();
+		System.out.println(review);
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		
-		review.setMem_id(currentUserId);
-		System.out.println(currentUserId);
+		System.out.println(user.getUid());
+		
+		//review.setMem_id(id);
+		//System.out.println(currentUserId);
 		review.setReg_date(new Date());
 		
 		if(!file1.isEmpty()) {

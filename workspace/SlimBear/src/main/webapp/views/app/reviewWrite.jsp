@@ -16,14 +16,16 @@
 	<form action="/app/review/upload" method="post" enctype="multipart/form-data" id="reviewForm">
 		<h2>후기 작성</h2>
 		<div class="prodImg">
-			<img alt="상품이미지" src="/resources/images/knit01_1.webp">
+			<img alt="상품이미지" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${product.main_image}">
 		</div>
 		<div class="option-text">
-			<p>${name}</p>
+			<p>${product.name}</p>
 		</div>
 		<div class="option-text2">
-			<p>${prodCode}</p>
-			<input type="hidden" name="prod_code" value="${prodCode}">
+			<p>색상: ${color}</p>
+			<p>사이즈: ${size}</p>
+			<p>수량: ${cnt}</p>
+			<%-- <input type="hidden" name="prod_code" value="${orderDetail.prod_code}"> --%>
 		</div>
 		<div class="star_rating">
 			<span class="star on" value="1"> </span> 

@@ -10,16 +10,15 @@ function selectAll(selectAll)  {
 
 // 주소찾기
 function searchAddress() {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            // 우편번호와 주소 정보를 가져온 후 폼에 채우기
-            $('#address_zip1').val(data.zonecode);  // 수정된 부분
-            $('#address_addr1').val(data.address);
-            $('#addr2').val("");
-        }
-    }).open();
-}
-
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 우편번호와 주소 정보를 가져온 후 폼에 채우기
+                document.getElementById('address_zip1').value = data.zonecode;
+                document.getElementById('address_addr1').value = data.address;
+                document.getElementById('address_addr2').value = '';
+            }
+        }).open();
+    }
     
 
 // submit 추가
@@ -202,18 +201,19 @@ $(document).ready(function () {
             }
         }
     });
+
     submitOrderSearch();
 });
 
 
 // 리뷰 작성 창
-$(document).ready(function(){
-    $('#openWriteForm').click(function(){
-        openPopup('/app/member/reviewWrite', '후기 작성', 420, 790);
-    });
+// $(document).ready(function(){
+//     $('#openWriteForm').click(function(){
+//         openPopup('/app/member/reviewWrite', '후기 작성', 420, 790);
+//     });
 
-    submitOrderSearch();
-});
+//     submitOrderSearch();
+// });
 
 function memberEditAction(){
 
@@ -351,10 +351,10 @@ function initOrderList(datas){
                 var price = product.price;
                 var cnt = product.cnt;
                 var productUid = product.productUid;
-                var productCode = product.prodCode;
                 var reviewUID = product.reviewUID;
+                var productCode = product.prodCode;
                 console.log(productCode);
-
+                
                 html.push('<div class="hCVtNj"><table class="sc-gnmni8-1 eSpcfO"><colgroup><col width="600"><col width=""></colgroup>');
                 html.push('<tbody class="sc-gnmni8-2 hryMPB"><tr class="sc-gnmni8-3 gmGnuU"><td class="hUzAOG"><div class="bQVZKC"><div class="sc-ki5ja7-1 krPkOP"></div></div>');
                 html.push('<div class="sc-1jiyjbz-0 dGiGeF"><div class="kCcQTc"><div class="gLgexz"><div class="cNiGzR"><div class="eEDOvs"><a href="/app/product?p=' + productUid + '"><img loading="lazy" width="64" height="64" ');
