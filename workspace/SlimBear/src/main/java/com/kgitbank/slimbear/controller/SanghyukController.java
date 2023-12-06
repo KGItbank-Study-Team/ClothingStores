@@ -260,7 +260,7 @@ public class SanghyukController {
 	}
 	
 	@RequestMapping("/member/reviewWrite/{orderUID}/{productCode}/{cnt}")
-	public String getOrderDetail(@PathVariable long orderUID, @PathVariable String productCode, @PathVariable int cnt, Authentication authentication, Model model) {
+	public String getOrderDetail(@PathVariable long orderUID, @PathVariable String productCode, @PathVariable int cnt, @PathVariable long reviewUID, Authentication authentication, Model model) {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		System.out.println(user.getUid());
 		System.out.println(user.getUsername());
@@ -275,7 +275,9 @@ public class SanghyukController {
 		ProductDTO product = sanghService.getProduct(ProductUID);
 		System.out.println("product: " + product);
 		System.out.println("cnt: " + cnt);
-
+		
+		model.addAttribute("prodCode", productCode);
+		model.addAttribute("reviewUID", reviewUID);
 		model.addAttribute("product", product);
 		model.addAttribute("color", productColor);
 		model.addAttribute("size", productSize);
@@ -287,7 +289,7 @@ public class SanghyukController {
 	private SlimBearS3 slimbearS3;
 	
 	@PostMapping("/review/upload")
-	public void ReviewUpload (
+	public void reviewUpload (
 			@ModelAttribute ReviewDTO review,
 			@RequestParam("file1")MultipartFile  file1,
 			@RequestParam("file2")MultipartFile  file2,
@@ -296,15 +298,13 @@ public class SanghyukController {
 			Authentication authentication,
 			HttpServletResponse response) {
 		
-		System.out.println(review);
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		
 		System.out.println(user.getUid());
 		
-		//review.setMem_id(id);
-		//System.out.println(currentUserId);
 		review.setReg_date(new Date());
-		
+		review.setMem_id(user.getUsername());
+		System.out.println(review);		
 		if(!file1.isEmpty()) {
 			String filePath1 = slimbearS3.saveImage(file1);
 			System.out.println("path: " + filePath1);
