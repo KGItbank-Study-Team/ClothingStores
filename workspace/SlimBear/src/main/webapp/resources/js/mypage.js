@@ -178,14 +178,7 @@ $(document).ready(function () {
 });
 
 
-// 리뷰 작성 창
-$(document).ready(function(){
-    $('#openWriteForm').click(function(){
-        var windowFeature = 'width=420, height=790, top=' + (screen.height / 2) + '.left=' + (screen.width / 2) + ', resizable=no';
 
-        window.open('/app/member/reviewWrite', '후기 작성', windowFeature);
-    })
-});
 
 function memberEditAction(){
 
@@ -230,3 +223,20 @@ function openPopup(url, name, width, height){
 	    popupWindow.resizeTo(width + 16, height + 73);
 	})
 }
+
+// // 리뷰 작성 창
+// $(document).ready(function(){
+//     $('#openWriteForm').click(function(){
+//         console.log('click');
+//         var status = 'scrollbars=no,resizable=no,width=700,height=230';
+//         var popUp = window.open('/app/member/reviewWrite', '후기 작성', status);
+//         popUp.onresize = (_=> {
+//             popUp.resizeTo(300, 900);
+//         })
+//     })
+// });
+$(document).ready(function(){
+    $('#openWriteForm').click(function(){
+        openPopup('/app/member/reviewWrite', '후기작성', 420, 900);
+    })
+});
