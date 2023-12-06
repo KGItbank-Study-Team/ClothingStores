@@ -1,5 +1,6 @@
 package com.kgitbank.slimbear.vo;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -18,6 +19,8 @@ public class OrderVO {
 	private int couponSaleAmount;
 	private long applyCouponUID;
 	private String productName;
+	private Date orderDate;
+	private String status;
 	
 	List<AddrVO> addressInfo;
 	List<MemberCartVO> productList;

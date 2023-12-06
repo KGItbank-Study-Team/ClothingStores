@@ -50,9 +50,6 @@
 				</div>
 
 
-
-
-				<!-- 주문상세! -->
 				<div class="cpmwZc">
 					<div class="hEqipt">
 						<span class="dslKAU"><strong>2023. 10.
@@ -60,15 +57,11 @@
 							16100015059001 </span>
 					</div>
 					<div class="fROrYB"></div>
-				</div><br>
-
-
+				<br>
 
 				<input id="mode" name="mode" value="" type="hidden"> <input
 					id="term" name="term" value="" type="hidden">
-
-				
-				<c:forEach var="item" items="${orderDetail}">
+	
 				<div class="hunn">
 					<table class="sc-gnmni8-1 eSpcfO">
 						<colgroup>
@@ -128,9 +121,8 @@
 						</tbody>
 					</table>
 				</div>
-				</c:forEach>
 
-				<p class="message displaynone">주문 내역이 없습니다.</p>
+				</div>
 			</div>
 		</div>
 	</div>

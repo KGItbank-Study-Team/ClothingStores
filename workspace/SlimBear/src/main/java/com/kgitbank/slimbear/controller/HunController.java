@@ -1,6 +1,9 @@
 package com.kgitbank.slimbear.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,19 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kgitbank.slimbear.common.SlimBearUtil;
-import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
 import com.kgitbank.slimbear.service.HunServiceImpl;
-import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
 import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
-import com.kgitbank.slimbear.vo.OrderListVO;
+import com.kgitbank.slimbear.vo.OrderVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 import com.kgitbank.slimbear.vo.reviewListVO;
 
@@ -38,9 +38,7 @@ public class HunController {
 	public String myPage(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-
+	
 		MyPageVO vo = hunService.getMyPageInfo(user.getUid());
 		model.addAttribute("info", vo);
 
@@ -49,25 +47,39 @@ public class HunController {
 
 	@RequestMapping("member/myPage/orderList")
 	public String orderList(Authentication authentication, Model model) {
+		SecurityUser user = (SecurityUser) authentication.getPrincipal();
+	
+		return "order_list";
+	}
+	
+	@RequestMapping("member/myPage/orderList/search")
+	@ResponseBody
+	public Map<String, Object> orderListSearch(Authentication authentication
+								, String searchType
+								, Long searchStartDate
+								, Long searchendDate) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+		
+		Date startDate = searchStartDate == null ? null : new Date(searchStartDate);
+		Date endDate = searchendDate == null ? null : new Date(searchendDate);
+		
+		if(searchType.equals("all")) {
+			searchType = null;
+		}
+		
 
-		List<OrderListVO> vo = hunService.getOrderListInfo(user.getUid());
-		model.addAttribute("orderList", vo);
-		model.addAttribute("orderList2", vo);
-
-		return "order_list";
+		List<OrderVO> list = hunService.getOrderListInfo(user.getUid(), searchType, startDate, endDate);
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		res.put("data", list);
+		return res;
 	}
 	
 	@RequestMapping("member/myPage/orderList/cancel")
 	public String orderCancel(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		
 		
 		
 		return "ordercancel";
@@ -77,10 +89,7 @@ public class HunController {
 	public String orderReturn(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		
-		
+	
 		
 		return "orderreturn";
 	}
@@ -89,10 +98,7 @@ public class HunController {
 	public String orderDetail(Authentication authentication, Model model) {
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
-		
-		
+	
 		
 		return "orderdetail";
 	}
@@ -100,8 +106,6 @@ public class HunController {
 	public String modify(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
 
 		ModifyVO vo = hunService.getModifyInfo(user.getUid());
 		model.addAttribute("modi", vo);
@@ -128,8 +132,7 @@ public class HunController {
 	public String mileage(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+
 
 		MileageVO vo = hunService.getMileageInfo(user.getUid());
 		List<MileageVO> v = hunService.getMileageListInfo(user.getUid());
@@ -144,8 +147,7 @@ public class HunController {
 	public String coupon(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+
 
 		List<CouponVO> vo = hunService.getCouponListInfo(user.getUid());
 		model.addAttribute("couponList", vo);
@@ -159,8 +161,7 @@ public class HunController {
 	public String wishList(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+
 
 		List<WishListVO> vo = hunService.getWishListInfo(user.getUid());
 		model.addAttribute("wishList", vo);
@@ -193,8 +194,7 @@ public class HunController {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		String writerID = user.getUsername();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+
 
 		List<MemberBoardVO> vo = hunService.getMemberBoardInfo(writerID);
 		
@@ -234,8 +234,7 @@ public class HunController {
 	public String addr(Authentication authentication, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+
 
 		List<AddrVO> vo = hunService.getAddrInfo(user.getUid());
 		model.addAttribute("addrList", vo);	
@@ -247,8 +246,8 @@ public class HunController {
 	public String addrFix(Authentication authentication,@RequestParam("addrUID")long addrUID, Model model) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+		
+		
 		
 		AddrVO vo = hunService.getAddrFixInfo(addrUID);
 		model.addAttribute("fix", vo);
@@ -274,8 +273,8 @@ public class HunController {
 			@RequestParam("phone3") String phone3 ){
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-        System.out.println(user.getUid());
-        System.out.println(user.getUsername());
+        
+        
         
         MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
         addr.setUid(addressUID);
@@ -299,8 +298,8 @@ public class HunController {
 	public String addrRegister(Authentication authentication, MemberOrderAddressDTO address) {
 
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-		System.out.println(user.getUid());
-		System.out.println(user.getUsername());
+		
+		
 		
 		return "addrregister";
 		
@@ -321,8 +320,8 @@ public class HunController {
 			@RequestParam("phone3") String phone3 ){
 		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
-        System.out.println(user.getUid());
-        System.out.println(user.getUsername());
+        
+        
         
         MemberOrderAddressDTO addr = new MemberOrderAddressDTO();
         addr.setMem_uid(user.getUid());

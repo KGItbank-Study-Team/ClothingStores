@@ -2,7 +2,6 @@ package com.kgitbank.slimbear.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +29,18 @@ import com.kgitbank.slimbear.dto.MemberOrderAddressDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 import com.kgitbank.slimbear.dto.OrderDetailDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
+import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
 import com.kgitbank.slimbear.dto.WishDTO;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
 import com.kgitbank.slimbear.vo.MemberBoardVO;
+import com.kgitbank.slimbear.vo.MemberCartVO;
 import com.kgitbank.slimbear.vo.MileageVO;
 import com.kgitbank.slimbear.vo.ModifyVO;
 import com.kgitbank.slimbear.vo.MyPageVO;
 import com.kgitbank.slimbear.vo.OrderDetailVO;
-import com.kgitbank.slimbear.vo.OrderListVO;
+import com.kgitbank.slimbear.vo.OrderVO;
 import com.kgitbank.slimbear.vo.WishListVO;
 import com.kgitbank.slimbear.vo.reviewListVO;
 
@@ -96,7 +97,7 @@ public class HunServiceImpl {
 		}
 		
 		
-		List<OrderDTO> orderList = orderDAO.getOrderListByMemberUID(uid);
+		List<OrderDTO> orderList = orderDAO.getOrderListByMemberUID(uid, null, null, null);
 		for(OrderDTO order : orderList) {
 			SlimBearEnum.ORDER_STATUS status = SlimBearEnum.ORDER_STATUS.valueOf(order.getStatus());
 			switch(status) {
@@ -124,23 +125,49 @@ public class HunServiceImpl {
 	}
 
 	//주문내역
-	public List<OrderListVO> getOrderListInfo(long memberUID) {
+	public List<OrderVO> getOrderListInfo(long memberUID, String searchType, Date startDate, Date endDate) {
 
-		ArrayList<OrderListVO> list = new ArrayList<>();
-		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUID);
+		ArrayList<OrderVO> list = new ArrayList<>();
+		
+		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUID, searchType, startDate, endDate);
+		
+		for(OrderDTO order : orderlist) {
+			
+			OrderVO orderVO = new OrderVO();
+			orderVO.setUid(order.getUid());
+			orderVO.setOrderDate(order.getOrder_date());
+			orderVO.setStatus(order.getStatus());
+			
+			List<OrderDetailDTO> orderProduct = detailDAO.getOrderListByMemberUID(order.getUid());
+			
+			ArrayList<MemberCartVO> productList = new ArrayList<MemberCartVO>();
+			for(OrderDetailDTO orderDetail : orderProduct) {
+				
+				MemberCartVO orderProductVO = new MemberCartVO();
+				
+				String[] productCodeInfo = SlimBearUtil.splitProductDetail(orderDetail.getProd_code());
 
-		for (OrderDTO i : orderlist) {
-			OrderListVO vo = new OrderListVO();
-
-			vo.setOrderDate(i.getOrder_date());
-			vo.setOrderStatus(i.getStatus());
-			vo.setOrderImage("이미지링크");
-			vo.setOrderName("미친 특가상품 지렸다");
-			vo.setOrderAmount(i.getTotal_price()); // 개별가격인데 일단 total넣어놈
-			vo.setOrderCount(1);
-
-			list.add(vo);
+				ProductDTO productInfo = productDAO.getProductByUid(Long.valueOf(productCodeInfo[0]));
+			
+				if(productInfo == null) {
+					continue;
+				}
+				
+				orderProductVO.setMain_image(productInfo.getMain_image());
+				orderProductVO.setName(productInfo.getName());
+				orderProductVO.setDesc(productCodeInfo[1] + "/" + productCodeInfo[2]);
+				orderProductVO.setPrice(productInfo.getPrice());
+				orderProductVO.setProductUid(productInfo.getUid());
+				
+				orderProductVO.setCnt(orderDetail.getCnt());
+				orderProductVO.setReviewUID(orderDetail.getReview_uid());
+				
+				productList.add(orderProductVO);
+			}
+			orderVO.setProductList(productList);
+			list.add(orderVO);
 		}
+
 		return list;
 	}
 	

@@ -1,12 +1,13 @@
 package com.kgitbank.slimbear.dao;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.OrderDTO;
 
 @Repository
@@ -15,10 +16,12 @@ public class OrderDAO {
 	@Autowired
 	protected SqlSessionTemplate template;
 	
-	public List<OrderDTO> getOrderListByMemberUID(long memberUID){
-		System.out.println("dao uid: " + memberUID);
-		MemberDTO info = new MemberDTO();
-		info.setUid(memberUID);
+	public List<OrderDTO> getOrderListByMemberUID(long memberUID, String status, Date startDate ,Date endDate){
+		HashMap<String, Object> info = new HashMap<String, Object>();
+		info.put("memberUID", memberUID);
+		info.put("status", status);
+		info.put("startDate", startDate);
+		info.put("endDate", endDate);
 		return template.selectList("com.slimbear.mapper.Order.SELECT_ORDER_LIST_BY_MEMBER_UID", info);
 	}
 	

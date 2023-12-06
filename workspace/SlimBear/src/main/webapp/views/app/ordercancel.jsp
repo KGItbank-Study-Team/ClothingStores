@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/modify.css">
     <script type="text/javascript" src="/resources/js/mypage.js" charset="utf-8"></script>
     <title>주문취소사유</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body id="popup">
@@ -41,20 +42,33 @@
                             <tr>
                                 <th scope="row">상세사유</th>
                                 <td>
-                                    <input id="acc_no" name="acc_no" class="inputTypeText" placeholder="" value="맘에안듬" type="text">
+                                    <input id="acc_no_desc" name="acc_no" class="inputTypeText" placeholder="" type="text">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="ec-base-button">
-                    <a href="#none" class="btnSubmitFix sizeS " onclick="window.close()">신청</a>
+                    <a href="#none" class="btnSubmitFix sizeS " onclick="doReturn()">신청</a>
                     <a href="#none" class="btnNormalFix sizeS" onclick="window.close()">취소</a>
                 </div>
             </div>
         </div>
     </form>
-
+	<script>
+			function doReturn(){
+				var reasonSelector = $('#acc_no').val();
+				var reason = $('#acc_no_desc').val();
+				
+				if(reasonSelector != "" && reason != ""){
+					opener.parent.orderCancel(1,reasonSelector + '[' + reason + ']');
+					window.close();
+				}
+				else{
+					alert("사유를 적어주세요");
+				}
+			}
+		</script>
 </body>
 
 </html>

@@ -61,17 +61,17 @@
 						<div class="stateSelect ">
 							<select id="order_status" name="order_status" class="fSelect">
 								<option value="all">전체</option>
-								<option value="all">주문대기중</option>
-								<option value="all">상품준비중</option>
-								<option value="shipped_standby">배송준비중</option>
-								<option value="shipped_begin">배송중</option>
-								<option value="shipped_complate">배송완료</option>
-								<option value="order_cancel">취소</option>
-								<option value="order_return">반품</option>
+								<option value="STAY">주문대기중</option>
+								<option value="PREPARING">상품준비중</option>
+								<option value="STAY_DLV">배송준비중</option>
+								<option value="DELIVERY">배송중</option>
+								<option value="DONE">배송완료</option>
+								<option value="CANCEL">취소</option>
+								<option value="RETURN">반품</option>
 							</select>
 						</div>
 						<input id="start_date" name="start_date" readonly="readonly" size="10"
-							type="text" class="huan">
+							value="2023-12-06"type="text" class="huan">
 						<!-- 처음날짜 버튼 -->
 						<button type="button" id="start_date_button">
 							<img src="/resources/images/ico_cal.gif" alt="...">
@@ -84,119 +84,16 @@
 						</button>
 						<!-- 조회버튼 -->
 						<input alt="조회" id="order_search_btn" type="image"
-							src="/resources/images/btn_search.gif">
+							src="/resources/images/btn_search.gif" onclick="submitOrderSearch()">
 					</fieldset>
 					<ul>
 						<li>주문상세보기를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
-						<li class="">취소/반품 신청은 배송완료일 기준 7일까지 가능합니다.</li>
 					</ul>
 				</div>
 
 				<br> <br>
-
-				<c:forEach var="item" items="${orderList}">
-					<div class="gKYVxm">
-						<div class="kcHmyx">
-							<div class="kSZYgn"><fmt:formatDate value="${item.orderDate}" pattern="yyyy-MM-dd HH:mm:ss" /> 주문</div>
-							<div class="kcHmyx">
-								<button
-									onclick="window.open('/app/member/myPage/orderList/cancel','bank_account','width=700,height=500');"
-									class="fTrGbC kiiuoA">취소 신청</button>
-								<button
-									onclick="window.open('/app/member/myPage/orderList/return','bank_account','width=700,height=500');"
-									class="fTrGbC kiiuoA">반품 신청</button>
-							</div>
-							<div class="kThsCL">
-								<a href="/app/member/myPage/orderList/detail" class="gSIruC">주문
-									상세보기</a>
-								<svg width="16" height="16" focusable="false"
-									viewBox="0 0 16 16" aria-hidden="true" role="presentation"
-									style="fill: rgb(0, 0, 0); vertical-align: middle; height: 100%;">
-        					<path fill="#346aff" fill-rule="nonzero"
-										d="M11.057 8L5.53 13.529c-.26.26-.26.682 0 .942.26.26.682.26.942 0l6-6c.26-.26.26-.682 0-.942l-6-6c-.26-.26-.682-.26-.942 0-.26.26-.26.682 0 .942L11.057 8z"></path>
-      						</svg>
-							</div>
-						</div>
-
-						<c:forEach var="item2" items="${orderList}">
-							<div class="hCVtNj">
-								<table class="sc-gnmni8-1 eSpcfO">
-									<colgroup>
-										<col width="600">
-										<col width="">
-									</colgroup>
-									<tbody class="sc-gnmni8-2 hryMPB">
-										<tr class="sc-gnmni8-3 gmGnuU">
-											<td class="hUzAOG">
-												<div class="bQVZKC">
-													<div class="sc-ki5ja7-1 krPkOP">
-														<span font-weight="bold" color="#111111" class="hullgd"
-															style="font-size: 1.25rem;">${item2.orderStatus}</span>
-													</div>
-												</div>
-
-												<div class="sc-1jiyjbz-0 dGiGeF">
-													<div class="kCcQTc">
-														<div class="gLgexz">
-															<div class="cNiGzR">
-																<div class="eEDOvs">
-																	<a href="#" target="_blank"><img loading="lazy"
-																		width="64" height="64" src="${item2.orderImage}"
-																		alt="오류발생 쵸비상"></a>
-																</div>
-																<div class="bmwSdh">
-																	<div class="jBCCpd">
-																		<a href="상품링크" target="_blank" class="yma-DD hPjYZj">
-																			<span color="#111111" class="ifMZxv">${item2.orderName}</span>
-																		</a> <a class="yma-DD iDQVMP">
-																			<div class="sc-8q24ha-3 gFbjJh">
-																				<div class="jxRaeI">
-																					<span font-weight="normal" color="#555555"
-																						class="eDgzyT">${item2.orderAmount} 원</span> <span
-																						class="kYtEGM"> <span class="joIhoV"></span>
-																					</span> <span class="jtWNEg">${item2.orderCount} 개
-																					</span>
-																				</div>
-																			</div>
-																		</a>
-																		<div class="igPkOG"></div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</td>
-											<td class="gbTJl">
-												<div class="bCQoer">
-													<button class="fUUUKW iiEWkt">배송조회</button>
-													<button class="fTrGbC kiiuoA" id="openWriteForm">리뷰 작성하기</button>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</c:forEach>
-
-					</div>
-				</c:forEach>
-
-				<div
-					class="xans-element- xans-myshop xans-myshop-orderhistorypaging ec-base-paginate">
-					<a
-						href="?page=1&amp;history_start_date=2023-08-02&amp;history_end_date=2023-10-31&amp;past_year=2022"><img
-						src="/resources/images/icon_prev2.png"></a>
-					<ol>
-						<li class="xans-record-"><a
-							href="?page=1&amp;history_start_date=2023-08-02&amp;history_end_date=2023-10-31&amp;past_year=2022"
-							class="this" style="padding-right: 0px;">1</a></li>
-					</ol>
-					<a
-						href="?page=1&amp;history_start_date=2023-08-02&amp;history_end_date=2023-10-31&amp;past_year=2022">
-						<img src="/resources/images/icon_next2.png">
-					</a>
-				</div>
+				
+				<div id="order-list"></div>
 			</div>
 		</div>
 	</div>

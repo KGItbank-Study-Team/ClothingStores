@@ -10,7 +10,7 @@
 	<h1>
 		<font color="red">SQLException 발생</font>
 	</h1>
-	<a href="/">메인 화면으로</a>
+	<a href="">메인 화면으로</a>
 	<hr>
 	<table>
 		<tr>
@@ -18,6 +18,6 @@
 		</tr>
 
 	</table>
-		<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/%ED%8F%AC%ED%9A%A8%EA%B3%B0.jpg" style="width:100%">
+		<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/exception_sql.png" style="width:100%">
 </body>
 </html>

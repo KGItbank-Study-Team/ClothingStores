@@ -210,4 +210,38 @@ public class OrderController {
 		res.put("url", "/app/member/myPage/orderList");
 		return res;
 	}
+	
+	@PostMapping("cancel")
+	@ResponseBody
+	public HashMap<String, String> orderCancel(Long orderUID, String reason){
+		HashMap<String, String> res = new HashMap<String, String>();
+		
+		try {
+			orderService.orderCancel(orderUID, reason);
+			res.put("success", "취소 완료");
+		}catch(SlimBearException e) {
+			res.put("failed", "취소 실패");
+		}catch(Exception e) {
+			res.put("failed", "취소 실패");
+		}
+		
+		return res;
+	}
+	
+	@PostMapping("return")
+	@ResponseBody
+	public HashMap<String, String> orderReturn(Long orderUID, String reason){
+		HashMap<String, String> res = new HashMap<String, String>();
+		
+		try {
+			orderService.orderReturn(orderUID, reason);
+			res.put("success", "반품 완료");
+		}catch(SlimBearException e) {
+			res.put("failed", "반품 실패");
+		}catch(Exception e) {
+			res.put("failed", "반품 실패");
+		}
+		
+		return res;
+	}
 }

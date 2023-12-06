@@ -175,10 +175,43 @@ $(document).ready(function () {
     $("#end_date_button").on("click", function () {
         toggleDatePicker("end_date");
     });
+
+    $('#start_date').on('change', function(){
+        var start_date = $('#start_date').val();
+        var end_date = $('#end_date').val();
+    
+        if(start_date != null && start_date != "" && end_date != null && end_date != ""){
+            start_date = new Date(start_date);
+            end_date = new Date(end_date);
+            if(start_date > end_date){
+                $('#start_date').val($('#end_date').val());
+            }
+        }
+    });
+
+    $(' #end_date').on('change', function(){
+        var start_date = $('#start_date').val();
+        var end_date = $('#end_date').val();
+    
+        if(start_date != null && start_date != "" && end_date != null && end_date != ""){
+            start_date = new Date(start_date);
+            end_date = new Date(end_date);
+            if(start_date > end_date){
+                $('#end_date').val($('#start_date').val());
+            }
+        }
+    });
 });
 
 
+// 리뷰 작성 창
+$(document).ready(function(){
+    $('#openWriteForm').click(function(){
+        openPopup('/app/member/reviewWrite', '후기 작성', 420, 790);
+    });
 
+    submitOrderSearch();
+});
 
 function memberEditAction(){
 
@@ -203,17 +236,34 @@ function submitOrderSearch(){
     var start_date = $('#start_date').val();
     var end_date = $('#end_date').val();
 
-    var searchType = $('#order_status').val() == 'all' ? null : $('#order_status').val();
+    var searchType = $('#order_status').val();
     var searchStartDate = null;
     var searchendDate = null;
-    
+
     if(start_date != null && start_date != ""){
         searchStartDate = new Date(start_date);
+        searchStartDate.setHours(0);
     }
     if(end_date != null && end_date != ""){
         searchendDate = new Date(end_date);
+        searchendDate.setHours(0);
     }
 
+    $.ajax({
+        url : '/app/member/myPage/orderList/search',
+        type : 'POST',
+        data : {
+            searchType : searchType,
+            searchStartDate : searchStartDate != null ? searchStartDate.getTime() : null,
+            searchendDate : searchendDate != null ? searchendDate.getTime() : null,
+        },
+        success : function(res){
+            initOrderList(res.data);
+        },
+        error : function(error){
+            alert("주문리스트 조회 실패");
+        }
+    })
 }
 
 function openPopup(url, name, width, height){
@@ -224,19 +274,150 @@ function openPopup(url, name, width, height){
 	})
 }
 
-// // 리뷰 작성 창
-// $(document).ready(function(){
-//     $('#openWriteForm').click(function(){
-//         console.log('click');
-//         var status = 'scrollbars=no,resizable=no,width=700,height=230';
-//         var popUp = window.open('/app/member/reviewWrite', '후기 작성', status);
-//         popUp.onresize = (_=> {
-//             popUp.resizeTo(300, 900);
-//         })
-//     })
-// });
-$(document).ready(function(){
-    $('#openWriteForm').click(function(){
-        openPopup('/app/member/reviewWrite', '후기작성', 420, 900);
-    })
-});
+function openOrderCancle(orderUID){
+    localStorage.setItem("cancel_order_uid", orderUID);
+    openPopup('/app/member/myPage/orderList/cancel','주문 취소 신청',700, 230);
+}
+
+function openOrderReturn(orderUID){
+    localStorage.setItem("return_order_uid", orderUID);
+    openPopup('/app/member/myPage/orderList/return','반품 신청',700, 230);
+}
+
+function openReviewWrite(){
+    openPopup('/app/member/reviewWrite', '후기 작성', 420, 900);
+}
+
+function initOrderList(datas){
+    var html = [];
+
+    if(datas.length <= 0) {
+        html.push('<div class="gKYVxm">')
+        html.push('<b>주문 내역이 없습니다.</b>')
+        html.push('</div>')
+    }else{
+       datas.forEach(function(item){
+          var orderUID = item.uid;
+            var orderDate = new Date(item.orderDate);
+            var orderStatus = item.status;
+            var orderProductList = item.productList;
+
+            var statusENUM = {
+                STAY : '주문대기',
+                PREPARING : '제품 준비',
+                STAY_DLV : '배송 대기',
+                DELIVERY : '배송',
+                DONE : '완료',
+                CANCEL : '취소',
+                
+                RETURN : '반품'
+            };
+            html.push('<div class="gKYVxm">')
+            html.push('<div class="kcHmyx">');
+            html.push('<div class="kSZYgn">' + statusENUM[orderStatus]+ '  (' + orderDate.getFullYear() +'/'+ (orderDate.getMonth()+1) +'/'+ orderDate.getDate() + '  ' + orderDate.toLocaleTimeString() + ')</div>');
+            html.push('<div class="kcHmyx">');
+
+            if(orderStatus == 'STAY' || orderStatus == 'PREPARING'|| orderStatus == 'STAY_DLV')
+                html.push('<button onclick="openOrderCancle(' + orderUID +')" class="fTrGbC kiiuoA">취소 신청</button>')
+            if(orderStatus == 'DELIVERY' || orderStatus == 'DONE')
+                html.push('<button onclick="openOrderReturn(' + orderUID +')" class="fTrGbC kiiuoA">반품 신청</button>')
+
+            html.push('</div>')
+            html.push('<div class="kThsCL">');
+            html.push('<a href="/app/member/myPage/orderList/detail" class="gSIruC">주문 상세보기</a>');
+            html.push('<svg width="16" height="16" focusable="false" viewBox="0 0 16 16" aria-hidden="true" role="presentation" style="fill: rgb(0, 0, 0); vertical-align: middle; height: 100%;">');
+            html.push('<path fill="#346aff" fill-rule="nonzero" d="M11.057 8L5.53 13.529c-.26.26-.26.682 0 .942.26.26.682.26.942 0l6-6c.26-.26.26-.682 0-.942l-6-6c-.26-.26-.682-.26-.942 0-.26.26-.26.682 0 .942L11.057 8z"></path></svg></div></div>');
+            
+            orderProductList.forEach(function(product){
+                var main_image = product.main_image;
+                var name = product.name;
+                var option = product.desc;
+                var price = product.price;
+                var cnt = product.cnt;
+                var productUid = product.productUid;
+                var reviewUID = product.reviewUID;
+
+                html.push('<div class="hCVtNj"><table class="sc-gnmni8-1 eSpcfO"><colgroup><col width="600"><col width=""></colgroup>');
+                html.push('<tbody class="sc-gnmni8-2 hryMPB"><tr class="sc-gnmni8-3 gmGnuU"><td class="hUzAOG"><div class="bQVZKC"><div class="sc-ki5ja7-1 krPkOP"></div></div>');
+                html.push('<div class="sc-1jiyjbz-0 dGiGeF"><div class="kCcQTc"><div class="gLgexz"><div class="cNiGzR"><div class="eEDOvs"><a href="/app/product?p=' + productUid + '"><img loading="lazy" width="64" height="64" ');
+                html.push('src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + main_image + '"></a></div>');
+                html.push('<div class="bmwSdh"><div class="jBCCpd"><a href="/app/product?p=' + productUid + '" class="yma-DD hPjYZj"><span color="#111111" class="ifMZxv">' + name + '</span></a>');
+                html.push('<a href="/app/product?p=' + productUid + '" class="yma-DD hPjYZj"><span color="#111111" class="ifMZxv">' + option + '</span></a>');
+                html.push('<a class="yma-DD iDQVMP"><div class="sc-8q24ha-3 gFbjJh"><div class="jxRaeI"><span font-weight="normal" color="#555555"');
+                html.push('class="eDgzyT">' + price +'원</span> <span class="kYtEGM"> <span class="joIhoV"></span>');
+                html.push('</span> <span class="jtWNEg">' + cnt + '개');
+                html.push('</span></div></div></a><div class="igPkOG"></div></div></div></div></div></div></div></td><td class="gbTJl"><div class="bCQoer">');
+                html.push('<button class="fUUUKW iiEWkt" onclick="location=' + "'/app/order/delivery'" +'">배송조회</button>');
+                if(orderStatus == 'DONE'){
+                    if(reviewUID == null){
+                        html.push('<button class="fTrGbC kiiuoA" id="openWriteForm" onclick="openReviewWrite()">리뷰 작성하기</button>')
+                    }else{
+                        html.push('<button class="fTrGbC kiiuoA" id="openWriteForm">리뷰 작성완료</button>')
+                    }
+                }else{
+                    html.push('<button class="fTrGbC kiiuoA" id="openWriteForm">배송 미완료</button>')
+                }
+                html.push('</div></td></tr></tbody></table></div>');
+            });
+
+            html.push('</div>');
+        });
+    }
+
+    var orderList = $('#order-list');
+    if(orderList != null){
+        orderList.html(html.join(''));
+    }
+}
+
+
+function orderCancel(reason){
+    var orderUID = localStorage.getItem("cancel_order_uid");
+    localStorage.removeItem("cancel_order_uid");
+
+    $.ajax({
+        url : '/app/order/cancel',
+        type : 'POST',
+        data : {
+            orderUID : orderUID,
+            reason : reason
+        },
+        success : function(res){
+            if(res.success){
+                submitOrderSearch();
+                alert(res.success)
+            }else{
+                alert(res.failed)
+            }
+        },
+        error : function(error){
+            alert('취소 실패');
+        }
+    });
+}
+
+
+function orderReturn(reason){
+    var orderUID = localStorage.getItem("return_order_uid");
+    localStorage.removeItem("return_order_uid");
+
+    $.ajax({
+        url : '/app/order/return',
+        type : 'POST',
+        data : {
+            orderUID : orderUID,
+            reason : reason
+        },
+        success : function(res){
+            if(res.success){
+                submitOrderSearch();
+                alert(res.success)
+            }else{
+                alert(res.failed)
+            }
+        },
+        error : function(error){
+            alert('반품 실패');
+        }
+    });
+}

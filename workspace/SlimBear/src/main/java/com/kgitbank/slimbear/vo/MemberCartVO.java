@@ -36,4 +36,6 @@ public class MemberCartVO {
 	
 	private String ProdCode;
 	private int mileage;
+	
+	private Integer reviewUID;
 }

@@ -43,8 +43,8 @@ public class OstController {
 		
 		if(authentication != null) {
 			SecurityUser user = (SecurityUser)authentication.getPrincipal();
-			System.out.println(user.getUid());
-			System.out.println(user.getUsername());
+			
+			
 			
 			List<MemberCartVO> cartlist = ostService.getCartList(user.getUid());
 			

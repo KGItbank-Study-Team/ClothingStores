@@ -6,8 +6,20 @@
  
  <mapper namespace="com.slimbear.mapper.Order">
 		<!-- 주문(productOrder) -->
-		<select id="SELECT_ORDER_LIST_BY_MEMBER_UID" resultType="order" parameterType="member">
-			SELECT * FROM productOrder WHERE mem_uid=#{uid}
+		<select id="SELECT_ORDER_LIST_BY_MEMBER_UID" resultType="order">
+			SELECT * FROM productOrder WHERE
+			<if test="status != null">
+				status=#{status} AND
+			</if>
+			<if test="startDate != null">
+				order_date>=#{startDate} AND
+			</if>
+			<if test="endDate != null">
+				<![CDATA[
+					order_date<=#{endDate} AND
+				]]>
+			</if>
+			mem_uid=#{memberUID} ORDER BY order_date DESC
 		</select>
 		
 		<select id="SELECT_ORDER_BY_UID" resultType="order">

@@ -176,7 +176,7 @@ public class SangyhyukServiceImpl {
 	public List<OrderListVO> getOrderListInfo(long memberUID) {
 		System.out.println("서비스멤바uid: " + memberUID);
 		ArrayList<OrderListVO> list = new ArrayList<>();
-		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUID);
+		List<OrderDTO> orderlist = orderDAO.getOrderListByMemberUID(memberUID, null, null ,null);
 
 		for (OrderDTO i : orderlist) {
 			OrderListVO vo = new OrderListVO();
