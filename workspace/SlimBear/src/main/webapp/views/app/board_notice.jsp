@@ -103,8 +103,8 @@
                                                 </c:if>
                                                 </p>
                                                 <p><br></p>
-                                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;">
-                                                	<strong style="font-weight: bolder;">${notices.content}</strong>
+                                                <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: left;">
+                                                	${notices.content}
                                                 </p>
 <!--                                                 <p style="margin: 0px; padding: 0px; display: block; line-height: 2.2 !important; text-align: center;"> -->
 <%--                                                 	${notices.content} --%>
