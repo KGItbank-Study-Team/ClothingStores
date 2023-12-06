@@ -37,6 +37,8 @@ function regProduct(){
 	for(var i=0; i<optionList.length; ++i){
 		option_list.append('<input type="hidden" name="colors" value="' + optionList[i].color +'">');
 		option_list.append('<input type="hidden" name="sizes" value="' + optionList[i].size +'">');
+		option_list.append('<input type="hidden" name="addi_mileage" value="' + optionList[i].addi_mileage +'">');
+		option_list.append('<input type="hidden" name="sale_price" value="' + optionList[i].sale_price +'">');
 	}
 	
 

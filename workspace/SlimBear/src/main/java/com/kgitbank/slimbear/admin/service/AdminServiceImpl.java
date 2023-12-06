@@ -63,6 +63,9 @@ public class AdminServiceImpl {
 		saveInfo.setReg_date(new Date(System.currentTimeMillis()));
 		saveInfo.setMaker("슬림베어");
 		
+		saveInfo.setAddi_mileage(product.getAddi_milleage());
+		saveInfo.setSale_price(product.getSale_price());
+		
 		// 대표이미지 파일
 		
 //		  if(product.getMain_image().getSize() != 0) { String mainImageName =
