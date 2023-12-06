@@ -309,19 +309,6 @@ $(document).ready(function () {
         // $(this).next("div").toggleClass("guideText");
     });
 });
-// 문의제목 클릭 -> 문의 내용 출력
-// $(document).ready(function () {
-//     $(".clickTitle").click(function () {
-//         var content = $(this).closest("tbody").find(".inquiryContent");
-
-//         if (content.is(":visible")) {
-//             content.slideUp();
-//         } else {
-//             content.slideDown();
-//         }
-//     });
-// });
-
 
 let totalData; // 총 데이터 수
 let dataPerPage = 5; // 한 페이지에 나타낼 글 수
@@ -368,13 +355,15 @@ function displayData(currentPage, dataPerPage, dataList) {
     dataPerPage = Number(dataPerPage); //alert('dataPerPage = ' + dataPerPage);
 
 
-    for (var i = (currentPage - 1) * dataPerPage; i < Math.min(currentPage * dataPerPage, dataList.length); i++) {ㅕ
+    for (var i = (currentPage - 1) * dataPerPage; i < Math.min(currentPage * dataPerPage, dataList.length); i++) {
+        var regDate = new Date(dataList[i].reg_date);
+        var formattedRegDate = regDate.toLocaleDateString();
         reviewHtml += '<div class="review-section">' +
             '<div class="info">' +
             '<div>' +
             '<span>' + dataList[i].mem_id + '</span>' +
             '<div class="reg_date">' +
-            '<p>' + dataList[i].reg_date + '</p>' +
+            '<p>' + formattedRegDate + '</p>' +
             '</div>' +
             '</div>' +
             '<div class="review-score">';
@@ -390,11 +379,13 @@ function displayData(currentPage, dataPerPage, dataList) {
             '<input type="hidden" id="reviewList" value="' + dataList[i].score + '"/>' +
             '</div>' +
             '<div class="photo-review">';
+        // 리뷰 이미지가 있는 경우에만 이미지 추가
         for (var k = 1; k <= 4; k++) {
-            reviewHtml +=
-                '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>';
+            if (dataList[i]['image' + k]) {
+                reviewHtml += '<a><img alt="상품" src="/resources/images/' + dataList[i]['image' + k] + '"></a>';
+            }
         }
-
+    
         reviewHtml += '</div>' +
             '<div>' +
             '<div class="reviewContent">' + dataList[i].content + '</div>' +
@@ -402,6 +393,7 @@ function displayData(currentPage, dataPerPage, dataList) {
             '</div>';
     }
     $('.review-section').html(reviewHtml);
+    
 }
 // 페이징 표시 함수
 function paging(totalData, dataPerPage, pageCount, currentPage, dataList) {

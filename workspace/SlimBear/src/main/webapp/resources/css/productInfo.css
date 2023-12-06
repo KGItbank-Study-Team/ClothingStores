@@ -431,6 +431,7 @@ section > h1 {
 .reviewContent {
 	padding-left: 5px;
 	padding-bottom: 20px;
+	padding-top: 20px;
 	border-bottom: 1px solid;
 }
 #wrapper {
