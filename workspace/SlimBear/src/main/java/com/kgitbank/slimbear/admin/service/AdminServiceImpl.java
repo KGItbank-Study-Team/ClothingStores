@@ -63,7 +63,7 @@ public class AdminServiceImpl {
 		saveInfo.setReg_date(new Date(System.currentTimeMillis()));
 		saveInfo.setMaker("슬림베어");
 		
-		saveInfo.setAddi_mileage(product.getAddi_milleage());
+		saveInfo.setAddi_mileage(product.getAddi_mileage());
 		saveInfo.setSale_price(product.getSale_price());
 		
 		// 대표이미지 파일
@@ -75,6 +75,7 @@ public class AdminServiceImpl {
 		 
 		
 		saveInfo.setMain_image(slimbearS3.saveImage(product.getMain_image()));
+		saveInfo.setMain_image2(slimbearS3.saveImage(product.getMain_image2()));
 
 		long uid = productDAO.insertProductReturnUID(saveInfo);
 		

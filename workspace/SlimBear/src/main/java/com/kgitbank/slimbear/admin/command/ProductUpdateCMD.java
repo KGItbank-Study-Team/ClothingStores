@@ -19,9 +19,10 @@ public class ProductUpdateCMD {
 	private String description;
 	private int price;
 	private long category;
-	private int addi_milleage;
+	private Integer addi_mileage;
 	private int sale_price;
 	private MultipartFile main_image;
+	private MultipartFile main_image2;
 	
 	List<String> colors = new ArrayList<String>();
 	List<String> sizes= new ArrayList<String>();

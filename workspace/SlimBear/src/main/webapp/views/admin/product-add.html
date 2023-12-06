@@ -80,12 +80,12 @@
 							</div>
 							<div class="col-md-6 mb-3">
 								<label for="addi_mileage">적립 마일리지</label> <input type="text"
-									class="form-control" id="addi_mileage" name="name"
+									class="form-control" id="addi_mileage" name="addi_mileage"
 									placeholder="" value="" required>
 							</div>
 							<div class="col-md-6 mb-3">
 								<label for="sale_price">할인 할 금액</label> <input type="text"
-									class="form-control" id="sale_price" name="name" placeholder=""
+									class="form-control" id="sale_price" name="sale_price" placeholder=""
 									value="" required>
 							</div>
 
@@ -132,7 +132,7 @@
 										<div class="btn btn-primary btn-rounded">
 											<label class="form-label text-white m-1" for="customFile2">상세이미지
 												업로드</label> <input type="file" class="form-control d-none"
-												name="detail_images[]" multiple id="customFile2"
+												name="main_image2" multiple id="customFile2"
 												onchange="displaySelectedImages(event, 'selectedImagesContainer')" />
 										</div>
 									</div>
@@ -307,17 +307,6 @@
 	</div>
 </body>
 <script>
-					function() {
-						var selectedImagesContainer = document
-								.getElementById('selectedImagesContainer');
-						var sampleImage = document.createElement('img');
-						// 샘플 이미지 크기를 대표이미지와 동일하게 조정
-						sampleImage.src = "https://mdbootstrap.com/img/Photos/Others/placeholder.jpg";
-						sampleImage.alt = "example placeholder";
-						sampleImage.style.width = '300px';
-						sampleImage.style.height = '200px';
-						selectedImagesContainer.appendChild(sampleImage);
-					});
 
 	function displaySelectedImages(event, containerId) {
 		var selectedImagesContainer = document.getElementById(containerId);

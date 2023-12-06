@@ -79,10 +79,10 @@
 		keyProperty="uid">
 		INSERT INTO
 		`product` (`ctg_uid`, `name`, `desc`, `price`,
-		`maker`, `main_image`,
+		`maker`, `main_image`, `detail_image`, `sale_price`, `addi_mileage`,
 		`reg_date`)
 		VALUES(#{ctg_uid}, #{name}, #{desc},
-		#{price}, #{maker}, #{main_image}, #{reg_date})
+		#{price}, #{maker}, #{main_image}, #{main_image2}, #{sale_price}, #{addi_mileage}, #{reg_date})
 	</insert>
 
 	<update id="UPDATE_PRODUCT" parameterType="product">
