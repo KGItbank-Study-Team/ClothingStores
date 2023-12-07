@@ -276,9 +276,6 @@ public class YangController {
 		case "4":
 			faqs = boardService.getFaqListByType("ETC_R");
 			break;
-		case "5":
-			faqs = boardService.getFaqListByType("SHOWROOM_R");
-			break;
 		default:
 			faqs = boardService.getFaqList();
 		}

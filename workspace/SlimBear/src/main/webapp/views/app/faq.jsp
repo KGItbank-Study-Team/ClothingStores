@@ -74,7 +74,6 @@
 			                                <c:when test="${board.type eq 'DELIVERY_R'}">배송관련</c:when>
 			                                <c:when test="${board.type eq 'CHANGE_R'}">교환/반품관련</c:when>
 			                                <c:when test="${board.type eq 'ETC_R'}">기타관련</c:when>
-			                                <c:when test="${board.type eq 'SHOWROOM_R'}">쇼룸관련</c:when>
 			                                <c:otherwise>전체보기</c:otherwise>
 			                            </c:choose>
 			                        </span>
