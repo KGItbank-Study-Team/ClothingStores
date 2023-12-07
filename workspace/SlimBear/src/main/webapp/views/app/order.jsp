@@ -73,7 +73,7 @@
 					<b>받는사람</b> <span class="placehold-textt"><input class="recipient-name" type="text" ></span>
 				</div>
 				<div class="field tel-number">
-					<b>주소</b>
+<!-- 					<b>주소</b> -->
 					<div>
 						<input class='recipient-postcode payment-buyer-postcode' type="text" id="sample6_postcode" placeholder="우편번호" readonly>
 						 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">

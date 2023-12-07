@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="/resources/css/login.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
 <script src="/resources/js/login.js"></script>
 </head>
