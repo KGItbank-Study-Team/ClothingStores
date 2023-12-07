@@ -169,8 +169,12 @@
     function showAddTextForm() {
         var html = [];
         html.push('<div class="add-text-form">');
-        html.push('<div class="mb-3"><label for="text" class="form-label">text</label><textarea class="form-control" id="text" rows="3"></textarea></div>');
 
+
+        html.push('<div class="mb-3">');
+        html.push('<label for="text" class="form-label">등록 할 배너 텍스트</label>');
+        html.push('<textarea class="form-control" id="text"></textarea>');
+        html.push('</div>');
         
         html.push('<div style="padding-top:10px;">' );
         html.push('<button type="button" class="btn btn-primary"  onclick="submitAddTextForm()">등록</button>');
@@ -306,7 +310,7 @@
 
  // "닫기" 버튼 클릭 시 폼 닫기
     function closeAddTextForm() {
-        $('#addbannerTextFormContainer').html(''); // 폼을 닫음
+        $('#addTextFormContainer').html(''); // 폼을 닫음
      // "새 공지사항 등록" 버튼을 다시 생성
         var addButtonHtml = '<button class="btn btn-primary" onclick="showAddTextForm()">새 텍스트 등록</button>';
         $('#addTextFormContainer').html(addButtonHtml);
@@ -345,14 +349,14 @@
     }
  // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
     function submitAddTextForm() {
-    var text = $('#addText').val();
+    var text = $('#text').val();
 
     // Ajax 요청
     $.ajax({
         url: "/admin/text/addText",
         type: "POST",
         data: {
-            text: text
+            text : text
         },
         success: function (result) {
             if (result.status === 'SUCCESS') {

@@ -142,8 +142,8 @@ public class RSYAdminDAO {
 	}
 
 	// BannerTop 수정
-	public int updateBannerTop(BannerTopDTO uid) {
-		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TOP", uid);
+	public int updateBannerTop(BannerTopDTO top) {
+		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TOP", top);
 	}
 
 	// BannerText리스트가져오기

@@ -205,9 +205,14 @@ public class RSYAdminServiceImpl {
 	// 배너 이미지 수정
 	public void updateBannerTop(Long uid, MultipartFile image, Long prod_uid) {
 		BannerTopDTO bannerTop = new BannerTopDTO();
-
+		BannerTopDTO top = new BannerTopDTO();
 		bannerTop.setUid(uid);
-		bannerTop.setImage(s3.saveImage(image));
+		if (image != null) {
+			bannerTop.setImage(s3.saveImage(image));
+		}else {
+			top = rsyAdminDAO.getBannerTop(uid);
+			bannerTop.setImage(top.getImage());
+		}
 		bannerTop.setProd_uid(prod_uid);
 
 		rsyAdminDAO.updateBannerTop(bannerTop);
@@ -256,13 +261,12 @@ public class RSYAdminServiceImpl {
 	}
 
 	// 공지추가
-	public void addText(String text1) {
-		BannerTextDTO text = new BannerTextDTO();
-		text.setBannerText(text1);
-		text.setDef_delivery_pay(1);
-		text.setDef_mileage_per(1);
+	public void addText(String text) {
+		BannerTextDTO text1 = new BannerTextDTO();
+		text1.setBannerText(text);
+		text1.setDef_delivery_pay(1);
+		text1.setDef_mileage_per(1);
 
-		
-		rsyAdminDAO.addText(text);
+		rsyAdminDAO.addText(text1);
 	}
 }
