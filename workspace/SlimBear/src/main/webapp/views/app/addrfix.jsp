@@ -92,7 +92,7 @@
                                                 <input id="address_zip1" name="address1" placeholder="우편번호"
                                                     fw-filter="" class="inputTypeText" type="text" maxlength="14"
                                                      readonly="" fw-label="우편번호" value="${fix.postcode	}"> <button id="SearchAddress"
-                                                    class="btnBasic" type="button" onclick="searchAddress()"
+                                                    class="btnBasic" type="button" onclick="searchAddressOnAddr()"
                                                     style="cursor: pointer;">주소검색</button><span class="ec-base-label">
                                                     <input id="nozip" name="nozip" class="displaynone" type="checkbox"
                                                         disabled="" style="display: none; cursor: unset;" fw-filter="">
