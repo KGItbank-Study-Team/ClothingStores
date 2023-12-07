@@ -61,8 +61,8 @@
 		#{prod_uid});
 	</insert>
 
-	<insert id="INSERT_TEXT">
-		INSERT INTO storeConfig (def_delivery_pay, def_mileage_per, text) VALUES (#{def_delivery_pay},#{def_mileage_per},#{text});
+	<insert id="INSERT_TEXT" parameterType="com.kgitbank.slimbear.admin.dto.BannerTextDTO">
+		INSERT INTO storeConfig (def_delivery_pay, def_mileage_per, bannerText) VALUES (#{def_delivery_pay},#{def_mileage_per},#{bannerText});
 	</insert>
 
 </mapper>

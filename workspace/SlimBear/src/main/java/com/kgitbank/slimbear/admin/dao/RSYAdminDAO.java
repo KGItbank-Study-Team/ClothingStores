@@ -177,7 +177,7 @@ public class RSYAdminDAO {
 	}
 
 	// 배너텍스트 추가
-	public int addText(BannerTextDTO text) {
-		return template.insert("com.slimbear.mapper.Page.INSERT_TEXT", text);
+	public int addText(BannerTextDTO text1) {
+		return template.insert("com.slimbear.mapper.Page.INSERT_TEXT", text1);
 	}
 }

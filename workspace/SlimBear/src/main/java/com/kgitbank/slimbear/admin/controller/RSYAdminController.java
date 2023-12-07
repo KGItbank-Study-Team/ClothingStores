@@ -473,25 +473,27 @@ public class RSYAdminController {
 
 	@RequestMapping("top/addTop")
 	@ResponseBody
-	public ResponseEntity<Map<String, String>> addTop(@RequestBody MultipartFile image, @RequestBody Long prod_uid) {
+	public ResponseEntity<Map<String, String>> addTop(@RequestParam("image") MultipartFile image, @RequestParam("prod_uid") Long prodUid) {
+	    try {
+	        System.out.println(image);
+	        System.out.println(prodUid);
+	        rsyAdminService.addTop(image, prodUid);
 
-		try {
-			rsyAdminService.addTop(image, prod_uid);
+	        // 성공일 경우
+	        Map<String, String> successResponse = new HashMap<>();
+	        successResponse.put("status", "SUCCESS");
+	        successResponse.put("message", "배너이미지가 성공적으로 등록되었습니다.");
+	        return ResponseEntity.ok(successResponse);
 
-			// 성공일 경우
-			Map<String, String> successResponse = new HashMap<>();
-			successResponse.put("status", "SUCCESS");
-			successResponse.put("message", "배너이미지가 성공적으로 등록되었습니다.");
-			return ResponseEntity.ok(successResponse);
-
-		} catch (Exception e) {
-			// 실패일 경우
-			Map<String, String> errorResponse = new HashMap<>();
-			errorResponse.put("status", "ERROR");
-			errorResponse.put("message", "배너이미지가 등록 중에 오류가 발생했습니다.");
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-		}
+	    } catch (Exception e) {
+	        // 실패일 경우
+	        Map<String, String> errorResponse = new HashMap<>();
+	        errorResponse.put("status", "ERROR");
+	        errorResponse.put("message", "배너이미지가 등록 중에 오류가 발생했습니다.");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+	    }
 	}
+
 
 	@RequestMapping("text/addText")
 	@ResponseBody

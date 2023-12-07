@@ -82,8 +82,10 @@
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">페이지관리 -> 배너이미지관리</h6>
 					</div>
-					<div id="addNoticeFormContainer"
+					<div id="addTopFormContainer"
 						style="padding-top: 20px; padding-left: 20px; padding-bottom: 20px;">
+						<button class="btn btn-primary" onclick="showAddTopForm()">새
+							배너 이미지 등록</button>
 					</div>
 					<div class="card-body">
 
@@ -102,7 +104,7 @@
 									<th data-field="image" data-formatter="imageFormatter" data-width="1500">이미지</th>
 									<th data-field="prod_uid" data-sortable="true" data-formatter="prodFormatter" data-width="1">상품uid</th>
 									<th data-field="actions" data-formatter="actionsFormatter"
-										data-width="1" data-events="actionsEvents">숨김/삭제</th>
+										data-width="1" data-events="actionsEvents">삭제</th>
 								</tr>
 							</thead>
 
@@ -356,38 +358,40 @@
         }
     }
 
-    // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
-       function submitAddTopForm() {
-       var text = $('#addTop').val();
+    function submitAddTopForm() {
+        // 상품 UID 가져오기
+        var prodUid = $('#prod_uid').val();
 
-    // FormData 객체 생성
-    var formData = new FormData();
-    formData.append('prod_uid', prod_uid);
+        // FormData 객체 생성
+        var formData = new FormData();
+        formData.append('prod_uid', prodUid);
 
-    // 파일 필드 추가
-    var mainImageInput = $('#customFile1')[0].files[0];
-    formData.append('image', mainImageInput);
+        // 파일 필드 추가
+        var mainImageInput = $('#customFile1')[0].files[0];
+        formData.append('image', mainImageInput);
 
-    // Ajax 요청
-    $.ajax({
-        url: "/admin/top/addTop",
-        type: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (result) {
-            if (result.status === 'SUCCESS') {
-                alert(result.message);
-                closeAddTopForm();
-            } else {
-                alert('새 배너 이미지 등록에 실패했습니다.');
+        // Ajax 요청
+        $.ajax({
+            url: "/admin/top/addTop",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                if (result.status === 'SUCCESS') {
+                    alert(result.message);
+                    closeAddTopForm();
+                } else {
+                    alert('새 배너 이미지 등록에 실패했습니다.');
+                }
+            },
+            error: function () {
+                alert("서버 오류로 인해 새 배너이미지를 등록할 수 없습니다.");
             }
-        },
-        error: function () {
-            alert("서버 오류로 인해 새 배너이미지를 등록할 수 없습니다.");
-        }
-    });
+        });
     }
+
+
 
  // "닫기" 버튼 클릭 시 폼 닫기
     function closeAddTopForm() {

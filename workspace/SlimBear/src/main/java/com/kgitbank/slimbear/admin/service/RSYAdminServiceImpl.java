@@ -257,6 +257,8 @@ public class RSYAdminServiceImpl {
 		BannerTopDTO top = new BannerTopDTO();
 		top.setImage(s3.saveImage(image));
 		top.setProd_uid(prod_uid);
+		System.out.println(top.getImage());
+		System.out.println(top.getProd_uid());
 		rsyAdminDAO.addTop(top);
 	}
 
@@ -266,7 +268,10 @@ public class RSYAdminServiceImpl {
 		text1.setBannerText(text);
 		text1.setDef_delivery_pay(1);
 		text1.setDef_mileage_per(1);
-
+		System.out.println(text1.getBannerText());
+		System.out.println(text1.getDef_delivery_pay());
+		System.out.println(text1.getDef_mileage_per());
+		
 		rsyAdminDAO.addText(text1);
 	}
 }
