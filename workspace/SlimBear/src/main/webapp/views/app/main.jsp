@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div id="one-text">
-			<h2>SlimBear</h2>
+			<!-- <h2>SlimBear</h2> -->
 			<p>
 			${bannerText }
 			</p>
@@ -67,7 +67,7 @@
 						<div id="slide" class="ec-base-product swiper-container">
 							<div class="title">
 								<span>가장 많이 사랑받은 베스트</span>
-								<h2>BEST ITEM</h2>
+								<h2 style="font-size: 20px !important;">🔥BEST ITEM🔥</h2>
 							</div>
 							<ul class="prdList grid4 swiper-wrapper">
 								<c:forEach var="item" items="${bestProductList}">
@@ -82,8 +82,8 @@
 											<!-- .prdImg -->
 										</div> <!-- .thumbnail -->
 										<div class="description">
-											<strong class="name"> <a href="#" class=""> <span class="title displaynone"> <span style="font-size: 12px; color: #555555;">${item.name}</span>:
-												</span>${item.name}
+											<strong class="name"> <a href="#" class=""> <span class="title displaynone"> <span style="font-size: 20px; color: #555555;">${item.name}</span>:
+												</span><span style="font-size: 16px; color: #555555;">${item.name}</span>
 											</a>
 											</strong>
 											<!-- .name -->
@@ -94,7 +94,7 @@
 														<span class="chips" title="#EBE4D3" style="background-color: #EBE4D3" color_no="" displayGroup="2"></span> <span class="chips" title="#000000" style="background-color: #000000" color_no="" displayGroup="2"></span>
 													</div></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #999999;">상품설명</span> :
-												</strong> <span style="font-size: 12px; color: #999999;"> ${item.desc } </span></li>
+												</strong> <span style="font-size: 12px; color: #555555;"> ${item.desc } </span></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555;">소비자가</span> :
 												</strong> <span style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price}</span></li>
 												<li class=" xans-record-"><strong class="title displaynone"> <span style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span> :
