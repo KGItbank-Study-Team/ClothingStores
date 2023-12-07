@@ -113,8 +113,9 @@
 							</li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
+							<span style="margin-right: 10px; position: relative; top: 5px;">로그인 후 이용하시면 더 많은 혜택이!💌</span>
 							<li class="menu-item"><a href="#">
-							<img src="/resources/images/icon_user.png" alt="user"></a>
+							<img src="/resources/images/icon_user.png" alt="user" style="position:relative; bottom: 4.5px;"></a>
 								<ul class="dropdown-content">
 									<li><a href="/app/login">로그인</a></li>
 									<li><a href="/app/join">회원가입</a></li>
