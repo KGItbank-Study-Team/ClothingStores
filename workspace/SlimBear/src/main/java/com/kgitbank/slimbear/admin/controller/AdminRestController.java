@@ -1,20 +1,22 @@
 package com.kgitbank.slimbear.admin.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kgitbank.slimbear.admin.dto.OrderListDTO;
+import com.kgitbank.slimbear.admin.dto.StatisticsCategoryDTO;
+import com.kgitbank.slimbear.admin.dto.StatisticsMemberDTO;
+import com.kgitbank.slimbear.admin.dto.StatisticsOrderDTO;
 import com.kgitbank.slimbear.admin.service.AdminServiceImpl;
+import com.kgitbank.slimbear.admin.service.StatisticsServiceImpl;
 import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.exception.SlimBearException;
@@ -32,6 +34,9 @@ public class AdminRestController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private StatisticsServiceImpl statisticsService;
 
 	@PostMapping("category/childs")
 	public List<CategoryDTO> getCategory(@RequestParam("ctg") long ctg) {
@@ -123,5 +128,31 @@ public class AdminRestController {
 	public String deleteProductDetail(ProductDetailDTO detail) {
 		adminService.deleteProductDetail(detail);
 		return "Success";
+	}
+	
+	// 통계
+	@RequestMapping("stat/orders/year")
+	public HashMap<Integer, StatisticsOrderDTO> getCurrentYearOrderList() {
+		return statisticsService.getYearOrderList(Calendar.getInstance().get(Calendar.YEAR));
+	}
+	
+	@RequestMapping("stat/orders/category/year")
+	public List<StatisticsCategoryDTO> getOrderCategoryStatistics() {
+		return statisticsService.getOrderCategoryStatistics(Calendar.getInstance().get(Calendar.YEAR));
+	}
+	
+	@RequestMapping("stat/members/year")
+	public HashMap<Integer, StatisticsMemberDTO> getMemberStatistics() {
+		return statisticsService.getYearMemberList(Calendar.getInstance().get(Calendar.YEAR));
+	}
+	
+	@RequestMapping("stat/members/type/year")
+	public List<StatisticsMemberDTO> getMemberTypeStatistics() {
+		return statisticsService.getYearMemberListType(Calendar.getInstance().get(Calendar.YEAR));
+	}
+	
+	@RequestMapping("stat/orders/type/year")
+	public HashMap<Integer, StatisticsOrderDTO> getCurrentYearOrderListStatus(@RequestParam(required=false) String status) {
+		return statisticsService.getYearOrderListType(Calendar.getInstance().get(Calendar.YEAR), status);
 	}
 }

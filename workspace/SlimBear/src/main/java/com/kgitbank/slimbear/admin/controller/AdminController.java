@@ -1,6 +1,9 @@
 package com.kgitbank.slimbear.admin.controller;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgitbank.slimbear.admin.command.ProductUpdateCMD;
 import com.kgitbank.slimbear.admin.service.AdminServiceImpl;
+import com.kgitbank.slimbear.admin.service.StatisticsServiceImpl;
 import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
@@ -48,9 +52,24 @@ public class AdminController {
 
 	@Autowired
 	private RSYServiceImpl rsyService;
+	
+	@Autowired
+	private StatisticsServiceImpl statSearvice;
 
 	@RequestMapping("home")
-	public String homePage() {
+	public String homePage(Model model) {
+		
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+
+		model.addAttribute("totalMemberCount", statSearvice.getTotalMemberCount());
+		model.addAttribute("curYearMemberCount", statSearvice.getTotalMemberCount(year));
+		model.addAttribute("curMonthMemberCount", statSearvice.getTotalMemberCount(year, month));
+		
+		model.addAttribute("totalPayamount", statSearvice.getTotalOrder().getPay_amount());
+		model.addAttribute("curYearPayamount", statSearvice.getTotalOrder(year).getPay_amount());
+		model.addAttribute("curMonthPayamount", statSearvice.getTotalOrder(year, month).getPay_amount());
+		
 		return "index";
 	}
 

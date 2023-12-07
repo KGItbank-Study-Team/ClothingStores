@@ -17,14 +17,12 @@
 
 
 	<div class="mx-3" sec:authorize="isAuthenticated()">
-		<li sec:authorize="isAuthenticated()" class="nav-item active"><i class="fas fa-fw "></i> <span><b
-				sec:authentication="name"></b><b>님어서오세요</b></span></li>
-
+		<li sec:authorize="isAuthenticated()" class="nav-item active"><i class="fas fa-fw "></i> <span><b style="color: white;"
+				sec:authentication="name"></b><b>님 어서오세요</b></span></li>
 	</div>
 
 	<hr class="sidebar-divider">
 	<!-- Heading -->
-	<div class="sidebar-heading">Administration</div>
 
 	<!-- 회원 관리 -->
 	<li id="accordionSidebar_member_nav" class="nav-item"><a
@@ -46,7 +44,7 @@
 	<li id="accordionSidebar_product_nav" class="nav-item"><a
 		class="nav-link collapsed" href="#" data-toggle="collapse"
 		data-target="#collapseUtilities" aria-expanded="true"
-		aria-controls="collapseUtilities"> <i class="fas fa-fw fa-wrench"></i>
+		aria-controls="collapseUtilities"> <i class="fa fa-cubes"></i>
 			<span>상품 관리</span>
 	</a>
 		<div id="collapseUtilities" class="collapse"
@@ -62,7 +60,7 @@
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#orderAdministration"
 		aria-expanded="true" aria-controls="#orderAdministration"> <i
-			class="fas fa-fw fa-wrench"></i> <span>주문 관리</span>
+			class="fa fa-rocket"></i> <span>주문 관리</span>
 	</a>
 		<div id="orderAdministration" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -76,7 +74,7 @@
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#boardAdministration"
 		aria-expanded="true" aria-controls="#boardAdministration"> <i
-			class="fas fa-fw fa-wrench"></i> <span>게시글 관리</span>
+			class="fa fa-window-restore"></i> <span>게시글 관리</span>
 	</a>
 		<div id="boardAdministration" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -103,49 +101,6 @@
 					class="collapse-item" href="/admin/home/board/bannerText">텍스트</a>
 			</div>
 		</div></li>
-
-	<!-- Divider -->
-	<hr class="sidebar-divider">
-
-	<!-- Heading -->
-	<div class="sidebar-heading">Addons</div>
-
-	<!-- Nav Item - Pages Collapse Menu -->
-	<li class="nav-item"><a class="nav-link collapsed" href="#"
-		data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-		aria-controls="collapsePages"> <i class="fas fa-fw fa-folder"></i> <span>Pages</span>
-	</a>
-		<div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-			data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Login Screens:</h6>
-				<a class="collapse-item" href="login.html">Login</a> <a
-					class="collapse-item" href="register.html">Register</a> <a
-					class="collapse-item" href="forgot-password.html">Forgot Password</a>
-				<div class="collapse-divider"></div>
-				<h6 class="collapse-header">Other Pages:</h6>
-				<a class="collapse-item" href="404.html">404 Page</a> <a
-					class="collapse-item" href="blank.html">Blank Page</a>
-			</div>
-		</div></li>
-
-	<!-- Nav Item - Charts -->
-	<li class="nav-item"><a class="nav-link" href="charts.html"> <i
-			class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-	</a></li>
-
-	<!-- Nav Item - Tables -->
-	<li class="nav-item"><a class="nav-link" href="tables.html"> <i
-			class="fas fa-fw fa-table"></i> <span>Tables</span>
-	</a></li>
-
-	<!-- Divider -->
-	<hr class="sidebar-divider d-none d-md-block">
-
-	<!-- Sidebar Toggler (Sidebar) -->
-	<div class="text-center d-none d-md-inline">
-		<button class="rounded-circle border-0" id="sidebarToggle"></button>
-	</div>
 
 </ul>
 <!-- End of Sidebar -->

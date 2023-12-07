@@ -44,4 +44,72 @@
 		WHERE order_uid=#{order_id};
  	</select>
  	
+ 	
+ 	<!-- 통계 -->
+ 	<select id ="SELECT_STATISTICS_MEMBER" resultType="com.kgitbank.slimbear.admin.dto.StatisticsMemberDTO">
+	 	SELECT  year(reg_date) as `year`,  
+	 	<if test="monthOff == null">
+		month(reg_date) as `month`, 
+		</if>
+	 	month(reg_date) as `month`, 
+	 	COUNT(*) as cnt, login_type
+		FROM member m
+		WHERE 
+		<if test="year != null">
+		year(reg_date)=#{year} AND 
+		</if>
+		<if test="month != null">
+		month(reg_date)=#{month} AND
+		</if>
+		1=1
+		GROUP BY year(reg_date)
+		<if test="monthOff == null">
+		,month(reg_date)
+		</if>
+		<if test="login_type != null">
+		,login_type
+		</if>
+ 	</select>
+ 	
+ 	<select id="SELECT_STATISTICS_ORDER" resultType="com.kgitbank.slimbear.admin.dto.StatisticsOrderDTO" >
+		SELECT year(order_date) as `year`,  month(order_date) as `month`, COUNT(*) as cnt, SUM(op.price) as pay_amount  
+		From productOrder p LEFT JOIN orderPayment op
+		ON(p.uid = op.order_uid)
+		WHERE 
+		<if test="year != null">
+		year(order_date)=#{year} AND 
+		</if>
+		<if test="month != null">
+		month(order_date)=#{month} AND
+		</if>
+		<if test="status != null">
+		p.`status`= #{status} AND
+		</if>
+		1=1
+		GROUP BY year(order_date), month(order_date);
+	</select>
+ 	
+ 	<select id="SELECT_STATISTICS_ORDERCNT_PRODUCT_CATEGORY" resultType="com.kgitbank.slimbear.admin.dto.StatisticsCategoryDTO" >
+	 	SELECT aa.* , c.name
+		FROM
+		(SELECT year(oduid.order_date) as year, month(oduid.order_date) as month, pt.ctg_uid, SUM(oduid.cnt) as cnt FROM
+		(SELECT SUBSTRING_INDEX(od.prod_code, ':', 1) as prod_uid, od.cnt, p.order_date
+		From orderDetail od LEFT JOIN productOrder p
+		ON(p.uid = od.order_uid)
+		WHERE p.`status`='DONE') as oduid
+		LEFT JOIN product pt
+		ON(oduid.prod_uid=pt.uid)
+		WHERE
+		<if test="year != null">
+		year(oduid.order_date)=#{year} AND 
+		</if>
+		<if test="month != null">
+		month(oduid.order_date)=#{month} AND
+		</if>
+		1=1
+		GROUP BY pt.ctg_uid, year(oduid.order_date), month(oduid.order_date)) as aa
+		LEFT JOIN 
+		category c
+		ON(aa.ctg_uid=c.uid);
+ 	</select>
  </mapper>
