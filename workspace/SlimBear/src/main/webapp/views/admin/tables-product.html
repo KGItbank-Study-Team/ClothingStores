@@ -102,7 +102,7 @@
 											<td><a th:text="${product.uid}" class="btn btn-primary"
 												th:href="@{/admin/home/product(productUID=${product.uid})}"></a></td>
 											<th th:text="${product.name}"></th>
-											<th th:text="${product.reg_date}"></th>
+											<th th:text="${#dates.format(product.reg_date,'yyyy-MM-dd')}"></th>
 											<th th:text="${product.toc}"></th>
 											<th th:text="${product.tpc}"></th>
 										</tr>

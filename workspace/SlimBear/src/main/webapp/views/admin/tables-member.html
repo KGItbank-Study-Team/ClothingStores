@@ -89,7 +89,6 @@
 										<tr>
 											<th>아이디</th>
 											<th>이름</th>
-											<th>총 결제금</th>
 											<th>가입일</th>
 											<th>상태</th>
 										</tr>
@@ -98,7 +97,6 @@
 										<tr>
 											<th>아이디</th>
 											<th>이름</th>
-											<th>총 결제금</th>
 											<th>가입일</th>
 											<th>상태</th>
 										</tr>
@@ -107,9 +105,8 @@
 										<tr th:each="member, i : ${memberList}">
 											<td><a th:text="${member.id}" class="btn btn-primary" th:href="@{/admin/home/member(memberID=${member.id})}"></a></td>
 											<td th:text="${member.name}"></td>
-											<td th:text="111"></td>
 											<td th:text="${#dates.format(member.reg_date,'yyyy-MM-dd HH:mm:ss')}"></td>
-											<td></td>
+											<td th:text="${member.status}"></td>
 										</tr>
 									</tbody>
 								</table>
