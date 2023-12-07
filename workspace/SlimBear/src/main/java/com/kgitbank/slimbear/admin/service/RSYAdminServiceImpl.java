@@ -118,7 +118,9 @@ public class RSYAdminServiceImpl {
 		notice.setContent(content);
 		notice.setPriority(priority);
 		notice.setType(type);
-		notice.setMain_image(s3.saveImage(main_image));
+		if(main_image != null) {
+			notice.setMain_image(s3.saveImage(main_image));
+		}
 		notice.setReg_date(date);
 
 		rsyAdminDAO.addNotice(notice);
@@ -135,7 +137,10 @@ public class RSYAdminServiceImpl {
 		notice.setContent(content);
 		notice.setPriority(priority);
 		notice.setType(type);
-		notice.setMain_image(s3.saveImage(main_image));
+
+		if(main_image != null) {
+			notice.setMain_image(s3.saveImage(main_image));
+		}
 		notice.setReg_date(date);
 
 		rsyAdminDAO.updateNotice(notice);
