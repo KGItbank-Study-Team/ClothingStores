@@ -190,14 +190,14 @@ box-shadow: 0 3px 6px rgb(0 0 0/ 9%);
   padding-left: 15px;
 }
 .userArea img {
-  width: 15px;
+  width: 20px;
   height: auto;
   vertical-align: middle;
   opacity: 1;
 }
 .cartPosi {
   position: relative;
-  top: 23%;
+  bottom: -4px;
   right: 12px;
 }
 /*======================================================  */

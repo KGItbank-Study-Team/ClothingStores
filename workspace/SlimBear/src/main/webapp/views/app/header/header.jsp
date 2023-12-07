@@ -95,7 +95,7 @@
 							<li><a href="/app/board/notice">공지사항</a></li>
 							<li><a href="/app/board/inquiry">문의사항</a></li>
 							<li><a href="/app/board/faq">FAQ</a></li>
-						</ul></li>
+<!-- 						</ul></li> -->
 				</div>
 				<div class="userArea">
 					<ul>
@@ -104,7 +104,7 @@
 							<li class="menu-item">${user.username} 님 안녕하세요! 😊</li>
 							<li class="menu-item">
 								<a href="#">
-									<img src="/resources/images/icon_user.png" alt="user">
+									<img src="/resources/images/icon_user.png" alt="user" style="position:relative; bottom: 4.5px;">
 								</a>
 								<ul class="dropdown-content">
 									<li><a href="/app/member/logout"><b>로그아웃</b></a></li>
@@ -113,8 +113,8 @@
 							</li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
-							<li class="menu-item"><a href="#"><img
-									src="/resources/images/icon_user.png" alt="user"></a>
+							<li class="menu-item"><a href="#">
+							<img src="/resources/images/icon_user.png" alt="user"></a>
 								<ul class="dropdown-content">
 									<li><a href="/app/login">로그인</a></li>
 									<li><a href="/app/join">회원가입</a></li>
@@ -123,8 +123,7 @@
 							</li>
 						</sec:authorize>
 						<li class="guraya">
-						<a href="/app/cart"><img class="cartPosi"
-							src="/resources/images/icon_cart.png" alt="cart"></a>
+						<a href="/app/cart"><img class="cartPosi" src="/resources/images/icon_cart.png" alt="cart"></a>
 						</li>
 					</ul>
 				</div>
