@@ -343,31 +343,28 @@
         var imageUrl = $(this).data('image-url');
         $('#imageModal').find('.modal-body img').attr('src', imageUrl);
     });
-	function actionsFormatter(value, row, index) {
+    function actionsFormatter(value, row, index) {
         return [
             '<div class="btn-group" role="group">',
-                '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
-                '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
+            '<button class="btn btn-danger btn-sm btn-delete">Delete</button>',
             '</div>'
         ].join('');
     }
 
     function actionsEvents() {
         return {
-            'click .btn-primary': function (e, value, row, index) {
+            'click .btn-hide': function (e, value, row, index) {
                 hideRow(index);
             },
-            'click .btn-danger': function (e, value, row, index) {
+            'click .btn-delete': function (e, value, row, index) {
                 deleteRow(index);
             }
         };
     }
-	function deleteRow(index) {
+
+    function deleteRow(index) {
         var rowData = $('#table').bootstrapTable('getData')[index];
-        // 확인을 위해 데이터 출력
-        console.log('Data to be sent to the server:', rowData);
-        console.log('Index of the row:', index);
-        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
+
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
                 url: '/admin/review/deleteData',
@@ -375,17 +372,16 @@
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
                 success: function(response) {
-                    // 성공적으로 처리된 경우
                     alert('삭제가 완료되었습니다.');
                     // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
                 },
                 error: function(error) {
-                    // 오류 발생 시
                     alert('삭제 중 오류가 발생했습니다.');
                 }
             });
         }
     }
+
 	
 </script>
 </html>

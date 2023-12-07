@@ -118,7 +118,7 @@ public class RSYAdminServiceImpl {
 		notice.setContent(content);
 		notice.setPriority(priority);
 		notice.setType(type);
-		if(main_image != null) {
+		if (main_image != null) {
 			notice.setMain_image(s3.saveImage(main_image));
 		}
 		notice.setReg_date(date);
@@ -138,7 +138,7 @@ public class RSYAdminServiceImpl {
 		notice.setPriority(priority);
 		notice.setType(type);
 
-		if(main_image != null) {
+		if (main_image != null) {
 			notice.setMain_image(s3.saveImage(main_image));
 		}
 		notice.setReg_date(date);
@@ -233,5 +233,36 @@ public class RSYAdminServiceImpl {
 		bannerText.setBannerText(banner_text);
 
 		rsyAdminDAO.updateBannerText(bannerText);
+	}
+
+	// 배너이미지삭제
+	public void deleteTop(BannerTopDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteTop(uid);
+	}
+
+	// 배너텍스트삭제
+	public void deleteText(BannerTextDTO data) {
+		Long uid = data.getUid();
+		rsyAdminDAO.deleteText(uid);
+	}
+
+	// 공지추가
+	public void addTop(MultipartFile image, Long prod_uid) {
+		BannerTopDTO top = new BannerTopDTO();
+		top.setImage(s3.saveImage(image));
+		top.setProd_uid(prod_uid);
+		rsyAdminDAO.addTop(top);
+	}
+
+	// 공지추가
+	public void addText(String text1) {
+		BannerTextDTO text = new BannerTextDTO();
+		text.setBannerText(text1);
+		text.setDef_delivery_pay(1);
+		text.setDef_mileage_per(1);
+
+		
+		rsyAdminDAO.addText(text);
 	}
 }

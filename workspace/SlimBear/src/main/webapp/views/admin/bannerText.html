@@ -82,6 +82,11 @@
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">페이지관리 -> 배너텍스트관리</h6>
 					</div>
+					<div id="addTextFormContainer"
+						style="padding-top: 20px; padding-left: 20px; padding-bottom: 20px;">
+						<button class="btn btn-primary" onclick="showAddTextForm()">새
+							배너 텍스트 등록</button>
+					</div>
 					<div class="card-body">
 
 						<div id="toolbar"></div>
@@ -161,7 +166,20 @@
     var lastOpenedRow = null;
 
 
-    
+    function showAddTextForm() {
+        var html = [];
+        html.push('<div class="add-text-form">');
+        html.push('<div class="mb-3"><label for="text" class="form-label">text</label><textarea class="form-control" id="text" rows="3"></textarea></div>');
+
+        
+        html.push('<div style="padding-top:10px;">' );
+        html.push('<button type="button" class="btn btn-primary"  onclick="submitAddTextForm()">등록</button>');
+
+        html.push('<button type="button" class="btn btn-secondary" onclick="closeAddTextForm()">닫기</button>');
+        html.push('</div>');
+        html.push('</div>');
+        $('#addTextFormContainer').html(html.join(''));
+    }
 
     $(function () {
         // 테이블 초기화
@@ -239,17 +257,6 @@
 
     });
 
-
-
-
-    function actionsFormatter(value, row, index) {
-        return [
-            '<div class="btn-group" role="group">',
-            '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
-            '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
-            '</div>'
-        ].join('');
-    }
     
     
     function imageFormatter(value, row, index) {
@@ -257,12 +264,20 @@
     }
     
 
+    function actionsFormatter(value, row, index) {
+        return [
+            '<div class="btn-group" role="group">',
+            '<button class="btn btn-danger btn-sm btn-delete">Delete</button>',
+            '</div>'
+        ].join('');
+    }
+
     function actionsEvents() {
         return {
-            'click .btn-primary': function (e, value, row, index) {
+            'click .btn-hide': function (e, value, row, index) {
                 hideRow(index);
             },
-            'click .btn-danger': function (e, value, row, index) {
+            'click .btn-delete': function (e, value, row, index) {
                 deleteRow(index);
             }
         };
@@ -271,24 +286,17 @@
     function deleteRow(index) {
         var rowData = $('#table').bootstrapTable('getData')[index];
 
-        // 확인을 위해 데이터 출력
-        console.log('Data to be sent to the server:', rowData);
-        console.log('Index of the row:', index);
-
-        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/notice/deleteData',
+                url: '/admin/text/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
-                success: function (response) {
-                    // 성공적으로 처리된 경우
+                success: function(response) {
                     alert('삭제가 완료되었습니다.');
                     // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
                 },
-                error: function (error) {
-                    // 오류 발생 시
+                error: function(error) {
                     alert('삭제 중 오류가 발생했습니다.');
                 }
             });
@@ -297,9 +305,11 @@
     
 
  // "닫기" 버튼 클릭 시 폼 닫기
-    function closeAddBannerTextForm() {
+    function closeAddTextForm() {
         $('#addbannerTextFormContainer').html(''); // 폼을 닫음
-
+     // "새 공지사항 등록" 버튼을 다시 생성
+        var addButtonHtml = '<button class="btn btn-primary" onclick="showAddTextForm()">새 텍스트 등록</button>';
+        $('#addTextFormContainer').html(addButtonHtml);
     }
  
  // 수정 폼 닫기 함수
@@ -333,6 +343,31 @@
             }
         });
     }
+ // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
+    function submitAddTextForm() {
+    var text = $('#addText').val();
+
+    // Ajax 요청
+    $.ajax({
+        url: "/admin/text/addText",
+        type: "POST",
+        data: {
+            text: text
+        },
+        success: function (result) {
+            if (result.status === 'SUCCESS') {
+                alert(result.message);
+                closeAddTextForm();
+            } else {
+                alert('새 텍스트 등록에 실패했습니다.');
+            }
+        },
+        error: function () {
+            alert("서버 오류로 인해 새 텍스트를 등록할 수 없습니다.");
+        }
+    });
+}
+
 </script>
 
 </html>

@@ -95,10 +95,10 @@
 							<thead>
 								<tr>
 									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
-									<th data-field="question" data-sortable="true" data-width="1">질문</th>
+									<th data-field="question" data-sortable="true" data-width="">질문</th>
 									<th data-field="answer" data-sortable="true">답변</th>
 
-									<th data-field="type" data-sortable="true" data-width="1">타입?</th>
+									<th data-field="type" data-sortable="true" data-width="1">타입</th>
 
 							
 
@@ -106,7 +106,7 @@
 
 									<th data-field="select" data-checkbox="true"></th>
 									<th data-field="actions" data-formatter="actionsFormatter"
-										data-width="1" data-events="actionsEvents">숨김/삭제</th>
+										data-width="1" data-events="actionsEvents">삭제</th>
 								</tr>
 							</thead>
 
@@ -176,9 +176,9 @@
         html.push('<div class="mb-3"><label for="addFaqType" class="form-label">타입</label>');
         html.push('<select class="form-select" id="addFaqType">');
         html.push('<option value="PRODUCT_R">PRODUCT_R</option>');
-        html.push('<option value="DELIVERY_R, ">DELIVERY_R</option>');
-        html.push('<option value=" CHANGE_R">CHANGE_R</option>');
-        html.push('<option value=" ETC_R">ETC_R</option>');
+        html.push('<option value="DELIVERY_R">DELIVERY_R</option>');
+        html.push('<option value="CHANGE_R">CHANGE_R</option>');
+        html.push('<option value="ETC_R">ETC_R</option>');
         html.push('</select></div>');
 
         html.push('<button type="button" class="btn btn-primary" onclick="submitAddFaqForm()">등록</button>');
@@ -289,18 +289,17 @@
     function actionsFormatter(value, row, index) {
         return [
             '<div class="btn-group" role="group">',
-            '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
-            '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
+            '<button class="btn btn-danger btn-sm btn-delete">Delete</button>',
             '</div>'
         ].join('');
     }
 
     function actionsEvents() {
         return {
-            'click .btn-primary': function (e, value, row, index) {
+            'click .btn-hide': function (e, value, row, index) {
                 hideRow(index);
             },
-            'click .btn-danger': function (e, value, row, index) {
+            'click .btn-delete': function (e, value, row, index) {
                 deleteRow(index);
             }
         };
@@ -309,24 +308,17 @@
     function deleteRow(index) {
         var rowData = $('#table').bootstrapTable('getData')[index];
 
-        // 확인을 위해 데이터 출력
-        console.log('Data to be sent to the server:', rowData);
-        console.log('Index of the row:', index);
-
-        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
                 url: '/admin/faq/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
-                success: function (response) {
-                    // 성공적으로 처리된 경우
+                success: function(response) {
                     alert('삭제가 완료되었습니다.');
                     // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
                 },
-                error: function (error) {
-                    // 오류 발생 시
+                error: function(error) {
                     alert('삭제 중 오류가 발생했습니다.');
                 }
             });

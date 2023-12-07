@@ -160,4 +160,24 @@ public class RSYAdminDAO {
 	public int updateBannerText(BannerTextDTO uid) {
 		return template.update("com.slimbear.mapper.Page.UPDATE_BANNER_TEXT", uid);
 	}
+
+	// BannerTop 삭제
+	public void deleteTop(Long uid) {
+		template.delete("com.slimbear.mapper.Page.DELETE_TOP", uid);
+	}
+
+	// BannerText 삭제
+	public void deleteText(Long uid) {
+		template.delete("com.slimbear.mapper.Page.DELETE_TEXT", uid);
+	}
+
+	// 배너이미지 추가
+	public int addTop(BannerTopDTO top) {
+		return template.insert("com.slimbear.mapper.Page.INSERT_TOP", top);
+	}
+
+	// 배너텍스트 추가
+	public int addText(BannerTextDTO text) {
+		return template.insert("com.slimbear.mapper.Page.INSERT_TEXT", text);
+	}
 }

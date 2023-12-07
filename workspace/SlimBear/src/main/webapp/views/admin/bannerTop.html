@@ -99,12 +99,8 @@
 							<thead>
 								<tr>
 									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
-									<th data-field="image" data-formatter="imageFormatter"  data-width="300">이미지</th>
+									<th data-field="image" data-formatter="imageFormatter" data-width="1500">이미지</th>
 									<th data-field="prod_uid" data-sortable="true" data-formatter="prodFormatter" data-width="1">상품uid</th>
-
-
-
-									<th data-field="select" data-checkbox="true"></th>
 									<th data-field="actions" data-formatter="actionsFormatter"
 										data-width="1" data-events="actionsEvents">숨김/삭제</th>
 								</tr>
@@ -180,6 +176,36 @@
 	<script>
     var lastOpenedRow = null;
 
+    function showAddTopForm() {
+        var html = [];
+        html.push('<div class="add-top-form">');
+
+        html.push('<div class="mb-4 d-flex justify-content-left">');
+        html.push('    <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 700px;" />');
+        html.push('</div>');
+
+
+        html.push('<div class="d-flex justify-content-left">');
+        html.push('    <div class="btn btn-primary btn-rounded">');
+        html.push('        <label class="form-label text-white m-1" for="customFile1">이미지추가</label>');
+        html.push('        <input type="file" class="form-control d-none" name="main_image" id="customFile1" onchange="displaySelectedImage(event, \'selectedImage\')" />');
+        html.push('    </div>');
+        html.push('</div >');
+
+
+	    html.push('<div class="mb-3">');
+	    html.push('<label for="prod_uid" class="form-label">상품uid</label>');
+	    html.push('<input type="text" class="form-control" id="prod_uid">');
+	    html.push('</div>');
+	    
+        html.push('<div style="padding-top:10px;">' );
+        html.push('<button type="button" class="btn btn-primary"  onclick="submitAddTopForm()">등록</button>');
+
+        html.push('<button type="button" class="btn btn-secondary" onclick="closeAddTopForm()">닫기</button>');
+        html.push('</div>');
+        html.push('</div>');
+        $('#addTopFormContainer').html(html.join(''));
+    }
 
     
 
@@ -278,14 +304,7 @@
 
 
 
-    function actionsFormatter(value, row, index) {
-        return [
-            '<div class="btn-group" role="group">',
-            '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
-            '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
-            '</div>'
-        ].join('');
-    }
+    
     
     function imageFormatter(value, row, index) {
         // Assuming the image fields are named image1, image2, image3, and image4
@@ -298,12 +317,20 @@
         $('#imageModal').find('.modal-body img').attr('src', imageUrl);
     });
 
+    function actionsFormatter(value, row, index) {
+        return [
+            '<div class="btn-group" role="group">',
+            '<button class="btn btn-danger btn-sm btn-delete">Delete</button>',
+            '</div>'
+        ].join('');
+    }
+
     function actionsEvents() {
         return {
-            'click .btn-primary': function (e, value, row, index) {
+            'click .btn-hide': function (e, value, row, index) {
                 hideRow(index);
             },
-            'click .btn-danger': function (e, value, row, index) {
+            'click .btn-delete': function (e, value, row, index) {
                 deleteRow(index);
             }
         };
@@ -312,44 +339,38 @@
     function deleteRow(index) {
         var rowData = $('#table').bootstrapTable('getData')[index];
 
-        // 확인을 위해 데이터 출력
-        console.log('Data to be sent to the server:', rowData);
-        console.log('Index of the row:', index);
-
-        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/bannerTop/deleteData',
+                url: '/admin/Top/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
-                success: function (response) {
-                    // 성공적으로 처리된 경우
+                success: function(response) {
                     alert('삭제가 완료되었습니다.');
                     // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
                 },
-                error: function (error) {
-                    // 오류 발생 시
+                error: function(error) {
                     alert('삭제 중 오류가 발생했습니다.');
                 }
             });
         }
     }
 
+    // "등록" 버튼 클릭 시 폼 제출 (실제 동작에 맞게 수정 필요)
+       function submitAddTopForm() {
+       var text = $('#addTop').val();
+
     // FormData 객체 생성
     var formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('priority', priority);
-    formData.append('type', type);
+    formData.append('prod_uid', prod_uid);
 
     // 파일 필드 추가
     var mainImageInput = $('#customFile1')[0].files[0];
-    formData.append('mainImage', mainImageInput);
+    formData.append('image', mainImageInput);
 
     // Ajax 요청
     $.ajax({
-        url: "/admin/notice/addNotice",
+        url: "/admin/top/addTop",
         type: "POST",
         data: formData,
         processData: false,
@@ -357,19 +378,20 @@
         success: function (result) {
             if (result.status === 'SUCCESS') {
                 alert(result.message);
-                closeAddNoticeForm();
+                closeAddTopForm();
             } else {
-                alert('새 공지사항 등록에 실패했습니다.');
+                alert('새 배너 이미지 등록에 실패했습니다.');
             }
         },
         error: function () {
-            alert("서버 오류로 인해 새 공지사항을 등록할 수 없습니다.");
+            alert("서버 오류로 인해 새 배너이미지를 등록할 수 없습니다.");
         }
     });
+    }
 
  // "닫기" 버튼 클릭 시 폼 닫기
-    function closeAddBannerTopForm() {
-        $('#addBannerTopFormContainer').html(''); // 폼을 닫음
+    function closeAddTopForm() {
+        $('#addTopFormContainer').html(''); // 폼을 닫음
 
     }
  
