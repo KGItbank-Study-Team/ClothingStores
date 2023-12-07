@@ -19,7 +19,7 @@ import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 
 @Service
-public class YangBoardServiceImpl {
+public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
@@ -29,6 +29,7 @@ public class YangBoardServiceImpl {
 	private FaqDAO faqDAO;
 	
 	// 공지사항
+	@Override
 	public List<NoticeDTO> getNoticeList(Integer offset, Integer pageSize, int currentPage) {
 		offset = (currentPage - 1) * pageSize;
 
@@ -42,6 +43,7 @@ public class YangBoardServiceImpl {
         return noticeDAO.getNoticeList(paramMap);
 //		return noticeDAO.getNoticeList(priority);
 	}
+	@Override
 	public int getTotalNotice() {
     	int total = noticeDAO.getTotalNotice();
 //    	System.out.println(total);
@@ -49,12 +51,14 @@ public class YangBoardServiceImpl {
     }
 	
 	// 공지사항 상세페이지조회
-    public NoticeDTO enterNoticeDetail(Long id) {
+    @Override
+	public NoticeDTO enterNoticeDetail(Long id) {
         return noticeDAO.enterNoticeDetail(id);
     }
 	
 	// 문의게시판
-    public List<InquiryDTO> getInquiryList(String type, Integer offset, Integer pageSize, int currentPage) {
+    @Override
+	public List<InquiryDTO> getInquiryList(String type, Integer offset, Integer pageSize, int currentPage) {
     	
 		offset = (currentPage - 1) * pageSize;
 
@@ -68,22 +72,26 @@ public class YangBoardServiceImpl {
 //		System.out.println(paramMap);
         return inquiryDAO.getInquiryList(paramMap);
     }
-    public int getTotalInquiry(String type) {
+    @Override
+	public int getTotalInquiry(String type) {
     	int total = inquiryDAO.getTotalInquiry(type);
 //    	System.out.println(total);
     	return total;
     }
     
     // 문의게시판 전체목록
-    public List<InquiryDTO> getInquiryListAll() {
+    @Override
+	public List<InquiryDTO> getInquiryListAll() {
         return inquiryDAO.getInquiryListAll();
     }
     // 문의게시판 답변
-    public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
+    @Override
+	public List<InquiryDTO> getInquiryListByProdUid(long prodUid) {
         return inquiryDAO.getInquiryListByProdUid(prodUid);
     }
 	
     // 문의게시판 등록
+	@Override
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		inquiryDAO.insertInquiry(inquiryDTO);
 	}
@@ -91,6 +99,7 @@ public class YangBoardServiceImpl {
 	
 	
 	// 문의게시판 상세페이지조회
+	@Override
 	public InquiryDTO getInquiryDetail(Long id) {
 	    try {
 	        InquiryDTO inquiry = inquiryDAO.getInquiryDetail(id);
@@ -142,28 +151,32 @@ public class YangBoardServiceImpl {
     }
 	
     // 문의게시판 삭제
-    public void deleteInquiry(Long id) {
+    @Override
+	public void deleteInquiry(Long id) {
         inquiryDAO.deleteInquiry(id);
     }
     
     // 문의게시판 수정페이지조회
-    public InquiryDTO getInquiryUpdate(Long id) {
+    @Override
+	public InquiryDTO getInquiryUpdate(Long id) {
         return inquiryDAO.getInquiryDetail(id);
     }
     // 문의게시판 수정
-    public void updateInquiry(InquiryDTO inquiry) {
+    @Override
+	public void updateInquiry(InquiryDTO inquiry) {
     	inquiryDAO.updateInquiry(inquiry);
     }
     
     // 문의게시글 검색 기능 추가
-    public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
-    	System.out.println(searchMap);
+    @Override
+	public List<InquiryDTO> getInquiryListBySearch(Map<String, String> searchMap) {
         return inquiryDAO.getInquiryListBySearch(searchMap);
     }
     
     
     // 문의게시판 답변게시글 목록
-    public List<InquiryDTO> getInquiryListWithAnswers(String type, Integer offset, Integer pageSize, int currentPage) {
+    @Override
+	public List<InquiryDTO> getInquiryListWithAnswers(String type, Integer offset, Integer pageSize, int currentPage) {
     	offset = (currentPage - 1) * pageSize;
 
 		Map<String, Object> paramMap = new HashMap<>();
@@ -173,7 +186,6 @@ public class YangBoardServiceImpl {
 		paramMap.put("offset", offset);
 		paramMap.put("pageSize", pageSize);
 
-		System.out.println(paramMap);
 		
         List<InquiryDTO> inquiries = inquiryDAO.getInquiryList(paramMap);
         
@@ -186,6 +198,7 @@ public class YangBoardServiceImpl {
         return inquiries;
     }
     // 문의게시판 답변게시글 조회
+	@Override
 	public InquiryAnswerDTO getAnswerDetail(Long uid) {
 		try {
 			InquiryAnswerDTO inquiryAnswer = inquiryDAO.getAnswerDetail(uid);
@@ -211,10 +224,12 @@ public class YangBoardServiceImpl {
 	}
     
 	// FAQ
+	@Override
 	public List<FaqDTO> getFaqList() {
         return faqDAO.getFaqList();
     }
 	
+	@Override
 	public List<FaqDTO> getFaqListByType(String type) {
         return faqDAO.getFaqListByType(type);
 	}

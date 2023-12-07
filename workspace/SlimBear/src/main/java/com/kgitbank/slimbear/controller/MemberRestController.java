@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +15,6 @@ import com.kgitbank.slimbear.dto.CouponDTO;
 import com.kgitbank.slimbear.dto.MemberCouponDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.security.SecurityUser;
-import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.vo.AddrVO;
 
@@ -26,9 +24,6 @@ public class MemberRestController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private HunServiceImpl hunService;
 	
 	@PostMapping("id/duplicate")
 	public HashMap<String, Object> CheckDuplicateMemberID(@RequestParam HashMap<String, Object> data) {
@@ -70,7 +65,7 @@ public class MemberRestController {
 			
 		}
 		else if(addrUID != null) {
-			addressInfo = hunService.getAddrFixInfo(addrUID);
+			addressInfo = memberService.getAddrFixInfo(addrUID);
 		}
 	
 		return  addressInfo;

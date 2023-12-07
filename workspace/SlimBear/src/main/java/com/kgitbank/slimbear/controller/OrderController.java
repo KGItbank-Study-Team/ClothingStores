@@ -25,10 +25,9 @@ import com.kgitbank.slimbear.dto.OrderPaymentDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.exception.SlimBearException;
 import com.kgitbank.slimbear.security.SecurityUser;
-import com.kgitbank.slimbear.service.HunServiceImpl;
 import com.kgitbank.slimbear.service.MemberService;
 import com.kgitbank.slimbear.service.OrderService;
-import com.kgitbank.slimbear.service.ProductServiceImpl;
+import com.kgitbank.slimbear.service.ProductService;
 import com.kgitbank.slimbear.vo.AddrVO;
 import com.kgitbank.slimbear.vo.CouponVO;
 import com.kgitbank.slimbear.vo.MemberCartVO;
@@ -47,20 +46,17 @@ public class OrderController {
 	private MemberService memberService;
 	
 	@Autowired
-	private HunServiceImpl hunService;
-	
-	@Autowired
-	private ProductServiceImpl prodService;
+	private ProductService prodService;
 
 	
 	@RequestMapping("product") 
 	public String orderPage(HttpSession session, OrderProductCommand orderProducts, Authentication authentication, Model model) 
 	{ 
-		System.out.println(orderProducts.getOptionsList());
+		
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		
 		MemberDTO mem = memberService.getMemberById(user.getUsername());
-		List<AddrVO> addressInfo = hunService.getAddrInfo(mem.getUid());
+		List<AddrVO> addressInfo = memberService.getAddrInfo(mem.getUid());
 		
 		try {
 			String[] check = SlimBearUtil.splitAddress(mem.getAddress());
@@ -127,7 +123,7 @@ public class OrderController {
 		orderInfo.setMileage( mem.getMileage());
 		orderInfo.setAddressInfo(addressInfo);
 		orderInfo.setProductList(productList);
-		orderInfo.setCouponeList( hunService.getCouponListInfo(user.getUid()));
+		orderInfo.setCouponeList( memberService.getCouponListInfo(user.getUid()));
 		orderInfo.setTotalProduct(totalProduct);
 		orderInfo.setDeliveryPrice( deliveryPrice);
 		orderInfo.setPaymonetAmount(paymonetAmount);
@@ -181,7 +177,7 @@ public class OrderController {
 			for(int i=0; i<orderInfo.getCouponeList().size(); ++i) {
 				CouponVO coupon = orderInfo.getCouponeList().get(i);
 	
-				System.out.println(coupon);
+				
 				if(coupon.getCoup_uid() == couponUID) {
 					if(orderInfo.getPaymonetAmount() < coupon.getMinimumAmount()) {
 						response.put("failed", coupon.getMinimumAmount()  + "원 이상일경우 사용가능");

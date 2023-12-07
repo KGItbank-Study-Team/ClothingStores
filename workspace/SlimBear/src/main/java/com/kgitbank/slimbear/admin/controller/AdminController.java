@@ -24,9 +24,8 @@ import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.service.MemberService;
-import com.kgitbank.slimbear.service.ProductServiceImpl;
-import com.kgitbank.slimbear.service.RSYServiceImpl;
-import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
+import com.kgitbank.slimbear.service.ProductService;
+import com.kgitbank.slimbear.service.ReviewService;
 
 //ADMIN작업중....
 //DAO, DTO는 DB테이블과 1대1로 맵핑될 수도있지만 프로젝트 크기가 커지면 
@@ -42,16 +41,13 @@ public class AdminController {
 	private MemberService memberService;
 
 	@Autowired
-	private ProductServiceImpl productService;
+	private ProductService productService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	@Autowired
 	private AdminServiceImpl adminService;
-
-	@Autowired
-	private SangyhyukServiceImpl sanghService;
-
-	@Autowired
-	private RSYServiceImpl rsyService;
 	
 	@Autowired
 	private StatisticsServiceImpl statSearvice;
@@ -130,17 +126,17 @@ public class AdminController {
 				return "redirect:/admin/home/board/product";
 			} else {
 
-				List<ProductDetailDTO> detailList = sanghService.getProductDetailList(product.getUid());
+				List<ProductDetailDTO> detailList = reviewService.getProductDetailList(product.getUid());
 
 				// 카테고리
 				List<Long> ctgList = new ArrayList<Long>();
-				CategoryDTO ctg = rsyService.getCategoryByUid(product.getCtg_uid());
+				CategoryDTO ctg = productService.getCategoryByUid(product.getCtg_uid());
 				if (ctg != null) {
 					ctgList.add(0, ctg.getUid());
 
 					// 상위 카테고리 존재
 					while (ctg != null && ctg.getTop_ctg_uid() != null) {
-						ctg = rsyService.getCategoryByUid(ctg.getTop_ctg_uid());
+						ctg = productService.getCategoryByUid(ctg.getTop_ctg_uid());
 						ctgList.add(0, ctg.getUid());
 					}
 				}

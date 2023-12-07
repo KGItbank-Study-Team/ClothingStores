@@ -21,13 +21,13 @@ import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.ProductDetailDTO;
 import com.kgitbank.slimbear.exception.SlimBearException;
 import com.kgitbank.slimbear.service.OrderService;
-import com.kgitbank.slimbear.service.RSYServiceImpl;
+import com.kgitbank.slimbear.service.ProductService;
 
 @RestController
 public class AdminRestController {
 
 	@Autowired
-	private RSYServiceImpl rsyService;
+	private ProductService productService;
 
 	@Autowired
 	private AdminServiceImpl adminService;
@@ -40,7 +40,7 @@ public class AdminRestController {
 
 	@PostMapping("category/childs")
 	public List<CategoryDTO> getCategory(@RequestParam("ctg") long ctg) {
-		List<CategoryDTO> categoryList = rsyService.getSubCategoryListByTopCtgUid(ctg);
+		List<CategoryDTO> categoryList = productService.getSubCategoryListByTopCtgUid(ctg);
 		
 		return categoryList;
 	}

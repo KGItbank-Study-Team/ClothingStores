@@ -19,27 +19,23 @@ import com.kgitbank.slimbear.dto.CategoryDTO;
 import com.kgitbank.slimbear.dto.MemberDTO;
 import com.kgitbank.slimbear.dto.ProductDTO;
 import com.kgitbank.slimbear.service.MemberService;
-import com.kgitbank.slimbear.service.PageConfigServiceImpl;
-import com.kgitbank.slimbear.service.ProductServiceImpl;
-import com.kgitbank.slimbear.service.RSYServiceImpl;
+import com.kgitbank.slimbear.service.PageConfigService;
+import com.kgitbank.slimbear.service.ProductService;
 
 @Controller
 public class PageController {
 
 	@Autowired
-	private PageConfigServiceImpl pageConfigService;
+	private PageConfigService pageConfigService;
 
 	@Autowired
-	private ProductServiceImpl productService;
+	private ProductService productService;
 	
 	@Autowired 
 	private MemberService memberService;
 	
 	@Autowired 
 	AdminServiceImpl adminService;
-
-	@Autowired
-	private RSYServiceImpl RSYService;
 	
 	@RequestMapping("main")
 	public String mainePage(@RequestParam(name = "category", required = false)Long category,
@@ -53,8 +49,8 @@ public class PageController {
 		pageSize = 12; // 페이지 당 아이템 수
 
 		// 페이징에 관련된 정보 추가
-//		int totalItems = RSYService.getTotalItems(category); // 전체아이템 수
-		int totalItems = RSYService.getTotalItems(); //전체 상품 개수 
+//		int totalItems = memberService.getTotalItems(category); // 전체아이템 수
+		int totalItems = productService.getTotalItems(); //전체 상품 개수 
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize); // 전체 페이지 수
 		int pageBlockSize = 5; // 보여질 페이지 블록 크기
 
@@ -65,7 +61,7 @@ public class PageController {
 		// 다음 페이지 블록이 있는지 여부
 		boolean hasNextBlock = endPage < totalPages;
 
-//		List<ProductDTO> productList = RSYService.getProductListByCategory(category, order, currentPage, offset,
+//		List<ProductDTO> productList = memberService.getProductListByCategory(category, order, currentPage, offset,
 //				pageSize);
 
 		model.addAttribute("order", order);
@@ -81,18 +77,18 @@ public class PageController {
 		model.addAttribute("bannerText", pageConfigService.getBannerText());
 		model.addAttribute("newMainProductList", productService.getNewProductList());
 
-//		List<CategoryDTO> categoryList = RSYService.getSubCategoryListByTopCtgUid(category);
+//		List<CategoryDTO> categoryList = memberService.getSubCategoryListByTopCtgUid(category);
 
 //		model.addAttribute("categoryList", categoryList);
 
-		List<ProductDTO> bestProductList = RSYService.getBestProductList(order, currentPage, offset, pageSize);
+		List<ProductDTO> bestProductList = productService.getBestProductList(order, currentPage, offset, pageSize);
 
 		model.addAttribute("bestProductList", bestProductList);
 
-//		CategoryDTO topCategory = RSYService.getCategoryByUid(category);
+//		CategoryDTO topCategory = memberService.getCategoryByUid(category);
 //		model.addAttribute("category", topCategory);
 		
-		List<ProductDTO> newProductList = RSYService.getProductListOrderByRegDate(order, currentPage, offset,
+		List<ProductDTO> newProductList = productService.getProductListOrderByRegDate(order, currentPage, offset,
 				pageSize);
 		model.addAttribute("newProductList",newProductList);
 

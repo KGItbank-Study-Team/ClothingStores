@@ -27,18 +27,18 @@ import com.kgitbank.slimbear.dto.InquiryAnswerDTO;
 import com.kgitbank.slimbear.dto.InquiryDTO;
 import com.kgitbank.slimbear.dto.NoticeDTO;
 import com.kgitbank.slimbear.dto.ReviewDTO;
-import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
-import com.kgitbank.slimbear.service.YangBoardServiceImpl;
+import com.kgitbank.slimbear.service.BoardService;
+import com.kgitbank.slimbear.service.ReviewService;
 import com.kgitbank.slimbear.vo.ReviewVO;
 
 @Controller
 public class RSYAdminController {
 
 	@Autowired
-	private SangyhyukServiceImpl sanghService;
+	private ReviewService reviewService;
 
 	@Autowired
-	private YangBoardServiceImpl yangService;
+	private BoardService yangService;
 	@Autowired
 	private RSYAdminServiceImpl rsyAdminService;
 
@@ -46,7 +46,7 @@ public class RSYAdminController {
 	@RequestMapping("home/board/review")
 	public String boardReview(Model model) {
 
-		model.addAttribute("reviewList", sanghService.getReviewList());
+		model.addAttribute("reviewList", reviewService.getReviewList());
 		return "tables-board-review";
 	}
 

@@ -1,12 +1,11 @@
 package com.kgitbank.slimbear.controller;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,21 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.kgitbank.slimbear.security.SecurityUser;
-import com.kgitbank.slimbear.service.OstSerivceImpl;
-import com.kgitbank.slimbear.service.SangyhyukServiceImpl;
+import com.kgitbank.slimbear.service.CartService;
 import com.kgitbank.slimbear.vo.MemberCartVO;
 
-
 @Controller
-public class OstController {
-	
+public class CartController {
 	@Autowired
-	private OstSerivceImpl ostService;
-	
-	@Autowired
-	private SangyhyukServiceImpl sanghService;
+	private CartService cartService;
 	
 	@RequestMapping("cart")
 	public String cartPage(Authentication authentication ,Model model) {
@@ -44,10 +36,10 @@ public class OstController {
 		if(authentication != null) {
 			SecurityUser user = (SecurityUser)authentication.getPrincipal();
 			
-			List<MemberCartVO> cartlist = ostService.getCartList(user.getUid());
+			List<MemberCartVO> cartlist = cartService.getCartList(user.getUid());
 			
-			int totalPrice = ostService.calculateTotalPrice(cartlist);
-			int paymentAmount = ostService.calculatePaymentAmount(cartlist);
+			int totalPrice = cartService.calculateTotalPrice(cartlist);
+			int paymentAmount = cartService.calculatePaymentAmount(cartlist);
 			 
 			model.addAttribute("cartList",cartlist);
 			model.addAttribute("totalprice",totalPrice);
@@ -66,7 +58,7 @@ public class OstController {
 	        SecurityUser user = (SecurityUser) authentication.getPrincipal();
 
 	        // 서비스를 호출하여 수량을 업데이트
-	        ostService.updateCartItem(productId, newQuantity);
+	        cartService.updateCartItem(productId, newQuantity);
 
 	        // "cart" 페이지로 리다이렉션
 	        return "redirect:/app/cart";
@@ -80,7 +72,7 @@ public class OstController {
 	@ResponseBody
 	public ResponseEntity<String> updateQuantity(@RequestParam long productId, @RequestParam int quantity) {
 	    // 여기에 수량 업데이트 로직을 추가하고 성공 여부에 따라 응답을 보냄
-	    ostService.updateCartItemQuantity(productId, quantity);
+	    cartService.updateCartItemQuantity(productId, quantity);
 	    return new ResponseEntity<>("수량이 업데이트되었습니다.", HttpStatus.OK);
 	}
 	// OstController.java
@@ -92,7 +84,7 @@ public class OstController {
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
 
-        int deletedItemCount = ostService.deleteSelectedItems(itemIds);
+        int deletedItemCount = cartService.deleteSelectedItems(itemIds);
 
         if (deletedItemCount > 0) {
             return new ResponseEntity<>("선택된 상품이 삭제되었습니다.", HttpStatus.OK);
@@ -103,9 +95,9 @@ public class OstController {
 	@GetMapping("/cartList")
     public String getCartList(Model model) {
         // 여기서 서비스의 메서드를 호출하여 데이터를 가져옵니다.
-        List<MemberCartVO> cartList = ostService.getCartList(1); // 여기에 회원 UID를 넣어주세요.
+        List<MemberCartVO> cartList = cartService.getCartList(1); // 여기에 회원 UID를 넣어주세요.
         
-        List<String> sizeOptionList = ostService.getSizeOptionList();
+        List<String> sizeOptionList = cartService.getSizeOptionList();
 
         // 모델에 데이터를 추가하여 화면으로 전달합니다.
         model.addAttribute("cartList", cartList);
@@ -118,7 +110,7 @@ public class OstController {
     public ResponseEntity<String> updateCartItemOptions(@RequestParam long cartUid,@RequestParam long productUid,
             @RequestParam String color, @RequestParam String size) {
         // 여기에 옵션 업데이트 로직을 추가하고 성공 또는 실패에 따라 응답을 보냄
-        ostService.updateCartItemOptions(cartUid, productUid,color, size);
+        cartService.updateCartItemOptions(cartUid, productUid,color, size);
         return new ResponseEntity<>("옵션이 업데이트되었습니다.", HttpStatus.OK);
     }
 	@PostMapping("/addChangedOptions")
@@ -129,7 +121,7 @@ public class OstController {
 		SecurityUser user = (SecurityUser) authentication.getPrincipal();
 		
 	    // 추가적인 로직을 여기에 추가하고 성공 또는 실패에 따른 응답을 반환합니다.
-	    ostService.addChangedOptions(user.getUid(), cartUid, productUid, color, size);
+	    cartService.addChangedOptions(user.getUid(), cartUid, productUid, color, size);
 	    return new ResponseEntity<>("변경된 옵션이 추가되었습니다.", HttpStatus.OK);
 	}
 	@PostMapping("/addCartItem")
@@ -144,7 +136,7 @@ public class OstController {
 	    if (authentication != null) {
 	        SecurityUser user = (SecurityUser) authentication.getPrincipal();
 	       
-	        ostService.addCartItem(user.getUid(), cartUid, productUid, color, size);
+	        cartService.addCartItem(user.getUid(), cartUid, productUid, color, size);
 
 	        return new ResponseEntity<>("카트에 상품이 추가되었습니다.", HttpStatus.OK);
 	    } else {
@@ -166,6 +158,4 @@ public class OstController {
 	        return ResponseEntity.badRequest().body("Invalid date format");
 	    }
 	}
-
 }
-
