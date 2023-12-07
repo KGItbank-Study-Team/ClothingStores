@@ -34,15 +34,15 @@
 		<div id="contents">
 			<div id="prdBest"
 				class="xans-element- xans-product xans-product-listrecommend">
-				<ul style="padding-top:50px;">
-					<div id="slide" class="ec-base-product swiper-container" >
-						<div class="title" >
-							<span >가장 많이 사랑받은 베스트</span>
+				<ul style="padding-top: 50px;">
+					<div id="slide" class="ec-base-product swiper-container">
+						<div class="title">
+							<span>가장 많이 사랑받은 베스트</span>
 							<h2>BEST ITEM</h2>
 						</div>
 						<ul class="prdList grid4 swiper-wrapper">
 							<c:forEach var="item" items="${bestProductList}">
-							
+
 								<li id="anchorBoxId_4777" class="swiper-slide xans-record-">
 									<div class="thumbnail">
 										<div class="salePer"></div>
@@ -67,33 +67,25 @@
 											class="xans-element- xans-product xans-product-listitem spec">
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">상품색상</span> :
-											</strong>
-												<div class="color">
-													<span class="chips" title="#EBE4D3"
-														style="background-color: #EBE4D3" color_no=""
-														displayGroup="2"></span> <span class="chips"
-														title="#000000" style="background-color: #000000"
-														color_no="" displayGroup="2"></span>
-												</div></li>
-											<li class=" xans-record-"><strong
-												class="title displaynone"> <span
 													style="font-size: 12px; color: #999999;">상품설명</span> :
 											</strong> <span style="font-size: 12px; color: #999999;">
 													${item.desc } </span></li>
+											<!-- 기존 코드 -->
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">소비자가</span> :
+													style="font-size: 12px; color: #555555;">소비자가</span>:
 											</strong> <span id="formattedPrice"
-												style="font-size: 12px; color: #555555; text-decoration: line-through;">${item.price}</span>
-											</li>
+												style="font-size: 12px; color: #555555; text-decoration: line-through;">
+													${item.price}원 </span></li>
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>
-													:
+													style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>:
 											</strong> <span id="formattedSalePrice"
-												style="font-size: 12px; color: #555555; font-weight: bold;">${item.sale_price }</span>
-												<span id="span_product_tax_type_text" style=""></span></li>
+												style="font-size: 12px; color: #555555; font-weight: bold;">
+													${item.price - item.sale_price}원 </span> <span
+												id="span_product_tax_type_text" style=""></span></li>
+											<!-- 기존 코드 끝 -->
+
 										</ul>
 										<!-- .spec -->
 										<div class="icon">
@@ -208,35 +200,22 @@
 										<!-- .name -->
 										<ul
 											class="xans-element- xans-product xans-product-listitem spec">
+											<!-- 기존 코드 -->
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">상품색상</span> :
-											</strong>
-												<div class="color">
-													<span class="chips" title="#CFBCAE"
-														style="background-color: #CFBCAE" color_no=""
-														displayGroup="1"></span> <span class="chips"
-														title="#845E22" style="background-color: #845E22"
-														color_no="" displayGroup="1"></span>
-												</div></li>
-											<li class=" xans-record-"><strong
-												class="title displaynone"> <span
-													style="font-size: 11px; color: #999999;">소비자가</span> :
+													style="font-size: 12px; color: #555555;">소비자가</span>:
 											</strong> <span id="formattedPrice"
-												style="font-size: 11px; color: #999999; text-decoration: line-through;">${item.price}</span>
-											</li>
-											
-											<li class=" xans-record-"><strong class="title ">
-													<span style="font-size: 12px; color: #555555;">할인판매가</span>
-													:
-											</strong> <span id="formattedSalePrice" style="font-size: 12px; color: #555555;">
-													${item.sale_price } <span id="discountRate"
-													style="font-size: 11px; color: #fa6767; font-weight: bold;"></span>
-											</span></li>
+												style="font-size: 12px; color: #555555; text-decoration: line-through;">
+													${item.price}원 </span></li>
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
-													style="font-size: 12px; color: #555555;">상품간략설명</span> :
-											</strong> <span style="font-size: 12px; color: #555555;">${item.desc }</span></li>
+													style="font-size: 12px; color: #555555; font-weight: bold;">판매가</span>:
+											</strong> <span id="formattedSalePrice"
+												style="font-size: 12px; color: #555555; font-weight: bold;">
+													${item.price - item.sale_price}원 </span> <span
+												id="span_product_tax_type_text" style=""></span></li>
+											<!-- 기존 코드 끝 -->
+
 											<li class=" xans-record-"><strong
 												class="title displaynone"> <span
 													style="font-size: 12px; color: #999999;">상품요약정보</span> :
