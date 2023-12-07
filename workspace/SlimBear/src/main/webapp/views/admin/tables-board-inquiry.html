@@ -21,12 +21,14 @@
 <link href="/admin/resources/css/sb-admin-2.css" rel="stylesheet">
 
 <!-- Custom styles for this page -->
-<link href="/admin/resources/vendor/datatables/dataTables.bootstrap4.min.css"
+<link
+	href="/admin/resources/vendor/datatables/dataTables.bootstrap4.min.css"
 	rel="stylesheet">
 
 <!-- Bootstrap core JavaScript-->
 <script src="/admin/resources/vendor/jquery/jquery.min.js"></script>
-<script src="/admin/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/admin/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="/admin/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -92,25 +94,31 @@
 									<th data-field="uid" data-sortable="true" data-width="1">UID</th>
 									<th data-field="writer_id" data-sortable="true" data-width="1"
 										data-formatter="ownerFormatter">아이디</th>
-										
+
 									<th data-field="title" data-sortable="true" data-width="180">제목</th>
-									
-									<th data-field="content" data-sortable="true" >내용</th>
-									<th data-field="attach_image1" data-formatter="imageFormatter" data-width="1">사진</th>
-									<th data-field="attach_image2" data-formatter="imageFormatter" data-width="1">사진</th>
-									<th data-field="attach_image3" data-formatter="imageFormatter" data-width="1">사진</th>
-									<th data-field="attach_image4" data-formatter="imageFormatter" data-width="1">사진</th>
-									<th data-field="prod_uid" data-sortable="true"
-										data-width="1" data-formatter="prodFormatter">상품코드</th>
-										
+
+									<th data-field="content" data-sortable="true">내용</th>
+									<th data-field="attach_image1" data-formatter="imageFormatter"
+										data-width="1">사진</th>
+									<th data-field="attach_image2" data-formatter="imageFormatter"
+										data-width="1">사진</th>
+									<th data-field="attach_image3" data-formatter="imageFormatter"
+										data-width="1">사진</th>
+									<th data-field="attach_image4" data-formatter="imageFormatter"
+										data-width="1">사진</th>
+									<th data-field="prod_uid" data-sortable="true" data-width="1"
+										data-formatter="prodFormatter">상품코드</th>
+
 									<th data-field="reg_date" data-sortable="true"
 										data-formatter="dateFormatter" data-width="15">작성 일자</th>
-									<th data-field="status" data-width="1" data-sortable="true" data-formatter="commentsFormatter">답변여부</th>
+									<th data-field="status" data-width="1" data-sortable="true"
+										data-formatter="commentsFormatter">답변여부</th>
 
-									<th data-field="type" data-sortable="true"data-width="1">분류</th>
+									<th data-field="type" data-sortable="true" data-width="1">분류</th>
 									<th data-field="select" data-checkbox="true"></th>
-									<th data-field="actions" data-formatter="actionsFormatter" data-width="1" data-events="actionsEvents">숨김/삭제</th>
-									
+									<th data-field="actions" data-formatter="actionsFormatter"
+										data-width="1" data-events="actionsEvents">숨김/삭제</th>
+
 								</tr>
 							</thead>
 
@@ -121,306 +129,339 @@
 			<!-- End of Main Content -->
 		</div>
 		<!-- End of Content Wrapper -->
-</div>
-		<!-- Footer -->
-		<div>
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2020</span>
-					</div>
+	</div>
+	<!-- Footer -->
+	<div>
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; Your Website 2020</span>
 				</div>
-			</footer>
-		</div>
-		<!-- End of Footer -->
+			</div>
+		</footer>
+	</div>
+	<!-- End of Footer -->
 
-		<!-- Scroll to Top Button-->
-		<a class="scroll-to-top rounded" href="#page-top"> <i
-			class="fas fa-angle-up"></i>
-		</a>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
 
-		<!-- Logout Modal-->
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-						<button class="close" type="button" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body">Select "Logout" below if you are ready
-						to end your current session.</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button"
-							data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
-					</div>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">큰 이미지</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img src="" alt="큰 이미지" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
+	</div>
+	<div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+		aria-labelledby="imageModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="imageModalLabel">큰 이미지</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<img src="" alt="큰 이미지" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<!-- 리뷰 목록을 펼쳤을 때 표시되는 영역 -->
-		<div id="detail-wrapper"></div>
+	<!-- 리뷰 목록을 펼쳤을 때 표시되는 영역 -->
+	<div id="detail-wrapper"></div>
 
-		<script>
-			var lastOpenedRow = null;
-			$(function() {
-				// 테이블 초기화
-				$('#table').bootstrapTable({
-					formatSearch : function() {
-						return '모든 항목 검색'
-					},
-					exportDataType : 'all',
-					exportTypes : [ 'json', 'xml', 'csv', 'pdf' ],
-					exportOptions : {
-						fileName : function() {
-							var cd = new Date().toLocaleDateString().replace(
-									/\./g, '').replace(/\s/g, '');
-							return 'OrderTable_' + cd;
-						}
-					}
-				});
-
-				// 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
-				$('#table').on('expand-row.bs.table', function (e, index, row, $detail) {
-					// 이전에 열린 답글 입력 창이 있다면 닫기
-		            if (lastOpenedRow != null && lastOpenedRow !== index) {
-		                $('#table').bootstrapTable('collapseRow', lastOpenedRow);
-		            }
-					$detail.html('상세 정보 불러오는 중....');
-				    $.ajax({
-				        url: "/admin/inquiry/getAnswer?uid=" + row['uid'],
-				        type: "GET",
-				        success: function (result) {
-				            var html = [];
-				            html.push('<tbody>');
-
-				            if (result) {
-				                var answer = result;
-				                html.push('<tr>');
-				                html.push('<td>' + (result.status === 'SUCCESS' ? '답변완료' : '미등록') + '</td>');
-
-				               
-				                html.push('</tr>');
-				            }
-
-				            html.push('</tbody></table></div>');
-
-							 // 답글 작성 폼
-						    html.push('<div class="reply-form">');
-						    html.push('<form id="replyForm">');
-							html.push('<div class="mb-3">')
-						    html.push('<label for="mem_id" class="form-label">관리자ID</label>')
-						    html.push('<input type="text" class="form-control dark-input" id="mem_id" value="' + row['mem_id'] + '" readonly>')
-						            
-						            
-						    html.push('</div>')
-						    html.push('<div class="mb-3">');
-						    html.push('<label for="answerTitle" class="form-label">제목</label>');
-						    html.push('<input type="text" class="form-control" id="answerTitle">');
-						    html.push('</div>');
-						    html.push('<div class="mb-3">');
-						    html.push('<label for="answerContent" class="form-label">내용</label>');
-						    html.push('<textarea class="form-control" id="answerContent" rows="8"></textarea>');
-						    html.push('</div>');
-						   
-						    html.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateAnswer(' + row['uid'] + ')">답글 추가/수정</button>');
-						    html.push('</form>');
-						    html.push('</div>');
-
-						    $detail.html(html);
-
-							// 답글이 있는 경우, 답글 내용을 폼에 채워줌
-						    if (result) {
-    							$('#answerTitle').val(result.title);
-    							$('#answerContent').val(result.content);
-							}
-						 // 현재 열린 행을 저장
-		                    lastOpenedRow = index;
-		                    
-		                    // 열린 행의 답글 작성 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
-		                    $('#table').on('collapse-row.bs.table', function (e, index) {
-		                        if (lastOpenedRow === index) {
-		                            lastOpenedRow = null;
-		                        }
-		                    });
+	<script>
+		var lastOpenedRow = null;
+		$(function() {
+			// 테이블 초기화
+			$('#table').bootstrapTable(
+					{
+						formatSearch : function() {
+							return '모든 항목 검색'
 						},
-						error : function() {
-							alert("error");
+						exportDataType : 'all',
+						exportTypes : [ 'json', 'xml', 'csv', 'pdf' ],
+						exportOptions : {
+							fileName : function() {
+								var cd = new Date().toLocaleDateString()
+										.replace(/\./g, '').replace(/\s/g, '');
+								return 'OrderTable_' + cd;
+							}
 						}
 					});
+
+			// 리뷰 목록의 각 행을 클릭했을 때 실행되는 이벤트
+			$('#table')
+					.on(
+							'expand-row.bs.table',
+							function(e, index, row, $detail) {
+								// 이전에 열린 답글 입력 창이 있다면 닫기
+								if (lastOpenedRow != null
+										&& lastOpenedRow !== index) {
+									$('#table').bootstrapTable('collapseRow',
+											lastOpenedRow);
+								}
+								$detail.html('상세 정보 불러오는 중....');
+								$
+										.ajax({
+											url : "/admin/inquiry/getAnswer?uid="
+													+ row['uid'],
+											type : "GET",
+											success : function(result) {
+												var html = [];
+												html.push('<tbody>');
+
+												if (result) {
+													var answer = result;
+													html.push('<tr>');
+													html
+															.push('<td>'
+																	+ (result.status === 'SUCCESS' ? '답변완료'
+																			: '미등록')
+																	+ '</td>');
+
+													html.push('</tr>');
+												}
+
+												html
+														.push('</tbody></table></div>');
+
+												// 답글 작성 폼
+												html
+														.push('<div class="reply-form">');
+												html
+														.push('<form id="replyForm">');
+												html.push('<div class="mb-3">')
+												html
+														.push('<label for="mem_id" class="form-label">관리자ID</label>')
+												html
+														.push('<input type="text" class="form-control dark-input" id="mem_id" value="' + row['mem_id'] + '" readonly>')
+
+												html.push('</div>')
+												html.push('<div class="mb-3">');
+												html
+														.push('<label for="answerTitle" class="form-label">제목</label>');
+												html
+														.push('<input type="text" class="form-control" id="answerTitle">');
+												html.push('</div>');
+												html.push('<div class="mb-3">');
+												html
+														.push('<label for="answerContent" class="form-label">내용</label>');
+												html
+														.push('<textarea class="form-control" id="answerContent" rows="8"></textarea>');
+												html.push('</div>');
+
+												html
+														.push('<button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="addOrUpdateAnswer('
+																+ row['uid']
+																+ ')">답글 추가/수정</button>');
+												html.push('</form>');
+												html.push('</div>');
+
+												$detail.html(html);
+
+												// 답글이 있는 경우, 답글 내용을 폼에 채워줌
+												if (result) {
+													$('#answerTitle').val(
+															result.title);
+													$('#answerContent').val(
+															result.content);
+												}
+												// 현재 열린 행을 저장
+												lastOpenedRow = index;
+
+												// 열린 행의 답글 작성 폼에서 '닫기' 버튼을 눌렀을 때의 이벤트 처리
+												$('#table')
+														.on(
+																'collapse-row.bs.table',
+																function(e,
+																		index) {
+																	if (lastOpenedRow === index) {
+																		lastOpenedRow = null;
+																	}
+																});
+											},
+											error : function() {
+												alert("error");
+											}
+										});
+							});
+		});
+
+		// 리뷰 작성 일자를 포맷하는 함수
+		function dateFormatter(value, row, index) {
+			return [ new Date(value).toLocaleDateString().replace(/\./g, '')
+					.replace(/\s/g, '-') ].join('');
+		}
+
+		// 리뷰 답글을 추가 또는 수정하는 함수
+		function addOrUpdateAnswer(uid) {
+			var answerTitle = $('#answerTitle').val();
+			var answerContent = $('#answerContent').val();
+			var mem_id = $('#mem_id').val();
+			// 서버로 답글 데이터를 전송하고 저장하는 AJAX 요청
+			$.ajax({
+				url : '/admin/inquiry/addOrUpdateAnswer',
+				type : 'POST',
+				data : {
+					inqr_uid : uid,
+					answerTitle : answerTitle,
+					answerContent : answerContent,
+					mem_id : mem_id
+				},
+				success : function(result) {
+					// 성공적으로 답글을 추가 또는 수정한 경우, 여기에서 추가한 답글을 화면에 표시하거나 업데이트할 수 있습니다.
+					// 필요한 경우, 서버로부터 가져온 데이터를 이용하여 답글을 동적으로 생성하여 $replyList에 추가합니다.
+					// 답글 목록을 표시하는 부분은 위에서 생성한 $replyList를 활용합니다.
+					// 이후 필요한 작업을 수행하세요.
+					alert('답글이 성공적으로 추가/수정되었습니다.');
+				},
+				error : function() {
+					alert('Error adding/updating reply');
+				}
+			});
+		}
+		function ownerFormatter(value, row, index) {
+			if (value == null)
+				return [ '-' ].join('');
+			else
+				return [
+						'<a class="btn btn-primary" href="/admin/home/member?memberID=',
+						value, '">', value, '</a>' ].join('')
+		}
+
+		function prodFormatter(value, row, index) {
+			if (value == null)
+				return [ '-' ].join('');
+			else
+				return [
+						'<a class="btn btn-primary" href="/admin/home/product?productUID=',
+						value, '">', value, '</a>' ].join('')
+		}
+		// 답변 여부를 표시하는 함수
+		function commentsFormatter(value, row, index) {
+			if (value === 'SUCCESS') {
+				return '<span class="badge badge-success">답변완료</span>';
+			} else {
+				return '<span class="badge badge-secondary">답변 미등록</span>';
+			}
+		}
+		function actionsFormatter(value, row, index) {
+			return [
+					'<div class="btn-group" role="group">',
+					'<button class="btn btn-dark btn-sm" onclick="hideRow('
+							+ index + ')">Hide</button>',
+					'<button class="btn btn-danger btn-sm" onclick="deleteRow('
+							+ index + ')">Delete</button>', '</div>' ].join('');
+		}
+		function imageFormatter(value, row, index) {
+			// Assuming the image fields are named image1, image2, image3, and image4
+			if (value) {
+				// 이미지가 있는 경우 HTML img 태그 반환
+				return '<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '">'
+						+ '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '" alt="사진" width="100" height="100"></a>';
+			} else {
+				// 이미지가 없는 경우 '-' 반환
+				return '-';
+			}
+		}
+
+		$(document).on('click', '[data-toggle="modal"]', function() {
+			var imageUrl = $(this).data('image-url');
+			$('#imageModal').find('.modal-body img').attr('src', imageUrl);
+		});
+
+		function actionsEvents() {
+			return {
+				'click .btn-primary' : function(e, value, row, index) {
+					hideRow(index);
+				},
+				'click .btn-danger' : function(e, value, row, index) {
+					deleteRow(index);
+				}
+			};
+		}
+		function hideRow(index) {
+			var rowData = $('#table').bootstrapTable('getData')[index];
+
+			// 숨김 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 숨김 요청 전송
+			if (confirm('숨기시겠습니까?')) {
+				$.ajax({
+					url : '/admin/inquiry/hideData',
+					method : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify(rowData),
+					success : function(response) {
+						// 성공적으로 처리된 경우
+						alert('숨김이 완료되었습니다.');
+						// 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
+						$('#table').bootstrapTable('remove', {
+							field : 'uid',
+							values : [ rowData.uid ]
+						});
+					},
+					error : function(error) {
+						// 오류 발생 시
+						alert('숨김 중 오류가 발생했습니다.');
+					}
 				});
+			}
+		}
+
+		function deleteRow(index) {
+			var rowData = $('#table').bootstrapTable('getData')[index];
+			// 확인을 위해 데이터 출력
+
+			// 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
+			if (confirm('삭제하시겠습니까?')) {
+				$.ajax({
+					url : '/admin/inquiry/deleteData',
+					method : 'DELETE',
+					contentType : 'application/json',
+					data : JSON.stringify(rowData),
+					success : function(response) {
+						// 성공적으로 처리된 경우
+						alert('삭제가 완료되었습니다.');
+						// 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
+					},
+					error : function(error) {
+						// 오류 발생 시
+						alert('삭제 중 오류가 발생했습니다.');
+					}
+				});
+			}
+		}
+		$(document).ready(function() {
+			// 버튼 이벤트 등록
+			$('.btn-hide').click(function() {
+				var index = $(this).closest('tr').data('index');
+				hideRow(index);
 			});
 
-	// 리뷰 작성 일자를 포맷하는 함수
-	function dateFormatter(value, row, index) {
-		return [ new Date(value).toLocaleDateString().replace(/\./g, '')
-				.replace(/\s/g, '-') ].join('');
-	}
-
-	// 리뷰 답글을 추가 또는 수정하는 함수
-	function addOrUpdateAnswer(uid) {
-		var answerTitle = $('#answerTitle').val();
-		var answerContent = $('#answerContent').val();
-		var mem_id = $('#mem_id').val();
-		// 서버로 답글 데이터를 전송하고 저장하는 AJAX 요청
-		$.ajax({
-			url : '/admin/inquiry/addOrUpdateAnswer',
-			type : 'POST',
-			data : {
-				inqr_uid : uid,
-				answerTitle : answerTitle,
-				answerContent : answerContent,
-				mem_id : mem_id
-			},
-			success : function(result) {
-				// 성공적으로 답글을 추가 또는 수정한 경우, 여기에서 추가한 답글을 화면에 표시하거나 업데이트할 수 있습니다.
-				// 필요한 경우, 서버로부터 가져온 데이터를 이용하여 답글을 동적으로 생성하여 $replyList에 추가합니다.
-				// 답글 목록을 표시하는 부분은 위에서 생성한 $replyList를 활용합니다.
-				// 이후 필요한 작업을 수행하세요.
-				alert('답글이 성공적으로 추가/수정되었습니다.');
-			},
-			error : function() {
-				alert('Error adding/updating reply');
-			}
+			$('.btn-delete').click(function() {
+				var index = $(this).closest('tr').data('index');
+				deleteRow(index);
+			});
 		});
-	}
-	function ownerFormatter(value, row, index){
-		if(value == null)
-			return ['-'].join('');
-		else
-			return [ 
-				'<a class="btn btn-primary" href="/admin/home/member?memberID=',value,'">',value,'</a>'
-			].join('')
-	}
-	
-	function prodFormatter(value, row, index){
-		if(value == null)
-			return ['-'].join('');
-		else
-			return [ 
-				'<a class="btn btn-primary" href="/admin/home/product?productUID=',value,'">',value,'</a>'
-			].join('')
-	}
-	// 답변 여부를 표시하는 함수
-	  function commentsFormatter(value, row, index) {
-	    if (value === 'SUCCESS') {
-	      return '<span class="badge badge-success">답변완료</span>';
-	    } else {
-	      return '<span class="badge badge-secondary">답변 미등록</span>';
-	    }
-	  }
-	  function actionsFormatter(value, row, index) {
-	        return [
-	            '<div class="btn-group" role="group">',
-	                '<button class="btn btn-dark btn-sm" onclick="hideRow(' + index + ')">Hide</button>',
-	                '<button class="btn btn-danger btn-sm" onclick="deleteRow(' + index + ')">Delete</button>',
-	            '</div>'
-	        ].join('');
-	    }
-	  function imageFormatter(value, row, index) {
-	        // Assuming the image fields are named image1, image2, image3, and image4
-	        return '<a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '">' +
-	               '<img src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/' + value + '" alt="사진" width="100" height="100"></a>';
-	    }
-
-	    $(document).on('click', '[data-toggle="modal"]', function() {
-	        var imageUrl = $(this).data('image-url');
-	        $('#imageModal').find('.modal-body img').attr('src', imageUrl);
-	    });
-
-	    function actionsEvents() {
-	        return {
-	            'click .btn-primary': function (e, value, row, index) {
-	                hideRow(index);
-	            },
-	            'click .btn-danger': function (e, value, row, index) {
-	                deleteRow(index);
-	            }
-	        };
-	    }
-	    function hideRow(index) {
-	        var rowData = $('#table').bootstrapTable('getData')[index];
-	        
-	        // 숨김 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 숨김 요청 전송
-	        if (confirm('숨기시겠습니까?')) {
-	            $.ajax({
-	                url: '/admin/inquiry/hideData',
-	                method: 'POST',
-	                contentType: 'application/json',
-	                data: JSON.stringify(rowData),
-	                success: function(response) {
-	                    // 성공적으로 처리된 경우
-	                    alert('숨김이 완료되었습니다.');
-	                    // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
-	                    $('#table').bootstrapTable('remove', {
-	                        field: 'uid',
-	                        values: [rowData.uid]
-	                    });
-	                },
-	                error: function(error) {
-	                    // 오류 발생 시
-	                    alert('숨김 중 오류가 발생했습니다.');
-	                }
-	            });
-	        }
-	    }
-
-	    function deleteRow(index) {
-	        var rowData = $('#table').bootstrapTable('getData')[index];
-	        // 확인을 위해 데이터 출력
-	        
-	        // 삭제 작업을 위한 확인 메시지 등을 표시하고 사용자가 확인하면 서버로 데이터 삭제 요청 전송
-	        if (confirm('삭제하시겠습니까?')) {
-	            $.ajax({
-	                url: '/admin/inquiry/deleteData',
-	                method: 'DELETE',
-	                contentType: 'application/json',
-	                data: JSON.stringify(rowData),
-	                success: function(response) {
-	                    // 성공적으로 처리된 경우
-	                    alert('삭제가 완료되었습니다.');
-	                    // 테이블에서 해당 행을 제거하거나, 다시 불러와서 업데이트 등의 작업 수행
-	                },
-	                error: function(error) {
-	                    // 오류 발생 시
-	                    alert('삭제 중 오류가 발생했습니다.');
-	                }
-	            });
-	        }
-	    }
-	    $(document).ready(function() {
-	        // 버튼 이벤트 등록
-	        $('.btn-hide').click(function() {
-	            var index = $(this).closest('tr').data('index');
-	            hideRow(index);
-	        });
-
-	        $('.btn-delete').click(function() {
-	            var index = $(this).closest('tr').data('index');
-	            deleteRow(index);
-	        });
-	    });
-	    
-	    
-
-</script>
+	</script>
 </html>
