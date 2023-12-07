@@ -104,6 +104,7 @@ public class YangController {
 		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
 		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
 		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+		int totalInquiryCount = boardService.getTotalInquiry(categoryNo); // inquiry 테이블의 총 개수 조회
 
 		// 다음 페이지 블록이 있는지 여부
 		boolean hasNextBlock = endPage < totalPages;
@@ -119,7 +120,8 @@ public class YangController {
         default:
             inquiries = boardService.getInquiryList("PRODUCT", offset, pageSize, currentPage);
 		}
-		
+		model.addAttribute("totalInquiryCount", totalInquiryCount); // inquiry 테이블의 총 개수를 JSP로 전달
+
         model.addAttribute("inquiries", inquiries);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);

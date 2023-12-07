@@ -84,35 +84,27 @@
 						<thead class="xans-element- xans-board xans-board-listheader-4 xans-board-listheader xans-board-4 ">
 							<tr style="">
 								<th scope="col">NO</th>
-								<th scope="col" class="displaynone">CATE</th>
 								<th scope="col">TITLE</th>
 								<th scope="col">NAME</th>
 								<th scope="col" class="">DATE</th>
-								<th scope="col" class="displaynone">HIT</th>
-								<th scope="col" class="displaynone">VOTE</th>
-								<th scope="col" class="displaynone">POINT</th>
 							</tr>
 						</thead>
 						
 						<!-- 문의게시글 목록 -->
 						<tbody class="xans-element- xans-board xans-board-notice-4 xans-board-notice xans-board-4 center">
 						    <c:set var="pageSize" value="10" />
-<c:set var="totalInquiries" value="${inquiries.size()}" />
-
-<c:choose>
-    <c:when test="${currentPage * pageSize > totalInquiries}">
-        <c:set var="startIndex" value="${totalInquiries}" />
-    </c:when>
-    <c:otherwise>
-        <c:set var="startIndex" value="${currentPage * pageSize}" />
-    </c:otherwise>
-</c:choose>
-
-<c:set var="endIndex" value="${startIndex - pageSize + 1}" />
+							<c:set var="totalInquiries" value="${inquiries.size()}" />
+							<c:set var="startIndex" value="${totalInquiryCount - (currentPage - 1) * pageSize}" />
+						    
+						    <c:if test="${startIndex < 1}">
+						        <c:set var="startIndex" value="${totalInquiries}" />
+						    </c:if>
+						
 						    <c:forEach items="${inquiries}" var="board" varStatus="loop">
-						    <c:if test="${startIndex - loop.index > 0}">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
 						            <td>${startIndex - loop.index}</td>
+						            
+						            
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
@@ -147,7 +139,6 @@
 						                    <td><fmt:formatDate value="${answer.reg_date}" pattern="yyyy-MM-dd"/></td>
 						                </tr>
 						            </c:forEach>
-						        </c:if>
 						        </c:if>
 						    </c:forEach>
 						</tbody>
