@@ -78,8 +78,11 @@
 						
 						
 						<!-- 1번째 tbody for문  -->
-						<c:set var="sequenceNumber" value="0" />
 						<tbody class="xans-element- xans-board xans-board-notice-1002 xans-board-notice xans-board-1002 center">
+							<c:set var="pageSize" value="15" />
+							<c:set var="totalNotice" value="${notices.size()}" />
+							<c:set var="startIndex" value="${totalNoticeCount - (currentPage - 1) * pageSize}" />
+						
 						    <c:forEach var="board" items="${notices}" varStatus="loop">
 						        <tr style="background-color: #FFFFFF; color: #555555;" class="xans-record-">
 						            <td>
@@ -88,16 +91,11 @@
 						                        <i class="xi-check"></i>
 						                    </c:when>
 						                    <c:when test="${board.priority eq 2}">
-						                        <c:if test="${sequenceNumber eq 0}">
-						                            <c:set var="sequenceNumber" value="${fn:length(notices)}" />
-						                        </c:if>
-						                        ${sequenceNumber - loop.index}
+						            			${startIndex - loop.index}
 						                    </c:when>
-						                    <c:otherwise>
-						                        <!-- 필요한 경우 다른 처리를 수행합니다. -->
-						                    </c:otherwise>
 						                </c:choose>
 						            </td>
+						            
 						            <td class="displaynone"></td>
 						            <td class="subject left txtBreak">
 						                <strong>
@@ -113,22 +111,12 @@
 						            <td>${board.view_cnt}</td>
 						            <td><fmt:formatDate value="${board.reg_date}" pattern="yyyy-MM-dd"/></td>
 						        </tr>
-						        
-						        
 						    </c:forEach>
 						</tbody>
 						
 					</table>
 					<p class="xans-element- xans-board xans-board-empty-1002 xans-board-empty xans-board-1002 message displaynone "></p>
 				</div>
-				
-				<%-- <sec:authorize access="isAuthenticated()">
-					<div class="xans-element- xans-board xans-board-buttonlist-4 xans-board-buttonlist xans-board-4  ec-base-button typeBG ">
-						<span class="gRight"> 
-							<a href="/app/board/write" class="btnSubmitFix sizeS ">WRITE</a>
-						</span>
-					</div>
-				</sec:authorize> --%>
 			</div>
 			
 			<!-- 페이지 수 계산 -->

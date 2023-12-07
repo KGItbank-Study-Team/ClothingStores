@@ -26,8 +26,6 @@ public class YangBoardServiceImpl {
 	@Autowired
 	private InquiryDAO inquiryDAO;
 	@Autowired
-    private MemberService memberService;
-	@Autowired
 	private FaqDAO faqDAO;
 	
 	// 공지사항

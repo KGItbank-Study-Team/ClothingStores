@@ -52,20 +52,21 @@ public class YangController {
 		// 현재 페이지 블록의 시작 페이지와 끝 페이지 계산
 		int startPage = ((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
 		int endPage = Math.min(startPage + pageBlockSize - 1, totalPages);
+		int totalNoticeCount = boardService.getTotalNotice(); // inquiry 테이블의 총 개수 조회
 
 		// 다음 페이지 블록이 있는지 여부
 		boolean hasNextBlock = endPage < totalPages;
 		
 		// 서비스 메서드 호출 시에 offset과 pageSize를 전달
 	    List<NoticeDTO> notices = boardService.getNoticeList((currentPage - 1) * pageSize, pageSize, currentPage);
-		
+
+		model.addAttribute("totalNoticeCount", totalNoticeCount); // notice 테이블의 총 개수를 JSP로 전달
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("hasNextBlock", hasNextBlock);
         model.addAttribute("totalItems", totalItems);
-        // 'notices' 변수를 모델에 추가
         model.addAttribute("notices", notices);
 //		model.addAttribute("notices", boardService.getNoticeList(0));
 		return "notice";
