@@ -1600,9 +1600,10 @@ div.ec-base-help ul li {
 	color: #705b46;
 }
 
-.ec-base-product img {
+.ec-base-product > img {
 	vertical-align: middle;
-	height: 400px;
+	width: 351px;
+	height: 467px;
 }
 
 .ec-base-product a[href^='/product/detail.html']>img {
@@ -1675,7 +1676,8 @@ div.ec-base-help ul li {
 }
 
 .ec-base-product .prdList .thumbnail a img {
-	width: 100%;
+	width: 345px;
+	height: 467px;
 	box-sizing: border-box;
 }
 
