@@ -576,11 +576,9 @@ public class MemberServiceImpl implements MemberService {
 		for (MemberDTO member : memberList) {
 			if (member.getName().equals(name) && member.getId().equals(id)) {
 				if (email != null && member.getEmail().equals(email)) {
-					member = memDAO.getMemberByEmail(email);
 					return member;
 				}
-				if (phone != null && member.getPhone().equals(phone)) {
-					member = memDAO.getMemberByPhone(phone);
+				if (phone != null && member.getPhone().replaceAll("-", "").equals(phone)) {
 					return member;
 				}
 			}
