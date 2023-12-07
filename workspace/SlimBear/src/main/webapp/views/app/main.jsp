@@ -47,8 +47,7 @@
 				<div class="image-list"> 
 					<c:forEach var="item" items="${newMainProductList}">
 					<div>
-						<img class="image-item" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" alt="img-1" />
-						<div class="prod-name"><p>${item.name}</p></div>
+						<a href="/app/product?p=${item.uid}"><img class="image-item" src="https://slimbearbucket.s3.ap-northeast-2.amazonaws.com/images/${item.main_image}" alt="img-1" /></a>
 					</div>
 					</c:forEach>
 				</div>
