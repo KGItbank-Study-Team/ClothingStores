@@ -249,6 +249,7 @@ public class RSYAdminServiceImpl {
 	// 배너텍스트삭제
 	public void deleteText(BannerTextDTO data) {
 		Long uid = data.getUid();
+		System.out.println(uid);
 		rsyAdminDAO.deleteText(uid);
 	}
 

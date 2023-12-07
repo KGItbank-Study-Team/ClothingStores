@@ -343,7 +343,7 @@
 
         if (confirm('삭제하시겠습니까?')) {
             $.ajax({
-                url: '/admin/Top/deleteData',
+                url: '/admin/top/deleteData',
                 method: 'DELETE',
                 contentType: 'application/json',
                 data: JSON.stringify(rowData),
