@@ -217,53 +217,58 @@ function addCart(uid) {
 };
 // 결제 버튼 클릭 시 장바구니에 자동 추가
 function buyClick(uid) {
-    $.ajax({
-        url: "/app/insert/payCart/" + uid,
-        type: "POST",
-        data: { selectOptionList: selectOptionList },
-        success: function (arr) {
-            console.log('1. 결제 버튼 ajax 실행 성공');
-            console.log("받아온 데이터 : " + JSON.stringify(arr)); //return;
-            console.log("2. 선택된 옵션 리스트 : " + JSON.stringify(selectOptionList));
 
-            var containCart = false;
-            for (var i = 0; i < arr.length; i++) {
-                if ('containCnt' in arr[i]) { //containCnt값이 존재하는 경우
-                    containCart = true;
-                    break;
-                }
-            }
-
-            if (containCart) { //containCnt값이 존재하는 경우
-                var msg = '동일한 상품이 장바구니에 있습니다. 같이 구매하시겠습니까? \n\n' + "'취소' 클릭 시 현재 개수만 구매합니다."
-                if (confirm(msg)) {
-                    //확인 클릭 시, selectOptionList의 cnt 업데이트
-                    for (var i = 0; i < arr.length; i++) {
-                        if (selectOptionList[i].color === arr[i].color && selectOptionList[i].size === arr[i].size) {
-                            selectOptionList[i].cnt = selectOptionList[i].cnt + arr[i].containCnt;
-                            console.log("3. containCnt 값 : " + JSON.stringify(arr[i].containCnt));
-                            console.log("4. 변경된 개수 : " + selectOptionList[i].cnt);
-                        }
+    if(selectedColor === null || selectedSize === null) {
+        alert('상품 옵션을 선택해주세요.');
+    } else {
+        $.ajax({
+            url: "/app/insert/payCart/" + uid,
+            type: "POST",
+            data: { selectOptionList: selectOptionList },
+            success: function (arr) {
+                console.log('1. 결제 버튼 ajax 실행 성공');
+                console.log("받아온 데이터 : " + JSON.stringify(arr)); //return;
+                console.log("2. 선택된 옵션 리스트 : " + JSON.stringify(selectOptionList));
+    
+                var containCart = false;
+                for (var i = 0; i < arr.length; i++) {
+                    if ('containCnt' in arr[i]) { //containCnt값이 존재하는 경우
+                        containCart = true;
+                        break;
                     }
-                    addInput(uid);
-                } else {
-                    //취소 클릭
-                    console.lgo("옵션 리스트 : " + JSON.stringify(selectOptionList));
-                    addInput(uid);
-                    console.log('옵션리스트 : ' + selectOptionList);
                 }
-            } else { //containCnt값이 존재하지 않는 경우
-                addInput(uid);
-                console.log('containCnt가 존재하지 않습니다.');
+    
+                if (containCart) { //containCnt값이 존재하는 경우
+                    var msg = '동일한 상품이 장바구니에 있습니다. 같이 구매하시겠습니까? \n\n' + "'취소' 클릭 시 현재 개수만 구매합니다."
+                    if (confirm(msg)) {
+                        //확인 클릭 시, selectOptionList의 cnt 업데이트
+                        for (var i = 0; i < arr.length; i++) {
+                            if (selectOptionList[i].color === arr[i].color && selectOptionList[i].size === arr[i].size) {
+                                selectOptionList[i].cnt = selectOptionList[i].cnt + arr[i].containCnt;
+                                console.log("3. containCnt 값 : " + JSON.stringify(arr[i].containCnt));
+                                console.log("4. 변경된 개수 : " + selectOptionList[i].cnt);
+                            }
+                        }
+                        addInput(uid);
+                    } else {
+                        //취소 클릭
+                        console.lgo("옵션 리스트 : " + JSON.stringify(selectOptionList));
+                        addInput(uid);
+                        console.log('옵션리스트 : ' + selectOptionList);
+                    }
+                } else { //containCnt값이 존재하지 않는 경우
+                    addInput(uid);
+                    console.log('containCnt가 존재하지 않습니다.');
+                }
+            },
+            error: function (request, status, error) {
+                console.log("request:", request);
+                console.log("status:", status);
+                console.log("error:", error);
+                alert("로그인 후 이용해주세요.");
             }
-        },
-        error: function (request, status, error) {
-            console.log("request:", request);
-            console.log("status:", status);
-            console.log("error:", error);
-            alert("로그인 후 이용해주세요.");
-        }
-    });
+        });
+    }
 }
 
 

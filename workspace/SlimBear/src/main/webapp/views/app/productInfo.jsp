@@ -250,7 +250,7 @@
 		<br />
 		<!-- 보기 선택  -->
 		<div class="menuChoice">
-			<div>ZZ
+			<div>
 				<span><a href="#productDetail">DETAIL</a></span>
 			</div>
 			<div>
