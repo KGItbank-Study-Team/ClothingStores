@@ -85,10 +85,10 @@
                 <input type="tel" placeholder="" name="telphone" id="tel3">
                 </div>
 
-                <div>
+               <!--  <div>
                 <input type="button" value="인증번호 받기">
             </div>
-            <input type="number" placeholder="인증번호를 입력하세요" value="" name="phoneck">
+            <input type="number" placeholder="인증번호를 입력하세요" value="" name="phoneck"> -->
         </div>
        <div class="field tel-number">
         <b>주소</b>
